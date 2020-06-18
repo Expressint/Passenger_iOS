@@ -22,8 +22,8 @@ import GoogleSignIn
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
 
-let googlApiKey = "AIzaSyAQPk1hdmEi1MgAsTK83gthxTDzQhGvZYM" // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA" // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8"//"AIzaSyB7GS-O76Vp0jkS2nU-eZ_jkxLXJaUHAjg" //"AIzaSyBpHWct2Dal71hBjPis6R1CU0OHZNfMgCw"  // AIzaSyB08IH_NbumyQIAUCxbpgPCuZtFzIT5WQo
-let googlPlacesApiKey = "AIzaSyAQPk1hdmEi1MgAsTK83gthxTDzQhGvZYM" // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA"  // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8" // "AIzaSyCKEP5WGD7n5QWtCopu0QXOzM9Qec4vAfE"   // AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk
+let googlApiKey = "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA" // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA" // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8"//"AIzaSyB7GS-O76Vp0jkS2nU-eZ_jkxLXJaUHAjg" //"AIzaSyBpHWct2Dal71hBjPis6R1CU0OHZNfMgCw"  // AIzaSyB08IH_NbumyQIAUCxbpgPCuZtFzIT5WQo
+let googlPlacesApiKey = googlApiKey // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA"  // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8" // "AIzaSyCKEP5WGD7n5QWtCopu0QXOzM9Qec4vAfE"   // AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk
 
 
 let kGoogle_Client_ID : String = "1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b.apps.googleusercontent.com"//"787787696945-nllfi2i6j9ts7m28immgteuo897u9vrl.apps.googleusercontent.com"

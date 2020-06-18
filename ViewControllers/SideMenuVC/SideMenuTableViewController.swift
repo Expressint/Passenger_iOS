@@ -111,7 +111,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
+//        UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
 //        if UserDefaults.standard.value(forKey: "i18n_language") != nil {
 //                        if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
 //                            if language == "sw" {
