@@ -1,12 +1,6 @@
 PODS:
-  - ACFloatingTextfield-Swift (1.5)
+  - ACFloatingTextfield-Swift (1.8)
   - Alamofire (4.5.1)
-  - Bolts (1.9.0):
-    - Bolts/AppLinks (= 1.9.0)
-    - Bolts/Tasks (= 1.9.0)
-  - Bolts/AppLinks (1.9.0):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.9.0)
   - CardIO (5.4.1)
   - CHIPageControl (0.1.4):
     - CHIPageControl/Aji (= 0.1.4)
@@ -30,25 +24,16 @@ PODS:
   - CreditCardForm (0.1.5)
   - DOAlertController (2.0)
   - Fabric (1.7.2)
-  - FacebookCore (0.3.3):
-    - Bolts (~> 1.9)
-    - FBSDKCoreKit (~> 4.36)
-  - FacebookLogin (0.3.3):
-    - Bolts (~> 1.9)
-    - FacebookCore (~> 0.3.3)
-    - FBSDKCoreKit (~> 4.36)
-    - FBSDKLoginKit (~> 4.36)
-  - FacebookShare (0.3.3):
-    - Bolts (~> 1.9)
-    - FacebookCore (~> 0.3.3)
-    - FBSDKCoreKit (~> 4.36)
-    - FBSDKShareKit (~> 4.36)
-  - FBSDKCoreKit (4.36.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.36.0):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.36.0):
-    - FBSDKCoreKit (~> 4.36.0)
+  - FBSDKCoreKit (7.1.1):
+    - FBSDKCoreKit/Basics (= 7.1.1)
+    - FBSDKCoreKit/Core (= 7.1.1)
+  - FBSDKCoreKit/Basics (7.1.1)
+  - FBSDKCoreKit/Core (7.1.1):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (7.1.1):
+    - FBSDKLoginKit/Login (= 7.1.1)
+  - FBSDKLoginKit/Login (7.1.1):
+    - FBSDKCoreKit (~> 7.1.1)
   - Firebase/Core (4.7.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.12)
@@ -133,9 +118,7 @@ DEPENDENCIES:
   - CreditCardForm
   - DOAlertController (from `https://github.com/okmr-d/DOAlertController.git`, branch `master`)
   - Fabric
-  - FacebookCore
-  - FacebookLogin
-  - FacebookShare
+  - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Messaging
   - FormTextField
@@ -157,18 +140,13 @@ SPEC REPOS:
   trunk:
     - ACFloatingTextfield-Swift
     - Alamofire
-    - Bolts
     - CardIO
     - CHIPageControl
     - Crashlytics
     - CreditCardForm
     - Fabric
-    - FacebookCore
-    - FacebookLogin
-    - FacebookShare
     - FBSDKCoreKit
     - FBSDKLoginKit
-    - FBSDKShareKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -206,21 +184,16 @@ CHECKOUT OPTIONS:
     :git: https://github.com/okmr-d/DOAlertController.git
 
 SPEC CHECKSUMS:
-  ACFloatingTextfield-Swift: ebcfb892acbce8545576dd224df7b1b7473a4bbd
+  ACFloatingTextfield-Swift: c3212cef9548ae58fa914ea1c26a2f9a4f7cd7df
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   CHIPageControl: 032b5ab68506c00711d5a61bd83e9fdf2a7ecb22
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
   DOAlertController: 4d4ee33bbf1656271895da4a3cac4fbaa1d3217e
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
-  FacebookCore: 9ecbe48cfd37c91a93add7f8cec2b4a2c50a1eec
-  FacebookLogin: bdaea5789e9b364fa8a1990ba3bbba4fd2197415
-  FacebookShare: 14e88f2dcc3a03376304d2a1e10254296076ce88
-  FBSDKCoreKit: 3b8e6570eedb443f9fc4af196a7bf39f18e3a3d8
-  FBSDKLoginKit: 8bccb6064708ab2f4251a7fc4e3b6d8d00ad91ba
-  FBSDKShareKit: 7090fdd55c39b03941efddb64c83a64ff6b3949f
+  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
+  FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
@@ -247,6 +220,6 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   TransitionButton: 0bf7e5ffe80030f9d10d57983a04acf2f511998a
 
-PODFILE CHECKSUM: e6d120cadbeec9f2840a2646294c0e06f6c407fa
+PODFILE CHECKSUM: 14f54c0eaee09769e3a724ed016701215d3df185
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.3

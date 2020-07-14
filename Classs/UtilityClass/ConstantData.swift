@@ -107,7 +107,8 @@ struct WebserviceURLs {
     static let kMissBokkingRequest                      = "BookingMissRequest"
     static let kTrackRunningTrip                        = "TrackRunningTrip/"
     
-
+    static let kPastDuesList                            = "PastDues"
+      static let kPayPastDues                           = "PastDuesPayment"
 //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
 
@@ -232,6 +233,7 @@ let OpenInviteFriend = NSNotification.Name("OpenInviteFriend")
 let OpenSetting = NSNotification.Name("OpenSetting")
 let OpenSupport = NSNotification.Name("OpenSupport")
 let OpenHome = NSNotification.Name("OpenHome")
+let OpenPastDues = NSNotification.Name("OpenPastDues")
 
 let UpdateProfileNotification =  NSNotification.Name("UpdateProfile")
 

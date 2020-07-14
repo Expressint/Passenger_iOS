@@ -167,6 +167,8 @@
 		3A84BC9B21C23CFC00EDA3A2 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9A21C23CFC00EDA3A2 /* RadioButton.m */; };
 		3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */; };
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
+		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
+		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
 		6E3DF71524222282002BFCD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E3DF71424222282002BFCD4 /* GoogleService-Info.plist */; };
 		6EFD7170241F79CE00B01752 /* zzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD716F241F79CE00B01752 /* zzz.swift */; };
 		CA98D2E2675BED84D75253DB /* Pods_AllOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8F4FD7F5F213E238836C3F /* Pods_AllOut.framework */; };
@@ -353,6 +355,8 @@
 		5B8CD5DE691145A01FDF1181 /* Pods-Flicha User.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicha User.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicha User/Pods-Flicha User.debug.xcconfig"; sourceTree = "<group>"; };
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
 		626E9D33B8993B5928C11526 /* Pods_TanTaxi_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TanTaxi_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueTableViewCell.swift; sourceTree = "<group>"; };
+		6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueViewController.swift; sourceTree = "<group>"; };
 		6A8F4FD7F5F213E238836C3F /* Pods_AllOut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllOut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C5BB4D02F5DAB560A69DD39 /* Pods_PickNGo_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PickNGo_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E3DF71424222282002BFCD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -471,6 +475,7 @@
 		3A4072DC21B512270015C494 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A34BF5124BD901A0084F466 /* Previous Due */,
 				18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */,
 				3A84BC9C21C264E800EDA3A2 /* MyRatingViewController */,
 				3A5DDCA521BA5C9200F9B5A3 /* TripInfoViewController */,
@@ -923,6 +928,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6A34BF5124BD901A0084F466 /* Previous Due */ = {
+			isa = PBXGroup;
+			children = (
+				6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */,
+				6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */,
+			);
+			path = "Previous Due";
+			sourceTree = "<group>";
+		};
 		EEFA6CA9220ECE30004F32E7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,16 +1131,11 @@
 				"${PODS_ROOT}/Target Support Files/Pods-AllOut/Pods-AllOut-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ACFloatingTextfield-Swift/ACFloatingTextfield_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CHIPageControl/CHIPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
 				"${BUILT_PRODUCTS_DIR}/DOAlertController/DOAlertController.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/FormTextField/FormTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -1148,16 +1157,11 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ACFloatingTextfield_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHIPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DOAlertController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FormTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -1199,6 +1203,7 @@
 				3A4073B121B512280015C494 /* UpCommingVC.swift in Sources */,
 				3A40740F21B512280015C494 /* Extention+UIViewController.swift in Sources */,
 				3A4073FF21B512280015C494 /* MTRipple.swift in Sources */,
+				6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */,
 				18546BD2225DE9BE009DF334 /* PesapalWebViewViewController.swift in Sources */,
 				3A4073DE21B512280015C494 /* TempDataOfWebservice.swift in Sources */,
 				3A4073A721B512280015C494 /* DriverInfoViewController.swift in Sources */,
@@ -1214,6 +1219,7 @@
 				3A40739D21B512280015C494 /* SideMenuCollectionViewCell.swift in Sources */,
 				3A4073C421B512280015C494 /* GroceriesViewController.swift in Sources */,
 				3A4073AA21B512280015C494 /* LoginViewController.swift in Sources */,
+				6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */,
 				3A4073EE21B512280015C494 /* ThemeButton.swift in Sources */,
 				3A4073CC21B512280015C494 /* ShoppingDetailsVC.swift in Sources */,
 				3A40739C21B512280015C494 /* BookTableCollectionViewCell.swift in Sources */,

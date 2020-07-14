@@ -18,9 +18,10 @@ target 'AllOut' do
   pod 'Crashlytics'
   pod 'SDWebImage', '~> 4.0'
   pod 'M13Checkbox'
-  pod 'FacebookCore'
-  pod 'FacebookLogin'
-  pod 'FacebookShare'
+#  pod 'FacebookCore'
+#  pod 'FacebookLogin'
+#  pod 'FacebookShare'
+  pod 'FBSDKLoginKit'
   pod 'GoogleSignIn'
   pod 'SideMenuController'
   pod "Pulsator"

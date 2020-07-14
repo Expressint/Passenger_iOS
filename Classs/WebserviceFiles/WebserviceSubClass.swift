@@ -53,6 +53,8 @@ let UpdateBankAccountDetails = WebserviceURLs.kUpdateBankAccountDetails
 let OTPVerify = WebserviceURLs.kOtpForRegister
 
 let TrackRunningTrip = WebserviceURLs.kTrackRunningTrip
+let PastDuesList = WebserviceURLs.kPastDuesList
+let PayPastDues = WebserviceURLs.kPayPastDues
 
 //-------------------------------------------------------------
 // MARK: - Webservice For Registration
@@ -210,6 +212,26 @@ func webserviceForCurrentTrip(_ dictParams: AnyObject, completion: @escaping(_ r
     let url = "\(CurrentBooking)/\(dictParams)"
     getData("" as AnyObject, nsURL: url, completion: completion)
 }
+//-------------------------------------------------------------
+// MARK: - Webservice For Previous due
+//-------------------------------------------------------------
+
+func webserviceForPastDuesList(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url =  PastDuesList 
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice to pay Previous due
+//-------------------------------------------------------------
+
+func webserviceToPayPastDue(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = PayPastDues
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
 
 
 //-------------------------------------------------------------

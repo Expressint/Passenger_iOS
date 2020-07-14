@@ -122,7 +122,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings", "Payment Options", "Help", "My Receipts"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings", "Help", "My Receipts", "Past Dues"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -637,18 +637,18 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        if arrMenuTitle[indexPath.row] == "New Booking" {
-//            NotificationCenter.default.post(name: NotificationForBookingNewTrip, object: nil)
-//            sideMenuController?.toggle()
-//            
-//        }
+        //        if arrMenuTitle[indexPath.row] == "New Booking" {
+        //            NotificationCenter.default.post(name: NotificationForBookingNewTrip, object: nil)
+        //            sideMenuController?.toggle()
+        //
+        //        }
         if arrMenuTitle[indexPath.row] == "My Bookings"
         {
             NotificationCenter.default.post(name: OpenMyBooking, object: nil)
             sideMenuController?.toggle()
         }
-      
-        if arrMenuTitle[indexPath.row] == "Payment Options" {
+        
+        else if arrMenuTitle[indexPath.row] == "Payment Options" {
             NotificationCenter.default.post(name: OpenPaymentOption, object: nil)
             sideMenuController?.toggle()
         }
@@ -672,6 +672,10 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
             NotificationCenter.default.post(name: OpenFavourite, object: nil)
             sideMenuController?.toggle()
         }
+        else if arrMenuTitle[indexPath.row] == "Past Dues" {
+            NotificationCenter.default.post(name: OpenPastDues, object: nil)
+            sideMenuController?.toggle()
+        }
         else if arrMenuTitle[indexPath.row] == "Legal" {
             NotificationCenter.default.post(name: OpenSetting, object: nil)
             sideMenuController?.toggle()
@@ -681,12 +685,12 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
             }
             return
             /* Rj Change
-            NotificationCenter.default.post(name: OpenSupport, object: nil)
-            sideMenuController?.toggle()
+             NotificationCenter.default.post(name: OpenSupport, object: nil)
+             sideMenuController?.toggle()
              */
         }
         else if arrMenuTitle[indexPath.row] == "Help" {
-           
+            
             UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
         }
     }

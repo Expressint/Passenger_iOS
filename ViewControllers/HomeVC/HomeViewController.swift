@@ -448,7 +448,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.GotoInviteFriendPage), name: OpenInviteFriend, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.GotoSettingPage), name: OpenSetting, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.GotoSupportPage), name: OpenSupport, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.GotoPastDuesPage), name: OpenPastDues, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.GotoHomePage), name: OpenHome, object: nil)
     }
 //    @IBOutlet weak var viewHeaderHeightConstant: NSLayoutConstraint!
@@ -2156,7 +2156,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         self.btnCash.setTitleColor(UIColor.black, for: .normal)
         self.btnCardSelection.setTitleColor(UIColor.black, for: .normal)
-        self.btnCardSelection.setTitle("Card", for: .normal)
+//        self.btnCardSelection.setTitle("Card", for: .normal)
         CardID = ""
         
         if SelectionIndex == 0 {
@@ -2184,17 +2184,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             self.imgCard.image = UIImage(named: "icon_SelectedCard")
             self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
-            paymentType = "card"
+            paymentType = "m_pesa"
             
-            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
-                next.delegateAddCardFromHomeVC = self
-                self.navigationController?.pushViewController(next, animated: true)
-            } else {
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
-                next.delegateForHomeAddcard = self
-                self.navigationController?.pushViewController(next, animated: true)
-            }
+//            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
+//                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+//                next.delegateAddCardFromHomeVC = self
+//                self.navigationController?.pushViewController(next, animated: true)
+//            } else {
+//                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+//                next.delegateForHomeAddcard = self
+//                self.navigationController?.pushViewController(next, animated: true)
+//            }
         }
 //        paymentType = "cash"
     }
@@ -3235,6 +3235,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //        self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
+     @objc func GotoPastDuesPage() {
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "PreviousDueViewController") as! PreviousDueViewController
+            
+    //        next.delegateForFavourite = self
+            
+            self.navigationController?.pushViewController(next, animated: true)
+            
+    //        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
+    //        self.navigationController?.pushViewController(NextPage, animated: true)
+        }
+    
     @objc func GotoInviteFriendPage() {
         let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "InviteDriverViewController") as! InviteDriverViewController
         self.navigationController?.pushViewController(NextPage, animated: true)
@@ -3256,9 +3267,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func BookingConfirmed(dictData : NSDictionary)
     {
         
-        let DriverInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "DriverInfo") as! NSArray).object(at: 0) as! NSDictionary
-        let carInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "CarInfo") as! NSArray).object(at: 0) as! NSDictionary
-        let bookingInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "BookingInfo") as! NSArray).object(at: 0) as! NSDictionary
+//        let DriverInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "DriverInfo") as! NSArray).object(at: 0) as! NSDictionary
+//        let carInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "CarInfo") as! NSArray).object(at: 0) as! NSDictionary
+//        let bookingInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "BookingInfo") as! NSArray).object(at: 0) as! NSDictionary
         
         //        showDriverInfo(bookingInfo: bookingInfo, DriverInfo: DriverInfo, carInfo: carInfo)
         
@@ -3525,7 +3536,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         // Socket Accepted
         self.socket.on(SocketData.kAcceptBookingRequestNotification, callback: { (data, ack) in
             print("AcceptBooking data is \(data)")
-            
+            self.viewActivity.stopAnimating()
+
             self.locationManager.startUpdatingLocation()
             
             if let getInfoFromData = data as? [[String:AnyObject]] {
@@ -5292,7 +5304,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             }
                             else {
                                 print("status")
-                                
+                                   UtilityClass.hideACProgressHUD()
 //                                self.getDirectionsSeconMethod(origin: origin, destination: destination, waypoints: waypoints, travelMode: nil, completionHandler: nil)
                                 print("OVER_QUERY_LIMIT Line number : \(#line) function name : \(#function)")
                             }
@@ -5592,13 +5604,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             self.demoPolylineOLD.map = nil
                             // ----------------------------------------------------------------------
                             
-                            
+                            UtilityClass.hideACProgressHUD()
+
                             print("Line Drawn")
                             
                         }
                         else {
                             print("status")
-                            
+                            UtilityClass.hideACProgressHUD()
+
 //                            self.changePolyLine(origin: origin, destination: destination, waypoints: waypoints, travelMode: nil, completionHandler: nil)
                             print("OVER_QUERY_LIMIT Line number : \(#line) function name : \(#function)")
                         }
@@ -5785,7 +5799,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             }
                             else {
                                 print("status")
-                                
+                                 UtilityClass.hideACProgressHUD()
 //                                self.getDirectionsAcceptRequest(origin: origin, destination: destination, waypoints: waypoints, travelMode: nil, completionHandler: nil)
                                 print("OVER_QUERY_LIMIT Line number : \(#line) function name : \(#function)")
                             }
@@ -5904,7 +5918,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             else {
                                 print("status")
                                 //completionHandler(status: status, success: false)
-                                
+                                UtilityClass.hideACProgressHUD()
+
 //                                self.setDirectionLineOnMapForSourceAndDestinationShow(origin: origin, destination: destination, waypoints: waypoints, travelMode: nil, completionHandler: nil)
                                 print("OVER_QUERY_LIMIT Line number : \(#line) function name : \(#function)")
                             }

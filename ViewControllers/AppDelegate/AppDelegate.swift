@@ -16,14 +16,14 @@ import SideMenuController
 import SocketIO
 import UserNotifications
 import Firebase
-import FBSDKCoreKit
+import FBSDKLoginKit
 import GoogleSignIn
 
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
 
-let googlApiKey = "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA" // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA" // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8"//"AIzaSyB7GS-O76Vp0jkS2nU-eZ_jkxLXJaUHAjg" //"AIzaSyBpHWct2Dal71hBjPis6R1CU0OHZNfMgCw"  // AIzaSyB08IH_NbumyQIAUCxbpgPCuZtFzIT5WQo
-let googlPlacesApiKey = googlApiKey // "AIzaSyD-SiXdgOn15rgcUFmvQJ4xflwuDWHQioA"  // "AIzaSyD3CaZD78zWTvHix-7bdW-R6hndr8FonO8" // "AIzaSyCKEP5WGD7n5QWtCopu0QXOzM9Qec4vAfE"   // AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk
+let googlApiKey = "AIzaSyCy6DG0LdvKs62tFgvWUiFvmlHKMJQPnnU"
+let googlPlacesApiKey = googlApiKey
 
 
 let kGoogle_Client_ID : String = "1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b.apps.googleusercontent.com"//"787787696945-nllfi2i6j9ts7m28immgteuo897u9vrl.apps.googleusercontent.com"
@@ -59,6 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
             UserDefaults.standard.set("en", forKey: "i18n_language")
             UserDefaults.standard.synchronize()
         }
+        
+        ApplicationDelegate.shared.application(
+                   application,
+                   didFinishLaunchingWithOptions: launchOptions
+               )
+
 
         isAlreadyLaunched = false
         // Firebase
@@ -72,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         
         Fabric.with([Crashlytics.self])
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GIDSignIn.sharedInstance().clientID = kGoogle_Client_ID
         GIDSignIn.sharedInstance().delegate = self
         googleAnalyticsTracking()
@@ -152,25 +157,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
   
         return true
     }
-    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
-    {
-        
-        let isFBOpenUrl = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[.sourceApplication] as? String, annotation: options[.annotation])
-        
-        let isGoogleOpenUrl = GIDSignIn.sharedInstance().handle(url as URL?,
-                                                                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                                annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        if isFBOpenUrl
-        {
-            return true
-            
-        }
-        if isGoogleOpenUrl
-        {
-            return true
-        }
-        return false
-    }
+    
+//    func application(_ app: UIApplication,open url: URL,options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    
+          ApplicationDelegate.shared.application(
+              app,
+              open: url,
+              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+              annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+          )
+
+      }
+    
+
     func googleAnalyticsTracking() {
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")

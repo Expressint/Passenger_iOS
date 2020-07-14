@@ -11,7 +11,7 @@ import UIKit
 import TransitionButton
 import ACFloatingTextfield_Swift
 import FBSDKLoginKit
-import FacebookLogin
+import FBSDKCoreKit
 import GoogleSignIn
 //import SideMenu
 import NVActivityIndicatorView
@@ -28,8 +28,11 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     //-------------------------------------------------------------
     // MARK: - Outlets
     //-------------------------------------------------------------
-    @IBOutlet weak var viewMain: UIView!
     
+//      let loginButton = FBLoginButton()
+    @IBOutlet weak var viewMain: UIView!
+    @IBOutlet weak var viewFacebookLoginContainer: UIView?
+
     @IBOutlet weak var txtPassword: ThemeTextField!
     @IBOutlet weak var txtMobile: ThemeTextField!
     
@@ -120,11 +123,26 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         lblLaungageName.backgroundColor = themeYellowColor
         lblLaungageName.layer.borderColor = UIColor.black.cgColor
         lblLaungageName.layer.borderWidth = 0.5
+      
+//        view.addSubview(loginButton)
+        
+//        let loginButton = FBLoginButton(type: .custom)
+//        loginButton.frame = CGRect(x: 0, y: 0, width: self.viewFacebookLoginContainer?.frame.size.width ?? 0.0, height: self.viewFacebookLoginContainer?.frame.size.height ?? 0.0)
+//        loginButton.center = self.viewFacebookLoginContainer?.center ?? CGPoint(x: 0, y: 0)
+//        loginButton.addTarget(self, action: #selector(self.btnFBClicked(_:)), for: .touchUpInside)
+//        self.viewFacebookLoginContainer?.addSubview(loginButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             self.setLocalization()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        loginButton.frame = self.viewFacebookLoginContainer!.frame
+//        loginButton.center = self.viewFacebookLoginContainer!.center
+        
     }
     
    func setLocalization()
@@ -247,27 +265,27 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //        {
 //            self.btnGoogle.isSelected = false
 //        }
-        let login = FBSDKLoginManager()
+        let login = LoginManager()
         
-        login.loginBehavior = FBSDKLoginBehavior.browser
+        
         UIApplication.shared.statusBarStyle = .default
         login.logOut()
-        login.logIn(withReadPermissions: ["public_profile","email"], from: self) { (result, error) in
+        login.logIn(permissions: ["public_profile","email"], from: self) { (result, error) in
             
             
             if error != nil
             {
-                UIApplication.shared.statusBarStyle = .lightContent
+//                UIApplication.shared.statusBarStyle = .lightContent
             }
             else if (result?.isCancelled)!
             {
-                UIApplication.shared.statusBarStyle = .lightContent
+//                UIApplication.shared.statusBarStyle = .lightContent
             }
             else
             {
                 if (result?.grantedPermissions.contains("email"))!
                 {
-                    UIApplication.shared.statusBarStyle = .lightContent
+//                    UIApplication.shared.statusBarStyle = .lightContent
                     self.getFBUserData()
                 }
                 else
@@ -286,7 +304,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         var parameters = [AnyHashable: Any]()
         parameters["fields"] = "first_name, last_name, picture, email,id"
         
-        FBSDKGraphRequest.init(graphPath: "me", parameters: parameters).start { (connection, result, error) in
+        GraphRequest.init(graphPath: "me", parameters: parameters as! [String : Any]).start { (connection, result, error) in
             if error == nil
             {
                 let dictData = result as! [String : AnyObject]
@@ -306,7 +324,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 //                let imgUrl = pictureDict["url"] as AnyObject
                 
                 var image = UIImage()
-                let url = URL(string: imgUrl as! String)
+                let url = URL(string: imgUrl!)
                 
                 self.strURLForSocialImage = imgUrl!
                 let data = try? Data(contentsOf: url!)
