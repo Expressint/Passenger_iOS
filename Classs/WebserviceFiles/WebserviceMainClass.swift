@@ -12,9 +12,6 @@ import Alamofire
 
 
 var request : Request!
-
-
-
 let header: [String:String] = ["key":"Allout123*"]
 
 

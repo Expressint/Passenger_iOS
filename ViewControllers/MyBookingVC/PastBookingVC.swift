@@ -10,7 +10,6 @@ import UIKit
 
 class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegate,delegatePesapalWebView
 {
-
     
     var aryData = NSMutableArray()
     
@@ -50,7 +49,6 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     
-        
     }
 
      func setLocalization()
@@ -70,6 +68,8 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+//        self.webserviceOfPastbookingpagination(index: 1)
         
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -97,21 +97,23 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "PastBooingTableViewCell") as! PastBooingTableViewCell
         
         if aryData.count > 0 {
+            
             cell.lblBookingID.text = "Booking Id :".localized
             cell.lblPickupAddress.text = "First Description".localized
             cell.lblDropoffAddress.text = "Second Description".localized
             cell.lblPickupTimeTitle.text = "Pickup Time:".localized
-            cell.lblPickupTimeTitle.text = "Booking Fee:".localized
-            cell.lblDropoffTimeTitle.text = "Trip Fare:".localized
+//            cell.lblPickupTimeTitle.text = "Booking Fee:".localized
+            cell.lblDropoffTimeTitle.text = "Dropoff Time".localized
+//            cell.lblDropoffTimeTitle.text = "Trip Fare:".localized
             cell.lblVehicleTypeTitle.text = "Vehicle Type:".localized
             cell.lblPaymentTypeTitle.text = "Payment Type:".localized
             cell.lblBookingFreeTitle.text = "Total Amount :".localized
             cell.lblTripFareTitle.text = "Trip Fare:".localized
-            cell.lblTripTitle.text = "Tip".localized
+//            cell.lblTripTitle.text = "Tip".localized
             cell.lblWaitingCostTitle.text = "Waiting Cost".localized
             cell.lblWaitingTimeTitle.text = "Waiting Time".localized
             cell.lblLessTitle.text = "Less" .localized
-            cell.lblPromoApplied.text = "Promo Applied:".localized
+//            cell.lblPromoApplied.text = "Promo Applied:".localized
             cell.lblTotlaAmountTitile.text = "Total Amount :".localized
             cell.lblInclTax.text = "(incl tax)".localized
             cell.lblTripStatusTitle.text = "Trip Status:".localized
@@ -203,7 +205,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 //            let strModel = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "Model", isNotHave: strNotAvailable)
 //            let strTripDistance = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripDistance", isNotHave: strNotAvailable)
 //            let strTripFare = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripFare", isNotHave: strNotAvailable)
-//            let strNightFare = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "NightFare", isNotHave: strNotAvailable)
+            let strNightFare = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "NightFare", isNotHave: strNotAvailable)
             
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en"
@@ -271,18 +273,21 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             
             cell.lblVehicleType.text = strModel
-            cell.lblTip.text = "\(strTip)x \(currencySign)"
+//            cell.lblTip.text = "\(strTip)x \(currencySign)"
             cell.lblTripFare.text = "\(strTripFare) \(currencySign)"
             cell.lblWaitingCost.text = "\(strWaitingTimeCost) \(currencySign)" // (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "WaitingTimeCost") as? String
             
             cell.lblBookingFee.text = "\(strBookingFee) \(currencySign)" //(aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "BookingCharge") as? String
-            cell.lblPromoCode.text = "\(strPromoCode) \(currencySign)"// (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Discount") as? String
+//            cell.lblPromoCode.text = "\(strPromoCode) \(currencySign)"// (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Discount") as? String
            
             cell.lblTotalAmount.text = "\(strTotalAmount) \(currencySign)"
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en"
                 {
-                     cell.lblPaymentType.text = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PaymentType", isNotHave: strNotAvailable)//(aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "PaymentType") as? String
+                    cell.lblPaymentType.text = (checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PaymentType", isNotHave: strNotAvailable)).capitalizingFirstLetter()//(aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "PaymentType") as? String
+                    
+                    
+                    
                     
                 }
                 else if SelectedLanguage == "sw"
@@ -291,7 +296,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
             }
             
-//            cell.lblNightFare.text = strNightFare
+            cell.lblNightFare.text = strNightFare
 //
 //
 //            cell.lblTollFee.text = strTollFee // (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "TollFee") as? String
@@ -378,15 +383,19 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 //                }
 //            }
 
-//            if let strNightFare = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "NightFare") as? String {
-//                if strNightFare == "" {
-//                    cell.lblNightFare.isHidden = true
-//                    cell.stackViewNightFare.isHidden = true
-//                }
-//                else {
-//                    cell.lblNightFare.text = strNightFare
-//                }
-//            }
+            if let strNightFare = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "NightFare") as? String {
+                if strNightFare == "" {
+                    cell.lblNightFare.isHidden = false
+                    cell.stackViewNightFare.isHidden = false
+                    
+                    cell.lblNightFare.text = "N/A"
+                }
+                else {
+                    cell.lblNightFare.text = strNightFare
+                    cell.lblNightFare.isHidden = false
+                    cell.stackViewNightFare.isHidden = false
+                }
+            }
             
             
 //            cell.lblTripFare.text = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "TripFare") as? String
@@ -403,8 +412,6 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             
             cell.viewDetails.isHidden = !expandedCellPaths.contains(indexPath)
-            
-            
             
         }
         
@@ -439,7 +446,10 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.current //Set timezone that you want
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "HH:mm yyyy/MM/dd" //Specify your format that you want
+//        dateFormatter.dateFormat = "HH:mm yyyy/MM/dd" //Specify your format that you want
+        
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm "
+        
         let strDate: String = dateFormatter.string(from: date)
         
         return strDate

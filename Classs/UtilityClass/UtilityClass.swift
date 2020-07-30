@@ -146,6 +146,17 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
     typealias alertCompletionBlockAJ = ((Int, String) -> Void)?
     
     class func setCustomAlert(title: String, message: String,completionHandler: alertCompletionBlockAJ) -> Void {
+        
+        if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window, let rootViewController = window?.rootViewController {
+            
+            var topViewController = rootViewController
+            if topViewController.presentedViewController == nil {
+                let vc = topViewController.childViewControllers.last! as? AJAlertController
+                vc?.view.removeFromSuperview()
+                vc?.removeFromParentViewController()
+            }
+        }
+
        
         AJAlertController.initialization().showAlertWithOkButton(aStrTitle: appName, aStrMessage: message) { (index,title) in
             

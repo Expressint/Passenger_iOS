@@ -13,7 +13,9 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var strPickupLat = String()
     var strPickupLng = String()
-    var aryData = NSArray()
+//    var aryData = NSArray()
+    
+    var aryData = NSMutableArray()
     
     var strDropoffLat = String()
     var strDropoffLng = String()
@@ -50,10 +52,6 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
     }
     
-   
-    
-  
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,12 +59,19 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @objc func reloadDataOfTableView() {
         
-        self.aryData = SingletonClass.sharedInstance.aryOnGoing
+//        self.aryData = SingletonClass.sharedInstance.aryOnGoing
+        
+        
+        webserviceOfOngoingpagination(index: 1)
+        
+        
         self.tableView.reloadData()
         
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+//        webserviceOfOngoingpagination(index: 1)
         
         tableView.reloadData()
         refreshControl.endRefreshing()
@@ -274,6 +279,61 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         return strDate
     }
+    
+    func webserviceOfOngoingpagination(index: Int) {
+        
+        let driverId = SingletonClass.sharedInstance.strPassengerID
+        
+        webserviceForOngoingBookingList(driverId as AnyObject, PageNumber: index as AnyObject) { (result, status) in
+            print(result)
+            
+            if (status) {
+                DispatchQueue.main.async {
+                    
+                    var tempUpcomingData = NSArray()
+                    
+                    if let dictData = result as? [String:AnyObject]
+                    {
+                        if let aryHistory = dictData["history"] as? [[String:AnyObject]]
+                        {
+                            tempUpcomingData = aryHistory as NSArray
+                        }
+                    }
+                    
+                    for i in 0..<tempUpcomingData.count {
+                        
+                        let dataOfAry = (tempUpcomingData.object(at: i) as! NSDictionary)
+                        
+                        let strHistoryType = dataOfAry.object(forKey: "HistoryType") as? String
+                        
+                        if strHistoryType == "onGoing" {
+                            self.aryData.add(dataOfAry)
+                        }
+                    }
+                    
+                    if(self.aryData.count == 0) {
+                        //                        self.labelNoData.text = "No data found."
+                        //                        self.tableView.isHidden = true
+                    }
+                    else {
+                        //                        self.labelNoData.removeFromSuperview()
+                        self.tableView.isHidden = false
+                    }
+                    
+                    //                    self.getPostJobs()
+                    self.refreshControl.endRefreshing()
+                    self.tableView.reloadData()
+                    
+                    UtilityClass.hideACProgressHUD()
+                }
+            }
+            else {
+                //                UtilityClass.showAlertOfAPIResponse(param: result, vc: self)
+            }
+        }
+    }
+    
+    
     
 /*
     func setMarkersOnMap(PickupLatitude: Double, PickupLongitude: Double, DropoffLatitude: Double, DropoffLongitude: Double, PickupLocation: String, DropoffLocation: String) {

@@ -27,8 +27,6 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
     var selectedBackgroundColor = themeYellowColor // themeBlackColor
     var unselectedBackgroundColor = UIColor.init(red: 204/255, green: 204/255, blue: 204/255, alpha: 1.0)
     
-    
-    
     var selectedTextColor = UIColor.white //themeYellowColor //UIColor.init(red: 48/255, green: 48/255, blue: 48/255, alpha: 1.0)
     var unselectedTextColor = UIColor.init(red: 167/255, green: 167/255, blue: 167/255, alpha: 1.0)
     
@@ -40,9 +38,7 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
         
         
         self.setNavBarWithBack(Title: "My Bookings".localized, IsNeedRightButton: true)
-
-
-
+        
         webserviceOfBookingHistory()
      
         scrollObject.isUserInteractionEnabled = true
@@ -59,7 +55,6 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
             else if bookingType == "reject" {
                 PastBooking()
             }
-            
         }
         else {
             PastBooking()
@@ -204,9 +199,6 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
 //
 //        bottomBorderOnGoing.removeFromSuperlayer()
 //        bottomBorderPastBooking.removeFromSuperlayer()
-        
-        
-        
         
 //        lblOnGoing.backgroundColor = UIColor.white
 ////        btnUpComming.backgroundColor = UIColor.init(red: 255/255, green: 163/255, blue: 0, alpha: 1.0)

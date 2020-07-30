@@ -18,7 +18,7 @@ let themeGrayColor: UIColor = UIColor.init(red: 114/255, green: 114/255, blue: 1
 //let ThemeYellowColor : UIColor = UIColor.init(hex: "ffa300")
 let themeGrayBGColor : UIColor = UIColor.init(hex: "DDDDDD")
 let themeGrayTextColor : UIColor = UIColor.init(hex: "7A7A7C")
-let currencySign = "TZS"
+let currencySign = "KSh"
 let appName = "AllOut"
 let helpLineNumber = "+255777115054"//"0772506506"
 let googleAnalyticsTrackId = "UA-122360832-1"
@@ -76,6 +76,8 @@ struct WebserviceURLs {
     static let kBookingHistory                          = "BookingHistory"
     
     static let kPastBooking                             = "PastBooking"
+    static let kUpcomingBooking                         = "UpcomingBooking"
+    static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
     static let kImageBaseURL                            = "http://3.6.200.100/" // "http://3.6.224.0/"//"https://www.tantaxitanzania.com/" // "https://pickngolk.info/web/" "http://54.169.67.226/web/" //
     static let kFeedbackList                            = "FeedbackList/"

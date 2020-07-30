@@ -79,7 +79,7 @@ class DriverInfoViewController: UIViewController {
     func setLocalization()
     {
         
-        lblDriverInfo.text = "Maelezo ya dereva".localized
+        lblDriverInfo.text = "Driver Info".localized
         lblDriverName.text = "Jina la dereva".localized
         lblCareName.text = "Jina la Gari".localized
         lblPickupLocation.text = "Pickup Location".localized

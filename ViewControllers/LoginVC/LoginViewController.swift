@@ -61,7 +61,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         super.loadView()
         
         if Connectivity.isConnectedToInternet() {
-            print("Yes! internet is available.")
+            print("Yes! Internet is available.")
             // do some tasks..
         }
         else {
@@ -175,10 +175,21 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
              // txtMobile.showErrorWithText(errorText: "Enter Email")
             return false
         }
+        else if ((txtMobile.text?.count)! < 10){
+            
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid Mobile Number") { (index, title) in
+            }
+        }
         else if (txtPassword.text?.count == 0)
         {
 
             UtilityClass.setCustomAlert(title: "Missing", message: "Enter Password") { (index, title) in
+            }
+
+            return false
+        }
+        else if (txtPassword.text!.count < 8) {
+            UtilityClass.setCustomAlert(title: "Missing", message: "Password must contain atleast 8 characters") { (index, title) in
             }
 
             return false
@@ -390,7 +401,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     func webserviceCallForForgotPassword(strEmail : String)
     {
         let dictparam = NSMutableDictionary()
-        dictparam.setObject(strEmail, forKey: "MobileNo" as NSCopying)
+        dictparam.setObject(strEmail, forKey: "Email" as NSCopying)
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         webserviceForForgotPassword(dictparam) { (result, status) in
@@ -710,6 +721,14 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
     @IBAction func btnLogin(_ sender: Any) {
         
+        
+        
+        guard (txtMobile.text?.count != 0) || (txtPassword.text?.count != 0) else {
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please fill all details") { (index, title) in
+            }
+            return
+        }
+        
         if (checkValidation()) {
             self.webserviceCallForLogin()
         }
@@ -731,6 +750,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         alert.addTextField { (textField) in
             
             textField.placeholder = "Email".localized
+            textField.keyboardType = .emailAddress
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
@@ -738,9 +758,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             print("Text field: \(String(describing: textField?.text))")
             
-            if (textField?.text?.count != 0)
+            let isEmailAddressValid = self.isValidEmailAddress(emailID: textField!.text!)
+            if (textField?.text?.count != 0) && (isEmailAddressValid)
             {
                 self.webserviceCallForForgotPassword(strEmail: (textField?.text)!)
+            } else {
+                UtilityClass.setCustomAlert(title: "Invalid!", message: "Enter a valid email") { (index, title) in
+                }
             }
         }))
         
@@ -750,6 +774,30 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func isValidEmailAddress(emailID: String) -> Bool
+    {
+        var returnValue = true
+        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z)-9.-]+\\.[A-Za-z]{2,3}"
+        
+        do{
+            let regex = try NSRegularExpression(pattern: emailRegEx)
+            let nsString = emailID as NSString
+            let results = regex.matches(in: emailID, range: NSRange(location: 0, length: nsString.length))
+            
+            if results.count == 0
+            {
+                returnValue = false
+            }
+        }
+        catch _ as NSError
+        {
+            returnValue = false
+        }
+        
+        return returnValue
+    }
+    
     func setLayoutForswahilLanguage()
     {
         UserDefaults.standard.set("sw", forKey: "i18n_language")

@@ -112,7 +112,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
 
         
-        webserviceOfCardList()
+//        webserviceOfCardList()
         
         pickerView.delegate = self
         
@@ -155,6 +155,15 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //       txtSelectPaymentMethod.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(self.IQKeyboardmanagerDoneMethod))
 //
 //        getPlaceFromLatLong()
+        
+        self.lblPromoCode.isHidden = true
+        self.btnhavePromoCode.isHidden = true
+        
+        
+        self.txtPromoCode.isHidden = true
+        
+        self.constantHavePromoCodeTop.constant = 0
+        
     }
     
     func setLocalization()
@@ -173,7 +182,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         lblSelectPaymentMethod.text = "Select Payment Method".localized
         txtSelectPaymentMethod.placeholder = "Select Payment Method".localized
         btnSubmit.setTitle("Submit".localized, for: .normal)
-       lblYouhaveToNotified.text =   "You will be notified with your driver detail after your request is submited.".localized
+       lblYouhaveToNotified.text =   "You will be notified with your driver detail after your request is submitted.".localized
         
         btnhavePromoCode.setTitle("Have a promocode?".localized, for: .normal)
         
@@ -188,7 +197,6 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func fillTextFields() {
         txtPickupLocation.text = strPickupLocation
         txtDropOffLocation.text = strDropoffLocation
-        
     }
     
     func gaveCornerRadius() {
@@ -331,8 +339,6 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBAction func btnApply(_ sender: UIButton)
     {
         
-        
-
         let strPromo = txtPromoCode.text
         //        let strFinalPromo = "\(strPromo!)/\(SingletonClass.sharedInstance.strEstimatedFare)"
         //        self.strAppliedPromoCode = strPromo!
@@ -361,8 +367,6 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //
 //                    self.strPromoCodeDiscountType = dict.object(forKey: "DiscountType") as! String
 //                    self.strPromoCodeDiscountValue = "\((dict.object(forKey: "DiscountValue")!))"
-                    
-                    
                     
                 }
                 else
@@ -474,9 +478,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     }
     
     @IBAction func viewMySelf(_ sender: M13Checkbox) {
-     
         ActionForViewMySelf()
-       
     }
     
     @objc func ActionForViewMySelf() {
@@ -586,7 +588,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         selector.optionCalendarBackgroundColorFutureDatesHighlight = themeYellowColor
         selector.optionClockBackgroundColorMinuteHighlight = themeYellowColor
         
-        
+        selector.optionButtonFontColorCancel = themeYellowColor
         
 //        selector.optionStyles.showDateMonth(true)
         selector.optionStyles.showYear(false)
@@ -599,6 +601,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         selector.optionTopPanelTitle = "Please choose date"
         
         selector.optionIdentifier = "Time" as AnyObject
+        
+        selector.optionButtonShowCancel = true
 
         let dateCurrent = Date()
      
@@ -617,7 +621,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         if txtFullName.text == "" || txtMobileNumber.text == "" || txtPickupLocation.text == "" || txtDropOffLocation.text == "" || txtDataAndTimeFromCalendar.text == "" || strPassengerType == "" || paymentType == ""  {
             
            
-            UtilityClass.setCustomAlert(title: "Missing", message: "All fields are required...".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please fill all the details".localized) { (index, title) in
             }
         }
 //        else if viewMySelf.checkState == .unchecked && viewOthers.checkState == .unchecked {
@@ -720,6 +724,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             if txtSelectPaymentMethod.text == "card" {
                 self.addNewCard()
             }
+            
+//            if textField.text == ""
         }
     }
     
@@ -801,7 +807,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func didHaveCards() {
         
         aryCards.removeAll()
-        webserviceOfCardList()
+//        webserviceOfCardList()
     }
     
     @objc func IQKeyboardmanagerDoneMethod() {
@@ -825,7 +831,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return aryCards.count
+//        return aryCards.count
+        return 3
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -834,7 +841,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
   
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        let data = aryCards[row]
+//        let data = aryCards[row]
         
         let myView = UIView(frame: CGRect(x:0, y:0, width: pickerView.bounds.width - 30, height: 60))
         
@@ -848,38 +855,47 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         switch row {
             
         case 0:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+            rowString = "Select"
+            
         case 1:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+            rowString = "Cash"
+            myImageView.image = UIImage(named: "icon_CashUnselected")
+            
+            
+            
         case 2:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 3:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 4:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 5:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 6:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 7:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 8:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 9:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        case 10:
-            rowString = data["CardNum2"] as! String
-            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+            rowString = "M-Pesa"
+            myImageView.image = UIImage(named: "icon_UnselectedCard")
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 3:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 4:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 5:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 6:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 7:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 8:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 9:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        case 10:
+//            rowString = data["CardNum2"] as! String
+//            myImageView.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
         default:
             rowString = "Error: too many rows"
             myImageView.image = nil
@@ -898,10 +914,28 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let data = aryCards[row]
+//        let data = aryCards[row]
+        if row == 0 {
+            
+            paymentType = ""
+            txtSelectPaymentMethod.text = ""
+
+            
+        } else if row == 1 {
+            
+            paymentType = "cash"
+            
+            txtSelectPaymentMethod.text = "Cash"
+            
+        } else {
+            paymentType = "m_pesa"
+            
+            txtSelectPaymentMethod.text = "M-Pesa"
+        }
         
-        imgPaymentOption.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
-        txtSelectPaymentMethod.text = data["CardNum2"] as? String
+        
+//        imgPaymentOption.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
+//        txtSelectPaymentMethod.text = data["CardNum2"] as? String
         
 //        if data["CardNum"] as! String == "Add a Card" {
 //
@@ -909,18 +943,18 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 ////            self.addNewCard()
 //        }
 
-        let type = data["CardNum"] as! String
-        
-        if type == "cash" {
-            paymentType = "cash"
-        } else {
-            paymentType = "card"
-            if data["Id"] != nil {
-                if data["Id"] as? String != "" {
-                    CardID = data["Id"] as! String
-                }
-            }
-        }
+//        let type = data["CardNum"] as! String
+//
+//        if type == "cash" {
+//            paymentType = "cash"
+//        } else {
+//            paymentType = "card"
+//            if data["Id"] != nil {
+//                if data["Id"] as? String != "" {
+//                    CardID = data["Id"] as! String
+//                }
+//            }
+//        }
         
         
 //        if type  == "wallet" {
@@ -946,7 +980,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
         next.delegateAddCardFromBookLater = self
         self.isAddCardSelected = false
-        self.navigationController?.pushViewController(next, animated: true)
+//        self.navigationController?.pushViewController(next, animated: true)
     }
     
     //-------------------------------------------------------------
@@ -1012,6 +1046,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         return false
     }
     
+    func WWCalendarTimeSelectorCancel(_ selector: WWCalendarTimeSelector, date: Date) {
+        print("It works")
+    }
+    
+    
     //-------------------------------------------------------------
     // MARK: - Webservice For Book Later
     //-------------------------------------------------------------
@@ -1037,8 +1076,6 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         dictData["PickupLng"] = doublePickupLng as AnyObject
         dictData["DropOffLat"] = doubleDropOffLat as AnyObject
         dictData["DropOffLon"] = doubleDropOffLng as AnyObject
-        
-        
         
         if lblPromoCode.text == "" {
             

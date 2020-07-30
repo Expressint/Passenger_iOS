@@ -85,11 +85,17 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func btnNext(_ sender: Any) {
         
+        
+        guard (txtPhoneNumber.text?.count != 0) || (txtEmail.text?.count != 0) || (txtPassword.text?.count != 0) || (txtConfirmPassword.text?.count != 0) else {
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please fill all details") { (index, str) in
+            }
+            return
+        }
+        
+        
         if (validateAllFields())
         {
-
             webserviceForGetOTPCode(email: txtEmail.text!, mobile: txtPhoneNumber.text!)
-
         }
         
     }
@@ -163,7 +169,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         else if (txtConfirmPassword.text?.count == 0)
         {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter confirm password".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm the password".localized) { (index, title) in
             }
             
             return false
@@ -178,7 +184,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         else if (txtPassword.text != txtConfirmPassword.text)
         {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Password and Confirm Password does not match".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Password and confirm password does not match".localized) { (index, title) in
             }
 
             return false
@@ -236,7 +242,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                     if SelectedLanguage == "en" {
                         
-                        UtilityClass.showAlertWithCompletion("OTP Code", message: datas["message"] as! String, vc: self, completionHandler: { ACTION in
+                        UtilityClass.showAlertWithCompletion("OTP Code", message: (datas["message"] as! String).firstCharacterUpperCase(), vc: self, completionHandler: { ACTION in
                             
                             if let otp = datas["otp"] as? String {
                                 SingletonClass.sharedInstance.otpCode = otp
@@ -301,5 +307,13 @@ extension RegisterViewController {
         self.lblSecondStep.layer.masksToBounds = true
     }
     
+}
+
+extension String {
+    func firstCharacterUpperCase() -> String! {
+        guard !isEmpty else { return nil }
+        let lowerCasedString = self.lowercased()
+        return lowerCasedString.replacingCharacters(in: lowerCasedString.startIndex...lowerCasedString.startIndex, with: String(lowerCasedString[lowerCasedString.startIndex]).uppercased())
+    }
 }
 

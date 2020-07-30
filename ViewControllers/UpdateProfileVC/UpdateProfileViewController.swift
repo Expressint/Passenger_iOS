@@ -13,7 +13,6 @@ import NVActivityIndicatorView
 import ACFloatingTextfield_Swift
 import IQDropDownTextField
 
-
 class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,IQDropDownTextFieldDelegate {
     
     //-------------------------------------------------------------
@@ -36,11 +35,9 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 //    @IBOutlet weak var btnSave: ThemeButton!
     
 //    @IBOutlet var viewChangePassword: UIView!
+    
     @IBOutlet var btnChangePassword: UIButton!
     @IBOutlet var btnProfile: UIButton!
-    
-    
-    
     
     var firstName = String()
     var lastName = String()
@@ -177,12 +174,15 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
    
     @IBAction func txtDateOfBirthAction(_ sender: UITextField) {
 
-
         let datePickerView:UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
+        datePickerView.maximumDate = Date()
+        datePickerView.date = (sender.text?.dateFromFormat("yyyy-MM-dd"))!
         sender.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(self.pickupdateMethod(_:)), for: UIControlEvents.valueChanged)
     }
+    
+    
 
     @objc func pickupdateMethod(_ sender: UIDatePicker)
     {
@@ -194,8 +194,12 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     func textField(_ textField: IQDropDownTextField, didSelect date: Date?)
     {
         
-
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        txtDateOfBirth =
+    }
+    
     @IBAction func btnChangePassword(_ sender: UIButton) {
         
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ChangePasswordVC") as! ChangePasswordVC
@@ -253,7 +257,10 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         picker.sourceType = .photoLibrary
         
         // picker.stopVideoCapture()
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+//        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        picker.mediaTypes = [(kUTTypeImage as String)]
+        
+//        picker.mediaTypes = []
         present(picker, animated: true, completion: nil)
     }
     
@@ -284,7 +291,6 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
     
     func setData()
     {
@@ -293,11 +299,25 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         
         imgProfile.sd_setShowActivityIndicatorView(true)
         imgProfile.sd_setIndicatorStyle(.whiteLarge)
-        imgProfile.sd_setImage(with: URL(string: getData.object(forKey: "Image") as! String), completed: nil)
+        
+        if SingletonClass.sharedInstance.isFromSocilaLogin {
+            imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)
+        } else {
+            imgProfile.sd_setImage(with: URL(string: (getData.object(forKey: "Image") as! String)), completed: nil)
+        }
+        
+        // (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))
+//        imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)
         
         txtPhoneNumber.text = getData.object(forKey: "MobileNo") as? String
-        txtDateOfBirth.text = getData.object(forKey: "DOB") as? String
         
+        let dob = getData.object(forKey: "DOB") as? String
+        
+        if dob! == "0000-00-00" {
+            txtDateOfBirth.text = ""
+        } else {
+            txtDateOfBirth.text = dob ?? ""
+        }
 
         fullName = getData.object(forKey: "Fullname") as! String
   
@@ -351,7 +371,6 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
-        
         webserviceForUpdateProfile(dictData as AnyObject, image1: self.imgUpdatedProfilePic ) { (result, status) in
             
             if (status) {
@@ -368,8 +387,6 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
                 UtilityClass.setCustomAlert(title: "Done", message: "Your profile updated successfully".localized) { (index, title) in
                     self.navigationController?.popViewController(animated: true)
                 }
-                
-                
             }
             else {
                 print(result)

@@ -19,6 +19,9 @@ class RegistrationContainerViewController: UIViewController,UIScrollViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollObject.delegate = self
+        
+//        Comment below line while Testing: to quick navigate between registration VCs:
+//        self.scrollObject.isScrollEnabled = false
   
     }
     

@@ -42,13 +42,12 @@ class ChangePasswordVC: BaseViewController {
     
     func setLocalization()
     {
-        
         lblChangePassWorld.text = "Change Password".localized
+        
         txtNewPassword.placeholder = "New Password".localized
+        
         txtConfirmPassword.placeholder = "Confirm Password".localized
         btnSubmit.setTitle("Submit".localized, for: .normal)
-        
-        
         
     }
     
@@ -61,12 +60,31 @@ class ChangePasswordVC: BaseViewController {
     @IBOutlet weak var txtConfirmPassword: ACFloatingTextfield!
     
     
+    
+    
     @IBOutlet weak var btnSubmit: ThemeButton!
     
     
     @IBAction func btnSubmit(_ sender: ThemeButton) {
             
         let str = txtNewPassword.text
+        
+        
+//        txtNewPassword.placeholder
+        
+        
+        guard !txtNewPassword.text!.isEmpty else {
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter new password".localized) { (index, title) in
+            }
+            return
+        }
+        
+        guard !txtConfirmPassword.text!.isEmpty else {
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm password".localized) { (index, title) in
+            }
+            return
+        }
+        
         
         if txtNewPassword.text == txtConfirmPassword.text {
         
@@ -82,7 +100,6 @@ class ChangePasswordVC: BaseViewController {
             UtilityClass.setCustomAlert(title: "Password did not match", message: "Password and confirm password must be same".localized) { (index, title) in
             }
         }
-        
     }
     
     

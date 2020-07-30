@@ -172,9 +172,10 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
+        picker.mediaTypes = [(kUTTypeImage as String)]
         
         // picker.stopVideoCapture()
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+//        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         present(picker, animated: true, completion: nil)
     }
     
@@ -235,7 +236,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         if (txtFullName.text?.count == 0)
         {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter User Name") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter user name") { (index, title) in
             }
             return false
         }
@@ -267,12 +268,12 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //        }
         else if (txtAddress.text?.count == 0) {
             
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Address") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter address") { (index, title) in
             }
             return false
         } else if gender == "" {
             
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose Gender") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose gender") { (index, title) in
             }
             return false
         }
@@ -296,6 +297,15 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     @IBAction func btnSignUp(_ sender: Any) {
         
+        let isplaceholder = imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!)
+        
+        guard (txtFullName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
+            
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter all details") { (index, title) in
+            }
+            return
+        }
+    
         if (checkValidation())
         {
             let registerVC = (self.navigationController?.viewControllers.last as! RegistrationContainerViewController).childViewControllers[0] as! RegisterViewController
@@ -419,11 +429,19 @@ extension RegistrationNewViewController {
         self.lblSecondStep.layer.masksToBounds = true
         
         self.radioButtonsController = AKRadioButtonsController(radioButtons: self.radioButtons)
-        self.radioButtonsController.strokeColor = themeYellowColor
+        
+        self.radioButtonsController.strokeColor = .white
+        
+//        self.radioButtonsController.strokeColor = themeYellowColor
         self.radioButtonsController.startGradColorForSelected = themeYellowColor
         self.radioButtonsController.endGradColorForSelected = themeYellowColor
-        self.radioButtonsController.selectedIndex = 2
+        self.radioButtonsController.selectedIndex = 1
+        
+        //0 is female
+        //1 is female
+        
         self.radioButtonsController.delegate = self //class should implement AKRadioButtonsControllerDelegate
+        
 
         
         

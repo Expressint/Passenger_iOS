@@ -169,7 +169,7 @@
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
-		6E3DF71524222282002BFCD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E3DF71424222282002BFCD4 /* GoogleService-Info.plist */; };
+		6EC8F1CD24C05FE700108675 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */; };
 		6EFD7170241F79CE00B01752 /* zzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD716F241F79CE00B01752 /* zzz.swift */; };
 		CA98D2E2675BED84D75253DB /* Pods_AllOut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A8F4FD7F5F213E238836C3F /* Pods_AllOut.framework */; };
 /* End PBXBuildFile section */
@@ -359,8 +359,8 @@
 		6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueViewController.swift; sourceTree = "<group>"; };
 		6A8F4FD7F5F213E238836C3F /* Pods_AllOut.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllOut.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C5BB4D02F5DAB560A69DD39 /* Pods_PickNGo_User.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PickNGo_User.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E3DF71424222282002BFCD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E4A9827241B54B00085A1F3 /* AllOut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AllOut.entitlements; sourceTree = "<group>"; };
+		6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6EFD716F241F79CE00B01752 /* zzz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zzz.swift; sourceTree = "<group>"; };
 		8AB9D1AFC2E46418F626C956 /* Pods-TickTok User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TickTok User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TickTok User/Pods-TickTok User.release.xcconfig"; sourceTree = "<group>"; };
 		AF52F47D5C41A2336F5A8C8E /* Pods-AllOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllOut/Pods-AllOut.debug.xcconfig"; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 		3A4072B321B512270015C494 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6E3DF71424222282002BFCD4 /* GoogleService-Info.plist */,
+				6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */,
 				3A5F1BD121CE21AD000007AE /* Credentials.plist */,
 				3A4072B421B512270015C494 /* Assets.xcassets */,
 				3A4072BA21B512270015C494 /* Fonts */,
@@ -1034,7 +1034,6 @@
 				3A40739021B512280015C494 /* costcoWholesale.png in Resources */,
 				3A40738021B512280015C494 /* proxima-nova-condensed-light.otf in Resources */,
 				3A40738F21B512280015C494 /* coles.jpg in Resources */,
-				6E3DF71524222282002BFCD4 /* GoogleService-Info.plist in Resources */,
 				3A5F1BD221CE21AD000007AE /* Credentials.plist in Resources */,
 				3A40738321B512280015C494 /* proxima-nova-condensed-semibold.otf in Resources */,
 				3A40738B21B512280015C494 /* proxima-nova.otf in Resources */,
@@ -1062,6 +1061,7 @@
 				3A40738521B512280015C494 /* proxima-nova-extrabold.otf in Resources */,
 				3A4073FC21B512280015C494 /* circle1.png in Resources */,
 				3A40737F21B512280015C494 /* proxima-nova-condensed-light-italic.otf in Resources */,
+				6EC8F1CD24C05FE700108675 /* GoogleService-Info.plist in Resources */,
 				3A40740221B512280015C494 /* round50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -186,7 +186,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func btnRequestLater()
     {
-        
         //        self.clearDataAfteCompleteTrip()
         clearMap()
         self.MarkerCurrntLocation.isHidden = false
@@ -208,6 +207,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //        self.doublePickupLng = 0
         self.btnCurrentLocation(self.btnCurrentLocation)
         //        SingletonClass.sharedInstance.strPassengerID = ""
+        
+        currentLocationAction()
         
     }
     // ----------------------------------------------------------------------
@@ -712,10 +713,18 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var dummyTimer = Timer()
     
     @IBAction func btnCurrentLocation(_ sender: UIButton) {
-//        self.getDummyDataLinedata()
-//        dummyTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(dummyCarMovement), userInfo: nil, repeats: true)
+        //        self.getDummyDataLinedata()
+        //        dummyTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(dummyCarMovement), userInfo: nil, repeats: true)
         
-        currentLocationAction()
+        let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.coordinate.latitude,
+                                              longitude: defaultLocation.coordinate.longitude,
+                                              zoom: 17)
+        mapView.camera = camera
+        
+        
+        //Sj Change : Commented cause we dont want to clear the map when this button is pressed. but just center the camera
+        
+//        currentLocationAction()
     }
     
     @objc func dummyCarMovement() {
@@ -1992,12 +2001,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     UtilityClass.setCustomAlert(title: "Missing", message: "Please enter your destination again") { (index, title) in
                     }
                 }
+                else if strCarModelID == "" {
+                    UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle".localized) { (index, title) in
+                    }
+                    
+                }
                 else if strModelId == ""
                 {
                     
                     //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                     //                }
-                    UtilityClass.setCustomAlert(title: "Missing", message: "No Driver Available Right Now.".localized) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing", message: "Vehicle not available".localized) { (index, title) in
                     }
                     //                    UtilityClass.setCustomAlert(title: appName, message: "There are no cars available. Do you want to pay extra chareges?") { (index, title) in
                     //                    }
@@ -2167,7 +2181,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //            self.btnCash.isSelected = true
 //            self.PayCashView.backgroundColor = UIColor.black
             paymentType = "cash"
-            btnCardSelection.setTitle("Card", for: .normal)
+            btnCardSelection.setTitle("M-Pesa", for: .normal)
             CardID = ""
 
         } else if SelectionIndex == 1 {
@@ -2304,7 +2318,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     
                     //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                     //                }
-                    UtilityClass.setCustomAlert(title: "Missing", message: "No Driver Available Right Now.".localized) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle type.".localized) { (index, title) in
                     }
                 }
                 else
@@ -2336,7 +2350,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if strCarModelID == "" && strCarModelIDIfZero == ""{
                     //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                     //                }
-                    UtilityClass.setCustomAlert(title: "Missing", message: "No Driver Available Right Now.".localized) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle type.".localized) { (index, title) in
                     }
                 }
                 else {
@@ -2380,7 +2394,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func btnRequest(_ sender: ThemeButton) {
         
-        let alert = UIAlertController(title: nil, message: "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to cancel the trip?".localized, preferredStyle: .alert)
         let OK = UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
             
             if self.strBookingType == "BookLater" {
@@ -3278,7 +3292,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //MARK: - Socket Methods
     func socketMethods()
     {
-        
         var isSocketConnected = Bool()
         
         socket.on(clientEvent: .disconnect) { (data, ack) in
@@ -3289,7 +3302,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             print ("socket is reconnected")
         }
         
-        socket.on(clientEvent: .connect) {data, ack in
+        socket.on(clientEvent: .connect) { data, ack in
             
             print("Socket BaseURl : \(SocketData.kBaseURL)")
             print("socket connected")
@@ -3366,8 +3379,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @objc func updateCounting(){
-        let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
-        socket.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON])
+        if doublePickupLat != 0 && doublePickupLng != 0 {
+            let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
+            socket.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON])
+        }
+        
     }
     
     func methodsAfterConnectingToSocket()
@@ -3928,18 +3944,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 
                 if SingletonClass.sharedInstance.bookingId != "" {
-                    if SingletonClass.sharedInstance.bookingId == bookingId {
+//                    if SingletonClass.sharedInstance.bookingId == bookingId {
                         self.viewActivity.stopAnimating()
                         self.viewMainActivityIndicator.isHidden = true
                         self.currentLocationAction()
                         self.getPlaceFromLatLong()
                         self.clearDataAfteCompleteTrip()
                         self.currentLocationAction()
+                        
+                        self.mapView.clear()
                         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                         
                         self.viewTripActions.isHidden = true
                          SingletonClass.sharedInstance.passengerTypeOther = false
                         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
+                        SingletonClass.sharedInstance.bookingId = ""
 //                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
 //
 //                        })
@@ -3954,7 +3973,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                 UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
                                 })
                             }
-                        }
+//                        }
                     }
                 } else {
                     self.viewActivity.stopAnimating()
@@ -4172,11 +4191,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //        }
         ViewController?.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
         
-        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        alertWindow.rootViewController = UIViewController()
-        alertWindow.windowLevel = UIWindowLevelAlert + 1;
-        alertWindow.makeKeyAndVisible()
-        alertWindow.rootViewController?.present(ViewController!, animated: true, completion: nil)
+//        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+//        alertWindow.rootViewController = UIViewController()
+//        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+//        alertWindow.makeKeyAndVisible()
+//        alertWindow.rootViewController?.present(ViewController!, animated: true, completion: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController?.present(ViewController!, animated: true, completion: nil)
+        
+        
         
         //        ViewController?.dictPassengerInfo = PassengerInfo
 //        Utilities.presentPopupOverScreen(ViewController!)
@@ -4242,7 +4265,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.currentLocationAction()
             self.getPlaceFromLatLong()
             
-            self.getRaringNotification()
+//            self.getRaringNotification()
             
             
             self.clearDataAfteCompleteTrip()
@@ -4282,7 +4305,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         })
         
         alert.addAction(OK)
-                self.present(alert, animated: true, completion: nil)
+//        Sj Change:
+//                self.present(alert, animated: true, completion: nil)
+        
+        
 //        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
 //        alertWindow.rootViewController = UIViewController()
 //        alertWindow.windowLevel = UIWindowLevelAlert + 1;
@@ -4322,7 +4348,33 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                print("Else Part")
 //            }
 //        })
-      
+        
+        UtilityClass.setCustomAlert(title: appName, message: "Your trip has been completed") { (index, str) in
+            self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
+            self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
+            
+            self.viewTripActions.isHidden = true
+            
+            self.viewCarLists.isHidden = false
+            self.ConstantViewCarListsHeight.constant = 150
+            
+            self.viewMainFinalRating.isHidden = true
+            SingletonClass.sharedInstance.passengerTypeOther = false
+            
+            self.viewCarLists.isHidden = false
+            self.ConstantViewCarListsHeight.constant = 150
+            
+            self.currentLocationAction()
+            self.getPlaceFromLatLong()
+            self.getRaringNotification()
+            self.clearDataAfteCompleteTrip()
+            
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
+            viewController.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
+            viewController.delegate = self
+            self.btnCurrentLocation(self.btnCurrentLocation)
+            UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true, completion: nil)
+        }
     }
     
     func clearSetupMapForNewBooking() {
@@ -4387,6 +4439,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         stopTimer()
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
         self.viewCarLists.isHidden = true
+        SingletonClass.sharedInstance.bookingId = ""
 //        self.viewShareRideView.isHidden = true
         
     }
@@ -4730,6 +4783,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
         
+        
+        clearSetupMapForNewBooking()
+        clearCurrentLocation()
         clearDataAfteCompleteTrip()
         
     }
@@ -4814,7 +4870,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     var BoolCurrentLocation = Bool()
     
-    
     @IBAction func txtDestinationLocation(_ sender: UITextField) {
         
         let visibleRegion = mapView.projection.visibleRegion()
@@ -4832,7 +4887,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func txtCurrentLocation(_ sender: UITextField) {
-        
         
         let visibleRegion = mapView.projection.visibleRegion()
         let bounds = GMSCoordinateBounds(coordinate: visibleRegion.farLeft, coordinate: visibleRegion.nearRight)
@@ -5157,6 +5211,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.mapView.delegate = self
         
         self.destinationLocationMarker.map = nil
+        
+        
+        
+        self.currentLocationMarker = GMSMarker(position: self.originCoordinate) // destinationCoordinate
+        self.currentLocationMarker.map = self.mapView
+        self.currentLocationMarker.snippet = self.currentLocationMarkerText
+        self.currentLocationMarker.icon = UIImage(named: "iconMapPin")
         
         //        self.mapView.stopRendering()
         //        self.mapView = nil
@@ -5645,7 +5706,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             print("Origin is nil")
             
             UtilityClass.hideACProgressHUD()
-            
             UtilityClass.setCustomAlert(title: "\(appName)", message: "Not able to get location Origin, please restart app") { (index, title) in
 //                self.changePolyLine(origin: origin, destination: destination, waypoints: waypoints, travelMode: nil, completionHandler: nil)
             }
@@ -6303,7 +6363,6 @@ extension HomeViewController: CLLocationManagerDelegate {
             {
                 destinationCordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
             }
-            
             
             if driverMarker == nil {
                 driverMarker = GMSMarker(position: destinationCordinate)

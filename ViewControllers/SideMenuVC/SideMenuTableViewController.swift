@@ -91,7 +91,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-         arrMenuIcons = ["icon_MyBookingUnselect","icon_PaymentOptionsUnselect","helpBlack","icon_MyReceiptUnselect"]
+         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_help_unselect","img_mn_receipt_unselect","ic_pay_unselect"]
 //        arrMenuIcons = ["icon_MyBookingUnselect","icon_MyReceiptUnselect","icon_UnSelectedWallet","icon_InviteFriendUnselect","icon_FavouriteUnselect","icon_Legal","icon_Support"]
         
         //,"icon_PaymentOptionsUnselect","icon_UnSelectedWallet",,"icon_PaymentOptionsUnselect"
@@ -122,7 +122,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings", "Help", "My Receipts", "Past Dues"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings", "Help", "My Receipts", "Previous Due"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,7 +148,15 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         
         self.imgProfile.sd_setShowActivityIndicatorView(true)
         self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
-        self.imgProfile.sd_setImage(with: URL(string: ProfileData.object(forKey: "Image") as! String), completed: nil)
+        
+        if SingletonClass.sharedInstance.isFromSocilaLogin {
+            self.imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (ProfileData.object(forKey: "Image") as! String)) ), completed: nil)
+        } else {
+            self.imgProfile.sd_setImage(with: URL(string: ((ProfileData.object(forKey: "Image") as! String))), completed: nil)
+        }
+        
+       
+//
         self.lblName.text = ProfileData.object(forKey: "Fullname") as? String
         
         self.lblMobileNumber.text = ProfileData.object(forKey: "Email") as? String
@@ -672,7 +680,7 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
             NotificationCenter.default.post(name: OpenFavourite, object: nil)
             sideMenuController?.toggle()
         }
-        else if arrMenuTitle[indexPath.row] == "Past Dues" {
+        else if arrMenuTitle[indexPath.row] == "Previous Due" {
             NotificationCenter.default.post(name: OpenPastDues, object: nil)
             sideMenuController?.toggle()
         }
@@ -713,7 +721,9 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let MenuWidth = sideMenuController?.sideViewController.view.frame.width
-        let CollectionCellWidth = (MenuWidth! - 95.0) / 2
+//        let CollectionCellWidth = (MenuWidth! - 95.0) / 2
+        
+        let CollectionCellWidth = (MenuWidth! - 80.0) / 2
         return CGSize(width: CollectionCellWidth, height: CollectionCellWidth)
     }
 }

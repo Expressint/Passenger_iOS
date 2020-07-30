@@ -305,6 +305,7 @@
 "Booking Confirmed" = "Booking Confirmed";
 "Your request status is pending..." = "Your request status is pending...";
 "Apply Promocode" = "Apply Promocode";
+
 "Enter promocode" = "Enter promocode";
 "Apply" = "Apply";
 "Request Now" = "Request Now";
@@ -403,7 +404,7 @@
 
 //HOME
 
-"HOME" = "HOME";
+"HOME" = "Home";
 "Done" = "Done";
 "Dropoff Location" = "Dropoff Location";
 "Pickup Location" = "Pickup Location";
@@ -436,7 +437,8 @@
 "Your ride has been booked." = "Your ride has been booked.";
 "Please Select Car" = "Please Select Car";
 "Enter Promocode" = "Enter Promocode";
-"Apply Promocode" = "Apply Promocode";
+"Apply Promocode" = "Apply Promocode";'
+"Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
 
 
 "BSB" = "BSB";
@@ -448,3 +450,5 @@
 "Account Updated Successfully." = "Account Updated Successfully.";
 "has invited you to become a AllOut Passenger" = "has invited you to become a AllOut Passenger";
 "Your invite code is:" = "Your invite code is:";
+"Please confirm password" = "Please confirm password";
+"Please fill all the details" = "Please fill all the details";

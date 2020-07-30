@@ -83,8 +83,6 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
-        
         return self.counts
     }
     
@@ -94,7 +92,6 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyRecepitTableViewCell") as! MyRecepitTableViewCell
         cell.selectionStyle = .none
         
-  
         
         cell.lblPickUpTimeTitle.text = "Pickup Time".localized
         cell.lblDropOffTimeTitle.text = "DropoffTime:".localized
@@ -110,6 +107,7 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
         cell.lblInclTaxTitle.text = "(incl tax)".localized
         cell.lblTripStatusTitlr.text = "Trip Status:".localized
         cell.btnGetReceipt.setTitle("GET RECEIPT".localized, for: .normal)
+        cell.lblNightFareTitle.text = "Night Fare :".localized
         
 
         let dictData = self.newAryData.object(at: indexPath.row) as! NSDictionary
@@ -150,6 +148,7 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
                 let PickTime = Double(dictData.object(forKey: "PickupTime") as! String)
                 let dropoffTime = Double(dictData.object(forKey: "DropTime") as! String)
                 
+                
                 let unixTimestamp = PickTime //as Double//as! Double//dictData.object(forKey: "PickupTime")
                 let unixTimestampDrop = (dropoffTime as! Double)
                 let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp!))
@@ -180,6 +179,10 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
                 cell.lblWaitingTime.text = dictData.object(forKey: "WaitingTime") as? String
                 cell.lblPromoCode.text = "\(dictData.object(forKey: "PromoCode") as! String) \(currencySign)"
                 cell.lblTotalAmount.text = "\(dictData.object(forKey: "GrandTotal") as! String) \(currencySign)"
+                
+                cell.lblNightFare.text = "\(dictData.object(forKey: "NightFare") as! String) \(currencySign)"
+                
+                
 //                cell.lblTripStatus.text = dictData.object(forKey: "Status") as? String
                 
                 if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
@@ -213,6 +216,11 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
 //                cell.lblDiscountApplied.text = dictData.object(forKey: "Discount") as? String
 //                cell.lblChargedCard.text = dictData.object(forKey: "PaymentType") as? String
 //
+                
+                
+                
+                
+                
 //                self.urlForMail = dictData.object(forKey: "ShareUrl") as! String
                 
                 
@@ -266,6 +274,7 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     {
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     @objc func getReceipt(sender: UIButton) {
         

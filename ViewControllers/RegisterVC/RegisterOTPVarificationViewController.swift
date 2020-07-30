@@ -68,6 +68,14 @@ class RegisterOTPVarificationViewController: UIViewController {
         let registerVC = (self.navigationController?.viewControllers.last as! RegistrationContainerViewController).childViewControllers.last as! RegistrationNewViewController
         registerVC.setupScrollView()
         
+        
+        guard txtOTP.text?.count != 0 else {
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "OTP cannot be blank", completionHandler: { (index, title) in
+                
+            })
+            return
+        }
+        
         if SingletonClass.sharedInstance.otpCode == txtOTP.text {
 
             let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
@@ -76,7 +84,7 @@ class RegisterOTPVarificationViewController: UIViewController {
         }
         else
         {
-            UtilityClass.setCustomAlert(title: "\(appName)", message: "Please Enter Valid OTP Code", completionHandler: { (index, title) in
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "Please enter valid OTP code", completionHandler: { (index, title) in
                 
             })
         }

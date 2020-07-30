@@ -31,6 +31,8 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
     var cardTypeLabel = String()
     var aryData = [[String:AnyObject]]()
     
+    
+    
     var CardNumber = String()
     var strMonth = String()
     var strYear = String()

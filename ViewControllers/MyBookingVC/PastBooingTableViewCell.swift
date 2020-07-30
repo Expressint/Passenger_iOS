@@ -65,7 +65,7 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTotalAmount: UILabel!
     
     
-    
+    @IBOutlet weak var lblNightFare: UILabel!
     
     @IBOutlet weak var stackViewDistanceTravelled: UIStackView!
     @IBOutlet weak var lblDistanceTravelled: UILabel!

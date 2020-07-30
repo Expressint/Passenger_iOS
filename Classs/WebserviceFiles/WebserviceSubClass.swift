@@ -22,6 +22,8 @@ let GetEstimateFare =  WebserviceURLs.kGetEstimateFare
 let ChangePassword = WebserviceURLs.kChangePassword
 let UpdateProfile = WebserviceURLs.kUpdateProfile
 let PastBooking = WebserviceURLs.kPastBooking
+let UpcomingBooking = WebserviceURLs.kUpcomingBooking
+let OngoingBooking = WebserviceURLs.kOngoingBooking
 let FeedbackList              = WebserviceURLs.kFeedbackList
 let cardsList = WebserviceURLs.kCardsList
 let bookPackage = WebserviceURLs.kBookPackage
@@ -156,7 +158,7 @@ func webserviceForBookingHistory(_ dictParams: AnyObject, completion: @escaping(
 }
 
 //-------------------------------------------------------------
-// MARK: - Webservice For PastBooking
+// MARK: - Webservice For PastBooking List
 //-------------------------------------------------------------
 
 func webserviceForPastBookingList(_ dictParams: AnyObject,PageNumber : AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
@@ -164,6 +166,29 @@ func webserviceForPastBookingList(_ dictParams: AnyObject,PageNumber : AnyObject
     let url = "\(PastBooking)/\(dictParams)/\(PageNumber)"
     getData(dictParams as AnyObject, nsURL: url, completion: completion)
 }
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Upcoming Bookings List
+//-------------------------------------------------------------
+
+func webserviceForUpcomingBookingList(_ dictParams: AnyObject,PageNumber : AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = "\(UpcomingBooking)/\(dictParams)/\(PageNumber)"
+    getData(dictParams as AnyObject, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For OnGoing Bookings List
+//-------------------------------------------------------------
+
+func webserviceForOngoingBookingList(_ dictParams: AnyObject,PageNumber : AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = "\(OngoingBooking)/\(dictParams)"    // /\(PageNumber)
+    getData(dictParams as AnyObject, nsURL: url, completion: completion)
+}
+
+
+
 //-------------------------------------------------------------
 // MARK: - Webservice For Feedback List
 //-------------------------------------------------------------

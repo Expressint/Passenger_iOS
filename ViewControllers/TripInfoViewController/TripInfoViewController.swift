@@ -116,7 +116,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblbookingID.text = "Booking Id".localized
         lblPickupLocation.text = "Address".localized
         lblDropOffLocation.text = "Address".localized
-        lblDropoffTimeTitle.text = "Dropoff Location".localized
+        lblDropoffTimeTitle.text = "Dropoff Time".localized
         lblPickUpTimeTitle.text = "Pickup Time".localized
         lblDisstanceTravelledTitle.text = "Distance Travelled:".localized
         lblBookingFreeTitle.text = "Booking Fee :".localized
@@ -124,9 +124,11 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         WaitingCostTitle.text = "Waiting Cost".localized
         lblWaitingTimeTile.text = "Waiting Time:".localized
         lblLess.text = "Less".localized
-        lblPrompAppplied.text = "Promo Applied :".localized
+//        lblPrompAppplied.text = "Promo Applied :".localized
         lblTotalAmount.text = "Total Amount :".localized
         lblTripStatusTitle.text = "Trip Status:".localized
+        lblNightFare.text = "lblNightFare".localized
+        
         if dictData.object(forKey: "PaymentType") as! String != "pesapal"
         {
         btnOK.setTitle("OK".localized, for: .normal)
@@ -149,7 +151,9 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
 //        dictData = NSMutableDictionary(dictionary: (dictData.object(forKey: "details") as! NSDictionary))
         print(dictData)
         
-        lblTip.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TollFee") as? String))) ? "\(String(describing: dictData.object(forKey: "TollFee") as! String)) \(currencySign)": "-"
+        lblNightFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "NightFare") as? String))) ? "\(String(describing: dictData.object(forKey: "NightFare") as! String)) \(currencySign)": "-"
+        
+//        lblTip.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TollFee") as? String))) ? "\(String(describing: dictData.object(forKey: "TollFee") as! String)) \(currencySign)": "-"
         
         
         lblPickupLocation.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "PickupLocation") as? String ))) ? (dictData.object(forKey: "PickupLocation") as? String ) : "-"
@@ -158,9 +162,11 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblGrandTotal.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "GrandTotal") as? String))) ? "\(String(describing: dictData.object(forKey: "GrandTotal") as! String)) \(currencySign)": "-"
         lblBaseFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripFare") as? String))) ? "\(String(describing: dictData.object(forKey: "TripFare") as! String)) \(currencySign)": "-"
         
+        
+        
         lblbookingID.text = "\("Booking Id :".localized) \(dictData.object(forKey: "Id") as! Int)"
 
-        lblTripStatus.text = dictData.object(forKey: "Status") as? String
+        lblTripStatus.text = (dictData.object(forKey: "Status") as? String)?.capitalizingFirstLetter()
         if((!UtilityClass.isEmpty(str: (dictData.object(forKey: "PromoCode") as? String))))
         {
             lblPromocodeType.text = "\(String(describing: dictData.object(forKey: "PromoCode") as! String)) applied: "
@@ -185,16 +191,17 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
         lblPickTime.text = strDate
         lblDropTime.text = strDateDrop
-        lblPaymentType.text = dictData.object(forKey: "PaymentType") as! String
+        lblPaymentType.text = (dictData.object(forKey: "PaymentType") as! String).capitalizingFirstLetter()
+    
         
-        lblWaitingTimeCost.text = "\(dictData.object(forKey: "WaitingTimeCost") as! String) \(currencySign)"
+//        lblWaitingTimeCost.text = "\(dictData.object(forKey: "WaitingTimeCost") as! String) \(currencySign)"
 //        lblFlightNumber.text = strDate//dictData.object(forKey: "PickupDateTime") as? String
 //
 //        lblNote.text = strDateDrop //dictData.object(forKey: "PickupDateTime") as? String
         
         if((!UtilityClass.isEmpty(str: (dictData.object(forKey: "Discount") as? String))))
         {
-            lblDiscount.text = " \(String(describing: dictData.object(forKey: "Discount") as! String)) \(currencySign)"
+//            lblDiscount.text = " \(String(describing: dictData.object(forKey: "Discount") as! String)) \(currencySign)"
             stackViewPomocide.isHidden = false
         }
         //        lblTripDistance.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripDistance") as? String))) ? (dictData.object(forKey: "TripDistance") as? String): "0.00"
@@ -207,18 +214,17 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         let doubleStr = String(format: "%.2f", distaceFloat!)
 
         lblTripDistance.text = (doubleStr != nil) ? "\(doubleStr) km" : "0.00 km"
-
-
+        
 
 //        lblDiatnceFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "DistanceFare") as? String))) ? "\(String(describing: dictData.object(forKey: "DistanceFare") as! String)) \(currencySign)": "-"
-          lblWaitingTime.text = dictData.object(forKey: "WaitingTime") as? String
+//          lblWaitingTime.text = dictData.object(forKey: "WaitingTime") as? String
 
 //        lblExtraCharges.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "ExtraCharges") as? String))) ? " \(String(describing: dictData.object(forKey: "ExtraCharges") as! String))": "-"
 
 
         let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int((dictData.object(forKey: "WaitingTime") as? String)!) ?? 0)
         
-                lblWaitingTime.text = "\(getStringFrom(seconds: h)):\(getStringFrom(seconds: m)):\(getStringFrom(seconds: s))"
+//                lblWaitingTime.text = "\(getStringFrom(seconds: h)):\(getStringFrom(seconds: m)):\(getStringFrom(seconds: s))"
     }
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
@@ -235,17 +241,17 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBAction func btnOK(_ sender: UIButton)
     {
         self.dismiss(animated: true, completion: nil)
-//        if SingletonClass.sharedInstance.passengerType == "other" || SingletonClass.sharedInstance.passengerType == "others"
-//        {
-////            self.completeTripInfo()
-//            self.delegate.delegateforGivingRate()
-//        }
-//        else
-//        {
-//            self.delegate.delegateforGivingRate()
-
-//        }
-//         SingletonClass.sharedInstance.passengerType = ""
+        //        if SingletonClass.sharedInstance.passengerType == "other" || SingletonClass.sharedInstance.passengerType == "others"
+        //        {
+        ////            self.completeTripInfo()
+        //            self.delegate.delegateforGivingRate()
+        //        }
+        //        else
+        //        {
+        //            self.delegate.delegateforGivingRate()
+        
+        //        }
+        //         SingletonClass.sharedInstance.passengerType = ""
         
         if (btnOK.titleLabel?.text) != "Make Payment".localized//dictData.object(forKey: "PaymentType") as! String != "pesapal"
         {
@@ -253,19 +259,19 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         }
         else
         {
-//            btnOK.setTitle("Make Payment".localized, for: .normal)
+            //            btnOK.setTitle("Make Payment".localized, for: .normal)
             let next = self.storyboard?.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
             next.delegate = self
             let Amount = String((lblGrandTotal.text)!.replacingOccurrences(of: currencySign, with: "").trimmingCharacters(in: .whitespacesAndNewlines))//(lblGrandTotal.text?.replacingOccurrences(of: currencySign, with: ""))?.trimmingCharacters(in: .whitespacesAndNewlines)
             
             let url = "https://www.tantaxitanzania.com/pesapal/add_money/\(SingletonClass.sharedInstance.strPassengerID)/\("\(Amount)")/passenger"
             next.strUrl = url
-//            self.present(next, animated: true, completion: nil)
-self.navigationController?.pushViewController(next, animated: true)
-//            let navController = UINavigationController.init(rootViewController: next)
-//            UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
+            //            self.present(next, animated: true, completion: nil)
+            self.navigationController?.pushViewController(next, animated: true)
+            //            let navController = UINavigationController.init(rootViewController: next)
+            //            UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
         }
-
+        
     }
     func didOrderPesapalStatus(status: Bool)
     {
@@ -278,5 +284,16 @@ self.navigationController?.pushViewController(next, animated: true)
         {
             self.btnOK.setTitle("Make Payment", for: .normal)
         }
+    }
+}
+
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }

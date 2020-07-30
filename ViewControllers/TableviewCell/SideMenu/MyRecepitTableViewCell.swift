@@ -51,6 +51,12 @@ class MyRecepitTableViewCell: UITableViewCell {
     @IBOutlet weak var lblDistanceTravelled: UILabel!
     @IBOutlet weak var lblTolllFee: UILabel!
     
+    
+    @IBOutlet weak var lblNightFareTitle: UILabel!
+    
+    @IBOutlet weak var lblNightFare: UILabel!
+    
+    
     @IBOutlet weak var lblFareTotal: UILabel!
     @IBOutlet weak var lblDiscountApplied: UILabel!
     @IBOutlet weak var lblChargedCard: UILabel!

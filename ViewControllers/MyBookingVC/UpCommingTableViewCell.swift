@@ -50,4 +50,8 @@ class UpCommingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTripStatusTitle: UILabel!
     
     
+    @IBOutlet weak var lblPickupTime: UILabel!
+    
+    
+    
 }

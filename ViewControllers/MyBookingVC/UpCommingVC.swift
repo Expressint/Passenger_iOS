@@ -11,7 +11,9 @@ import UIKit
 class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate { 
 
     
-    var aryData = NSArray()
+//    var aryData = NSArray()
+    
+    var aryData = NSMutableArray()
     
     var strPickupLat = String()
     var strPickupLng = String()
@@ -21,6 +23,7 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     let notAvailable: String = "N/A"
     
     var bookinType = String()
+    
     
     var expandedCellPaths = Set<IndexPath>()
     
@@ -33,6 +36,8 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         return refreshControl
     }()
+    
+    
     
     
     override func viewDidLoad() {
@@ -49,6 +54,9 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
+        
+//        webserviceOfUpcommingpagination(index: 1)
+        
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -60,7 +68,10 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
     @objc func reloadDataTableView()
     {
-        self.aryData = SingletonClass.sharedInstance.aryUpComming
+//        self.aryData = SingletonClass.sharedInstance.aryUpComming
+        
+        webserviceOfUpcommingpagination(index: 1)
+        
         self.tableView.reloadData()
 //        self.tableView.frame.size = tableView.contentSize
     }
@@ -142,7 +153,7 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 cell.btnCancelRequest.tag = bookingID
             }
             
-//            cell.lblPickupTime.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "PickupTime", isNotHave: notAvailable)
+            cell.lblPickupTime.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "PickupDateTime", isNotHave: notAvailable)
 //            cell.lblDistanceTravelled.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "TripDistance", isNotHave: notAvailable)
             
             cell.lblBookingId.text = "\("Booking Id :".localized) \(checkDictionaryHaveValue(dictData: currentData, didHaveValue: "Id", isNotHave: notAvailable))"
@@ -179,12 +190,47 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         }
     }
     
+    var isDataLoading:Bool=false
+    var pageNo:Int = 0
+    var didEndReached:Bool=false
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        print("scrollViewWillBeginDragging")
+        isDataLoading = false
+    }
+    
+    //Pagination
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        print("scrollViewDidEndDragging")
+        if ((tableView.contentOffset.y + tableView.frame.size.height) >= tableView.contentSize.height) {
+            //            if !isDataLoading{
+            //                isDataLoading = true
+            //                self.pageNo = self.pageNo + 1
+            //                webserviceOfPastbookingpagination(index: self.pageNo)
+            //            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == (self.aryData.count - 5) {
+            if !isDataLoading{
+                isDataLoading = true
+                self.pageNo = self.pageNo + 1
+                webserviceOfUpcommingpagination(index: self.pageNo)
+            }
+        }
+    }
+    
+    
     @objc func CancelRequest(sender: UIButton)
     {
         
          let bookingID = sender.tag
         
-        RMUniversalAlert.show(in: self, withTitle:appName, message: "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?".localized, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: ["YES".localized, "NO".localized], tap: {(alert, buttonIndex) in
+        RMUniversalAlert.show(in: self, withTitle:appName, message: "Are you sure you want to cancel the trip?".localized, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: ["YES".localized, "NO".localized], tap: {(alert, buttonIndex) in
             if (buttonIndex == 2)
             {
                
@@ -281,5 +327,59 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         return time2
     }
     
-   
+    
+    func webserviceOfUpcommingpagination(index: Int) {
+        
+        let driverId = SingletonClass.sharedInstance.strPassengerID
+        
+        webserviceForUpcomingBookingList(driverId as AnyObject, PageNumber: index as AnyObject) { (result, status) in
+            print(result)
+            
+            if (status) {
+                DispatchQueue.main.async {
+                    
+                    var tempOngoingData = NSArray()
+                    
+                    if let dictData = result as? [String:AnyObject]
+                    {
+                        if let aryHistory = dictData["history"] as? [[String:AnyObject]]
+                        {
+                            tempOngoingData = aryHistory as NSArray
+                        }
+                    }
+                    
+                    for i in 0..<tempOngoingData.count {
+                        
+                        let dataOfAry = (tempOngoingData.object(at: i) as! NSDictionary)
+                        
+                        let strHistoryType = dataOfAry.object(forKey: "HistoryType") as? String
+                        
+                        if strHistoryType == "Upcoming" {
+                            self.aryData.add(dataOfAry)
+                        }
+                    }
+                    
+                    if(self.aryData.count == 0) {
+                        //                        self.labelNoData.text = "No data found."
+                        //                        self.tableView.isHidden = true
+                    }
+                    else {
+                        //                        self.labelNoData.removeFromSuperview()
+                        self.tableView.isHidden = false
+                    }
+                    
+                    //                    self.getPostJobs()
+                    self.refreshControl.endRefreshing()
+                    self.tableView.reloadData()
+                    
+                    UtilityClass.hideACProgressHUD()
+                }
+            }
+            else {
+                //                UtilityClass.showAlertOfAPIResponse(param: result, vc: self)
+            }
+        }
+    }
+    
+    
 }
