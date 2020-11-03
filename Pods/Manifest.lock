@@ -24,16 +24,16 @@ PODS:
   - CreditCardForm (0.1.5)
   - DOAlertController (2.0)
   - Fabric (1.7.2)
-  - FBSDKCoreKit (7.1.1):
-    - FBSDKCoreKit/Basics (= 7.1.1)
-    - FBSDKCoreKit/Core (= 7.1.1)
-  - FBSDKCoreKit/Basics (7.1.1)
-  - FBSDKCoreKit/Core (7.1.1):
+  - FBSDKCoreKit (7.0.0):
+    - FBSDKCoreKit/Basics (= 7.0.0)
+    - FBSDKCoreKit/Core (= 7.0.0)
+  - FBSDKCoreKit/Basics (7.0.0)
+  - FBSDKCoreKit/Core (7.0.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (7.1.1):
-    - FBSDKLoginKit/Login (= 7.1.1)
-  - FBSDKLoginKit/Login (7.1.1):
-    - FBSDKCoreKit (~> 7.1.1)
+  - FBSDKLoginKit (7.0.0):
+    - FBSDKLoginKit/Login (= 7.0.0)
+  - FBSDKLoginKit/Login (7.0.0):
+    - FBSDKCoreKit (~> 7.0.0)
   - Firebase/Core (4.7.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.12)
@@ -137,7 +137,7 @@ DEPENDENCIES:
   - TransitionButton
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - ACFloatingTextfield-Swift
     - Alamofire
     - CardIO
@@ -192,8 +192,8 @@ SPEC CHECKSUMS:
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
   DOAlertController: 4d4ee33bbf1656271895da4a3cac4fbaa1d3217e
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
-  FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
-  FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
+  FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
+  FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
@@ -220,6 +220,6 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   TransitionButton: 0bf7e5ffe80030f9d10d57983a04acf2f511998a
 
-PODFILE CHECKSUM: 14f54c0eaee09769e3a724ed016701215d3df185
+PODFILE CHECKSUM: 3d0e3fa98872b5a7adb048f9446613d7ac0bf557
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.5.3

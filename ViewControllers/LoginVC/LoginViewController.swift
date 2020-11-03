@@ -116,7 +116,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             txtMobile.text = "9904439228"
             txtPassword.text = "12345678"
         }
-        txtMobile.text = "1122334455"
+        txtMobile.text = "9898989898"
         txtPassword.text = "12345678"
         
         lblLaungageName.layer.cornerRadius = 5

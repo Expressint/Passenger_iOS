@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>116935323205-c27744cpt0geqf4dn7p7h4ck3d0tdhd2.apps.googleusercontent.com</string>
+	<string>476182293945-mgph4c2fhpl5r8c5i3u9do0t3v4gt72q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.116935323205-c27744cpt0geqf4dn7p7h4ck3d0tdhd2</string>
+	<string>com.googleusercontent.apps.476182293945-mgph4c2fhpl5r8c5i3u9do0t3v4gt72q</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDKCfn5tgZ-kGXqNKE5my9Ta81qSyLPkL0</string>
+	<string>AIzaSyAWeKwZDXVV5ATPWV0UkA6ZkdkZ4JU6ils</string>
 	<key>GCM_SENDER_ID</key>
-	<string>116935323205</string>
+	<string>476182293945</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.AllOut.passenger</string>
+	<string>com.eww.Ladapassenger</string>
 	<key>PROJECT_ID</key>
-	<string>allout-tour</string>
+	<string>wired-summit-293911</string>
 	<key>STORAGE_BUCKET</key>
-	<string>allout-tour.appspot.com</string>
+	<string>wired-summit-293911.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:116935323205:ios:41ef774ff594eee3dafd2c</string>
+	<string>1:476182293945:ios:fa410e77502a7d9bb6da68</string>
 	<key>DATABASE_URL</key>
-	<string>https://allout-tour.firebaseio.com</string>
+	<string>https://wired-summit-293911.firebaseio.com</string>
 </dict>
 </plist>

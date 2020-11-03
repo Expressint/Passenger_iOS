@@ -18,7 +18,8 @@ class ThemeTextField: UITextField {
     override func awakeFromNib() {
         self.font = UIFont.regular(ofSize: 13.0)
         self.textColor = UIColor.black
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.init(white: 1, alpha: 0.8)
+        
         self.setValue(UIColor.black , forKeyPath: "placeholderLabel.textColor")
         
         if isLeftViewNeeded == true {

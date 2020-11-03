@@ -22,7 +22,6 @@
 
 #import "FBSDKMLMacros.h"
 #import "FBSDKModelParser.h"
-#import "FBSDKTypeUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     char *json = (char *)data + 4;
-    NSDictionary<NSString *, id> *info = [FBSDKTypeUtility JSONObjectWithData:[NSData dataWithBytes:json length:length]
+    NSDictionary<NSString *, id> *info = [NSJSONSerialization JSONObjectWithData:[NSData dataWithBytes:json length:length]
                                                                          options:0
                                                                            error:nil];
     NSArray<NSString *> *keys = [[info allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *key1, NSString *key2) {
@@ -63,14 +62,14 @@ NS_ASSUME_NONNULL_BEGIN
     NSDictionary<NSString *, NSString *> *keysMapping = [self getKeysMapping];
     for (NSString *key in keys) {
       NSString *finalKey = key;
-      NSString *mapping = [FBSDKTypeUtility dictionary:keysMapping objectForKey:key ofType:NSObject.class];
+      NSString *mapping = [keysMapping objectForKey:key];
       if (mapping) {
         finalKey = mapping;
       }
       std::string s_name([finalKey UTF8String]);
 
       std::vector<int> v_shape;
-      NSArray<NSString *> *shape = [FBSDKTypeUtility dictionary:info objectForKey:key ofType:NSObject.class];
+      NSArray<NSString *> *shape = [info objectForKey:key];
       int count = 1;
       for (NSNumber *_s in shape) {
         int i = [_s intValue];
@@ -156,7 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
         return false;
       }
       for (int i = 0; i < expectedSize.count; i++) {
-        if((int)actualSize[i] != (int)[[FBSDKTypeUtility array:expectedSize objectAtIndex:i] intValue]) {
+        if((int)actualSize[i] != (int)[expectedSize[i] intValue]) {
           return false;
         }
       }

@@ -51,7 +51,7 @@ static BOOL isSampleEnabled = NO;
     NSString *valueString =[FBSDKTypeUtility stringValue:parameters[key]];
     BOOL shouldFilter = [FBSDKModelManager processIntegrity:key] || [FBSDKModelManager processIntegrity:valueString];
     if (shouldFilter) {
-      [FBSDKTypeUtility dictionary:restrictiveParams setObject:isSampleEnabled ? valueString : @"" forKey:key];
+      [restrictiveParams setObject:isSampleEnabled ? valueString : @"" forKey:key];
       [params removeObjectForKey:key];
     }
   }
@@ -59,7 +59,7 @@ static BOOL isSampleEnabled = NO;
     NSString *restrictiveParamsJSONString = [FBSDKBasicUtility JSONStringForObject:restrictiveParams
                                                                              error:NULL
                                                               invalidObjectHandler:NULL];
-    [FBSDKTypeUtility dictionary:params setObject:restrictiveParamsJSONString forKey:@"_onDeviceParams"];
+    [FBSDKBasicUtility dictionary:params setObject:restrictiveParamsJSONString forKey:@"_onDeviceParams"];
   }
   return [params copy];
 }

@@ -55,11 +55,12 @@ static dispatch_queue_t serialQueue;
   if (FBSDKAdvertisingTrackingAllowed != [FBSDKAppEventsUtility advertisingTrackingStatus]) {
     return;
   }
-
-  NSDictionary<NSString *, id> *AAMRules = [FBSDKServerConfigurationManager cachedServerConfiguration].AAMRules;
-  if (AAMRules) {
-    [FBSDKMetadataIndexer setupWithRules:AAMRules];
-  }
+  [FBSDKServerConfigurationManager loadServerConfigurationWithCompletionBlock:^(FBSDKServerConfiguration *serverConfiguration, NSError *error) {
+    if (error) {
+      return;
+    }
+    [FBSDKMetadataIndexer setupWithRules:serverConfiguration.AAMRules];
+  }];
 }
 
 + (void)setupWithRules:(NSDictionary<NSString *, id> * _Nullable)rules
@@ -74,14 +75,17 @@ static dispatch_queue_t serialQueue;
 
     BOOL isEnabled = NO;
     for (NSString *key in _rules) {
-      if (_rules[key]) {
+      BOOL isRuleEnabled = (nil != _rules[key]);
+      if (isRuleEnabled) {
         isEnabled = YES;
-        break;
+      }
+      if (!isRuleEnabled) {
+        [_store removeObjectForKey:key];
+        [FBSDKUserDataStore setHashData:nil forType:key];
       }
     }
 
     if (isEnabled) {
-      [FBSDKUserDataStore setEnabledRules:_rules.allKeys];
       [FBSDKMetadataIndexer setupMetadataIndexing];
     }
   });
@@ -91,15 +95,15 @@ static dispatch_queue_t serialQueue;
 {
   _store = [[NSMutableDictionary alloc] init];
   for (NSString *key in _rules) {
-    NSString *data = [FBSDKUserDataStore getInternalHashedDataForType:key];
+    NSString *data = [FBSDKUserDataStore getHashedDataForType:key];
     if (data.length > 0) {
-      [FBSDKTypeUtility dictionary:_store setObject:[NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]] forKey:key];
+      _store[key] = [NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]];
     }
   }
 
   for (NSString *key in _rules) {
     if (!_store[key]) {
-      [FBSDKTypeUtility dictionary:_store setObject:[[NSMutableArray alloc] init] forKey:key];
+      _store[key] = [[NSMutableArray alloc] init];
     }
   }
 }
@@ -109,7 +113,7 @@ static dispatch_queue_t serialQueue;
   for (NSString *key in rules) {
     NSDictionary<NSString *, NSString *> *value = [FBSDKTypeUtility dictionaryValue:rules[key]];
     if (value[FIELD_K].length > 0 && value[FIELD_V]) {
-      [FBSDKTypeUtility dictionary:_rules setObject:value forKey:key];
+      _rules[key] = value;
     }
   }
 }
@@ -164,7 +168,7 @@ static dispatch_queue_t serialQueue;
 
   NSString *placeholder = [self normalizeField:[FBSDKViewHierarchy getHint:view]];
   if (placeholder.length > 0) {
-    [FBSDKTypeUtility array:labels addObject:placeholder];
+    [labels addObject:placeholder];
   }
 
   NSArray<id> *siblingViews = [self getSiblingViewsOfView:view];
@@ -172,7 +176,7 @@ static dispatch_queue_t serialQueue;
     if ([sibling isKindOfClass:[UILabel class]]) {
       NSString *text = [self normalizeField:[FBSDKViewHierarchy getText:sibling]];
       if (text.length > 0) {
-        [FBSDKTypeUtility array:labels addObject:text];
+        [labels addObject:text];
       }
     }
   }
@@ -253,9 +257,9 @@ static dispatch_queue_t serialQueue;
     while (_store[key].count >= FBSDKMetadataIndexerMaxValue) {
       [_store[key] removeObjectAtIndex:0];
     }
-    [FBSDKTypeUtility array:_store[key] addObject:hashData];
-    [FBSDKUserDataStore setInternalHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
-                                    forType:key];
+    [_store[key] addObject:hashData];
+    [FBSDKUserDataStore setHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
+                            forType:key];
   });
 }
 
@@ -332,7 +336,7 @@ static dispatch_queue_t serialQueue;
   } else if ([key isEqualToString:@"r4"] || [key isEqualToString:@"r5"]) {
     value = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@""];
   } else if ([key isEqualToString:@"r6"]) {
-    value = [FBSDKTypeUtility array:[value componentsSeparatedByString:@"-"] objectAtIndex:0];
+    value = [value componentsSeparatedByString:@"-"][0];
   }
   return value;
 }

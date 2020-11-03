@@ -21,12 +21,14 @@
 #import <objc/runtime.h>
 
 #import "FBSDKAppEventsUtility.h"
+#import "FBSDKEventDeactivationManager.h"
 #import "FBSDKGateKeeperManager.h"
 #import "FBSDKGraphRequest+Internal.h"
 #import "FBSDKGraphRequest.h"
 #import "FBSDKImageDownloader.h"
 #import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
+#import "FBSDKRestrictiveDataFilterManager.h"
 #import "FBSDKServerConfiguration+Internal.h"
 #import "FBSDKServerConfiguration.h"
 #import "FBSDKSettings.h"
@@ -107,8 +109,6 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
   }
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (void)loadServerConfigurationWithCompletionBlock:(FBSDKServerConfigurationBlock)completionBlock
 {
   void (^loadBlock)(void) = nil;
@@ -145,7 +145,7 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
       loadBlock = [self _wrapperBlockForLoadBlock:completionBlock];
     } else {
       // hold onto the completion block
-      [FBSDKTypeUtility array:_completionBlocks addObject:[completionBlock copy]];
+      [FBSDKBasicUtility array:_completionBlocks addObject:[completionBlock copy]];
 
       // check if we are already loading
       if (!_loadingServerConfiguration) {
@@ -172,7 +172,6 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
   // Fetch app gatekeepers
   [FBSDKGateKeeperManager loadGateKeepers:nil];
 }
-#pragma clang diagnostic pop
 
 #pragma mark - Internal Class Methods
 
@@ -236,6 +235,10 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
                                                                                          AAMRules:AAMRules
                                                                            suggestedEventsSetting:suggestedEventsSetting
                                                                           monitoringConfiguration:monitoringConfiguration];
+  if (restrictiveParams) {
+    [FBSDKRestrictiveDataFilterManager updateFilters:restrictiveParams];
+    [FBSDKEventDeactivationManager updateDeactivatedEvents:restrictiveParams];
+  }
 #if TARGET_OS_TV
   // don't download icons more than once a day.
   static const NSTimeInterval kSmartLoginIconsTTL = 60 * 60 * 24;
@@ -344,16 +347,13 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultsKey = [NSString stringWithFormat:FBSDK_SERVER_CONFIGURATION_USER_DEFAULTS_KEY, appID];
     if (serverConfiguration) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
       NSData *data = [NSKeyedArchiver archivedDataWithRootObject:serverConfiguration];
-#pragma clang diagnostic pop
       [defaults setObject:data forKey:defaultsKey];
     }
 
     // wrap the completion blocks
     for (FBSDKServerConfigurationBlock completionBlock in _completionBlocks) {
-      [FBSDKTypeUtility array:completionBlocks addObject:[self _wrapperBlockForLoadBlock:completionBlock]];
+      [completionBlocks addObject:[self _wrapperBlockForLoadBlock:completionBlock]];
     }
     [_completionBlocks removeAllObjects];
     _loadingServerConfiguration = NO;
@@ -376,9 +376,9 @@ typedef NS_OPTIONS(NSUInteger, FBSDKServerConfigurationManagerAppEventsFeatures)
       if (name.length) {
         NSURL *URL = [FBSDKTypeUtility URLValue:dialogConfigurationDictionary[@"url"]];
         NSArray *appVersions = [FBSDKTypeUtility arrayValue:dialogConfigurationDictionary[@"versions"]];
-        [FBSDKTypeUtility dictionary:dialogConfigurations setObject:[[FBSDKDialogConfiguration alloc] initWithName:name
+        dialogConfigurations[name] = [[FBSDKDialogConfiguration alloc] initWithName:name
                                                                                 URL:URL
-                                                                        appVersions:appVersions] forKey:name];
+                                                                        appVersions:appVersions];
       }
     }
   }

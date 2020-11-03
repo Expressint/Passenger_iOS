@@ -16,6 +16,8 @@ let ForgotPassword =  WebserviceURLs.kForgotPassword
 let CarLists =  WebserviceURLs.kGetCarList
 let MakeBookingRequest = WebserviceURLs.kMakeBookingRequest
 let bookLater = WebserviceURLs.kAdvancedBooking
+let CheckPromocode = WebserviceURLs.kCheckPromocode
+let GetPromoCodeList = WebserviceURLs.kGetPromoCodeList
 let driverList = WebserviceURLs.kDriver
 let BookingHistory = WebserviceURLs.kBookingHistory
 let GetEstimateFare =  WebserviceURLs.kGetEstimateFare
@@ -127,6 +129,24 @@ func webserviceForBookLater(_ dictParams: AnyObject, completion: @escaping(_ res
     postData(dictParams, nsURL: url, completion: completion)
 }
 
+//-------------------------------------------------------------
+// MARK: - Webservice For Check Promocode
+//-------------------------------------------------------------
+
+func webserviceForCheckPromocode(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = CheckPromocode
+    postData(dictParams, nsURL: url, completion: completion)
+}
+//-------------------------------------------------------------
+// MARK: - Webservice For Promocode List
+//-------------------------------------------------------------
+
+func webserviceForPromoCodeList(completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = "\(GetPromoCodeList)/\(SingletonClass.sharedInstance.strPassengerID)"
+    getData([String : AnyObject].self as AnyObject, nsURL: url, completion: completion)
+}
 //-------------------------------------------------------------
 // MARK: - Webservice For All Drivers List
 //-------------------------------------------------------------

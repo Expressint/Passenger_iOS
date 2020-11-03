@@ -82,10 +82,14 @@ class AJAlertController: UIViewController {
         viewSubAlert.layer.cornerRadius  = 10.0
         viewSubAlert.layer.masksToBounds = true
         
-        btnOther.backgroundColor = themeButtonColor
-        btnCancel.backgroundColor = themeButtonColor
-        btnOK.backgroundColor = themeButtonColor
+//        btnOther.backgroundColor = themeButtonColor
+//        btnCancel.backgroundColor = themeButtonColor
+//        btnOK.backgroundColor = themeButtonColor
        
+        btnOther.backgroundColor = themeAppMainColor
+               btnCancel.backgroundColor = themeAppMainColor
+                btnOK.backgroundColor = themeAppMainColor
+        
         lblTitle.text = strAlertTitle
         lblAlertText?.text = strAlertText
         

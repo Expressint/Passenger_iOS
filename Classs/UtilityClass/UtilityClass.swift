@@ -15,7 +15,30 @@ typealias CompletionHandler = (_ success:Bool) -> Void
 class UtilityClass: NSObject, alertViewMethodsDelegates {
     
     var delegateOfAlert : alertViewMethodsDelegates!
-
+    
+    //MARK: -
+    class func formattedDateFromString(dateString: String,fromFormat : String = "", withFormat format: String) -> String? {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        if(fromFormat.trimmingCharacters(in: .whitespacesAndNewlines).count != 0)
+        {
+            inputFormatter.dateFormat = fromFormat
+            
+        }
+        //        2018-08-01 17:34:32
+        if let date = inputFormatter.date(from: dateString)
+        {
+            
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = format
+            let str = outputFormatter.string(from: date)
+            return str
+        }
+        
+        return nil
+    }
+    
     class func showAlert(_ title: String, message: String, vc: UIViewController) -> Void
     {
         let alert = UIAlertController(title: appName,

@@ -36,7 +36,7 @@ public extension Settings {
    */
   static var loggingBehaviors: Set<LoggingBehavior> {
     get {
-      Set(Settings.__loggingBehaviors.map { LoggingBehavior(rawValue: $0) })
+      return Set(Settings.__loggingBehaviors.map { LoggingBehavior(rawValue: $0) })
     }
     set {
       Settings.__loggingBehaviors = Set(newValue.map { $0.rawValue })

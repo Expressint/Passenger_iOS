@@ -51,19 +51,15 @@ typedef NSDictionary<NSString *, NSNumber *> SampleRates;
 {
   if (self = [super init]) {
     NSMutableDictionary *sampleRates = [NSMutableDictionary dictionary];
-    NSArray<RemoteSampleRates *> *remoteSampleRates = [FBSDKTypeUtility dictionary:dictionary
-                                                                      objectForKey:sampleRatesKey
-                                                                            ofType:NSArray.class];
-    if (!remoteSampleRates) {
-      return self;
-    }
+    NSArray<RemoteSampleRates *> *remoteSampleRates = dictionary[sampleRatesKey];
 
     for (RemoteSampleRates *ratePair in remoteSampleRates) {
-      NSString *key = [FBSDKTypeUtility dictionary:ratePair objectForKey:sampleRateNameKey ofType:NSString.class];
-      NSNumber *value = [FBSDKTypeUtility dictionary:ratePair objectForKey:sampleRateValueKey ofType:NSNumber.class];
+      NSString *key = ratePair[sampleRateNameKey];
+      NSNumber *value = ratePair[sampleRateValueKey];
 
-      if (value.intValue > 0) {
-        [FBSDKTypeUtility dictionary:sampleRates setObject:value forKey:key];
+      if ([value isKindOfClass:[NSNumber class]] &&
+          value.intValue > 0) {
+        [FBSDKBasicUtility dictionary:sampleRates setObject:value forKey:key];
       }
     }
 
@@ -75,7 +71,7 @@ typedef NSDictionary<NSString *, NSNumber *> SampleRates;
 
 - (int)sampleRateForEntry:(nonnull id<FBSDKMonitorEntry>)entry
 {
-  return [[FBSDKTypeUtility dictionary:_sampleRates objectForKey:entry.name ofType:NSObject.class] intValue] ?: self.defaultSamplingRate;
+  return [_sampleRates objectForKey:entry.name].intValue ?: self.defaultSamplingRate;
 }
 
 - (void)encodeWithCoder:(nonnull NSCoder *)encoder {

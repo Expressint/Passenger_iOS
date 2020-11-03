@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)new NS_UNAVAILABLE;
 
 + (void)enable;
++ (void)updateFilters:(nullable NSDictionary<NSString *, id> *)restrictiveParams;
 + (void)processEvents:(NSMutableArray<NSDictionary<NSString *, id> *> *)events;
 + (nullable NSDictionary<NSString *, id> *)processParameters:(nullable NSDictionary<NSString *, id> *)parameters
                                                    eventName:(NSString *)eventName;

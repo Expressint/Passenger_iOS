@@ -327,17 +327,17 @@ static UIApplicationState _applicationState;
   NSURL *targetURL = [targetURLString isKindOfClass:[NSString class]] ? [NSURL URLWithString:targetURLString] : nil;
 
   NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
-  [FBSDKTypeUtility dictionary:logData setObject:targetURL.absoluteString forKey:@"targetURL"];
-  [FBSDKTypeUtility dictionary:logData setObject:targetURL.host forKey:@"targetURLHost"];
+  [FBSDKBasicUtility dictionary:logData setObject:targetURL.absoluteString forKey:@"targetURL"];
+  [FBSDKBasicUtility dictionary:logData setObject:targetURL.host forKey:@"targetURLHost"];
 
   NSDictionary *refererData = applinkData[@"referer_data"];
   if (refererData) {
-    [FBSDKTypeUtility dictionary:logData setObject:refererData[@"target_url"] forKey:@"referralTargetURL"];
-    [FBSDKTypeUtility dictionary:logData setObject:refererData[@"url"] forKey:@"referralURL"];
-    [FBSDKTypeUtility dictionary:logData setObject:refererData[@"app_name"] forKey:@"referralAppName"];
+    [FBSDKBasicUtility dictionary:logData setObject:refererData[@"target_url"] forKey:@"referralTargetURL"];
+    [FBSDKBasicUtility dictionary:logData setObject:refererData[@"url"] forKey:@"referralURL"];
+    [FBSDKBasicUtility dictionary:logData setObject:refererData[@"app_name"] forKey:@"referralAppName"];
   }
-  [FBSDKTypeUtility dictionary:logData setObject:url.absoluteString forKey:@"inputURL"];
-  [FBSDKTypeUtility dictionary:logData setObject:url.scheme forKey:@"inputURLScheme"];
+  [FBSDKBasicUtility dictionary:logData setObject:url.absoluteString forKey:@"inputURL"];
+  [FBSDKBasicUtility dictionary:logData setObject:url.scheme forKey:@"inputURLScheme"];
 
   [FBSDKAppEvents logInternalEvent:FBSDKAppLinkInboundEvent
                         parameters:logData
@@ -362,11 +362,11 @@ static UIApplicationState _applicationState;
   NSInteger bitmask = 0;
   NSInteger bit = 0;
   NSMutableDictionary<NSString *, NSNumber *> *params = NSMutableDictionary.new;
-  [FBSDKTypeUtility dictionary:params setObject:@1 forKey:@"core_lib_included"];
+  params[@"core_lib_included"] = @1;
   for (NSString *className in metaInfo.allKeys) {
-    NSString *keyName = [FBSDKTypeUtility dictionary:metaInfo objectForKey:className ofType:NSObject.class];
+    NSString *keyName = [metaInfo objectForKey:className];
     if (objc_lookUpClass([className UTF8String])) {
-      [FBSDKTypeUtility dictionary:params setObject:@1 forKey:keyName];
+      params[keyName] = @1;
       bitmask |=  1 << bit;
     }
     bit++;
@@ -391,7 +391,7 @@ static UIApplicationState _applicationState;
     NSMutableDictionary<NSString *, NSString *> *params = [[NSMutableDictionary alloc] init];
     if (![FBSDKAppLinkUtility isMatchURLScheme:[NSString stringWithFormat:@"fb%@", [FBSDKSettings appID]]]) {
       NSString *warning = @"You haven't set the Auto App Link URL scheme: fb<YOUR APP ID>";
-      [FBSDKTypeUtility dictionary:params setObject:warning forKey:@"SchemeWarning"];
+      params[@"SchemeWarning"] = warning;
       NSLog(@"%@", warning);
     }
     [FBSDKAppEvents logInternalEvent:@"fb_auto_applink" parameters:params isImplicitlyLogged:YES];

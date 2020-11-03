@@ -31,8 +31,15 @@ protocol deleagateForBookTaxiLater
     func btnRequestLater()
 }
 
-class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GMSAutocompleteViewControllerDelegate, FavouriteLocationDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable, UIGestureRecognizerDelegate, FloatRatingViewDelegate, CompleterTripInfoDelegate, ARCarMovementDelegate, GMSMapViewDelegate, addCardFromHomeVCDelegate, SelectCardDelegate,delegateRateGiven,deleagateForBookTaxiLater, CadsSelectionDelegate
+class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GMSAutocompleteViewControllerDelegate, FavouriteLocationDelegate, UIPickerViewDelegate, UIPickerViewDataSource, NVActivityIndicatorViewable, UIGestureRecognizerDelegate, FloatRatingViewDelegate, CompleterTripInfoDelegate, ARCarMovementDelegate, GMSMapViewDelegate, addCardFromHomeVCDelegate, SelectCardDelegate,delegateRateGiven,deleagateForBookTaxiLater, CadsSelectionDelegate, BookLaterSubmitedDelegate
 {
+    
+    func BookLaterComplete() {
+//        self.clearSetupMapForNewBooking()
+        btnRequestLater()
+    }
+   
+    
     
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     let baseUrlForGetAddress = "https://maps.googleapis.com/maps/api/geocode/json?"
@@ -506,7 +513,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
                 SingletonClass.sharedInstance.isFromNotificationBookLater = false
                 
-                next.delegateBookLater = self
+                next.BookLaterCompleted = self
                 next.strModelId = strCarModelID
                 next.strCarModelURL = strNavigateCarModel
                 next.strCarName = strCarModelClass
@@ -2326,7 +2333,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     let next = self.storyboard?.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                     
                     SingletonClass.sharedInstance.isFromNotificationBookLater = false
-                    next.delegateBookLater = self
+                    next.BookLaterCompleted = self
                     next.strModelId = strCarModelID
                     next.strCarModelURL = strNavigateCarModel
                     next.strCarName = strCarModelClass
@@ -2355,7 +2362,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else {
                     let next = self.storyboard?.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
-                    next.delegateBookLater = self
+                    next.BookLaterCompleted = self
                     next.strModelId = strCarModelID
                     next.strCarModelURL = strNavigateCarModel
                     next.strCarName = strCarModelClass
@@ -2421,7 +2428,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         })
         alert.addAction(OK)
         alert.addAction(Cancel)
-                self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
 //        Utilities.presentPopupOverScreen(alert)
         
         
@@ -5246,7 +5253,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                            directionsURLString += "|" + waypoint
 //                        }
 //                    }
-                    
+                     
                     // .addingPercentEscapes(using: String.Encoding.utf8)!
                     
                     // print("directionsURLString: \(directionsURLString)")
