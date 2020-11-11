@@ -8,18 +8,18 @@
 
 import UIKit
 import Foundation
-let themeAppMainColor : UIColor =  UIColor.init(hex: "3fa9f5")//"ef4036")
+let themeAppMainColor : UIColor =  UIColor.init(hex: "bba739")//Sky Blue 3fa9f5 //"ef4036")
 let themeYellowColor: UIColor =  themeAppMainColor //UIColor.init(hex: "005f99")//"ef4036")
 let themeButtonColor: UIColor =  UIColor.init(hex: "ffffff")//"ef4036") //Blue "002e44" //Skyblue "3fa9f5"
-let themeBlackColor: UIColor =  UIColor.init(hex: "231f20")
+let themeBlackColor: UIColor =  UIColor.init(hex: "000000")
 let themeRedColor: UIColor = UIColor.init(hex: "EF4036")
 //    UIColor.init(red: 255/255, green: 163/255, blue: 0, alpha: 1.0)
 let themeGrayColor: UIColor = UIColor.init(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
 //let ThemeYellowColor : UIColor = UIColor.init(hex: "ffa300")
 let themeGrayBGColor : UIColor = UIColor.init(hex: "DDDDDD")
 let themeGrayTextColor : UIColor = UIColor.init(hex: "7A7A7C")
-let currencySign = "GH₵" //"KSh"
-let appName = "LADA"
+let currencySign = "$" //"KSh"
+let appName = "Book A Ride"
 let helpLineNumber = "+255777115054"//"0772506506"
 let googleAnalyticsTrackId = "UA-122360832-1"
 

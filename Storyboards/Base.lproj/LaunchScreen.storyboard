@@ -16,21 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p-splash" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-2X-fzk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p-splash" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-2X-fzk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bag-o4-tdy">
-                                <rect key="frame" x="0.0" y="126.66666666666669" width="375" height="315"/>
+                                <rect key="frame" x="0.0" y="248.66666666666663" width="375" height="315"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="AOP-Sw-Drv">
                                         <rect key="frame" x="71" y="0.0" width="233" height="150"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="8ZW-dO-F2t"/>
                                         </constraints>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="driver" translatesAutoresizingMaskIntoConstraints="NO" id="5Li-0C-vSg">
-                                        <rect key="frame" x="137" y="190" width="101" height="125"/>
+                                        <rect key="frame" x="137" y="190.00000000000003" width="101" height="124.99999999999997"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5Li-0C-vSg" secondAttribute="height" multiplier="101:125" id="CxV-Tq-mIe"/>
@@ -48,11 +47,11 @@
                                     <constraint firstItem="AOP-Sw-Drv" firstAttribute="centerX" secondItem="Bag-o4-tdy" secondAttribute="centerX" id="Vmy-Z2-M28"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" image="splashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="jSG-fO-Sht">
-                                <rect key="frame" x="0.0" y="567" width="375.00000000000006" height="219"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="splashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="jSG-fO-Sht">
+                                <rect key="frame" x="0.0" y="340" width="375" height="438"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.24705882352941178" green="0.66274509803921566" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bag-o4-tdy" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="3MO-Zx-TPH"/>
                             <constraint firstItem="zW1-2X-fzk" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="DVz-aA-JJl"/>
@@ -63,7 +62,7 @@
                             <constraint firstAttribute="bottom" secondItem="zW1-2X-fzk" secondAttribute="bottom" id="r5c-MW-tlD"/>
                             <constraint firstItem="zW1-2X-fzk" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="saf-aJ-vAZ"/>
                             <constraint firstAttribute="trailing" secondItem="zW1-2X-fzk" secondAttribute="trailing" id="skh-9D-iH0"/>
-                            <constraint firstItem="Bag-o4-tdy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.7" id="tk1-AQ-R6a"/>
+                            <constraint firstItem="Bag-o4-tdy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.7" constant="121.96666666666675" id="tk1-AQ-R6a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
@@ -74,7 +73,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="258" height="90"/>
+        <image name="Logo" width="277" height="86"/>
         <image name="driver" width="101" height="125"/>
         <image name="p-splash" width="375" height="812"/>
         <image name="splashBottom" width="374" height="219"/>

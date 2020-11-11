@@ -21,8 +21,9 @@ class ThemeButton: UIButton {
         self.layer.masksToBounds = true
 
         if isSubmitButton == true {
-            self.backgroundColor = themeButtonColor
-            setTitleColor(themeAppMainColor, for: .normal)
+            self.backgroundColor = themeAppMainColor
+            setTitleColor(themeBlackColor, for: .normal)
+            
         }
         else {
             self.backgroundColor = UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0)

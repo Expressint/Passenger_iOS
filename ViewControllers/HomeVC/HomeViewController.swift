@@ -264,7 +264,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         if sender.currentImage == UIImage(named: "iconRightArraw") {
             
-            sender.setImage(UIImage(named: "iconArrowSmall"), for: .normal)
+            sender.setImage(UIImage(named: "iconArrow"), for: .normal)
             constantLeadingOfShareRideButton.constant = 10
             
             UIView.animate(withDuration: 0.5) {

@@ -40,35 +40,35 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="po0-dm-hG5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="po0-dm-hG5">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="loginBottom" translatesAutoresizingMaskIntoConstraints="NO" id="Tkq-5D-Hep">
-                                <rect key="frame" x="0.0" y="499" width="375" height="153"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="loginBottom" translatesAutoresizingMaskIntoConstraints="NO" id="Tkq-5D-Hep">
+                                <rect key="frame" x="0.0" y="346" width="375" height="306"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qT4-kL-5rn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdu-Mf-Nt2">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="569.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="691.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="h3O-3Y-rKX">
-                                                <rect key="frame" x="58.5" y="30" width="258" height="90"/>
+                                                <rect key="frame" x="-89.5" y="70" width="554" height="172"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgN-e6-EZh">
-                                                <rect key="frame" x="305" y="60" width="40" height="30"/>
+                                                <rect key="frame" x="305" y="141" width="40" height="30"/>
                                                 <connections>
                                                     <action selector="btnLaungageClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pQq-rE-Al9"/>
                                                 </connections>
                                             </button>
                                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmu-6o-JBY">
-                                                <rect key="frame" x="305" y="60" width="40" height="30"/>
+                                                <rect key="frame" x="305" y="141" width="40" height="30"/>
                                                 <color key="backgroundColor" red="0.61960784310000006" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Dz6-4d-upA"/>
@@ -79,12 +79,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uSY-u8-4s9">
-                                                <rect key="frame" x="20" y="140" width="335" height="122"/>
+                                                <rect key="frame" x="20" y="262" width="335" height="122"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NpI-nM-RXk">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="51"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number / Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNj-VZ-geJ" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile Number / Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNj-VZ-geJ" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,7 +128,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="njV-rl-cdo">
                                                         <rect key="frame" x="0.0" y="71" width="335" height="51"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vE-Mx-ge8" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vE-Mx-ge8" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,7 +169,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5Q-0D-ebS">
-                                                <rect key="frame" x="237" y="267" width="118" height="30"/>
+                                                <rect key="frame" x="237" y="389" width="118" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="sMv-wS-zO2"/>
                                                 </constraints>
@@ -181,8 +181,8 @@
                                                     <action selector="btnForgotPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ure-Mi-tZX"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRo-TR-N6H" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="307" width="335" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRo-TR-N6H" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="429" width="335" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.1803921568627451" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="pfv-g3-QpT"/>
@@ -199,7 +199,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wAG-oE-Ivh">
-                                                <rect key="frame" x="83" y="441" width="209" height="28"/>
+                                                <rect key="frame" x="83" y="563" width="209" height="28"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-Cx-6wN">
                                                         <rect key="frame" x="0.0" y="0.0" width="147" height="28"/>
@@ -229,7 +229,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUz-Pe-Mvy">
-                                                <rect key="frame" x="20" y="369" width="335" height="50"/>
+                                                <rect key="frame" x="20" y="491" width="335" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eMQ-8g-Hrt">
                                                         <rect key="frame" x="102.5" y="0.0" width="130" height="50"/>
@@ -261,7 +261,7 @@
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHA-QA-AJd">
-                                                <rect key="frame" x="142.5" y="459" width="90" height="0.0"/>
+                                                <rect key="frame" x="142.5" y="581" width="90" height="0.0"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-wk-0wR">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="0.0"/>
@@ -296,7 +296,7 @@
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WD-KJ-dum">
-                                                <rect key="frame" x="0.0" y="469" width="375" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="591" width="375" height="0.0"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3R-WI-EnN">
                                                         <rect key="frame" x="0.0" y="-0.5" width="166" height="1"/>
@@ -337,7 +337,7 @@
                                                 </constraints>
                                             </view>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LT6-ZL-F2F">
-                                                <rect key="frame" x="70" y="482" width="235" height="50"/>
+                                                <rect key="frame" x="70" y="604" width="235" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="17"/>
                                                 <state key="normal" title="Sign Up">
@@ -360,7 +360,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsW-9Y-NRr">
-                                                <rect key="frame" x="177" y="424" width="21" height="15"/>
+                                                <rect key="frame" x="177" y="546" width="21" height="15"/>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -395,7 +395,7 @@
                                             <constraint firstItem="1WD-KJ-dum" firstAttribute="top" secondItem="wAG-oE-Ivh" secondAttribute="bottom" id="jBp-7S-lJW"/>
                                             <constraint firstItem="zRo-TR-N6H" firstAttribute="top" secondItem="Z5Q-0D-ebS" secondAttribute="bottom" constant="10" id="lDQ-48-EdN"/>
                                             <constraint firstItem="zgN-e6-EZh" firstAttribute="centerY" secondItem="h3O-3Y-rKX" secondAttribute="centerY" id="n3V-ck-FZW"/>
-                                            <constraint firstItem="h3O-3Y-rKX" firstAttribute="top" secondItem="xdu-Mf-Nt2" secondAttribute="top" multiplier="0.089" constant="30" id="ogo-xH-amN"/>
+                                            <constraint firstItem="h3O-3Y-rKX" firstAttribute="top" secondItem="xdu-Mf-Nt2" secondAttribute="top" multiplier="0.089" constant="70" id="ogo-xH-amN"/>
                                             <constraint firstItem="zRo-TR-N6H" firstAttribute="trailing" secondItem="uSY-u8-4s9" secondAttribute="trailing" id="ozA-1p-XFJ"/>
                                             <constraint firstItem="LT6-ZL-F2F" firstAttribute="height" secondItem="zRo-TR-N6H" secondAttribute="height" id="p96-Lg-Qcf"/>
                                             <constraint firstAttribute="trailing" secondItem="uSY-u8-4s9" secondAttribute="trailing" constant="20" id="tPz-ha-1Ax"/>
@@ -458,7 +458,7 @@
         <!--Home View Controller-->
         <scene sceneID="V9v-FK-sLX">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="eKb-OP-gzz" customClass="HomeViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="eKb-OP-gzz" customClass="HomeViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="04M-Ri-flH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -488,7 +488,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CarsCollectionViewCell" id="hob-sD-jHh" customClass="CarsCollectionViewCell" customModule="LADA" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CarsCollectionViewCell" id="hob-sD-jHh" customClass="CarsCollectionViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="1" width="104" height="138"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -628,7 +628,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Ui-Se-xbd">
                                         <rect key="frame" x="10" y="5" width="355" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTj-uF-Rw0" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTj-uF-Rw0" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="172.5" height="40"/>
                                                 <color key="backgroundColor" red="0.44705882352941173" green="0.44705882352941173" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -648,7 +648,7 @@
                                                     <action selector="btnRequest:" destination="eKb-OP-gzz" eventType="touchUpInside" id="gYI-Rs-aBW"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaJ-7H-kTb" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaJ-7H-kTb" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="177.5" y="0.0" width="0.0" height="40"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Cancel Trip">
@@ -667,7 +667,7 @@
                                                     <action selector="btnCancelStartedTrip:" destination="eKb-OP-gzz" eventType="touchUpInside" id="kqv-kk-g4i"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0K-re-4LC" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0K-re-4LC" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="182.5" y="0.0" width="172.5" height="40"/>
                                                 <color key="backgroundColor" red="0.44705882352941173" green="0.44705882352941173" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -732,7 +732,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkz-So-1im">
-                                                <rect key="frame" x="0.0" y="0.0" width="26" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="40"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.51000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="iconRightArraw"/>
                                                 <connections>
@@ -899,7 +899,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EbV-Gq-CM4">
                                                         <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-sv-5FK" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJA-sv-5FK" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="10" y="5" width="355" height="40"/>
                                                                 <color key="backgroundColor" red="0.44705882352941173" green="0.44705882352941173" blue="0.44705882352941173" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -919,7 +919,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6h-oG-h5r">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                                 <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ik-uC-dzQ" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ik-uC-dzQ" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                         <rect key="frame" x="10" y="5" width="174.5" height="40"/>
                                                                         <color key="backgroundColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <constraints>
@@ -935,7 +935,7 @@
                                                                             <action selector="btnBookNow:" destination="eKb-OP-gzz" eventType="touchUpInside" id="Zam-k2-hHg"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="783-qS-zyr" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="783-qS-zyr" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                         <rect key="frame" x="190.5" y="5" width="174.5" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
@@ -1228,7 +1228,7 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YkY-8n-AXQ">
-                                                <rect key="frame" x="18.5" y="10" width="258" height="60"/>
+                                                <rect key="frame" x="-129.5" y="10" width="554" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1591,7 +1591,7 @@
                                                     <constraint firstItem="0cv-8L-Qly" firstAttribute="leading" secondItem="ecr-eY-IOH" secondAttribute="leading" id="ssn-1k-BGN"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-ON-x15" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGz-ON-x15" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="50" y="254" width="195" height="40"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1733,7 +1733,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-BF-hkJ" customClass="FloatRatingView" customModule="LADA" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-BF-hkJ" customClass="FloatRatingView" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="165.5" width="285" height="40"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1774,7 +1774,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="MOf-nl-vFZ">
                                                 <rect key="frame" x="30" y="286.5" width="275" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36h-7X-54s" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36h-7X-54s" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="275" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -1974,7 +1974,7 @@
         <!--Give Rating View Controller-->
         <scene sceneID="67P-Ks-rl0">
             <objects>
-                <viewController storyboardIdentifier="GiveRatingViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ol5-ay-OKu" customClass="GiveRatingViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GiveRatingViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ol5-ay-OKu" customClass="GiveRatingViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t3e-uQ-bJx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2020,7 +2020,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="r14-2h-CT3" secondAttribute="bottom" id="tMD-g0-xzM"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jg-Uj-ndT" customClass="FloatRatingView" customModule="LADA" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jg-Uj-ndT" customClass="FloatRatingView" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="45" y="165.5" width="245" height="30"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -2070,7 +2070,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="E4t-Kb-68p">
                                                 <rect key="frame" x="0.0" y="276.5" width="335" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKz-Eq-xCd" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKz-Eq-xCd" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -2144,7 +2144,7 @@
         <!--Book Later View Controller-->
         <scene sceneID="CPV-ks-sVC">
             <objects>
-                <viewController storyboardIdentifier="BookLaterViewController1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OYL-Im-NYx" customClass="BookLaterViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookLaterViewController1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OYL-Im-NYx" customClass="BookLaterViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4s6-tp-NMn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="968"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2424,7 +2424,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-rZ-UlR" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-rZ-UlR" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="625" width="280" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -2634,7 +2634,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="02N-Us-FkI">
                                                 <rect key="frame" x="20" y="120" width="233" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPZ-Hk-kmC" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPZ-Hk-kmC" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="111.5" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.63921568630000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -2652,7 +2652,7 @@
                                                             <action selector="btnApply:" destination="OYL-Im-NYx" eventType="touchUpInside" id="USC-jj-Ok3"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQJ-Bg-N7Q" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQJ-Bg-N7Q" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="121.5" y="0.0" width="111.5" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -2769,7 +2769,7 @@
         <!--Package View Controller-->
         <scene sceneID="CjH-Ob-8ps">
             <objects>
-                <viewController storyboardIdentifier="PackageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="str-wi-kg0" customClass="PackageViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PackageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="str-wi-kg0" customClass="PackageViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="WVJ-9o-DWQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2923,7 +2923,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PackageCarListCollectionViewCell" id="nf9-Ch-ofc" userLabel="PackageCarListCollectionViewCell" customClass="PackageCarListCollectionViewCell" customModule="LADA" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PackageCarListCollectionViewCell" id="nf9-Ch-ofc" userLabel="PackageCarListCollectionViewCell" customClass="PackageCarListCollectionViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -3002,11 +3002,11 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HdX-Bu-nmU">
-                                <rect key="frame" x="0.0" y="367" width="375" height="411"/>
+                                <rect key="frame" x="0.0" y="323" width="375" height="344"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PacageHoursDaysTableViewCell" rowHeight="90" id="XQA-eu-48N" userLabel="PacageHoursDaysTableViewCell" customClass="PacageHoursDaysTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PacageHoursDaysTableViewCell" rowHeight="90" id="XQA-eu-48N" userLabel="PacageHoursDaysTableViewCell" customClass="PacageHoursDaysTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XQA-eu-48N" id="pQw-Py-txk">
@@ -3097,9 +3097,9 @@ Hours</string>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gR2-nN-k6U">
-                                <rect key="frame" x="0.0" y="410" width="375" height="368"/>
+                                <rect key="frame" x="0.0" y="299" width="375" height="368"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rke-eC-0zp" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rke-eC-0zp" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="328" width="375" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -3220,7 +3220,7 @@ Hours</string>
         <!--Package Detail View Controller-->
         <scene sceneID="lNx-bg-cyk">
             <objects>
-                <viewController storyboardIdentifier="PackageDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZLa-uS-w3E" customClass="PackageDetailViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PackageDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZLa-uS-w3E" customClass="PackageDetailViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jN5-NE-e7L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3718,7 +3718,7 @@ Hours</string>
         <!--PackageHistoryViewController-->
         <scene sceneID="XZ6-uP-Bco">
             <objects>
-                <viewController storyboardIdentifier="PackageHistoryViewController" id="0fI-w7-SWi" userLabel="PackageHistoryViewController" customClass="PackageHistoryViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PackageHistoryViewController" id="0fI-w7-SWi" userLabel="PackageHistoryViewController" customClass="PackageHistoryViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QNQ-M5-kMy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3728,7 +3728,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageHistoryListTableViewCell" rowHeight="353" id="fC3-2M-JNW" userLabel="PackageHistoryListTableViewCell" customClass="PackageHistoryListTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageHistoryListTableViewCell" rowHeight="353" id="fC3-2M-JNW" userLabel="PackageHistoryListTableViewCell" customClass="PackageHistoryListTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="353"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fC3-2M-JNW" id="Z4O-Kd-025">
@@ -4222,7 +4222,7 @@ Hours</string>
         <!--Favorite View Controller-->
         <scene sceneID="Wgk-hg-WBk">
             <objects>
-                <viewController storyboardIdentifier="FavoriteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P0s-oS-haF" customClass="FavoriteViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="P0s-oS-haF" customClass="FavoriteViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Pf-lv-DF2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4246,7 +4246,7 @@ Hours</string>
                                                 <rect key="frame" x="0.0" y="29" width="375" height="574"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyFavouriteTableViewCell" rowHeight="70" id="zmH-2H-ezt" customClass="MyFavouriteTableViewCell" customModule="LADA" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyFavouriteTableViewCell" rowHeight="70" id="zmH-2H-ezt" customClass="MyFavouriteTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zmH-2H-ezt" id="5Fp-SR-aZi">
@@ -4346,7 +4346,7 @@ Hours</string>
         <!--Book Table View Controller-->
         <scene sceneID="h29-Yi-sto">
             <objects>
-                <viewController storyboardIdentifier="BookTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oqH-qf-QR8" customClass="BookTableViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oqH-qf-QR8" customClass="BookTableViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IOy-tZ-Lka">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4364,7 +4364,7 @@ Hours</string>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookTableCollectionViewCell" id="E9H-Ft-ghF" customClass="BookTableCollectionViewCell" customModule="LADA" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookTableCollectionViewCell" id="E9H-Ft-ghF" customClass="BookTableCollectionViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="199"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -4466,12 +4466,12 @@ Hours</string>
         <!--Registration Container View Controller-->
         <scene sceneID="DDa-gC-fFh">
             <objects>
-                <viewController storyboardIdentifier="RegistrationContainerViewController" id="k24-bf-O76" customClass="RegistrationContainerViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationContainerViewController" id="k24-bf-O76" customClass="RegistrationContainerViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g54-0R-NV5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="qLH-Mq-QMn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="qLH-Mq-QMn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnn-PB-laL">
@@ -4573,7 +4573,7 @@ Hours</string>
         <!--Register View Controller-->
         <scene sceneID="Qdh-ju-RbE">
             <objects>
-                <viewController storyboardIdentifier="RegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8fb-6k-oa1" customClass="RegisterViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8fb-6k-oa1" customClass="RegisterViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E6D-qI-YYy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4591,7 +4591,7 @@ Hours</string>
                                                     <constraint firstAttribute="height" constant="25" id="2LO-rc-XcG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                                <color key="textColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.73333333333333328" green="0.65490196078431373" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -4662,7 +4662,7 @@ Hours</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X0w-xg-wu5">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="41"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOr-i6-d6v" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOr-i6-d6v" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4706,7 +4706,7 @@ Hours</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3wM-8z-Dc7">
                                                 <rect key="frame" x="0.0" y="56" width="335" height="41"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4x-Lx-z0J" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4x-Lx-z0J" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4747,7 +4747,7 @@ Hours</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Cf3-Gl-yqQ">
                                                 <rect key="frame" x="0.0" y="112" width="335" height="41"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZLU-rw-ZMg" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZLU-rw-ZMg" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4788,7 +4788,7 @@ Hours</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2jd-l7-Q5V">
                                                 <rect key="frame" x="0.0" y="168" width="335" height="41"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGL-0h-54D" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cGL-0h-54D" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4828,7 +4828,7 @@ Hours</string>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIm-RV-Pwz" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIm-RV-Pwz" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="20" y="597" width="335" height="50"/>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.25098039215686274" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -4913,7 +4913,7 @@ Hours</string>
         <!--All Drivers On Map View Controller-->
         <scene sceneID="goK-Rg-hBj">
             <objects>
-                <viewController storyboardIdentifier="AllDriversOnMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NOu-GK-TPM" customClass="AllDriversOnMapViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllDriversOnMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NOu-GK-TPM" customClass="AllDriversOnMapViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cGe-eT-y2h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4977,7 +4977,7 @@ Hours</string>
         <!--Registration New View Controller-->
         <scene sceneID="Pgw-BS-c4I">
             <objects>
-                <viewController storyboardIdentifier="RegistrationNewViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q8U-wW-XvY" customClass="RegistrationNewViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationNewViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q8U-wW-XvY" customClass="RegistrationNewViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="icJ-Tp-Y6j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5001,7 +5001,7 @@ Hours</string>
                                                                     <constraint firstAttribute="height" constant="25" id="0cv-8u-tKY"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                                                <color key="textColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" red="0.73333333333333328" green="0.65490196078431373" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -5029,7 +5029,7 @@ Hours</string>
                                                                     <constraint firstAttribute="height" constant="25" id="BXi-0Z-0fU"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                                                <color key="textColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="textColor" red="0.73333333333333328" green="0.65490196078431373" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -5108,7 +5108,7 @@ Hours</string>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gaC-Dx-20b">
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="41"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R62-Zu-z5m" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R62-Zu-z5m" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5152,7 +5152,7 @@ Hours</string>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gt6-Jn-yEd">
                                                                 <rect key="frame" x="0.0" y="56" width="355" height="41"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-OW-8mL" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="User Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-OW-8mL" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5199,7 +5199,7 @@ Hours</string>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0uM-hI-ZXN">
                                                                 <rect key="frame" x="0.0" y="112" width="355" height="41"/>
                                                                 <subviews>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBu-zl-I2t" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBu-zl-I2t" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="40"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5242,7 +5242,7 @@ Hours</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PXn-xK-mp9">
                                                         <rect key="frame" x="10" y="525.5" width="355" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jc-EZ-Pgx" customClass="AKRadioButton" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jc-EZ-Pgx" customClass="AKRadioButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="10" y="0.0" width="157.5" height="40"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
@@ -5250,7 +5250,7 @@ Hours</string>
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                             </button>
-                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JL9-VZ-Ckd" customClass="AKRadioButton" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JL9-VZ-Ckd" customClass="AKRadioButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="187.5" y="0.0" width="157.5" height="40"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
@@ -5286,7 +5286,7 @@ Hours</string>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePY-AL-g7a">
                                                         <rect key="frame" x="10" y="580.5" width="355" height="1"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Post Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-Ty-WV9" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Post Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-Ty-WV9" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="167.5" height="1"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5298,7 +5298,7 @@ Hours</string>
                                                                     <userDefinedRuntimeAttribute type="image" keyPath="LeftImage" value="icon_PostCode"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Invite Code (Option)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TBy-4I-4MN" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Invite Code (Option)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TBy-4I-4MN" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="187.5" y="0.0" width="167.5" height="1"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5323,7 +5323,7 @@ Hours</string>
                                                             <constraint firstItem="TBy-4I-4MN" firstAttribute="width" secondItem="wxv-Ty-WV9" secondAttribute="width" id="ysn-QZ-r3D"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8h-bD-5Tx" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8h-bD-5Tx" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="10" y="596.5" width="355" height="50"/>
                                                         <color key="backgroundColor" red="0.93725490196078431" green="0.25098039215686274" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -5426,7 +5426,7 @@ Hours</string>
                     <rect key="frame" x="0.0" y="0.0" width="300" height="41"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date Of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r4g-e2-brf" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date Of Birth" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r4g-e2-brf" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5464,7 +5464,7 @@ Hours</string>
         <!--Driver Info View Controller-->
         <scene sceneID="KRN-u3-JCA">
             <objects>
-                <viewController storyboardIdentifier="DriverInfoViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qFc-oh-FJE" customClass="DriverInfoViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DriverInfoViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qFc-oh-FJE" customClass="DriverInfoViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lX2-xC-xhv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5665,7 +5665,7 @@ Hours</string>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <viewLayoutGuide key="safeArea" id="UP0-uj-e9E"/>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBb-01-pJC" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qBb-01-pJC" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
                     <color key="backgroundColor" red="1" green="0.63921568627450975" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -5686,7 +5686,7 @@ Hours</string>
         <!--My Booking View Controller-->
         <scene sceneID="nyr-2d-RW6">
             <objects>
-                <viewController storyboardIdentifier="MyBookingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ICf-Sa-UAP" customClass="MyBookingViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyBookingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ICf-Sa-UAP" customClass="MyBookingViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vcy-hM-HRi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5909,7 +5909,7 @@ Hours</string>
         <!--Trip Details View Controller-->
         <scene sceneID="UUN-BK-sF8">
             <objects>
-                <viewController id="bpU-TY-WIc" customClass="TripDetailsViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bpU-TY-WIc" customClass="TripDetailsViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Tm-Ra-UnA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5961,7 +5961,7 @@ Hours</string>
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="91" id="VNs-uc-A2P" customClass="TripDetailsTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="91" id="VNs-uc-A2P" customClass="TripDetailsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VNs-uc-A2P" id="zjK-gI-IRk">
@@ -6032,7 +6032,7 @@ Hours</string>
         <!--Trip Details View Controller-->
         <scene sceneID="ybH-ZL-8Ww">
             <objects>
-                <viewController storyboardIdentifier="TripDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cxK-lQ-nJ3" customClass="TripDetailsViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TripDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cxK-lQ-nJ3" customClass="TripDetailsViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p2k-i4-ccq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6405,7 +6405,7 @@ Hours</string>
         <!--Comming Soon View Controller-->
         <scene sceneID="VLb-SS-89W">
             <objects>
-                <viewController storyboardIdentifier="CommingSoonViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f8F-e0-Ob7" customClass="CommingSoonViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommingSoonViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f8F-e0-Ob7" customClass="CommingSoonViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jHB-DO-7aN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6467,7 +6467,7 @@ Hours</string>
         <!--Edit Profile View Controller-->
         <scene sceneID="8nT-gf-S2H">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a31-9t-SSP" customClass="EditProfileViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a31-9t-SSP" customClass="EditProfileViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ym4-3C-lR2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6588,7 +6588,7 @@ Hours</string>
                                                     <constraint firstItem="vaE-sx-aSf" firstAttribute="top" secondItem="zTd-mS-aQG" secondAttribute="top" id="h7G-pK-brH"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq6-cL-RNT" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq6-cL-RNT" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="473.5" width="325" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="QR3-0r-7UT"/>
@@ -6715,7 +6715,7 @@ Hours</string>
         <!--Update Profile View Controller-->
         <scene sceneID="Jrz-b9-cQa">
             <objects>
-                <viewController storyboardIdentifier="UpdateProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qwf-s2-kPF" customClass="UpdateProfileViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpdateProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qwf-s2-kPF" customClass="UpdateProfileViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NKc-Ns-oEK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7060,7 +7060,7 @@ Hours</string>
                                                                     <constraint firstItem="yXj-BR-Udu" firstAttribute="width" secondItem="Wvm-h3-Dte" secondAttribute="width" id="tA1-Pg-PNM"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JS-Iv-Dlf" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JS-Iv-Dlf" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="435" width="335" height="50"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -7078,7 +7078,7 @@ Hours</string>
                                                                     <action selector="btnChangePassword:" destination="qwf-s2-kPF" eventType="touchUpInside" id="1tI-ZU-thz"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuA-JY-iQj" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuA-JY-iQj" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="505" width="335" height="50"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
@@ -7526,7 +7526,7 @@ Hours</string>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN0-KU-tvm" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kN0-KU-tvm" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                             <rect key="frame" x="20" y="90" width="280" height="50"/>
                             <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -7561,7 +7561,7 @@ Hours</string>
         <!--Side Menu Table View Controller-->
         <scene sceneID="GKz-KD-GNq">
             <objects>
-                <viewController storyboardIdentifier="SideMenuTableViewController" id="JmO-tL-fGl" customClass="SideMenuTableViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SideMenuTableViewController" id="JmO-tL-fGl" customClass="SideMenuTableViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XpF-dZ-yFY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7652,7 +7652,7 @@ Hours</string>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SideMenuCollectionViewCell" id="hyt-xY-yUK" customClass="SideMenuCollectionViewCell" customModule="LADA" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SideMenuCollectionViewCell" id="hyt-xY-yUK" customClass="SideMenuCollectionViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="87"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -7723,7 +7723,7 @@ Hours</string>
                                 </connections>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sWC-6g-uHZ">
-                                <rect key="frame" x="20" y="427" width="335" height="40"/>
+                                <rect key="frame" x="20" y="527" width="335" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZh-wZ-QHO">
                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="40"/>
@@ -7828,7 +7828,7 @@ Hours</string>
                             <constraint firstItem="0DL-Rm-wYP" firstAttribute="trailing" secondItem="Zal-90-lAz" secondAttribute="trailing" constant="30" id="F5t-y0-Xpt"/>
                             <constraint firstAttribute="trailing" secondItem="sWC-6g-uHZ" secondAttribute="trailing" constant="20" id="M3a-AV-5Wo"/>
                             <constraint firstItem="G0z-6e-4Cz" firstAttribute="leading" secondItem="0DL-Rm-wYP" secondAttribute="leading" id="MuH-AZ-SpD"/>
-                            <constraint firstItem="0DL-Rm-wYP" firstAttribute="bottom" secondItem="sWC-6g-uHZ" secondAttribute="bottom" constant="200" id="XPb-JA-xtr"/>
+                            <constraint firstItem="0DL-Rm-wYP" firstAttribute="bottom" secondItem="sWC-6g-uHZ" secondAttribute="bottom" constant="100" id="XPb-JA-xtr"/>
                             <constraint firstItem="0DL-Rm-wYP" firstAttribute="trailing" secondItem="G0z-6e-4Cz" secondAttribute="trailing" id="dgf-9s-yGH"/>
                             <constraint firstItem="G0z-6e-4Cz" firstAttribute="top" secondItem="XpF-dZ-yFY" secondAttribute="top" id="mSb-vs-3wq"/>
                             <constraint firstItem="Zal-90-lAz" firstAttribute="top" secondItem="G0z-6e-4Cz" secondAttribute="bottom" constant="10" id="mc1-78-JkM"/>
@@ -7851,7 +7851,7 @@ Hours</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpr-xy-nOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZY-cv-RPd" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZY-cv-RPd" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="290" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="5sS-9R-dK0"/>
@@ -7882,7 +7882,7 @@ Hours</string>
         <!--Edit Account View Controller-->
         <scene sceneID="tbH-Ep-Dr2">
             <objects>
-                <viewController storyboardIdentifier="EditAccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yvz-nb-XVu" customClass="EditAccountViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditAccountViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yvz-nb-XVu" customClass="EditAccountViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j7f-70-cVo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8083,7 +8083,7 @@ Hours</string>
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKP-Pn-fMa" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKP-Pn-fMa" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="20" y="230" width="335" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -8213,7 +8213,7 @@ Hours</string>
         <!--Change PasswordVC-->
         <scene sceneID="F4v-9T-kUl">
             <objects>
-                <viewController storyboardIdentifier="ChangePasswordVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o7R-fe-Bcl" customClass="ChangePasswordVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o7R-fe-Bcl" customClass="ChangePasswordVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PE9-mS-hyo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8302,7 +8302,7 @@ Hours</string>
                                             </imageView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFl-Sp-M8W" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFl-Sp-M8W" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="140" width="335" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -8406,9 +8406,9 @@ Hours</string>
         <!--Custom Side Menu View Controller-->
         <scene sceneID="rnk-cq-hFu">
             <objects>
-                <viewController storyboardIdentifier="CustomSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8lO-1E-18h" customClass="CustomSideMenuViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8lO-1E-18h" customClass="CustomSideMenuViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8GI-9o-0Hg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="DGv-Ml-hVf"/>
@@ -8426,7 +8426,7 @@ Hours</string>
         <!--On GoingVC-->
         <scene sceneID="BUU-70-RQ8">
             <objects>
-                <viewController storyboardIdentifier="OnGoingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XZM-id-2x6" customClass="OnGoingVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnGoingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XZM-id-2x6" customClass="OnGoingVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="syX-6w-wgg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8436,7 +8436,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnGoingTableViewCell" rowHeight="175" id="y3K-nH-Dpl" customClass="OnGoingTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnGoingTableViewCell" rowHeight="175" id="y3K-nH-Dpl" customClass="OnGoingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y3K-nH-Dpl" id="yRY-sz-4VE">
@@ -8449,7 +8449,7 @@ Hours</string>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRr-1X-D0T">
                                                             <rect key="frame" x="10" y="10" width="335" height="155"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-ZV-Ox4" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKQ-ZV-Ox4" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="115" width="335" height="40"/>
                                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
@@ -8982,7 +8982,7 @@ Hours</string>
         <!--Up CommingVC-->
         <scene sceneID="nW4-m4-jo2">
             <objects>
-                <viewController storyboardIdentifier="UpCommingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HBW-24-6O9" customClass="UpCommingVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UpCommingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HBW-24-6O9" customClass="UpCommingVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gpH-Si-vda">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -8992,7 +8992,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpCommingTableViewCell" rowHeight="262" id="m4x-dA-beN" customClass="UpCommingTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpCommingTableViewCell" rowHeight="262" id="m4x-dA-beN" customClass="UpCommingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="262"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m4x-dA-beN" id="lpb-9o-Hos">
@@ -9002,7 +9002,7 @@ Hours</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuO-D6-NOC">
                                                     <rect key="frame" x="10" y="10" width="355" height="242"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz6-aC-97q" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz6-aC-97q" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="202" width="355" height="40"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -9381,7 +9381,7 @@ Hours</string>
         <!--Past BookingVC-->
         <scene sceneID="03N-7c-dtZ">
             <objects>
-                <viewController storyboardIdentifier="PastBookingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L5k-7r-uIq" customClass="PastBookingVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PastBookingVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L5k-7r-uIq" customClass="PastBookingVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8dL-2e-Sd2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="607"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -9391,7 +9391,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PastBooingTableViewCell" rowHeight="400" id="Iag-jX-9VT" customClass="PastBooingTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PastBooingTableViewCell" rowHeight="400" id="Iag-jX-9VT" customClass="PastBooingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iag-jX-9VT" id="Vqu-M2-kdI">
@@ -9401,7 +9401,7 @@ Hours</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iU-xJ-vj5">
                                                     <rect key="frame" x="10" y="10" width="355" height="380"/>
                                                     <subviews>
-                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1x-Hf-g8v" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1x-Hf-g8v" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="340" width="355" height="40"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -9883,7 +9883,7 @@ Hours</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrI-lB-nMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5y-dn-D86" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5y-dn-D86" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
                     <color key="backgroundColor" red="1" green="0.63921568630000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -10199,7 +10199,7 @@ Hours</string>
         <!--Wallet View Controller-->
         <scene sceneID="vTZ-jp-g37">
             <objects>
-                <viewController storyboardIdentifier="WalletViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mpV-TY-1X2" customClass="WalletViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mpV-TY-1X2" customClass="WalletViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bKi-8q-E1G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="587"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -10445,7 +10445,7 @@ Hours</string>
         <!--Wallet Top UpVC-->
         <scene sceneID="uNQ-Ws-lUy">
             <objects>
-                <viewController storyboardIdentifier="WalletTopUpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w0c-sF-54O" customClass="WalletTopUpVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletTopUpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w0c-sF-54O" customClass="WalletTopUpVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NOj-Dg-MLe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -10513,7 +10513,7 @@ Hours</string>
                                             <constraint firstItem="eSI-i1-VG6" firstAttribute="centerY" secondItem="3fG-By-REE" secondAttribute="centerY" id="v3z-Q5-Xci"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzE-ae-7K3" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzE-ae-7K3" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="10" y="308.5" width="355" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -10623,7 +10623,7 @@ Hours</string>
         <!--Wallet Transfer To BankVC-->
         <scene sceneID="oEM-X5-e82">
             <objects>
-                <viewController storyboardIdentifier="WalletTransferToBankVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zd0-7l-rdn" customClass="WalletTransferToBankVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletTransferToBankVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zd0-7l-rdn" customClass="WalletTransferToBankVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5qw-pu-YP0" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -10678,7 +10678,7 @@ Hours</string>
                                             <action selector="txtAmount:" destination="zd0-7l-rdn" eventType="editingChanged" id="aS1-IK-cY3"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csn-XN-Wei" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csn-XN-Wei" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="27" y="587" width="321" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -11017,7 +11017,7 @@ Hours</string>
         <!--Wallet CardsVC-->
         <scene sceneID="uny-Q0-cgw">
             <objects>
-                <viewController storyboardIdentifier="WalletCardsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ex4-1V-S1y" customClass="WalletCardsVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletCardsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ex4-1V-S1y" customClass="WalletCardsVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JiT-bt-MvP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -11027,7 +11027,7 @@ Hours</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletCardsTableViewCell" rowHeight="90" id="uns-5O-2X3" customClass="WalletCardsTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletCardsTableViewCell" rowHeight="90" id="uns-5O-2X3" customClass="WalletCardsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uns-5O-2X3" id="FLr-ZP-mwa">
@@ -11100,7 +11100,7 @@ Hours</string>
                                             <outlet property="viewCards" destination="w2c-WW-jeY" id="ODj-h5-xvE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCard" rowHeight="50" id="BSS-0p-Go8" customClass="WalletCardsTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCard" rowHeight="50" id="BSS-0p-Go8" customClass="WalletCardsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="118" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BSS-0p-Go8" id="VDe-aJ-BoK">
@@ -11178,7 +11178,7 @@ Hours</string>
         <!--Wallet Transfer View Controller-->
         <scene sceneID="NpL-Pf-9ne">
             <objects>
-                <viewController storyboardIdentifier="WalletTransferViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cY7-ke-dlt" customClass="WalletTransferViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletTransferViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cY7-ke-dlt" customClass="WalletTransferViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tEW-D1-Ppa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -11427,7 +11427,7 @@ Hours</string>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smz-cx-ZtY">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNy-iD-x1M" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNy-iD-x1M" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                     <rect key="frame" x="210" y="3" width="100" height="62"/>
                                                     <color key="backgroundColor" red="1" green="0.63921568627450975" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -11501,7 +11501,7 @@ Hours</string>
         <!--Wallet History View Controller-->
         <scene sceneID="vOz-qZ-Nxw">
             <objects>
-                <viewController storyboardIdentifier="WalletHistoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VQw-Ml-H4P" customClass="WalletHistoryViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletHistoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VQw-Ml-H4P" customClass="WalletHistoryViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QqP-E8-eDn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -11511,7 +11511,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletHistoryTableViewCell" rowHeight="82" id="jaZ-mx-7Vl" customClass="WalletHistoryTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletHistoryTableViewCell" rowHeight="82" id="jaZ-mx-7Vl" customClass="WalletHistoryTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jaZ-mx-7Vl" id="96U-zh-FYZ">
@@ -11598,7 +11598,7 @@ Hours</string>
         <!--Wallet Balance MainVC-->
         <scene sceneID="4M1-r8-iNW">
             <objects>
-                <viewController storyboardIdentifier="WalletBalanceMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9ga-x5-L6y" customClass="WalletBalanceMainVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletBalanceMainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9ga-x5-L6y" customClass="WalletBalanceMainVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hPF-ai-gTz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -11789,7 +11789,7 @@ Hours</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="436"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletBalanceMainTableViewCell" rowHeight="96" id="CiN-Wv-b3e" customClass="WalletBalanceMainTableViewCell" customModule="LADA" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletBalanceMainTableViewCell" rowHeight="96" id="CiN-Wv-b3e" customClass="WalletBalanceMainTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="375" height="96"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CiN-Wv-b3e" id="4Ww-2c-dzs">
@@ -11934,7 +11934,7 @@ Hours</string>
         <!--Wallet Add Cards View Controller-->
         <scene sceneID="VHB-e9-BSa">
             <objects>
-                <viewController storyboardIdentifier="WalletAddCardsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DK2-wM-2h5" customClass="WalletAddCardsViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletAddCardsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DK2-wM-2h5" customClass="WalletAddCardsViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yrc-6P-SGs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -12143,7 +12143,7 @@ Hours</string>
                                             <action selector="btnScanCard:" destination="DK2-wM-2h5" eventType="touchUpInside" id="UeM-Pn-i2B"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-2P-zUR" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-2P-zUR" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="20" y="326.5" width="335" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -12202,7 +12202,7 @@ Hours</string>
         <!--Web ViewVC-->
         <scene sceneID="S1m-zh-5Yz">
             <objects>
-                <viewController storyboardIdentifier="webViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yfe-Lj-gds" customClass="webViewVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="webViewVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yfe-Lj-gds" customClass="webViewVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jsG-as-3jZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -12247,7 +12247,7 @@ Hours</string>
         <!--Wallet Transfer Send-->
         <scene sceneID="Rta-DR-NYm">
             <objects>
-                <viewController storyboardIdentifier="WalletTransferSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WAr-bZ-Af6" customClass="WalletTransferSend" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletTransferSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WAr-bZ-Af6" customClass="WalletTransferSend" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="INr-ML-SWD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -12330,7 +12330,7 @@ Hours</string>
                                             <action selector="txtEnterMoney:" destination="WAr-bZ-Af6" eventType="editingChanged" id="BJn-K8-c66"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOu-iU-cr4" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOu-iU-cr4" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="47.5" y="462" width="260" height="35"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -12407,7 +12407,7 @@ Hours</string>
         <!--Wallet Transfer Recieve-->
         <scene sceneID="wim-b4-KTK">
             <objects>
-                <viewController storyboardIdentifier="WalletTransferRecieve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mg0-kx-L9e" customClass="WalletTransferRecieve" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletTransferRecieve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mg0-kx-L9e" customClass="WalletTransferRecieve" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="scI-D7-MkC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -12476,7 +12476,7 @@ Hours</string>
         <!--Invite Driver View Controller-->
         <scene sceneID="szU-A8-T9d">
             <objects>
-                <viewController storyboardIdentifier="InviteDriverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yuA-xa-Ujw" customClass="InviteDriverViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteDriverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yuA-xa-Ujw" customClass="InviteDriverViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kdl-px-0je">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -12994,7 +12994,7 @@ Hours</string>
         <!--My Receipts View Controller-->
         <scene sceneID="AoN-N3-eDa">
             <objects>
-                <viewController storyboardIdentifier="MyReceiptsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="emZ-S2-ewz" customClass="MyReceiptsViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyReceiptsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="emZ-S2-ewz" customClass="MyReceiptsViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OOk-fO-jje">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -13004,7 +13004,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecepitTableViewCell" rowHeight="380" id="DeW-ME-53b" customClass="MyRecepitTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecepitTableViewCell" rowHeight="380" id="DeW-ME-53b" customClass="MyRecepitTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="380"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DeW-ME-53b" id="tnb-tG-fb8">
@@ -13014,7 +13014,7 @@ Hours</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvX-kO-LrD">
                                                     <rect key="frame" x="10" y="10" width="355" height="360"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHc-Kh-ApS" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHc-Kh-ApS" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="320" width="355" height="40"/>
                                                             <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -13482,7 +13482,7 @@ Hours</string>
                                             <outlet property="viewDetails" destination="XCT-f6-Zw3" id="E1S-HM-AZ1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoDataFound" id="aVn-N4-9nY" customClass="DispatchedJobsForMyJobsTableViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoDataFound" id="aVn-N4-9nY" customClass="DispatchedJobsForMyJobsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="408" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aVn-N4-9nY" id="pfN-wQ-92c">
@@ -13550,7 +13550,7 @@ Hours</string>
         <!--TiCK Pay Need To Varify View Controller-->
         <scene sceneID="JJ6-qJ-AIQ">
             <objects>
-                <viewController storyboardIdentifier="TiCKPayNeedToVarifyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IUI-ww-7oo" customClass="TiCKPayNeedToVarifyViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TiCKPayNeedToVarifyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IUI-ww-7oo" customClass="TiCKPayNeedToVarifyViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t9I-FF-ob3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -13641,7 +13641,7 @@ Hours</string>
         <!--Pay-->
         <scene sceneID="hab-89-2Ed">
             <objects>
-                <viewController storyboardIdentifier="PayViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xtw-eq-RAc" customClass="PayViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PayViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xtw-eq-RAc" customClass="PayViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZPJ-EQ-G23">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -13780,7 +13780,7 @@ Hours</string>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5n-2P-O0W" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5n-2P-O0W" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="437" width="280" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.63921568627450975" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -13940,7 +13940,7 @@ Hours</string>
         <!--In Voice Receipt View Controller-->
         <scene sceneID="ajL-VB-NgS">
             <objects>
-                <viewController storyboardIdentifier="InVoiceReceiptViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6qR-9o-ova" customClass="InVoiceReceiptViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InVoiceReceiptViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6qR-9o-ova" customClass="InVoiceReceiptViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L5C-Sc-3O6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -14082,7 +14082,7 @@ Hours</string>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-rh-UQw" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-rh-UQw" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                                         <rect key="frame" x="20" y="327" width="335" height="40"/>
                                                         <color key="backgroundColor" red="1" green="0.63921568627450975" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -14192,7 +14192,7 @@ Hours</string>
         <!--Tick Pay Alert View Controller-->
         <scene sceneID="5ZI-Fc-YfI">
             <objects>
-                <viewController storyboardIdentifier="TickPayAlertViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eRR-ww-uCu" customClass="TickPayAlertViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TickPayAlertViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eRR-ww-uCu" customClass="TickPayAlertViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tvu-pr-vUB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -14303,7 +14303,7 @@ Hours</string>
         <!--Tick Pay Registration View Controller-->
         <scene sceneID="zYx-GI-Eko">
             <objects>
-                <viewController storyboardIdentifier="TickPayRegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z6J-Gp-gcy" customClass="TickPayRegistrationViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TickPayRegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z6J-Gp-gcy" customClass="TickPayRegistrationViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pk0-3e-QXD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -14642,7 +14642,7 @@ Hours</string>
         <!--Verify Password View Controller-->
         <scene sceneID="VLh-i6-KTN">
             <objects>
-                <viewController storyboardIdentifier="VerifyPasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5wY-bc-gKe" customClass="VerifyPasswordViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyPasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5wY-bc-gKe" customClass="VerifyPasswordViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RMe-Cr-xKC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -14944,7 +14944,7 @@ Hours</string>
         <!--Setting PasscodeVC-->
         <scene sceneID="Bwb-6n-x0g">
             <objects>
-                <viewController storyboardIdentifier="SettingPasscodeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IHt-vw-u35" customClass="SettingPasscodeVC" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingPasscodeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IHt-vw-u35" customClass="SettingPasscodeVC" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4jf-lW-Hjq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -15124,7 +15124,7 @@ Hours</string>
         <!--Set Passcode View Controller-->
         <scene sceneID="XP5-Py-8oy">
             <objects>
-                <viewController storyboardIdentifier="SetPasscodeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="He0-or-zMW" customClass="SetPasscodeViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetPasscodeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="He0-or-zMW" customClass="SetPasscodeViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w23-he-OoR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -15428,7 +15428,7 @@ Hours</string>
         <!--CustomAlertsViewController-->
         <scene sceneID="fyc-DG-xgQ">
             <objects>
-                <viewController storyboardIdentifier="CustomAlertsViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLv-zW-B8A" userLabel="CustomAlertsViewController" customClass="CustomAlertsViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomAlertsViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLv-zW-B8A" userLabel="CustomAlertsViewController" customClass="CustomAlertsViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ena-d5-2Zb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -15484,7 +15484,7 @@ Hours</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="THs-XV-Sjd">
                                                         <rect key="frame" x="0.0" y="170" width="335" height="40"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-2b-jkg" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-2b-jkg" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -15591,7 +15591,7 @@ Hours</string>
         <!--RegisterOTP Varification View Controller-->
         <scene sceneID="V9r-vT-YBd">
             <objects>
-                <viewController storyboardIdentifier="RegisterOTPVarificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dfA-mb-xJC" customClass="RegisterOTPVarificationViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegisterOTPVarificationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dfA-mb-xJC" customClass="RegisterOTPVarificationViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UcH-ir-miQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -15609,7 +15609,7 @@ Hours</string>
                                                     <constraint firstAttribute="height" constant="25" id="XmS-8c-p6T"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="14"/>
-                                                <color key="textColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.73333333333333328" green="0.65490196078431373" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -15677,7 +15677,7 @@ Hours</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L4A-Gx-8p4">
                                         <rect key="frame" x="20" y="267.5" width="335" height="41"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter OTP" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dDQ-YI-daH" customClass="ThemeTextField" customModule="LADA" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter OTP" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dDQ-YI-daH" customClass="ThemeTextField" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
                                                 <color key="tintColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -15733,7 +15733,7 @@ Hours</string>
                                             <constraint firstAttribute="height" constant="1" id="NxF-eO-RgH"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-HB-LRq" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYf-HB-LRq" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="20" y="597" width="335" height="50"/>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.25098039215686274" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -15797,7 +15797,7 @@ Hours</string>
         <!--TripInfoViewController-->
         <scene sceneID="eAs-iK-eLu">
             <objects>
-                <viewController storyboardIdentifier="TripInfoViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xdD-V9-6Nm" userLabel="TripInfoViewController" customClass="TripInfoViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TripInfoViewController" modalPresentationStyle="overCurrentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xdD-V9-6Nm" userLabel="TripInfoViewController" customClass="TripInfoViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TPh-OQ-zId">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16190,7 +16190,7 @@ Hours</string>
                                             <constraint firstItem="9dQ-Yf-1wl" firstAttribute="width" secondItem="kCe-pX-sFU" secondAttribute="width" id="f63-gP-H2N"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-yE-pZt" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-yE-pZt" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="30" y="577" width="243" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -16499,7 +16499,7 @@ Hours</string>
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aE9-CI-7NY" customClass="ThemeButton" customModule="LADA" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aE9-CI-7NY" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
                             <rect key="frame" x="50" y="319.5" width="180" height="40"/>
                             <color key="backgroundColor" red="0.81568627449999997" green="0.1333333333" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -16615,7 +16615,7 @@ Hours</string>
         <!--MyRatingViewController-->
         <scene sceneID="hSM-So-og7">
             <objects>
-                <viewController storyboardIdentifier="MyRatingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uvx-RP-9F8" userLabel="MyRatingViewController" customClass="MyRatingViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyRatingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uvx-RP-9F8" userLabel="MyRatingViewController" customClass="MyRatingViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZO8-Kl-qkN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16625,7 +16625,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRatingViewCell" rowHeight="250" id="PK0-xP-AfD" userLabel="MyRatingViewCell" customClass="MyRatingViewCell" customModule="LADA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRatingViewCell" rowHeight="250" id="PK0-xP-AfD" userLabel="MyRatingViewCell" customClass="MyRatingViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PK0-xP-AfD" id="hqV-XE-iDO">
@@ -16657,7 +16657,7 @@ Hours</string>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GV4-Db-wLt" customClass="FloatRatingView" customModule="LADA" customModuleProvider="target">
+                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GV4-Db-wLt" customClass="FloatRatingView" customModule="Book_A_Ride" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="95" width="160" height="20"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" red="0.61960784310000006" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
@@ -16851,7 +16851,7 @@ Hours</string>
         <!--Pesapal Web View View Controller-->
         <scene sceneID="uv8-Em-buQ">
             <objects>
-                <viewController storyboardIdentifier="PesapalWebViewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8mg-CQ-NfV" customClass="PesapalWebViewViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PesapalWebViewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8mg-CQ-NfV" customClass="PesapalWebViewViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ENy-6g-Ihh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16881,7 +16881,7 @@ Hours</string>
         <!--Previous Due View Controller-->
         <scene sceneID="FLn-qi-9rb">
             <objects>
-                <viewController storyboardIdentifier="PreviousDueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s4E-wS-TiC" customClass="PreviousDueViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PreviousDueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s4E-wS-TiC" customClass="PreviousDueViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gKn-MS-VtW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16893,7 +16893,7 @@ Hours</string>
                                         <rect key="frame" x="0.0" y="10" width="375" height="607"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviousDueTableViewCell" rowHeight="210" id="irn-Jw-DKg" customClass="PreviousDueTableViewCell" customModule="LADA" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviousDueTableViewCell" rowHeight="210" id="irn-Jw-DKg" customClass="PreviousDueTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="irn-Jw-DKg" id="a5Z-fa-wUK">
@@ -17155,7 +17155,7 @@ Hours</string>
         <!--Book Later View Controller-->
         <scene sceneID="70s-V2-bdm">
             <objects>
-                <viewController storyboardIdentifier="BookLaterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="piI-La-Ahf" customClass="BookLaterViewController" customModule="LADA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookLaterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="piI-La-Ahf" customClass="BookLaterViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WvK-ec-Fgw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -17989,7 +17989,7 @@ Hours</string>
                                                     <constraint firstAttribute="bottom" secondItem="GCo-FZ-V4S" secondAttribute="bottom" id="rn9-wx-zD1"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-ol-87T" customClass="ThemeButtonForRide" customModule="LADA" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-ol-87T" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="782" width="300" height="40"/>
                                                 <color key="backgroundColor" red="0.92941176469999998" green="0.47843137250000001" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -18222,7 +18222,7 @@ Hours</string>
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="258" height="90"/>
+        <image name="Logo" width="277" height="86"/>
         <image name="fbLogo" width="138" height="132"/>
         <image name="gPlusLogo" width="138" height="132"/>
         <image name="ic_paynow" width="85" height="85"/>
@@ -18304,15 +18304,15 @@ Hours</string>
         <image name="icon_UserName" width="30" height="30"/>
         <image name="icon_plusBlack" width="30" height="30"/>
         <image name="iconcardsYellow" width="85" height="85"/>
-        <image name="imgBackground" width="480" height="960"/>
+        <image name="imgBackground" width="375" height="812"/>
         <image name="loginBottom" width="232" height="153"/>
-        <image name="logo" width="258" height="90"/>
+        <image name="logo" width="277" height="86"/>
         <image name="logoBacnlGround" width="307" height="307"/>
         <image name="to-from-address-ico" width="14" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Kko-AZ-703"/>
-        <segue reference="oeb-Ea-QzW"/>
+        <segue reference="24f-p1-b17"/>
         <segue reference="ilW-4h-6HM"/>
     </inferredMetricsTieBreakers>
 </document>
