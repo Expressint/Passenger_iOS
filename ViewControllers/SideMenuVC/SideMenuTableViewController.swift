@@ -91,7 +91,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_help_unselect","img_mn_receipt_unselect","ic_pay_unselect","ic_pay_unselect"]
+         arrMenuIcons = ["icon_MyBookingUnselect","icon_UnSelectedWallet","img_mn_help_unselect","img_mn_receipt_unselect","ic_pay_unselect"]
 //        arrMenuIcons = ["icon_MyBookingUnselect","icon_MyReceiptUnselect","icon_UnSelectedWallet","icon_InviteFriendUnselect","icon_FavouriteUnselect","icon_Legal","icon_Support"]
         
         //,"icon_PaymentOptionsUnselect","icon_UnSelectedWallet",,"icon_PaymentOptionsUnselect"
@@ -122,7 +122,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings", "Help", "My Receipts", "Previous Due","Payment Options"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings","Payment Options", "Help", "My Receipts", "Previous Due"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {

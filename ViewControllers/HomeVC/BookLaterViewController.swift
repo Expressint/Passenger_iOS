@@ -1199,18 +1199,20 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
     }
     func addNewCard() {
-        let WalletSB = UIStoryboard(name: "Wallet", bundle: nil)
-        let next = WalletSB.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+//        let WalletSB = UIStoryboard(name: "Wallet", bundle: nil)
+        let next = self.storyboard!.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
         next.delegateAddCardFromBookLater = self
         self.isAddCardSelected = false
         self.navigationController?.pushViewController(next, animated: true)//present(next, animated: true, completion: nil)
     }
 
     func selectExistingCard() {
-        let WalletSB = UIStoryboard(name: "Wallet", bundle: nil)
-        let next = WalletSB.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+//        let WalletSB = UIStoryboard(name: "Wallet", bundle: nil)
+        let next = self.storyboard!.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
         next.delegateForTopUp = self
         self.isAddCardSelected = false
+        SingletonClass.sharedInstance.isFromTopUP = true
+ 
         self.navigationController?.pushViewController(next, animated: true)//present(next, animated: true, completion: nil)
     }
     
@@ -1476,7 +1478,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                    dictData["FlightNumber"] = txtFlightNumber.text as AnyObject
                }
         
-        
+        print("book later.. \(dictData)")
         webserviceForBookLater(dictData as AnyObject) { (result, status) in
             self.btnSubmit.isEnabled = true
             if (status) {

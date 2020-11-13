@@ -2205,7 +2205,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             self.imgCard.image = UIImage(named: "icon_SelectedCard")
             self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
-            paymentType = "m_pesa"
+            paymentType = "card" //rjChange "m_pesa"
             
 //            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
 //                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
@@ -2291,7 +2291,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             paymentType = "cash"
         }
         else {
-            paymentType = "pesapal"//"card"
+            paymentType =  "card" //"pesapal"//"card"
         }
 
         if paymentType == "card" {
@@ -2301,7 +2301,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //        self.SetPaymentOption(SelectionIndex: 0)
         viewBookNow.isHidden = false
         
-        paymentType = "cash"
+//        paymentType = "cash"
         
 //         self.webserviceCallForBookingCar()
     }
@@ -5219,9 +5219,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         self.destinationLocationMarker.map = nil
         
+        if self.originCoordinate != nil { //RJ change
+            self.currentLocationMarker = GMSMarker(position: self.originCoordinate) // destinationCoordinate
+        }
         
         
-        self.currentLocationMarker = GMSMarker(position: self.originCoordinate) // destinationCoordinate
         self.currentLocationMarker.map = self.mapView
         self.currentLocationMarker.snippet = self.currentLocationMarkerText
         self.currentLocationMarker.icon = UIImage(named: "iconMapPin")

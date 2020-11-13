@@ -732,7 +732,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkz-So-1im">
-                                                <rect key="frame" x="0.0" y="0.0" width="52" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26" height="40"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.51000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="iconRightArraw"/>
                                                 <connections>
@@ -1228,7 +1228,7 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YkY-8n-AXQ">
-                                                <rect key="frame" x="-129.5" y="10" width="554" height="60"/>
+                                                <rect key="frame" x="9" y="10" width="277" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1292,17 +1292,17 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnG-RS-TBc">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_CashUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="x7g-C2-pbF">
-                                                                                <rect key="frame" x="112.5" y="15" width="40" height="40"/>
+                                                                                <rect key="frame" x="44" y="15" width="40" height="40"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="x7g-C2-pbF" secondAttribute="height" multiplier="1:1" id="hQX-vv-O8A"/>
                                                                                     <constraint firstAttribute="height" constant="40" id="vKD-wg-boq"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHk-Nw-P4q">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="265" height="90"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="90"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1333,23 +1333,23 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i14-qE-aWX">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i14-qE-aWX">
+                                                                        <rect key="frame" x="137" y="0.0" width="128" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnselectedCard" translatesAutoresizingMaskIntoConstraints="NO" id="2tI-sB-pA4">
-                                                                                <rect key="frame" x="-20" y="15" width="40" height="40"/>
+                                                                                <rect key="frame" x="44" y="15" width="40" height="40"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="HLO-Au-wjw"/>
                                                                                     <constraint firstAttribute="width" secondItem="2tI-sB-pA4" secondAttribute="height" multiplier="1:1" id="Sia-Do-C4M"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-dz-Z6j">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="90"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="40"/>
-                                                                                <state key="normal" title="M-Pesa">
+                                                                                <state key="normal" title="Card">
                                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 </state>
                                                                                 <state key="selected">
@@ -1380,7 +1380,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6b9-Go-dcx">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
+                                                                        <rect key="frame" x="265" y="0.0" width="0.0" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnSelectedWallet" translatesAutoresizingMaskIntoConstraints="NO" id="Tk0-tD-lNc">
                                                                                 <rect key="frame" x="-10" y="8" width="20" height="20"/>
@@ -4474,7 +4474,7 @@ Hours</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="qLH-Mq-QMn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnn-PB-laL">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnn-PB-laL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGm-NL-N0V">
@@ -7645,7 +7645,7 @@ Hours</string>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Zal-90-lAz">
                                 <rect key="frame" x="30" y="190" width="315" height="457"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="wMk-Fd-dYM">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="15" id="wMk-Fd-dYM">
                                     <size key="itemSize" width="100" height="87"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -7723,7 +7723,7 @@ Hours</string>
                                 </connections>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sWC-6g-uHZ">
-                                <rect key="frame" x="20" y="527" width="335" height="40"/>
+                                <rect key="frame" x="20" y="557" width="335" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZh-wZ-QHO">
                                         <rect key="frame" x="0.0" y="0.0" width="162.5" height="40"/>
@@ -7828,7 +7828,7 @@ Hours</string>
                             <constraint firstItem="0DL-Rm-wYP" firstAttribute="trailing" secondItem="Zal-90-lAz" secondAttribute="trailing" constant="30" id="F5t-y0-Xpt"/>
                             <constraint firstAttribute="trailing" secondItem="sWC-6g-uHZ" secondAttribute="trailing" constant="20" id="M3a-AV-5Wo"/>
                             <constraint firstItem="G0z-6e-4Cz" firstAttribute="leading" secondItem="0DL-Rm-wYP" secondAttribute="leading" id="MuH-AZ-SpD"/>
-                            <constraint firstItem="0DL-Rm-wYP" firstAttribute="bottom" secondItem="sWC-6g-uHZ" secondAttribute="bottom" constant="100" id="XPb-JA-xtr"/>
+                            <constraint firstItem="0DL-Rm-wYP" firstAttribute="bottom" secondItem="sWC-6g-uHZ" secondAttribute="bottom" constant="70" id="XPb-JA-xtr"/>
                             <constraint firstItem="0DL-Rm-wYP" firstAttribute="trailing" secondItem="G0z-6e-4Cz" secondAttribute="trailing" id="dgf-9s-yGH"/>
                             <constraint firstItem="G0z-6e-4Cz" firstAttribute="top" secondItem="XpF-dZ-yFY" secondAttribute="top" id="mSb-vs-3wq"/>
                             <constraint firstItem="Zal-90-lAz" firstAttribute="top" secondItem="G0z-6e-4Cz" secondAttribute="bottom" constant="10" id="mc1-78-JkM"/>
@@ -17773,7 +17773,7 @@ Hours</string>
                                                                     <attributedString key="attributedTitle">
                                                                         <fragment content="Have a Promocode?">
                                                                             <attributes>
-                                                                                <color key="NSColor" red="0.24705882352941178" green="0.66274509803921566" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <color key="NSColor" red="0.73333333333333328" green="0.65490196078431373" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <font key="NSFont" size="20" name=".AppleSystemUIFont"/>
                                                                                 <integer key="NSUnderline" value="1"/>
                                                                             </attributes>
@@ -17844,23 +17844,23 @@ Hours</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KcX-kS-3Di">
-                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_CashUnselected" highlightedImage="icon_SelectedCash" translatesAutoresizingMaskIntoConstraints="NO" id="6Rt-z0-7F0">
-                                                                        <rect key="frame" x="135" y="15" width="30" height="30"/>
+                                                                        <rect key="frame" x="55" y="15" width="30" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="6Rt-z0-7F0" secondAttribute="height" multiplier="1:1" id="43g-Ng-ARE"/>
                                                                             <constraint firstAttribute="width" constant="30" id="Ppa-45-BYf"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDB-Gc-oK6">
-                                                                        <rect key="frame" x="127.5" y="49" width="45.5" height="24"/>
+                                                                        <rect key="frame" x="47.5" y="49" width="45.5" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                         <nil key="textColor"/>
-                                                                        <color key="highlightedColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="highlightedColor" red="0.73333333329999995" green="0.65490196079999996" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </label>
                                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3X-4Q-vCZ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal">
                                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -17888,7 +17888,7 @@ Hours</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kz5-NS-Xmg">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="100"/>
+                                                                <rect key="frame" x="150" y="0.0" width="0.0" height="100"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnSelectedWallet" highlightedImage="icon_SelectedWallet" translatesAutoresizingMaskIntoConstraints="NO" id="5NA-RS-h42">
                                                                         <rect key="frame" x="-15" y="15" width="30" height="30"/>
@@ -17930,23 +17930,23 @@ Hours</string>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pV-Rw-Klh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="100"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pV-Rw-Klh">
+                                                                <rect key="frame" x="160" y="0.0" width="140" height="100"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnselectedCard" highlightedImage="icon_SelectedCard" translatesAutoresizingMaskIntoConstraints="NO" id="SYk-nd-rSx">
-                                                                        <rect key="frame" x="-15" y="15" width="30" height="30"/>
+                                                                        <rect key="frame" x="55" y="15" width="30" height="30"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="SYk-nd-rSx" secondAttribute="height" multiplier="1:1" id="DhM-Vn-8N4"/>
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNB-OB-3mv">
-                                                                        <rect key="frame" x="-21" y="49" width="42" height="24"/>
+                                                                        <rect key="frame" x="49" y="49" width="42" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                         <nil key="textColor"/>
-                                                                        <color key="highlightedColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="highlightedColor" red="0.73333333329999995" green="0.65490196079999996" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </label>
                                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgc-Fq-UjQ">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="100"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="100"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <state key="normal">
                                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -18069,7 +18069,7 @@ Hours</string>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGR-xB-9Vz">
-                                <rect key="frame" x="0.0" y="815" width="320" height="1000"/>
+                                <rect key="frame" x="0.0" y="995" width="320" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gT7-5M-wl0">
                                         <rect key="frame" x="20" y="410" width="280" height="180"/>
@@ -18100,7 +18100,7 @@ Hours</string>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDL-ul-yeC">
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="40"/>
-                                                        <color key="backgroundColor" red="0.69803921570000005" green="0.1764705882" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="0.73333333329999995" green="0.65490196079999996" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                         <state key="normal" title="APPLY">
                                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

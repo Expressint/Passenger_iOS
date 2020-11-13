@@ -127,7 +127,7 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
             return 1
         }
         else {
-            return aryData.count
+            return 1
         }
         
     }
@@ -162,8 +162,8 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
             cell.imgCardIcon.image = UIImage(named: setCreditCardImage(str: type))
             cell.lblCardNumber.text = dictData["CardNum2"] as? String
             
-            var colorTop:UIColor = UIColor()
-            var colorMiddle:UIColor = UIColor()
+            var colorTop:UIColor = .clear //UIColor()
+            var colorMiddle:UIColor = .clear //UIColor()
             
             if type == "visa" {
                 colorTop = UIColor(red: 253.0/255.0, green: 149.0/255.0, blue:47.0/255.0, alpha: 1.0)
@@ -172,6 +172,9 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
                 colorTop = UIColor(red: 76.0/255.0, green: 210.0/255.0, blue:252.0/255.0, alpha: 1.0)
                 colorMiddle =  UIColor(red: 46.0/255.0, green: 167.0/255.0, blue: 252.0/255.0, alpha: 1.0)
             } else if type == "discover" {
+                colorTop = UIColor(red: 199.0/255.0, green: 40.0/255.0, blue:135.0/255.0, alpha: 1.0)
+                colorMiddle =  UIColor(red: 237.0/255.0, green: 59.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            }else if type == "jcb" {
                 colorTop = UIColor(red: 199.0/255.0, green: 40.0/255.0, blue:135.0/255.0, alpha: 1.0)
                 colorMiddle =  UIColor(red: 237.0/255.0, green: 59.0/255.0, blue: 76.0/255.0, alpha: 1.0)
             }
