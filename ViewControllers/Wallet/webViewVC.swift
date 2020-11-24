@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import WebKit
+/*
 
-class webViewVC: BaseViewController, UIWebViewDelegate {
-
-    var strURL = String()
+*/
+class webViewVC: BaseViewController, WKNavigationDelegate, WKUIDelegate {
     
+    var strURL = String()
     var headerName = String()
     
     override func viewDidLoad() {
@@ -20,7 +22,7 @@ class webViewVC: BaseViewController, UIWebViewDelegate {
         UtilityClass.showACProgressHUD()
         setNavBarWithBack(Title: headerName, IsNeedRightButton: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -29,32 +31,29 @@ class webViewVC: BaseViewController, UIWebViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if headerName != "" {
-//            headerView?.lblTitle.text = headerName
-//        }
+        // if headerName != "" {
+        // headerView?.lblTitle.text = headerName
+        // }
         
         let url = strURL
         
         let requestURL = URL(string: url)
         let request = URLRequest(url: requestURL! as URL)
-        webView.loadRequest(request)
+        webView.load(request)
         
     }
     
-
     
-    // MARK: - Outlets
-    @IBOutlet weak var webView: UIWebView!
     
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        
-    }
     
-    // MARK: - web view delegate method
-    func webViewDidFinishLoad(_ webView: UIWebView)
-    {
+    @IBOutlet weak var webView: WKWebView!
+    
+    
+    
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UtilityClass.hideACProgressHUD()
     }
     
-
+    
 }

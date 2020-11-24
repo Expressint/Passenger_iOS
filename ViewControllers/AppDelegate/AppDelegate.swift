@@ -10,8 +10,8 @@ import UIKit
 import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
-import Fabric
-import Crashlytics
+//import Fabric
+//import Crashlytics
 import SideMenuController
 import SocketIO
 import UserNotifications
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         GMSPlacesClient.provideAPIKey(googlApiKey)
         
         
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         GIDSignIn.sharedInstance().clientID = kGoogle_Client_ID
         GIDSignIn.sharedInstance().delegate = self
         googleAnalyticsTracking()

@@ -22,7 +22,7 @@ import CoreLocation
 
 
 
-class LoginViewController: UIViewController, CLLocationManagerDelegate, alertViewMethodsDelegates, GIDSignInDelegate,GIDSignInUIDelegate
+class LoginViewController: UIViewController, CLLocationManagerDelegate, alertViewMethodsDelegates, GIDSignInDelegate
 {
     
     //-------------------------------------------------------------
@@ -428,7 +428,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //        }
         
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
+//        GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
         GIDSignIn.sharedInstance().signIn()
     }
     

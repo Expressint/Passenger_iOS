@@ -62,7 +62,7 @@ let screenWidthDeveloper : Double = 320
 
 
 struct WebserviceURLs {
-    static let kBaseURL                                 = "http://3.138.250.141/Passenger_Api/" //"http://3.6.200.100/Passenger_Api/" // "http://3.6.224.0/Passenger_Api/" //"https://www.tantaxitanzania.com/Passenger_Api/" // "http://54.169.67.226/web/Passenger_Api/" // "https://pickngolk.info/web/Passenger_Api/" "http://54.169.67.226/web/Passenger_Api/" //
+    static let kBaseURL                                 = "http://3.83.58.5/Passenger_Api/"//"http://3.138.250.141/Passenger_Api/" //"http://3.6.200.100/Passenger_Api/" // "http://3.6.224.0/Passenger_Api/" //"https://www.tantaxitanzania.com/Passenger_Api/" // "http://54.169.67.226/web/Passenger_Api/" // "https://pickngolk.info/web/Passenger_Api/" "http://54.169.67.226/web/Passenger_Api/" //
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -81,7 +81,7 @@ struct WebserviceURLs {
     static let kUpcomingBooking                         = "UpcomingBooking"
     static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
-    static let kImageBaseURL                            = "http://3.138.250.141/"//"http://3.6.200.100/" // "http://3.6.224.0/"//"https://www.tantaxitanzania.com/" // "https://pickngolk.info/web/" "http://54.169.67.226/web/" //
+    static let kImageBaseURL                            = "http://3.83.58.5/"//"http://3.138.250.141/"//"http://3.6.200.100/" // "http://3.6.224.0/"//"https://www.tantaxitanzania.com/" // "https://pickngolk.info/web/" "http://54.169.67.226/web/" //
     static let kFeedbackList                            = "FeedbackList/"
     static let kCardsList                               = "Cards/"
     static let kPackageBookingHistory                   = "PackageBookingHistory"
@@ -120,7 +120,7 @@ struct WebserviceURLs {
 
 struct SocketData {
     
-    static let kBaseURL                                     = "http://3.138.250.141:8080"//"http://3.6.200.100:8080" // "http://3.6.224.0:8080" //"https://www.tantaxitanzania.com:8081"//"http://3.120.161.225:8080"
+    static let kBaseURL                                     = "http://3.83.58.5:8080"//"http://3.138.250.141:8080"//"http://3.138.250.141:8080"//"http://3.6.200.100:8080" // "http://3.6.224.0:8080" //"https://www.tantaxitanzania.com:8081"//"http://3.120.161.225:8080"
     // "http://54.255.222.125:8080/" // "https://pickngolk.info:8081" "http://54.169.67.226:8080" //
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"

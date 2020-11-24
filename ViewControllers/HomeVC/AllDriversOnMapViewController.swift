@@ -13,15 +13,15 @@ import GooglePlaces
 import Pulsator
 
 class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate {
-
+    
     let kMaxRadius: CGFloat = 200
     let kMaxDuration: TimeInterval = 10
     
-   
+    
     
     @IBOutlet weak var subMapView: UIView!
     
-     var timer = Timer()
+    var timer = Timer()
     
     var mapView : GMSMapView!
     
@@ -51,17 +51,17 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
                 print("unknown")
             }
         }
-
-//        startAnimation()
+        
+        //        startAnimation()
         
         webserviceForAllDrivers()
         
-//        if SingletonClass.sharedInstance.allDiverShowOnBirdView.count != 0 {
-//            webserviceForAllDrivers()
-//        }
-//        else {
-//            self.dictData = SingletonClass.sharedInstance.allDiverShowOnBirdView
-//        }
+        //        if SingletonClass.sharedInstance.allDiverShowOnBirdView.count != 0 {
+        //            webserviceForAllDrivers()
+        //        }
+        //        else {
+        //            self.dictData = SingletonClass.sharedInstance.allDiverShowOnBirdView
+        //        }
         
         
         if( CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
@@ -73,7 +73,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
                 {
                     locationManager.startUpdatingLocation()
                     locationManager.delegate = self
-
+                    
                 }
             }
         }
@@ -82,20 +82,20 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), camera: camera)
         mapView.isMyLocationEnabled = false
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-  
+        
         subMapView.addSubview(mapView)
         
-         getAllLatandLong()
+        getAllLatandLong()
         
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         
-         
+        
+        
     }
-   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -105,7 +105,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
         view.layer.layoutIfNeeded()
         pulsator.position = imgStartTrip.layer.position
     }
-
+    
     //-------------------------------------------------------------
     // MARK: - Outlets
     //-------------------------------------------------------------
@@ -126,7 +126,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
         scheduledTimerWithTimeInterval()
     }
     
-
+    
     //-------------------------------------------------------------
     // MARK: - Custom Methods
     //-------------------------------------------------------------
@@ -134,7 +134,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
     @IBAction func btnDismissToHome(_ sender: UIButton) {
         
         if ripple != nil {
-             ripple.hideAnimation()
+            ripple.hideAnimation()
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -145,32 +145,32 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
     
     private func setupInitialValues() {
         
-       pulsator.numPulse = 5
-       pulsator.radius = CGFloat(0.7) * kMaxRadius
+        pulsator.numPulse = 5
+        pulsator.radius = CGFloat(0.7) * kMaxRadius
         pulsator.animationDuration = Double(0.5) * kMaxDuration
         
         pulsator.backgroundColor = UIColor.red.cgColor
     }
-
+    
     
     @IBAction func btnClose(_ sender: UIButton) {
-       
+        
         if ripple != nil {
-             ripple.hideAnimation()
+            ripple.hideAnimation()
         }
         
         self.dismiss(animated: true, completion: nil)
         
-     //   self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
+        //   self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
         
     }
-   
+    
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.btnClose(_:)), userInfo: nil, repeats: false)
         
     }
-
+    
     //-------------------------------------------------------------
     // MARK: - Location Methods
     //-------------------------------------------------------------
@@ -184,7 +184,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
                                               zoom: zoomLevel)
         mapView.camera = camera
         
-//        print("Location: \(location)")
+        //        print("Location: \(location)")
     }
     
     // Handle authorization for the location manager.
@@ -209,7 +209,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
         locationManager.stopUpdatingLocation()
         print("Error: \(error)")
     }
-   
+    
     func setMarkersOnMap(latitude: Double, longitude: Double, name: String, carModel: String) {
         
         let position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -232,11 +232,11 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
         webserviceForAllDriversList { (result, status) in
             
             if (status) {
-
+                
                 self.dictData = ((result as! NSDictionary).object(forKey: "drivers") as! NSArray)
                 self.getAllLatandLong()
                 self.startAnimation()
-           
+                
             }
             else {
                 print(result)
@@ -253,7 +253,7 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
             let lat = currentMarkers.object(forKey: "Lat") as! String
             let lng = currentMarkers.object(forKey: "Lng") as! String
             let name = currentMarkers.object(forKey: "Fullname") as! String
-    
+            
             if currentMarkers.object(forKey: "Models") as! String != "" {
                 
                 let img = (currentMarkers.object(forKey: "Models") as! String).first!
@@ -265,12 +265,12 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
                 }
             }
             
-
-//            let img = (currentMarkers.object(forKey: "Models") as! String).replacingOccurrences(of: ",", with: "")
             
-//            print("img : \(img)")
-//            let strImg = Character("".randomCarModelFromList(length: 1, param: img))
-//            print("strImg : \(strImg)")
+            //            let img = (currentMarkers.object(forKey: "Models") as! String).replacingOccurrences(of: ",", with: "")
+            
+            //            print("img : \(img)")
+            //            let strImg = Character("".randomCarModelFromList(length: 1, param: img))
+            //            print("strImg : \(strImg)")
             
             print(lat)
             print(lng)
@@ -282,29 +282,29 @@ class AllDriversOnMapViewController: UIViewController, CLLocationManagerDelegate
     func setCarImage(modelId : Character) -> String {
         
         var CarModel = String()
-       
+        
         switch modelId {
         case "1":
             CarModel = "imgBusinessClass"
-             return CarModel
+            return CarModel
         case "2":
             CarModel = "imgMIni"
-             return CarModel
+            return CarModel
         case "3":
             CarModel = "imgVan"
-             return CarModel
+            return CarModel
         case "4":
             CarModel = "imgNano"
-             return CarModel
+            return CarModel
         case "5":
             CarModel = "imgTukTuk"
-             return CarModel
+            return CarModel
         case "6":
             CarModel = "imgBreakdown"
-             return CarModel
+            return CarModel
         default:
             CarModel = "imgBus"
-             return CarModel
+            return CarModel
         }
     }
     

@@ -39,7 +39,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         btnRequestLater()
     }
    
-    
+    //RJ Change
+     var timerToUpdatePassengerlocation:Timer!
+    //
     
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
     let baseUrlForGetAddress = "https://maps.googleapis.com/maps/api/geocode/json?"
@@ -54,7 +56,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var moveMent: ARCarMovement!
     var driverMarker: GMSMarker!
     var strTipAmount = String()
-    var alertForTip = UIAlertController()
+//    var alertForTip = UIAlertController()
     var timer = Timer()
     var timerToGetDriverLocation : Timer!
     var aryCards = [[String:AnyObject]]()
@@ -3382,9 +3384,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
+         timerToUpdatePassengerlocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
     
+    func stopTimerforUpdatePassengerLatlong(){
+          if timerToUpdatePassengerlocation != nil {
+              timerToUpdatePassengerlocation.invalidate()
+              timerToUpdatePassengerlocation = nil
+          }
+      }
     @objc func updateCounting(){
         if doublePickupLat != 0 && doublePickupLng != 0 {
             let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
@@ -3404,20 +3412,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             self.showTimerProgressViaInstance()
             let msg = (data as NSArray)
-            self.alertForTip = UIAlertController(title: "Tip Alert".localized,
+            let alertForTip = UIAlertController(title: "Tip Alert".localized,
                                                  message: (msg.object(at: 0) as! NSDictionary).object(forKey: "message") as? String,
                                                  preferredStyle: UIAlertControllerStyle.alert)
             
             //2. Add the text field. You can configure it however you need.
-            self.alertForTip.addTextField { (textField) in
+            alertForTip.addTextField { (textField) in
                 textField.placeholder = "Add Tip".localized
                 textField.keyboardType = .decimalPad
 //                Utilities.setLeftPaddingInTextfield(textfield: textField, padding: 10)
             }
             
             // 3. Grab the value from the text field, and print it when the user clicks OK.
-            self.alertForTip.addAction(UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
-                let textField = self.alertForTip.textFields![0] // Force unwrapping because we know it exists.
+            alertForTip.addAction(UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
+                let textField = alertForTip.textFields![0] // Force unwrapping because we know it exists.
                 self.strTipAmount = (textField.text)!
                 print("Text field: \(String(describing: textField.text))")
                 
@@ -3440,7 +3448,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }))
             
             // 3. Grab the value from the text field, and print it when the user clicks OK.
-            self.alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
+            alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
                 
                 let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": "", "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
                 self.socket.emit(SocketData.kReceiveTipsForBookLater , with: [myJSON])
@@ -3448,7 +3456,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }))
             
             // 4. Present the alert.
-            self.present(self.alertForTip, animated: true, completion: nil)
+            self.present(alertForTip, animated: true, completion: nil)
         })
     }
     func showTimerProgressViaInstance()
@@ -3473,10 +3481,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if (boolTimeEnd)
         {
             timerOfRequest.invalidate()
-            alertForTip.dismiss(animated: true, completion: nil)
+//            alertForTip.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         } else {
             timerOfRequest.invalidate()
-            alertForTip.dismiss(animated: true, completion: nil)
+//            alertForTip.dismiss(animated: true, completion: nil)
+             self.dismiss(animated: true, completion: nil)
         }
     }
     func socketMethodForGiveTipToDriver()
@@ -3492,12 +3502,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             let msg = (data as NSArray)
             
-            self.alertForTip = UIAlertController(title: "Tip Alert".localized,
+            
+            let alertForTip = UIAlertController(title: "Tip Alert".localized,
                                                  message: (msg.object(at: 0) as! NSDictionary).object(forKey: "message") as? String,
                                                  preferredStyle: UIAlertControllerStyle.alert)
             
             //2. Add the text field. You can configure it however you need.
-            self.alertForTip.addTextField { (textField) in
+            alertForTip.addTextField { (textField) in
                 textField.placeholder = "Add Tip".localized
                 textField.keyboardType = .decimalPad
 //                Utilities.setLeftPaddingInTextfield(textfield: textField, padding: 10)
@@ -3505,8 +3516,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             
             // 3. Grab the value from the text field, and print it when the user clicks OK.
-            self.alertForTip.addAction(UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
-                let textField = self.alertForTip.textFields![0] // Force unwrapping because we know it exists.
+            alertForTip.addAction(UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
+                let textField = alertForTip.textFields![0] // Force unwrapping because we know it exists.
                 self.strTipAmount = (textField.text)!
                 print("Text field: \(String(describing: textField.text))")
                 
@@ -3534,7 +3545,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }))
             
             // 3. Grab the value from the text field, and print it when the user clicks OK.
-            self.alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
+            alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
                 
                 let myJSON = ["Running": 0,"PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": "", "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
                 self.socket.emit(SocketData.kReceiveTips , with: [myJSON])
@@ -3550,7 +3561,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             alertWindow.rootViewController = UIViewController()
             alertWindow.windowLevel = UIWindowLevelAlert + 1;
             alertWindow.makeKeyAndVisible()
-            alertWindow.rootViewController?.present(self.alertForTip, animated: true, completion: nil)
+            alertWindow.rootViewController?.present(alertForTip, animated: true, completion: nil)
         })
     }
     
@@ -3727,7 +3738,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func methodAfterStartTrip(tripData: NSArray) {
-        
+        self.stopTimerforUpdatePassengerLatlong()
         self.MarkerCurrntLocation.isHidden = true
         
         SingletonClass.sharedInstance.isTripContinue = true

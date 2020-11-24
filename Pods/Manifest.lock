@@ -1,6 +1,11 @@
 PODS:
   - ACFloatingTextfield-Swift (1.8)
   - Alamofire (4.5.1)
+  - AppAuth (1.3.1):
+    - AppAuth/Core (= 1.3.1)
+    - AppAuth/ExternalUserAgent (= 1.3.1)
+  - AppAuth/Core (1.3.1)
+  - AppAuth/ExternalUserAgent (1.3.1)
   - CardIO (5.4.1)
   - CHIPageControl (0.1.4):
     - CHIPageControl/Aji (= 0.1.4)
@@ -19,11 +24,8 @@ PODS:
   - CHIPageControl/Jaloro (0.1.4)
   - CHIPageControl/Paprika (0.1.4)
   - CHIPageControl/Puya (0.1.4)
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
   - CreditCardForm (0.1.5)
   - DOAlertController (2.0)
-  - Fabric (1.7.2)
   - FBSDKCoreKit (7.0.0):
     - FBSDKCoreKit/Basics (= 7.0.0)
     - FBSDKCoreKit/Core (= 7.0.0)
@@ -63,30 +65,23 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.0.3):
     - GoogleMaps/Base (= 3.0.3)
-  - GoogleSignIn (4.2.0):
-    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
-    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
-    - GTMOAuth2 (~> 1.0)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3)":
-    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.1.3)"
-  - GTMOAuth2 (1.1.6):
+  - GTMAppAuth (1.0.0):
+    - AppAuth/Core (~> 1.0)
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.2.0):
-    - GTMSessionFetcher/Full (= 1.2.0)
-  - GTMSessionFetcher/Core (1.2.0)
-  - GTMSessionFetcher/Full (1.2.0):
-    - GTMSessionFetcher/Core (= 1.2.0)
+  - GTMSessionFetcher (1.4.0):
+    - GTMSessionFetcher/Full (= 1.4.0)
+  - GTMSessionFetcher/Core (1.4.0)
+  - GTMSessionFetcher/Full (1.4.0):
+    - GTMSessionFetcher/Core (= 1.4.0)
   - IQDropDownTextField (1.1.1)
   - IQKeyboardManagerSwift (5.0.6)
   - M13Checkbox (3.2.1)
@@ -114,10 +109,8 @@ DEPENDENCIES:
   - Alamofire
   - CardIO
   - CHIPageControl
-  - Crashlytics
   - CreditCardForm
   - DOAlertController (from `https://github.com/okmr-d/DOAlertController.git`, branch `master`)
-  - Fabric
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Messaging
@@ -140,11 +133,10 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - ACFloatingTextfield-Swift
     - Alamofire
+    - AppAuth
     - CardIO
     - CHIPageControl
-    - Crashlytics
     - CreditCardForm
-    - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -158,7 +150,7 @@ SPEC REPOS:
     - GooglePlaces
     - GoogleSignIn
     - GoogleToolboxForMac
-    - GTMOAuth2
+    - GTMAppAuth
     - GTMSessionFetcher
     - IQDropDownTextField
     - IQKeyboardManagerSwift
@@ -186,12 +178,11 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ACFloatingTextfield-Swift: c3212cef9548ae58fa914ea1c26a2f9a4f7cd7df
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AppAuth: 8803ba1aec6d00d9afd30093f82e600307eaa6ea
   CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   CHIPageControl: 032b5ab68506c00711d5a61bd83e9fdf2a7ecb22
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
   DOAlertController: 4d4ee33bbf1656271895da4a3cac4fbaa1d3217e
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
@@ -203,10 +194,10 @@ SPEC CHECKSUMS:
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleMaps: fd5c9fa58871781b9fb94d4936f19c69fe60ce32
   GooglePlaces: f09e76993c9c3ee4af8f4f7f535bb94d6aa3b649
-  GoogleSignIn: 591e46382014e591269f862ba6e7bc0fbd793532
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMOAuth2: e8b6512c896235149df975c41d9a36c868ab7fba
-  GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
+  GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
   IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
   M13Checkbox: 12376f5b128189432508c240e4a36dc945ab7e4e
@@ -220,6 +211,6 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   TransitionButton: 0bf7e5ffe80030f9d10d57983a04acf2f511998a
 
-PODFILE CHECKSUM: 2266120f32394569fc17466ab8a5fc648b4c9820
+PODFILE CHECKSUM: 77fc1ae41e46ef4a480a7cfca890a9e8086888ce
 
 COCOAPODS: 1.5.3

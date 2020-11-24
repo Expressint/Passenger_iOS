@@ -78,7 +78,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        gender = "male"
         self.SetLayout()
         var image = UIImage()
         if SingletonClass.sharedInstance.isFromSocilaLogin == true
