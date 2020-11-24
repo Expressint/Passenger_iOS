@@ -65,7 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                    didFinishLaunchingWithOptions: launchOptions
                )
 
-
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
         isAlreadyLaunched = false
         // Firebase
         FirebaseApp.configure()
