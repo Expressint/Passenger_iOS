@@ -174,6 +174,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
         datePickerView = UIDatePicker()
         datePickerView.datePickerMode = UIDatePicker.Mode.dateAndTime
+        
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
         let calendar = Calendar.current
         let date = calendar.date(byAdding: .minute, value: 30, to: Date())
         datePickerView.minimumDate = date
@@ -1210,6 +1218,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //        let WalletSB = UIStoryboard(name: "Wallet", bundle: nil)
         let next = self.storyboard!.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
         next.delegateForTopUp = self
+        next.canEditRowBool = false
         self.isAddCardSelected = false
         SingletonClass.sharedInstance.isFromTopUP = true
  

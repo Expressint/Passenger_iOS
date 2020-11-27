@@ -336,8 +336,22 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var dropoffLat = Double()
     var dropoffLng = Double()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        //Crashlytics
+        
+//        let button = UIButton(type: .roundedRect)
+//        button.frame = CGRect(x: 20, y: 50, width: 100, height: 30)
+//        button.setTitle("Crash", for: [])
+//        button.addTarget(self, action: #selector(self.crashButtonTapped(_:)), for: .touchUpInside)
+//        view.addSubview(button)
+        
+        
+        
         
         self.viewBookNowLater.isHidden = true
         
@@ -2057,6 +2071,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             else {
                 strSpecialRequest = "0"
                 bookingRequest()
+                self.SetPaymentOption(SelectionIndex: 0)
                 
                 //                if (SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0) && self.aryCardsListForBookNow.count == 2 {
                 //                    //                UtilityClass.showAlert("", message: "There is no card, If you want to add card than choose payment options to add card.", vc: self)
@@ -2190,7 +2205,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //            self.btnCash.isSelected = true
 //            self.PayCashView.backgroundColor = UIColor.black
             paymentType = "cash"
-            btnCardSelection.setTitle("M-Pesa", for: .normal)
+            btnCardSelection.setTitle("Card", for: .normal)
             CardID = ""
 
         } else if SelectionIndex == 1 {
@@ -2202,22 +2217,23 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.CardLogo.image = UIImage(named: "icon_SelectedCard")
 //            self.btnPesaPal.isSelected = true
 //            self.PayCardView.backgroundColor = UIColor.black
-            paymentType = "pesapal"//"card"
+            paymentType = "card"  //"pesapal"
         } else if SelectionIndex == 3 {
             
             self.imgCard.image = UIImage(named: "icon_SelectedCard")
             self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
             paymentType = "card" //rjChange "m_pesa"
             
-//            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
-//                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
-//                next.delegateAddCardFromHomeVC = self
-//                self.navigationController?.pushViewController(next, animated: true)
-//            } else {
-//                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
-//                next.delegateForHomeAddcard = self
-//                self.navigationController?.pushViewController(next, animated: true)
-//            }
+            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
+                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+                next.delegateAddCardFromHomeVC = self
+                self.navigationController?.pushViewController(next, animated: true)
+            } else {
+                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+                next.delegateForHomeAddcard = self
+                next.canEditRowBool = false
+                self.navigationController?.pushViewController(next, animated: true)
+            }
         }
 //        paymentType = "cash"
     }

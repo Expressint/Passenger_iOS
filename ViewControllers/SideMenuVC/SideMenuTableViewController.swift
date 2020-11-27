@@ -38,6 +38,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             btnSignOut1.setTitle("Sign out".localized, for: .normal)
         }
     }
+   // @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
     @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
     
     var ProfileData = NSDictionary()
@@ -163,7 +164,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     }
     
     override func viewDidLayoutSubviews() {
-//        self.CollectionHeight.constant = self.CollectionView.collectionViewLayout.collectionViewContentSize.height
+        self.CollectionHeight.constant = self.CollectionView.collectionViewLayout.collectionViewContentSize.height
     }
     
 
@@ -698,7 +699,6 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
              */
         }
         else if arrMenuTitle[indexPath.row] == "Help" {
-            
             UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
         }
     }

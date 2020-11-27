@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>476182293945-mgph4c2fhpl5r8c5i3u9do0t3v4gt72q.apps.googleusercontent.com</string>
+	<string>968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.476182293945-mgph4c2fhpl5r8c5i3u9do0t3v4gt72q</string>
+	<string>com.googleusercontent.apps.968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAWeKwZDXVV5ATPWV0UkA6ZkdkZ4JU6ils</string>
+	<string>AIzaSyCQ10cPN_q98K0PrDxvZx-aVYD05hiNB7g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>476182293945</string>
+	<string>968991622520</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.eww.Ladapassenger</string>
+	<string>com.eww.BookARidePassenger</string>
 	<key>PROJECT_ID</key>
-	<string>wired-summit-293911</string>
+	<string>book-a-ride-c22ab</string>
 	<key>STORAGE_BUCKET</key>
-	<string>wired-summit-293911.appspot.com</string>
+	<string>book-a-ride-c22ab.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:476182293945:ios:fa410e77502a7d9bb6da68</string>
+	<string>1:968991622520:ios:f35358e1abe7bd2a6b748d</string>
 	<key>DATABASE_URL</key>
-	<string>https://wired-summit-293911.firebaseio.com</string>
+	<string>https://book-a-ride-c22ab.firebaseio.com</string>
 </dict>
 </plist>

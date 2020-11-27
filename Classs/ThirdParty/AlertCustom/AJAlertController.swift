@@ -115,8 +115,6 @@ class AJAlertController: UIViewController {
             btnOK.isHidden  = true
         }
         
-        
-        
     }
     
     /// Setup different widths for iPad and iPhone
@@ -130,7 +128,13 @@ class AJAlertController: UIViewController {
             case .unspecified: break
             case .tv: break
             case .carPlay: break
+                
+        
+        case .mac: break
         }
+        
+        
+        
     }
     
     /// Create and Configure Alert Controller

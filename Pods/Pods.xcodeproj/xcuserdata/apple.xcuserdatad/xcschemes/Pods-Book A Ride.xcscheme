@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "794EC68D0B89D8964F6006B5AF909A53"
+               BlueprintIdentifier = "E979F93D22046D164DDB669EF1352FE2"
                BuildableName = "Pods_Book_A_Ride.framework"
                BlueprintName = "Pods-Book A Ride"
                ReferencedContainer = "container:Pods.xcodeproj">
