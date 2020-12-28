@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3F8488914C1EC318E5EF82F1998392E4"
+               BlueprintIdentifier = "E5BBA75F847DD6D3B2E202F6F0E9A01C"
+               BuildableName = "Pulsator.framework"
                BlueprintName = "Pulsator"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pulsator.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

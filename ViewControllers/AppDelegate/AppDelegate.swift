@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         }
         isAlreadyLaunched = false
         // Firebase
-        FirebaseApp.configure()
         Messaging.messaging().delegate = self
         
         IQKeyboardManager.sharedManager().enable = true
@@ -82,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 //        Fabric.with([Crashlytics.self])
         GIDSignIn.sharedInstance().clientID = kGoogle_Client_ID
         GIDSignIn.sharedInstance().delegate = self
-        googleAnalyticsTracking()
+//        googleAnalyticsTracking()
         
         // TODO: Move this to where you establish a user session
         //   self.logUser()
@@ -157,6 +156,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
          }
          */
   
+        
+        FirebaseApp.configure()
         return true
     }
     
@@ -173,18 +174,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
       }
     
 
-    func googleAnalyticsTracking() {
-        guard let gai = GAI.sharedInstance() else {
-            assert(false, "Google Analytics not configured correctly")
-        }
-        gai.tracker(withTrackingId: googleAnalyticsTrackId)
-        // Optional: automatically report uncaught exceptions.
-        gai.trackUncaughtExceptions = true
-        
-        // Optional: set Logger to VERBOSE for debug information.
-        // Remove before app release.
-        gai.logger.logLevel = .verbose
-    }
+//    func googleAnalyticsTracking() {
+//        guard let gai = GAI.sharedInstance() else {
+//            assert(false, "Google Analytics not configured correctly")
+//        }
+//        gai.tracker(withTrackingId: googleAnalyticsTrackId)
+//        // Optional: automatically report uncaught exceptions.
+//        gai.trackUncaughtExceptions = true
+//
+//        // Optional: set Logger to VERBOSE for debug information.
+//        // Remove before app release.
+//        gai.logger.logLevel = .verbose
+//    }
     
     //    func logUser() {
     //        // TODO: Use the current user's information

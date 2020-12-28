@@ -26,6 +26,8 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
     
     var aryData = [[String:AnyObject]]()
     
+    var canEditRowBool = true
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -72,6 +74,8 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+               
         
         self.setNavBarWithBack(Title: "Card List".localized, IsNeedRightButton: true)
         
@@ -263,6 +267,10 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
         }
         
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return canEditRowBool
+    }
    
     
     //-------------------------------------------------------------
@@ -360,7 +368,6 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
     func webserviceOFGetAllCards() {
  
         webserviceForCardList(SingletonClass.sharedInstance.strPassengerID as AnyObject) { (result, status) in
-        
        
             if (status) {
                 print(result)

@@ -6,14 +6,14 @@
 //  Copyright © 2018 Excellent Webworld. All rights reserved.
 //
 
-#ifndef TanTaxi_User_Bridging_Header_h
-#define TanTaxi_User_Bridging_Header_h
+//#ifndef TanTaxi_User_Bridging_Header_h
+//#define TanTaxi_User_Bridging_Header_h
 
 #import "CardIO.h"
 
-#import <GoogleAnalytics/GAI.h>
-#import <GoogleAnalytics/GAIDictionaryBuilder.h>
-#import <GoogleAnalytics/GAIFields.h>
+//#import <GoogleAnalytics/GAI.h>
+//#import <GoogleAnalytics/GAIDictionaryBuilder.h>
+//#import <GoogleAnalytics/GAIFields.h>
 
 #import "RMPopoverPresentationController.h"
 #import "UIAlertView+Blocks.h"
@@ -32,4 +32,4 @@
 @import MobileCoreServices;
 
 
-#endif /* TanTaxi_User_Bridging_Header_h */
+//#endif /* TanTaxi_User_Bridging_Header_h */

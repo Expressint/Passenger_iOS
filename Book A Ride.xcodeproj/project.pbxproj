@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18546BD2225DE9BE009DF334 /* PesapalWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */; };
+		18B061AB256F739200BAA013 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18B061AA256F739100BAA013 /* GoogleService-Info.plist */; };
 		34E01A1D220EE898000D048E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E01A1F220EE898000D048E /* Main.storyboard */; };
 		34E01A25220EED13000D048E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E01A27220EED13000D048E /* LaunchScreen.storyboard */; };
 		34E01A2A220EEE2C000D048E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34E01A28220EEE2C000D048E /* Localizable.strings */; };
@@ -168,7 +169,6 @@
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
-		6EC8F1CD24C05FE700108675 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */; };
 		6EFD7170241F79CE00B01752 /* zzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD716F241F79CE00B01752 /* zzz.swift */; };
 		E8C9D082B65507939DF95E79 /* Pods_Book_A_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B15DD6CDE343A0B29EC2A6 /* Pods_Book_A_Ride.framework */; };
 /* End PBXBuildFile section */
@@ -182,6 +182,7 @@
 		11B15DD6CDE343A0B29EC2A6 /* Pods_Book_A_Ride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book_A_Ride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1852C71B255A65B500CB0EE1 /* Book A Ride.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Book A Ride.entitlements"; sourceTree = "<group>"; };
 		18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PesapalWebViewViewController.swift; sourceTree = "<group>"; };
+		18B061AA256F739100BAA013 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26E310B5961269E1085FBB82 /* Pods-LADA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LADA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LADA/Pods-LADA.debug.xcconfig"; sourceTree = "<group>"; };
 		27AE23757D7BA862D0C53DC6 /* Pods-Book A Ride.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book A Ride.release.xcconfig"; path = "Pods/Target Support Files/Pods-Book A Ride/Pods-Book A Ride.release.xcconfig"; sourceTree = "<group>"; };
 		3419629621637561005A580E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -361,7 +362,6 @@
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
 		6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueTableViewCell.swift; sourceTree = "<group>"; };
 		6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueViewController.swift; sourceTree = "<group>"; };
-		6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6EFD716F241F79CE00B01752 /* zzz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zzz.swift; sourceTree = "<group>"; };
 		8AB9D1AFC2E46418F626C956 /* Pods-TickTok User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TickTok User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TickTok User/Pods-TickTok User.release.xcconfig"; sourceTree = "<group>"; };
 		AF52F47D5C41A2336F5A8C8E /* Pods-AllOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllOut/Pods-AllOut.debug.xcconfig"; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 		3A4072B321B512270015C494 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6EC8F1CC24C05FE700108675 /* GoogleService-Info.plist */,
+				18B061AA256F739100BAA013 /* GoogleService-Info.plist */,
 				3A5F1BD121CE21AD000007AE /* Credentials.plist */,
 				3A4072B421B512270015C494 /* Assets.xcassets */,
 				3A4072BA21B512270015C494 /* Fonts */,
@@ -964,6 +964,7 @@
 				008D222B1FA08DCF001223DF /* Resources */,
 				A2933852BD74F8C0D508A763 /* [CP] Embed Pods Frameworks */,
 				0F3CCE603DFCC1C63FAF5F5C /* [CP] Copy Pods Resources */,
+				18B061AE256F7F2400BAA013 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1064,7 +1065,7 @@
 				3A40738521B512280015C494 /* proxima-nova-extrabold.otf in Resources */,
 				3A4073FC21B512280015C494 /* circle1.png in Resources */,
 				3A40737F21B512280015C494 /* proxima-nova-condensed-light-italic.otf in Resources */,
-				6EC8F1CD24C05FE700108675 /* GoogleService-Info.plist in Resources */,
+				18B061AB256F739200BAA013 /* GoogleService-Info.plist in Resources */,
 				3A40740221B512280015C494 /* round50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1078,7 +1079,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
@@ -1091,8 +1092,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		18B061AE256F7F2400BAA013 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		9B2149097BFB38C9959DC4A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1118,7 +1138,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ACFloatingTextfield-Swift/ACFloatingTextfield_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
@@ -1130,11 +1150,12 @@
 				"${BUILT_PRODUCTS_DIR}/FormTextField/FormTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1157,11 +1178,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FormTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -1173,7 +1195,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1465,6 +1487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
+				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1495,6 +1518,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
+				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

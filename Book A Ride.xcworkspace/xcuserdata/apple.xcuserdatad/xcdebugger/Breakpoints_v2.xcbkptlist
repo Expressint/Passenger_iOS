@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "18D32D5B-BBD0-4D3B-A953-84C246027AB2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViewControllers/Wallet/WalletAddCardsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D3579AE7-DCAD-4785-A802-B5E1830F0A87"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -30,8 +14,8 @@
             filePath = "ViewControllers/Wallet/WalletAddCardsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "btnAddPaymentMethods(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +30,8 @@
             filePath = "ViewControllers/Wallet/WalletAddCardsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "cardCVV()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +46,8 @@
             filePath = "ViewControllers/Wallet/WalletAddCardsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "cardExpiry()"
             landmarkType = "7">
          </BreakpointContent>
@@ -72,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             uuid = "5AC49A92-65F6-4A9C-B2F9-5895BE4534EB"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             scope = "1"
@@ -89,8 +73,8 @@
             filePath = "ViewControllers/Wallet/WalletCardsVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -127,34 +111,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - c4589fbf7405197d"
+                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - f265e4c94a4650cc"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Book_A_Ride.RegisterViewController.webserviceForGetOTPCode(email: Swift.String, mobile: Swift.String) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Raju/Projects/BookARide/Code/BookARide/ViewControllers/RegisterVC/RegisterViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/RegisterVC/RegisterViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "532">
+                  offsetFromSymbolStart = "452">
                </Location>
                <Location
-                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - a3b14ac80368340f"
+                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - 958c31be3d2b7df8"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.AnyObject, Swift.Bool) -&gt; () in Book_A_Ride.RegisterViewController.webserviceForGetOTPCode(email: Swift.String, mobile: Swift.String) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Raju/Projects/BookARide/Code/BookARide/ViewControllers/RegisterVC/RegisterViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/RegisterVC/RegisterViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "237"
                   endingLineNumber = "237"
-                  offsetFromSymbolStart = "248">
+                  offsetFromSymbolStart = "268">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -179,7 +163,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7385B822-1FE8-4D3B-B27A-E2BE192DCF21"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classs/WebserviceFiles/WebserviceMainClass.swift"
@@ -195,7 +179,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D56D1D02-4192-4FFD-809F-F6EB2D2CDD57"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classs/WebserviceFiles/WebserviceMainClass.swift"
@@ -207,34 +191,34 @@
             landmarkType = "9">
             <Locations>
                <Location
-                  uuid = "D56D1D02-4192-4FFD-809F-F6EB2D2CDD57 - 7f51ec85005960c4"
+                  uuid = "D56D1D02-4192-4FFD-809F-F6EB2D2CDD57 - 64dfd72b00ebc304"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Book_A_Ride.postData(_: Swift.AnyObject, nsURL: Swift.String, completion: (Swift.AnyObject, Swift.Bool) -&gt; ()) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Raju/Projects/BookARide/Code/BookARide/Classs/WebserviceFiles/WebserviceMainClass.swift"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/Classs/WebserviceFiles/WebserviceMainClass.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "31"
                   endingLineNumber = "31"
-                  offsetFromSymbolStart = "1236">
+                  offsetFromSymbolStart = "1144">
                </Location>
                <Location
-                  uuid = "D56D1D02-4192-4FFD-809F-F6EB2D2CDD57 - 58d9bba13e3a165"
+                  uuid = "D56D1D02-4192-4FFD-809F-F6EB2D2CDD57 - 1e03a01413510284"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in Book_A_Ride.postData(_: Swift.AnyObject, nsURL: Swift.String, completion: (Swift.AnyObject, Swift.Bool) -&gt; ()) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Raju/Projects/BookARide/Code/BookARide/Classs/WebserviceFiles/WebserviceMainClass.swift"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/Classs/WebserviceFiles/WebserviceMainClass.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
                   endingLineNumber = "32"
-                  offsetFromSymbolStart = "124">
+                  offsetFromSymbolStart = "100">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -243,7 +227,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "09892D74-9352-4B6C-8A30-D98A5D743FEC"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Classs/WebserviceFiles/WebserviceMainClass.swift"
@@ -253,6 +237,102 @@
             endingLineNumber = "32"
             landmarkName = "postData(_:nsURL:completion:)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "285A2FBB-329A-4EB0-88F6-E8761E999BE3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2305"
+            endingLineNumber = "2305"
+            landmarkName = "paymentOptions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCA57E2F-2397-49FF-AE5B-A28D80F55C99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2200"
+            endingLineNumber = "2200"
+            landmarkName = "SetPaymentOption(SelectionIndex:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1363"
+            endingLineNumber = "1363"
+            landmarkName = "webserviceCallForBookingCar()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - e788f369c9baa4ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_A_Ride.HomeViewController.webserviceCallForBookingCar() -&gt; ()"
+                  moduleName = "Book A Ride"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/HomeVC/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1349"
+                  endingLineNumber = "1349"
+                  offsetFromSymbolStart = "4928">
+               </Location>
+               <Location
+                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - 94606dc2712834b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.AnyObject, Swift.Bool) -&gt; () in Book_A_Ride.HomeViewController.webserviceCallForBookingCar() -&gt; ()"
+                  moduleName = "Book A Ride"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/HomeVC/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1351"
+                  endingLineNumber = "1351"
+                  offsetFromSymbolStart = "300">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F11438A9-DFA2-4BCF-9D6F-83301F6742F4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1320"
+            endingLineNumber = "1320"
+            landmarkName = "webserviceCallForBookingCar()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
+# platform :ios, '9.0'
 
 target 'Book A Ride' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -29,10 +29,12 @@ target 'Book A Ride' do
 #  pod 'ACProgressHUD-Swift'
   pod 'CreditCardForm'
   pod 'FormTextField'
+  
+  pod 'IQDropDownTextField'
+  
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-  pod 'IQDropDownTextField'
-  pod 'GoogleAnalytics'
+  pod 'Firebase/Crashlytics'
 
   # pod 'WWCalendarTimeSelector'
   pod 'DOAlertController', :git => 'https://github.com/okmr-d/DOAlertController.git', :branch => 'master'

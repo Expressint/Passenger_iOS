@@ -53,18 +53,29 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
         super.viewDidLoad()
             self.setNavBarWithBack(Title: "ADD CARD".localized, IsNeedRightButton: true)
             setDesignView()
+        
+        self.btnScanCard.isHidden = true
       
         
         // Initialise Credit Card Validator
             creditCardValidator = CreditCardValidator()
             pickerView.delegate = self
+        
+        
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        self.currentYear = "\(currentYear)"
+        aryYear = (currentYear...(currentYear + 15)).map { String($0) }
+        
+//        aryMonth = calendar.shortMonthSymbols
+        
 //        aryMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 //        aryMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
             aryMonth = ["01","02","03","04","05","06","07","08","09","10","11","12"]
-            aryYear = ["2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"]
+//            aryYear = ["2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"]
         
-            aryTempMonth = ["01","02","03","04","05","06","07","08","09","10","11","12"]
-            aryTempYear = ["2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"]
+            aryTempMonth = aryMonth //["01","02","03","04","05","06","07","08","09","10","11","12"]
+            aryTempYear = aryYear //["2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"]
 
         // Do any additional setup after loading the view.
     }
@@ -394,8 +405,6 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
                     self.delegateAddCardFromBookLater.didHaveCards()
                 }
                 
-               
-                
                 // Post notification
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "CardListReload"), object: nil)
 
@@ -411,6 +420,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
                         self.dismiss(animated: true, completion: nil)
                     }
                     else {
+                        
                         self.navigationController?.popViewController(animated: true)
                         
                     }
