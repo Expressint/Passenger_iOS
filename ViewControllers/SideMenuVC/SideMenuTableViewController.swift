@@ -164,7 +164,10 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     }
     
     override func viewDidLayoutSubviews() {
-        self.CollectionHeight.constant = self.CollectionView.collectionViewLayout.collectionViewContentSize.height
+        super.viewDidLayoutSubviews()
+        if let _ = self.CollectionHeight {
+            self.CollectionHeight.constant = self.CollectionView.collectionViewLayout.collectionViewContentSize.height
+        }
     }
     
 
@@ -181,12 +184,11 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                    }
 //            }
 
-        func setLayoutForswahilLanguage()
-        {
-            UserDefaults.standard.set("sw", forKey: "i18n_language")
-            UserDefaults.standard.synchronize()
-//            setLayoutForSwahilLanguage()
-        }
+    func setLayoutForswahilLanguage() {
+        UserDefaults.standard.set("sw", forKey: "i18n_language")
+        UserDefaults.standard.synchronize()
+        //            setLayoutForSwahilLanguage()
+    }
     func setLayoutForenglishLanguage()
     {
         UserDefaults.standard.set("en", forKey: "i18n_language")

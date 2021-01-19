@@ -58,7 +58,7 @@ class ChangePasswordVC: BaseViewController {
     
     @IBOutlet weak var txtNewPassword: ACFloatingTextfield!
     @IBOutlet weak var txtConfirmPassword: ACFloatingTextfield!
-    
+    @IBOutlet weak var txtCurrentPassword: ACFloatingTextfield!
     
     
     
@@ -71,7 +71,11 @@ class ChangePasswordVC: BaseViewController {
         
         
 //        txtNewPassword.placeholder
-        
+        guard !txtCurrentPassword.text!.isEmpty else {
+             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter current password".localized) { (index, title) in
+             }
+             return
+         }
         
         guard !txtNewPassword.text!.isEmpty else {
             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter new password".localized) { (index, title) in
@@ -145,7 +149,7 @@ class ChangePasswordVC: BaseViewController {
         
         dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["Password"] = txtNewPassword.text as AnyObject
-        
+        dictData["OldPassword"] = txtCurrentPassword.text as AnyObject
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
