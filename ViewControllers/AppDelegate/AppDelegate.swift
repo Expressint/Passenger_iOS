@@ -22,7 +22,7 @@ import GoogleSignIn
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
 
-let googlApiKey = "AIzaSyDG701J-4569BcaXrQAbVzzgpqZur5l9jI" // "AIzaSyCy6DG0LdvKs62tFgvWUiFvmlHKMJQPnnU"
+let googlApiKey = "AIzaSyCQ10cPN_q98K0PrDxvZx-aVYD05hiNB7g"//"AIzaSyDG701J-4569BcaXrQAbVzzgpqZur5l9jI" // "AIzaSyCy6DG0LdvKs62tFgvWUiFvmlHKMJQPnnU"
 let googlPlacesApiKey = googlApiKey
 
 

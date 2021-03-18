@@ -197,11 +197,9 @@ struct NotificationCenterName {
 
 struct PassengerDataKeys {
     static let kPassengerID = "PassengerId"
-    
 }
 
 struct setAllDevices {
-    
     static let allDevicesStatusBarHeight = 20
     static let allDevicesNavigationBarHeight = 44
     static let allDevicesNavigationBarTop = 20
@@ -212,7 +210,6 @@ struct setiPhoneX {
     static let iPhoneXStatusBarHeight = 44
     static let iPhoneXNavigationBarHeight = 40
     static let iPhoneXNavigationBarTop = 44
-    
     
 }
 

@@ -130,7 +130,7 @@ class AJAlertController: UIViewController {
             case .carPlay: break
                 
         
-//        case .mac: break
+        case .mac: break
         }
         
         

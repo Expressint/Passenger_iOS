@@ -111,34 +111,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - f265e4c94a4650cc"
+                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - 2b1ad26fc80e920a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Book_A_Ride.RegisterViewController.webserviceForGetOTPCode(email: Swift.String, mobile: Swift.String) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/RegisterVC/RegisterViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Harsh/Projects/SourceTree/BookARidePassenger/Code/BookARidePassenger/ViewControllers/RegisterVC/RegisterViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "235"
                   endingLineNumber = "235"
-                  offsetFromSymbolStart = "452">
+                  offsetFromSymbolStart = "453">
                </Location>
                <Location
-                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - 958c31be3d2b7df8"
+                  uuid = "85A495BB-9F51-4EA6-BA85-2311F861881F - 4cf30718bf63bfba"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.AnyObject, Swift.Bool) -&gt; () in Book_A_Ride.RegisterViewController.webserviceForGetOTPCode(email: Swift.String, mobile: Swift.String) -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/RegisterVC/RegisterViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Harsh/Projects/SourceTree/BookARidePassenger/Code/BookARidePassenger/ViewControllers/RegisterVC/RegisterViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "237"
                   endingLineNumber = "237"
-                  offsetFromSymbolStart = "268">
+                  offsetFromSymbolStart = "308">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -251,8 +251,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2305"
             endingLineNumber = "2305"
-            landmarkName = "paymentOptions()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -267,8 +267,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2200"
             endingLineNumber = "2200"
-            landmarkName = "SetPaymentOption(SelectionIndex:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -283,38 +283,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1363"
             endingLineNumber = "1363"
-            landmarkName = "webserviceCallForBookingCar()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - e788f369c9baa4ab"
+                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - 52e61f9e5742015b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Book_A_Ride.HomeViewController.webserviceCallForBookingCar() -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/HomeVC/HomeViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Harsh/Projects/SourceTree/BookARidePassenger/Code/BookARidePassenger/ViewControllers/HomeVC/HomeViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1349"
-                  endingLineNumber = "1349"
-                  offsetFromSymbolStart = "4928">
+                  startingLineNumber = "1363"
+                  endingLineNumber = "1363"
+                  offsetFromSymbolStart = "6213">
                </Location>
                <Location
-                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - 94606dc2712834b7"
+                  uuid = "B2F9C0F3-0856-403A-B872-4AFDC79F0CDF - 210e8135efd091c7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.AnyObject, Swift.Bool) -&gt; () in Book_A_Ride.HomeViewController.webserviceCallForBookingCar() -&gt; ()"
                   moduleName = "Book A Ride"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/Source%20Tree%20Projects/bookaride-passenger/ViewControllers/HomeVC/HomeViewController.swift"
+                  urlString = "file:///Users/apple/Documents/Harsh/Projects/SourceTree/BookARidePassenger/Code/BookARidePassenger/ViewControllers/HomeVC/HomeViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1351"
-                  endingLineNumber = "1351"
-                  offsetFromSymbolStart = "300">
+                  startingLineNumber = "1365"
+                  endingLineNumber = "1365"
+                  offsetFromSymbolStart = "308">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -331,8 +331,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1320"
             endingLineNumber = "1320"
-            landmarkName = "webserviceCallForBookingCar()"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "100073B6-0FDE-4033-8D96-64EDE1C6998B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4472"
+            endingLineNumber = "4472"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2614D747-E0C5-479B-ADF2-1ED4DD5C2369"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4815"
+            endingLineNumber = "4815"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
