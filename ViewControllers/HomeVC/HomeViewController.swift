@@ -2905,6 +2905,34 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             collectionViewCars.reloadData()
         }
+        
+        //RJ Change
+        
+        let alert = UIAlertController(title: appName,
+                                      message: "Do you want to send booking request to specific driver?",
+                                      preferredStyle: UIAlertControllerStyle.alert)
+        
+        let yesAction = UIAlertAction(title: "YES", style: .default) { (alertAction) in
+            let driverListStoryBoard = UIStoryboard.init(name: "DriverList", bundle: nil)
+//            if let vcDriverList = driverListStoryBoard.instantiateViewController(identifier: "SelectDriverViewController") as? SelectDriverViewController {
+//                
+//            }
+            print("Push to select Driver controller")
+        }
+        let cancelAction = UIAlertAction(title: "NO".localized,
+                                         style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(yesAction)
+        if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil) {
+            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
+//                vc.present(alert, animated: true, completion: nil)
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            })
+        }else {
+            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+        
 //        else
 //        {
 //
