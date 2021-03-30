@@ -9,10 +9,11 @@
 import UIKit
 
 class SelectDriverViewController: UIViewController {
-    var arrDriverList = [[String: String]]()
+    var arrCurrentModelSelectedCars = NSMutableArray()
+    @IBOutlet weak var tblVw: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -31,11 +32,16 @@ class SelectDriverViewController: UIViewController {
 
 extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 //arrDriverList.count
+        return arrCurrentModelSelectedCars.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DriverListCell") as! DriverListCell
+        if let dict = arrCurrentModelSelectedCars[indexPath.row] as? [String: AnyObject] {
+//            cell.lblDriverName.text = dict[""]
+        }
+        
+        return cell
     }
     
     
@@ -44,6 +50,10 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
 class DriverListCell : UITableViewCell {
     @IBOutlet weak var lblDriverName: UILabel!
     @IBOutlet weak var lblPhoneNumber: UILabel!
+    @IBOutlet weak var lblVehiclePlateTitle: UILabel!
+    @IBOutlet weak var lblVehiclePlateNumber: UILabel!
+    @IBOutlet weak var lblDriverRatingTitle: UILabel!
+    
     @IBOutlet weak var lblCurrentAddressTitle: UILabel!
     @IBOutlet weak var lblCurrentAddress: UILabel!
     @IBOutlet weak var imgProfile: UIImageView!

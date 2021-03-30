@@ -2914,9 +2914,22 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         let yesAction = UIAlertAction(title: "YES", style: .default) { (alertAction) in
             let driverListStoryBoard = UIStoryboard.init(name: "DriverList", bundle: nil)
-//            if let vcDriverList = driverListStoryBoard.instantiateViewController(identifier: "SelectDriverViewController") as? SelectDriverViewController {
-//                
-//            }
+            if let vcDriverList = driverListStoryBoard.instantiateViewController(withIdentifier: "SelectDriverViewController") as? SelectDriverViewController {
+                var arrCurrentModelSelectedCars = NSMutableArray()
+                for obj in self.arrNumberOfOnlineCars {
+                    if let dict = obj as? [String: AnyObject] {
+                        if let strCartype = dict["CarType"] as? String {
+                            if strCartype == self.strCarModelID {
+                                arrCurrentModelSelectedCars.add(dict)
+                            }
+                        }
+                        
+                    }
+                }
+                vcDriverList.arrCurrentModelSelectedCars = arrCurrentModelSelectedCars
+                self.navigationController?.pushViewController(vcDriverList, animated: true)
+            }
+
             print("Push to select Driver controller")
         }
         let cancelAction = UIAlertAction(title: "NO".localized,

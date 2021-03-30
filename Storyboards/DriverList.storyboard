@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="315" id="aJ3-SR-Klf" customClass="DriverListCell" customModule="Book_A_Ride" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DriverListCell" rowHeight="315" id="aJ3-SR-Klf" customClass="DriverListCell" customModule="Book_A_Ride" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="315"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aJ3-SR-Klf" id="AGV-TU-UaF">
@@ -178,8 +178,25 @@
                                                 <constraint firstItem="MCJ-Db-wSk" firstAttribute="leading" secondItem="AGV-TU-UaF" secondAttribute="leading" constant="8" id="ic4-aN-Syr"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btnBookLater" destination="lU4-Ff-RhI" id="Cjn-Yy-bvC"/>
+                                            <outlet property="btnBookNow" destination="1cV-0T-rAf" id="hBa-P4-sRt"/>
+                                            <outlet property="btnCall" destination="JOy-sh-8SD" id="cmk-FQ-CsX"/>
+                                            <outlet property="imgProfile" destination="jlN-mu-vMN" id="vgC-DX-lET"/>
+                                            <outlet property="lblCurrentAddress" destination="7pH-RU-3B1" id="wDb-Yu-1xt"/>
+                                            <outlet property="lblCurrentAddressTitle" destination="mM7-aP-IiU" id="42H-UK-9PM"/>
+                                            <outlet property="lblDriverName" destination="Kd2-2H-05a" id="JBS-3t-uRb"/>
+                                            <outlet property="lblDriverRatingTitle" destination="w5m-Jj-OB1" id="VYN-Kq-1vY"/>
+                                            <outlet property="lblPhoneNumber" destination="c1X-Gj-fao" id="fwl-tD-0va"/>
+                                            <outlet property="lblVehiclePlateNumber" destination="Xqi-0c-mwm" id="gwG-mq-4an"/>
+                                            <outlet property="lblVehiclePlateTitle" destination="jR3-AM-SIT" id="Poa-lf-r8F"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d5L-nN-6MS" id="4jJ-f1-ztt"/>
+                                    <outlet property="delegate" destination="d5L-nN-6MS" id="KrK-gE-vI5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1V4-qK-220"/>
@@ -191,6 +208,9 @@
                             <constraint firstItem="JHV-nO-He4" firstAttribute="leading" secondItem="ema-bX-KoK" secondAttribute="leading" id="yIi-kA-ez9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tblVw" destination="JHV-nO-He4" id="rhB-Lp-h0F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a6a-cz-yD7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
