@@ -2916,17 +2916,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             let driverListStoryBoard = UIStoryboard.init(name: "DriverList", bundle: nil)
             if let vcDriverList = driverListStoryBoard.instantiateViewController(withIdentifier: "SelectDriverViewController") as? SelectDriverViewController {
                 var arrCurrentModelSelectedCars = NSMutableArray()
-                for obj in self.arrNumberOfOnlineCars {
+                for obj in self.arrNumberOfAvailableCars {
                     if let dict = obj as? [String: AnyObject] {
                         if let strCartype = dict["CarType"] as? String {
                             if strCartype == self.strCarModelID {
                                 arrCurrentModelSelectedCars.add(dict)
                             }
                         }
-                        
                     }
                 }
                 vcDriverList.arrCurrentModelSelectedCars = arrCurrentModelSelectedCars
+                vcDriverList.delegate = self
                 self.navigationController?.pushViewController(vcDriverList, animated: true)
             }
 
@@ -6552,3 +6552,11 @@ extension UILabel {
     }
 }
 
+// MARK: - Delegate For Selection Driver
+extension HomeViewController : SendBackSelectedDriverDelegate {
+    func didSelectDriver(_ dictSelectedDriver: [String : AnyObject]) {
+        if let dict = dictSelectedDriver as? [String : AnyObject] {
+            
+        }
+    }
+}

@@ -155,7 +155,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         btnLogin.setTitle("Sign In".localized, for: .normal)
         btnSignup.setTitle("Sign Up".localized, for: .normal)
         
-        
     }
     
     override var prefersStatusBarHidden: Bool {
