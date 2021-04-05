@@ -1318,6 +1318,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //,PromoCode,Notes,PaymentType,CardId(If paymentType is card)
         
         let dictParams = NSMutableDictionary()
+        if let dict = self.dictSelectedDriver {
+            if let strDriverID = dict["DriverId"] as? String {
+                dictParams.setObject(strDriverID, forKey: "DriverId" as NSCopying)
+            }
+            if let strDriverID = dict["DriverId"] as? Int {
+                dictParams.setObject(strDriverID, forKey: "DriverId" as NSCopying)
+            }
+        }
         dictParams.setObject(SingletonClass.sharedInstance.strPassengerID, forKey: "PassengerId" as NSCopying)
         dictParams.setObject(strModelId, forKey: SubmitBookingRequest.kModelId as NSCopying)
         if(strModelId == "")
@@ -1997,6 +2005,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.collectionViewCars.scrollToItem(at: NSIndexPath(row: 0, section: 0) as IndexPath, at: .left, animated: true)
     }
     
+    var dictSelectedDriver : [String : AnyObject]?
     
     @IBAction func btnBookNow(_ sender: Any) {
 
@@ -2027,10 +2036,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 else if strCarModelID == "" {
                     UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle".localized) { (index, title) in
                     }
-                    
                 }
-                else if strModelId == ""
-                {
+                else if strModelId == "" {
                     
                     //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                     //                }
@@ -2356,6 +2363,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     next.strCarModelURL = strNavigateCarModel
                     next.strCarName = strCarModelClass
                     
+                    next.dictSelectedDriver = self.dictSelectedDriver
+                    
                     next.strFullname = profileData.object(forKey: "Fullname") as! String
                     next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
                     
@@ -2384,6 +2393,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     next.strModelId = strCarModelID
                     next.strCarModelURL = strNavigateCarModel
                     next.strCarName = strCarModelClass
+                    
+                    next.dictSelectedDriver = self.dictSelectedDriver
                     
                     next.strPickupLocation = strPickupLocation
                     next.doublePickupLat = doublePickupLat
@@ -2940,9 +2951,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil) {
             (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
 //                vc.present(alert, animated: true, completion: nil)
+                self.dictSelectedDriver = nil
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             })
         }else {
+            self.dictSelectedDriver = nil
             (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
         }
         
@@ -6554,9 +6567,7 @@ extension UILabel {
 
 // MARK: - Delegate For Selection Driver
 extension HomeViewController : SendBackSelectedDriverDelegate {
-    func didSelectDriver(_ dictSelectedDriver: [String : AnyObject]) {
-        if let dict = dictSelectedDriver as? [String : AnyObject] {
-            
-        }
+    func didSelectDriver(_ dictSelectedDriver: [String : AnyObject], isBookNow: Bool) {
+            self.dictSelectedDriver = dictSelectedDriver
     }
 }

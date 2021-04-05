@@ -11,7 +11,7 @@ import CoreLocation
 import GoogleMaps
 
 protocol SendBackSelectedDriverDelegate {
-    func didSelectDriver(_ dictSelectedDriver: [String: AnyObject])
+    func didSelectDriver(_ dictSelectedDriver: [String: AnyObject], isBookNow: Bool)
 }
 class SelectDriverViewController: BaseViewController {
     var arrCurrentModelSelectedCars = NSMutableArray()
@@ -113,13 +113,13 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
     }
     @IBAction func bookNowClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
-            delegate?.didSelectDriver(dict)
+            delegate?.didSelectDriver(dict, isBookNow: true)
             self.navigationController?.popViewController(animated: true)
         }
     }
     @IBAction func bookLaterClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
-            delegate?.didSelectDriver(dict)
+            delegate?.didSelectDriver(dict, isBookNow: false)
             self.navigationController?.popViewController(animated: true)
         }
     }

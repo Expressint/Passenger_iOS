@@ -40,7 +40,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBOutlet weak var btnCancelPromocode: UIButton!
     var BookLaterCompleted:BookLaterSubmitedDelegate!
     var datePickerView = UIDatePicker()
-
+    var dictSelectedDriver: [String: AnyObject]?
 //    var pickerView = UIPickerView()
     var pickerViewForInvoiceType = UIPickerView()
     var strModelId = String()
@@ -1394,7 +1394,64 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             return
         }
         var dictData = [String:AnyObject]()
-      /*  dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
+        /*  dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
+         dictData["ModelId"] = strModelId as AnyObject
+         dictData["PickupLocation"] = txtPickupLocation.text as AnyObject
+         dictData["DropoffLocation"] = txtDropOffLocation.text as AnyObject
+         dictData["PassengerType"] = strPassengerType as AnyObject
+         dictData["PassengerName"] = txtFullName.text as AnyObject
+         dictData["PassengerContact"] = txtMobileNumber.text as AnyObject
+         dictData["PickupDateTime"] = convertDateToString as AnyObject
+         //        dictData["NoOfPassenger"] = self.btnNumberOfPassenger.currentTitle as AnyObject
+         dictData["ReceiptType"] = self.ReceiptType as AnyObject
+         
+         if self.strAppliedPromocode.trimmingCharacters(in: .whitespacesAndNewlines).count != 0 {
+         if let Promodetail:String = self.strAppliedPromocode.trimmingCharacters(in: .whitespacesAndNewlines) {
+         let promocode = Promodetail.components(separatedBy: " ")[0]
+         dictData["PromoCode"] = promocode as AnyObject
+         }
+         }
+         
+         dictData["Notes"] = txtDescription.text as AnyObject
+         
+         if paymentType == "" {
+         
+         UtilityClass.setCustomAlert(title: "Missing", message: "Select Payment Type") { (index, title) in
+         }
+         
+         return
+         }
+         else {
+         dictData["PaymentType"] = paymentType as AnyObject
+         }
+         
+         if CardID == "" {
+         
+         }
+         else {
+         dictData["CardId"] = CardID as AnyObject
+         }
+         
+         if txtFlightNumber.text!.count == 0 {
+         
+         dictData["FlightNumber"] = "" as AnyObject
+         }
+         else {
+         dictData["FlightNumber"] = txtFlightNumber.text as AnyObject
+         
+         } */
+        
+        if let dict = self.dictSelectedDriver {
+            if let strDriverID = dict["DriverId"] as? String {
+                dictData["DriverId"] = strDriverID as AnyObject
+                //                dictData.setObject(strDriverID, forKey: "DriverId" as NSCopying)
+            }
+            if let strDriverID = dict["DriverId"] as? Int {
+                dictData["DriverId"] = strDriverID as AnyObject
+                //                dictData.setObject(strDriverID, forKey: "DriverId" as NSCopying)
+            }
+        }
+        dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["ModelId"] = strModelId as AnyObject
         dictData["PickupLocation"] = txtPickupLocation.text as AnyObject
         dictData["DropoffLocation"] = txtDropOffLocation.text as AnyObject
@@ -1402,14 +1459,18 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         dictData["PassengerName"] = txtFullName.text as AnyObject
         dictData["PassengerContact"] = txtMobileNumber.text as AnyObject
         dictData["PickupDateTime"] = convertDateToString as AnyObject
-        //        dictData["NoOfPassenger"] = self.btnNumberOfPassenger.currentTitle as AnyObject
-        dictData["ReceiptType"] = self.ReceiptType as AnyObject
         
-        if self.strAppliedPromocode.trimmingCharacters(in: .whitespacesAndNewlines).count != 0 {
-            if let Promodetail:String = self.strAppliedPromocode.trimmingCharacters(in: .whitespacesAndNewlines) {
-                let promocode = Promodetail.components(separatedBy: " ")[0]
-                dictData["PromoCode"] = promocode as AnyObject
-            }
+        
+        dictData["PickupLat"] = doublePickupLat as AnyObject
+        dictData["PickupLng"] = doublePickupLng as AnyObject
+        dictData["DropOffLat"] = doubleDropOffLat as AnyObject
+        dictData["DropOffLon"] = doubleDropOffLng as AnyObject
+        
+        if lblPromoCode.text == "" {
+            
+        }
+        else {
+            dictData["PromoCode"] = lblPromoCode.text as AnyObject
         }
         
         dictData["Notes"] = txtDescription.text as AnyObject
@@ -1418,74 +1479,23 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             
             UtilityClass.setCustomAlert(title: "Missing", message: "Select Payment Type") { (index, title) in
             }
-            
-            return
         }
         else {
             dictData["PaymentType"] = paymentType as AnyObject
         }
         
         if CardID == "" {
-            
         }
         else {
             dictData["CardId"] = CardID as AnyObject
         }
         
         if txtFlightNumber.text!.count == 0 {
-            
             dictData["FlightNumber"] = "" as AnyObject
         }
         else {
             dictData["FlightNumber"] = txtFlightNumber.text as AnyObject
-            
-        } */
-        
-        dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
-               dictData["ModelId"] = strModelId as AnyObject
-               dictData["PickupLocation"] = txtPickupLocation.text as AnyObject
-               dictData["DropoffLocation"] = txtDropOffLocation.text as AnyObject
-               dictData["PassengerType"] = strPassengerType as AnyObject
-               dictData["PassengerName"] = txtFullName.text as AnyObject
-               dictData["PassengerContact"] = txtMobileNumber.text as AnyObject
-               dictData["PickupDateTime"] = convertDateToString as AnyObject
-               
-               
-               dictData["PickupLat"] = doublePickupLat as AnyObject
-               dictData["PickupLng"] = doublePickupLng as AnyObject
-               dictData["DropOffLat"] = doubleDropOffLat as AnyObject
-               dictData["DropOffLon"] = doubleDropOffLng as AnyObject
-               
-               if lblPromoCode.text == "" {
-                   
-               }
-               else {
-                   dictData["PromoCode"] = lblPromoCode.text as AnyObject
-               }
-               
-               dictData["Notes"] = txtDescription.text as AnyObject
-              
-               if paymentType == "" {
-                   
-                   UtilityClass.setCustomAlert(title: "Missing", message: "Select Payment Type") { (index, title) in
-                   }
-               }
-               else {
-                   dictData["PaymentType"] = paymentType as AnyObject
-               }
-               
-               if CardID == "" {
-               }
-               else {
-                   dictData["CardId"] = CardID as AnyObject
-               }
-               
-               if txtFlightNumber.text!.count == 0 {
-                   dictData["FlightNumber"] = "" as AnyObject
-               }
-               else {
-                   dictData["FlightNumber"] = txtFlightNumber.text as AnyObject
-               }
+        }
         
         print("book later.. \(dictData)")
         webserviceForBookLater(dictData as AnyObject) { (result, status) in
@@ -1546,9 +1556,9 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
                     }
                 }
-                           
                 
-//                UtilityClass.showAlertOfAPIResponse(param: result, vc: self)
+                
+                //                UtilityClass.showAlertOfAPIResponse(param: result, vc: self)
             }
         }
         
