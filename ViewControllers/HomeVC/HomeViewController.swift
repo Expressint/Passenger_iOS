@@ -2633,6 +2633,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             cell.lblPrices.textColor = themeYellowColor
             cell.lblMinutes.textColor = themeYellowColor
             cell.lblAvailableCars.textColor = themeYellowColor
+            cell.lblDistance.textColor = themeYellowColor
             
 //            cell.viewOfImage.layer.borderColor = themeYellowColor.cgColor
 //            cell.viewOfImage.layer.masksToBounds = true
@@ -2644,6 +2645,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             cell.lblPrices.textColor = UIColor.black
             cell.lblMinutes.textColor = UIColor.black
             cell.lblAvailableCars.textColor = UIColor.black
+            cell.lblDistance.textColor = UIColor.black
 //            cell.viewOfImage.layer.borderColor = themeGrayColor.cgColor
 //            cell.viewOfImage.layer.masksToBounds = true
         }
@@ -2660,6 +2662,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             })
             
             cell.lblMinutes.text = "0 min"
+            cell.lblDistance.text = ""
             //            cell.lblPrices.text = "\(currencySign) 0.00"
             cell.lblCarType.text = dictOnlineCarData["Name"] as? String
             
@@ -2696,7 +2699,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                        EstimateFare = "\(price)"
 ////                        cell.lblPrices.text = "\(currencySign) \(price)"
 //                    }
-                    cell.lblPrices.text = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "estimate_fare_range") as? String
+                     if let fareRange = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "estimate_fare_range") as? String {
+                        cell.lblPrices.text = fareRange
+                     
+                    }
 //                    if ((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "duration") as? NSNull) != nil {
 //                        if EstimateFare != "" {
 //                            cell.lblMinutes.text = "\(currencySign)\(EstimateFare) - \(0.00) min"
@@ -2704,11 +2710,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                    }
 //                    else if
                     if let minute = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "duration") as? Int {
-                        cell.lblMinutes.text = "\(minute) min"
+                        cell.lblMinutes.text = "\(minute) min ETA"
                     }
                     
                     if let strAvilCAR = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "available_driver") as? Int {
-                    cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
+//                        if strAvilCAR == 0 {
+//                            cell.lblPrices.isHidden = true
+//                        }else {
+//                            cell.lblPrices.isHidden = false
+//                        }
+                        cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
+                    }
+                    
+                    if let strDistance = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "km") as? Double {
+                        cell.lblDistance.text = "Distance \(strDistance) km"
                     }
 //                    if (intShareRide == 1) {
 //

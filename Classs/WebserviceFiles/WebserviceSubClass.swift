@@ -39,6 +39,7 @@ let QRCodeDetails = WebserviceURLs.kQRCodeDetails
 let RemoveCard = WebserviceURLs.kRemoveCard
 let Tickpay = WebserviceURLs.kTickpay
 let AddAddress = WebserviceURLs.kAddAddress
+let GetDriverETA = WebserviceURLs.kGetDriverETA
 let GetAddress = WebserviceURLs.kGetAddress
 let RemoveAddress = WebserviceURLs.kRemoveAddress
 let VarifyUser = WebserviceURLs.kVarifyUser
@@ -387,6 +388,17 @@ func webserviceForAddAddress(_ dictParams: AnyObject, completion: @escaping(_ re
     let url = AddAddress
     postData(dictParams, nsURL: url, completion: completion)
 }
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Get Driver ETA
+//-------------------------------------------------------------
+
+func webserviceForGetDriverETA(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = GetDriverETA
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
 
 //-------------------------------------------------------------
 // MARK: - Webservice For Get Address

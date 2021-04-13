@@ -208,5 +208,46 @@ class DriverInfoViewController: UIViewController {
         }
         
     }
+    //-------------------------------------------------------------
+    // MARK: - Webservice Methods for Add Address to Favourite
+    //-------------------------------------------------------------
     
+//    func webserviceOfAddAddressToFavourite() {
+//        //        PassengerId,Type,Address,Lat,Lng
+//        
+//        var param = [String:AnyObject]()
+////        param["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
+//        param["BookingType"] = type as AnyObject
+//        param["BookingId"] = txtDestinationLocation.text as AnyObject
+//        param["CurrentLat"] = doubleDropOffLat as AnyObject  // SingletonClass.sharedInstance.currentLatitude as AnyObject
+//        param["CurrentLng"] = doubleDropOffLng as AnyObject  // SingletonClass.sharedInstance.currentLongitude as AnyObject
+//        
+//        webserviceForGetDriverETA(param as AnyObject) { (result, status) in
+//            
+//            if (status) {
+//                //  print(result)
+//                
+//                if let res = result as? String {
+//                    
+//                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
+//                    }
+//                }
+//                else if let res = result as? NSDictionary {
+//                    
+//                    let alert = UIAlertController(title: nil, message: res.object(forKey: "message") as? String, preferredStyle: .alert)
+//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in
+//                        
+//                        UIView.transition(with: self.viewForMainFavourite, duration: 0.4, options: .transitionCrossDissolve, animations: {() -> Void in
+//                            self.viewForMainFavourite.isHidden = true
+//                        }) { _ in }
+//                    })
+//                    alert.addAction(OK)
+//                    self.present(alert, animated: true, completion: nil)
+//                }
+//            }
+//            else {
+//                //     print(result)
+//            }
+//        }
+//    }
 }

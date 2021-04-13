@@ -112,7 +112,9 @@ struct WebserviceURLs {
     static let kTrackRunningTrip                        = "TrackRunningTrip/"
     
     static let kPastDuesList                            = "PastDues"
-      static let kPayPastDues                           = "PastDuesPayment"
+    static let kPayPastDues                           = "PastDuesPayment"
+    
+    static let kGetDriverETA                            = "GetETA"
 //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
 

@@ -21,5 +21,5 @@ class CarsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lblPrices: UILabel!
     @IBOutlet weak var viewOfImage: UIView!
     
-    
+    @IBOutlet weak var lblDistance: UILabel!
 }
