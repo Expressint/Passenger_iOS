@@ -3955,6 +3955,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         next.strPassengerMobileNumber = DriverInfo.object(forKey: "MobileNo") as! String
         //        }
         
+        let strDriverLat = DriverInfo.object(forKey: "Lat") as? String ?? ""
+        let strDriverLng = DriverInfo.object(forKey: "Lng") as? String ?? ""
+        let strBookingID = bookingInfo.object(forKey: "Id") as? String ?? ""
+        let strBookingType = (self.strBookingType == "BookNow") ? "Booking" : "AdvanceBooking"
+        next.strCurrentLat = strDriverLat
+        next.strCurrentLng = strDriverLng
+        next.strBookingID = String(strBookingID)
+        next.strBookingType = strBookingType
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(next, animated: true, completion: nil)
     }
     
@@ -6164,7 +6172,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.aryRequestAcceptedData = self.aryCurrentBookingData
                 
                 let bookingType = (self.aryCurrentBookingData.object(at: 0) as! NSDictionary).object(forKey: "BookingType") as! String
-                
+                self.strBookingType = bookingType
                 if bookingType != "" {
                     
                     
