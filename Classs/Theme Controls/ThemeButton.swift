@@ -66,8 +66,8 @@ class ThemeButtonForRide: UIButton {
             self.backgroundColor = themeAppMainColor
             setTitleColor(themeButtonColor, for: .normal)
         }else {
-            self.backgroundColor = themeButtonColor
-            setTitleColor(themeAppMainColor, for: .normal)
+//            self.backgroundColor = themeButtonColor
+            setTitleColor(themeButtonColor, for: .normal)
             //                self.backgroundColor = UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0)
             //                setTitleColor(UIColor.white, for: .normal)
         }

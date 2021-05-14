@@ -8,11 +8,11 @@
 
 import UIKit
 import Foundation
-let themeAppMainColor : UIColor =  UIColor.init(hex: "bba739")//Sky Blue 3fa9f5 //"ef4036")
-let themeYellowColor: UIColor =  themeAppMainColor //UIColor.init(hex: "005f99")//"ef4036")
-let themeButtonColor: UIColor =  UIColor.init(hex: "ffffff")//"ef4036") //Blue "002e44" //Skyblue "3fa9f5"
+let themeAppMainColor : UIColor =  UIColor.init(hex: "fcee21")//Sky Blue 3fa9f5 //"ef4036") // Yellow Color theme color
+let themeYellowColor: UIColor =  UIColor.init(hex: "02a64d")//themeAppMainColor //UIColor.init(hex: "005f99")//"ef4036") /// Nav Color
+let themeButtonColor: UIColor =  UIColor.init(hex: "000000")//"ef4036") //Blue "002e44" //Skyblue "3fa9f5"
 let themeBlackColor: UIColor =  UIColor.init(hex: "000000")
-let themeRedColor: UIColor = UIColor.init(hex: "EF4036")
+let themeRedColor: UIColor = UIColor.init(hex: "BE212E")
 //    UIColor.init(red: 255/255, green: 163/255, blue: 0, alpha: 1.0)
 let themeGrayColor: UIColor = UIColor.init(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
 //let ThemeYellowColor : UIColor = UIColor.init(hex: "ffa300")

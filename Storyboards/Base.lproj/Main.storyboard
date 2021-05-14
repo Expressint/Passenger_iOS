@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -960,11 +960,11 @@
                                                                         </state>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="NO"/>
-                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                                 <real key="value" value="1"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                <color key="value" red="0.74509803921568629" green="0.12941176470588234" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
@@ -1457,7 +1457,7 @@
                                                 <rect key="frame" x="15" y="244" width="265" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Have a promocode?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oe-K2-gmC">
-                                                        <rect key="frame" x="30" y="-7.5" width="155" height="15"/>
+                                                        <rect key="frame" x="30" y="-7.5" width="150.5" height="15"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="4dO-oj-pDU"/>
                                                         </constraints>
@@ -1477,7 +1477,7 @@
                                                         </connections>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQd-u4-mJQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="185" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="180.5" height="0.0"/>
                                                         <connections>
                                                             <action selector="btnPromocode:" destination="eKb-OP-gzz" eventType="touchUpInside" id="AZp-i4-L4W"/>
                                                         </connections>
@@ -2784,7 +2784,7 @@
         <scene sceneID="CjH-Ob-8ps">
             <objects>
                 <viewController storyboardIdentifier="PackageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="str-wi-kg0" customClass="PackageViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WVJ-9o-DWQ">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="WVJ-9o-DWQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -3015,13 +3015,13 @@
                                     <action selector="segmentValueChanged:" destination="str-wi-kg0" eventType="valueChanged" id="htA-In-Lmi"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HdX-Bu-nmU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HdX-Bu-nmU">
                                 <rect key="frame" x="0.0" y="323" width="375" height="344"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PacageHoursDaysTableViewCell" rowHeight="90" id="XQA-eu-48N" userLabel="PacageHoursDaysTableViewCell" customClass="PacageHoursDaysTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XQA-eu-48N" id="pQw-Py-txk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -3110,7 +3110,7 @@ Hours</string>
                                     <outlet property="delegate" destination="str-wi-kg0" id="QVb-FS-byJ"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gR2-nN-k6U">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gR2-nN-k6U">
                                 <rect key="frame" x="0.0" y="299" width="375" height="368"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rke-eC-0zp" customClass="ThemeButton" customModule="Book_A_Ride" customModuleProvider="target">
@@ -3743,7 +3743,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageHistoryListTableViewCell" rowHeight="353" id="fC3-2M-JNW" userLabel="PackageHistoryListTableViewCell" customClass="PackageHistoryListTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="353"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="353"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fC3-2M-JNW" id="Z4O-Kd-025">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="353"/>
@@ -4261,7 +4261,7 @@ Hours</string>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyFavouriteTableViewCell" rowHeight="70" id="zmH-2H-ezt" customClass="MyFavouriteTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="375" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zmH-2H-ezt" id="5Fp-SR-aZi">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -5976,7 +5976,7 @@ Hours</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TripDetailsTableViewCell" rowHeight="91" id="VNs-uc-A2P" customClass="TripDetailsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="91"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VNs-uc-A2P" id="zjK-gI-IRk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
@@ -8494,7 +8494,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnGoingTableViewCell" rowHeight="175" id="y3K-nH-Dpl" customClass="OnGoingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="175"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y3K-nH-Dpl" id="yRY-sz-4VE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
@@ -9050,7 +9050,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpCommingTableViewCell" rowHeight="262" id="m4x-dA-beN" customClass="UpCommingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="262"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="262"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m4x-dA-beN" id="lpb-9o-Hos">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="262"/>
@@ -9449,7 +9449,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PastBooingTableViewCell" rowHeight="400" id="Iag-jX-9VT" customClass="PastBooingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="400"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iag-jX-9VT" id="Vqu-M2-kdI">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
@@ -11085,7 +11085,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletCardsTableViewCell" rowHeight="90" id="uns-5O-2X3" customClass="WalletCardsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uns-5O-2X3" id="FLr-ZP-mwa">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -11158,7 +11158,7 @@ Hours</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCard" rowHeight="50" id="BSS-0p-Go8" customClass="WalletCardsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="118" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="114.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BSS-0p-Go8" id="VDe-aJ-BoK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -11569,7 +11569,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletHistoryTableViewCell" rowHeight="82" id="jaZ-mx-7Vl" customClass="WalletHistoryTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="82"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jaZ-mx-7Vl" id="96U-zh-FYZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
@@ -11847,7 +11847,7 @@ Hours</string>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletBalanceMainTableViewCell" rowHeight="96" id="CiN-Wv-b3e" customClass="WalletBalanceMainTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="375" height="96"/>
+                                                                <rect key="frame" x="0.0" y="24.5" width="375" height="96"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CiN-Wv-b3e" id="4Ww-2c-dzs">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -13063,7 +13063,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecepitTableViewCell" rowHeight="380" id="DeW-ME-53b" customClass="MyRecepitTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="380"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="380"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DeW-ME-53b" id="tnb-tG-fb8">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
@@ -13541,7 +13541,7 @@ Hours</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoDataFound" id="aVn-N4-9nY" customClass="DispatchedJobsForMyJobsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="408" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="404.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aVn-N4-9nY" id="pfN-wQ-92c">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -16684,7 +16684,7 @@ Hours</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRatingViewCell" rowHeight="250" id="PK0-xP-AfD" userLabel="MyRatingViewCell" customClass="MyRatingViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="250"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PK0-xP-AfD" id="hqV-XE-iDO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -16952,7 +16952,7 @@ Hours</string>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PreviousDueTableViewCell" rowHeight="210" id="irn-Jw-DKg" customClass="PreviousDueTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="210"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="375" height="210"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="irn-Jw-DKg" id="a5Z-fa-wUK">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -18373,7 +18373,7 @@ Hours</string>
         <image name="iconLockStar" width="64" height="64"/>
         <image name="iconLogOut" width="170" height="170"/>
         <image name="iconMainStar" width="64" height="64"/>
-        <image name="iconMapPin" width="26" height="26"/>
+        <image name="iconMapPin" width="31" height="42"/>
         <image name="iconNab" width="133" height="133"/>
         <image name="iconNewLogo" width="150" height="150"/>
         <image name="iconOffice" width="42" height="42"/>

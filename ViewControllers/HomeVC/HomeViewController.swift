@@ -2628,12 +2628,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         if selectedIndexPath == indexPath
         {
-            cell.CarUnderline.backgroundColor = themeYellowColor
-            cell.lblCarType.textColor = themeYellowColor
-            cell.lblPrices.textColor = themeYellowColor
-            cell.lblMinutes.textColor = themeYellowColor
-            cell.lblAvailableCars.textColor = themeYellowColor
-            cell.lblDistance.textColor = themeYellowColor
+            cell.CarUnderline.backgroundColor = themeRedColor
+            cell.lblCarType.textColor = themeRedColor
+            cell.lblPrices.textColor = themeRedColor
+            cell.lblMinutes.textColor = themeRedColor
+            cell.lblAvailableCars.textColor = themeRedColor
+            cell.lblDistance.textColor = themeRedColor
             
 //            cell.viewOfImage.layer.borderColor = themeYellowColor.cgColor
 //            cell.viewOfImage.layer.masksToBounds = true
