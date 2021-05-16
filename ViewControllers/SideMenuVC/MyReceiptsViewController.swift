@@ -145,13 +145,17 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
                
 //                "\("Booking Id :".localized) \(String(describing: dictData.object(forKey: "Id")))"
               
-                let PickTime = Double(dictData.object(forKey: "PickupTime") as! String)
-                let dropoffTime = Double(dictData.object(forKey: "DropTime") as! String)
-                
+                let PickTime = Double(dictData.object(forKey: "PickupTime") as? String ?? "0.0") ?? 0.0
+                let dropoffTime = Double(dictData.object(forKey: "DropTime") as? String ?? "0.0") ?? 0.0
+                if (PickTime == 0)
+                {
+                    cell.lblPickUpTimeTitle.isHidden = true
+                    cell.lblPickupTime.isHidden = true
+                }
                 
                 let unixTimestamp = PickTime //as Double//as! Double//dictData.object(forKey: "PickupTime")
-                let unixTimestampDrop = (dropoffTime as! Double)
-                let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp!))
+                let unixTimestampDrop = (dropoffTime )
+                let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
                 let dateDrop = Date(timeIntervalSince1970: TimeInterval(unixTimestampDrop))
                 let dateFormatter = DateFormatter()
                 //        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want

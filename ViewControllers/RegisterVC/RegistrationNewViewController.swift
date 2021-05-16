@@ -377,11 +377,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
                         UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
                         self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
                    
-//                    let viewHomeController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController")as? HomeViewController
-//                    let navController = UINavigationController(rootViewController: viewHomeController!)
-//                    self.sideMenuController?.embed(centerViewController: navController)
-                    
-//                    })
+
                 })
                 
             }

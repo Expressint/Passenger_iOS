@@ -575,16 +575,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 (UIApplication.shared.delegate as! AppDelegate).GoToHome()
                 
                 
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setprofiledata"), object: nil, userInfo: nil)
-//                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "profiledata"), object: nil)
-//                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
-//                //        self.navigationController?.pushViewController(viewController!, animated: true)
-//                //                self.sideMenuViewController?.contentViewController = UINavigationController(rootViewController: viewController!)
-//                //                self.sideMenuViewController?.hideMenuViewController()
-//
-//                self.sideMenuViewController?.contentViewController = homeVC //UINavigationController(rootViewController: viewController!)
-//                self.sideMenuViewController?.hideMenuViewController()
-//                UIApplication.shared.keyWindow?.rootViewController = Appdelegate.sideMenu
+
             }
             else
             {

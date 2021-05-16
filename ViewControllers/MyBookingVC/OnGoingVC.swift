@@ -335,43 +335,5 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     
-/*
-    func setMarkersOnMap(PickupLatitude: Double, PickupLongitude: Double, DropoffLatitude: Double, DropoffLongitude: Double, PickupLocation: String, DropoffLocation: String) {
-        
-        let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-    
-        SingletonClass.sharedInstance.boolIsFromPrevious = true
-        
-        
-        let dictData = NSMutableDictionary()
-        
-        dictData.setValue(Double(strPickupLat)!, forKey: "PickupLat")
-        dictData.setValue(Double(strPickupLng)!, forKey: "PickupLng")
-        
-        dictData.setValue(Double(strDropoffLat)!, forKey: "DropOffLat")
-        dictData.setValue(Double(strDropoffLng)!, forKey: "DropOffLon")
-        
-        dictData.setValue(PickupAddress, forKey: "PickupLocation")
-        dictData.setValue(DropoffAddress, forKey: "DropoffLocation")
-        
-        
-        SingletonClass.sharedInstance.dictIsFromPrevious = dictData
-     
-        
-//        next.zPickupLat = Double(strPickupLat)!
-//        next.zPickupLng = Double(strPickupLng)!
-//
-//        next.zDropoffLat = Double(strDropoffLat)!
-//        next.zDropoffLng = Double(strDropoffLng)!
-//
-//        next.zPickupLocation = PickupAddress
-//        next.zDropoffLocation = DropoffAddress
-        
-//        self.navigationController?.popViewController(animated: true)
-//        self.navigationController?.pushViewController(next, animated: true)
-        
-        self.navigationController?.present(next, animated: true, completion: nil)
-    }
-*/
     
 }

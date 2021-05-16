@@ -1990,7 +1990,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func btnCollectionViewScrollRight(_ sender: Any) {
-        if (arrTotalNumberOfCars.count <= 5) {
+        if (arrTotalNumberOfCars.count <= 3) {
 //            self.collectionViewCars.scrollToItem(at: NSIndexPath(row: 0, section: 0) as IndexPath, at: .right, animated: true)
         }
         else {
