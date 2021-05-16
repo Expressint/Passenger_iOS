@@ -10484,7 +10484,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="OnGoingVC" storyboardName="MyBookings" referencedIdentifier="OnGoingVC" id="Utu-RN-jtA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LtT-Vx-LJF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2145" y="3395"/>
+            <point key="canvasLocation" x="-1941" y="2658"/>
         </scene>
         <!--PastBookingVC-->
         <scene sceneID="01Y-mz-Zpx">
@@ -10492,7 +10492,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="PastBookingVC" storyboardName="MyBookings" referencedIdentifier="PastBookingVC" id="wcw-n5-rpU" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2L-OT-lbG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="3394"/>
+            <point key="canvasLocation" x="-1202" y="2658"/>
         </scene>
         <!--MyReceiptsViewController-->
         <scene sceneID="VXt-9U-nSo">
@@ -10500,7 +10500,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="MyReceiptsViewController" storyboardName="MyBookings" referencedIdentifier="MyReceiptsViewController" id="ds4-Cz-PJr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RKq-Er-VP6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1287" y="4077"/>
+            <point key="canvasLocation" x="-1513" y="2765"/>
         </scene>
         <!--UpCommingVC-->
         <scene sceneID="JF5-Lc-x4e">
@@ -10508,7 +10508,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="UpCommingVC" storyboardName="MyBookings" referencedIdentifier="UpCommingVC" id="V6r-ct-Ndr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RS6-cH-hHe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1367" y="3394"/>
+            <point key="canvasLocation" x="-1568" y="2659"/>
         </scene>
     </scenes>
     <designables>
