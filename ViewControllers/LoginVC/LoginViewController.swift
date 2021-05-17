@@ -255,12 +255,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 SingletonClass.sharedInstance.allDiverShowOnBirdView = self.aryAllDrivers
                 
-                (UIApplication.shared.delegate as! AppDelegate).GoToHome()
-                
-//                self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
-//                let viewHomeController = self.storyboard?.instantiateViewController(withIdentifier: "CustomSideMenuViewController")as? CustomSideMenuViewController
-//                let navController = UINavigationController(rootViewController: viewHomeController!)
-//                self.sideMenuController?.embed(centerViewController: navController)
+                appDelegate.GoToHome()
+
             }
             else {
                 print(result)
@@ -636,8 +632,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                         
                         if(SingletonClass.sharedInstance.isUserLoggedIN)
                         {
-//                            self.webserviceForAllDrivers()
-                            self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
+                              appDelegate.GoToHome()
                         }
                     })
                     alert.addAction(UPDATE)
@@ -647,9 +642,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 else {
                     
                     if(SingletonClass.sharedInstance.isUserLoggedIN) {
-
-                        self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
-                    }
+                        appDelegate.GoToHome()
+                     }
                 }
             }
             else {

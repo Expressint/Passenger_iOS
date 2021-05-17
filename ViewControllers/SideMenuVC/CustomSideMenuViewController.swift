@@ -44,8 +44,7 @@ class CustomSideMenuViewController: SideMenuController {
                 self.performSegue(withIdentifier: "embedSideController", sender: nil)
                 
                 
-//                self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
-            }
+             }
             else {
                 print(result)
             }

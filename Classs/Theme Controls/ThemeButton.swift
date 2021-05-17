@@ -59,15 +59,16 @@ class ThemeButtonForRide: UIButton {
         self.titleLabel?.font = UIFont.regular(ofSize: 15.0)
         self.layer.cornerRadius = 5.0
         self.layer.masksToBounds = true
+        self.titleLabel?.textColor = .black
         if isRoundButton {
             self.layer.cornerRadius = self.frame.height/2
         }
         if isSelectedButton == true {
             self.backgroundColor = themeAppMainColor
-            setTitleColor(themeButtonColor, for: .normal)
+            setTitleColor(.black, for: .normal)
         }else {
 //            self.backgroundColor = themeButtonColor
-            setTitleColor(themeButtonColor, for: .normal)
+            setTitleColor(.black, for: .normal)
             //                self.backgroundColor = UIColor(red: 114.0/255.0, green: 114.0/255.0, blue: 114.0/255.0, alpha: 1.0)
             //                setTitleColor(UIColor.white, for: .normal)
         }

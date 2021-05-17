@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,28 +36,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oSu-fa-nkC">
                                 <rect key="frame" x="10" y="54" width="394" height="160"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLY-qB-oYS">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="160"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="HhI-cP-NjA"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.89411764709999997" green="0.21176470589999999" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="iconLeftArraw"/>
-                                        <connections>
-                                            <action selector="btnCollectionViewScrollLeft:" destination="eKb-OP-gzz" eventType="touchUpInside" id="rS3-4C-huE"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAB-8P-OU2">
-                                        <rect key="frame" x="354" y="0.0" width="40" height="160"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="2wL-5G-cZd"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.89411764709999997" green="0.21176470589999999" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" image="iconRightArraw"/>
-                                        <connections>
-                                            <action selector="btnCollectionViewScrollRight:" destination="eKb-OP-gzz" eventType="touchUpInside" id="3AG-IV-hOt"/>
-                                        </connections>
-                                    </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9ND-3J-BZ1">
                                         <rect key="frame" x="5" y="5" width="384" height="150"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -193,6 +172,28 @@
                                             <outlet property="delegate" destination="eKb-OP-gzz" id="mcS-sZ-t4b"/>
                                         </connections>
                                     </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLY-qB-oYS">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="160"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="HhI-cP-NjA"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.89411764709999997" green="0.21176470589999999" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="iconLeftArraw"/>
+                                        <connections>
+                                            <action selector="btnCollectionViewScrollLeft:" destination="eKb-OP-gzz" eventType="touchUpInside" id="rS3-4C-huE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAB-8P-OU2">
+                                        <rect key="frame" x="354" y="0.0" width="40" height="160"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="2wL-5G-cZd"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.89411764709999997" green="0.21176470589999999" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="iconRightArraw"/>
+                                        <connections>
+                                            <action selector="btnCollectionViewScrollRight:" destination="eKb-OP-gzz" eventType="touchUpInside" id="3AG-IV-hOt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -241,6 +242,7 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="NoNeedBackground" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="btnRequest:" destination="eKb-OP-gzz" eventType="touchUpInside" id="gYI-Rs-aBW"/>
@@ -280,6 +282,7 @@
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="NoNeedBackground" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="btnDriverInfo:" destination="eKb-OP-gzz" eventType="touchUpInside" id="T5z-ew-FEx"/>
@@ -890,17 +893,17 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="304" height="90"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnG-RS-TBc">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="147.5" height="90"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_CashUnselected" translatesAutoresizingMaskIntoConstraints="NO" id="x7g-C2-pbF">
-                                                                                <rect key="frame" x="54" y="15" width="40" height="40"/>
+                                                                                <rect key="frame" x="132" y="15" width="40" height="40"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="x7g-C2-pbF" secondAttribute="height" multiplier="1:1" id="hQX-vv-O8A"/>
                                                                                     <constraint firstAttribute="height" constant="40" id="vKD-wg-boq"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHk-Nw-P4q">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="147.5" height="90"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="304" height="90"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -931,18 +934,18 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i14-qE-aWX">
-                                                                        <rect key="frame" x="156.5" y="0.0" width="147.5" height="90"/>
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i14-qE-aWX">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnselectedCard" translatesAutoresizingMaskIntoConstraints="NO" id="2tI-sB-pA4">
-                                                                                <rect key="frame" x="54" y="15" width="40" height="40"/>
+                                                                                <rect key="frame" x="-20" y="15" width="40" height="40"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="40" id="HLO-Au-wjw"/>
                                                                                     <constraint firstAttribute="width" secondItem="2tI-sB-pA4" secondAttribute="height" multiplier="1:1" id="Sia-Do-C4M"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-dz-Z6j">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="147.5" height="90"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -978,7 +981,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6b9-Go-dcx">
-                                                                        <rect key="frame" x="304" y="0.0" width="0.0" height="90"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="90"/>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UnSelectedWallet" translatesAutoresizingMaskIntoConstraints="NO" id="Tk0-tD-lNc">
                                                                                 <rect key="frame" x="-10" y="8" width="20" height="20"/>
@@ -1203,7 +1206,6 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSubmitButton" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>

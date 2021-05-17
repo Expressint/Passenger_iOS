@@ -30,6 +30,10 @@ let dictanceType : String = " "
 let windowHeight: CGFloat = CGFloat(UIScreen.main.bounds.size.height)
 let screenHeightDeveloper : Double = 568
 let screenWidthDeveloper : Double = 320
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+let bookingsStoryboard = UIStoryboard(name: "BookingScreen", bundle: nil)
+let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 
 /* App Font Names
 

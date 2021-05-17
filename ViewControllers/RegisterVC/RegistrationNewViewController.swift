@@ -371,12 +371,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
                         SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)   
                         SingletonClass.sharedInstance.isUserLoggedIN = true
                         SingletonClass.sharedInstance.strPassengerID = String(describing: SingletonClass.sharedInstance.dictProfile.object(forKey: "Id")!)
-//                        SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)
-//                        UserDefaults.standard.set(SingletonClass.sharedInstance.arrCarLists, forKey: "carLists")
-
                         UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
-                        self.performSegue(withIdentifier: "segueToHomeVC", sender: nil)
-                   
+                        appDelegate.GoToHome()
 
                 })
                 

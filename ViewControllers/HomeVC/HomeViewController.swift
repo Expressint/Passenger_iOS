@@ -525,7 +525,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             else if strDestinationLocationForBookLater != "" {
                 let profileData = SingletonClass.sharedInstance.dictProfile
                 
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
+                let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                 
                 SingletonClass.sharedInstance.isFromNotificationBookLater = false
                 
@@ -1946,7 +1946,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         mapView.isHidden = true
         
     }
-    
+    var x = 1
+
     func getPlaceFromLatLong()
     {
         placesClient.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
@@ -1996,7 +1997,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         else {
             
             if self.collectionViewCars!.contentSize.width >= 150 {
-                self.collectionViewCars.scrollToItem(at: NSIndexPath(row: arrTotalNumberOfCars.count, section: 0) as IndexPath, at: .right, animated: true)
+                self.collectionViewCars.scrollToItem(at: NSIndexPath(row: arrTotalNumberOfCars.count-1, section: 0) as IndexPath, at: .right, animated: true)
             }
         }
     }
@@ -2086,7 +2087,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                    let alert = UIAlertController(title: nil, message: "Do you want to add card.", preferredStyle: .alert)
                 //                    let OK = UIAlertAction(title: "OK", style: .default, handler: { ACTION in
                 //
-                //                        let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+                //                        let next = mainStoryborad.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
                 //
                 //                        next.delegateAddCardFromHomeVC = self
                 //
@@ -2122,7 +2123,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //            let alert = UIAlertController(title: nil, message: "Do you want to add card.", preferredStyle: .alert)
 //            let OK = UIAlertAction(title: "OK", style: .default, handler: { ACTION in
 //
-//                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+//                let next = mainStoryborad.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
 //
 //                next.delegateAddCardFromHomeVC = self
 //
@@ -2232,11 +2233,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             paymentType = "card" //rjChange "m_pesa"
             
             if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
                 next.delegateAddCardFromHomeVC = self
                 self.navigationController?.pushViewController(next, animated: true)
             } else {
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
                 next.delegateForHomeAddcard = self
                 next.canEditRowBool = false
                 self.navigationController?.pushViewController(next, animated: true)
@@ -2254,13 +2255,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func btnAddCard(_ sender: Any) {
         
-//        let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+//        let next = mainStoryborad.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
 //        SingletonClass.sharedInstance.isFromTopUP = true
 //        next.delegateForTopUp = self
 //        self.navigationController?.pushViewController(next, animated: true)
         
         
-//        let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+//        let next = mainStoryborad.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
 //
 //        next.delegateAddCardFromHomeVC = self
 //
@@ -2355,7 +2356,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else
                 {
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
+                    let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                     
                     SingletonClass.sharedInstance.isFromNotificationBookLater = false
                     next.BookLaterCompleted = self
@@ -2388,7 +2389,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
                 else {
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
+                    let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                     next.BookLaterCompleted = self
                     next.strModelId = strCarModelID
                     next.strCarModelURL = strNavigateCarModel
@@ -2977,7 +2978,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //        else
 //        {
 //
-//            let PackageVC = self.storyboard?.instantiateViewController(withIdentifier: "PackageViewController")as! PackageViewController
+//            let PackageVC = mainStoryborad.instantiateViewController(withIdentifier: "PackageViewController")as! PackageViewController
 //            let navController = UINavigationController(rootViewController: PackageVC) // Creating a navigation controller with VC1 at the root of the navigation stack.
 //
 //            PackageVC.strPickupLocation = strPickupLocation
@@ -3271,34 +3272,34 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //MARK:- Side Menu Navigation
     @objc func GotoProfilePage() {
         /* Raj Changes
-        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        let NextPage = mainStoryborad.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
         self.navigationController?.pushViewController(NextPage, animated: true) */
         
-        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController        
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "UpdateProfileViewController") as? UpdateProfileViewController
         self.navigationController?.pushViewController(viewController!, animated: true)
     }
     
     @objc func GotoHomePage()
     {
-//        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+//        let NextPage = mainStoryborad.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
 //        self.navigationController?.pushViewController(NextPage, animated: true)
         self.setLocalization()
         self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true)
     }
     
     @objc func GotoMyBookingPage() {
-        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "MyBookingViewController") as! MyBookingViewController
+        let NextPage = myBookingsStoryboard.instantiateViewController(withIdentifier: "MyBookingViewController") as! MyBookingViewController
         self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @objc func GotoPaymentPage() {
         
         if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
             self.navigationController?.pushViewController(next, animated: true)
         }
         else {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
             self.navigationController?.pushViewController(next, animated: true)
         }
     }
@@ -3307,66 +3308,66 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if (SingletonClass.sharedInstance.isPasscodeON) {
             
             if SingletonClass.sharedInstance.setPasscode == "" {
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SetPasscodeViewController") as! SetPasscodeViewController
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: "SetPasscodeViewController") as! SetPasscodeViewController
                 viewController.strStatusToNavigate = "Wallet"
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
             else {
                 
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "VerifyPasswordViewController") as! VerifyPasswordViewController
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: "VerifyPasswordViewController") as! VerifyPasswordViewController
                 viewController.strStatusToNavigate = "Wallet"
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         }
         else {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletViewController") as! WalletViewController
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletViewController") as! WalletViewController
             self.navigationController?.pushViewController(next, animated: true)
         }
         
-//        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "WalletViewController") as! WalletViewController
+//        let NextPage = mainStoryborad.instantiateViewController(withIdentifier: "WalletViewController") as! WalletViewController
 //        self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @objc func GotoMyReceiptPage() {
-        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "MyReceiptsViewController") as! MyReceiptsViewController
+        let NextPage = myBookingsStoryboard.instantiateViewController(withIdentifier: "MyReceiptsViewController") as! MyReceiptsViewController
         self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @objc func GotoFavouritePage() {
-        let next = self.storyboard?.instantiateViewController(withIdentifier: "MyRatingViewController") as! MyRatingViewController
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "MyRatingViewController") as! MyRatingViewController
         
 //        next.delegateForFavourite = self
         
         self.navigationController?.pushViewController(next, animated: true)
         
-//        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
+//        let NextPage = mainStoryborad.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
 //        self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
      @objc func GotoPastDuesPage() {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "PreviousDueViewController") as! PreviousDueViewController
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "PreviousDueViewController") as! PreviousDueViewController
             
     //        next.delegateForFavourite = self
             
             self.navigationController?.pushViewController(next, animated: true)
             
-    //        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
+    //        let NextPage = mainStoryborad.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
     //        self.navigationController?.pushViewController(NextPage, animated: true)
         }
     
     @objc func GotoInviteFriendPage() {
-        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "InviteDriverViewController") as! InviteDriverViewController
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "InviteDriverViewController") as! InviteDriverViewController
         self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @objc func GotoSettingPage() {
-        let NextPage = self.storyboard?.instantiateViewController(withIdentifier: "SettingPasscodeVC") as! SettingPasscodeVC
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "SettingPasscodeVC") as! SettingPasscodeVC
         self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @objc func GotoSupportPage()
     {
-        let next = self.storyboard?.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
         next.headerName = "\(appName)"
         next.strURL = "https://www.tantaxitanzania.com/front/about"
         self.navigationController?.pushViewController(next, animated: true)
@@ -3928,7 +3929,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //MARK:- Show Driver Information
     
     func showDriverInfo(bookingInfo : NSDictionary, DriverInfo: NSDictionary, carInfo : NSDictionary) {
-        let next = self.storyboard?.instantiateViewController(withIdentifier: "DriverInfoViewController") as! DriverInfoViewController
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "DriverInfoViewController") as! DriverInfoViewController
         
         next.strDriverName = DriverInfo.object(forKey: "Fullname") as! String
         next.strPickupLocation = "\(bookingInfo.object(forKey: "PickupLocation") as! String)"
@@ -4230,8 +4231,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             else {
                 self.completeTripInfo()
-                //                self.performSegue(withIdentifier: "showRating", sender: nil)
-            }
+             }
             
 //            if let getInfoFromData = data as? [[String:AnyObject]] {
 //
@@ -4280,7 +4280,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
              //                self.performSegue(withIdentifier: "showRating", sender: nil)
              }
              
-             //            let next = self.storyboard?.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
+             //            let next = mainStoryborad.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
              //            next.strBookingType = self.strBookingType
              //            next.delegate = self
              //            next.modalPresentationStyle = .overCurrentContext
@@ -4292,7 +4292,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func delegateforGivingRate()
     {
         
-        let ViewController = self.storyboard?.instantiateViewController(withIdentifier: "GiveRatingViewController") as? GiveRatingViewController
+        let ViewController = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as? GiveRatingViewController
         ViewController?.delegateRating = self
         ViewController?.strBookingType = strBookingType
         
@@ -4383,10 +4383,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             //                self.performSegue(withIdentifier: "seguePresentTripDetails", sender: nil)
             
             
-//            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TripDetailsViewController") as? TripDetailsViewController
+//            let viewController = mainStoryborad.instantiateViewController(withIdentifier: "TripDetailsViewController") as? TripDetailsViewController
 //            viewController?.arrData = self.arrDataAfterCompletetionOfTrip as NSMutableArray
 //            viewController?.delegate = self
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
             viewController.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
             viewController.delegate = self
 
@@ -4403,7 +4403,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             alertWindow.makeKeyAndVisible()
             alertWindow.rootViewController?.present(viewController, animated: true, completion: nil)
             
-//            let next = self.storyboard?.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
+//            let next = mainStoryborad.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
 //            next.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
 //            next.delegate = self
 //            DispatchQueue.main.async
@@ -4480,7 +4480,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.getRaringNotification()
             self.clearDataAfteCompleteTrip()
             
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
+            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
             viewController.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
             viewController.delegate = self
             self.btnCurrentLocation(self.btnCurrentLocation)
@@ -4535,7 +4535,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @objc func openRatingView() {
         
-        let next = self.storyboard?.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
         next.strBookingType = self.strBookingType
         //        next.delegate = self
         //            self.presentingViewController?.modalPresentationStyle
@@ -4872,7 +4872,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             }
                             else {
                                 self.completeTripInfo()
-                                //                let next = self.storyboard?.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
+                                //                let next = mainStoryborad.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
                                 //                next.strBookingType = self.strBookingType
                                 //                next.delegate = self
                                 //                //            self.presentingViewController?.modalPresentationStyle
@@ -6147,6 +6147,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     var strBookingType = String()
     
+    
+    
+    
+    
+    
     func webserviceOfCurrentBooking() {
         
         if let Token = UserDefaults.standard.object(forKey: "Token") as? String {
@@ -6591,6 +6596,14 @@ extension UILabel {
 // MARK: - Delegate For Selection Driver
 extension HomeViewController : SendBackSelectedDriverDelegate {
     func didSelectDriver(_ dictSelectedDriver: [String : AnyObject], isBookNow: Bool) {
-            self.dictSelectedDriver = dictSelectedDriver
+        self.dictSelectedDriver = dictSelectedDriver
+        if(isBookNow)
+        {
+            self.btnBookNow(UIButton())
+        }
+        else
+        {
+            self.btnBookLater(UIButton())
+        }
     }
 }

@@ -225,14 +225,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         }
         
         
-        if (passCode != "" && SingletonClass.sharedInstance.isPasscodeON) {
-            
-            let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "VerifyPasswordViewController") as! VerifyPasswordViewController
-            
-            initialViewController.isFromAppDelegate = true
-            self.window?.rootViewController?.present(initialViewController, animated: true, completion: nil)
-        }
+//        if (passCode != "" && SingletonClass.sharedInstance.isPasscodeON) {
+//
+//            let mainStoryboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: "VerifyPasswordViewController") as! VerifyPasswordViewController
+//
+//            initialViewController.isFromAppDelegate = true
+//            self.window?.rootViewController?.present(initialViewController, animated: true, completion: nil)
+//        }
         
     }
     
@@ -504,8 +504,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     // MARK:- Login & Logout Methods
     
     func GoToHome() {
-        let storyborad = UIStoryboard(name: "Main", bundle: nil)
-        let CustomSideMenu = storyborad.instantiateViewController(withIdentifier: "CustomSideMenuViewController") as! CustomSideMenuViewController
+//        let storyborad = UIStoryboard(name: "Main", bundle: nil)
+        let CustomSideMenu = mainStoryboard.instantiateViewController(withIdentifier: "CustomSideMenuViewController") as! CustomSideMenuViewController
         let NavHomeVC = UINavigationController(rootViewController: CustomSideMenu)
         NavHomeVC.isNavigationBarHidden = true
         UIApplication.shared.keyWindow?.rootViewController = NavHomeVC
@@ -513,8 +513,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     
     func GoToLogin() {
         
-        let storyborad = UIStoryboard(name: "Main", bundle: nil)
-        let Login = storyborad.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        let storyborad = UIStoryboard(name: "MyBookings", bundle: nil)
+        let Login = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         //        let customNavigation = UINavigationController(rootViewController: Login)
         let NavHomeVC = UINavigationController(rootViewController: Login)
         NavHomeVC.isNavigationBarHidden = true
@@ -540,8 +540,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         SingletonClass.sharedInstance.strPassengerID = ""
         UserDefaults.standard.removeObject(forKey: "profileData")
         SingletonClass.sharedInstance.isUserLoggedIN = false
-        //                self.performSegue(withIdentifier: "unwindToContainerVC", sender: self)
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         
         UserDefaults.standard.removeObject(forKey: "Passcode")
         SingletonClass.sharedInstance.setPasscode = ""

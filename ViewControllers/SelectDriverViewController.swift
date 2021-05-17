@@ -13,6 +13,12 @@ import GoogleMaps
 protocol SendBackSelectedDriverDelegate {
     func didSelectDriver(_ dictSelectedDriver: [String: AnyObject], isBookNow: Bool)
 }
+
+
+enum BookingType : Int {
+    case BookNow = 1
+    case BookLater = 2
+}
 class SelectDriverViewController: BaseViewController {
     var arrCurrentModelSelectedCars = NSMutableArray()
     @IBOutlet weak var tblVw: UITableView!
@@ -60,6 +66,20 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
              Rating = "4.75";
          })
          */
+        
+        var btn = UIButton(type: .custom)
+        btn.tag = indexPath.row
+        cell.varCallBackActionBooking = { ( type:BookingType) in
+            if (type == .BookNow)
+            {
+                self.bookNowClick(btn)
+            }
+            else
+            {
+                self.bookLaterClick(btn)
+            }
+        }
+        
         cell.selectionStyle = .none
         if let dict = arrCurrentModelSelectedCars[indexPath.row] as? [String: AnyObject] {
             cell.lblDriverName.text = "Driver Name : " + (dict["DriverName"] as? String ?? "")
@@ -76,8 +96,8 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
             cell.btnBookLater.tag = indexPath.row
             
             cell.btnCall.addTarget(self, action: #selector(callClick(_:)), for: .touchUpInside)
-            cell.btnBookNow.addTarget(self, action: #selector(bookNowClick(_:)), for: .touchUpInside)
-            cell.btnBookLater.addTarget(self, action: #selector(bookLaterClick(_:)), for: .touchUpInside)
+//            cell.btnBookNow.addTarget(self, action: #selector(bookNowClick(_:)), for: .touchUpInside)
+//            cell.btnBookLater.addTarget(self, action: #selector(bookLaterClick(_:)), for: .touchUpInside)
             if let arrLatLong = dict["Location"] as? [Double] {
 //                guard let lat = arrLatLong.first, (Double(lat) != nil) else {
 //                    return cell
@@ -119,8 +139,8 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
     }
     @IBAction func bookLaterClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
+            self.navigationController?.popViewController(animated: false)
             delegate?.didSelectDriver(dict, isBookNow: false)
-            self.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -164,4 +184,20 @@ class DriverListCell : UITableViewCell {
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnBookNow: UIButton!
     @IBOutlet weak var btnBookLater: UIButton!
+    
+    
+    var varCallBackActionBooking : ((BookingType) -> ()) = {_ in }
+    
+    
+    @IBAction func btnBookNow(sender : UIButton)
+    {
+        varCallBackActionBooking(.BookNow)
+    }
+    
+    
+    @IBAction func btnBookLater(sender : UIButton)
+    {
+        varCallBackActionBooking(.BookLater)
+
+    }
 }
