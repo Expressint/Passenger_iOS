@@ -67,7 +67,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         txtPostCode.placeholder = "Post Code".localized
         txtDateOfBirth.placeholder = "Date Of Birth".localized
         txtDOB.placeholder = "Date Of Birth".localized
-        btnSignUp.setTitle("Sign Up".localized , for: .normal)
+        btnSignUp.setTitle("Submit".localized , for: .normal)
         btnmale.setTitle("Male".localized, for: .normal)
         btnFemail.setTitle("Female".localized, for: .normal)
         
