@@ -157,22 +157,7 @@ class BookTableSelectedDataViewController: BaseViewController, UITableViewDataSo
                 }
             }
         
-            
-//        ((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0] as! UINavigationController).popViewController(animated: true)
-            
-//            let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-            
-//            ((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0] as! UINavigationController).popViewController(animated: true)
-            
-//            for controller in ((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0] as! UINavigationController).viewControllers as Array {
-//                if controller.isKind(of: HomeViewController.self) {
-//                    self.navigationController!.popToViewController(controller, animated: true)
-//                    break
-//                }
-//            }
-            
-            
-//            self.navigationController?.popToViewController(((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0] as! UINavigationController).childViewControllers[0] as! HomeViewController, animated: true)
+
             
         }
         

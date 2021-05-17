@@ -569,11 +569,11 @@ extension String {
 //        }
 
         let lang = UserDefaults.standard.string(forKey: "i18n_language")
-        print(lang)
+//        print(lang)
         let path = Bundle.main.path(forResource: lang, ofType: "lproj")
         let bundle = Bundle(path: path!)
-        print(path ?? "")
-        print(bundle ?? "")
+//        print(path ?? "")
+//        print(bundle ?? "")
               return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
 }

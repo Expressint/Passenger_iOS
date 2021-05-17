@@ -169,6 +169,8 @@
 		3A84BC9B21C23CFC00EDA3A2 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9A21C23CFC00EDA3A2 /* RadioButton.m */; };
 		3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */; };
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
+		54DF0EE326513C4200028B4E /* MyBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54DF0EE126513C4200028B4E /* MyBookings.storyboard */; };
+		54DF0EE426513C6000028B4E /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
 		6EFD7170241F79CE00B01752 /* zzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD716F241F79CE00B01752 /* zzz.swift */; };
@@ -362,6 +364,8 @@
 		3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewCell.swift; sourceTree = "<group>"; };
 		3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewController.swift; sourceTree = "<group>"; };
 		46D6BDF823FFD22700A303B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = BookingScreen.storyboard; path = "/Users/rahulpatel/Documents/Rahul/Projects/bookaride-passenger/Storyboards/BookingScreen.storyboard"; sourceTree = "<absolute>"; };
+		54DF0EE226513C4200028B4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MyBookings.storyboard; sourceTree = "<group>"; };
 		5B8CD5DE691145A01FDF1181 /* Pods-Flicha User.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicha User.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicha User/Pods-Flicha User.debug.xcconfig"; sourceTree = "<group>"; };
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
 		6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueTableViewCell.swift; sourceTree = "<group>"; };
@@ -949,6 +953,8 @@
 		EEFA6CA9220ECE30004F32E7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				54DF0EE126513C4200028B4E /* MyBookings.storyboard */,
+				54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */,
 				34E01A1F220EE898000D048E /* Main.storyboard */,
 				6EFD716F241F79CE00B01752 /* zzz.swift */,
 				34E01A27220EED13000D048E /* LaunchScreen.storyboard */,
@@ -1050,6 +1056,7 @@
 				3A40738B21B512280015C494 /* proxima-nova.otf in Resources */,
 				3A40738621B512280015C494 /* proxima-nova-light-italic.otf in Resources */,
 				3A4073F321B512280015C494 /* ACProgressView.xib in Resources */,
+				54DF0EE326513C4200028B4E /* MyBookings.storyboard in Resources */,
 				3A40738E21B512280015C494 /* amazon.jpg in Resources */,
 				3A40737C21B512280015C494 /* proxima-nova-black.otf in Resources */,
 				3A40738221B512280015C494 /* proxima-nova-condensed-semibold-italic.otf in Resources */,
@@ -1067,6 +1074,7 @@
 				34E01A2A220EEE2C000D048E /* Localizable.strings in Resources */,
 				3A4073FD21B512280015C494 /* circle2.png in Resources */,
 				34E01A25220EED13000D048E /* LaunchScreen.storyboard in Resources */,
+				54DF0EE426513C6000028B4E /* BookingScreen.storyboard in Resources */,
 				34E01A1D220EE898000D048E /* Main.storyboard in Resources */,
 				3A40739221B512280015C494 /* startHere.png in Resources */,
 				3A40738521B512280015C494 /* proxima-nova-extrabold.otf in Resources */,
@@ -1368,6 +1376,14 @@
 				34E01A2D220EEEA7000D048E /* sw */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		54DF0EE126513C4200028B4E /* MyBookings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				54DF0EE226513C4200028B4E /* Base */,
+			);
+			name = MyBookings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
