@@ -1840,7 +1840,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         }
                     }
                 }
-                
+                    /// RJ change this is use for pass data to
+                    SingletonClass.sharedInstance.aryEstimateFareData = self.aryEstimateFareData
                 UIView.performWithoutAnimation {
                     self.collectionViewCars.reloadData()
                 }
@@ -2930,6 +2931,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 
             }
+            SingletonClass.sharedInstance.selectedIndexPath = indexPath
             collectionViewCars.reloadData()
         }
         
@@ -4829,7 +4831,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func postPickupAndDropLocationForEstimateFare()
     {
         let driverID = aryOfOnlineCarsIds.compactMap{ $0 }.joined(separator: ",")
-        
+       
+        SingletonClass.sharedInstance.strOnlineDriverID = driverID
         var myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID,  "PickupLocation" : strPickupLocation ,"PickupLat" :  self.doublePickupLat , "PickupLong" :  self.doublePickupLng, "DropoffLocation" : strDropoffLocation,"DropoffLat" : self.doubleDropOffLat, "DropoffLon" : self.doubleDropOffLng,"Ids" : driverID, "ShareRiding": intShareRide ] as [String : Any]
         
         if(strDropoffLocation.count == 0)

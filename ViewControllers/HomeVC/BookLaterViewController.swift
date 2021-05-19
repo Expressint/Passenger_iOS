@@ -14,6 +14,7 @@ import SDWebImage
 import FormTextField
 import ACFloatingTextfield_Swift
 import IQKeyboardManagerSwift
+import SocketIO
 //import ActionSheetPicker_3_0
 
 protocol isHaveCardFromBookLaterDelegate {
@@ -21,7 +22,6 @@ protocol isHaveCardFromBookLaterDelegate {
 }
 
 protocol BookLaterSubmitedDelegate {
-    
     func BookLaterComplete()
 }
 
@@ -35,7 +35,6 @@ extension UIApplication {
 class BookLaterViewController: BaseViewController, GMSAutocompleteViewControllerDelegate, UINavigationControllerDelegate, WWCalendarTimeSelectorProtocol, UIPickerViewDelegate, UIPickerViewDataSource, isHaveCardFromBookLaterDelegate, UITextFieldDelegate,SelectCardDelegate {
 
 
-    
     
     @IBOutlet weak var btnCancelPromocode: UIButton!
     var BookLaterCompleted:BookLaterSubmitedDelegate!
@@ -88,14 +87,17 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBOutlet weak var lblCashTitle: UILabel!
     @IBOutlet weak var lblWalletTitle: UILabel!
     @IBOutlet weak var lblCardTitle: UILabel!
-
+    
+    @IBOutlet weak var txtDriverAwayTime: UITextField!
+    @IBOutlet weak var txtDriverAwayKm: UITextField!
+    @IBOutlet weak var txtEstimatedFare: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
 
 //        self.title = "Schedule Trip"
-               self.setNavBarWithBack(Title: "Book Later".localized, IsNeedRightButton: false)
+        self.setNavBarWithBack(Title: "Book Later".localized, IsNeedRightButton: false)
 
         self.navigationItem.title = "Book Later".localized
         
@@ -200,7 +202,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             txtDataAndTimeFromCalendar.text = dateFormaterView.string(from: sender.date)
         }
 
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.isOpenPlacePickerController == false {
@@ -237,7 +239,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func fillTextFields() {
         txtPickupLocation.text = strPickupLocation
         txtDropOffLocation.text = strDropoffLocation
-        
+        postPickupAndDropLocationForEstimateFare()
     }
     
     func gaveCornerRadius() {
@@ -866,7 +868,78 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     var doubleDropOffLat = Double()
     var doubleDropOffLng = Double()
+    /// if intShareRide = 1 than ON and if intShareRide = 0 OFF
+    var intShareRide:Int = 0
+    let socket = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
+    //  MARK: - Get estimate fare
     
+    func postPickupAndDropLocationForEstimateFare()
+    {
+//        let driverID = aryOfOnlineCarsIds.compactMap{ $0 }.joined(separator: ",")
+        
+        var myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID,  "PickupLocation" : strPickupLocation ,"PickupLat" :  doublePickupLat , "PickupLong" :  self.doublePickupLng, "DropoffLocation" : strDropoffLocation,"DropoffLat" : self.doubleDropOffLat, "DropoffLon" : self.doubleDropOffLng,"Ids" : SingletonClass.sharedInstance.strOnlineDriverID, "ShareRiding": intShareRide ] as [String : Any]
+        
+        if(strDropoffLocation.count == 0)
+        {
+            myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID,  "PickupLocation" : strPickupLocation ,"PickupLat" :  self.doublePickupLat , "PickupLong" :  self.doublePickupLng, "DropoffLocation" : strPickupLocation,"DropoffLat" : self.doubleDropOffLng, "DropoffLon" : self.doubleDropOffLng,"Ids" : SingletonClass.sharedInstance.strOnlineDriverID, "ShareRiding": intShareRide] as [String : Any]
+        }
+        socket.emit(SocketData.kSendRequestForGetEstimateFare , with: [myJSON])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+           // Code you want to be delayed
+            if SingletonClass.sharedInstance.aryEstimateFareData.count != 0 {
+                
+                var EstimateFare:String = ""
+                if let indexPath = SingletonClass.sharedInstance.selectedIndexPath {
+                    if let fareRange = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "estimate_fare_range") as? String {
+    //                    cell.lblPrices.text = fareRange
+                        self.txtEstimatedFare.text = fareRange
+                    }
+        //                    if ((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "duration") as? NSNull) != nil {
+        //                        if EstimateFare != "" {
+        //                            cell.lblMinutes.text = "\(currencySign)\(EstimateFare) - \(0.00) min"
+        //                        }
+        //                    }
+        //                    else if
+                    if let minute = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "duration") as? Int {
+    //                    cell.lblMinutes.text = "\(minute) min ETA"
+                        self.txtDriverAwayTime.text =  "\(minute) min"
+                    }
+                    
+                    if let strAvilCAR = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "available_driver") as? Int {
+        //                        if strAvilCAR == 0 {
+        //                            cell.lblPrices.isHidden = true
+        //                        }else {
+        //                            cell.lblPrices.isHidden = false
+        //                        }
+    //                    cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
+                        
+                    }
+                    
+                    if let strDistance = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "km") as? Double {
+                       // cell.lblDistance.text = "Distance \(strDistance) km"
+                        
+                        self.txtDriverAwayKm.text = "Distance \(strDistance) km"
+                    }
+                }
+    //
+              
+    //                    if (intShareRide == 1) {
+    //
+    //                        if let ride = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "share_ride") as? String {
+    //
+    //                            if ride == "1" {
+    //                                cell.contentView.isUserInteractionEnabled = true
+    //                            }
+    //                            else if ride == "0" {
+    //
+    //                            }
+    //                        }
+    //                    }
+            }
+        }
+
+    }
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -877,14 +950,13 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             doublePickupLat = place.coordinate.latitude
             doublePickupLng = place.coordinate.longitude
             
-        }
-        else {
+        }else {
             txtDropOffLocation.text = place.formattedAddress
             strDropoffLocation = place.formattedAddress!
             doubleDropOffLat = place.coordinate.latitude
             doubleDropOffLng = place.coordinate.longitude
         }
-        
+        postPickupAndDropLocationForEstimateFare()
         dismiss(animated: true, completion: nil)
     }
     

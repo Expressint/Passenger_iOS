@@ -170,10 +170,10 @@
 		3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */; };
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
 		54DF0EE326513C4200028B4E /* MyBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54DF0EE126513C4200028B4E /* MyBookings.storyboard */; };
-		54DF0EE426513C6000028B4E /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
 		6EFD7170241F79CE00B01752 /* zzz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFD716F241F79CE00B01752 /* zzz.swift */; };
+		AD01829F2652420900595BAB /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD01829E2652420900595BAB /* BookingScreen.storyboard */; };
 		E8C9D082B65507939DF95E79 /* Pods_Book_A_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B15DD6CDE343A0B29EC2A6 /* Pods_Book_A_Ride.framework */; };
 /* End PBXBuildFile section */
 
@@ -364,7 +364,6 @@
 		3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewCell.swift; sourceTree = "<group>"; };
 		3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewController.swift; sourceTree = "<group>"; };
 		46D6BDF823FFD22700A303B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = BookingScreen.storyboard; path = "/Users/rahulpatel/Documents/Rahul/Projects/bookaride-passenger/Storyboards/BookingScreen.storyboard"; sourceTree = "<absolute>"; };
 		54DF0EE226513C4200028B4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MyBookings.storyboard; sourceTree = "<group>"; };
 		5B8CD5DE691145A01FDF1181 /* Pods-Flicha User.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicha User.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicha User/Pods-Flicha User.debug.xcconfig"; sourceTree = "<group>"; };
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +371,7 @@
 		6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueViewController.swift; sourceTree = "<group>"; };
 		6EFD716F241F79CE00B01752 /* zzz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zzz.swift; sourceTree = "<group>"; };
 		8AB9D1AFC2E46418F626C956 /* Pods-TickTok User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TickTok User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TickTok User/Pods-TickTok User.release.xcconfig"; sourceTree = "<group>"; };
+		AD01829E2652420900595BAB /* BookingScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookingScreen.storyboard; sourceTree = "<group>"; };
 		AF52F47D5C41A2336F5A8C8E /* Pods-AllOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllOut/Pods-AllOut.debug.xcconfig"; sourceTree = "<group>"; };
 		B23EAA82EBAF76E7E17B170F /* Pods-LADA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LADA.release.xcconfig"; path = "Pods/Target Support Files/Pods-LADA/Pods-LADA.release.xcconfig"; sourceTree = "<group>"; };
 		B8B9B5BC8AFC67D76F792937 /* Pods-AllOut.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllOut.release.xcconfig"; path = "Pods/Target Support Files/Pods-AllOut/Pods-AllOut.release.xcconfig"; sourceTree = "<group>"; };
@@ -954,7 +954,7 @@
 			isa = PBXGroup;
 			children = (
 				54DF0EE126513C4200028B4E /* MyBookings.storyboard */,
-				54DF0EE026513B1B00028B4E /* BookingScreen.storyboard */,
+				AD01829E2652420900595BAB /* BookingScreen.storyboard */,
 				34E01A1F220EE898000D048E /* Main.storyboard */,
 				6EFD716F241F79CE00B01752 /* zzz.swift */,
 				34E01A27220EED13000D048E /* LaunchScreen.storyboard */,
@@ -1044,6 +1044,7 @@
 				3A40738121B512280015C494 /* proxima-nova-condensed-regular-italic.otf in Resources */,
 				3A40738421B512280015C494 /* proxima-nova-condensed.otf in Resources */,
 				3A40738721B512280015C494 /* proxima-nova-light.otf in Resources */,
+				AD01829F2652420900595BAB /* BookingScreen.storyboard in Resources */,
 				3A40740A21B512280015C494 /* WWCalendarTimeSelector.storyboard in Resources */,
 				3A40738821B512280015C494 /* proxima-nova-regular-italic.otf in Resources */,
 				3A4073F521B512280015C494 /* AJAlertController.xib in Resources */,
@@ -1074,7 +1075,6 @@
 				34E01A2A220EEE2C000D048E /* Localizable.strings in Resources */,
 				3A4073FD21B512280015C494 /* circle2.png in Resources */,
 				34E01A25220EED13000D048E /* LaunchScreen.storyboard in Resources */,
-				54DF0EE426513C6000028B4E /* BookingScreen.storyboard in Resources */,
 				34E01A1D220EE898000D048E /* Main.storyboard in Resources */,
 				3A40739221B512280015C494 /* startHere.png in Resources */,
 				3A40738521B512280015C494 /* proxima-nova-extrabold.otf in Resources */,

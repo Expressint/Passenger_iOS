@@ -9,7 +9,11 @@
 import UIKit
 
 class SingletonClass: NSObject {
-   
+    /// Online cars for book later
+    var strOnlineDriverID = String()
+    var aryEstimateFareData = NSMutableArray()
+    var selectedIndexPath: IndexPath?
+    
     var dictProfile = NSMutableDictionary()
     var strPassengerID = String()
     var isUserLoggedIN = Bool()
