@@ -8,7 +8,7 @@
 //
 
 import UIKit
-
+import MarqueeLabel
 class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegateRateGiven
 {
     
@@ -16,9 +16,10 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     // MARK: - Outlets
     //-------------------------------------------------------------
     var delegate: delegateRateGiven!
-    @IBOutlet weak var lblPickupLocation: UILabel!
-    @IBOutlet weak var lblDropOffLocation: UILabel!
-    
+    @IBOutlet weak var lblPickupLocation: MarqueeLabel!
+    @IBOutlet weak var lblDropOffLocation: MarqueeLabel!
+    @IBOutlet weak var lblDropOffLocation2: MarqueeLabel!
+    @IBOutlet var viewDropOffLocation2: UIView!
     @IBOutlet var lblTripStatusTitle: UILabel!
     @IBOutlet weak var lblTripFare: UILabel!     // as Base Fare
     @IBOutlet weak var lblDistanceFare: UILabel!
@@ -160,6 +161,16 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblDropOffLocation.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "DropoffLocation") as? String))) ?(dictData.object(forKey: "DropoffLocation") as? String): "-"
 //        lblTollFree.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TollFee") as? String))) ?"\(String(describing: dictData.object(forKey: "TollFee") as! String)) \(currencySign)": "-"
         lblGrandTotal.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "GrandTotal") as? String))) ? "\(String(describing: dictData.object(forKey: "GrandTotal") as! String)) \(currencySign)": "-"
+        
+        let strDropLocation2 = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "DropoffLocation2") as? String))) ?(dictData.object(forKey: "DropoffLocation2") as? String): "-"
+        
+        viewDropOffLocation2.isHidden = true
+        if(strDropLocation2 != "-")
+        {
+            viewDropOffLocation2.isHidden = false
+            lblDropOffLocation2.text = strDropLocation2
+        }
+        
         lblBaseFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripFare") as? String))) ? "\(String(describing: dictData.object(forKey: "TripFare") as! String)) \(currencySign)": "-"
         
         
@@ -177,10 +188,24 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
         let PickTime = Double(dictData.object(forKey: "PickupTime") as! String)
         let dropoffTime = Double(dictData.object(forKey: "DropTime") as! String)
-        let unixTimestamp = PickTime //as Double//as! Double//dictData.object(forKey: "PickupTime")
-        let unixTimestampDrop = dropoffTime
-        let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp!))
-        let dateDrop = Date(timeIntervalSince1970: TimeInterval(unixTimestampDrop!))
+        
+        lblPaymentType.text = (dictData.object(forKey: "PaymentType") as! String).capitalizingFirstLetter()
+
+        if((!UtilityClass.isEmpty(str: (dictData.object(forKey: "Discount") as? String))))
+        {
+//            lblDiscount.text = " \(String(describing: dictData.object(forKey: "Discount") as! String)) \(currencySign)"
+            stackViewPomocide.isHidden = false
+        }
+        let strTemp = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripDistance") as? String ))) ?  (dictData.object(forKey: "TripDistance") as? String  ?? "") : "0.00 km"
+
+        let distaceFloat = Float(strTemp) ?? 0.0
+        let doubleStr = String(format: "%.2f", distaceFloat)
+
+        lblTripDistance.text = (doubleStr != "") ? "\(doubleStr) km" : "0.00 km"
+        guard let unixTimestamp = PickTime else { return } //as Double//as! Double//dictData.object(forKey: "PickupTime")
+        guard let unixTimestampDrop = dropoffTime else { return  }
+        let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
+        let dateDrop = Date(timeIntervalSince1970: TimeInterval(unixTimestampDrop))
         let dateFormatter = DateFormatter()
         //        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
         //        dateFormatter.locale = NSLocale.current
@@ -191,7 +216,6 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
         lblPickTime.text = strDate
         lblDropTime.text = strDateDrop
-        lblPaymentType.text = (dictData.object(forKey: "PaymentType") as! String).capitalizingFirstLetter()
     
         
 //        lblWaitingTimeCost.text = "\(dictData.object(forKey: "WaitingTimeCost") as! String) \(currencySign)"
@@ -199,21 +223,12 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
 //
 //        lblNote.text = strDateDrop //dictData.object(forKey: "PickupDateTime") as? String
         
-        if((!UtilityClass.isEmpty(str: (dictData.object(forKey: "Discount") as? String))))
-        {
-//            lblDiscount.text = " \(String(describing: dictData.object(forKey: "Discount") as! String)) \(currencySign)"
-            stackViewPomocide.isHidden = false
-        }
+     
         //        lblTripDistance.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripDistance") as? String))) ? (dictData.object(forKey: "TripDistance") as? String): "0.00"
 
 //                lblTripDistance.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripDistance") as? String))) ? (dictData.object(forKey: "TripDistance") as? String): "0.00"
 
-        let strTemp = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "TripDistance") as? String ))) ?  (dictData.object(forKey: "TripDistance") as! String ) : "0.00 km"
-
-        let distaceFloat = Float(strTemp)
-        let doubleStr = String(format: "%.2f", distaceFloat!)
-
-        lblTripDistance.text = (doubleStr != nil) ? "\(doubleStr) km" : "0.00 km"
+   
         
 
 //        lblDiatnceFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "DistanceFare") as? String))) ? "\(String(describing: dictData.object(forKey: "DistanceFare") as! String)) \(currencySign)": "-"
@@ -222,7 +237,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
 //        lblExtraCharges.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "ExtraCharges") as? String))) ? " \(String(describing: dictData.object(forKey: "ExtraCharges") as! String))": "-"
 
 
-        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int((dictData.object(forKey: "WaitingTime") as? String)!) ?? 0)
+//        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int((dictData.object(forKey: "WaitingTime") as? String)!) ?? 0)
         
 //                lblWaitingTime.text = "\(getStringFrom(seconds: h)):\(getStringFrom(seconds: m)):\(getStringFrom(seconds: s))"
     }

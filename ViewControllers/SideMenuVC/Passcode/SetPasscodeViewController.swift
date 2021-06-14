@@ -115,7 +115,7 @@ class SetPasscodeViewController: UIViewController {
                         }
                         else {
                             
-                            if strStatusToNavigate == "0" {
+                            /*if strStatusToNavigate == "0" {
                                 
                                 let next = self.storyboard?.instantiateViewController(withIdentifier: "TickPayRegistrationViewController") as! TickPayRegistrationViewController
                                 self.navigationController?.pushViewController(next, animated: true)
@@ -132,8 +132,9 @@ class SetPasscodeViewController: UIViewController {
                                 let next = self.storyboard?.instantiateViewController(withIdentifier: "PayViewController") as! PayViewController
                                 self.navigationController?.pushViewController(next, animated: true)
                                 
-                            }
-                            else if strStatusToNavigate == "Wallet" {
+                            }*/
+                             
+                            if strStatusToNavigate == "Wallet" {
                                 let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletViewController") as! WalletViewController
                                 self.navigationController?.pushViewController(next, animated: true)
                             }

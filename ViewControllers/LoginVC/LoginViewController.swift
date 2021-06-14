@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import TransitionButton
+//import TransitionButton
 import ACFloatingTextfield_Swift
 import FBSDKLoginKit
 import FBSDKCoreKit
@@ -111,13 +111,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         UserDefaults.standard.set("en", forKey: "i18n_language")
         UserDefaults.standard.synchronize()
         
-        if UIDevice.current.name == "Bhavesh iPhone" || UIDevice.current.name == "Excellent Web's iPhone 5s" || UIDevice.current.name == "Rahul's iPhone" {
-            
-            txtMobile.text = "9904439228"
-            txtPassword.text = "12345678"
-        }
-        txtMobile.text = "9898989898"
-        txtPassword.text = "12345678"
+//        if UIDevice.current.name == "Bhavesh iPhone" || UIDevice.current.name == "Excellent Web's iPhone 5s" || UIDevice.current.name == "Rahul's iPhone" {
+//
+//            txtMobile.text = "9904439228"
+//            txtPassword.text = "12345678"
+//        }
+//        txtMobile.text = "9898989898"
+//        txtPassword.text = "12345678"
         
         lblLaungageName.layer.cornerRadius = 5
         lblLaungageName.backgroundColor = themeYellowColor
@@ -147,7 +147,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
    func setLocalization()
     {
-        txtMobile.placeholder = "Phone Number".localized
+        txtMobile.placeholder = "Email/Phone Number".localized
         txtPassword.placeholder = "Password".localized
         lblDontAc.text = "Don't have an account?".localized
 //       lblOr.text = "OR".localized
@@ -168,17 +168,17 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         if (txtMobile.text?.count == 0)
         {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Mobile Number") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Email/Mobile Number") { (index, title) in
             }
             
              // txtMobile.showErrorWithText(errorText: "Enter Email")
             return false
         }
-        else if ((txtMobile.text?.count)! < 10){
-            
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid Mobile Number") { (index, title) in
-            }
-        }
+//        else if ((txtMobile.text?.count)! < 10){
+//
+//            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid Mobile Number") { (index, title) in
+//            }
+//        }
         else if (txtPassword.text?.count == 0)
         {
 

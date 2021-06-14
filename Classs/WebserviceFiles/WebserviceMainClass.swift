@@ -24,7 +24,7 @@ func postData(_ dictParams: AnyObject, nsURL: String, completion: @escaping (_ r
     let url = WebserviceURLs.kBaseURL + nsURL
 
     UtilityClass.showACProgressHUD()
-     print("webservice is : \(url)")
+     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
     Alamofire.request(url, method: .post, parameters: dictParams as? [String : AnyObject], encoding: URLEncoding.default, headers: header)
         .validate()
         .responseJSON
@@ -57,7 +57,7 @@ func getData(_ dictParams: AnyObject, nsURL: String,  completion: @escaping (_ r
 {
     let url = WebserviceURLs.kBaseURL + nsURL
 
-    print("webservice is : \(url)")
+    print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
     UtilityClass.showACProgressHUD()
     
     Alamofire.request(url, method: .get, parameters: dictParams as? [String : AnyObject], encoding: URLEncoding.default, headers: header)
@@ -98,7 +98,8 @@ func sendImage(_ dictParams: [String:AnyObject], image1: UIImage, nsURL: String,
     let url = WebserviceURLs.kBaseURL + nsURL
     
     UtilityClass.showACProgressHUD()
-    
+    print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
+
     Alamofire.upload(multipartFormData: { (multipartFormData) in
         
         if let imageData1 = UIImageJPEGRepresentation(image1, 0.6) {
@@ -162,7 +163,8 @@ func postTwoImageMethod(_ dictParams: [String:AnyObject], image1: UIImage, image
     let url = WebserviceURLs.kBaseURL + nsURL
     
     UtilityClass.showACProgressHUD()
-    
+    print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
+
     Alamofire.upload(multipartFormData: { (multipartFormData) in
         
         if let imageData1 = UIImageJPEGRepresentation(image1, 0.6) {
@@ -349,7 +351,8 @@ func estimateMethod(_ dictParams: AnyObject, nsURL: String, completion: @escapin
     let url = WebserviceURLs.kBaseURL + nsURL
     
 //    UtilityClass.showACProgressHUD()
-    
+    print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
+
     Alamofire.request(url, method: .post, parameters: dictParams as? [String : AnyObject], encoding: URLEncoding.default, headers: header)
         .validate()
         .responseJSON

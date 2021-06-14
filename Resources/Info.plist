@@ -79,7 +79,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera access required for capturing photos!</string>
+	<string>Camera access required for uploading photos for profile picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App would like to use your current location to journal places you go.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -87,7 +87,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App would like to use your current location to journal places you go.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library access required for using photos!</string>
+	<string>Photo Library access required for uploading photos for profile picture.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>proxima-nova-black.otf</string>

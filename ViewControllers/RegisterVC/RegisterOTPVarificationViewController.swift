@@ -34,6 +34,7 @@ class RegisterOTPVarificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.SetLayout()
+        txtOTP.keyboardType = .numberPad
        
     }
     

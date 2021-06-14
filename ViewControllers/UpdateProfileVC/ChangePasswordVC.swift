@@ -89,7 +89,20 @@ class ChangePasswordVC: BaseViewController {
             return
         }
         
-        
+        if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
+        {
+            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+            }
+            
+            return
+        }
+        else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
+        {
+            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+            }
+            
+            return
+        }
         if txtNewPassword.text == txtConfirmPassword.text {
         
             if str!.count >= 8  {

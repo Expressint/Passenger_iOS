@@ -79,30 +79,10 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         //        giveGradientColor()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.setNewBookingOnArray), name: NotificationForAddNewBooingOnSideMenu, object: nil)
-//
-//        if SingletonClass.sharedInstance.bookingId != "" {
-//            setNewBookingOnArray()
-//        }
         
-        webserviceOfTickPayStatus()
-        
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-         arrMenuIcons = ["icon_MyBookingUnselect","icon_UnSelectedWallet","img_mn_help_unselect","img_mn_receipt_unselect","ic_pay_unselect"]
-//        arrMenuIcons = ["icon_MyBookingUnselect","icon_MyReceiptUnselect","icon_UnSelectedWallet","icon_InviteFriendUnselect","icon_FavouriteUnselect","icon_Legal","icon_Support"]
-        
-        //,"icon_PaymentOptionsUnselect","icon_UnSelectedWallet",,"icon_PaymentOptionsUnselect"
-//                        "iconSettings","iconMyBooking","iconPackageHistory","iconLogOut"]
-        
-//        arrMenuTitle = ["My Booking","My Receipts","Invite Friends","My Ratings","Legal", "Support"]//"Favourites","Payment Options"
-//                        "Settings","Become a \(appName) Driver","Package History","LogOut"]//,"Wallet"
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        webserviceOfTickPayStatus()
+         arrMenuIcons = ["icon_MyBookingUnselect","icon_UnSelectedWallet","img_mn_help_unselect","img_mn_receipt_unselect","icon_FavouriteUnselect"]
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,7 +103,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings","Payment Options", "Help", "My Receipts", "Previous Due"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings","Payment Options", "Help", "My Receipts" , "Favourites"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -563,7 +543,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     // MARK: - Custom Methods
     //-------------------------------------------------------------
     
-    func navigateToTiCKPay() {
+   /* func navigateToTiCKPay() {
         //        webserviceOfTickPayStatus()
         
         if self.varifyKey == 0 {
@@ -581,7 +561,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             let next = self.storyboard?.instantiateViewController(withIdentifier: "PayViewController") as! PayViewController
             self.navigationController?.pushViewController(next, animated: true)
         }
-    }
+    }*/
     
     @IBAction func btnProfilePickClicked(_ sender: Any)
     {

@@ -160,6 +160,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             return false
         }
             
+        else if ((txtPassword.text?.hasPrefix(" ") == true) || (txtPassword.text?.hasSuffix(" ") == true))
+        {
+            UtilityClass.setCustomAlert(title: "Error", message: "Your password can’t start or end with a blank space".localized) { (index, title) in
+            }
+
+            return false
+        }
         else if ((txtPassword.text?.count)! < 6)
         {
             UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
@@ -178,6 +185,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         else if ((txtConfirmPassword.text?.count)! < 6)
         {
             UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+            }
+            
+            return false
+        }
+        else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
+        {
+            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
             }
             
             return false

@@ -9,7 +9,7 @@
 import UIKit
 import FormTextField
 
-class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate, CardIOPaymentViewControllerDelegate {
+class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     
     var aryMonth = [String]()
@@ -292,12 +292,12 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
         }
     }
     
-    @IBAction func btnScanCard(_ sender: UIButton) {
+   /* @IBAction func btnScanCard(_ sender: UIButton) {
         
         let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
         cardIOVC?.modalPresentationStyle = .formSheet
         present(cardIOVC!, animated: true, completion: nil)
-    }
+    }*/
     
     
     func validateCardNumber(number: String) {
@@ -469,7 +469,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
     //-------------------------------------------------------------
     
     
-    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+/*    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -525,7 +525,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
             txtValidThrough.text = "\(info.expiryMonth)/\(info.expiryYear)"
         }
         paymentViewController?.dismiss(animated: true, completion: nil)
-    }
+    }*/
     
     func customStringFormatting(of str: String) -> String {
         return str.characters.chunk(n: 4)

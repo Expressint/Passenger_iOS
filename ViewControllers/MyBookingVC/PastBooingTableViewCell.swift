@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MarqueeLabel
 class PastBooingTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
@@ -42,15 +42,16 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var viewDetails: UIView!
     @IBOutlet weak var lblDriverName: UILabel!
     @IBOutlet weak var lblBookingID: UILabel!
-    @IBOutlet weak var lblDropoffAddress: UILabel!  // DropOff Address is PickupAddress
+    @IBOutlet weak var lblDropoffAddress: MarqueeLabel!  // DropOff Address is PickupAddress
+    @IBOutlet weak var lblDropoffAddress2: MarqueeLabel!  // DropOff Address is PickupAddress
     @IBOutlet weak var lblDateAndTime: UILabel!
     @IBOutlet var viewCell: UIView!
-    @IBOutlet weak var lblPickupAddress: UILabel! // Pickup Address is PickupAddress
+    @IBOutlet weak var lblPickupAddress: MarqueeLabel! // Pickup Address is PickupAddress
     @IBOutlet weak var stackViewPickupTime: UIStackView!
     @IBOutlet weak var lblPickupTime: UILabel!
     @IBOutlet weak var stackViewDropoffTime: UIStackView!
     @IBOutlet weak var lblDropoffTime: UILabel!
-    @IBOutlet weak var stackViewVehicleType: UIStackView!
+    @IBOutlet weak var stackViewDropLocation2: UIView!
     @IBOutlet weak var lblVehicleType: UILabel!
     @IBOutlet var lblPaymentType: UILabel!
     @IBOutlet var lblBookingFee: UILabel!

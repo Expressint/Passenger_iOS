@@ -284,7 +284,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type")!
+        let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type") ?? ""
         
         if(application.applicationState == .background)
         {

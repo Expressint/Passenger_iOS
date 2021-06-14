@@ -10,7 +10,7 @@ import UIKit
 import FormTextField
 import CreditCardForm
 
-class PayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CardIOPaymentViewControllerDelegate, UITextFieldDelegate {
+class PayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
    
     let pickerView = UIPickerView()
@@ -540,13 +540,13 @@ class PayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-    @IBAction func btnScanCard(_ sender: UIButton) {
+   /* @IBAction func btnScanCard(_ sender: UIButton) {
         
         let cardIOVC = CardIOPaymentViewController(paymentDelegate: self)
         cardIOVC?.modalPresentationStyle = .formSheet
         present(cardIOVC!, animated: true, completion: nil)
         
-    }
+    }*/
     
     var currentMonth = String()
     var currentYear = String()
@@ -572,7 +572,7 @@ class PayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     // MARK: - Scan Card Methods
     //-------------------------------------------------------------
     
-    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+   /* func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -623,7 +623,7 @@ class PayViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             txtExpiryDate.text = "\(info.expiryMonth)/\(info.expiryYear)"
         }
         paymentViewController?.dismiss(animated: true, completion: nil)
-    }
+    }*/
     
     func customStringFormatting(of str: String) -> String {
         return str.characters.chunk(n: 4)

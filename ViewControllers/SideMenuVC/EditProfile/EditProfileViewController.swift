@@ -84,7 +84,7 @@ class EditProfileViewController: BaseViewController {
     
     func setImageColorOfImage(name: String) -> UIImage {
         
-        var imageView = UIImageView()
+        let imageView = UIImageView()
         
         let img = UIImage(named: name)
         imageView.image = img?.maskWithColor(color: UIColor.white)

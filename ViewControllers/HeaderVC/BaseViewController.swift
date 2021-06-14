@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool){
+    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false){
 //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.barTintColor = themeYellowColor;
@@ -34,9 +34,21 @@ class BaseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         if IsNeedRightButton == true {
-//            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
-//            self.navigationItem.rightBarButtonItem = nil
-//            self.navigationItem.rightBarButtonItem = rightNavBarButton
+            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
+
+            if(isFavNeeded)
+            {
+                
+                let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
+
+                self.navigationItem.rightBarButtonItems = [rightNavBarButton,rightFavBarButton]
+
+            }
+            else
+            {
+                self.navigationItem.rightBarButtonItem = nil
+                self.navigationItem.rightBarButtonItem = rightNavBarButton
+            }
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }
@@ -60,9 +72,9 @@ class BaseViewController: UIViewController {
         
         
         if IsNeedRightButton == true {
-//            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
-//            self.navigationItem.rightBarButtonItem = nil
-//            self.navigationItem.rightBarButtonItem = rightNavBarButton
+            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
+            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = rightNavBarButton
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }

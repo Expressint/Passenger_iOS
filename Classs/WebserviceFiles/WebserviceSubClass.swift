@@ -46,7 +46,7 @@ let VarifyUser = WebserviceURLs.kVarifyUser
 let TickpayInvoice = WebserviceURLs.kTickpayInvoice
 let GetTickpayRate = WebserviceURLs.kGetTickpayRate
 let Init = WebserviceURLs.kInit
-
+let UpdateDropoffLocation = WebserviceURLs.kUpdateDropoffLocation
 let GetPackages = WebserviceURLs.kGetPackages
 
 let ReviewRating = WebserviceURLs.kReviewRating
@@ -571,3 +571,12 @@ func webserviceForTrackRunningTrip(_ dictParams: AnyObject, completion: @escapin
 }
 
 
+//-------------------------------------------------------------
+// MARK: - Webservice For Update Dropoff Location
+//-------------------------------------------------------------
+
+func webserviceForUpdateDropoffLocation(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = UpdateDropoffLocation
+    postData(dictParams, nsURL: url, completion: completion)
+}

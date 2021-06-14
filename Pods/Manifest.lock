@@ -6,7 +6,6 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.3.1)
   - AppAuth/Core (1.3.1)
   - AppAuth/ExternalUserAgent (1.3.1)
-  - CardIO (5.4.1)
   - CHIPageControl (0.1.4):
     - CHIPageControl/Aji (= 0.1.4)
     - CHIPageControl/Aleppo (= 0.1.4)
@@ -25,7 +24,6 @@ PODS:
   - CHIPageControl/Paprika (0.1.4)
   - CHIPageControl/Puya (0.1.4)
   - CreditCardForm (0.1.5)
-  - DOAlertController (2.0)
   - FBSDKCoreKit (7.0.0):
     - FBSDKCoreKit/Basics (= 7.0.0)
     - FBSDKCoreKit/Core (= 7.0.0)
@@ -139,6 +137,7 @@ PODS:
   - IQDropDownTextField (1.1.1)
   - IQKeyboardManagerSwift (5.0.6)
   - M13Checkbox (3.2.1)
+  - MarqueeLabel/Swift (3.2.1)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -149,7 +148,6 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.0.0)
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
-  - Pulsator (0.4.0)
   - SDWebImage (4.2.1):
     - SDWebImage/Core (= 4.2.1)
   - SDWebImage/Core (4.2.1)
@@ -157,15 +155,12 @@ PODS:
   - Socket.IO-Client-Swift (12.1.2):
     - Starscream (~> 2.1.1)
   - Starscream (2.1.1)
-  - TransitionButton (0.3.0)
 
 DEPENDENCIES:
   - ACFloatingTextfield-Swift
   - Alamofire
-  - CardIO
   - CHIPageControl
   - CreditCardForm
-  - DOAlertController (from `https://github.com/okmr-d/DOAlertController.git`, branch `master`)
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Crashlytics
@@ -177,19 +172,17 @@ DEPENDENCIES:
   - IQDropDownTextField
   - IQKeyboardManagerSwift
   - M13Checkbox
+  - MarqueeLabel/Swift
   - NVActivityIndicatorView
-  - Pulsator
   - SDWebImage (~> 4.0)
   - SideMenuController
   - Socket.IO-Client-Swift
-  - TransitionButton
 
 SPEC REPOS:
   trunk:
     - ACFloatingTextfield-Swift
     - Alamofire
     - AppAuth
-    - CardIO
     - CHIPageControl
     - CreditCardForm
     - FBSDKCoreKit
@@ -214,35 +207,22 @@ SPEC REPOS:
     - IQDropDownTextField
     - IQKeyboardManagerSwift
     - M13Checkbox
+    - MarqueeLabel
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
     - Protobuf
-    - Pulsator
     - SDWebImage
     - SideMenuController
     - Socket.IO-Client-Swift
     - Starscream
-    - TransitionButton
-
-EXTERNAL SOURCES:
-  DOAlertController:
-    :branch: master
-    :git: https://github.com/okmr-d/DOAlertController.git
-
-CHECKOUT OPTIONS:
-  DOAlertController:
-    :commit: d0c58322b6ebc8d935399598bed0fb029451e0b3
-    :git: https://github.com/okmr-d/DOAlertController.git
 
 SPEC CHECKSUMS:
   ACFloatingTextfield-Swift: c3212cef9548ae58fa914ea1c26a2f9a4f7cd7df
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AppAuth: 8803ba1aec6d00d9afd30093f82e600307eaa6ea
-  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   CHIPageControl: 032b5ab68506c00711d5a61bd83e9fdf2a7ecb22
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
-  DOAlertController: 4d4ee33bbf1656271895da4a3cac4fbaa1d3217e
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
@@ -265,17 +245,16 @@ SPEC CHECKSUMS:
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
   IQKeyboardManagerSwift: 02bfbb0dff71c66d0ab77d80d25dfce0c3717735
   M13Checkbox: 12376f5b128189432508c240e4a36dc945ab7e4e
+  MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  Pulsator: a0e7c006790a576de63280b2f0552ea1c1b83ce0
   SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  TransitionButton: 0bf7e5ffe80030f9d10d57983a04acf2f511998a
 
-PODFILE CHECKSUM: cf971888016b5487222669ffeeb0e96577ad99b7
+PODFILE CHECKSUM: be2e12475c6d749cf081be8376197570d75acd95
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

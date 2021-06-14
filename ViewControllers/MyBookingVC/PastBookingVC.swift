@@ -192,12 +192,14 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let pickupTime = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PickupTime", isNotHave: strNotAvailable)
             let DropoffTime = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "DropTime", isNotHave: strNotAvailable)
             let strModel = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "Model", isNotHave: strNotAvailable)
-            let strTripDistance = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripDistance", isNotHave: strNotAvailable)
+//            let strTripDistance = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripDistance", isNotHave: strNotAvailable)
             let strTripFare = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripFare", isNotHave: strNotAvailable)
             
+            let strDropLocation2 = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "DropoffLocation2", isNotHave: strNotAvailable)
+            
             let strBookingFee = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "BookingCharge", isNotHave: strNotAvailable) //(aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "BookingCharge") as? String
-            let strPromoCode = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "Discount", isNotHave: "0")// (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Discount") as? String
-            let  strTip = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TollFee", isNotHave: strNotAvailable)
+//            let strPromoCode = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "Discount", isNotHave: "0")// (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Discount") as? String
+//            let  strTip = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TollFee", isNotHave: strNotAvailable)
             
             let strTotalAmount = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "GrandTotal", isNotHave: strNotAvailable)
 
@@ -210,12 +212,12 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en"
                 {
-                    cell.lblTripStatus.text = currentData.object(forKey: "Status") as! String
+                    cell.lblTripStatus.text = currentData.object(forKey: "Status") as? String
                     
                 }
                 else if SelectedLanguage == "sw"
                 {
-                   cell.lblTripStatus.text = currentData.object(forKey: "swahili_BookingStatus") as! String
+                    cell.lblTripStatus.text = currentData.object(forKey: "swahili_BookingStatus") as? String
                 }
             }
             
@@ -271,7 +273,12 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             } else {
                 cell.lblDropoffTime.text = setTimeStampToDate(timeStamp: DropoffTime)
             }
-            
+            cell.stackViewDropLocation2.isHidden = true
+            if(strDropLocation2 != strNotAvailable)
+            {
+                cell.stackViewDropLocation2.isHidden = false
+                cell.lblDropoffAddress2.text = strDropLocation2
+            }
             cell.lblVehicleType.text = strModel
 //            cell.lblTip.text = "\(strTip)x \(currencySign)"
             cell.lblTripFare.text = "\(strTripFare) \(currencySign)"

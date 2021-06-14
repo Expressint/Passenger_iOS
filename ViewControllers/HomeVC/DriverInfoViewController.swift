@@ -8,6 +8,9 @@
 
 import UIKit
 import SDWebImage
+import MarqueeLabel
+import CoreLocation
+import MapKit
 
 class DriverInfoViewController: UIViewController {
     //-------------------------------------------------------------
@@ -17,8 +20,16 @@ class DriverInfoViewController: UIViewController {
     @IBOutlet weak var imgCar: UIImageView!
     @IBOutlet weak var lblCareName: UILabel!
     @IBOutlet weak var lblCarClassModel: UILabel!
-    @IBOutlet weak var lblPickupLocation: UILabel!
-    @IBOutlet weak var lblDropoffLocation: UILabel!
+    @IBOutlet weak var lblPickupLocation: MarqueeLabel!
+    @IBOutlet weak var lblDropoffLocation: MarqueeLabel!
+    @IBOutlet weak var lblDropoffLocation2: MarqueeLabel!
+    @IBOutlet weak var viewDropoffLocation2: UIView!
+    
+    
+    @IBOutlet weak var viewTimeToReachPickLocation: UIView!
+    @IBOutlet weak var viewDistanceToReachPickLocation: UIView!
+
+    
     @IBOutlet var btnCallGreen: UIButton!
     @IBOutlet weak var lblCarPlateNumber: UILabel!
     @IBOutlet weak var imgDriver: UIImageView!
@@ -26,22 +37,35 @@ class DriverInfoViewController: UIViewController {
     @IBOutlet weak var viewCarAndDriverInfo: UIView!
     @IBOutlet weak var btnOk: ThemeButton!
     @IBOutlet weak var lblDriverInfo: UILabel!
-
+    var directions: MKDirections!
+    var strApproxTimeToYourLocation = String()
+    var strApproxDistanceToYourLocation = String()
+    var shouldShow = Bool()
     
     var strCurrentLat = ""
     var strCurrentLng = ""
+    var strPickUpLat = ""
+    var strPickUpLng = ""
     var strBookingID = ""
     var strBookingType = ""
-    
+    var ApproxTimeReachYourLocation:String = ""
+    var ApproxDistanceReachYourLocation:String = ""
+
     var strCarImage = String()
     var strCareName = String()
     var strCarClass = String()
     var strPickupLocation = String()
     var strDropoffLocation = String()
+    var strDropoffLocation2 = String()
     var strDriverImage = String()
     var strDriverName = String()
     var strCarPlateNumber = String()
     var strPassengerMobileNumber = String()
+    
+    
+    @IBOutlet var lblApproxTime: UILabel!
+    @IBOutlet var lblApproxDistanceToYourLocation: UILabel!
+
 
     //-------------------------------------------------------------
     // MARK: - Base Methods
@@ -49,13 +73,13 @@ class DriverInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setLocalization()
-        fillAllFields()
+//        setLocalization()
+//        fillAllFields()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         
         btnOk.layer.cornerRadius = 5
@@ -65,6 +89,27 @@ class DriverInfoViewController: UIViewController {
         btnCallGreen.layer.cornerRadius = btnCallGreen.frame.width / 2
         btnCallGreen.clipsToBounds = true
         self.webserviceForGetEstimateETA()
+        
+        if(shouldShow)
+        {
+            self.getEstimateData { (status) in
+                if status {
+                    
+                    self.strApproxTimeToYourLocation = self.ApproxTimeReachYourLocation
+                    self.strApproxDistanceToYourLocation = self.ApproxDistanceReachYourLocation
+                    self.fillAllFields()
+                    
+                    UIView.animate(withDuration: 0.5) {
+                        self.view.layoutIfNeeded()
+                    }
+                }
+            }
+        }
+        else
+        {
+            self.fillAllFields()
+            
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -132,16 +177,23 @@ class DriverInfoViewController: UIViewController {
     
     func fillAllFields() {
         
-        if let carImg = strCarImage as? String {
+//        if strCarImage is String {
 //            imgCar.sd_setShowActivityIndicatorView(true)
 //            imgCar.sd_setIndicatorStyle(.gray)
 //            imgCar.sd_setImage(with: URL(string: carImg), completed: nil)
-        }
+//        }
         
-        if let driverImg = strDriverImage as? String {
-            imgDriver.sd_setShowActivityIndicatorView(true)
-            imgDriver.sd_setIndicatorStyle(.gray)
-            imgDriver.sd_setImage(with: URL(string: driverImg), completed: nil)
+        
+        
+        let driverImg = strDriverImage
+        imgDriver.sd_setShowActivityIndicatorView(true)
+        imgDriver.sd_setIndicatorStyle(.gray)
+        imgDriver.sd_setImage(with: URL(string: driverImg), completed: nil)
+        viewDropoffLocation2.isHidden = true
+        if(strDropoffLocation2 != "")
+        {
+            viewDropoffLocation2.isHidden = false
+            lblDropoffLocation2.text = strDropoffLocation2
         }
         
         lblCareName.text = strCareName
@@ -157,6 +209,16 @@ class DriverInfoViewController: UIViewController {
         else {
             lblCarClassModel.text = strCarClass
         }
+        
+        
+        self.lblApproxTime.text  = self.strApproxTimeToYourLocation
+        self.lblApproxDistanceToYourLocation.text    = self.strApproxDistanceToYourLocation
+
+        self.lblApproxTime.isHidden  = (self.strApproxTimeToYourLocation == "")
+        self.lblApproxDistanceToYourLocation.isHidden = (self.strApproxDistanceToYourLocation == "")
+        self.viewTimeToReachPickLocation.isHidden = self.lblApproxTime.isHidden
+        self.viewDistanceToReachPickLocation.isHidden = self.lblApproxDistanceToYourLocation.isHidden
+
     }
    
     @IBAction func btnCallToDriver(_ sender: UIButton) {
@@ -215,6 +277,61 @@ class DriverInfoViewController: UIViewController {
         }
         
     }
+    lazy var request = MKDirections.Request()
+
+    
+    func getEstimateData(Response: @escaping (Bool) -> ()) {
+        
+        
+        var TotalMinutes:Double = 0.0  // this variable counts total minutes from pickup to destination time in Minutes
+        var TotalDistance:Double = 0.0 // this variable counts total minutes from pickup to destination distance in Miles
+        // First Location Details
+        let pickupLat = strCurrentLat
+        let pickupLng = strCurrentLng
+        let DropOffLat = strPickUpLat
+        let DropOffLng = strPickUpLng
+        
+        let start = CLLocationCoordinate2D(latitude: (pickupLat as NSString).doubleValue, longitude: (pickupLng as NSString).doubleValue)
+        let Destiny = CLLocationCoordinate2D(latitude: (DropOffLat as NSString).doubleValue, longitude: (DropOffLng as NSString).doubleValue)
+        
+        estimateTravelTime(request: request, transportType: .automobile, source: start, destination: Destiny) { (minutes, distance) in
+            TotalMinutes = (TotalMinutes + minutes).rounded(toPlaces: 2)
+            TotalDistance = (TotalDistance + distance).rounded(toPlaces: 2)
+            
+            
+            self.ApproxTimeReachYourLocation = "Estimate time: \(TotalMinutes) Minutes"
+            self.ApproxDistanceReachYourLocation = "Estimate distance: \(TotalDistance) km(s)"
+            Response(true)
+        }
+        
+    }
+    
+    
+    func estimateTravelTime(request: MKDirections.Request, transportType: MKDirectionsTransportType, source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, string: @escaping (Double, Double) -> ()) {
+        
+        let p1 = CLLocation(latitude: source.latitude, longitude: source.longitude)
+        let p2 = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
+        let distance = p2.distance(from: p1) / 1000
+        
+        let start = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
+        let Destiny = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
+        
+        request.source = start
+        request.destination = Destiny
+        request.transportType = transportType
+        request.requestsAlternateRoutes = false
+        directions = MKDirections(request: request)
+        directions.calculateETA { (response, error) in
+            if let seconds = response?.expectedTravelTime {
+                let minutes = seconds / 60
+                string(minutes , distance)
+                //                    string(Int(ceil(minutes)).description, String(format: "%.2f", distance))
+            } else {
+                string(0, distance)
+            }
+        }
+    }
+    
     //-------------------------------------------------------------
     // MARK: - Webservice Methods for Add Address to Favourite
     //-------------------------------------------------------------

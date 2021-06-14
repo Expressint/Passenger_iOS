@@ -66,7 +66,7 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 
 
 struct WebserviceURLs {
-    static let kBaseURL                                 = "http://3.83.58.5/Passenger_Api/"//"http://3.138.250.141/Passenger_Api/" //"http://3.6.200.100/Passenger_Api/" // "http://3.6.224.0/Passenger_Api/" //"https://www.tantaxitanzania.com/Passenger_Api/" // "http://54.169.67.226/web/Passenger_Api/" // "https://pickngolk.info/web/Passenger_Api/" "http://54.169.67.226/web/Passenger_Api/" //
+    static let kBaseURL                                 = "http://3.83.58.5/Passenger_Api2/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -80,12 +80,12 @@ struct WebserviceURLs {
     static let kGetPromoCodeList                        = "PromoCodeList"
     static let kDriver                                  = "Driver"
     static let kBookingHistory                          = "BookingHistory"
-    
+    static let kUpdateDropoffLocation                   = "UpdateDropoffLocation"
     static let kPastBooking                             = "PastBooking"
     static let kUpcomingBooking                         = "UpcomingBooking"
     static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
-    static let kImageBaseURL                            = "http://3.83.58.5/"//"http://3.138.250.141/"//"http://3.6.200.100/" // "http://3.6.224.0/"//"https://www.tantaxitanzania.com/" // "https://pickngolk.info/web/" "http://54.169.67.226/web/" //
+    static let kImageBaseURL                            = "http://3.83.58.5/"
     static let kFeedbackList                            = "FeedbackList/"
     static let kCardsList                               = "Cards/"
     static let kPackageBookingHistory                   = "PackageBookingHistory"
@@ -126,11 +126,11 @@ struct WebserviceURLs {
 
 struct SocketData {
     
-    static let kBaseURL                                     = "http://3.83.58.5:8080"//"http://3.138.250.141:8080"//"http://3.138.250.141:8080"//"http://3.6.200.100:8080" // "http://3.6.224.0:8080" //"https://www.tantaxitanzania.com:8081"//"http://3.120.161.225:8080"
-    // "http://54.255.222.125:8080/" // "https://pickngolk.info:8081" "http://54.169.67.226:8080" //
+    static let kBaseURL                                     = "http://3.83.58.5:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"
+    static let kBookingDetailsDropoffs                      = "BookingDetailsDropoffs"
     static let kRejectBookingRequestNotification            = "RejectBookingRequestNotification"
     static let kPickupPassengerNotification                 = "PickupPassengerNotification"
     static let kBookingCompletedNotification                = "BookingDetails"
@@ -141,7 +141,6 @@ struct SocketData {
     static let kReceiveHoldingNotificationToPassenger       = "TripHoldNotification"
     static let kSendRequestForGetEstimateFare               = "EstimateFare"
     static let kReceiveGetEstimateFare                      = "GetEstimateFare"
-    
     static let kAcceptAdvancedBookingRequestNotification    = "AcceptAdvancedBookingRequestNotification"
     static let kRejectAdvancedBookingRequestNotification    = "RejectAdvancedBookingRequestNotification"
     static let kAdvancedBookingPickupPassengerNotification  = "AdvancedBookingPickupPassengerNotification"
@@ -174,11 +173,13 @@ struct SubmitBookingRequest {
     static let kModelId                 = "ModelId"
     static let kPickupLocation          = "PickupLocation"
     static let kDropoffLocation         = "DropoffLocation"
+    static let kDropoffLocation2        = "DropoffLocation2"
     static let kPickupLat               = "PickupLat"
     static let kPickupLng               = "PickupLng"
     static let kDropOffLat              = "DropOffLat"
     static let kDropOffLon              = "DropOffLon"
-    
+    static let kDropOffLat2             = "DropOffLat2"
+    static let kDropOffLon2             = "DropOffLon2"
     static let kPromoCode               = "PromoCode"
     static let kNotes                   = "Notes"
     static let kPaymentType             = "PaymentType"

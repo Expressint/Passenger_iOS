@@ -37,6 +37,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
     
     @IBOutlet weak var btnCancelPromocode: UIButton!
+    @IBOutlet weak var btnApplyPromocode: UIButton!
+
     var BookLaterCompleted:BookLaterSubmitedDelegate!
     var datePickerView = UIDatePicker()
     var dictSelectedDriver: [String: AnyObject]?
@@ -189,6 +191,15 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         datePickerView.minimumDate = date
         txtDataAndTimeFromCalendar.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(self.pickupdateMethod(_:)), for: UIControl.Event.valueChanged)
+        
+        
+        let mySelectedAttributedTitle = NSAttributedString(string: "Have a Promocode?",
+                                                           attributes: [NSAttributedString.Key.foregroundColor : themeAppMainColor,NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+        self.btnSelectPromocode.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
+        self.btnSelectPromocode.setTitle("Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
+        self.btnApplyPromocode.backgroundColor = themeAppMainColor
+        self.btnApplyPromocode.setTitleColor(.black, for: .normal)
+        self.txtMobileNumber.leftMargin = 0
 
     }
 
@@ -907,20 +918,19 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     }
                     
                     if let strAvilCAR = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "available_driver") as? Int {
-        //                        if strAvilCAR == 0 {
-        //                            cell.lblPrices.isHidden = true
-        //                        }else {
-        //                            cell.lblPrices.isHidden = false
-        //                        }
-    //                    cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
+                        
+                        if let strDistance = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "km") as? Double {
+                            if strAvilCAR == 0 {
+                                self.txtDriverAwayKm.text = "Distance \(0) km"
+                            }else {
+                                self.txtDriverAwayKm.text = "Distance \(strDistance) km"
+                            }
+                        }
+                        //
                         
                     }
                     
-                    if let strDistance = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "km") as? Double {
-                       // cell.lblDistance.text = "Distance \(strDistance) km"
-                        
-                        self.txtDriverAwayKm.text = "Distance \(strDistance) km"
-                    }
+                  
                 }
     //
               
@@ -1387,10 +1397,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBAction func btnCancelPromocode(_ sender: Any) {
         
         
-        let mySelectedAttributedTitle = NSAttributedString(string: "Have a Promocode?",
-                                                           attributes: [NSAttributedString.Key.foregroundColor : UIColor.black,NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
-        self.btnSelectPromocode.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
-        self.btnSelectPromocode.setTitle("Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
+ 
         self.strAppliedPromocode = ""
         btnCancelPromocode.isHidden = true
         

@@ -43,7 +43,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     
     func setLocalization()
     {
-        lblSwipeRightToLeftForRemoveAddress.text = "Please Swape Right To Left for remove address.".localized
+        lblSwipeRightToLeftForRemoveAddress.text = "Please Swipe Right To Left for remove address.".localized
     }
     //-------------------------------------------------------------
     // MARK: - Outlets
@@ -132,8 +132,11 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
                 tableView.endUpdates()
                 
                 if aryAddress.count == 0 {
-                    let dict = [String:AnyObject]()
-                    delegateForFavourite?.didEnterFavouriteDestination(Source: dict)
+//                    let dict = [String:AnyObject]()
+//                    dict["Address"] = selectedData["Address"]
+//                    dict["Lat"] = selectedData[""]
+//                    dict["Lng"] = selectedData[""]
+                    delegateForFavourite?.didEnterFavouriteDestination(Source: selectedData)
                     self.navigationController?.popViewController(animated: true)
                 }
             }

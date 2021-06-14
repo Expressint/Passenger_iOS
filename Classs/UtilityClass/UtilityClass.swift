@@ -68,6 +68,42 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         
     }
     
+    /// Response may be Any Type
+    class func showAlertOfAPIResponse(param: Any, vc: UIViewController) {
+        
+        if let res = param as? String {
+            UtilityClass.showAlert(appName, message: res, vc: vc)
+        }
+        else if let resDict = param as? NSDictionary {
+            if let msg = resDict.object(forKey: "message") as? String {
+                UtilityClass.showAlert(appName, message: msg, vc: vc)
+            }
+            else if let msg = resDict.object(forKey: "msg") as? String {
+                UtilityClass.showAlert(appName, message: msg, vc: vc)
+            }
+            else if let msg = resDict.object(forKey: "message") as? [String] {
+                UtilityClass.showAlert(appName, message: msg.first ?? "", vc: vc)
+            }
+        }
+        else if let resAry = param as? NSArray {
+            
+            if let dictIndxZero = resAry.firstObject as? NSDictionary {
+                if let message = dictIndxZero.object(forKey: "message") as? String {
+                    UtilityClass.showAlert(appName, message: message, vc: vc)
+                }
+                else if let msg = dictIndxZero.object(forKey: "msg") as? String {
+                    UtilityClass.showAlert(appName, message: msg, vc: vc)
+                }
+                else if let msg = dictIndxZero.object(forKey: "message") as? [String] {
+                    UtilityClass.showAlert(appName, message: msg.first ?? "", vc: vc)
+                }
+            }
+            else if let msg = resAry as? [String] {
+                UtilityClass.showAlert(appName, message: msg.first ?? "", vc: vc)
+            }
+        }
+    }
+    
     class func presentPopupOverScreen(_ alertController : UIViewController)
     {
         let alertWindow = UIWindow(frame: UIScreen.main.bounds)
@@ -155,7 +191,7 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         else
         {
             newString = newString?.trimmingCharacters(in: .whitespacesAndNewlines)
-            if ((str)!.count ?? 0) == 0 {
+            if ((str)!.count ) == 0 {
                 return true
                 
             }
@@ -172,7 +208,7 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         
         if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window, let rootViewController = window?.rootViewController {
             
-            var topViewController = rootViewController
+            let topViewController = rootViewController
             if topViewController.presentedViewController == nil {
                 let vc = topViewController.childViewControllers.last! as? AJAlertController
                 vc?.view.removeFromSuperview()
@@ -196,18 +232,7 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         
     }
     
-    
-//    convenience init(title: String, message: String, buttons buttonArray: [Any], completion block: @escaping (_ buttonIndex: Int) -> Void) {
-//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        for buttonTitle: String in buttonArray {
-//            let action = UIAlertAction(title: buttonTitle, style: .default, handler: {(_ action: UIAlertAction) -> Void in
-//                let index: Int = (buttonArray as NSArray).index(of: action.title ?? "")
-//                block(index)
-//            })
-//            alertController.addAction(action)
-//        }
-//        self.topMostController().present(alertController, animated: true) {() -> Void in }
-//    }
+
     
     class func showHUD()
     {
@@ -224,20 +249,6 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
     }
     class func showACProgressHUD() {
         
-//        let progressView = ACProgressHUD.shared
-//        /*
-//         ACProgressHUD.shared.configureStyle(withProgressText: "", progressTextColor: .black, progressTextFont: <#T##UIFont#>, shadowColor: UIColor.black, shadowRadius: 3, cornerRadius: 5, indicatorColor: UIColor.init(red: 204/255, green: 3/255, blue: 0, alpha: 1.0), hudBackgroundColor: .white, enableBackground: false, backgroundColor: UIColor.black, backgroundColorAlpha: 0.3, enableBlurBackground: false, showHudAnimation: .growIn, dismissHudAnimation: .growOut)
-//         */
-//        progressView.progressText = ""
-//
-//        progressView.hudBackgroundColor = .black
-//
-//        progressView.indicatorColor = themeYellowColor
-//        //        progressView.shadowRadius = 0.5
-//
-//
-//        progressView.showHUD()
-        
         let activityData = ActivityData()
         NVActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 55
         NVActivityIndicatorView.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD = 55
@@ -248,8 +259,6 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
     }
     
     class func hideACProgressHUD() {
-        
-//        ACProgressHUD.shared.hideHUD()
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
 
     }
@@ -284,7 +293,7 @@ extension UIViewController {
     
     func checkDictionaryHaveValue(dictData: [String:AnyObject], didHaveValue paramString: String, isNotHave: String) -> String {
         
-        var currentData = dictData
+        let currentData = dictData
         
         if currentData[paramString] == nil {
             return isNotHave
@@ -326,4 +335,22 @@ extension UIViewController {
     }
     
     
+}
+
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
 }

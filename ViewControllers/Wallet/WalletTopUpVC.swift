@@ -124,13 +124,10 @@ class WalletTopUpVC: BaseViewController, SelectCardDelegate,delegatePesapalWebVi
             }
         }
         else {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
-            next.strUrl = "https://www.tantaxitanzania.com/pesapal/add_money/\(SingletonClass.sharedInstance.strPassengerID)/\(txtAmount.text!.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: currencySign, with: ""))/passenger"
-//            self.present(next, animated: true, completion: nil)
-            next.delegate = self
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+            SingletonClass.sharedInstance.isFromTopUP = true
+            next.delegateForTopUp = self
             self.navigationController?.pushViewController(next, animated: true)
-//            let navController = UINavigationController.init(rootViewController: next)
-//            UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
             
 //            webserviceOFTopUp()
         }

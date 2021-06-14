@@ -8,7 +8,9 @@
 
 import UIKit
 import ACFloatingTextfield_Swift
-import TransitionButton
+import PhotosUI
+
+//import TransitionButton
 
 class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
  
@@ -167,29 +169,97 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     func PickingImageFromGallery()
     {
-        let picker = UIImagePickerController()
-        picker.delegate = self
         
-        picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = [(kUTTypeImage as String)]
-        
-        // picker.stopVideoCapture()
-//        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(picker, animated: true, completion: nil)
+        PHPhotoLibrary.requestAuthorization { status in
+            
+            
+            switch status {
+            case .authorized:
+                DispatchQueue.main.async {
+                    let picker = UIImagePickerController()
+                    picker.delegate = self
+                    
+                    picker.allowsEditing = false
+                    picker.sourceType = .photoLibrary
+                    picker.mediaTypes = [(kUTTypeImage as String)]
+                    self.present(picker, animated: true, completion: nil)
+                }
+            case .limited:
+                DispatchQueue.main.async {
+                    let picker = UIImagePickerController()
+                    picker.delegate = self
+                    
+                    picker.allowsEditing = false
+                    picker.sourceType = .photoLibrary
+                    picker.mediaTypes = [(kUTTypeImage as String)]
+                    self.present(picker, animated: true, completion: nil)
+                }
+            case .restricted:
+                break
+            //                   showRestrictedAccessUI()
+            
+            case .denied:
+                DispatchQueue.main.async {
+                    
+                    let alert = UIAlertController(title: "Photos", message: "Photo access is absolutely necessary to use this app", preferredStyle: .alert)
+                    
+                    // Add "OK" Button to alert, pressing it will bring you to the settings app
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Will do later", style: .default, handler: { action in
+                    }))
+                    // Show the alert with animation
+                    self.present(alert, animated: true)
+                }
+            //                   showAccessDeniedUI()
+            
+            case .notDetermined:
+                break
+                
+            @unknown default:
+                break
+            }
+        }
     }
+    
     
     
     func PickingImageFromCamera()
     {
-        let picker = UIImagePickerController()
         
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .camera
-        picker.cameraCaptureMode = .photo
         
-        present(picker, animated: true, completion: nil)
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                DispatchQueue.main.async {
+                    let picker = UIImagePickerController()
+                    
+                    picker.delegate = self
+                    picker.allowsEditing = false
+                    picker.sourceType = .camera
+                    picker.cameraCaptureMode = .photo
+                    
+                    self.present(picker, animated: true, completion: nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    
+                    let alert = UIAlertController(title: "Camera", message: "Camera access is absolutely necessary to use this app", preferredStyle: .alert)
+                    
+                    // Add "OK" Button to alert, pressing it will bri≥ng you to the settings app
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Will do later", style: .default, handler: { action in
+                    }))
+                    // Show the alert with animation
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+        
     }
     
     // MARK: - Image Delegate and DataSource Methods
