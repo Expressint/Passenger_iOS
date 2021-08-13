@@ -16,11 +16,15 @@
         limitations under the License.
  */
 
-#ifndef GTMAPPAUTH_USER_IMPORTS
-#import <GTMSessionFetcher/GTMSessionFetcher.h>
-#else // GTMAPPAUTH_USER_IMPORTS
-#import "GTMSessionFetcher.h"
-#endif // GTMAPPAUTH_USER_IMPORTS
+#if !defined(__has_include)
+  #error "__has_include not available."
+#elif __has_include(<GTMSessionFetcher/GTMSessionFetcher.h>)
+  #import <GTMSessionFetcher/GTMSessionFetcher.h>
+#elif __has_include("../GTMSessionFetcher.h")
+  #import "../GTMSessionFetcher.h"
+#else
+# error "Failed to find GTMSessionFetcher"
+#endif
 
 @class OIDAuthState;
 @class OIDServiceConfiguration;

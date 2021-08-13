@@ -81,7 +81,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
         
 //        webserviceOfTickPayStatus()
-         arrMenuIcons = ["icon_MyBookingUnselect","icon_UnSelectedWallet","img_mn_help_unselect","img_mn_receipt_unselect","icon_FavouriteUnselect"]
+         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_help_unselect","img_mn_receipt_unselect","icon_FavouriteUnselect"]
 
     }
     
@@ -103,7 +103,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings","Payment Options", "Help", "My Receipts" , "Favourites"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings", "Help", "My Receipts" , "Favourites"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {

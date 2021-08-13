@@ -282,7 +282,7 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     
     @objc func getReceipt(sender: UIButton) {
         
-        let emailTitle = ""
+//        let emailTitle = ""
         let messageBody = urlForMail
         let toRecipents = [""]
     

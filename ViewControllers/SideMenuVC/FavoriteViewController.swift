@@ -13,6 +13,12 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
 
     var labelNoData = UILabel()
     var aryAddress = [[String:AnyObject]]()
+    {
+        didSet
+        {
+            setLocalization()
+        }
+    }
     var delegateForFavourite: FavouriteLocationDelegate!
     
     @IBOutlet weak var lblSwipeRightToLeftForRemoveAddress: UILabel!
@@ -33,7 +39,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.setLocalization()
+//        self.setLocalization()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,7 +49,11 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     
     func setLocalization()
     {
-        lblSwipeRightToLeftForRemoveAddress.text = "Please Swipe Right To Left for remove address.".localized
+        lblSwipeRightToLeftForRemoveAddress.text = ""
+        if(aryAddress.count > 0)
+        {
+            lblSwipeRightToLeftForRemoveAddress.text = "Please Swipe Right To Left for remove address.".localized
+        }
     }
     //-------------------------------------------------------------
     // MARK: - Outlets

@@ -114,16 +114,36 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
     }
     
     
-    class func showAlertWithCompletion(_ title: String, message: String, vc: UIViewController,completionHandler: @escaping CompletionHandler) -> Void
+    class func showAlertWithCompletion(_ title: String, message: String, okTitle : String = "", otherTitle : String = "", vc: UIViewController,completionHandler: @escaping CompletionHandler) -> Void
     {
         let alert = UIAlertController(title: appName,
                                       message: message,
                                       preferredStyle: UIAlertControllerStyle.alert)
         
         
-        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { (action) in
-            completionHandler(true)
-        }))
+      
+        
+        if(okTitle != "")
+        {
+            alert.addAction(UIAlertAction(title: okTitle.localized, style: .default, handler: { (action) in
+                completionHandler(true)
+            }))
+        }
+        else
+        {
+            alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { (action) in
+                completionHandler(true)
+            }))
+            
+        }
+        
+        
+        if(otherTitle != "")
+        {
+            alert.addAction(UIAlertAction(title: otherTitle.localized, style: .default, handler: { (action) in
+                completionHandler(false)
+            }))
+        }
         
         if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)
         {

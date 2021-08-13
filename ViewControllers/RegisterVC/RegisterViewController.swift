@@ -43,6 +43,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         txtPhoneNumber.delegate = self
+        txtEmail.delegate = self
+        txtPassword.delegate = self
+        txtConfirmPassword.delegate = self
         self.SetLayout()
         
         //        txtPhoneNumber.text = "1234567890"
@@ -62,11 +65,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     //-------------------------------------------------------------
-    // MARK: - TextField Delegate Method"Sign Up
+    //MARK: - Textfield Delegate Methods
+
     //-------------------------------------------------------------
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        if (string == " ") {
+            return false
+        }
         if textField == txtPhoneNumber {
             let resultText: String? = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
             
@@ -80,6 +87,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
+ 
     // MARK: - Navigation
     
     

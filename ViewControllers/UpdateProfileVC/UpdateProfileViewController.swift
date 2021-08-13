@@ -24,7 +24,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet weak var lblContactNumber: UILabel!
     var  imgUpdatedProfilePic = UIImage()
     @IBOutlet weak var txtFirstName: UITextField!
-    //    @IBOutlet weak var txtLastName: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhoneNumber: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtDateOfBirth: UITextField!
@@ -76,7 +76,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
      
         self.btnMale.isSelected = true
         self.txtPhoneNumber.isUserInteractionEnabled = false
- 
+        self.txtEmail.isUserInteractionEnabled = false
+
 //        self.setShadowToTextFieldView(txtField: txtFirstName)
 //        self.setShadowToTextFieldView(txtField: txtAddress)
 //        self.setShadowToTextFieldView(txtField: txtPhoneNumber)
@@ -87,12 +88,15 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         UtilityClass.setLeftPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
+        UtilityClass.setLeftPaddingInTextfield(textfield: txtEmail, padding: 10)
+
         
         UtilityClass.setRightPaddingInTextfield(textfield: txtFirstName, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
-        
+        UtilityClass.setRightPaddingInTextfield(textfield: txtEmail, padding: 10)
+
         
 //        viewRadioGender.layer.cornerRadius = 2
 //        viewRadioGender.layer.shadowRadius = 3.0
@@ -176,6 +180,9 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 
         let datePickerView:UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        }
         datePickerView.maximumDate = Date()
         datePickerView.date = (sender.text?.dateFromFormat("yyyy-MM-dd"))!
         sender.inputView = datePickerView
@@ -298,7 +305,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         let getData = SingletonClass.sharedInstance.dictProfile
         
         imgProfile.sd_setShowActivityIndicatorView(true)
-        imgProfile.sd_setIndicatorStyle(.whiteLarge)
+        imgProfile.sd_setIndicatorStyle(.medium)
         
         if SingletonClass.sharedInstance.isFromSocilaLogin {
             imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)
@@ -322,7 +329,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         fullName = getData.object(forKey: "Fullname") as! String
   
         let fullNameArr = fullName.components(separatedBy: " ")
-        
+        txtEmail.text = getData.object(forKey: "Email") as? String ?? ""
         firstName = fullNameArr[0]
         lastName = fullNameArr[1]
 

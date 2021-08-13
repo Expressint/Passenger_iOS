@@ -22,7 +22,7 @@ import CoreLocation
 
 
 
-class LoginViewController: UIViewController, CLLocationManagerDelegate, alertViewMethodsDelegates, GIDSignInDelegate
+class LoginViewController: UIViewController, CLLocationManagerDelegate, alertViewMethodsDelegates, GIDSignInDelegate,UITextFieldDelegate
 {
     
     //-------------------------------------------------------------
@@ -123,7 +123,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         lblLaungageName.backgroundColor = themeYellowColor
         lblLaungageName.layer.borderColor = UIColor.black.cgColor
         lblLaungageName.layer.borderWidth = 0.5
-      
+        txtPassword.delegate = self
+        txtMobile.delegate = self
+
 //        view.addSubview(loginButton)
         
 //        let loginButton = FBLoginButton(type: .custom)
@@ -160,6 +162,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    //MARK: - Textfield Delegate Methods
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if (string == " ") {
+            return false
+        }
+        return true
+    }
+
 
     //MARK: - Validation
     

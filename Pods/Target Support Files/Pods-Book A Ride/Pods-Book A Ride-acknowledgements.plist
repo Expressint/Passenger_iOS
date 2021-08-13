@@ -2159,7 +2159,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    limitations under the License.
 </string>
 			<key>License</key>
-			<string>Apache License, Version 2.0</string>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMAppAuth</string>
 			<key>Type</key>

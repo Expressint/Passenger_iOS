@@ -16,7 +16,9 @@
         limitations under the License.
  */
 
-#import "GTMAppAuthFetcherAuthorization.h"
+#import <Foundation/Foundation.h>
+
+@class GTMAppAuthFetcherAuthorization;
 
 NS_ASSUME_NONNULL_BEGIN
 
