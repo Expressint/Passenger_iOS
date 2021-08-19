@@ -31,7 +31,7 @@ let kDeviceType : String = "1"
 
 //AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     var isAlreadyLaunched : Bool?
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.regular(ofSize: 14.0)]
 
         // Set Stored Language from Local Database
-
+      
         if UserDefaults.standard.value(forKey: "i18n_language") == nil {
             UserDefaults.standard.set("en", forKey: "i18n_language")
             UserDefaults.standard.synchronize()
@@ -304,12 +304,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         // Print full message.
         print(userInfo)
-        
+       
         completionHandler(UIBackgroundFetchResult.newData)
+        
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue:"NotificationBadges"), object: notification.request.content)
+        completionHandler([.alert, .sound])
         
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
+        print(#function)
+        completionHandler()
         /*
          // 1
          let userInfo = response.notification.request.content.userInfo
@@ -327,7 +334,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
          }
          }
          // 4
-         completionHandler()
+        
          */
         
     }
@@ -337,14 +344,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     //-------------------------------------------------------------
     
     func registerForPushNotification() {
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
-            
-            print("Permissin granted: \(granted)")
-            
-            self.getNotificationSettings()
-            
-        })
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_ , _ in })
+            // For iOS 10 data message (sent via FCM)
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
+//
+//            print("Permissin granted: \(granted)")
+//
+//            self.getNotificationSettings()
+//
+//        })
         
     }
     

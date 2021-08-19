@@ -141,6 +141,7 @@ struct SocketData {
     static let kReceiveHoldingNotificationToPassenger       = "TripHoldNotification"
     static let kSendRequestForGetEstimateFare               = "EstimateFare"
     static let kReceiveGetEstimateFare                      = "GetEstimateFare"
+    static let kDriverArrived                               = "DriverArrived"
     static let kAcceptAdvancedBookingRequestNotification    = "AcceptAdvancedBookingRequestNotification"
     static let kRejectAdvancedBookingRequestNotification    = "RejectAdvancedBookingRequestNotification"
     static let kAdvancedBookingPickupPassengerNotification  = "AdvancedBookingPickupPassengerNotification"

@@ -1512,8 +1512,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //        sideMenuController?.toggle()
     //
     //    }
-    
-    
     func onGetEstimateFare() {
         
         self.socket.on(SocketData.kReceiveGetEstimateFare, callback: { (data, ack) in
@@ -1590,6 +1588,29 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                 }
                             }
                         }
+                    }
+                }
+            }
+        })
+    }
+    
+    func onDriverArrived() {
+        
+        self.socket.on(SocketData.kDriverArrived, callback: { (data, ack) in
+            print(#function,data)
+            
+            if (((data as NSArray).firstObject as? NSDictionary) != nil) {
+                var estimateData = (data as! [[String:AnyObject]])
+                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+                    if SelectedLanguage == "en" {
+                        
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+                        })
+                    }
+                    else if SelectedLanguage == "sw"
+                    {
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+                        })
                     }
                 }
             }
@@ -3200,11 +3221,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.onReceiveNotificationWhenDriverAcceptRequest()
                 self.socketMethodForDropOffs()
                 self.onGetEstimateFare()
+                self.onDriverArrived()
             }
             
             // Get Estimate
             self.socket.on(SocketData.kNearByDriverList, callback: { (data, ack) in
-//                print("NearByDriverListIOS is \(data)")
+                print("NearByDriverListIOS is \(data)")
                 
 //                var lat : Double!
 //                var long : Double!
@@ -3254,7 +3276,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if doublePickupLat != 0 && doublePickupLng != 0 {
             let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
             socket.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON])
-//            print(SocketData.kUpdatePassengerLatLong, myJSON)
+            print(SocketData.kUpdatePassengerLatLong, myJSON)
         }
         
     }
@@ -4909,13 +4931,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         acController.autocompleteBounds = bounds
-        acController.autocompleteFilter?.country = "GY"
-        
+        let filter = GMSAutocompleteFilter()
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul's iphone")
         {
-            acController.autocompleteFilter?.country = "IN"
+//            filter.country = "IN"
         }
-        //        BoolCurrentLocation = false
+        acController.autocompleteFilter = filter
         if(sender.tag == 0)
         {
             locationEnteredType = .dropOffFirst
@@ -4937,11 +4959,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         acController.autocompleteBounds = bounds
-        acController.autocompleteFilter?.country = "GY"
+
+        let filter = GMSAutocompleteFilter()
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul's iphone")
         {
-            acController.autocompleteFilter?.country = "IN"
+//            filter.country = "IN"
         }
+        acController.autocompleteFilter = filter
         //        BoolCurrentLocation = true
         locationEnteredType = .pickup
         
