@@ -686,12 +686,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         BoolCurrentLocation = true
-        acController.autocompleteFilter?.country = "GY"
-        
+
+        let filter = GMSAutocompleteFilter()
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul's iphone")
         {
-            acController.autocompleteFilter?.country = "IN"
+            filter.country = "IN"
         }
+        acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
         
     }
@@ -701,12 +703,13 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
-        acController.autocompleteFilter?.country = "GY"
-        
+        let filter = GMSAutocompleteFilter()
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul's iphone")
         {
-            acController.autocompleteFilter?.country = "IN"
+            filter.country = "IN"
         }
+        acController.autocompleteFilter = filter
         BoolCurrentLocation = false
         
         present(acController, animated: true, completion: nil)
