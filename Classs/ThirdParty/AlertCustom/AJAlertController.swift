@@ -19,8 +19,8 @@ class AJAlertController: UIViewController {
     private var btnCancelTitle:String?
     private var btnOtherTitle:String?
     
-    private let btnOtherColor  = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
-    private let btnCancelColor = UIColor(red: 255.0/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+    private let btnOtherColor  = UIColor.black//UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
+    private let btnCancelColor = UIColor.black//UIColor(red: 255.0/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     
     // MARK:- Public Properties
     // MARK:-

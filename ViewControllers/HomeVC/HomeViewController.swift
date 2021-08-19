@@ -122,6 +122,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBOutlet weak var viewBookNowLater: UIView!
     
+    var isFromAutoComplete = Bool()
+    
     
     func floatRatingView(_ ratingView: FloatRatingView, didUpdate rating: Float) {
         
@@ -874,6 +876,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //        sleep(12)
         
         print("idleAt cameraPosition : \(cameraPosition)")
+        if(isFromAutoComplete)
+        {
+            isFromAutoComplete = false
+            return
+        }
         
         if Connectivity.isConnectedToInternet() {
             
@@ -954,22 +961,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if let address = result.first?["formatted_address"] as? String
             {
                 if markerType == .pickup {
-                    
                     self.txtCurrentLocation.text = address
                     self.strPickupLocation = address
-                    btnDoneForLocationSelected.isHidden = false
+                    self.btnDoneForLocationSelected.isHidden = false
                     self.viewBookNowLater.isHidden = true
                 }
                 else if markerType == .dropOffFirst {
                     self.txtDestinationLocation.text = address
                     self.strDropoffLocation = address
-                    btnDoneForLocationSelected.isHidden = false
+                    self.btnDoneForLocationSelected.isHidden = false
                     self.viewBookNowLater.isHidden = true
                 }
                 else if markerType == .dropOffSecond {
                     self.txtAdditionalDestinationLocation.text = address
                     self.strAdditionalDropoffLocation = address
-                    btnDoneForLocationSelected.isHidden = false
+                    self.btnDoneForLocationSelected.isHidden = false
                     self.viewBookNowLater.isHidden = true
                 }
             }
@@ -3851,40 +3857,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             var bookingId = String()
             
-            if let bookingInfoData = (data as! [[String:AnyObject]])[0] as? [String:AnyObject] {
-                if let bookingInfo = bookingInfoData["BookingId"] as? Int {
-                    bookingId = "\(bookingInfo)"
-                }
-                else if let bookingInfo = bookingInfoData["BookingId"] as? String {
-                    bookingId = bookingInfo
-                }
-                
-                if SingletonClass.sharedInstance.bookingId != "" {
-                    if SingletonClass.sharedInstance.bookingId == bookingId {
-                        self.viewActivity.stopAnimating()
-                        self.TempBookingInfoDict.removeAll()
-                        self.viewMainActivityIndicator.isHidden = true
-                        
-                        if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                            if SelectedLanguage == "en" {
-                                
-                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                                })
-                            }
-                            else if SelectedLanguage == "sw"
-                            {
-                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-                                })
-                            }
-                        }
-                    }
-                }
-                else {
+            let bookingInfoData = (data as! [[String:AnyObject]])[0] //as? [String:AnyObject] {
+            if let bookingInfo = bookingInfoData["BookingId"] as? Int {
+                bookingId = "\(bookingInfo)"
+            }
+            else if let bookingInfo = bookingInfoData["BookingId"] as? String {
+                bookingId = bookingInfo
+            }
+            
+            if SingletonClass.sharedInstance.bookingId != "" {
+                if SingletonClass.sharedInstance.bookingId == bookingId {
                     self.viewActivity.stopAnimating()
+                    self.TempBookingInfoDict.removeAll()
                     self.viewMainActivityIndicator.isHidden = true
-                    //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                    //
-                    //                    })
+                    
                     if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                         if SelectedLanguage == "en" {
                             
@@ -3899,6 +3885,26 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
             }
+            else {
+                self.viewActivity.stopAnimating()
+                self.viewMainActivityIndicator.isHidden = true
+                //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+                //
+                //                    })
+                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+                    if SelectedLanguage == "en" {
+                        
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+                        })
+                    }
+                    else if SelectedLanguage == "sw"
+                    {
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+                        })
+                    }
+                }
+            }
+            //            }
             
             //            self.viewActivity.stopAnimating()
             //            self.viewMainActivityIndicator.isHidden = true
@@ -4570,10 +4576,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en" {
                     
-                    if let resAry = NSArray(array: data) as? NSArray {
+                    let resAry = NSArray(array: data) //as? NSArray {
                         message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
                         //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-                    }
+//                    }
                     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
                     
@@ -4583,10 +4589,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else if SelectedLanguage == "sw"
                 {
-                    if let resAry = NSArray(array: data) as? NSArray {
+                     let resAry = NSArray(array: data) //as? NSArray {
                         message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "swahili_message") as! String
                         //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-                    }
+//                    }
                     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
                     
@@ -4606,10 +4612,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             var message = String()
             message = "Trip on Hold"
             
-            if let resAry = NSArray(array: data) as? NSArray {
+            let resAry = NSArray(array: data) //as? NSArray {
                 message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
                 //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-            }
+       //     }
             
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
@@ -4819,10 +4825,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             var message = String()
             message = "Trip on Hold"
             
-            if let resAry = NSArray(array: data) as? NSArray {
+             let resAry = NSArray(array: data) //as? NSArray {
                 message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
                 
-            }
+         //   }
             
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
@@ -4843,7 +4849,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             var bookingId = String()
             
             if let bookingInfoData = (data as! [[String:AnyObject]])[0]["BookingInfo"] as? [[String:AnyObject]] {
-                self.TempBookingInfoDict = bookingInfoData[0] as? [String:Any] ?? [:]
+                self.TempBookingInfoDict = bookingInfoData[0] //as? [String:Any] ?? [:]
  
                 if let bookingInfo = bookingInfoData[0]["Id"] as? Int {
                     bookingId = "\(bookingInfo)"
@@ -4859,9 +4865,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         var message = String()
                         message = "Trip on Hold"
                         
-                        if let resAry = NSArray(array: data) as? NSArray {
-                            message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
-                        }
+                        let resAry = NSArray(array: data) //as? NSArray //{
+                        message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                        //}
                         
                         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                         let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
@@ -4873,9 +4879,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     var message = String()
                     message = "Trip on Hold"
                     
-                    if let resAry = NSArray(array: data) as? NSArray {
+                     let resAry = NSArray(array: data) //as? NSArray {
                         message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
-                    }
+                  //  }
                     
                     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
@@ -4951,7 +4957,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.MarkerCurrntLocation.isHidden = false
         self.btnDoneForLocationSelected.isHidden = false
         self.viewBookNowLater.isHidden = true
-        
+        self.isFromAutoComplete = true
         if locationEnteredType == .pickup {
             
             self.locationEnteredType = .pickup
