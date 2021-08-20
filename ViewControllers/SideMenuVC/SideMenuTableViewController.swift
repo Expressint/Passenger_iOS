@@ -81,7 +81,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
         
 //        webserviceOfTickPayStatus()
-         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_help_unselect","img_mn_receipt_unselect","icon_FavouriteUnselect"]
+         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_help_unselect","img_mn_receipt_unselect","icon_FavouriteUnselect","iconHelp"]
 
     }
     
@@ -103,7 +103,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
 //                            }
 //                        }
 //                    }
-         arrMenuTitle = ["My Bookings", "Help", "My Receipts" , "Favourites"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+         arrMenuTitle = ["My Bookings", "Help", "My Receipts" , "Favourites", "Help"]//"My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -681,7 +681,8 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
              */
         }
         else if arrMenuTitle[indexPath.row] == "Help" {
-            UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
+//            UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
+            self.dialNumber(number: "0987654321")
         }
     }
     
@@ -707,6 +708,20 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
         
         let CollectionCellWidth = (MenuWidth! - 80.0) / 2
         return CGSize(width: CollectionCellWidth, height: CollectionCellWidth)
+    }
+    
+    func dialNumber(number : String) {
+
+     if let url = URL(string: "tel://\(number)"),
+       UIApplication.shared.canOpenURL(url) {
+          if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler:nil)
+           } else {
+               UIApplication.shared.openURL(url)
+           }
+       } else {
+                // add error message here
+       }
     }
 }
 
