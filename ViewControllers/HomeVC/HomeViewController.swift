@@ -953,35 +953,37 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func getAddressForLatLng(latitude: String, longitude: String, markerType: locationTypeEntered)
     {
         let url = NSURL(string: "\(baseUrlForGetAddress)latlng=\(latitude),\(longitude)&key=\(apikey)")
-
+        
         let data = NSData(contentsOf: url! as URL)
-
-        let json = try! JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-        if let result = json["results"] as? [[String:AnyObject]] {
-            if let address = result.first?["formatted_address"] as? String
-            {
-                if markerType == .pickup {
-                    self.txtCurrentLocation.text = address
-                    self.strPickupLocation = address
-                    self.btnDoneForLocationSelected.isHidden = false
-                    self.viewBookNowLater.isHidden = true
-                }
-                else if markerType == .dropOffFirst {
-                    self.txtDestinationLocation.text = address
-                    self.strDropoffLocation = address
-                    self.btnDoneForLocationSelected.isHidden = false
-                    self.viewBookNowLater.isHidden = true
-                }
-                else if markerType == .dropOffSecond {
-                    self.txtAdditionalDestinationLocation.text = address
-                    self.strAdditionalDropoffLocation = address
-                    self.btnDoneForLocationSelected.isHidden = false
-                    self.viewBookNowLater.isHidden = true
+        do {
+            let json = try JSONSerialization.jsonObject(with: (data as Data?) ?? Data(), options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
+            if let result = json?["results"] as? [[String:AnyObject]] {
+                if let address = result.first?["formatted_address"] as? String
+                {
+                    if markerType == .pickup {
+                        self.txtCurrentLocation.text = address
+                        self.strPickupLocation = address
+                        self.btnDoneForLocationSelected.isHidden = false
+                        self.viewBookNowLater.isHidden = true
+                    }
+                    else if markerType == .dropOffFirst {
+                        self.txtDestinationLocation.text = address
+                        self.strDropoffLocation = address
+                        self.btnDoneForLocationSelected.isHidden = false
+                        self.viewBookNowLater.isHidden = true
+                    }
+                    else if markerType == .dropOffSecond {
+                        self.txtAdditionalDestinationLocation.text = address
+                        self.strAdditionalDropoffLocation = address
+                        self.btnDoneForLocationSelected.isHidden = false
+                        self.viewBookNowLater.isHidden = true
+                    }
                 }
             }
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
         }
-        
-        
     }
 
 
@@ -2723,8 +2725,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         //RJ Change
         SingletonClass.sharedInstance.selectedIndexPath = indexPath
-
-        let alert = UIAlertController(title: appName,
+        //Code for getting online driver list and sending specific request to that driver
+      /*  let alert = UIAlertController(title: appName,
                                       message: "Do you want to send booking request to specific driver?",
                                       preferredStyle: UIAlertControllerStyle.alert)
         
@@ -2762,7 +2764,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }else {
             self.dictSelectedDriver = nil
             (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-        }
+        }*/
         
         //        else
         //        {
@@ -4932,10 +4934,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul's iphone")
+        filter.country = "GY"
+        if(UIDevice.current.name.lowercased() == "rahul’s iphone")
         {
-//            filter.country = "IN"
+            filter.country = "IN"
         }
         acController.autocompleteFilter = filter
         if(sender.tag == 0)
@@ -4961,10 +4963,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul's iphone")
+        filter.country = "GY"
+        if(UIDevice.current.name.lowercased() == "rahul’s iphone")
         {
-//            filter.country = "IN"
+            filter.country = "IN"
         }
         acController.autocompleteFilter = filter
         //        BoolCurrentLocation = true

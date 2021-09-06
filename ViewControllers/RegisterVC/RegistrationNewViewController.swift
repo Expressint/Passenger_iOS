@@ -291,6 +291,11 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     @IBAction func txtDateOfBirth(_ sender: ThemeTextField) {
         let datePickerView:UIDatePicker = UIDatePicker()
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
         datePickerView.datePickerMode = UIDatePickerMode.date
         datePickerView.maximumDate = Date()
         sender.inputView = datePickerView
@@ -310,12 +315,12 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             }
             return false
         }
-        else if imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!) {
+      /*  else if imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!) {
             
             UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
             }
             return false
-        }
+        }*/
 //        else if (txtLastName.text?.count == 0)
 //        {
 //

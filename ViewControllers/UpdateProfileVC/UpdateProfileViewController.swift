@@ -326,7 +326,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
             txtDateOfBirth.text = dob ?? ""
         }
 
-        fullName = getData.object(forKey: "Fullname") as! String
+        fullName = getData.object(forKey: "Fullname") as? String ?? ""
   
         let fullNameArr = fullName.components(separatedBy: " ")
         txtEmail.text = getData.object(forKey: "Email") as? String ?? ""
@@ -336,7 +336,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         txtFirstName.text = fullName
         txtAddress.text = getData.object(forKey: "Address") as? String
         
-        gender = getData.object(forKey: "Gender") as! String
+        gender = getData.object(forKey: "Gender") as? String ?? ""
         
         if gender == "male" || gender == "Male" {
             self.btnMale.isSelected = true
@@ -374,7 +374,9 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         dictData["Gender"] = gender as AnyObject
         dictData["Address"] = txtAddress.text as AnyObject
         dictData["DOB"] = txtDateOfBirth.text as AnyObject
-        
+        dictData["MobileNo"] = txtPhoneNumber.text as AnyObject
+        dictData["Email"] = txtEmail.text as AnyObject
+
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
