@@ -328,10 +328,24 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 
         fullName = getData.object(forKey: "Fullname") as? String ?? ""
   
-        let fullNameArr = fullName.components(separatedBy: " ")
+//        if fullName.contains(" ") {
+//            let arrNames = fullName.components(separatedBy: " ")
+//            FirstName = arrNames[0]
+//            if arrNames.count > 1 {
+//                LastName = arrNames[1]
+//            }
+//        } else {
+//            FirstName = FullName
+//        }
+        
+        
+       // let fullNameArr = fullName.components(separatedBy: " ")
         txtEmail.text = getData.object(forKey: "Email") as? String ?? ""
-        firstName = fullNameArr[0]
-        lastName = fullNameArr[1]
+     //   firstName = fullName
+//        if fullNameArr.count > 1 {
+//            lastName = fullNameArr[1]
+//        }
+        
 
         txtFirstName.text = fullName
         txtAddress.text = getData.object(forKey: "Address") as? String
@@ -371,6 +385,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         var dictData = [String:AnyObject]()
         dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["Fullname"] = fullName as AnyObject
+        dictData["MobileNo"] = txtPhoneNumber.text as AnyObject
+        dictData["Email"] = txtEmail.text as AnyObject
         dictData["Gender"] = gender as AnyObject
         dictData["Address"] = txtAddress.text as AnyObject
         dictData["DOB"] = txtDateOfBirth.text as AnyObject
@@ -387,6 +403,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
                 
                 print(result)
+                print("ATDebug :: \(NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary))")
                 SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)
                 
                 UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")

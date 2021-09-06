@@ -272,6 +272,7 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     }
                     else {
                         let myJSON = [SocketDataKeys.kBookingIdNow : bookingID] as [String : Any]
+                        print(socketData.status.rawValue)
                         socketData.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON])
                         
                         //                UtilityClass.showAlertWithCompletion("", message: "Your request cancelled successfully", vc: self, completionHandler: { ACTION in
