@@ -39,10 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     {
         
     }
-//    let SocketManager = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
-    
-    let SocketManager = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!)
-    
+    let manager = SocketManager(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(true), .compress,.version(.two)])
+    var socket : SocketIOClient!
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -54,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.regular(ofSize: 14.0)]
 
         // Set Stored Language from Local Database
-      
+        socket = manager.defaultSocket
+
         if UserDefaults.standard.value(forKey: "i18n_language") == nil {
             UserDefaults.standard.set("en", forKey: "i18n_language")
             UserDefaults.standard.synchronize()

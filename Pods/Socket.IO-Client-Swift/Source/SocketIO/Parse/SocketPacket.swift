@@ -116,7 +116,7 @@ public struct SocketPacket : CustomStringConvertible {
     private func createPacketString() -> String {
         let typeString = String(type.rawValue)
         // Binary count?
-        let binaryCountString = typeString + (type == .binaryEvent || type == .binaryAck ? "\(String(binary.count))-" : "")
+        let binaryCountString = typeString + (type.isBinary ? "\(String(binary.count))-" : "")
         // Namespace?
         let nspString = binaryCountString + (nsp != "/" ? "\(nsp)," : "")
         // Ack number?
@@ -142,12 +142,8 @@ public struct SocketPacket : CustomStringConvertible {
             if dict["_placeholder"] as? Bool ?? false {
                 return binary[dict["num"] as! Int]
             } else {
-                return dict.reduce(JSON(), {cur, keyValue in
-                    var cur = cur
-
+                return dict.reduce(into: JSON(), {cur, keyValue in
                     cur[keyValue.0] = _fillInPlaceholders(keyValue.1)
-
-                    return cur
                 })
             }
         case let arr as [Any]:
@@ -162,7 +158,7 @@ public extension SocketPacket {
     // MARK: PacketType enum
 
     /// The type of packets.
-    public enum PacketType: Int {
+    enum PacketType: Int {
         // MARK: Cases
 
         /// Connect: 0
@@ -185,6 +181,13 @@ public extension SocketPacket {
 
         /// Binary Ack: 6
         case binaryAck
+
+        // MARK: Properties
+
+        /// Whether or not this type is binary
+        public var isBinary: Bool {
+            return self == .binaryAck || self == .binaryEvent
+        }
     }
 }
 
@@ -204,11 +207,15 @@ extension SocketPacket {
         }
     }
 
-    static func packetFromEmit(_ items: [Any], id: Int, nsp: String, ack: Bool) -> SocketPacket {
-        let (parsedData, binary) = deconstructData(items)
+    static func packetFromEmit(_ items: [Any], id: Int, nsp: String, ack: Bool, checkForBinary: Bool = true) -> SocketPacket {
+        if checkForBinary {
+            let (parsedData, binary) = deconstructData(items)
 
-        return SocketPacket(type: findType(binary.count, ack: ack), data: parsedData, id: id, nsp: nsp,
-                            binary: binary)
+            return SocketPacket(type: findType(binary.count, ack: ack), data: parsedData, id: id, nsp: nsp,
+                                binary: binary)
+        } else {
+            return SocketPacket(type: findType(0, ack: ack), data: items, id: id, nsp: nsp)
+        }
     }
 }
 
@@ -225,12 +232,8 @@ private extension SocketPacket {
         case let arr as [Any]:
             return arr.map({shred($0, binary: &binary)})
         case let dict as JSON:
-            return dict.reduce(JSON(), {cur, keyValue in
-                var mutCur = cur
-
-                mutCur[keyValue.0] = shred(keyValue.1, binary: &binary)
-
-                return mutCur
+            return dict.reduce(into: JSON(), {cur, keyValue in
+                cur[keyValue.0] = shred(keyValue.1, binary: &binary)
             })
         default:
             return data

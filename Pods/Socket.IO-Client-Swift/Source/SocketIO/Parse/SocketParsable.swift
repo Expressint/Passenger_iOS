@@ -23,17 +23,7 @@
 import Foundation
 
 /// Defines that a type will be able to parse socket.io-protocol messages.
-public protocol SocketParsable : class {
-    // MARK: Properties
-
-    /// A list of packets that are waiting for binary data.
-    ///
-    /// The way that socket.io works all data should be sent directly after each packet.
-    /// So this should ideally be an array of one packet waiting for data.
-    ///
-    /// **This should not be modified directly.**
-    var waitingPackets: [SocketPacket] { get set }
-
+public protocol SocketParsable : AnyObject {
     // MARK: Methods
 
     /// Called when the engine has received some binary data that should be attached to a packet.
@@ -43,12 +33,13 @@ public protocol SocketParsable : class {
     /// into the correct placeholder.
     ///
     /// - parameter data: The data that should be attached to a packet.
-    func parseBinaryData(_ data: Data)
+    func parseBinaryData(_ data: Data) -> SocketPacket?
 
     /// Called when the engine has received a string that should be parsed into a socket.io packet.
     ///
     /// - parameter message: The string that needs parsing.
-    func parseSocketMessage(_ message: String)
+    /// - returns: A completed socket packet if there is no more data left to collect.
+    func parseSocketMessage(_ message: String) -> SocketPacket?
 }
 
 /// Errors that can be thrown during parsing.
@@ -65,38 +56,20 @@ public enum SocketParsableError : Error {
     case invalidPacketType
 }
 
-public extension SocketParsable where Self: SocketIOClientSpec {
-    private func isCorrectNamespace(_ nsp: String) -> Bool {
-        return nsp == self.nsp
-    }
+/// Says that a type will be able to buffer binary data before all data for an event has come in.
+public protocol SocketDataBufferable : AnyObject {
+    // MARK: Properties
 
-    private func handleConnect(_ packetNamespace: String) {
-        guard packetNamespace == nsp else { return }
+    /// A list of packets that are waiting for binary data.
+    ///
+    /// The way that socket.io works all data should be sent directly after each packet.
+    /// So this should ideally be an array of one packet waiting for data.
+    ///
+    /// **This should not be modified directly.**
+    var waitingPackets: [SocketPacket] { get set }
+}
 
-        didConnect(toNamespace: packetNamespace)
-    }
-
-    private func handlePacket(_ pack: SocketPacket) {
-        switch pack.type {
-        case .event where isCorrectNamespace(pack.nsp):
-            handleEvent(pack.event, data: pack.args, isInternalMessage: false, withAck: pack.id)
-        case .ack where isCorrectNamespace(pack.nsp):
-            handleAck(pack.id, data: pack.data)
-        case .binaryEvent where isCorrectNamespace(pack.nsp):
-            waitingPackets.append(pack)
-        case .binaryAck where isCorrectNamespace(pack.nsp):
-            waitingPackets.append(pack)
-        case .connect:
-            handleConnect(pack.nsp)
-        case .disconnect:
-            didDisconnect(reason: "Got Disconnect")
-        case .error:
-            handleEvent("error", data: pack.data, isInternalMessage: true, withAck: pack.id)
-        default:
-            DefaultSocketLogger.Logger.log("Got invalid packet: \(pack.description)", type: "SocketParser")
-        }
-    }
-
+public extension SocketParsable where Self: SocketManagerSpec & SocketDataBufferable {
     /// Parses a message from the engine, returning a complete SocketPacket or throwing.
     ///
     /// - parameter message: The message to parse.
@@ -104,7 +77,7 @@ public extension SocketParsable where Self: SocketIOClientSpec {
     internal func parseString(_ message: String) throws -> SocketPacket {
         var reader = SocketStringReader(message: message)
 
-		guard let type = Int(reader.read(count: 1)).flatMap({ SocketPacket.PacketType(rawValue: $0) }) else {
+        guard let type = Int(reader.read(count: 1)).flatMap({ SocketPacket.PacketType(rawValue: $0) }) else {
             throw SocketParsableError.invalidPacketType
         }
 
@@ -115,7 +88,7 @@ public extension SocketParsable where Self: SocketIOClientSpec {
         var namespace = "/"
         var placeholders = -1
 
-        if type == .binaryEvent || type == .binaryAck {
+        if type.isBinary {
             if let holders = Int(reader.readUntilOccurence(of: "-")) {
                 placeholders = holders
             } else {
@@ -136,19 +109,16 @@ public extension SocketParsable where Self: SocketIOClientSpec {
         if type == .error {
             reader.advance(by: -1)
         } else {
-            while reader.hasNext {
-                if let int = Int(reader.read(count: 1)) {
-                    idString += String(int)
-                } else {
-                    reader.advance(by: -2)
-                    break
-                }
+            while let int = Int(reader.read(count: 1)) {
+                idString += String(int)
             }
+
+            reader.advance(by: -2)
         }
 
-        var dataArray = String(message.utf16[message.utf16.index(reader.currentIndex, offsetBy: 1)..<message.utf16.endIndex])!
+        var dataArray = String(message.utf16[message.utf16.index(reader.currentIndex, offsetBy: 1)...])!
 
-        if type == .error && !dataArray.hasPrefix("[") && !dataArray.hasSuffix("]") {
+        if (type == .error || type == .connect) && !dataArray.hasPrefix("[") && !dataArray.hasSuffix("]") {
             dataArray = "[" + dataArray + "]"
         }
 
@@ -169,8 +139,9 @@ public extension SocketParsable where Self: SocketIOClientSpec {
     /// Called when the engine has received a string that should be parsed into a socket.io packet.
     ///
     /// - parameter message: The string that needs parsing.
-    public func parseSocketMessage(_ message: String) {
-        guard !message.isEmpty else { return }
+    /// - returns: A completed socket packet or nil if the packet is invalid.
+    func parseSocketMessage(_ message: String) -> SocketPacket? {
+        guard !message.isEmpty else { return nil }
 
         DefaultSocketLogger.Logger.log("Parsing \(message)", type: "SocketParser")
 
@@ -179,9 +150,11 @@ public extension SocketParsable where Self: SocketIOClientSpec {
 
             DefaultSocketLogger.Logger.log("Decoded packet as: \(packet.description)", type: "SocketParser")
 
-            handlePacket(packet)
+            return packet
         } catch {
             DefaultSocketLogger.Logger.error("\(error): \(message)", type: "SocketParser")
+
+            return nil
         }
     }
 
@@ -192,21 +165,17 @@ public extension SocketParsable where Self: SocketIOClientSpec {
     /// into the correct placeholder.
     ///
     /// - parameter data: The data that should be attached to a packet.
-    public func parseBinaryData(_ data: Data) {
+    /// - returns: A completed socket packet if there is no more data left to collect.
+    func parseBinaryData(_ data: Data) -> SocketPacket? {
         guard !waitingPackets.isEmpty else {
             DefaultSocketLogger.Logger.error("Got data when not remaking packet", type: "SocketParser")
-            return
+
+            return nil
         }
 
         // Should execute event?
-        guard waitingPackets[waitingPackets.count - 1].addData(data) else { return }
+        guard waitingPackets[waitingPackets.count - 1].addData(data) else { return nil }
 
-        let packet = waitingPackets.removeLast()
-
-        if packet.type != .binaryAck {
-            handleEvent(packet.event, data: packet.args, isInternalMessage: false, withAck: packet.id)
-        } else {
-            handleAck(packet.id, data: packet.args)
-        }
+        return waitingPackets.removeLast()
     }
 }

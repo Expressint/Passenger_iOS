@@ -253,7 +253,7 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     if self.bookinType == "Book Now"
                     {
                         let myJSON = [SocketDataKeys.kBookingIdNow : bookingID] as [String : Any]
-                        socketData.emit(SocketData.kCancelTripByPassenger , with: [myJSON])
+                        socketData?.emit(SocketData.kCancelTripByPassenger , with: [myJSON], completion: nil)
                         
                         showTopView.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                         
@@ -272,8 +272,8 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     }
                     else {
                         let myJSON = [SocketDataKeys.kBookingIdNow : bookingID] as [String : Any]
-                        print(socketData.status.rawValue)
-                        socketData.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON])
+                        print(socketData?.status.rawValue)
+                        socketData?.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON], completion: nil)
                         
                         //                UtilityClass.showAlertWithCompletion("", message: "Your request cancelled successfully", vc: self, completionHandler: { ACTION in
                         //                    self.navigationController?.popViewController(animated: true)
@@ -319,11 +319,11 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
         dateFormatter.dateFormat = "yyyy-mm-dd HH-mm-ss"
         
-        var fullDate = dateFormatter.date(from: time)
+        let fullDate = dateFormatter.date(from: time)
         
         dateFormatter.dateFormat = "yyyy/mm/dd HH:mm"
         
-        var time2 = dateFormatter.string(from: fullDate!)
+        let time2 = dateFormatter.string(from: fullDate!)
         
         return time2
     }

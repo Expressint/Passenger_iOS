@@ -27,12 +27,17 @@ import Foundation
 import Starscream
 
 /// Specifies a SocketEngine.
-@objc public protocol SocketEngineSpec {
+public protocol SocketEngineSpec: class {
+    // MARK: Properties
+
     /// The client for this engine.
     var client: SocketEngineClient? { get set }
 
     /// `true` if this engine is closed.
     var closed: Bool { get }
+
+    /// If `true` the engine will attempt to use WebSocket compression.
+    var compress: Bool { get }
 
     /// `true` if this engine is connected. Connected means that the initial poll connect has succeeded.
     var connected: Bool { get }
@@ -47,7 +52,7 @@ import Starscream
     var engineQueue: DispatchQueue { get }
 
     /// A dictionary of extra http headers that will be set during connection.
-    var extraHeaders: [String: String]? { get }
+    var extraHeaders: [String: String]? { get set }
 
     /// When `true`, the engine is in the process of switching to WebSockets.
     var fastUpgrade: Bool { get }
@@ -76,18 +81,26 @@ import Starscream
     /// The url for WebSockets.
     var urlWebSocket: URL { get }
 
+    /// The version of engine.io being used. Default is three.
+    var version: SocketIOVersion { get }
+
     /// If `true`, then the engine is currently in WebSockets mode.
+    @available(*, deprecated, message: "No longer needed, if we're not polling, then we must be doing websockets")
     var websocket: Bool { get }
 
     /// The WebSocket for this engine.
     var ws: WebSocket? { get }
+
+    // MARK: Initializers
 
     /// Creates a new engine.
     ///
     /// - parameter client: The client for this engine.
     /// - parameter url: The url for this engine.
     /// - parameter options: The options for this engine.
-    init(client: SocketEngineClient, url: URL, options: NSDictionary?)
+    init(client: SocketEngineClient, url: URL, options: [String: Any]?)
+
+    // MARK: Methods
 
     /// Starts the connection to the server.
     func connect()
@@ -120,22 +133,34 @@ import Starscream
     /// Parses a raw engine.io packet.
     ///
     /// - parameter message: The message to parse.
-    /// - parameter fromPolling: Whether this message is from long-polling.
-    ///                          If `true` we might have to fix utf8 encoding.
     func parseEngineMessage(_ message: String)
 
     /// Writes a message to engine.io, independent of transport.
     ///
     /// - parameter msg: The message to send.
-    /// - parameter withType: The type of this message.
-    /// - parameter withData: Any data that this message has.
-    func write(_ msg: String, withType type: SocketEnginePacketType, withData data: [Data])
+    /// - parameter type: The type of this message.
+    /// - parameter data: Any data that this message has.
+    /// - parameter completion: Callback called on transport write completion.
+    func write(_ msg: String, withType type: SocketEnginePacketType, withData data: [Data], completion: (() -> ())?)
 }
 
 extension SocketEngineSpec {
+    var engineIOParam: String {
+        switch version {
+        case .two:
+            return "&EIO=3"
+        case .three:
+            return "&EIO=4"
+        }
+    }
+
     var urlPollingWithSid: URL {
         var com = URLComponents(url: urlPolling, resolvingAgainstBaseURL: false)!
         com.percentEncodedQuery = com.percentEncodedQuery! + "&sid=\(sid.urlEncode()!)"
+
+        if !com.percentEncodedQuery!.contains("EIO") {
+            com.percentEncodedQuery = com.percentEncodedQuery! + engineIOParam
+        }
 
         return com.url!
     }
@@ -144,12 +169,20 @@ extension SocketEngineSpec {
         var com = URLComponents(url: urlWebSocket, resolvingAgainstBaseURL: false)!
         com.percentEncodedQuery = com.percentEncodedQuery! + (sid == "" ? "" : "&sid=\(sid.urlEncode()!)")
 
+        if !com.percentEncodedQuery!.contains("EIO") {
+            com.percentEncodedQuery = com.percentEncodedQuery! + engineIOParam
+        }
+
+
         return com.url!
     }
 
-    func addHeaders(to req: inout URLRequest) {
-        if let cookies = cookies {
-            req.allHTTPHeaderFields = HTTPCookie.requestHeaderFields(with: cookies)
+    func addHeaders(to req: inout URLRequest, includingCookies additionalCookies: [HTTPCookie]? = nil) {
+        var cookiesToAdd: [HTTPCookie] = cookies ?? []
+        cookiesToAdd += additionalCookies ?? []
+
+        if !cookiesToAdd.isEmpty {
+            req.allHTTPHeaderFields = HTTPCookie.requestHeaderFields(with: cookiesToAdd)
         }
 
         if let extraHeaders = extraHeaders {
@@ -160,15 +193,17 @@ extension SocketEngineSpec {
     }
 
     func createBinaryDataForSend(using data: Data) -> Either<Data, String> {
-        if websocket {
-            return .left(Data(bytes: [0x4]) + data)
+        let prefixB64 = version.rawValue >= 3 ? "b" : "b4"
+
+        if polling {
+            return .right(prefixB64 + data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)))
         } else {
-            return .right("b4" + data.base64EncodedString(options: Data.Base64EncodingOptions(rawValue: 0)))
+            return .left(version.rawValue >= 3 ? data : Data([0x4]) + data)
         }
     }
 
     /// Send an engine message (4)
-    func send(_ msg: String, withData datas: [Data]) {
-        write(msg, withType: .message, withData: datas)
+    func send(_ msg: String, withData datas: [Data], completion: (() -> ())? = nil) {
+        write(msg, withType: .message, withData: datas, completion: completion)
     }
 }

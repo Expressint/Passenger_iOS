@@ -34,6 +34,7 @@ extension UIApplication {
 
 class BookLaterViewController: BaseViewController, GMSAutocompleteViewControllerDelegate, UINavigationControllerDelegate, WWCalendarTimeSelectorProtocol, UIPickerViewDelegate, UIPickerViewDataSource, isHaveCardFromBookLaterDelegate, UITextFieldDelegate,SelectCardDelegate {
 
+    let socket = (UIApplication.shared.delegate as! AppDelegate).socket
 
     
     @IBOutlet weak var btnCancelPromocode: UIButton!
@@ -81,7 +82,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var isOpenPlacePickerController:Bool = false
     
 //    @IBOutlet weak var btnNumberOfPassenger: UIButton!
-
+//    var homeVC : HomeViewController?
     @IBOutlet weak var imgCardForPaymentType: UIImageView!
     @IBOutlet weak var imgWalletForPaymentType: UIImageView!
     @IBOutlet weak var imgCashForPaymentType: UIImageView!
@@ -895,7 +896,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var doubleDropOffLng = Double()
     /// if intShareRide = 1 than ON and if intShareRide = 0 OFF
     var intShareRide:Int = 0
-    let socket = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
+//    let socket = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
     //  MARK: - Get estimate fare
     
     func postPickupAndDropLocationForEstimateFare()
@@ -908,7 +909,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         {
             myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID,  "PickupLocation" : strPickupLocation ,"PickupLat" :  self.doublePickupLat , "PickupLong" :  self.doublePickupLng, "DropoffLocation" : strPickupLocation,"DropoffLat" : self.doubleDropOffLng, "DropoffLon" : self.doubleDropOffLng,"Ids" : SingletonClass.sharedInstance.strOnlineDriverID, "ShareRiding": intShareRide] as [String : Any]
         }
-        socket.emit(SocketData.kSendRequestForGetEstimateFare , with: [myJSON])
+        self.socket?.emit(SocketData.kSendRequestForGetEstimateFare , with: [myJSON], completion: nil)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
            // Code you want to be delayed

@@ -26,50 +26,64 @@ import Dispatch
 import Foundation
 
 /// Defines the interface for a SocketIOClient.
-public protocol SocketIOClientSpec : class {
+public protocol SocketIOClientSpec : AnyObject {
     // MARK: Properties
 
     /// A handler that will be called on any event.
     var anyHandler: ((SocketAnyEvent) -> ())? { get }
 
-    /// The configuration for this client.
-    var config: SocketIOClientConfiguration { get set }
-
-    /// The queue that all interaction with the client must be on.
-    var handleQueue: DispatchQueue { get set }
-
     /// The array of handlers for this socket.
     var handlers: [SocketEventHandler] { get }
+
+    /// The manager for this socket.
+    var manager: SocketManagerSpec? { get }
 
     /// The namespace that this socket is currently connected to.
     ///
     /// **Must** start with a `/`.
-    var nsp: String { get set }
+    var nsp: String { get }
+
+    /// A view into this socket where emits do not check for binary data.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.rawEmitView.emit("myEvent", myObject)
+    /// ```
+    ///
+    /// **NOTE**: It is not safe to hold on to this view beyond the life of the socket.
+    var rawEmitView: SocketRawView { get }
+
+    /// The id of this socket.io connect. This is different from the sid of the engine.io connection.
+    var sid: String? { get }
 
     /// The status of this client.
-    var status: SocketIOClientStatus { get }
+    var status: SocketIOStatus { get }
 
     // MARK: Methods
 
     /// Connect to the server. The same as calling `connect(timeoutAfter:withHandler:)` with a timeout of 0.
     ///
     /// Only call after adding your event listeners, unless you know what you're doing.
-    func connect()
+    ///
+    /// - parameter payload: An optional payload sent on connect
+    func connect(withPayload payload: [String: Any]?)
 
     /// Connect to the server. If we aren't connected after `timeoutAfter` seconds, then `withHandler` is called.
     ///
     /// Only call after adding your event listeners, unless you know what you're doing.
     ///
+    /// - parameter withPayload: An optional payload sent on connect
     /// - parameter timeoutAfter: The number of seconds after which if we are not connected we assume the connection
     ///                           has failed. Pass 0 to never timeout.
-    /// - parameter withHandler: The handler to call when the client fails to connect.
-    func connect(timeoutAfter: Double, withHandler handler: (() -> ())?)
+    /// - parameter handler: The handler to call when the client fails to connect.
+    func connect(withPayload payload: [String: Any]?, timeoutAfter: Double, withHandler handler: (() -> ())?)
 
     /// Called when the client connects to a namespace. If the client was created with a namespace upfront,
     /// then this is only called when the client connects to that namespace.
     ///
     /// - parameter toNamespace: The namespace that was connected to.
-    func didConnect(toNamespace namespace: String)
+    func didConnect(toNamespace namespace: String, payload: [String: Any]?)
 
     /// Called when the client has disconnected from socket.io.
     ///
@@ -84,14 +98,25 @@ public protocol SocketIOClientSpec : class {
     /// Disconnects the socket.
     func disconnect()
 
-    /// Send an event to the server, with optional data items.
+    /// Send an event to the server, with optional data items and optional write completion handler.
     ///
     /// If an error occurs trying to transform `items` into their socket representation, a `SocketClientEvent.error`
     /// will be emitted. The structure of the error data is `[eventName, items, theError]`
     ///
     /// - parameter event: The event to send.
     /// - parameter items: The items to send with this event. May be left out.
-    func emit(_ event: String, _ items: SocketData...)
+    /// - parameter completion: Callback called on transport write completion.
+    func emit(_ event: String, _ items: SocketData..., completion: (() -> ())?)
+    
+    /// Send an event to the server, with optional data items and optional write completion handler.
+    ///
+    /// If an error occurs trying to transform `items` into their socket representation, a `SocketClientEvent.error`
+    /// will be emitted. The structure of the error data is `[eventName, items, theError]`
+    ///
+    /// - parameter event: The event to send.
+    /// - parameter items: The items to send with this event. May be left out.
+    /// - parameter completion: Callback called on transport write completion.
+    func emit(_ event: String, with items: [SocketData], completion: (() -> ())?)
 
     /// Call when you wish to tell the server that you've received the event for `ack`.
     ///
@@ -119,6 +144,27 @@ public protocol SocketIOClientSpec : class {
     /// - parameter items: The items to send with this event. May be left out.
     /// - returns: An `OnAckCallback`. You must call the `timingOut(after:)` method before the event will be sent.
     func emitWithAck(_ event: String, _ items: SocketData...) -> OnAckCallback
+    
+    /// Sends a message to the server, requesting an ack.
+    ///
+    /// **NOTE**: It is up to the server send an ack back, just calling this method does not mean the server will ack.
+    /// Check that your server's api will ack the event being sent.
+    ///
+    /// If an error occurs trying to transform `items` into their socket representation, a `SocketClientEvent.error`
+    /// will be emitted. The structure of the error data is `[eventName, items, theError]`
+    ///
+    /// Example:
+    ///
+    /// ```swift
+    /// socket.emitWithAck("myEvent", 1).timingOut(after: 1) {data in
+    ///     ...
+    /// }
+    /// ```
+    ///
+    /// - parameter event: The event to send.
+    /// - parameter items: The items to send with this event. May be left out.
+    /// - returns: An `OnAckCallback`. You must call the `timingOut(after:)` method before the event will be sent.
+    func emitWithAck(_ event: String, with items: [SocketData]) -> OnAckCallback
 
     /// Called when socket.io has acked one of our emits. Causes the corresponding ack callback to be called.
     ///
@@ -126,29 +172,33 @@ public protocol SocketIOClientSpec : class {
     /// - parameter data: The data sent back with this ack.
     func handleAck(_ ack: Int, data: [Any])
 
-    /// Called when we get an event from socket.io.
-    ///
-    /// - parameter event: The name of the event.
-    /// - parameter data: The data that was sent with this event.
-    /// - parameter isInternalMessage: Whether this event was sent internally. If `true` it is always sent to handlers.
-    /// - parameter withAck: If > 0 then this event expects to get an ack back from the client.
-    func handleEvent(_ event: String, data: [Any], isInternalMessage: Bool, withAck ack: Int)
-
     /// Called on socket.io specific events.
     ///
     /// - parameter event: The `SocketClientEvent`.
     /// - parameter data: The data for this event.
     func handleClientEvent(_ event: SocketClientEvent, data: [Any])
 
-    /// Call when you wish to leave a namespace and return to the default namespace.
+    /// Called when we get an event from socket.io.
+    ///
+    /// - parameter event: The name of the event.
+    /// - parameter data: The data that was sent with this event.
+    /// - parameter isInternalMessage: Whether this event was sent internally. If `true` it is always sent to handlers.
+    /// - parameter ack: If > 0 then this event expects to get an ack back from the client.
+    func handleEvent(_ event: String, data: [Any], isInternalMessage: Bool, withAck ack: Int)
+
+    /// Causes a client to handle a socket.io packet. The namespace for the packet must match the namespace of the
+    /// socket.
+    ///
+    /// - parameter packet: The packet to handle.
+    func handlePacket(_ packet: SocketPacket)
+
+    /// Call when you wish to leave a namespace and disconnect this socket.
     func leaveNamespace()
 
-    /// Joins `namespace`.
+    /// Joins `nsp`. You shouldn't need to call this directly, instead call `connect`.
     ///
-    /// **Do not use this to join the default namespace.** Instead call `leaveNamespace`.
-    ///
-    /// - parameter namespace: The namespace to join.
-    func joinNamespace(_ namespace: String)
+    /// - Parameter withPayload: The payload to connect when joining this namespace
+    func joinNamespace(withPayload payload: [String: Any]?)
 
     /// Removes handler(s) for a client event.
     ///
@@ -212,18 +262,21 @@ public protocol SocketIOClientSpec : class {
     /// - parameter handler: The callback that will execute whenever an event is received.
     func onAny(_ handler: @escaping (SocketAnyEvent) -> ())
 
-    /// Tries to reconnect to the server.
-    func reconnect()
-
     /// Removes all handlers.
     ///
     /// Can be used after disconnecting to break any potential remaining retain cycles.
     func removeAllHandlers()
+
+    /// Puts the socket back into the connecting state.
+    /// Called when the manager detects a broken connection, or when a manual reconnect is triggered.
+    ///
+    /// parameter reason: The reason this socket is going reconnecting.
+    func setReconnecting(reason: String)
 }
 
 public extension SocketIOClientSpec {
     /// Default implementation.
-    public func didError(reason: String) {
+    func didError(reason: String) {
         DefaultSocketLogger.Logger.error("\(reason)", type: "SocketIOClient")
 
         handleClientEvent(.error, data: [reason])
@@ -245,18 +298,95 @@ public enum SocketClientEvent : String {
     /// ```
     case connect
 
-    /// Called when the socket has disconnected and will not attempt to try to reconnect.
+    /// Emitted when the socket has disconnected and will not attempt to try to reconnect.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .disconnect) {data, ack in
+    ///     // Some cleanup logic
+    /// }
+    /// ```
     case disconnect
 
-    /// Called when an error occurs.
+    /// Emitted when an error occurs.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .error) {data, ack in
+    ///     // Some logging
+    /// }
+    /// ```
     case error
 
-    /// Called when the client begins the reconnection process.
+    /// Emitted whenever the engine sends a ping.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .ping) {_, _ in
+    ///   // Maybe keep track of latency?
+    /// }
+    /// ```
+    case ping
+
+    /// Emitted whenever the engine gets a pong.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .pong) {_, _ in
+    ///   // Maybe keep track of latency?
+    /// }
+    /// ```
+    case pong
+
+    /// Emitted when the client begins the reconnection process.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .reconnect) {data, ack in
+    ///     // Some reconnect event logic
+    /// }
+    /// ```
     case reconnect
 
-    /// Called each time the client tries to reconnect to the server.
+    /// Emitted each time the client tries to reconnect to the server.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .reconnectAttempt) {data, ack in
+    ///     // Some reconnect attempt logging
+    /// }
+    /// ```
     case reconnectAttempt
 
-    /// Called every time there is a change in the client's status.
+    /// Emitted every time there is a change in the client's status.
+    ///
+    /// The payload for data is [SocketIOClientStatus, Int]. Where the second item is the raw value. Use the second one
+    /// if you are working in Objective-C.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .statusChange) {data, ack in
+    ///     // Some status changing logging
+    /// }
+    /// ```
     case statusChange
+
+    /// Emitted when when upgrading the http connection to a websocket connection.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// socket.on(clientEvent: .websocketUpgrade) {data, ack in
+    ///     let headers = (data as [Any])[0]
+    ///     // Some header logic
+    /// }
+    /// ```
+    case websocketUpgrade
 }

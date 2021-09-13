@@ -28,7 +28,8 @@ class DriverInfoViewController: UIViewController {
     
     @IBOutlet weak var viewTimeToReachPickLocation: UIView!
     @IBOutlet weak var viewDistanceToReachPickLocation: UIView!
-
+    var driverLocationLat = String()
+    var driverLocationLong = String()
     
     @IBOutlet var btnCallGreen: UIButton!
     @IBOutlet weak var lblCarPlateNumber: UILabel!
@@ -61,7 +62,8 @@ class DriverInfoViewController: UIViewController {
     var strDriverName = String()
     var strCarPlateNumber = String()
     var strPassengerMobileNumber = String()
-    
+    var strDriverID = String()
+    var homeVC : HomeViewController?
     
     @IBOutlet var lblApproxTime: UILabel!
     @IBOutlet var lblApproxDistanceToYourLocation: UILabel!
@@ -80,7 +82,7 @@ class DriverInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        socketOnMethodForGettingDriverLocation()
         
         btnOk.layer.cornerRadius = 5
         btnOk.layer.masksToBounds = true
@@ -88,28 +90,62 @@ class DriverInfoViewController: UIViewController {
         viewCarAndDriverInfo.layer.masksToBounds = true
         btnCallGreen.layer.cornerRadius = btnCallGreen.frame.width / 2
         btnCallGreen.clipsToBounds = true
-        self.webserviceForGetEstimateETA()
+//        self.webserviceForGetEstimateETA()
         
         if(shouldShow)
         {
-            self.getEstimateData { (status) in
-                if status {
-                    
-                    self.strApproxTimeToYourLocation = self.ApproxTimeReachYourLocation
-                    self.strApproxDistanceToYourLocation = self.ApproxDistanceReachYourLocation
-                    self.fillAllFields()
-                    
-                    UIView.animate(withDuration: 0.5) {
-                        self.view.layoutIfNeeded()
-                    }
-                }
-            }
+            self.socketMethodForEmitingToGetDriverLocation()
+
         }
         else
         {
             self.fillAllFields()
             
         }
+    }
+    
+    func socketMethodForEmitingToGetDriverLocation()
+    {
+        let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "DriverId": strDriverID] as [String : Any]
+        homeVC?.socket?.emit(SocketData.kGetDriverCurrentLatLong , with: [myJSON], completion: nil)
+//        homeVC?.socket?.status.rawValue
+    }
+    
+    func socketOnMethodForGettingDriverLocation()
+    {
+        homeVC?.socket?.on(SocketData.kGetDriverCurrentLatLong, callback: { data, ack in
+            print((data.first as? [String:Any]) ?? "")
+            
+            if let dictData = data.first as? [String:Any]
+            {
+                if let dictInnerData = (dictData["data"] as? [[String:Any]])?.first
+                {
+                    if let arrLocation = dictInnerData["Location"] as? [Double]
+                    {
+                        self.strCurrentLat = "\(arrLocation.first ?? 0.0)"
+                        self.strCurrentLng = "\(arrLocation.last ?? 0.0)"
+                    }
+                    else if let arrLocation = dictInnerData["Location"] as? [String]
+                    {
+                        self.strCurrentLat = arrLocation.first ?? "0.0"
+                        self.strCurrentLng = arrLocation.last ?? "0.0"
+                    }
+                }
+                
+                self.getEstimateData { (status) in
+                    if status {
+                        
+                        self.strApproxTimeToYourLocation = self.ApproxTimeReachYourLocation
+                        self.strApproxDistanceToYourLocation = self.ApproxDistanceReachYourLocation
+                        self.fillAllFields()
+                        
+                        UIView.animate(withDuration: 0.5) {
+                            self.view.layoutIfNeeded()
+                        }
+                    }
+                }
+            }
+        })
     }
     
     override func viewDidLayoutSubviews() {
@@ -336,7 +372,7 @@ class DriverInfoViewController: UIViewController {
     // MARK: - Webservice Methods for Add Address to Favourite
     //-------------------------------------------------------------
     
-    func webserviceForGetEstimateETA() {
+   /* func webserviceForGetEstimateETA() {
         //        PassengerId,Type,Address,Lat,Lng
       /*
         CurrentLat:23.7485451
@@ -383,5 +419,5 @@ class DriverInfoViewController: UIViewController {
                 //     print(result)
             }
         }
-    }
+    }*/
 }

@@ -152,11 +152,12 @@ struct SocketData {
     static let kInformPassengerForAdvancedTrip              = "InformPassengerForAdvancedTrip"
     static let kAcceptAdvancedBookingRequestNotify          = "AcceptAdvancedBookingRequestNotify"
     
-    static let kAskForTipsToPassenger = "AskForTipsToPassenger"
-    static let kAskForTipsToPassengerForBookLater = "AskForTipsToPassengerForBookLater"
-
-    static let kReceiveTips = "ReceiveTips"
-    static let kReceiveTipsForBookLater = "ReceiveTipsForBookLater"
+    static let kAskForTipsToPassenger                       = "AskForTipsToPassenger"
+    static let kAskForTipsToPassengerForBookLater           = "AskForTipsToPassengerForBookLater"
+    
+    static let kReceiveTips                                 = "ReceiveTips"
+    static let kReceiveTipsForBookLater                     = "ReceiveTipsForBookLater"
+    static let kGetDriverCurrentLatLong                     = "GetDriverCurrentLatLong"
 }
 
 struct SocketDataKeys {

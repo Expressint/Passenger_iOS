@@ -54,9 +54,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     let apikey = googlApiKey
     
-    let socket = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
-    
-    //    let socket = (UIApplication.shared.delegate as! AppDelegate).SocketManager
+    let socket = (UIApplication.shared.delegate as! AppDelegate).socket
+
+
+    //    let socket? = (UIApplication.shared.delegate as! AppDelegate).SocketManager
     var boolTimeEnd = Bool()
     
     var moveMent: ARCarMovement!
@@ -353,7 +354,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         
-        
+
         //Crashlytics
         
         //        let button = UIButton(type: .roundedRect)
@@ -1516,7 +1517,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //    }
     func onGetEstimateFare() {
         
-        self.socket.on(SocketData.kReceiveGetEstimateFare, callback: { (data, ack) in
+        self.socket?.on(SocketData.kReceiveGetEstimateFare, callback: { (data, ack) in
 //            print("onGetEstimateFare() is \(data)")
             
             
@@ -1598,11 +1599,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onDriverArrived() {
         
-        self.socket.on(SocketData.kDriverArrived, callback: { (data, ack) in
+        self.socket?.on(SocketData.kDriverArrived, callback: { (data, ack) in
             print(#function,data)
             
             if (((data as NSArray).firstObject as? NSDictionary) != nil) {
-                var estimateData = (data as! [[String:AnyObject]])
+                _ = (data as! [[String:AnyObject]])
                 if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                     if SelectedLanguage == "en" {
                         
@@ -3176,30 +3177,30 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     //    }
     
-    //MARK: - Socket Methods
+    //MARK: - socket? Methods
     func socketMethods()
     {
         var isSocketConnected = Bool()
         
-        socket.on(clientEvent: .disconnect) { (data, ack) in
-            print ("socket is disconnected please reconnect")
+        socket?.on(clientEvent: .disconnect) { (data, ack) in
+            print ("socket? is disconnected please reconnect")
         }
         
-        socket.on(clientEvent: .reconnect) { (data, ack) in
-            print ("socket is reconnected")
+        socket?.on(clientEvent: .reconnect) { (data, ack) in
+            print ("socket? is reconnected")
             self.webserviceOfCurrentBooking()
         }
         
-        socket.on(clientEvent: .connect) { data, ack in
+        socket?.on(clientEvent: .connect) { data, ack in
             
-            print("Socket BaseURl : \(SocketData.kBaseURL)")
-            print("socket connected")
+            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? connected")
             
             self.methodsAfterConnectingToSocket()
             
-            if self.socket.status != .connected {
+            if self.socket?.status != .connected {
                 
-                print("socket.status != .connected")
+                print("socket?.status != .connected")
             }
             
             if (isSocketConnected == false) {
@@ -3227,7 +3228,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             
             // Get Estimate
-            self.socket.on(SocketData.kNearByDriverList, callback: { (data, ack) in
+            self.socket?.on(SocketData.kNearByDriverList, callback: { (data, ack) in
                 print("NearByDriverListIOS is \(data)")
                 
 //                var lat : Double!
@@ -3253,7 +3254,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.postPickupAndDropLocationForEstimateFare()
             })
         }
-        socket.connect()
+        socket?.connect()
     }
     
     var timesOfAccept = Int()
@@ -3277,7 +3278,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @objc func updateCounting(){
         if doublePickupLat != 0 && doublePickupLng != 0 {
             let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
-            socket.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON])
+            socket?.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON], completion: nil)
             print(SocketData.kUpdatePassengerLatLong, myJSON)
         }
         
@@ -3289,7 +3290,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     func socketMethodForGiveTipToDriverBookLater()
     {
-        self.socket.on(SocketData.kAskForTipsToPassengerForBookLater, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAskForTipsToPassengerForBookLater, callback: { (data, ack) in
             print("kAskForTipsToPassenger for BookLater: \(data)")
             
             self.showTimerProgressViaInstance()
@@ -3314,7 +3315,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                if !UtilityClass.isEmpty(str: (textField.text)!)
                 //                {
                 let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": self.strTipAmount, "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
-                self.socket.emit(SocketData.kReceiveTipsForBookLater , with: [myJSON])
+                self.socket?.emit(SocketData.kReceiveTipsForBookLater , with: [myJSON], completion: nil)
                 //                }
                 //                else
                 //                {
@@ -3333,7 +3334,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
                 
                 let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": "", "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
-                self.socket.emit(SocketData.kReceiveTipsForBookLater , with: [myJSON])
+                self.socket?.emit(SocketData.kReceiveTipsForBookLater , with: [myJSON], completion: nil)
                 self.strTipAmount = ""
             }))
             
@@ -3373,7 +3374,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     func socketMethodForGiveTipToDriver()
     {
-        self.socket.on(SocketData.kAskForTipsToPassenger, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAskForTipsToPassenger, callback: { (data, ack) in
             print("kAskForTipsToPassenger: \(data)")
             
             //            kAskForTipsToPassenger: [{
@@ -3407,8 +3408,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                {
                 //
                 let myJSON = ["Running": 0,"PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": self.strTipAmount, "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
-                self.socket.emit(SocketData.kReceiveTips , with: [myJSON])
-                
+                self.socket?.emit(SocketData.kReceiveTips , with: [myJSON], completion: nil)
+                    
                 print("kReceiveTips yes tip is given: \(myJSON)")
                 //
                 //                }
@@ -3430,7 +3431,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             alertForTip.addAction(UIAlertAction(title: "NO".localized, style: .destructive, handler: { [] (_) in
                 
                 let myJSON = ["Running": 0,"PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Amount": "", "BookingId": SingletonClass.sharedInstance.bookingId] as [String : Any]
-                self.socket.emit(SocketData.kReceiveTips , with: [myJSON])
+                self.socket?.emit(SocketData.kReceiveTips , with: [myJSON], completion: nil)
                 print("kReceiveTips no tip not given: \(myJSON)")
                 self.strTipAmount = ""
             }))
@@ -3449,8 +3450,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func socketMethodForGettingBookingAcceptNotification()
     {
-        // Socket Accepted
-        self.socket.on(SocketData.kAcceptBookingRequestNotification, callback: { (data, ack) in
+        // socket? Accepted
+        self.socket?.on(SocketData.kAcceptBookingRequestNotification, callback: { (data, ack) in
             print("AcceptBooking data is \(data)")
             self.viewActivity.stopAnimating()
             
@@ -3497,7 +3498,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func socketMethodForDropOffs()
     {
-        self.socket.on(SocketData.kBookingDetailsDropoffs) { data, ack in
+        self.socket?.on(SocketData.kBookingDetailsDropoffs) { data, ack in
             print("data \(data)")
             if data.count != 0 {
                 if let BookingInfo = (data as? [[String:Any]])?.first?["BookingInfo"] as? [[String:Any]] {
@@ -3824,6 +3825,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         let next = mainStoryboard.instantiateViewController(withIdentifier: "DriverInfoViewController") as! DriverInfoViewController
         
         next.strDriverName = DriverInfo.object(forKey: "Fullname") as! String
+        if let strDriverID = DriverInfo.object(forKey: "Id") as? String
+        {
+            next.strDriverID = strDriverID
+        }
+        else  if let intDriverID = DriverInfo.object(forKey: "Id") as? Int
+        {
+            next.strDriverID = "\(intDriverID)"
+        }
         next.strPickupLocation = "\(bookingInfo.object(forKey: "PickupLocation") as! String)"
         next.strDropoffLocation = "\(bookingInfo.object(forKey: "DropoffLocation") as! String)"
         if let carClass = carInfo.object(forKey: "Model") as? NSDictionary {
@@ -3858,10 +3867,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             next.shouldShow = true
         }
         //        }
-        
-        let strDriverLat = DriverInfo.object(forKey: "Lat") as? String ?? ""
-        let strDriverLng = DriverInfo.object(forKey: "Lng") as? String ?? ""
-        let strBookingID = bookingInfo.object(forKey: "Id") as? String ?? ""
+        let PickupLat:Double = self.defaultLocation.coordinate.latitude
+        let PickupLng:Double = self.defaultLocation.coordinate.longitude
+
+        let strDriverLat = "\(PickupLat)"
+        let strDriverLng = "\(PickupLng)"
+        let strBookingID = "\(bookingInfo.object(forKey: "Id") as? Int ?? 0)"
         
         let strBookingType = (self.strBookingType == "BookNow") ? "Booking" : "AdvanceBooking"
         next.strPickUpLat = bookingInfo.object(forKey: "PickupLat") as? String ?? ""
@@ -3870,13 +3881,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         next.strCurrentLng = strDriverLng
         next.strBookingID = String(strBookingID)
         next.strBookingType = strBookingType
+        next.homeVC = self
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(next, animated: true, completion: nil)
     }
     
     func socketMethodForGettingBookingRejectNotification()
     {
-        // Socket Accepted
-        self.socket.on(SocketData.kRejectBookingRequestNotification, callback: { (data, ack) in
+        // socket? Accepted
+        self.socket?.on(SocketData.kRejectBookingRequestNotification, callback: { (data, ack) in
             print("socketMethodForGettingBookingRejectNotification() is \(data)")
             
             var bookingId = String()
@@ -3948,8 +3960,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func socketMethodForGettingBookingRejectNotificatioByDriver()
     {
-        // Socket Accepted
-        self.socket.on(SocketData.kCancelTripByDriverNotficication, callback: { (data, ack) in
+        // socket? Accepted
+        self.socket?.on(SocketData.kCancelTripByDriverNotficication, callback: { (data, ack) in
             print("socketMethodForGettingBookingRejectNotificatioByDriver() is \(data)")
             
             //            var bookingId = String()
@@ -4031,7 +4043,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func socketMethodForGettingPickUpNotification()
     {
-        self.socket.on(SocketData.kPickupPassengerNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kPickupPassengerNotification, callback: { (data, ack) in
             print("socketMethodForGettingPickUpNotification() is \(data)")
             //            self.stopTimer()
             /*
@@ -4126,7 +4138,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func socketMethodForGettingTripCompletedNotification()
     {
-        self.socket.on(SocketData.kBookingCompletedNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kBookingCompletedNotification, callback: { (data, ack) in
             print("socketMethodForGettingTripCompletedNotification() is \(data)")
             
             SingletonClass.sharedInstance.isTripContinue = false
@@ -4277,7 +4289,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
             
             self.dismiss(animated: true, completion: nil)
-            //                    self.socket.off(SocketData.kBookingCompletedNotification)
+            //                    self.socket?.off(SocketData.kBookingCompletedNotification)
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
             
             self.viewTripActions.isHidden = true
@@ -4466,7 +4478,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     {
         
         let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId] as [String : Any]
-        socket.emit(SocketData.kCancelTripByPassenger , with: [myJSON])
+        socket?.emit(SocketData.kCancelTripByPassenger , with: [myJSON], completion: nil)
         viewAdditionalDestinationLocation.isHidden = false
         _ = btnClose.compactMap{$0.isHidden = false}
         self.strAdditionalDropoffLocation = ""
@@ -4484,7 +4496,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onAcceptBookLaterBookingRequestNotification() {
         
-        self.socket.on(SocketData.kAcceptAdvancedBookingRequestNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAcceptAdvancedBookingRequestNotification, callback: { (data, ack) in
             print("onAcceptBookLaterBookingRequestNotification() is \(data)")
             
             //            self.playSound(fileName: "RequestConfirm", extensionType: "mp3")
@@ -4527,7 +4539,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onRejectBookLaterBookingRequestNotification() {
         
-        self.socket.on(SocketData.kRejectAdvancedBookingRequestNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kRejectAdvancedBookingRequestNotification, callback: { (data, ack) in
             print("onRejectBookLaterBookingRequestNotification() is \(data)")
             
             //            self.playSound(fileName: "PickNGo", extensionType: "mp3")
@@ -4544,7 +4556,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onPickupPassengerByDriverInBookLaterRequestNotification() {
         
-        self.socket.on(SocketData.kAdvancedBookingPickupPassengerNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAdvancedBookingPickupPassengerNotification, callback: { (data, ack) in
             print("onPickupPassengerByDriverInBookLaterRequestNotification() is \(data)")
             
             var bookingId = String()
@@ -4591,7 +4603,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onTripHoldingNotificationForPassenger() {
         
-        self.socket.on(SocketData.kReceiveHoldingNotificationToPassenger, callback: { (data, ack) in
+        self.socket?.on(SocketData.kReceiveHoldingNotificationToPassenger, callback: { (data, ack) in
             print("onTripHoldingNotificationForPassenger() is \(data)")
             
             var message = String()
@@ -4630,7 +4642,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onTripHoldingNotificationForPassengerLater() {
         
-        self.socket.on(SocketData.kAdvancedBookingTripHoldNotification, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAdvancedBookingTripHoldNotification, callback: { (data, ack) in
             print("onTripHoldingNotificationForPassengerLater() is \(data)")
             
             var message = String()
@@ -4652,8 +4664,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func onReceiveDriverLocationToPassenger() {
-        
-        self.socket.on(SocketData.kReceiveDriverLocationToPassenger, callback: { (data, ack) in
+        if(self.socket?.status == .connected)
+        {
+            print("hi")
+        }
+        self.socket?.on(SocketData.kReceiveDriverLocationToPassenger, callback: { (data, ack) in
             print("onReceiveDriverLocationToPassenger() is \(data)")
             
             SingletonClass.sharedInstance.driverLocation = (data as NSArray).object(at: 0) as! [String : AnyObject]
@@ -4748,7 +4763,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @objc func getDriverLocation()
     {
         let myJSON = ["PassengerId" : passengerIDTimer,  "DriverId" : driverIDTimer] as [String : Any]
-        socket.emit(SocketData.kSendDriverLocationRequestByPassenger , with: [myJSON])
+        socket?.emit(SocketData.kSendDriverLocationRequestByPassenger , with: [myJSON], completion: nil)
     }
     
     
@@ -4771,12 +4786,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID,  "PickupLocation" : strPickupLocation ,"PickupLat" :  self.doublePickupLat , "PickupLong" :  self.doublePickupLng, "DropoffLocation" : strDropoffLocation,"DropoffLat" : self.doubleDropOffLng, "DropoffLon" : self.doubleDropOffLng,"Ids" : driverID, "ShareRiding": intShareRide, "DropoffLocation2" : strAdditionalDropoffLocation,"DropOffLat2" : self.doubleUpdateNewLat,"DropOffLon2" : self.doubleUpdateNewLng] as [String : Any]
         }
 //        print("kSendRequestForGetEstimateFare \(myJSON)")
-        socket.emit(SocketData.kSendRequestForGetEstimateFare , with: [myJSON])
+        socket?.emit(SocketData.kSendRequestForGetEstimateFare , with: [myJSON], completion: nil)
     }
     
     func onBookingDetailsAfterCompletedTrip() {
         
-        self.socket.on(SocketData.kAdvancedBookingDetails, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAdvancedBookingDetails, callback: { (data, ack) in
             print("onBookingDetailsAfterCompletedTrip() is \(data)")
             
             SingletonClass.sharedInstance.isTripContinue = false
@@ -4825,7 +4840,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func CancelBookLaterTripAfterDriverAcceptRequest() {
         
         let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId] as [String : Any]
-        socket.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON])
+        socket?.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON], completion: nil)
         
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
         
@@ -4843,7 +4858,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onAdvanceTripInfoBeforeStartTrip() {
         
-        self.socket.on(SocketData.kInformPassengerForAdvancedTrip, callback: { (data, ack) in
+        self.socket?.on(SocketData.kInformPassengerForAdvancedTrip, callback: { (data, ack) in
             print("onAdvanceTripInfoBeforeStartTrip() is \(data)")
             
             var message = String()
@@ -4867,7 +4882,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func onReceiveNotificationWhenDriverAcceptRequest() {
         
-        self.socket.on(SocketData.kAcceptAdvancedBookingRequestNotify, callback: { (data, ack) in
+        self.socket?.on(SocketData.kAcceptAdvancedBookingRequestNotify, callback: { (data, ack) in
             print("onReceiveNotificationWhenDriverAcceptRequest is \(data)")
             
             var bookingId = String()
@@ -4935,7 +4950,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul’s iphone")
+        if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
             filter.country = "IN"
         }
@@ -4964,7 +4979,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul’s iphone")
+        if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
             filter.country = "IN"
         }

@@ -130,29 +130,29 @@ class EditProfileViewController: BaseViewController {
             if (buttonIndex == 2)
             {
 
-                let socket = (UIApplication.shared.delegate as! AppDelegate).SocketManager
+                let socket = (UIApplication.shared.delegate as! AppDelegate).socket
                 
                 
-                socket.off(SocketData.kReceiveGetEstimateFare)
-                socket.off(SocketData.kNearByDriverList)
-                socket.off(SocketData.kAskForTipsToPassengerForBookLater)
-                socket.off(SocketData.kAskForTipsToPassenger)
-                socket.off(SocketData.kAcceptBookingRequestNotification)
-                socket.off(SocketData.kRejectBookingRequestNotification)
-                socket.off(SocketData.kCancelTripByDriverNotficication)
-                socket.off(SocketData.kPickupPassengerNotification)
-                socket.off(SocketData.kBookingCompletedNotification)
-                socket.off(SocketData.kAcceptAdvancedBookingRequestNotification)
-                socket.off(SocketData.kRejectAdvancedBookingRequestNotification)
-                socket.off(SocketData.kAdvancedBookingPickupPassengerNotification)
-                socket.off(SocketData.kReceiveHoldingNotificationToPassenger)
-                socket.off(SocketData.kAdvancedBookingTripHoldNotification)
-                socket.off(SocketData.kReceiveDriverLocationToPassenger)
-                socket.off(SocketData.kAdvancedBookingDetails)
-                socket.off(SocketData.kInformPassengerForAdvancedTrip)
-                socket.off(SocketData.kAcceptAdvancedBookingRequestNotify)
+                socket?.off(SocketData.kReceiveGetEstimateFare)
+                socket?.off(SocketData.kNearByDriverList)
+                socket?.off(SocketData.kAskForTipsToPassengerForBookLater)
+                socket?.off(SocketData.kAskForTipsToPassenger)
+                socket?.off(SocketData.kAcceptBookingRequestNotification)
+                socket?.off(SocketData.kRejectBookingRequestNotification)
+                socket?.off(SocketData.kCancelTripByDriverNotficication)
+                socket?.off(SocketData.kPickupPassengerNotification)
+                socket?.off(SocketData.kBookingCompletedNotification)
+                socket?.off(SocketData.kAcceptAdvancedBookingRequestNotification)
+                socket?.off(SocketData.kRejectAdvancedBookingRequestNotification)
+                socket?.off(SocketData.kAdvancedBookingPickupPassengerNotification)
+                socket?.off(SocketData.kReceiveHoldingNotificationToPassenger)
+                socket?.off(SocketData.kAdvancedBookingTripHoldNotification)
+                socket?.off(SocketData.kReceiveDriverLocationToPassenger)
+                socket?.off(SocketData.kAdvancedBookingDetails)
+                socket?.off(SocketData.kInformPassengerForAdvancedTrip)
+                socket?.off(SocketData.kAcceptAdvancedBookingRequestNotify)
                 //                Singletons.sharedInstance.isPasscodeON = false
-                socket.disconnect()
+                socket?.disconnect()
   
                 
 //                self.navigationController?.popToRootViewController(animated: true)

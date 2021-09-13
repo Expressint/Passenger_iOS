@@ -148,9 +148,9 @@ PODS:
     - SDWebImage/Core (= 4.2.1)
   - SDWebImage/Core (4.2.1)
   - SideMenuController (0.2.4)
-  - Socket.IO-Client-Swift (12.1.2):
-    - Starscream (~> 2.1.1)
-  - Starscream (2.1.1)
+  - Socket.IO-Client-Swift (16.0.1):
+    - Starscream (~> 4.0)
+  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - ACFloatingTextfield-Swift
@@ -248,8 +248,8 @@ SPEC CHECKSUMS:
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
-  Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
+  Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
 PODFILE CHECKSUM: 40bcb45bab580c9bf53a3aba1fdb0dd1260fee01
 
