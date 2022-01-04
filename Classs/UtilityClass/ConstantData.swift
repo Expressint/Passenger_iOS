@@ -22,7 +22,7 @@ let currencySign = "$" //"KSh"
 let appName = "Book A Ride"
 let helpLineNumber = "+255777115054"//"0772506506"
 let googleAnalyticsTrackId = "UA-122360832-1"
-
+let supportURL = "https://www.tantaxitanzania.com/front/about"
 let AppRegularFont:String = "ProximaNova-Regular"
 let AppBoldFont:String = "ProximaNova-Bold"
 let AppSemiboldFont:String = "ProximaNova-Semibold"
@@ -66,7 +66,7 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 
 
 struct WebserviceURLs {
-    static let kBaseURL                                 = "http://3.83.58.5/Passenger_Api2/"
+    static let kBaseURL                                 = "https://www.bookaridegy.com/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -126,7 +126,7 @@ struct WebserviceURLs {
 
 struct SocketData {
     
-    static let kBaseURL                                     = "http://3.83.58.5:8080"
+    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"

@@ -14,6 +14,7 @@ import SocketIO
 import SDWebImage
 import NVActivityIndicatorView
 import M13Checkbox
+import AVFoundation
 
 protocol FavouriteLocationDelegate {
     func didEnterFavouriteDestination(Source: [String: AnyObject])
@@ -777,11 +778,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             } else {
                 setDirectionLineOnMapForSourceAndDestinationShow(origin: originalLoc, destination: destiantionLoc, waypoints: nil, travelMode: nil, completionHandler: nil)
             }
-            
-            
-            //commented for Query Limit Issue -
-            //            setDirectionLineOnMapForSourceAndDestinationShow(origin: originalLoc, destination: destiantionLoc, waypoints: aryMyWayPoints, completionHandler: nil)
-            //            self.callforMapLine(functionname: #function)
         }
     }
     
@@ -805,10 +801,17 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                               zoom: 17)
         mapView.camera = camera
         
+        if CLLocationManager.locationServicesEnabled() {
+             switch CLLocationManager.authorizationStatus() {
+                case .notDetermined, .restricted, .denied:
+                 self.mapView.animate(toZoom: 1)
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Access")
+                }
+            } else {
+                print("Location services are not enabled")
+        }
         
-        //Sj Change : Commented cause we dont want to clear the map when this button is pressed. but just center the camera
-        
-        //        currentLocationAction()
     }
     
     @objc func dummyCarMovement() {
@@ -843,7 +846,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                               zoom: 17)
         
         mapView.camera = camera
-        
+
+
         self.MarkerCurrntLocation.isHidden = false
         self.btnDoneForLocationSelected.isHidden = false
         self.viewBookNowLater.isHidden = true
@@ -855,23 +859,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //
         getAddressForLatLng(latitude: strLati, longitude: strlongi, markerType: .pickup)
         
-        //        let position = CLLocationCoordinate2D(latitude: defaultLocation.coordinate.latitude, longitude: defaultLocation.coordinate.longitude)
-        //        currentLocationMarker = GMSMarker(position: position)
-        //        currentLocationMarker.map = self.mapView
-        //        currentLocationMarker.snippet = currentLocationMarkerText // "Current Location"
-        //        currentLocationMarker.icon = UIImage(named: "iconCurrentLocation")
-        //        currentLocationMarker.isDraggable = true
     }
     
     let geocoder = GMSGeocoder()
-    
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        
-        //        self.btnDoneForLocationSelected.isHidden = true
-        
-    }
-    
-    //    var strLocationType = String()
+
     
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
 //        sleep(12)
@@ -886,17 +877,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if Connectivity.isConnectedToInternet() {
             
             if MarkerCurrntLocation.isHidden == false {
-                
-                //                geocoder.reverseGeocodeCoordinate(cameraPosition.target) { (response, error) in
-                //                    guard error == nil else {
-                //                        return
-                //                    }
-                //                }
-                
-                //                if self.strLocationType != "" {
-                
-                //                     UtilityClass.showACProgressHUD()
-                
                 self.btnDoneForLocationSelected.isHidden = false
                 self.viewBookNowLater.isHidden = true
                 
@@ -919,37 +899,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     self.doubleUpdateNewLng = cameraPosition.target.longitude
                     getAddressForLatLng(latitude: "\(cameraPosition.target.latitude)", longitude: "\(cameraPosition.target.longitude)", markerType: .dropOffSecond)
                 }
-                //                    if txtCurrentLocation.text?.count != 0 && txtDestinationLocation.text?.count != 0 && self.btnDoneForLocationSelected.isHidden != false {
-                //                        self.strLocationType = ""
-                
-                //                        UtilityClass.hideHUD()
-                //                    }
-                //                }
-                
-                //                getAddressForLatLng(latitude: "\(cameraPosition.target.latitude)", longitude: "\(cameraPosition.target.longitude)", markerType: strLocationType) // currentLocationMarkerText
             }
         } else {
             UtilityClass.showAlert("", message: "Internet connection not available", vc: self)
         }
     }
-    
-    func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
-        print("didBeginDragging")
-    }
-    
-    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
-        print("didDrag")
-        
-        //        currentLocationMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: marker.position.latitude, longitude: marker.position.longitude))
-        //        currentLocationMarker.map = self.mapView
-        //        currentLocationMarker.snippet = currentLocationMarkerText // "Current Location"
-        //        currentLocationMarker.icon = UIImage(named: "iconCurrentLocation")
-    }
-    
-    func mapView(_ mapView: GMSMapView, did position: GMSCameraPosition) {
-        print("did position: \(position)")
-    }
-    
     
     func getAddressForLatLng(latitude: String, longitude: String, markerType: locationTypeEntered)
     {
@@ -1095,10 +1049,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             dictParams.setObject(txtHavePromocode.text!, forKey: SubmitBookingRequest.kPromoCode as NSCopying)
         }
         
-        if CardID == "" {
-        } else {
-            dictParams.setObject(CardID, forKey: SubmitBookingRequest.kCardId as NSCopying)
-        }
+//        if CardID == "" {
+//        } else {
+//            dictParams.setObject(CardID, forKey: SubmitBookingRequest.kCardId as NSCopying)
+//        }
         
         if intShareRide == 1 {
             dictParams.setObject(intShareRide, forKey: SubmitBookingRequest.kShareRide as NSCopying)
@@ -2011,16 +1965,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
             paymentType = "card" //rjChange "m_pesa"
             
-            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
-                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
-                next.delegateAddCardFromHomeVC = self
-                self.navigationController?.pushViewController(next, animated: true)
-            } else {
-                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
-                next.delegateForHomeAddcard = self
-                next.canEditRowBool = false
-                self.navigationController?.pushViewController(next, animated: true)
-            }
+//            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
+//                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
+//                next.delegateAddCardFromHomeVC = self
+//                self.navigationController?.pushViewController(next, animated: true)
+//            } else {
+//                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+//                next.delegateForHomeAddcard = self
+//                next.canEditRowBool = false
+//                self.navigationController?.pushViewController(next, animated: true)
+//            }
         }
         //        paymentType = "cash"
     }
@@ -2099,9 +2053,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             paymentType =  "card" //"pesapal"//"card"
         }
         
-        if paymentType == "card" {
-            CardID = data["Id"] as! String
-        }
+//        if paymentType == "card" {
+//            CardID = data["Id"] as! String
+//        }
         
         //        self.SetPaymentOption(SelectionIndex: 0)
         viewBookNow.isHidden = false
@@ -3162,7 +3116,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     {
         let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
         next.headerName = "\(appName)"
-        next.strURL = "https://www.tantaxitanzania.com/front/about"
+        next.strURL = supportURL
         self.navigationController?.pushViewController(next, animated: true)
     }
     
@@ -3188,7 +3142,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         socket?.on(clientEvent: .reconnect) { (data, ack) in
             print ("socket? is reconnected")
-            self.webserviceOfCurrentBooking()
+//            self.webserviceOfCurrentBooking()
         }
         
         socket?.on(clientEvent: .connect) { data, ack in
@@ -3229,7 +3183,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             // Get Estimate
             self.socket?.on(SocketData.kNearByDriverList, callback: { (data, ack) in
-                print("NearByDriverListIOS is \(data)")
+//                print("NearByDriverListIOS is \(data)")
                 
 //                var lat : Double!
 //                var long : Double!
@@ -3279,7 +3233,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if doublePickupLat != 0 && doublePickupLng != 0 {
             let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": doublePickupLat, "Long": doublePickupLng, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
             socket?.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON], completion: nil)
-            print(SocketData.kUpdatePassengerLatLong, myJSON)
+//            print(SocketData.kUpdatePassengerLatLong, myJSON)
+        }
+        else
+        {
+            let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": defaultLocation.coordinate.latitude, "Long": defaultLocation.coordinate.longitude, "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
+            socket?.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON], completion: nil)
+//            print(SocketData.kUpdatePassengerLatLong, myJSON)
         }
         
     }
@@ -3456,7 +3416,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.viewActivity.stopAnimating()
             
             self.locationManager.startUpdatingLocation()
-            
+            self.timerToUpdatePassengerlocation?.invalidate()
+            self.timerToUpdatePassengerlocation = nil
             if let getInfoFromData = data as? [[String:AnyObject]] {
                 
                 if let infoData = getInfoFromData[0] as? [String:AnyObject] {
@@ -3893,7 +3854,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             var bookingId = String()
             
-            let bookingInfoData = (data as! [[String:AnyObject]])[0] //as? [String:AnyObject] {
+            let bookingInfoData = (data as! [[String:AnyObject]])[0] //as? [String:AnyObject]  {
             if let bookingInfo = bookingInfoData["BookingId"] as? Int {
                 bookingId = "\(bookingInfo)"
             }
@@ -4218,57 +4179,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     func delegateforGivingRate()
     {
-        
         let ViewController = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as? GiveRatingViewController
         ViewController?.delegateRating = self
         ViewController?.strBookingType = strBookingType
-        
-        //        ifself.strBookingType
-        //        {
-        //            ViewController?.strBookingType = "BookLater""
-        //        }
         ViewController?.dictData = self.arrDataAfterCompletetionOfTrip[0] as? NSDictionary
-        
-        //        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        //        alertWindow.rootViewController = UIViewController()
-        //        alertWindow.windowLevel = UIWindowLevelAlert + 1;
-        //        alertWindow.makeKeyAndVisible()
-        //        alertWindow.rootViewController?.present(ViewController!, animated: true, completion: nil)
-        
         UIApplication.shared.windows.first?.rootViewController?.present(ViewController!, animated: true, completion: nil)
-        
-        
-        
-        //        ViewController?.dictPassengerInfo = PassengerInfo
-        //        Utilities.presentPopupOverScreen(ViewController!)
-        //         self.resetMapView()
-        /*
-         let getBookingAndPassengerInfo = self.getBookingAndPassengerInfo(data: self.aryPassengerData)
-         
-         let PassengerInfo = getBookingAndPassengerInfo.1
-         
-         ViewController?.strBookingType = "BookNow"
-         
-         if(isAdvanceBooking)
-         {
-         ViewController?.strBookingType = "BookLater"
-         }
-         //
-         
-         self.lblCurrentLocationText.isHidden = false
-         self.viewDropOffLocation.isHidden = true
-         self.constrainPickupBottonLine.constant = 10
-         self.iconLine.isHidden = true
-         self.viewBTNStartTrip.isHidden = true
-         print("Line Number :=== 424 //self.viewMyJobs.isHidden = false")
-         self.viewMyJobs.isHidden = false
-         self.viewCancelTripPassInfoDirection.isHidden = true
-         self.viewCompleteTripDirection.isHidden = true
-         self.btnClosePassangerInfo.isHidden = true
-         self.viewProfile.isHidden = true
-         self.constainViewProfileBottom.constant = 15
-         self.view.layoutIfNeeded()
-         */
     }
     
     func completeTripInfo() {
@@ -4703,12 +4618,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.driverMarker.icon = UIImage(named: "dummyCar")
                 self.driverMarker.map = self.mapView
             }
-            //            self.moveMent.ARCarMovement(marker: self.driverMarker, oldCoordinate: self.destinationCordinate, newCoordinate: DriverCordinate, mapView: self.mapView, bearing: Float(SingletonClass.sharedInstance.floatBearing))
             else {
                 self.driverMarker.icon = UIImage.init(named: "dummyCar")
             }
             _ = DriverCordinate
-            
+            self.moveMent.ARCarMovement(marker: self.driverMarker, oldCoordinate: self.destinationCordinate, newCoordinate: DriverCordinate, mapView: self.mapView, bearing: Float(SingletonClass.sharedInstance.floatBearing))
+
             self.driverMarker.position = DriverCordinate// = GMSMarker(position: DriverCordinate) // self.originCoordinate
             self.driverMarker.map = self.mapView
             
@@ -4716,6 +4631,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             self.destinationCordinate = DriverCordinate
             self.MarkerCurrntLocation.isHidden = true
+            
+            let camera = GMSCameraPosition.camera(withLatitude: DriverCordinate.latitude,longitude: DriverCordinate.longitude, zoom: 17)
+            self.mapView.camera = camera
+
             // ----------------------------------------------------------------------
             
             //            CATransaction.begin()
@@ -4748,7 +4667,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         driverIDTimer = driverID
         passengerIDTimer = passengerID
         if timerToGetDriverLocation == nil {
-            timerToGetDriverLocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.getDriverLocation), userInfo: nil, repeats: true)
+//            timerToGetDriverLocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.getDriverLocation), userInfo: nil, repeats: true)
         }
         
     }
@@ -4949,10 +4868,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
-            filter.country = "IN"
+//            filter.country = "IN"
         }
         acController.autocompleteFilter = filter
         if(sender.tag == 0)
@@ -4978,10 +4897,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
-            filter.country = "IN"
+//            filter.country = "IN"
         }
         acController.autocompleteFilter = filter
         //        BoolCurrentLocation = true
@@ -5929,28 +5848,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                         
                                         self.driverMarker = GMSMarker(position: self.destinationCoordinate) // self.originCoordinate
                                         self.driverMarker.map = self.mapView
-                                        //                                        var vehicleID = Int()
-                                        //                                        //                                    var vehicleID = Int()
-                                        //                                        if let vID = SingletonClass.sharedInstance.dictCarInfo["VehicleModel"] as? Int {
-                                        //
-                                        //                                            if vID == 0 {
-                                        //                                                vehicleID = 7
-                                        //                                            }
-                                        //                                            else {
-                                        //                                                vehicleID = vID
-                                        //                                            }
-                                        //                                        }
-                                        //                                        else if let sID = SingletonClass.sharedInstance.dictCarInfo["VehicleModel"] as? String
-                                        //                                        {
-                                        //
-                                        //                                            if sID == "" {
-                                        //                                                vehicleID = 7
-                                        //                                            }
-                                        //                                            else {
-                                        //                                                vehicleID = Int(sID)!
-                                        //                                            }
-                                        //                                        }
-                                        //
                                         self.driverMarker.icon = UIImage(named: "dummyCar")
                                         
                                         self.driverMarker.title = originAddress
@@ -6233,8 +6130,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.strBookingType = bookingType
                 if bookingType != "" {
                     
-                    
-                    self.MarkerCurrntLocation.isHidden = true
+//                    self.timerToUpdatePassengerlocation?.invalidate()
+//                    self.timerToUpdatePassengerlocation = nil
+
+//                    self.MarkerCurrntLocation.isHidden = true
                     
                     if bookingType == "BookNow" {
                         
@@ -6620,7 +6519,7 @@ extension HomeViewController: CLLocationManagerDelegate {
                 
                 driverMarker.map = mapView
             }
-            //            self.moveMent.ARCarMovement(marker: driverMarker, oldCoordinate: destinationCordinate, newCoordinate: currentCordinate, mapView: mapView, bearing: Float(SingletonClass.sharedInstance.floatBearing))
+//                        self.moveMent.ARCarMovement(marker: driverMarker, oldCoordinate: destinationCordinate, newCoordinate: currentCordinate, mapView: mapView, bearing: Float(SingletonClass.sharedInstance.floatBearing))
             destinationCordinate = currentCordinate
             self.MarkerCurrntLocation.isHidden = true
         }

@@ -354,12 +354,20 @@ extension UIViewController {
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
+    var isModal: Bool {
+
+           let presentingIsModal = presentingViewController != nil
+           let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
+           let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
+
+           return presentingIsModal || presentingIsNavigation || presentingIsTabBar
+       }
     
 }
 
 
 extension UIApplication {
-    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
         }

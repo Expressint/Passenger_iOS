@@ -18,16 +18,28 @@ class BaseViewController: UIViewController {
     }
 
     func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false){
-//        self.navigationController?.navigationBar.isTranslucent = false
+        //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
-        self.navigationController?.navigationBar.barTintColor = themeYellowColor;
         self.navigationController?.navigationBar.tintColor = UIColor.white;
+        self.navigationController?.navigationBar.barTintColor = themeYellowColor;
         
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = themeYellowColor
+            appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                              .foregroundColor: UIColor.white]
 
+            // Customizing our navigation bar
+            navigationController?.navigationBar.tintColor = .white
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
         
         let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_menu"), style: .plain, target: self, action: #selector(self.OpenMenuAction))
         self.navigationItem.leftBarButtonItem = nil
@@ -35,14 +47,14 @@ class BaseViewController: UIViewController {
         
         if IsNeedRightButton == true {
             let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
-
+            
             if(isFavNeeded)
             {
                 
                 let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
-
+                
                 self.navigationItem.rightBarButtonItems = [rightNavBarButton,rightFavBarButton]
-
+                
             }
             else
             {
@@ -52,6 +64,8 @@ class BaseViewController: UIViewController {
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }
+        
+        
     }
     
     func setNavBarWithBack(Title:String, IsNeedRightButton:Bool) {

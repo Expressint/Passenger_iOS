@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CountryPickerView
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
     
@@ -25,6 +25,32 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var lblSecondStep: UILabel!
     
+    @IBOutlet var btnCountryCode: UIButton!
+    
+    let countryPicker = CountryPickerView()
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        txtPhoneNumber.delegate = self
+        txtEmail.delegate = self
+        txtPassword.delegate = self
+        txtConfirmPassword.delegate = self
+        self.SetLayout()
+        
+        if SingletonClass.sharedInstance.isFromSocilaLogin == true
+        {
+            self.txtEmail.text = SingletonClass.sharedInstance.strSocialEmail
+        }
+        countryPicker.delegate = self
+        btnCountryCode.setTitle("+592", for: .normal)
+
+//        txtPhoneNumber.placeHolderColor = UIColor.red
+        // Do any additional setup after loading the view.
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.setLocalization()
@@ -39,30 +65,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         btnNext.setTitle("Next".localized, for: .normal)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        txtPhoneNumber.delegate = self
-        txtEmail.delegate = self
-        txtPassword.delegate = self
-        txtConfirmPassword.delegate = self
-        self.SetLayout()
-        
-        //        txtPhoneNumber.text = "1234567890"
-        //        txtEmail.text = "rahul.bbit@gmail.com"
-        //        txtPassword.text = "12345678"
-        //        txtConfirmPassword.text = "12345678"
-        
-        if SingletonClass.sharedInstance.isFromSocilaLogin == true
-        {
-            self.txtEmail.text = SingletonClass.sharedInstance.strSocialEmail
-          
-        }
-//        txtPhoneNumber.placeHolderColor = UIColor.red
-        // Do any additional setup after loading the view.
+    
+    @IBAction func btnCountryCode(_ sender: Any) {
+        countryPicker.showPhoneCodeInView = true
+        countryPicker.showCountriesList(from: self)
     }
-    
-    
     
     //-------------------------------------------------------------
     //MARK: - Textfield Delegate Methods
@@ -104,7 +111,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         if (validateAllFields())
         {
-            webserviceForGetOTPCode(email: txtEmail.text!, mobile: txtPhoneNumber.text!)
+            webserviceForGetOTPCode(email: txtEmail.text!, mobile: "\(txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")")
         }
         
     }
@@ -254,7 +261,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         var param = [String:AnyObject]()
         param["MobileNo"] = mobile as AnyObject
         param["Email"] = email as AnyObject
-        
+        param["CountryCode"] = btnCountryCode.titleLabel?.text as AnyObject
+
         webserviceForOTPRegister(param as AnyObject) { (result, status) in
             
             if (status) {
@@ -340,3 +348,34 @@ extension String {
     }
 }
 
+
+
+extension RegisterViewController: CountryPickerViewDelegate {
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+        btnCountryCode.setTitle(country.phoneCode, for: .normal)
+
+    }
+    
+//    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+//        btnCountryCode.setTitle(country.phoneCode, for: .normal)
+//    }
+}
+
+extension RegisterViewController: CountryPickerViewDataSource {
+
+    func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
+        return "Select a Country"
+    }
+        
+    func searchBarPosition(in countryPickerView: CountryPickerView) -> SearchBarPosition {
+        return .tableViewHeader
+    }
+    
+    func showPhoneCodeInList(in countryPickerView: CountryPickerView) -> Bool {
+        return true
+    }
+    
+    func showCountryCodeInList(in countryPickerView: CountryPickerView) -> Bool {
+       return false
+    }
+}

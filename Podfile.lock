@@ -23,6 +23,7 @@ PODS:
   - CHIPageControl/Jaloro (0.1.4)
   - CHIPageControl/Paprika (0.1.4)
   - CHIPageControl/Puya (0.1.4)
+  - CountryPickerView (3.3.0)
   - CreditCardForm (0.1.5)
   - FBSDKCoreKit (7.0.0):
     - FBSDKCoreKit/Basics (= 7.0.0)
@@ -156,6 +157,7 @@ DEPENDENCIES:
   - ACFloatingTextfield-Swift
   - Alamofire
   - CHIPageControl
+  - CountryPickerView
   - CreditCardForm
   - FBSDKLoginKit
   - Firebase/Core
@@ -180,6 +182,7 @@ SPEC REPOS:
     - Alamofire
     - AppAuth
     - CHIPageControl
+    - CountryPickerView
     - CreditCardForm
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -218,6 +221,7 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   CHIPageControl: 032b5ab68506c00711d5a61bd83e9fdf2a7ecb22
+  CountryPickerView: 6322ada32a80b0cd721b0267282a5c24f406f263
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
@@ -251,6 +255,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 40bcb45bab580c9bf53a3aba1fdb0dd1260fee01
+PODFILE CHECKSUM: fe8976f23e8f0af82ec32f19fa9dd2ad317ea0d5
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

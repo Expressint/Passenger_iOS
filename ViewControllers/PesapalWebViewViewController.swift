@@ -15,6 +15,7 @@ protocol delegatePesapalWebView {
 //    @objc optional func didOrderFailed()
 }
 
+
 class PesapalWebViewViewController: BaseViewController
 {
     
@@ -41,6 +42,9 @@ class PesapalWebViewViewController: BaseViewController
     deinit {
         webView?.removeObserver(self, forKeyPath: "estimatedProgress")
     }
+    
+    let successURL = "https://www.bookaridegy.com/payment/success"
+    let failURL = "https://www.bookaridegy.com/payment/failed"
     
     // ----------------------------------------------------
     // MARK: - Base Methods
@@ -116,8 +120,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
         
        self.showProgressView()
         print("didStartProvisionalNavigation: \(String(describing: webView.url?.absoluteString))")
-        //"https://www.tantaxitanzania.com/pesapal/add_money_pesapal_ipn?pesapal_transaction_tracking_id=347bb386-84b4-4340-913a-9799e372d2a3&pesapal_merchant_reference=455"
-        if (webView.url?.absoluteString == "https://www.tantaxitanzania.com/pesapal/add_money_success") {
+        if (webView.url?.absoluteString == successURL) {
            
             let alert = UIAlertController(title: appName.localized, message: "Payment Success", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
@@ -127,14 +130,18 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                 }
             }
             alert.addAction(ok)
-            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow.rootViewController = UIViewController()
-            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-            alertWindow.makeKeyAndVisible()
-            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
-            
+            if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)
+            {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
+                    //                vc.present(alert, animated: true, completion: nil)
+                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
         }
-        else if webView.url?.absoluteString == "https://www.tantaxitanzania.com/pesapal/add_money_failed" {
+        else if webView.url?.absoluteString == "https://www.bookaridegy.com/payment/failed" {
             
             let alert = UIAlertController(title: appName.localized, message: "Payment failed", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
@@ -142,13 +149,24 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                 self.dismiss(animated: true, completion: nil)
             }
             alert.addAction(ok)
-            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow.rootViewController = UIViewController()
-            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-            alertWindow.makeKeyAndVisible()
-            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
+            if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)
+            {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
+                    //                vc.present(alert, animated: true, completion: nil)
+                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
         }
     }
+    
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        webView.evaluateJavaScript(jscript)
+    }
+    
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         UtilityClass.hideHUD()
@@ -171,36 +189,57 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
         self.hideProgressView()
         print("didFinish: \(String(describing: webView.url?.absoluteString))")
         
-        if (webView.url?.absoluteString == "https://www.tantaxitanzania.com/pesapal/add_money_success") {
+        if (webView.url?.absoluteString == successURL) {
             
             let alert = UIAlertController(title: appName.localized, message: "Payment Success", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
-                self.dismiss(animated: true) {
+                alert.dismiss(animated: true) {
                     //                self.delegate?.PayPalPaymentSuccess(paymentID: "\(self.paymentid)")
-                    self.delegate?.didOrderPesapalStatus(status: true)
+                    
+                    if(self.isModal)
+                    {
+                        self.dismiss(animated: true) {
+                            self.delegate?.didOrderPesapalStatus(status: true)
+                        }
+                    }
+                    else
+                    {
+                        self.navigationController?.popViewController(animated: false)
+                        self.delegate?.didOrderPesapalStatus(status: true)
+
+                    }
                 }
             }
             alert.addAction(ok)
-            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow.rootViewController = UIViewController()
-            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-            alertWindow.makeKeyAndVisible()
-            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
+            if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)
+            {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
+                    //                vc.present(alert, animated: true, completion: nil)
+                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
         }
-        
-        if webView.url?.absoluteString == "https://www.tantaxitanzania.com/pesapal/add_money_failed" {
+        else if webView.url?.absoluteString == failURL {
            
             let alert = UIAlertController(title: appName.localized, message: "Payment failed", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
                 self.delegate?.didOrderPesapalStatus(status: false)
-                self.dismiss(animated: true, completion: nil)
+                alert.dismiss(animated: true, completion: nil)
             }
             alert.addAction(ok)
-            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow.rootViewController = UIViewController()
-            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-            alertWindow.makeKeyAndVisible()
-            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
+            if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)
+            {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.dismiss(animated: true, completion: {
+                    //                vc.present(alert, animated: true, completion: nil)
+                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            }
         }
     }
     

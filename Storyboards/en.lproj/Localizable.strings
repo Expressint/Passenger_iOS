@@ -1,20 +1,11 @@
-/* 
-  Localizable.strings
-  TanTaxi User
-
-  Created by EWW-iMac Old on 09/02/19.
-  Copyright © 2019 Excellent Webworld. All rights reserved.
-*/
-"AllOut" = "AllOut";
+"App Name" = "Book A Ride Driver";
 "Phone Number" = "Phone Number";
 "Flight Number"  = "Flight Number";
 "Flight Number (If applicable)" = "Flight Number (If applicable)";
 "Notes"  = "Notes";
-"Click calendar icon to select pickup time" = "Click calendar icon to select pickup time" ;"Bonyeza kalenda icon kuchagua muda Pickup";
 "Password" = "Password";
 "Email" = "Email";
 "Confirm Password"  = "Confirm Password";
-"MissingTranslationitle"  = "MissingTranslationitle";
 "First Name"  = "First Name";
 "Full Name"  = "Full Name";
 "Address"  = "Address";
@@ -23,18 +14,10 @@
 "Name"  = "Name";
 "Last Name"  = "Last Name";
 "Invite Code"  = "Invite Code";
-"TZS"  = "TZS";
 "Car not available!" = "Car not available!";
 "Book Car Now" = "Book Car Now";
 "Not Available" = "Not Available";
 "Book Car Later" = "Book Car Later";
-"Please Swape Right To Left or Touch for Book Bars and Clubs" = "Please Swape Right To Left or Touch for Book Bars and Clubs";
-"Please Swape Right To Left or Touch for Shopping Center" = "Please Swape Right To Left or Touch for Shopping Center";
-"Please Swape Right To Left or Touch for Book Restaurants" = "Please Swape Right To Left or Touch for Book Restaurants";
-"Please Swape Right To Left or Touch for Book Hotels" = "Please Swape Right To Left or Touch for Book Hotels";
-"Please Swape Right To Left for remove address." = "Please Swape Right To Left for remove address.";
-"MissingTranslationopen_drawer" = "MissingTranslationopen_drawer";
-"MissingTranslationaclose_drawer" = "MissingTranslationclose_drawer";
 "Home" = "Home";
 "MY RECEIPTS" = "MY RECEIPTS";
 "INVITE FRIENDS" =  "INVITE FRIENDS";
@@ -46,15 +29,11 @@
 "Settings" = "Settings";
 "Cancel" = "Cancel";
 "Permission Denied, You cannot access location data." = "Permission Denied, You cannot access location data.";
-
 "Request Cancelled" = "Request Cancelled";
 "NO" = "NO";
 "YES" = "YES";
-"If you were to will be chanxceed package limites you will be charged as follows" = "If you were to will be chanxceed package limites you will be charged as follows";
 "If you cancel the trip then you will be partially charged.\nAre you sure you want to cancel the trip?" = "If you cancel the trip then you will be partially charged.\nAre you sure you want to cancel the trip?";
 "Please select payment method." = "Please select payment method.";
-"Need NFC Permission" = "Need NFC Permission";
-"This app needs nfc permission." = "This app needs nfc permission.";
 "Please select another image" = "Please select another image";
 "Permission Granted" = "Permission Granted";
 "Permission not Granted" = "Permission not Granted";
@@ -72,9 +51,6 @@
 "Water" = "Water";
 "Gas" = "Gas";
 "Electricity" = "Salio Lililopo";
-"Myki" = "Myki";
-"Movies" = "Movies";
-"Travel" = "Travel";
 "Available Funds" = "Available Funds";
 "Top Up" = "Top Up";
 "Transfer To Bank" = "Transfer To Bank";
@@ -96,16 +72,12 @@
 "Done" = "Done";
 "Card Number" = "Card Number";
 "Expiry Date" = "Expiry Date";
-"MissingTranslationCVV" = "MissingTranslationCVV";
 "Alias" = "Alias";
 "CVV" = "CVV";
 "Add Payment Method" = "Add Payment Method";
 "Please ensure you have entered your payment detail correctly." = "Please ensure you have entered your payment detail correctly.";
 "Card is not valid." = "Card is not valid.";
 "Invalid card number." = "Invalid card number.";
-"MissingTranslation0" = "MissingTranslation0";
-"Avail\u0020" = "Avail\u0020";
-"MissingTranslation20" = "MissingTranslation20";
 "Have a promocode?" = "Have a promocode?";
 "%1$s Applied" = "%1$s Applied";
 "OK" = "OK";
@@ -132,9 +104,6 @@
 "Please enter address" = "Please enter address";
 "Please first complete your trip" = "Please first complete your trip";
 "Please enter new password" = "Please enter new password";
-"MissingTranslation" = "MissingTranslation";
-//"https://play.google.com/store/apps/details?id=com.tantaxi" = "https://play.google.com/store/apps/details?id=com.tantaxi";
-//"https://play.google.com/store/apps/details?id=com.tantaxi" = "https://play.google.com/store/apps/details?id=com.tantaxi";
 "Next" = "Next";
 "fonts/proxima-nova-586c8e081cb01.otf" = "fonts/proxima-nova-586c8e081cb01.otf";
 "Sign In" = "Sign In";
@@ -156,9 +125,6 @@
 "Submit" = "Submit";
 "Success Message" = "Success Message";
 "Home" = "Home";
-"MissingTranslationStandard" = "MissingTranslationStandard";
-"MissingTranslationPremium" = "MissingTranslationPremium";
-"MissingTranslationVan" = "MissingTranslationVan";
 "Legal" = "Legal";
 "Package Type" = "Package Type";
 "Driver Rating" = "Driver Rating";
@@ -185,13 +151,9 @@
 "Image" = "Image";
 "Cards" = "Cards";
 "Card" = "Card";
-"pesapal" = "pesapal";
 "Card :" = "Card :";
 "Transfer" = "Transfer";
 "Balance" = "Balance";
-"fonts/proxima-nova-586c8e081cb01.otf" = "fonts/proxima-nova-586c8e081cb01.otf";
-"fonts/proxima-nova-bold-586c8dd29c851.otf" = "fonts/proxima-nova-bold-586c8dd29c851.otf";
-"&#160;&#160;&#160;&#160;&#160;TZS0.00&#160;&#160;&#160;&#160;&#160;" = "&#160;&#160;&#160;&#160;&#160;TZS0.00&#160;&#160;&#160;&#160;&#160;";
 "Current Balance" = "Current Balance";
 "Send Money" = "Send Money";
 "When a friend register with your code, you will recieve referal amount." = "When a friend register with your code, you will recieve referal amount.";
@@ -277,7 +239,6 @@
 "OnGoing" = "OnGoing";
 "UpComing" = "UpComing";
 "Past Booking" = "Past Booking";
-"Packages can be made after 2 hours from now. Sri Lankan time is"  = "Packages can be made after 2 hours from now. Sri Lankan time is 2018-03-06 11:16 AM";
 "No data Found" = "No data Found";
 "Account" = "Account";
 "Trip Detail" = "Trip Detail";
@@ -312,8 +273,6 @@
 "Update" = "Update";
 "Remind Later" = "Remind Later";
 "Your booking request has been confirmed" = "Your booking request has been confirmed";
-"MissingTranslation01" = "MissingTranslation01";
-"MissingTranslation02" = "MissingTranslation02";
 "Choose Image" = "Choose Image";
 "Open Camera" = "Open Camera";
 "Booking Id" = "Booking Id";
@@ -338,11 +297,7 @@
 "Promo Code"  = "Promo Code";
 "SHARE YOUR INVITE CODE" = "SHARE YOUR INVITE CODE";
 "Please enter promocode" = "Please enter promocode";
-"MissingTranslation" = "MissingTranslation";
-"MissingTranslation" = "MissingTranslation";
 "Camera" = "Camera";
-"MissingTranslation" = "MissingTranslation";
-"MissingTranslation" = "MissingTranslation";
 "You need to grant access to&#160;" = "You need to grant access to&#160;";
 "Money added  successfully" = "Money added  successfully";
 "Transfer Success check your history" = "Transfer Success check your history";
@@ -364,9 +319,6 @@
 //"" = "Privacy Policy";
 "condition" = "Conditions";
 "privacyPolicy" = "Privacy Policy";
-"linkTerms" = "https://www.tantaxitanzania.com/page/terms-conditions-passengers";
-//"" = "https://www.tantaxitanzania.com/page/privacy-policy";
-"linkPrivcyPolicy" = "https://www.tantaxitanzania.com/page/privacy-policy";
 "select" = "Select";
 "cancel" = "Cancel";
 "addTip" = "Add Tip";
@@ -375,7 +327,6 @@
 "logout" = "Logout";
 "confirmLogout" = "Confirm Logout?";
 "logoutmsg" = "Are you sure you want to logout?";
-"invitedYoubeComeATantaxiPassenger" = "&#160;has invited you to become a AllOut Passenger.\n\n";
 "yourInviteCode" = "\n\n Your invite code is:&#160";
 "scanCard" = "Scan Card";
 "TrackYourTrip:" = "TrackYourTrip:";

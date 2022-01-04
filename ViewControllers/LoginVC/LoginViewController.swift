@@ -739,36 +739,36 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
     @IBAction func btnForgotPassword(_ sender: UIButton) {
         
-        //1. Create the alert controller.
-        let alert = UIAlertController(title: "Forgot Password?".localized, message: "", preferredStyle: .alert)
-        
-        //2. Add the text field. You can configure it however you need.
-        alert.addTextField { (textField) in
-            
-            textField.placeholder = "Email".localized
-            textField.keyboardType = .emailAddress
-        }
-        
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            print("Text field: \(String(describing: textField?.text))")
-            
-            let isEmailAddressValid = self.isValidEmailAddress(emailID: textField!.text!)
-            if (textField?.text?.count != 0) && (isEmailAddressValid)
-            {
-                self.webserviceCallForForgotPassword(strEmail: (textField?.text)!)
-            } else {
-                UtilityClass.setCustomAlert(title: "Invalid!", message: "Enter a valid email") { (index, title) in
-                }
-            }
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (_) in
-        }))
-        
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
+//        //1. Create the alert controller.
+//        let alert = UIAlertController(title: "Forgot Password?".localized, message: "", preferredStyle: .alert)
+//
+//        //2. Add the text field. You can configure it however you need.
+//        alert.addTextField { (textField) in
+//
+//            textField.placeholder = "Email".localized
+//            textField.keyboardType = .emailAddress
+//        }
+//
+//        // 3. Grab the value from the text field, and print it when the user clicks OK.
+//        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { [weak alert] (_) in
+//            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+//            print("Text field: \(String(describing: textField?.text))")
+//
+//            let isEmailAddressValid = self.isValidEmailAddress(emailID: textField!.text!)
+//            if (textField?.text?.count != 0) && (isEmailAddressValid)
+//            {
+//                self.webserviceCallForForgotPassword(strEmail: (textField?.text)!)
+//            } else {
+//                UtilityClass.setCustomAlert(title: "Invalid!", message: "Enter a valid email") { (index, title) in
+//                }
+//            }
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (_) in
+//        }))
+//
+//        // 4. Present the alert.
+//        self.present(alert, animated: true, completion: nil)
     }
     
     func isValidEmailAddress(emailID: String) -> Bool

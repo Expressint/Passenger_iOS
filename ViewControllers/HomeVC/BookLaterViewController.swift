@@ -706,10 +706,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //        acController.autocompleteBounds = NearByRegion
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul's iphone")
-        {
-            filter.country = "IN"
-        }
+//        if(UIDevice.current.name.lowercased() == "rahul's iphone")
+//        {
+//            filter.country = "IN"
+//        }
         acController.autocompleteFilter = filter
         BoolCurrentLocation = false
         
@@ -822,10 +822,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             ValidationStatus = false
             ValidationMessage = "Select Payment Type"
         }
-        else if paymentType == "card" && CardID.count == 0 {
-            ValidationStatus = false
-            ValidationMessage = "Please Select Card or Change the Payment Method"
-        }
+//        else if paymentType == "card" && CardID.count == 0 {
+//            ValidationStatus = false
+//            ValidationMessage = "Please Select Card or Change the Payment Method"
+//        }
         
         return (ValidationMessage,ValidationStatus)
     }
@@ -1278,15 +1278,15 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             lblCardTitle.isHighlighted = true
 
 
-            if(self.aryCards.count == 0)
-            {
-                addNewCard()
-
-            }
-            else
-            {
-                selectExistingCard()
-            }
+//            if(self.aryCards.count == 0)
+//            {
+//                addNewCard()
+//
+//            }
+//            else
+//            {
+//                selectExistingCard()
+//            }
         }
         
     }
@@ -1578,11 +1578,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             dictData["PaymentType"] = paymentType as AnyObject
         }
         
-        if CardID == "" {
-        }
-        else {
-            dictData["CardId"] = CardID as AnyObject
-        }
+//        if CardID == "" {
+//        }
+//        else {
+//            dictData["CardId"] = CardID as AnyObject
+//        }
         
         if txtFlightNumber.text!.count == 0 {
             dictData["FlightNumber"] = "" as AnyObject

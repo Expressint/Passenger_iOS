@@ -130,7 +130,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblTripStatusTitle.text = "Trip Status:".localized
         lblNightFare.text = "lblNightFare".localized
         
-        if dictData.object(forKey: "PaymentType") as! String != "pesapal"
+        if (dictData.object(forKey: "PaymentType") as? String ?? "") != "card"
         {
         btnOK.setTitle("OK".localized, for: .normal)
         }
@@ -255,39 +255,23 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     
     @IBAction func btnOK(_ sender: UIButton)
     {
-        self.dismiss(animated: true, completion: nil)
-        //        if SingletonClass.sharedInstance.passengerType == "other" || SingletonClass.sharedInstance.passengerType == "others"
-        //        {
-        ////            self.completeTripInfo()
-        //            self.delegate.delegateforGivingRate()
-        //        }
-        //        else
-        //        {
-        //            self.delegate.delegateforGivingRate()
-        
-        //        }
-        //         SingletonClass.sharedInstance.passengerType = ""
-        
-        if (btnOK.titleLabel?.text) != "Make Payment".localized//dictData.object(forKey: "PaymentType") as! String != "pesapal"
-        {
-            self.delegate.delegateforGivingRate()
+//        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true) {
+            if (self.btnOK.titleLabel?.text) != "Make Payment".localized//dictData.object(forKey: "PaymentType") as! String != "pesapal"
+            {
+                self.delegate.delegateforGivingRate()
+            }
+            else
+            {
+                let next = self.storyboard?.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
+                next.delegate = self
+                let url = self.dictData["PaymentURL"] as? String
+                next.strUrl = url ?? ""
+                UIApplication.topViewController()?.childViewControllers.first?.childViewControllers.first?.navigationController?.pushViewController(next, animated: true)
+            }
         }
-        else
-        {
-            //            btnOK.setTitle("Make Payment".localized, for: .normal)
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
-            next.delegate = self
-            let Amount = String((lblGrandTotal.text)!.replacingOccurrences(of: currencySign, with: "").trimmingCharacters(in: .whitespacesAndNewlines))//(lblGrandTotal.text?.replacingOccurrences(of: currencySign, with: ""))?.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            let url = "https://www.tantaxitanzania.com/pesapal/add_money/\(SingletonClass.sharedInstance.strPassengerID)/\("\(Amount)")/passenger"
-            next.strUrl = url
-            //            self.present(next, animated: true, completion: nil)
-            self.navigationController?.pushViewController(next, animated: true)
-            //            let navController = UINavigationController.init(rootViewController: next)
-            //            UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
-        }
-        
     }
+    
     func didOrderPesapalStatus(status: Bool)
     {
         if status
