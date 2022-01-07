@@ -227,7 +227,10 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
             let alert = UIAlertController(title: appName.localized, message: "Payment failed", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
                 self.delegate?.didOrderPesapalStatus(status: false)
-                alert.dismiss(animated: true, completion: nil)
+                alert.dismiss(animated: true) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                
             }
             alert.addAction(ok)
             if((UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.presentedViewController != nil)

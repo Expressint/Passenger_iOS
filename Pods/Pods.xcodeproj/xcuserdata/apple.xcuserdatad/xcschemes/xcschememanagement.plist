@@ -39,6 +39,16 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>CountryPickerView-CountryPickerView_CountryPickerView.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>44</integer>
+		</dict>
+		<key>CountryPickerView.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>42</integer>
+		</dict>
 		<key>CreditCardForm-CreditCardForm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -217,7 +227,7 @@
 		<key>MarqueeLabel.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>42</integer>
+			<integer>43</integer>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>

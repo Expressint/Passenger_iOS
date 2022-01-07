@@ -626,6 +626,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         webserviceForAppSetting(param as AnyObject) { (result, status) in
             
             if (status) {
+                helpLineNumber = result["contact_number"] as? String ?? "0000000000"
                 print("result is : \(result)")
                 SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)
 

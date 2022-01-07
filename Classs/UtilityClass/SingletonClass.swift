@@ -10,6 +10,8 @@ import UIKit
 
 class SingletonClass: NSObject {
     /// Online cars for book later
+    var helpPhoneNumber = ""
+    
     var strOnlineDriverID = String()
     var aryEstimateFareData = NSMutableArray()
     var selectedIndexPath: IndexPath?
