@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FirebaseScreenReportingEnabled</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -25,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb3109641222403884</string>
+				<string>fb759025508666941</string>
 			</array>
 		</dict>
 		<dict>
@@ -33,7 +35,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b</string>
+				<string>com.googleusercontent.apps.968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44</string>
 			</array>
 		</dict>
 	</array>
@@ -54,9 +56,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>3109641222403884</string>
+	<string>759025508666941</string>
 	<key>FacebookDisplayName</key>
-	<string>AllOut Taxi</string>
+	<string>Book A Ride</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

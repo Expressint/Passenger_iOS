@@ -21,12 +21,12 @@ import GoogleSignIn
 
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
-    
+//968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44.apps.googleusercontent.com
 let googlApiKey = "AIzaSyCQ10cPN_q98K0PrDxvZx-aVYD05hiNB7g" 
 let googlPlacesApiKey = googlApiKey
 
 
-let kGoogle_Client_ID : String = "1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b.apps.googleusercontent.com"//"787787696945-nllfi2i6j9ts7m28immgteuo897u9vrl.apps.googleusercontent.com"
+let kGoogle_Client_ID : String = "968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44.apps.googleusercontent.com" //"1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b.apps.googleusercontent.com"//"787787696945-nllfi2i6j9ts7m28immgteuo897u9vrl.apps.googleusercontent.com"
 let kDeviceType : String = "1"
 
 //AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk

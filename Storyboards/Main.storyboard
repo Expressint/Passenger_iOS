@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -232,7 +232,7 @@
                                                 <rect key="frame" x="20" y="405" width="280" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="eMQ-8g-Hrt">
-                                                        <rect key="frame" x="115" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="75" y="0.0" width="130" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbe-ZJ-TiR">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -245,13 +245,16 @@
                                                                     <action selector="btnFBClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uxX-gU-c6a"/>
                                                                 </connections>
                                                             </button>
-                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PiX-gQ-RNx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PiX-gQ-RNx">
+                                                                <rect key="frame" x="80" y="0.0" width="50" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="50" id="K31-0c-tYk"/>
                                                                     <constraint firstAttribute="height" constant="50" id="K9N-PU-l1L"/>
                                                                 </constraints>
                                                                 <state key="normal" image="gPlusLogo"/>
+                                                                <connections>
+                                                                    <action selector="btnGoogleClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FlW-vH-ARV"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -443,6 +446,7 @@
                     <connections>
                         <outlet property="btnFB" destination="zbe-ZJ-TiR" id="P3S-Sk-cBu"/>
                         <outlet property="btnForgotPass" destination="Z5Q-0D-ebS" id="21Y-vv-0hi"/>
+                        <outlet property="btnGoogle" destination="PiX-gQ-RNx" id="g4s-B8-sy0"/>
                         <outlet property="btnLogin" destination="zRo-TR-N6H" id="vPR-tt-oXv"/>
                         <outlet property="btnSignup" destination="LT6-ZL-F2F" id="eKw-nO-cph"/>
                         <outlet property="lblDontAc" destination="aXI-Cx-6wN" id="uBA-f6-0RZ"/>
@@ -6499,7 +6503,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-16-6RH">
-                                                                        <rect key="frame" x="32" y="50" width="42.5" height="14.5"/>
+                                                                        <rect key="frame" x="32" y="50" width="42" height="14.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -11311,10 +11315,10 @@
             <size key="intrinsicContentSize" width="27" height="18.5"/>
         </designable>
         <designable name="fwG-w4-Esk">
-            <size key="intrinsicContentSize" width="57" height="34"/>
+            <size key="intrinsicContentSize" width="43" height="34"/>
         </designable>
         <designable name="hMS-rA-t75">
-            <size key="intrinsicContentSize" width="65" height="18.5"/>
+            <size key="intrinsicContentSize" width="65.5" height="18.5"/>
         </designable>
         <designable name="lCc-dT-hOD">
             <size key="intrinsicContentSize" width="29" height="18.5"/>

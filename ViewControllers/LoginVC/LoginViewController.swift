@@ -118,7 +118,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //        }
 //        txtMobile.text = "9898989898"
 //        txtPassword.text = "12345678"
-        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         lblLaungageName.layer.cornerRadius = 5
         lblLaungageName.backgroundColor = themeYellowColor
         lblLaungageName.layer.borderColor = UIColor.black.cgColor
