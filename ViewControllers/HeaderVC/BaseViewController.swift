@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false){
+    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false,isSOSNeeded:Bool=false){
         //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.tintColor = UIColor.white;
@@ -46,21 +46,27 @@ class BaseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
         if IsNeedRightButton == true {
-            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
+//            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
             
             if(isFavNeeded)
             {
                 
                 let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
                 
-                self.navigationItem.rightBarButtonItems = [rightNavBarButton,rightFavBarButton]
+                self.navigationItem.rightBarButtonItems = [rightFavBarButton]
                 
             }
-            else
+            if(isSOSNeeded)
             {
-                self.navigationItem.rightBarButtonItem = nil
-                self.navigationItem.rightBarButtonItem = rightNavBarButton
+                let rightSOSBarButton = UIBarButtonItem(image: UIImage(named: "iconSOS"), style: .plain, target: self, action: #selector(HomeViewController.btnSOS(_:)))
+                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
+                
             }
+//            else
+//            {
+//                self.navigationItem.rightBarButtonItem = nil
+//                self.navigationItem.rightBarButtonItem = rightNavBarButton
+//            }
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }

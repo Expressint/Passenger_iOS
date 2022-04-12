@@ -11,6 +11,9 @@ import SDWebImage
 import MarqueeLabel
 import CoreLocation
 import MapKit
+import Alamofire
+import SwiftyJSON
+
 
 class DriverInfoViewController: UIViewController {
     //-------------------------------------------------------------
@@ -18,8 +21,14 @@ class DriverInfoViewController: UIViewController {
     //-------------------------------------------------------------
     
     @IBOutlet weak var imgCar: UIImageView!
-    @IBOutlet weak var lblCareName: UILabel!
+//    @IBOutlet weak var lblCareName: UILabel!
     @IBOutlet weak var lblCarClassModel: UILabel!
+    
+    @IBOutlet weak var lblVehicleMake: UILabel!
+    @IBOutlet weak var lblVehiclePlateNum: UILabel!
+    @IBOutlet weak var lblVehicleType: UILabel!
+    @IBOutlet weak var lblVehicleColor: UILabel!
+    
     @IBOutlet weak var lblPickupLocation: MarqueeLabel!
     @IBOutlet weak var lblDropoffLocation: MarqueeLabel!
     @IBOutlet weak var lblDropoffLocation2: MarqueeLabel!
@@ -55,6 +64,13 @@ class DriverInfoViewController: UIViewController {
     var strCarImage = String()
     var strCareName = String()
     var strCarClass = String()
+    
+    var strVehicleMake = String()
+    var strVehiclePlateNum = String()
+    var strVehicleType = String()
+    var strVehicleColor = String()
+    
+    
     var strPickupLocation = String()
     var strDropoffLocation = String()
     var strDropoffLocation2 = String()
@@ -92,9 +108,20 @@ class DriverInfoViewController: UIViewController {
         btnCallGreen.clipsToBounds = true
 //        self.webserviceForGetEstimateETA()
         
+
+//        self.fillAllFields()
+        
+       
         if(shouldShow)
         {
-            self.socketMethodForEmitingToGetDriverLocation()
+            self.strApproxTimeToYourLocation = "calculating..."
+            self.strApproxDistanceToYourLocation = "calculating..."
+            self.fillAllFields()
+
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+                self.socketMethodForEmitingToGetDriverLocation()
+            }
 
         }
         else
@@ -108,13 +135,24 @@ class DriverInfoViewController: UIViewController {
     {
         let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "DriverId": strDriverID] as [String : Any]
         homeVC?.socket?.emit(SocketData.kGetDriverCurrentLatLong , with: [myJSON], completion: nil)
-//        homeVC?.socket?.status.rawValue
+        print("Method name is \(SocketData.kGetDriverCurrentLatLong) and value is \(myJSON)")
+//        print("is Socket connected \(homeVC?.socket?.status)")
+        if homeVC?.socket?.status != .connected {
+            
+            print("socket?.status != .connected")
+        }else
+        {
+            print("Its connected")
+            
+//            self.socketMethodForEmitingToGetDriverLocation()
+        }
     }
     
     func socketOnMethodForGettingDriverLocation()
     {
+        print("Socket did on")
         homeVC?.socket?.on(SocketData.kGetDriverCurrentLatLong, callback: { data, ack in
-            print((data.first as? [String:Any]) ?? "")
+            print( "The data is \((data.first as? [String:Any]) ?? [:])")
             
             if let dictData = data.first as? [String:Any]
             {
@@ -132,20 +170,25 @@ class DriverInfoViewController: UIViewController {
                     }
                 }
                 
-                self.getEstimateData { (status) in
-                    if status {
-                        
-                        self.strApproxTimeToYourLocation = self.ApproxTimeReachYourLocation
-                        self.strApproxDistanceToYourLocation = self.ApproxDistanceReachYourLocation
-                        self.fillAllFields()
-                        
-                        UIView.animate(withDuration: 0.5) {
-                            self.view.layoutIfNeeded()
-                        }
-                    }
-                }
+                self.getEstimate()
             }
         })
+    }
+    
+    func getEstimate()
+    {
+        self.getEstimateData { (status) in
+            if status {
+                
+                self.strApproxTimeToYourLocation = self.ApproxTimeReachYourLocation
+                self.strApproxDistanceToYourLocation = self.ApproxDistanceReachYourLocation
+                self.fillAllFields()
+                
+                UIView.animate(withDuration: 0.5) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -154,8 +197,11 @@ class DriverInfoViewController: UIViewController {
 //        imgCar.layer.cornerRadius = imgCar.frame.size.width / 2
 //        imgCar.layer.masksToBounds = true
 //
-        imgDriver.layer.cornerRadius = imgDriver.frame.size.width / 2
+        imgDriver.layer.cornerRadius = 20
         imgDriver.layer.masksToBounds = true
+        
+        imgCar.layer.cornerRadius = 20
+        imgCar.layer.masksToBounds = true
         
     }
 
@@ -169,7 +215,7 @@ class DriverInfoViewController: UIViewController {
         
         lblDriverInfo.text = "Driver Info".localized
         lblDriverName.text = "Jina la dereva".localized
-        lblCareName.text = "Jina la Gari".localized
+//        lblCareName.text = "Jina la Gari".localized
         lblPickupLocation.text = "Pickup Location".localized
         lblDropoffLocation.text = "Dropoff Location".localized
         
@@ -183,6 +229,37 @@ class DriverInfoViewController: UIViewController {
     
     @IBAction func btnClosed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func btnMessage(_ sender: UIButton) {
+        self.onSOS()
+        socketEmitForSOS()
+    }
+    
+    
+    func socketEmitForSOS()
+    {
+        let myJSON = ["UserId" : SingletonClass.sharedInstance.strPassengerID,
+                      "BookingId": strBookingID,
+                      "BookingType" : self.strBookingType,
+                      "UserType": "Passenger", "Token": SingletonClass.sharedInstance.deviceToken,"Lat": SingletonClass.sharedInstance.currentLatitude, "Lng": SingletonClass.sharedInstance.currentLongitude] as [String : Any]
+        
+        homeVC?.socket?.emit(SocketData.SOS, with: [myJSON], completion: nil)
+        print ("\(SocketData.SOS) : \(myJSON)")
+    }
+    
+    func onSOS() {
+        
+        homeVC?.socket?.on("SOS", callback: { (data, ack) in
+            print ("SOS Driver Notify : \(data)")
+            
+            let msg = (data as NSArray)
+            
+            UtilityClass.showAlert("", message: (msg.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
+            
+        })
+        
     }
     
     
@@ -212,29 +289,28 @@ class DriverInfoViewController: UIViewController {
     //-------------------------------------------------------------
     
     func fillAllFields() {
-        
-//        if strCarImage is String {
-//            imgCar.sd_setShowActivityIndicatorView(true)
-//            imgCar.sd_setIndicatorStyle(.gray)
-//            imgCar.sd_setImage(with: URL(string: carImg), completed: nil)
-//        }
-        
-        
-        
-        let driverImg = strDriverImage
+ 
         imgDriver.sd_setShowActivityIndicatorView(true)
-        imgDriver.sd_setIndicatorStyle(.gray)
-        imgDriver.sd_setImage(with: URL(string: driverImg), completed: nil)
+        imgDriver.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.medium)
+        imgDriver.sd_setImage(with: URL(string: strDriverImage), placeholderImage: UIImage(named: "icon_UserImages"), options: [.retryFailed,.scaleDownLargeImages]) { image, error, cacheType, url in
+//            print(image)
+
+        }
+        
+        
+        imgCar.sd_setShowActivityIndicatorView(true)
+        imgCar.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.medium)
+        imgCar.sd_setImage(with: URL(string: strCarImage), placeholderImage: UIImage(named: "icon_UserImages"), options: [.retryFailed,.scaleDownLargeImages]) { image, error, cacheType, url in
+//            print(image)
+
+        }
+        
         viewDropoffLocation2.isHidden = true
         if(strDropoffLocation2 != "")
         {
             viewDropoffLocation2.isHidden = false
             lblDropoffLocation2.text = strDropoffLocation2
         }
-        
-        lblCareName.text = strCareName
-        lblCarPlateNumber.text = strCarPlateNumber
-       
         lblPickupLocation.text = strPickupLocation
         lblDropoffLocation.text = strDropoffLocation
         lblDriverName.text = strDriverName
@@ -248,12 +324,22 @@ class DriverInfoViewController: UIViewController {
         
         
         self.lblApproxTime.text  = self.strApproxTimeToYourLocation
-        self.lblApproxDistanceToYourLocation.text    = self.strApproxDistanceToYourLocation
+        self.lblApproxDistanceToYourLocation.text = self.strApproxDistanceToYourLocation
 
         self.lblApproxTime.isHidden  = (self.strApproxTimeToYourLocation == "")
         self.lblApproxDistanceToYourLocation.isHidden = (self.strApproxDistanceToYourLocation == "")
         self.viewTimeToReachPickLocation.isHidden = self.lblApproxTime.isHidden
         self.viewDistanceToReachPickLocation.isHidden = self.lblApproxDistanceToYourLocation.isHidden
+        
+        
+        self.lblVehicleMake.text = "\(strVehicleMake)"
+        self.lblVehiclePlateNum.text = "\(strCarPlateNumber)"
+        self.lblVehicleType.text = "\(strVehicleType)"
+        self.lblVehicleColor.text = "\(strVehicleColor)"
+        
+        
+    
+
 
     }
    
@@ -322,8 +408,8 @@ class DriverInfoViewController: UIViewController {
         var TotalMinutes:Double = 0.0  // this variable counts total minutes from pickup to destination time in Minutes
         var TotalDistance:Double = 0.0 // this variable counts total minutes from pickup to destination distance in Miles
         // First Location Details
-        let pickupLat = strCurrentLat
-        let pickupLng = strCurrentLng
+        let pickupLat = self.strCurrentLat
+        let pickupLng = self.strCurrentLng
         let DropOffLat = strPickUpLat
         let DropOffLng = strPickUpLng
         
@@ -345,27 +431,71 @@ class DriverInfoViewController: UIViewController {
     
     func estimateTravelTime(request: MKDirections.Request, transportType: MKDirectionsTransportType, source: CLLocationCoordinate2D, destination: CLLocationCoordinate2D, string: @escaping (Double, Double) -> ()) {
         
-        let p1 = CLLocation(latitude: source.latitude, longitude: source.longitude)
-        let p2 = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
-        let distance = p2.distance(from: p1) / 1000
+//        let p1 = CLLocation(latitude: source.latitude, longitude: source.longitude)
+//        let p2 = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
         
-        let start = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
-        let Destiny = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
         
-        request.source = start
-        request.destination = Destiny
-        request.transportType = transportType
-        request.requestsAlternateRoutes = false
-        directions = MKDirections(request: request)
-        directions.calculateETA { (response, error) in
-            if let seconds = response?.expectedTravelTime {
-                let minutes = seconds / 60
-                string(minutes , distance)
-                //                    string(Int(ceil(minutes)).description, String(format: "%.2f", distance))
-            } else {
-                string(0, distance)
+        let directionURL = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&key=\(googlApiKey)"
+        
+        print("The url is \(directionURL)")
+        
+        Alamofire.request(directionURL, method: .post, encoding: JSONEncoding.default, headers: nil).downloadProgress(queue: DispatchQueue.global(qos: .utility)){
+            progress in
+            print("Progress: \(progress.fractionCompleted)")
+        }
+        .responseJSON {
+            response in
+            if response.result.isSuccess {
+                print("response is \(response)")
+                let JsonResponse = JSON(response.result.value!)
+                let routes = JsonResponse["routes"].arrayValue
+                for route in routes
+                {
+                    
+                    let duration = route["legs"][0]["duration"]["text"].doubleValue
+                    
+                    let distance = route["legs"][0]["distance"]["value"].doubleValue
+                    
+                    
+//                    if let seconds = response?.expectedTravelTime {
+//                        let minutes = seconds / 60
+                        string(duration , distance/1000)
+                        //                    string(Int(ceil(minutes)).description, String(format: "%.2f", distance))
+//                    } else {
+//                        string(0, distance)
+//                    }
+//
+                    
+                }
+                
+            }
+            if response.result.isFailure {
+                // Show error
+                print("Response failed \(response.result.error?.localizedDescription ?? "")")
+                string(0 , 0)
+
             }
         }
+        
+        //        let distance = p2.distance(from: p1) / 1000
+        //
+        //        let start = MKMapItem(placemark: MKPlacemark(coordinate: source, addressDictionary: nil))
+        //        let Destiny = MKMapItem(placemark: MKPlacemark(coordinate: destination, addressDictionary: nil))
+        //
+        //        request.source = start
+        //        request.destination = Destiny
+        //        request.transportType = transportType
+        //        request.requestsAlternateRoutes = false
+        //        directions = MKDirections(request: request)
+        //        directions.calculateETA { (response, error) in
+        //            if let seconds = response?.expectedTravelTime {
+        //                let minutes = seconds / 60
+        //                string(minutes , distance)
+        //                //                    string(Int(ceil(minutes)).description, String(format: "%.2f", distance))
+        //            } else {
+        //                string(0, distance)
+        //            }
+        //        }
     }
     
     //-------------------------------------------------------------

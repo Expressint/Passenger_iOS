@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     {
         
     }
-    let manager = SocketManager(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress,.version(.two)])
+    let manager = SocketManager(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(true), .compress,.version(.two)])
     var socket : SocketIOClient!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

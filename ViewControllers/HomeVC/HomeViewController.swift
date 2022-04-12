@@ -88,7 +88,18 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //    var dictCars = NSMutableDictionary()
     var strCarModelClass = String()
     
+    var boolShouldTrackCamera = true
+    
     var aryRequestAcceptedData = NSMutableArray()
+    {
+        didSet
+        {
+            aryRequestAcceptedData.count != 0 ? self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true,isSOSNeeded: true):self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true,isSOSNeeded: false)
+            
+        }
+    }
+    
+    @IBOutlet var constraintVerticalSpacingLocation : NSLayoutConstraint?
     
     var strCarModelID = String()
     var strCarModelIDIfZero = String()
@@ -244,6 +255,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     //MARK:-
     @IBOutlet weak var viewCarLists: UIView!
+   
     
     @IBOutlet weak var viewShareRideView: UIView!
     @IBOutlet weak var imgIsShareRideON: UIImageView!
@@ -355,7 +367,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         
-
+        PayCardView.isHidden = false
         //Crashlytics
         
         //        let button = UIButton(type: .roundedRect)
@@ -429,6 +441,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         viewHavePromocode.boxType = .square
         
         viewTripActions.isHidden = true
+        self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
         
         //        webserviceOfCardList()
         
@@ -467,7 +480,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //        {
         //            mapView.isHidden = false
         //        }
-        
+        self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true)
+
     }
     
     func setNotificationcenter()
@@ -523,7 +537,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.setLocalization()
         //        self.btnDoneForLocationSelected.isHidden = true
         
-        self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true)
         //        setupGoogleMap()
         
         //        viewTripActions.isHidden = true
@@ -579,6 +592,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if(locationManager != nil) {
             locationManager.startUpdatingLocation()
         }
+        
+
     }
     
     func setLocalization()
@@ -795,7 +810,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBAction func btnCurrentLocation(_ sender: UIButton) {
         //        self.getDummyDataLinedata()
         //        dummyTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(dummyCarMovement), userInfo: nil, repeats: true)
-        
+        self.boolShouldTrackCamera = true
         let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.coordinate.latitude,
                                               longitude: defaultLocation.coordinate.longitude,
                                               zoom: 17)
@@ -862,6 +877,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     let geocoder = GMSGeocoder()
+    
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        if (gesture){
+            print("dragged")
+            self.boolShouldTrackCamera = false
+        }
+    }
 
     
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
@@ -964,6 +987,35 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    @IBAction func btnSOS(_ sender: UIButton) {
+        socketEmitForSOS()
+    }
+    func socketEmitForSOS()
+    {
+        let myJSON = ["UserId" : SingletonClass.sharedInstance.strPassengerID,
+                      "BookingId": SingletonClass.sharedInstance.bookingId,
+                      "BookingType" : self.strBookingType,
+                      "UserType": "Passenger", "Token": SingletonClass.sharedInstance.deviceToken,"Lat": SingletonClass.sharedInstance.currentLatitude, "Lng": SingletonClass.sharedInstance.currentLongitude] as [String : Any]
+        
+        self.socket?.emit(SocketData.SOS, with: [myJSON], completion: nil)
+        print ("\(SocketData.SOS) : \(myJSON)")
+    }
+    
+    func onSOS() {
+        
+        self.socket?.on(SocketData.SOS, callback: { (data, ack) in
+            print ("SOS Driver Notify : \(data)")
+            
+            let msg = (data as NSArray)
+            
+            UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
+            
+        })
+        
+    }
+    
+    
+    
     func setPaymentType() {
         paymentType = "cash"
     }
@@ -974,7 +1026,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //        viewCurrentLocation.isHidden = status
         //        viewDestinationLocation.isHidden = status
         //        viewAddressandBooknowlaterBTN.isHidden = status
-        btnCurrentLocation.isHidden = status
+//        btnCurrentLocation.isHidden = status
     }
     
     
@@ -1528,6 +1580,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                 }))
                                 
                                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                                
                             }
                         }
                     }
@@ -1943,9 +1996,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.btnCash.setTitleColor(themeYellowColor, for: .normal)
             
             self.CashLogo.image = UIImage(named: "icon_SelectedCash")
+            self.CashLogo.tintColor = .red
             //            self.btnCash.isSelected = true
-            //            self.PayCashView.backgroundColor = UIColor.black
+            self.PayCashView.backgroundColor = UIColor.black
             paymentType = "cash"
+            btnCash.setTitleColor(themeAppMainColor, for: .normal)
             btnCardSelection.setTitle("Card", for: .normal)
             CardID = ""
             
@@ -1965,6 +2020,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
             paymentType = "card" //rjChange "m_pesa"
             
+            self.imgCard.tintColor = .red
+            self.PayCardView.backgroundColor = UIColor.black
+            btnCardSelection.setTitleColor(themeAppMainColor, for: .normal)
+
 //            if SingletonClass.sharedInstance.CardsVCHaveAryData.count == 0 {
 //                let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletAddCardsViewController") as! WalletAddCardsViewController
 //                next.delegateAddCardFromHomeVC = self
@@ -2036,12 +2095,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
         self.pickerView.reloadAllComponents()
         
-        let data = cardData[0]
+        let data = cardData.first
         
         //        imgPaymentType.image = UIImage(named: setCardIcon(str: data["Type"] as! String))
         //        txtSelectPaymentOption.text = data["CardNum2"] as? String
         //
-        let type = data["CardNum"] as! String
+        let type = data?["CardNum"] as? String
         
         if type  == "wallet" {
             paymentType = "wallet"
@@ -2172,28 +2231,42 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func btnRequest(_ sender: ThemeButton) {
         
-        let alert = UIAlertController(title: nil, message: "Are you sure you want to cancel the trip?".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel the trip?".localized, preferredStyle: .alert)
         let OK = UIAlertAction(title: "YES".localized, style: .default, handler: { ACTION in
             
-            if self.strBookingType == "BookLater" {
-                self.CancelBookLaterTripAfterDriverAcceptRequest()
-            } else {
-                self.socketMethodForCancelRequestTrip()
+            alert.dismiss(animated: false) {
+                let reasonsVC = CancelAlertViewController(nibName: "CancelAlertViewController", bundle: nil)
+                reasonsVC.okPressedClosure = { (reason) in
+                    if self.strBookingType == "BookLater" {
+                        self.CancelBookLaterTripAfterDriverAcceptRequest(withReason: reason)
+                    } else {
+                        self.socketMethodForCancelRequestTrip(withReason: reason)
+                    }
+                    
+                    self.clearMap()
+                    self.txtCurrentLocation.text = ""
+                    self.txtDestinationLocation.text = ""
+                    self.txtAdditionalDestinationLocation.text = ""
+                    self.clearDataAfteCompleteTrip()
+                    self.getPlaceFromLatLong()
+                    
+                    //        UtilityClass.setCustomAlert(title: "\(appName)", message: "Request Cancelled") { (index, title) in
+                    //        }
+                    
+                    self.viewTripActions.isHidden = true
+                    self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
+                    self.viewCarLists.isHidden = false
+                    self.ConstantViewCarListsHeight.constant = 150
+                    reasonsVC.dismiss(animated: true, completion: nil)
+                }
+                
+                    reasonsVC.modalPresentationStyle = .overCurrentContext
+                    self.present(reasonsVC, animated: true)
             }
+        
             
-            self.clearMap()
-            self.txtCurrentLocation.text = ""
-            self.txtDestinationLocation.text = ""
-            self.txtAdditionalDestinationLocation.text = ""
-            self.clearDataAfteCompleteTrip()
-            self.getPlaceFromLatLong()
-            
-            //        UtilityClass.setCustomAlert(title: "\(appName)", message: "Request Cancelled") { (index, title) in
-            //        }
-            
-            self.viewTripActions.isHidden = true
-            self.viewCarLists.isHidden = false
-            self.ConstantViewCarListsHeight.constant = 150
+          
         })
         let Cancel = UIAlertAction(title: "NO".localized, style: .destructive, handler: { ACTION in
             //            self.paymentOptions()
@@ -2377,7 +2450,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             cell.lblMinutes.textColor = themeRedColor
             cell.lblAvailableCars.textColor = themeRedColor
             cell.lblDistance.textColor = themeRedColor
-            
+            cell.lblCapacity.textColor = themeRedColor
             //            cell.viewOfImage.layer.borderColor = themeYellowColor.cgColor
             //            cell.viewOfImage.layer.masksToBounds = true
         }
@@ -2389,6 +2462,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             cell.lblMinutes.textColor = UIColor.black
             cell.lblAvailableCars.textColor = UIColor.black
             cell.lblDistance.textColor = UIColor.black
+            cell.lblCapacity.textColor = UIColor.black
             //            cell.viewOfImage.layer.borderColor = themeGrayColor.cgColor
             //            cell.viewOfImage.layer.masksToBounds = true
         }
@@ -2406,14 +2480,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             cell.lblMinutes.text = "0 min"
             cell.lblDistance.text = ""
+            cell.lblCapacity.text = ""
             //            cell.lblPrices.text = "\(currencySign) 0.00"
             cell.lblCarType.text = dictOnlineCarData["Name"] as? String
             
             return cell
             
         }
-        else if (self.arrNumberOfOnlineCars.count != 0 && indexPath.row < self.arrNumberOfOnlineCars.count)
-        {
+//        else if (self.arrNumberOfOnlineCars.count != 0 && indexPath.row < self.arrNumberOfOnlineCars.count)
+//        {
             let dictOnlineCarData = (arrNumberOfOnlineCars.object(at: indexPath.row) as! [String : AnyObject])
             let imageURL = dictOnlineCarData["Image"] as! String
             
@@ -2437,6 +2512,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     cell.lblMinutes.text = "\(minute) min ETA"
                 }
                 
+                if let minute = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "est_duration") as? Int {
+                    cell.lblMinutes.text = "\(minute) min ETA"
+                }
+                
+                if let capacity = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "capacity") as? String {
+                    cell.lblCapacity.text = "\(capacity)"
+                }
+                
+//                cell.lblCapacity.backgroundColor = .red
+                
                 if let strAvilCAR = dictOnlineCarData["carCount"] as? Int {
                     cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
                     if(selectedIndexPath == indexPath)
@@ -2445,7 +2530,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         let dictOnlineCarData = (arrNumberOfOnlineCars.object(at: indexPath.row) as! NSDictionary)
                         let carModelID = dictOnlineCarData.object(forKey: "Id") as? String
                         let carModelIDConverString: String = carModelID!
-                        
+                          
                         let strCarName: String = dictOnlineCarData.object(forKey: "Name") as! String
                         
                         strCarModelClass = strCarName
@@ -2492,7 +2577,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     cell.lblDistance.text = "Distance \(strDistance) km"
                 }
             }
-         }
+//         }
         
         return cell
         
@@ -3179,6 +3264,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.socketMethodForDropOffs()
                 self.onGetEstimateFare()
                 self.onDriverArrived()
+                self.onSOS()
             }
             
             // Get Estimate
@@ -3220,6 +3306,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function "updateCounting" with the interval of 1 seconds
+        self.updateCounting()
         timerToUpdatePassengerlocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.updateCounting), userInfo: nil, repeats: true)
     }
     
@@ -3510,6 +3597,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.MarkerCurrntLocation.isHidden = true
         
         self.viewTripActions.isHidden = false
+        self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(600)
+
         self.ConstantViewCarListsHeight.constant = 0
         self.viewCarLists.isHidden = true
     
@@ -3664,6 +3753,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: true)
         self.TempBookingInfoDict = tripData[0] as? [String:Any] ?? [:]
         self.viewTripActions.isHidden = false
+        self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(600)
+
         self.ConstantViewCarListsHeight.constant = 0
         self.viewCarLists.isHidden = true
         // self.viewFromToSubmitButton.isHidden = true
@@ -3812,9 +3903,24 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             next.strCarPlateNumber = carPlateNumber
         }
         
+        if let Color = carInfo.object(forKey: "Color") as? String {
+            next.strVehicleColor = Color
+        }
+        if let Company = carInfo.object(forKey: "Company") as? String {
+            next.strVehicleMake = Company
+        }
+        
+        if let VehicleModelName = carInfo.object(forKey: "VehicleModelName") as? String {
+            next.strVehicleType = VehicleModelName
+        }
+        
+        if let VehicleRegistrationNo = carInfo.object(forKey: "VehicleRegistrationNo") as? String {
+            next.strCarPlateNumber = VehicleRegistrationNo
+        }
+        
         next.strCareName = "\(carInfo.object(forKey: "Company") as! String) - \(next.strCarClass) - \(next.strCarPlateNumber)"
-        next.strDriverImage = WebserviceURLs.kImageBaseURL + (DriverInfo.object(forKey: "Image") as! String)
-        next.strCarImage = WebserviceURLs.kImageBaseURL + (carInfo.object(forKey: "VehicleImage") as! String)
+        next.strDriverImage = WebserviceURLs.kImageBaseURL + (DriverInfo.object(forKey: "Image") as? String ?? "")
+        next.strCarImage = WebserviceURLs.kImageBaseURL + (carInfo.object(forKey: "VehicleImage") as? String ?? "")
         
         //        if (SingletonClass.sharedInstance.passengerTypeOther) {
         //            next.strPassengerMobileNumber = bookingInfo.object(forKey: "PassengerContact") as! String
@@ -3828,23 +3934,25 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             next.shouldShow = true
         }
         //        }
-        let PickupLat:Double = self.defaultLocation.coordinate.latitude
-        let PickupLng:Double = self.defaultLocation.coordinate.longitude
+//        let PickupLat:Double = self.defaultLocation.coordinate.latitude
+//        let PickupLng:Double = self.defaultLocation.coordinate.longitude
 
-        let strDriverLat = "\(PickupLat)"
-        let strDriverLng = "\(PickupLng)"
+//        let strDriverLat = "\(PickupLat)"
+//        let strDriverLng = "\(PickupLng)"
         let strBookingID = "\(bookingInfo.object(forKey: "Id") as? Int ?? 0)"
         
         let strBookingType = (self.strBookingType == "BookNow") ? "Booking" : "AdvanceBooking"
         next.strPickUpLat = bookingInfo.object(forKey: "PickupLat") as? String ?? ""
         next.strPickUpLng = bookingInfo.object(forKey: "PickupLng") as? String ?? ""
-        next.strCurrentLat = strDriverLat
-        next.strCurrentLng = strDriverLng
+//        next.strCurrentLat = strDriverLat
+//        next.strCurrentLng = strDriverLng
         next.strBookingID = String(strBookingID)
         next.strBookingType = strBookingType
         next.homeVC = self
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(next, animated: true, completion: nil)
     }
+    
+    
     
     func socketMethodForGettingBookingRejectNotification()
     {
@@ -3950,6 +4058,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 
                 self.viewTripActions.isHidden = true
+                self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
                 SingletonClass.sharedInstance.passengerTypeOther = false
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 SingletonClass.sharedInstance.bookingId = ""
@@ -3979,6 +4089,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 
                 self.viewTripActions.isHidden = true
+                self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
                 SingletonClass.sharedInstance.passengerTypeOther = false
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
@@ -4031,12 +4143,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en" {
                     
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0]["message"]! as? String ?? "----", completionHandler: { (index, title) in
                     })
                 }
                 else if SelectedLanguage == "sw"
                 {
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"] as? String ?? "----", completionHandler: { (index, title) in
                     })
                 }
             }
@@ -4208,6 +4320,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
             
             self.viewTripActions.isHidden = true
+            self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
             self.viewCarLists.isHidden = false
             //                self.viewShareRideView.isHidden = false
             self.ConstantViewCarListsHeight.constant = 150
@@ -4308,7 +4422,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
             
             self.viewTripActions.isHidden = true
-            
+            self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
             self.viewCarLists.isHidden = false
             self.ConstantViewCarListsHeight.constant = 150
             
@@ -4337,6 +4452,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         clearMap()
         self.currentLocationAction()
         self.viewTripActions.isHidden = true
+        self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
+
         //        self.viewCarLists.isHidden = false
         //        self.ConstantViewCarListsHeight.constant = 150
         clearDataAfteCompleteTrip()
@@ -4354,7 +4471,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.doublePickupLng = 0
         
         //        SingletonClass.sharedInstance.strPassengerID = ""
-        aryRequestAcceptedData.removeAllObjects()
+        aryRequestAcceptedData = NSMutableArray()
         self.strModelId = ""
         self.strPickupLocation = ""
         self.strDropoffLocation = ""
@@ -4372,6 +4489,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.doubleUpdateNewLat = 0
         self.doubleUpdateNewLng = 0
         SingletonClass.sharedInstance.isTripContinue = false
+        self.viewAdditionalDestinationLocation.isHidden = false
         self.txtCurrentLocation.isUserInteractionEnabled = true
 
     }
@@ -4389,10 +4507,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.present(next, animated: true, completion: nil)
     }
     
-    func socketMethodForCancelRequestTrip()
+    func socketMethodForCancelRequestTrip(withReason : String)
     {
         
-        let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId] as [String : Any]
+        let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId, SocketDataKeys.kCancelReasons : withReason] as [String : Any]
         socket?.emit(SocketData.kCancelTripByPassenger , with: [myJSON], completion: nil)
         viewAdditionalDestinationLocation.isHidden = false
         _ = btnClose.compactMap{$0.isHidden = false}
@@ -4459,12 +4577,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             //            self.playSound(fileName: "PickNGo", extensionType: "mp3")
             
-            let alert = UIAlertController(title: nil, message: "Your request has been rejected.".localized, preferredStyle: .alert)
-            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { (ACTION) in
-                //                self.stopSound(fileName: "PickNGo", extensionType: "mp3")
-            })
-            alert.addAction(OK)
-            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: nil, message: "Your request has been rejected.".localized, preferredStyle: .alert)
+//            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { (ACTION) in
+//                //                self.stopSound(fileName: "PickNGo", extensionType: "mp3")
+//            })
+//            alert.addAction(OK)
+//            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            
+            
+            UtilityClass.setCustomAlert(title: "", message: "Your request has been rejected.".localized, completionHandler: nil)
             
         })
     }
@@ -4488,10 +4609,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     
                     if SingletonClass.sharedInstance.bookingId == bookingId {
                         self.strBookingType = "BookLater"
-                        let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
-                        let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-                        alert.addAction(OK)
-                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//                        let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
+//                        let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//                        alert.addAction(OK)
+//                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                        
+                        
+                        UtilityClass.setCustomAlert(title: "", message: "Your trip has now started.".localized, completionHandler: nil)
+
                         
                         self.btnRequest.isHidden = true
                         self.btnCancelStartedTrip.isHidden = true
@@ -4502,10 +4627,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else {
                     self.strBookingType = "BookLater"
-                    let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
-                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-                    alert.addAction(OK)
-                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//                    let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
+//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//                    alert.addAction(OK)
+//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                    
+                    
+                    UtilityClass.setCustomAlert(title: "", message: "Your trip has now started.".localized, completionHandler: nil)
+
                     
                     self.btnRequest.isHidden = true
                     self.btnCancelStartedTrip.isHidden = true
@@ -4528,28 +4657,35 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if SelectedLanguage == "en" {
                     
                     let resAry = NSArray(array: data) //as? NSArray {
-                        message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "----"
                         //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
 //                    }
-                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//
+//                    alert.addAction(OK)
+//
+//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//
                     
-                    alert.addAction(OK)
-                    
-                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                    UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
+
                 }
                 else if SelectedLanguage == "sw"
                 {
                      let resAry = NSArray(array: data) //as? NSArray {
-                        message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "swahili_message") as! String
+                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "swahili_message") as? String ?? "----"
                         //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
 //                    }
-                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//
+//                    alert.addAction(OK)
+//
+//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
                     
-                    alert.addAction(OK)
-                    
-                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                    UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
+
                 }
             }
         })
@@ -4564,16 +4700,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             message = "Trip on Hold"
             
             let resAry = NSArray(array: data) //as? NSArray {
-                message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? ""
                 //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
        //     }
+//
+//            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//
+//            alert.addAction(OK)
+//
+//            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             
-            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
             
-            alert.addAction(OK)
-            
-            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
+
             
         })
     }
@@ -4632,9 +4772,31 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.destinationCordinate = DriverCordinate
             self.MarkerCurrntLocation.isHidden = true
             
-            let camera = GMSCameraPosition.camera(withLatitude: DriverCordinate.latitude,longitude: DriverCordinate.longitude, zoom: 17)
-            self.mapView.camera = camera
-
+//            if let topVC = self.navigationController?.topViewController?.presentedViewController as? DriverInfoViewController
+//            {
+//                if(topVC.lblApproxTime.text == "calculating...")
+//                {
+//                    
+//                    
+//                    let bookingInfo = ((self.aryRequestAcceptedData.object(at: 0) as! NSDictionary).object(forKey: "BookingInfo") as! NSArray).object(at: 0) as! NSDictionary
+//                    
+////                    next.strPickUpLat = bookingInfo.object(forKey: "PickupLat") as? String ?? ""
+////                    next.strPickUpLng = bookingInfo.object(forKey: "PickupLng") as? String ?? ""
+//
+//                    topVC.strPickUpLat = "\(DoubleLat)"
+//                    topVC.strPickUpLng = "\(DoubleLng)"
+//                    topVC.strCurrentLat =  bookingInfo.object(forKey: "PickupLat") as? String ?? ""
+//                    topVC.strCurrentLng = bookingInfo.object(forKey: "PickupLng") as? String ?? ""
+//                    topVC.getEstimate()
+//                }
+//            }
+          
+            
+            if(self.boolShouldTrackCamera)
+            {
+                let camera = GMSCameraPosition.camera(withLatitude: DriverCordinate.latitude,longitude: DriverCordinate.longitude, zoom: 17)
+                self.mapView.camera = camera
+            }
             // ----------------------------------------------------------------------
             
             //            CATransaction.begin()
@@ -4756,9 +4918,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         })
     }
     
-    func CancelBookLaterTripAfterDriverAcceptRequest() {
+    func CancelBookLaterTripAfterDriverAcceptRequest(withReason : String) {
         
-        let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId] as [String : Any]
+        let myJSON = [SocketDataKeys.kBookingIdNow : SingletonClass.sharedInstance.bookingId, SocketDataKeys.kCancelReasons : withReason] as [String : Any]
         socket?.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON], completion: nil)
         
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
@@ -4784,16 +4946,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             message = "Trip on Hold"
             
              let resAry = NSArray(array: data) //as? NSArray {
-                message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? ""
                 
          //   }
             
-            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+//            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
+//
+//            alert.addAction(OK)
+//
+//            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             
-            alert.addAction(OK)
             
-            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+            UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
+
             
         })
         
@@ -4824,13 +4990,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         message = "Trip on Hold"
                         
                         let resAry = NSArray(array: data) //as? NSArray //{
-                        message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "---"
                         //}
                         
                         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                         let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
                         alert.addAction(OK)
-                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                        
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: message) { (index, title) in
+                        }
                     }
                 }
                 else {
@@ -4838,13 +5007,18 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     message = "Trip on Hold"
                     
                      let resAry = NSArray(array: data) //as? NSArray {
-                        message = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                    message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "----"
                   //  }
                     
                     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
                     alert.addAction(OK)
-                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
+                    
+                    
+                    UtilityClass.setCustomAlert(title: "\(appName)", message: message) { (index, title) in
+                    }
+
                 }
             }
             
@@ -4868,7 +5042,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -4897,7 +5071,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"

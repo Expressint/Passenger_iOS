@@ -60,7 +60,8 @@ let OTPVerify = WebserviceURLs.kOtpForRegister
 let TrackRunningTrip = WebserviceURLs.kTrackRunningTrip
 let PastDuesList = WebserviceURLs.kPastDuesList
 let PayPastDues = WebserviceURLs.kPayPastDues
-
+let HelpOptions = WebserviceURLs.kHelpOptions
+let Help = WebserviceURLs.kHelp
 //-------------------------------------------------------------
 // MARK: - Webservice For Registration
 //-------------------------------------------------------------
@@ -578,5 +579,27 @@ func webserviceForTrackRunningTrip(_ dictParams: AnyObject, completion: @escapin
 func webserviceForUpdateDropoffLocation(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = UpdateDropoffLocation
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Help options
+//-------------------------------------------------------------
+
+func webserviceForHelpOptions(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = HelpOptions
+    getData("" as AnyObject, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Sending Help Request
+//-------------------------------------------------------------
+
+
+
+func webserviceForSendingHelpRequest(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = Help
     postData(dictParams, nsURL: url, completion: completion)
 }

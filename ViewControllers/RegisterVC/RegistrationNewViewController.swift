@@ -29,10 +29,13 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //    @IBOutlet weak var txtLastName: ACFloatingTextfield!
     
     @IBOutlet weak var btnSignUp: ThemeButton!
-    
+    @IBOutlet weak var btnTermsSignUp: UIButton!
+
 
 //    var strEmail = String()
     @IBOutlet weak var txtFullName: ThemeTextField!
+    
+    @IBOutlet weak var txtTermsAndPrivacy: UITextView!
     
     @IBOutlet weak var txtDateOfBirth: ThemeTextField!
     
@@ -56,6 +59,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     var strPassword = String()
     var gender = String()
     
+    var termsLink = "https://www.bookaridegy.com/TermsAndCondition"
+    var PrivacyLink = "https://www.bookaridegy.com/PrivacyPolicy"
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -98,7 +103,13 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             self.imgProfile.image = image
         }
         
-        
+        txtTermsAndPrivacy.text = "I agree with Terms & conditions and Privacy Policy"
+                self.txtTermsAndPrivacy.hyperLink(originalText: "I agree with Terms & conditions and Privacy Policy",
+                                                  linkTextsAndTypes: [("Terms & conditions"): termsLink,("Privacy Policy"): PrivacyLink])
+                
+                self.txtTermsAndPrivacy.delegate = self
+                self.txtTermsAndPrivacy.textColor = .white
+                self.txtTermsAndPrivacy.font = UIFont.regular(ofSize: 14)
         
         // Do any additional setup after loading the view.
  //        txtFirstName.text = "rahul"
@@ -303,14 +314,15 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         
     }
     
-    
+    @IBAction func btnClickTerms(_ sender : UIButton)
+    {
+        btnTermsSignUp.isSelected = !btnTermsSignUp.isSelected
+    }
     //MARK: - Validation
     
     func checkValidation() -> Bool
     {
-        if (txtFullName.text?.count == 0)
-        {
-
+        if (txtFullName.text?.count == 0){
             UtilityClass.setCustomAlert(title: "Missing", message: "Enter user name") { (index, title) in
             }
             return false
@@ -342,13 +354,16 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //            return false
 //        }
         else if (txtAddress.text?.count == 0) {
-            
             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter address") { (index, title) in
             }
             return false
         } else if gender == "" {
-            
             UtilityClass.setCustomAlert(title: "Missing", message: "Please choose gender") { (index, title) in
+            }
+            return false
+        }
+        else if btnTermsSignUp.isSelected == false{
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please accept terms & condition and privacy policy") { (index, title) in
             }
             return false
         }
@@ -366,21 +381,16 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     //MARK: - IBActions
     
     @IBAction func btnChooseImage(_ sender: Any) {
-        
         self.TapToProfilePicture()
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
-        
         let isplaceholder = imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!)
-        
         guard (txtFullName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
-            
             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter all details") { (index, title) in
             }
             return
         }
-    
         if (checkValidation())
         {
             let registerVC = (self.navigationController?.viewControllers.last as! RegistrationContainerViewController).childViewControllers[0] as! RegisterViewController
@@ -391,7 +401,6 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             
             webServiceCallForRegister()
         }
-        
     }
     
     // MARK: - WebserviceCall
@@ -526,4 +535,50 @@ extension UIImage {
         return data1.isEqual(data2)
     }
     
+}
+
+
+//MARK: - TextView Delegate
+extension RegistrationNewViewController : UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
+        next.headerName = "\(appName)"
+        next.strURL = URL.absoluteString
+        next.isFromRegister = true
+        next.navigationController?.isNavigationBarHidden = false
+//        let myNavigationController = UINavigationController(rootViewController: next)
+        self.navigationController?.pushViewController(next, animated: true)
+
+        return false
+    }
+    
+}
+
+public extension UITextView {
+    
+    func hyperLink(originalText: String, linkTextsAndTypes: [String: String]) {
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = .left
+        
+        let attributedOriginalText = NSMutableAttributedString(string: originalText)
+        
+        for linkTextAndType in linkTextsAndTypes {
+            let linkRange = attributedOriginalText.mutableString.range(of: linkTextAndType.key)
+            let fullRange = NSRange(location: 0, length: attributedOriginalText.length)
+            attributedOriginalText.addAttribute(NSAttributedString.Key.link, value: linkTextAndType.value, range: linkRange)
+            attributedOriginalText.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: fullRange)
+            attributedOriginalText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: fullRange)
+            attributedOriginalText.addAttribute(NSAttributedString.Key.font, value: UIFont.regular(ofSize: 14.0), range: fullRange)
+        }
+        
+        self.linkTextAttributes = [
+            kCTForegroundColorAttributeName: UIColor.blue,
+            kCTUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue
+        ] as [String: Any]
+        
+        self.attributedText = attributedOriginalText
+    }
 }

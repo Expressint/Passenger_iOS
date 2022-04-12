@@ -540,12 +540,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             if(status)
             {
 //                Utilities.hideActivityIndicator()
-                print(result)
+//                print(result)
 //                SingletonClass.sharedInstance.isFromSocilaLogin = true
 //                Utilities.hideActivityIndicator()
                 print(result)
                 
-                let dictData = result as! [String : AnyObject]
+                let dictData = result as? [String : AnyObject]
                 UtilityClass.hideACProgressHUD()
                 SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)
 //                SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)

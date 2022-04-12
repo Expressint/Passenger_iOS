@@ -145,13 +145,14 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.0.0)
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
-  - SDWebImage (4.2.1):
-    - SDWebImage/Core (= 4.2.1)
-  - SDWebImage/Core (4.2.1)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
   - SideMenuController (0.2.4)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - ACFloatingTextfield-Swift
@@ -175,6 +176,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4.0)
   - SideMenuController
   - Socket.IO-Client-Swift
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -215,6 +217,7 @@ SPEC REPOS:
     - SideMenuController
     - Socket.IO-Client-Swift
     - Starscream
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   ACFloatingTextfield-Swift: c3212cef9548ae58fa914ea1c26a2f9a4f7cd7df
@@ -250,11 +253,12 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  SDWebImage: 1fa4c9edf525b744f002db89f3f5a38b3cd4c541
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: fe8976f23e8f0af82ec32f19fa9dd2ad317ea0d5
+PODFILE CHECKSUM: ec6a79831b698cc2eaa7fc6a2e6d6b0c59ef4aea
 
 COCOAPODS: 1.11.2

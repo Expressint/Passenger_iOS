@@ -146,14 +146,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
             return false
         }
-        else if ((txtPhoneNumber.text?.count)! < 10)
-        {
-
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid phone number".localized) { (index, title) in
-            }
-
-            return false
-        }
+//        else if ((txtPhoneNumber.text?.count)! < 10)
+//        {
+//
+//            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid phone number".localized) { (index, title) in
+//            }
+//
+//            return false
+//        }
         else if (txtEmail.text?.count == 0)
         {
             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter email".localized) { (index, title) in

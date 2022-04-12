@@ -15,12 +15,21 @@ class webViewVC: BaseViewController, WKNavigationDelegate, WKUIDelegate {
     
     var strURL = String()
     var headerName = String()
-    
+    @IBOutlet weak var webView: WKWebView!
+    var isFromRegister = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UtilityClass.showACProgressHUD()
         setNavBarWithBack(Title: headerName, IsNeedRightButton: true)
+        webView.navigationDelegate = self
+        
+        if(isFromRegister)
+        {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = themeYellowColor
+
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,17 +51,21 @@ class webViewVC: BaseViewController, WKNavigationDelegate, WKUIDelegate {
         webView.load(request)
         
     }
-    
-    
-    
-    
-    @IBOutlet weak var webView: WKWebView!
-    
-    
-    
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if(isFromRegister)
+        {
+            self.navigationController?.isNavigationBarHidden = true
+        }
+    }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UtilityClass.hideACProgressHUD()
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        UtilityClass.hideACProgressHUD()
+
     }
     
     

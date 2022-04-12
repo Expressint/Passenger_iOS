@@ -18,7 +18,7 @@ protocol delegateForTiCKPayVerifyStatus {
 
 class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifyStatus {
     
-//    @IBOutlet weak var tableView: UITableView!
+    //    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var CollectionView: UICollectionView!
     
@@ -38,7 +38,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             btnSignOut1.setTitle("Sign out".localized, for: .normal)
         }
     }
-   // @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
+    // @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
     @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
     
     var ProfileData = NSDictionary()
@@ -52,7 +52,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.removeObserver(self, name: UpdateProfileNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setProfileData), name: UpdateProfileNotification, object: nil)
         
@@ -60,10 +60,10 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             if SelectedLanguage == "en" {
                 lblLaungageName.text = "SW"
             } else if SelectedLanguage == "sw" {
-                 lblLaungageName.text = "EN"
+                lblLaungageName.text = "EN"
             }
         }
-
+        
         setProfileData()
         
         lblLaungageName.layer.cornerRadius = 5
@@ -80,9 +80,9 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
         
-//        webserviceOfTickPayStatus()
-         arrMenuIcons = ["icon_MyBookingUnselect","img_mn_receipt_unselect","icon_FavouriteUnselect","iconHelp"]
-
+        //        webserviceOfTickPayStatus()
+        arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","iconHelp"]//img_mn_receipt_unselect
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,18 +92,18 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
-//        if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-//                        if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                            if language == "sw" {
-//                                setLayoutForswahilLanguage()
-//                            }
-//                            else {
-//                                setLayoutForEnglishLanguage()
-//                            }
-//                        }
-//                    }
-         arrMenuTitle = ["My Bookings", "My Receipts" , "Favourites", "Help"]//"My Ratings","Legal", "Support"]//,"Payment Options"
+        //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
+        //        if UserDefaults.standard.value(forKey: "i18n_language") != nil {
+        //                        if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+        //                            if language == "sw" {
+        //                                setLayoutForswahilLanguage()
+        //                            }
+        //                            else {
+        //                                setLayoutForEnglishLanguage()
+        //                            }
+        //                        }
+        //                    }
+        arrMenuTitle = ["My Bookings" , "Favourites", "Help"]//"My Receipts","My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,9 +112,9 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       setLocalition()
+        setLocalition()
     }
-
+    
     func setLocalition() {
         
     }
@@ -136,8 +136,8 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             self.imgProfile.sd_setImage(with: URL(string: ((ProfileData.object(forKey: "Image") as! String))), completed: nil)
         }
         
-       
-//
+        
+        //
         self.lblName.text = ProfileData.object(forKey: "Fullname") as? String
         
         self.lblMobileNumber.text = ProfileData.object(forKey: "Email") as? String
@@ -150,20 +150,20 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         }
     }
     
-
-//    func setViewWillAppear() {
-//                    if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-//                        if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                            if language == "sw" {
-//                                setLayoutForSwahilLanguage()
-//                            }
-//                            else {
-//                                setLayoutForEnglishLanguage()
-//                            }
-//                        }
-//                    }
-//            }
-
+    
+    //    func setViewWillAppear() {
+    //                    if UserDefaults.standard.value(forKey: "i18n_language") != nil {
+    //                        if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+    //                            if language == "sw" {
+    //                                setLayoutForSwahilLanguage()
+    //                            }
+    //                            else {
+    //                                setLayoutForEnglishLanguage()
+    //                            }
+    //                        }
+    //                    }
+    //            }
+    
     func setLayoutForswahilLanguage() {
         UserDefaults.standard.set("sw", forKey: "i18n_language")
         UserDefaults.standard.synchronize()
@@ -173,8 +173,8 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     {
         UserDefaults.standard.set("en", forKey: "i18n_language")
         UserDefaults.standard.synchronize()
-//        setLayoutForSwahilLanguage()
-//        setLayoutForEnglishLanguage()
+        //        setLayoutForSwahilLanguage()
+        //        setLayoutForEnglishLanguage()
     }
     @objc func SetRating() {
         self.CollectionView.reloadData()
@@ -217,7 +217,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     @IBAction func btnSettings(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: OpenEditProfile, object: nil)
-        sideMenuController?.toggle()        
+        sideMenuController?.toggle()
     }
     
     
@@ -255,89 +255,89 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
                 (UIApplication.shared.delegate as! AppDelegate).GoToLogout()
             }
         })
-
+        
         /*
-        
-        let socket = (UIApplication.shared.delegate as! AppDelegate).SocketManager
-        
-//        socket.off(SocketData.kPassengerCancelTripNotification)
-//        socket.off(SocketData.kNearByDriverList)
-//        socket.off(SocketData.kReceiveGetEstimateFare)
-//        socket.off(SocketData.kAcceptBookingRequestNotification)
-//        socket.off(SocketData.kRejectBookingRequestNotification)
-//
-//        socket.off(SocketData.kGetDriverLocation)
-//        socket.off(SocketData.kPickupPassengerNotification)
-//
-//        socket.off(SocketData.kBookingDetails)
-//        socket.off(SocketData.kAskForTipsToPassenger)
-//
-//
-//        socket.off(SocketData.kAskForTipsToPassengerForBookLater)
-//        socket.off(SocketData.kGetEstimateFare)
-//
-//        socket.off(SocketData.kReceiveMoneyNotify)
-//        socket.off(SocketData.kAcceptAdvancedBookingRequestNotification)
-//
-//        socket.off(SocketData.kRejectAdvancedBookingRequestNotification)
-//        socket.off(SocketData.kAcceptAdvancedBookingRequestNotify)
-//
-//        socket.off(SocketData.kAdvancedBookingPickupPassengerNotification)
-//        socket.off(SocketData.kAdvancedBookingTripHoldNotification)
-//        socket.off(SocketData.kAdvancedBookingDetails)
-        
-        socket.off(SocketData.kReceiveGetEstimateFare)
-        socket.off(SocketData.kNearByDriverList)
-        socket.off(SocketData.kAskForTipsToPassengerForBookLater)
-        socket.off(SocketData.kAskForTipsToPassenger)
-        socket.off(SocketData.kAcceptBookingRequestNotification)
-        socket.off(SocketData.kRejectBookingRequestNotification)
-        socket.off(SocketData.kCancelTripByDriverNotficication)
-        socket.off(SocketData.kPickupPassengerNotification)
-        socket.off(SocketData.kBookingCompletedNotification)
-        socket.off(SocketData.kAcceptAdvancedBookingRequestNotification)
-        socket.off(SocketData.kRejectAdvancedBookingRequestNotification)
-        socket.off(SocketData.kAdvancedBookingPickupPassengerNotification)
-        socket.off(SocketData.kReceiveHoldingNotificationToPassenger)
-        socket.off(SocketData.kAdvancedBookingTripHoldNotification)
-        socket.off(SocketData.kReceiveDriverLocationToPassenger)
-        socket.off(SocketData.kAdvancedBookingDetails)
-        socket.off(SocketData.kInformPassengerForAdvancedTrip)
-        socket.off(SocketData.kAcceptAdvancedBookingRequestNotify)
-        //                Singletons.sharedInstance.isPasscodeON = false
-        socket.disconnect()
-        
-        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            print("\(key) = \(value) \n")
-            
-            if key == "Token" {
-                
-            }
-            else {
-                UserDefaults.standard.removeObject(forKey: key)
-            }
-        }
-//        UserDefaults.standard.set(false, forKey: kIsSocketEmited)
-//        UserDefaults.standard.synchronize()
-        
-        SingletonClass.sharedInstance.strPassengerID = ""
-        UserDefaults.standard.removeObject(forKey: "profileData")
-        SingletonClass.sharedInstance.isUserLoggedIN = false
-        
-        self.performSegue(withIdentifier: "unwindToContainerVC", sender: self)
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        
-        UserDefaults.standard.removeObject(forKey: "Passcode")
-        SingletonClass.sharedInstance.setPasscode = ""
-        
-        UserDefaults.standard.removeObject(forKey: "isPasscodeON")
-        SingletonClass.sharedInstance.isPasscodeON = false
-     */
+         
+         let socket = (UIApplication.shared.delegate as! AppDelegate).SocketManager
+         
+         //        socket.off(SocketData.kPassengerCancelTripNotification)
+         //        socket.off(SocketData.kNearByDriverList)
+         //        socket.off(SocketData.kReceiveGetEstimateFare)
+         //        socket.off(SocketData.kAcceptBookingRequestNotification)
+         //        socket.off(SocketData.kRejectBookingRequestNotification)
+         //
+         //        socket.off(SocketData.kGetDriverLocation)
+         //        socket.off(SocketData.kPickupPassengerNotification)
+         //
+         //        socket.off(SocketData.kBookingDetails)
+         //        socket.off(SocketData.kAskForTipsToPassenger)
+         //
+         //
+         //        socket.off(SocketData.kAskForTipsToPassengerForBookLater)
+         //        socket.off(SocketData.kGetEstimateFare)
+         //
+         //        socket.off(SocketData.kReceiveMoneyNotify)
+         //        socket.off(SocketData.kAcceptAdvancedBookingRequestNotification)
+         //
+         //        socket.off(SocketData.kRejectAdvancedBookingRequestNotification)
+         //        socket.off(SocketData.kAcceptAdvancedBookingRequestNotify)
+         //
+         //        socket.off(SocketData.kAdvancedBookingPickupPassengerNotification)
+         //        socket.off(SocketData.kAdvancedBookingTripHoldNotification)
+         //        socket.off(SocketData.kAdvancedBookingDetails)
+         
+         socket.off(SocketData.kReceiveGetEstimateFare)
+         socket.off(SocketData.kNearByDriverList)
+         socket.off(SocketData.kAskForTipsToPassengerForBookLater)
+         socket.off(SocketData.kAskForTipsToPassenger)
+         socket.off(SocketData.kAcceptBookingRequestNotification)
+         socket.off(SocketData.kRejectBookingRequestNotification)
+         socket.off(SocketData.kCancelTripByDriverNotficication)
+         socket.off(SocketData.kPickupPassengerNotification)
+         socket.off(SocketData.kBookingCompletedNotification)
+         socket.off(SocketData.kAcceptAdvancedBookingRequestNotification)
+         socket.off(SocketData.kRejectAdvancedBookingRequestNotification)
+         socket.off(SocketData.kAdvancedBookingPickupPassengerNotification)
+         socket.off(SocketData.kReceiveHoldingNotificationToPassenger)
+         socket.off(SocketData.kAdvancedBookingTripHoldNotification)
+         socket.off(SocketData.kReceiveDriverLocationToPassenger)
+         socket.off(SocketData.kAdvancedBookingDetails)
+         socket.off(SocketData.kInformPassengerForAdvancedTrip)
+         socket.off(SocketData.kAcceptAdvancedBookingRequestNotify)
+         //                Singletons.sharedInstance.isPasscodeON = false
+         socket.disconnect()
+         
+         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+         print("\(key) = \(value) \n")
+         
+         if key == "Token" {
+         
+         }
+         else {
+         UserDefaults.standard.removeObject(forKey: key)
+         }
+         }
+         //        UserDefaults.standard.set(false, forKey: kIsSocketEmited)
+         //        UserDefaults.standard.synchronize()
+         
+         SingletonClass.sharedInstance.strPassengerID = ""
+         UserDefaults.standard.removeObject(forKey: "profileData")
+         SingletonClass.sharedInstance.isUserLoggedIN = false
+         
+         self.performSegue(withIdentifier: "unwindToContainerVC", sender: self)
+         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+         
+         UserDefaults.standard.removeObject(forKey: "Passcode")
+         SingletonClass.sharedInstance.setPasscode = ""
+         
+         UserDefaults.standard.removeObject(forKey: "isPasscodeON")
+         SingletonClass.sharedInstance.isPasscodeON = false
+         */
     }
     
     @IBAction func btnLaungageClicked(_ sender: Any)
     {
-
+        
         if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
             if SelectedLanguage == "en" {
                 setLayoutForswahilLanguage()
@@ -346,192 +346,192 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
                 setLayoutForenglishLanguage()
                 lblLaungageName.text = "SW"
             }
-
+            
             self.navigationController?.loadViewIfNeeded()
-
+            
             self.CollectionView.reloadData()
             (UIApplication.shared.delegate as! AppDelegate).isAlreadyLaunched = true
             NotificationCenter.default.post(name: OpenHome, object: nil)
             sideMenuController?.toggle()
         }
-
-//        if strSelectedLaungage == KEnglish
-//        {
-//            strSelectedLaungage = KSwiley
-//
-//            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-//                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                        if language == "en"
-//                        {
-//                            setLayoutForswahilLanguage()
-//
-//                            print("Swahil")
-//                    }
-//                }
-//            }
-//        }
-//        else
-//        {
-//            strSelectedLaungage = KEnglish
-//            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-//                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                    if language == "sw" {
-////                        setLayoutForEnglishLanguage()
-//                        setLayoutForenglishLanguage()
-//                        print("English")
-//                    }
-//                }
-//            }
-//        }
-//
-//        lblLaungageName.text = strSelectedLaungage
+        
+        //        if strSelectedLaungage == KEnglish
+        //        {
+        //            strSelectedLaungage = KSwiley
+        //
+        //            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
+        //                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+        //                        if language == "en"
+        //                        {
+        //                            setLayoutForswahilLanguage()
+        //
+        //                            print("Swahil")
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            strSelectedLaungage = KEnglish
+        //            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
+        //                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+        //                    if language == "sw" {
+        ////                        setLayoutForEnglishLanguage()
+        //                        setLayoutForenglishLanguage()
+        //                        print("English")
+        //                    }
+        //                }
+        //            }
+        //        }
+        //
+        //        lblLaungageName.text = strSelectedLaungage
     }
     
     // MARK: - Table view data source
     
     /*
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0
-        {
-            return 1
-        }
-        else
-        {
-            return arrMenuIcons.count
-        }
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        if (indexPath.section == 0)
-        {
-            let cellHeader = tableView.dequeueReusableCell(withIdentifier: "MainHeaderTableViewCell") as! MainHeaderTableViewCell
-            cellHeader.selectionStyle = .none
-            cellHeader.imgProfile.layer.cornerRadius = cellHeader.imgProfile.frame.width / 2
-            cellHeader.imgProfile.layer.borderWidth = 1.0
-            cellHeader.imgProfile.layer.borderColor = UIColor.white.cgColor
-            cellHeader.imgProfile.layer.masksToBounds = true
-            
-            cellHeader.imgProfile.sd_setImage(with: URL(string: ProfileData.object(forKey: "Image") as! String), completed: nil)
-            cellHeader.lblName.text = ProfileData.object(forKey: "Fullname") as? String
-            
-            cellHeader.lblMobileNumber.text = ProfileData.object(forKey: "MobileNo") as? String
-            cellHeader.lblRating.text = SingletonClass.sharedInstance.passengerRating
-            
-            return cellHeader
-        }
-        else
-        {
-            let cellMenu = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell") as! ContentTableViewCell
-            
-            cellMenu.imgDetail?.image = UIImage.init(named:  "\(arrMenuIcons[indexPath.row])")
-            cellMenu.selectionStyle = .none
-            
-            cellMenu.lblTitle.text = arrMenuTitle[indexPath.row]
-            
-            return cellMenu
-        }
-        
-        
-        // Configure the cell...
-        
-        //        return cellHeader
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 0 {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
-            self.navigationController?.pushViewController(next, animated: true)
-            
-        }
-        else if (indexPath.section == 1)
-        {
-            if arrMenuTitle[indexPath.row] == "New Booking" {
-                NotificationCenter.default.post(name: NotificationForBookingNewTrip, object: nil)
-                sideMenuController?.toggle()
-                
-            }
-            if arrMenuTitle[indexPath.row] == "My Booking"
-            {
-                NotificationCenter.default.post(name: OpenMyBooking, object: nil)
-                sideMenuController?.toggle()
-            }
-            
-            if arrMenuTitle[indexPath.row] == "Payment Options" {
-                NotificationCenter.default.post(name: OpenPaymentOption, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "Wallet" {
-                NotificationCenter.default.post(name: OpenWallet, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "Favourites" {
-                NotificationCenter.default.post(name: OpenFavourite, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "My Receipts" {
-                NotificationCenter.default.post(name: OpenMyReceipt, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "Invite Friends" {
-                NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "Settings" {
-                NotificationCenter.default.post(name: OpenSetting, object: nil)
-                sideMenuController?.toggle()
-            }
-            else if arrMenuTitle[indexPath.row] == "Become a \(appName) Driver" {
-                UIApplication.shared.openURL(NSURL(string: "https://itunes.apple.com/us/app/pick-n-go-driver/id1320783710?mt=8")! as URL)
-            }
-            else if arrMenuTitle[indexPath.row] == "Package History"
-            {
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "PackageHistoryViewController") as! PackageHistoryViewController
-                self.navigationController?.pushViewController(next, animated: true)
-            }
-            
-            
-            if (arrMenuTitle[indexPath.row] == "LogOut")
-            {
-                self.performSegue(withIdentifier: "unwindToContainerVC", sender: self)
-                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                
-                UserDefaults.standard.removeObject(forKey: "Passcode")
-                SingletonClass.sharedInstance.setPasscode = ""
-                
-                UserDefaults.standard.removeObject(forKey: "isPasscodeON")
-                SingletonClass.sharedInstance.isPasscodeON = false
-                
-            }
-            //            else if (indexPath.row == arrMenuTitle.count - 2)
-            //            {
-            //                self.performSegue(withIdentifier: "pushToBlank", sender: self)
-            //            }
-        }
-        
-        
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0)
-        {
-            return 130
-        }
-        else
-        {
-            return 42
-        }
-    }
-    */
+     
+     func numberOfSections(in tableView: UITableView) -> Int {
+     // #warning Incomplete implementation, return the number of sections
+     return 2
+     }
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     if section == 0
+     {
+     return 1
+     }
+     else
+     {
+     return arrMenuIcons.count
+     }
+     }
+     
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
+     
+     if (indexPath.section == 0)
+     {
+     let cellHeader = tableView.dequeueReusableCell(withIdentifier: "MainHeaderTableViewCell") as! MainHeaderTableViewCell
+     cellHeader.selectionStyle = .none
+     cellHeader.imgProfile.layer.cornerRadius = cellHeader.imgProfile.frame.width / 2
+     cellHeader.imgProfile.layer.borderWidth = 1.0
+     cellHeader.imgProfile.layer.borderColor = UIColor.white.cgColor
+     cellHeader.imgProfile.layer.masksToBounds = true
+     
+     cellHeader.imgProfile.sd_setImage(with: URL(string: ProfileData.object(forKey: "Image") as! String), completed: nil)
+     cellHeader.lblName.text = ProfileData.object(forKey: "Fullname") as? String
+     
+     cellHeader.lblMobileNumber.text = ProfileData.object(forKey: "MobileNo") as? String
+     cellHeader.lblRating.text = SingletonClass.sharedInstance.passengerRating
+     
+     return cellHeader
+     }
+     else
+     {
+     let cellMenu = tableView.dequeueReusableCell(withIdentifier: "ContentTableViewCell") as! ContentTableViewCell
+     
+     cellMenu.imgDetail?.image = UIImage.init(named:  "\(arrMenuIcons[indexPath.row])")
+     cellMenu.selectionStyle = .none
+     
+     cellMenu.lblTitle.text = arrMenuTitle[indexPath.row]
+     
+     return cellMenu
+     }
+     
+     
+     // Configure the cell...
+     
+     //        return cellHeader
+     }
+     
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     
+     if indexPath.section == 0 {
+     let next = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+     self.navigationController?.pushViewController(next, animated: true)
+     
+     }
+     else if (indexPath.section == 1)
+     {
+     if arrMenuTitle[indexPath.row] == "New Booking" {
+     NotificationCenter.default.post(name: NotificationForBookingNewTrip, object: nil)
+     sideMenuController?.toggle()
+     
+     }
+     if arrMenuTitle[indexPath.row] == "My Booking"
+     {
+     NotificationCenter.default.post(name: OpenMyBooking, object: nil)
+     sideMenuController?.toggle()
+     }
+     
+     if arrMenuTitle[indexPath.row] == "Payment Options" {
+     NotificationCenter.default.post(name: OpenPaymentOption, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "Wallet" {
+     NotificationCenter.default.post(name: OpenWallet, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "Favourites" {
+     NotificationCenter.default.post(name: OpenFavourite, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "My Receipts" {
+     NotificationCenter.default.post(name: OpenMyReceipt, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "Invite Friends" {
+     NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "Settings" {
+     NotificationCenter.default.post(name: OpenSetting, object: nil)
+     sideMenuController?.toggle()
+     }
+     else if arrMenuTitle[indexPath.row] == "Become a \(appName) Driver" {
+     UIApplication.shared.openURL(NSURL(string: "https://itunes.apple.com/us/app/pick-n-go-driver/id1320783710?mt=8")! as URL)
+     }
+     else if arrMenuTitle[indexPath.row] == "Package History"
+     {
+     let next = self.storyboard?.instantiateViewController(withIdentifier: "PackageHistoryViewController") as! PackageHistoryViewController
+     self.navigationController?.pushViewController(next, animated: true)
+     }
+     
+     
+     if (arrMenuTitle[indexPath.row] == "LogOut")
+     {
+     self.performSegue(withIdentifier: "unwindToContainerVC", sender: self)
+     UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+     
+     UserDefaults.standard.removeObject(forKey: "Passcode")
+     SingletonClass.sharedInstance.setPasscode = ""
+     
+     UserDefaults.standard.removeObject(forKey: "isPasscodeON")
+     SingletonClass.sharedInstance.isPasscodeON = false
+     
+     }
+     //            else if (indexPath.row == arrMenuTitle.count - 2)
+     //            {
+     //                self.performSegue(withIdentifier: "pushToBlank", sender: self)
+     //            }
+     }
+     
+     
+     }
+     
+     
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     if (indexPath.section == 0)
+     {
+     return 130
+     }
+     else
+     {
+     return 42
+     }
+     }
+     */
     
     
     func didRegisterCompleted() {
@@ -543,32 +543,32 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     // MARK: - Custom Methods
     //-------------------------------------------------------------
     
-   /* func navigateToTiCKPay() {
-        //        webserviceOfTickPayStatus()
-        
-        if self.varifyKey == 0 {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "TickPayRegistrationViewController") as! TickPayRegistrationViewController
-            next.delegateForVerifyStatus = self
-            self.navigationController?.pushViewController(next, animated: true)
-        }
-            
-        else if self.varifyKey == 1 {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "TiCKPayNeedToVarifyViewController") as! TiCKPayNeedToVarifyViewController
-            self.navigationController?.pushViewController(next, animated: true)
-        }
-            
-        else if self.varifyKey == 2 {
-            let next = self.storyboard?.instantiateViewController(withIdentifier: "PayViewController") as! PayViewController
-            self.navigationController?.pushViewController(next, animated: true)
-        }
-    }*/
+    /* func navigateToTiCKPay() {
+     //        webserviceOfTickPayStatus()
+     
+     if self.varifyKey == 0 {
+     let next = self.storyboard?.instantiateViewController(withIdentifier: "TickPayRegistrationViewController") as! TickPayRegistrationViewController
+     next.delegateForVerifyStatus = self
+     self.navigationController?.pushViewController(next, animated: true)
+     }
+     
+     else if self.varifyKey == 1 {
+     let next = self.storyboard?.instantiateViewController(withIdentifier: "TiCKPayNeedToVarifyViewController") as! TiCKPayNeedToVarifyViewController
+     self.navigationController?.pushViewController(next, animated: true)
+     }
+     
+     else if self.varifyKey == 2 {
+     let next = self.storyboard?.instantiateViewController(withIdentifier: "PayViewController") as! PayViewController
+     self.navigationController?.pushViewController(next, animated: true)
+     }
+     }*/
     
     @IBAction func btnProfilePickClicked(_ sender: Any)
     {
-//        let next = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
-//        self.navigationController?.pushViewController(next, animated: true)
-//        NotificationCenter.default.post(name: OpenEditProfile, object: nil)
-//        sideMenuController?.toggle()
+        //        let next = self.storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        //        self.navigationController?.pushViewController(next, animated: true)
+        //        NotificationCenter.default.post(name: OpenEditProfile, object: nil)
+        //        sideMenuController?.toggle()
     }
     
     
@@ -618,10 +618,20 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
         
         customCell.imgDetail?.image = UIImage.init(named:  "\(arrMenuIcons[indexPath.row])")
         customCell.lblTitle.text = arrMenuTitle[indexPath.row].localized
-//        customCell.lblTitle.font = UIFont.regular(ofSize: 12.0)
+        //        customCell.lblTitle.font = UIFont.regular(ofSize: 12.0)
         
-        customCell.imgDetail?.tintColor = UIColor.black
-        customCell.lblTitle.textColor = UIColor.black
+        
+        
+        if(arrMenuTitle[indexPath.row].localized == "SOS")
+        {
+            customCell.lblTitle.textColor = .red
+        }
+        else
+        {
+            customCell.imgDetail?.tintColor = UIColor.black
+            customCell.lblTitle.textColor = UIColor.black
+            
+        }
         
         return customCell
     }
@@ -681,47 +691,70 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
              */
         }
         else if arrMenuTitle[indexPath.row] == "Help" {
-//            UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
-            self.dialNumber(number: "0987654321")
+            //            UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
+//            self.dialNumber(number: helpLineNumber)
+            self.alertForHelpOptions()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         
-//        let customCell = self.CollectionView.dequeueReusableCell(withReuseIdentifier: "SideMenuCollectionViewCell", for: indexPath) as! SideMenuCollectionViewCell
+        //        let customCell = self.CollectionView.dequeueReusableCell(withReuseIdentifier: "SideMenuCollectionViewCell", for: indexPath) as! SideMenuCollectionViewCell
         
-        let customCell = collectionView.cellForItem(at: indexPath) as! SideMenuCollectionViewCell
-        customCell.imgDetail?.tintColor = themeYellowColor
-        customCell.lblTitle.textColor = themeYellowColor
+        if(arrMenuTitle[indexPath.row].localized != "SOS")
+        {
+            let customCell = collectionView.cellForItem(at: indexPath) as! SideMenuCollectionViewCell
+            customCell.imgDetail?.tintColor = themeYellowColor
+            customCell.lblTitle.textColor = themeYellowColor
+            
+        }
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let customCell = collectionView.cellForItem(at: indexPath) as! SideMenuCollectionViewCell
-        customCell.imgDetail?.tintColor = UIColor.black
-        customCell.lblTitle.textColor = UIColor.black
+        
+        if(arrMenuTitle[indexPath.row].localized != "SOS")
+        {
+            let customCell = collectionView.cellForItem(at: indexPath) as! SideMenuCollectionViewCell
+            customCell.imgDetail?.tintColor = UIColor.black
+            customCell.lblTitle.textColor = UIColor.black
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let MenuWidth = sideMenuController?.sideViewController.view.frame.width
-//        let CollectionCellWidth = (MenuWidth! - 95.0) / 2
+        //        let CollectionCellWidth = (MenuWidth! - 95.0) / 2
         
         let CollectionCellWidth = (MenuWidth! - 80.0) / 2
         return CGSize(width: CollectionCellWidth, height: CollectionCellWidth)
     }
     
+    func alertForHelpOptions()
+    {
+        let reasonsVC = CancelAlertViewController(nibName: "CancelAlertViewController", bundle: nil)
+        
+        reasonsVC.isHelp = true
+        reasonsVC.okPressedClosure = { (reason) in
+            
+        }
+        reasonsVC.modalPresentationStyle = .overCurrentContext
+        self.present(reasonsVC, animated: true)
+    }
+    
     func dialNumber(number : String) {
-
-     if let url = URL(string: "tel://\(number)"),
-       UIApplication.shared.canOpenURL(url) {
-          if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler:nil)
-           } else {
-               UIApplication.shared.openURL(url)
-           }
-       } else {
-                // add error message here
-       }
+        
+        if let url = URL(string: "tel://\(number)"),
+           UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        } else {
+            // add error message here
+        }
     }
 }
 

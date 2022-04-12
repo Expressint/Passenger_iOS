@@ -415,6 +415,8 @@
 		5426B7E527229C1C001189DE /* TJ.png in Resources */ = {isa = PBXBuildFile; fileRef = 5426B6E827229C1B001189DE /* TJ.png */; };
 		5426B7E72722BEA0001189DE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5426B7E62722BEA0001189DE /* MobileCoreServices.framework */; };
 		54761341274D29B60073E3B5 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54761340274D29B60073E3B5 /* ForgetPasswordViewController.swift */; };
+		5480321227A2DB3900ECD2BD /* CancelAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5480321027A2DB3800ECD2BD /* CancelAlertViewController.swift */; };
+		5480321327A2DB3900ECD2BD /* CancelAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5480321127A2DB3800ECD2BD /* CancelAlertViewController.xib */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
 		AD01829F2652420900595BAB /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD01829E2652420900595BAB /* BookingScreen.storyboard */; };
@@ -850,6 +852,8 @@
 		5426B6E827229C1B001189DE /* TJ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TJ.png; sourceTree = "<group>"; };
 		5426B7E62722BEA0001189DE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		54761340274D29B60073E3B5 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		5480321027A2DB3800ECD2BD /* CancelAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAlertViewController.swift; sourceTree = "<group>"; };
+		5480321127A2DB3800ECD2BD /* CancelAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelAlertViewController.xib; sourceTree = "<group>"; };
 		5B8CD5DE691145A01FDF1181 /* Pods-Flicha User.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicha User.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicha User/Pods-Flicha User.debug.xcconfig"; sourceTree = "<group>"; };
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
 		6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueTableViewCell.swift; sourceTree = "<group>"; };
@@ -981,6 +985,7 @@
 				3A4072DD21B512270015C494 /* AppDelegate */,
 				3A4072DF21B512270015C494 /* CollectionCell */,
 				3A4072E221B512270015C494 /* CommingSoonViewController.swift */,
+				5480321427A2DBC800ECD2BD /* CancelAlert */,
 				3A4072E321B512270015C494 /* CustomAlertsViewController.swift */,
 				3A4072E421B512270015C494 /* HeaderVC */,
 				3A4072E921B512270015C494 /* HomeVC */,
@@ -1650,6 +1655,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		5480321427A2DBC800ECD2BD /* CancelAlert */ = {
+			isa = PBXGroup;
+			children = (
+				5480321027A2DB3800ECD2BD /* CancelAlertViewController.swift */,
+				5480321127A2DB3800ECD2BD /* CancelAlertViewController.xib */,
+			);
+			path = CancelAlert;
+			sourceTree = "<group>";
+		};
 		5DE7D0CBCFE96E734E733E60 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1792,6 +1806,7 @@
 				3A4073FE21B512280015C494 /* circle@2x.png in Resources */,
 				5426B75F27229C1C001189DE /* EH.png in Resources */,
 				347A9FDC2608CC2500065C29 /* DriverList.storyboard in Resources */,
+				5480321327A2DB3900ECD2BD /* CancelAlertViewController.xib in Resources */,
 				5426B75E27229C1C001189DE /* GW.png in Resources */,
 				5426B76B27229C1C001189DE /* PR.png in Resources */,
 				5426B72D27229C1C001189DE /* NZ.png in Resources */,
@@ -2176,6 +2191,7 @@
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2203,6 +2219,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2261,6 +2278,7 @@
 				3A4073E521B512280015C494 /* WalletCardsVC.swift in Sources */,
 				3A4073D421B512280015C494 /* BarsAndClubsTableViewCell.swift in Sources */,
 				3A4073C321B512280015C494 /* FavoriteViewController.swift in Sources */,
+				5480321227A2DB3900ECD2BD /* CancelAlertViewController.swift in Sources */,
 				3A4073AC21B512280015C494 /* OnGoingTableViewCell.swift in Sources */,
 				3A4073AB21B512280015C494 /* MyBookingViewController.swift in Sources */,
 				3A4073D721B512280015C494 /* MyFavouriteTableViewCell.swift in Sources */,
@@ -2475,7 +2493,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.1;
+				CURRENT_PROJECT_VERSION = 1.3.2;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2486,7 +2504,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2507,7 +2525,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.1;
+				CURRENT_PROJECT_VERSION = 1.3.2;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2518,7 +2536,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

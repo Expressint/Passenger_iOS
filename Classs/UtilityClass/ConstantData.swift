@@ -20,7 +20,7 @@ let themeGrayBGColor : UIColor = UIColor.init(hex: "DDDDDD")
 let themeGrayTextColor : UIColor = UIColor.init(hex: "7A7A7C")
 let currencySign = "$" //"KSh"
 let appName = "Book A Ride"
-var helpLineNumber = "+255777115054"//"0772506506"
+var helpLineNumber = ""//"0772506506"
 let googleAnalyticsTrackId = "UA-122360832-1"
 let supportURL = "https://www.tantaxitanzania.com/front/about"
 let AppRegularFont:String = "ProximaNova-Regular"
@@ -116,12 +116,13 @@ struct WebserviceURLs {
     static let kTrackRunningTrip                        = "TrackRunningTrip/"
     
     static let kPastDuesList                            = "PastDues"
-    static let kPayPastDues                           = "PastDuesPayment"
+    static let kPayPastDues                             = "PastDuesPayment"
     
     static let kGetDriverETA                            = "GetETA"
+    static let kHelpOptions                             = "HelpOptions"
+    static let kHelp                                    = "Help"
 //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
-
 
 
 struct SocketData {
@@ -158,11 +159,18 @@ struct SocketData {
     static let kReceiveTips                                 = "ReceiveTips"
     static let kReceiveTipsForBookLater                     = "ReceiveTipsForBookLater"
     static let kGetDriverCurrentLatLong                     = "GetDriverCurrentLatLong"
+    
+    static let SOS = "SOS"
+
+    
 }
 
 struct SocketDataKeys {
     
     static let kBookingIdNow    = "BookingId"
+    static let kCancelReasons    = "Reason"
+    static let kUserType = "UserType"
+
 }
 
 

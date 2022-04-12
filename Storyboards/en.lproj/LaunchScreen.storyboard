@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,9 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p-splash" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-2X-fzk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgBackground" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-2X-fzk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QGt-9e-M4c">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80362332577736961" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bag-o4-tdy">
                                 <rect key="frame" x="0.0" y="248.66666666666663" width="375" height="315"/>
                                 <subviews>
@@ -48,23 +52,27 @@
                                 </constraints>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="splashBottom" translatesAutoresizingMaskIntoConstraints="NO" id="jSG-fO-Sht">
-                                <rect key="frame" x="0.0" y="340" width="375" height="438"/>
+                                <rect key="frame" x="0.0" y="559" width="375" height="219"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bag-o4-tdy" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="3MO-Zx-TPH"/>
                             <constraint firstItem="zW1-2X-fzk" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="DVz-aA-JJl"/>
+                            <constraint firstItem="QGt-9e-M4c" firstAttribute="bottom" secondItem="zW1-2X-fzk" secondAttribute="bottom" id="GbK-1N-Qla"/>
                             <constraint firstItem="jSG-fO-Sht" firstAttribute="bottom" secondItem="Bcu-3y-fUS" secondAttribute="bottom" id="VPv-tU-Hbt"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Bag-o4-tdy" secondAttribute="trailing" id="Zxz-y9-J28"/>
+                            <constraint firstItem="QGt-9e-M4c" firstAttribute="trailing" secondItem="zW1-2X-fzk" secondAttribute="trailing" id="aR1-8a-sVO"/>
                             <constraint firstAttribute="trailing" secondItem="jSG-fO-Sht" secondAttribute="trailing" id="e5G-bb-CfU"/>
                             <constraint firstItem="jSG-fO-Sht" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="f9X-Ng-J64"/>
+                            <constraint firstItem="QGt-9e-M4c" firstAttribute="leading" secondItem="zW1-2X-fzk" secondAttribute="leading" id="jU9-qr-Dun"/>
+                            <constraint firstItem="QGt-9e-M4c" firstAttribute="top" secondItem="zW1-2X-fzk" secondAttribute="top" id="pjt-DA-VUN"/>
                             <constraint firstAttribute="bottom" secondItem="zW1-2X-fzk" secondAttribute="bottom" id="r5c-MW-tlD"/>
                             <constraint firstItem="zW1-2X-fzk" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="saf-aJ-vAZ"/>
                             <constraint firstAttribute="trailing" secondItem="zW1-2X-fzk" secondAttribute="trailing" id="skh-9D-iH0"/>
                             <constraint firstItem="Bag-o4-tdy" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.7" constant="121.96666666666675" id="tk1-AQ-R6a"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -75,7 +83,7 @@
     <resources>
         <image name="Logo" width="277" height="86"/>
         <image name="driver" width="101" height="125"/>
-        <image name="p-splash" width="375" height="812"/>
+        <image name="imgBackground" width="426" height="284"/>
         <image name="splashBottom" width="374" height="219"/>
     </resources>
 </document>

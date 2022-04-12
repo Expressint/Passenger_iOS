@@ -39,6 +39,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     @IBOutlet weak var btnCancelPromocode: UIButton!
     @IBOutlet weak var btnApplyPromocode: UIButton!
+    
+    
+    @IBOutlet weak var PayCashView: UIView!
+    @IBOutlet weak var btnCash: UIButton!
+
+    @IBOutlet weak var PayCardView: UIView!
+    @IBOutlet weak var btnCardSelection: UIButton!
+
 
     var BookLaterCompleted:BookLaterSubmitedDelegate!
     var datePickerView = UIDatePicker()
@@ -84,12 +92,12 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //    @IBOutlet weak var btnNumberOfPassenger: UIButton!
 //    var homeVC : HomeViewController?
     @IBOutlet weak var imgCardForPaymentType: UIImageView!
-    @IBOutlet weak var imgWalletForPaymentType: UIImageView!
+//    @IBOutlet weak var imgWalletForPaymentType: UIImageView!
     @IBOutlet weak var imgCashForPaymentType: UIImageView!
 
-    @IBOutlet weak var lblCashTitle: UILabel!
-    @IBOutlet weak var lblWalletTitle: UILabel!
-    @IBOutlet weak var lblCardTitle: UILabel!
+//    @IBOutlet weak var lblCashTitle: UILabel!
+//    @IBOutlet weak var lblWalletTitle: UILabel!
+//    @IBOutlet weak var lblCardTitle: UILabel!
     
     @IBOutlet weak var txtDriverAwayTime: UITextField!
     @IBOutlet weak var txtDriverAwayKm: UITextField!
@@ -97,14 +105,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        PayCardView.isHidden = false
 
 //        self.title = "Schedule Trip"
         self.setNavBarWithBack(Title: "Book Later".localized, IsNeedRightButton: false)
 
         self.navigationItem.title = "Book Later".localized
         
-        self.lblWalletTitle.numberOfLines = 0
+//        self.lblWalletTitle.numberOfLines = 0
         let imageViewForCalendar = self.btnCalendar.imageView
         imageViewForCalendar?.setImageColor(color: themeAppMainColor)
         self.btnCalendar.setImage(imageViewForCalendar?.image, for: .normal)
@@ -198,7 +206,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                                                            attributes: [NSAttributedString.Key.foregroundColor : themeAppMainColor,NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         self.btnSelectPromocode.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
         self.btnSelectPromocode.setTitle("Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
-        self.btnApplyPromocode.backgroundColor = themeAppMainColor
+        self.btnApplyPromocode.backgroundColor = themeYellowColor
         self.btnApplyPromocode.setTitleColor(.black, for: .normal)
         self.txtMobileNumber.leftMargin = 0
 
@@ -225,7 +233,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //                txtSelectPaymentMethod.text = ""
 //                imgPaymentOption.image = UIImage(named: "iconDummyCard")
                 //            paymentType = "cash"
-//                pickerView.selectedRow(inComponent: 0)
+//                pickerView.selectedRow(inComponent: 0)car
 //                txtSelectPaymentMethod.becomeFirstResponder()
 //                txtSelectPaymentMethod.resignFirstResponder()
 
@@ -690,10 +698,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul's iphone")
-        {
-            filter.country = "IN"
-        }
+//        if(UIDevice.current.name.lowercased() == "rahul's iphone")
+//        {
+//            filter.country = "IN"
+//        }
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
         
@@ -1250,33 +1258,75 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     {
 
 //        sender.isSelected = !sender.isSelected
+        
+        self.imgCashForPaymentType.image = UIImage(named: "icon_CashUnselected")
+//        self.imgWalletForPaymentType.image = UIImage(named: "icon_UnSelectedWallet")
+        self.imgCardForPaymentType.image = UIImage(named: "icon_UnselectedCard")
+//        self.imgCard.image = UIImage(named: "icon_UnselectedCard")
+        
+        //        self.btnCash.isSelected = false
+        //        self.btnWallet.isSelected = false
+        //        self.btnPesaPal.isSelected = false
+        
+        self.PayCashView.backgroundColor = UIColor.init(hex: "E5E5E5")
+        self.PayCardView.backgroundColor = UIColor.init(hex: "E5E5E5")
+        
+        self.btnCash.setTitleColor(UIColor.black, for: .normal)
+        self.btnCardSelection.setTitleColor(UIColor.black, for: .normal)
+        //        self.btnCardSelection.setTitle("Card", for: .normal)
+        CardID = ""
+        
+        
         imgCashForPaymentType.isHighlighted = false
-        lblCashTitle.isHighlighted = false
-        imgWalletForPaymentType.isHighlighted = false
-        lblWalletTitle.isHighlighted = false
+//        lblCashTitle.isHighlighted = false
+//        imgWalletForPaymentType.isHighlighted = false
+//        lblWalletTitle.isHighlighted = false
         imgCardForPaymentType.isHighlighted = false
-        lblCardTitle.isHighlighted = false
-        lblWalletTitle.text = "Wallet"
+//        lblCardTitle.isHighlighted = false
+//        lblWalletTitle.text = "Wallet"
+        
+        
+        
+        
         if(sender.tag == 1)
         {
+            
+            self.btnCash.setTitleColor(themeYellowColor, for: .normal)
+            
+            self.imgCashForPaymentType.image = UIImage(named: "icon_SelectedCash")
+            self.imgCashForPaymentType.tintColor = .red
+            //            self.btnCash.isSelected = true
+            self.PayCashView.backgroundColor = UIColor.black
             paymentType = "cash"
-            imgCashForPaymentType.isHighlighted = true
-            lblCashTitle.isHighlighted = true
+            btnCash.setTitleColor(themeAppMainColor, for: .normal)
+            btnCardSelection.setTitle("Card", for: .normal)
+            CardID = ""
+            
+            
+            paymentType = "cash"
+//            imgCashForPaymentType.isHighlighted = true
+//            lblCashTitle.isHighlighted = true
         }
         else if(sender.tag == 2)
         {
             paymentType = "wallet"
-            imgWalletForPaymentType.isHighlighted = true
-            lblWalletTitle.isHighlighted = true
-            lblWalletTitle.text = "Wallet\n\(SingletonClass.sharedInstance.strCurrentBalance)"
+//            imgWalletForPaymentType.isHighlighted = true
+//            lblWalletTitle.isHighlighted = true
+//            lblWalletTitle.text = "Wallet\n\(SingletonClass.sharedInstance.strCurrentBalance)"
 
         }
         else if(sender.tag == 3)
         {
-            paymentType = "card"
-            imgCardForPaymentType.isHighlighted = true
-            lblCardTitle.isHighlighted = true
-
+//            paymentType = "card"
+//            imgCardForPaymentType.isHighlighted = true
+//            lblCardTitle.isHighlighted = true
+            self.imgCardForPaymentType.image = UIImage(named: "icon_SelectedCard")
+            self.btnCardSelection.setTitleColor(themeYellowColor, for: .normal)
+            paymentType = "card" //rjChange "m_pesa"
+            
+            self.imgCardForPaymentType.tintColor = .red
+            self.PayCardView.backgroundColor = UIColor.black
+            btnCardSelection.setTitleColor(themeAppMainColor, for: .normal)
 
 //            if(self.aryCards.count == 0)
 //            {
@@ -1297,8 +1347,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             {
                 if let lastComponent = strCardNumber.components(separatedBy: " ").last
                 {
-                    self.lblCardTitle.text = lastComponent
-                    CardID = dictData["Id"] as? String ?? ""
+//                    self.lblCardTitle.text = lastComponent
+//                    CardID = dictData["Id"] as? String ?? ""
                 }
             }
 
@@ -1695,7 +1745,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                                 {
                                     if let lastComponent = strCardNumber.components(separatedBy: " ").last
                                     {
-                                        self.lblCardTitle.text = lastComponent
+//                                        self.lblCardTitle.text = lastComponent
                                         self.CardID = arrCards[0]["Id"] as? String ?? ""
                                     }
                                 }

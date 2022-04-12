@@ -240,11 +240,11 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         AJAlertController.initialization().showAlertWithOkButton(aStrTitle: appName, aStrMessage: message) { (index,title) in
             
             if index == 0 {
-                completionHandler!(0,title)
+                completionHandler?(0,title)
                 
             }
             else if index == 2 {
-                completionHandler!(2,title)
+                completionHandler?(2,title)
                 
             }
             

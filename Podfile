@@ -25,4 +25,6 @@ target 'Book A Ride' do
   pod 'Firebase/Crashlytics'
   pod 'MarqueeLabel/Swift' #, '3.1.4'
   pod 'CountryPickerView'
+  pod 'SwiftyJSON', '~> 4.0'
+
 end

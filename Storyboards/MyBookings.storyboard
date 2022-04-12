@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -232,7 +232,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OnGoingTableViewCell" rowHeight="175" id="y3K-nH-Dpl" customClass="OnGoingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="175"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y3K-nH-Dpl" id="yRY-sz-4VE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="175"/>
@@ -788,7 +788,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UpCommingTableViewCell" rowHeight="262" id="m4x-dA-beN" customClass="UpCommingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="262"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="262"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m4x-dA-beN" id="lpb-9o-Hos">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="262"/>
@@ -1187,7 +1187,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PastBooingTableViewCell" rowHeight="459" id="Iag-jX-9VT" customClass="PastBooingTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="459"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="459"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iag-jX-9VT" id="Vqu-M2-kdI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="459"/>
@@ -1219,7 +1219,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="394" height="394"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scn-2X-QeW">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="199"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="183"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Smith" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp2-2T-qug">
                                                                                     <rect key="frame" x="155.5" y="5" width="83" height="25"/>
@@ -1256,13 +1256,13 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xR-dJ-ujv">
-                                                                                    <rect key="frame" x="10" y="59" width="374" height="135"/>
+                                                                                    <rect key="frame" x="10" y="59" width="374" height="119"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIC-dp-pYo">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="135"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="119"/>
                                                                                             <subviews>
                                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to-from-address-ico" translatesAutoresizingMaskIntoConstraints="NO" id="97J-cA-FAU">
-                                                                                                    <rect key="frame" x="0.0" y="10" width="17" height="115"/>
+                                                                                                    <rect key="frame" x="0.0" y="10" width="17" height="99"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" constant="17" id="bQB-tO-lv1"/>
                                                                                                     </constraints>
@@ -1276,10 +1276,10 @@
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bgg-7n-ICb">
-                                                                                                    <rect key="frame" x="25" y="50" width="341" height="75"/>
+                                                                                                    <rect key="frame" x="25" y="50" width="341" height="59"/>
                                                                                                     <subviews>
-                                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BuL-Tg-kU2">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="51"/>
+                                                                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BuL-Tg-kU2">
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="33"/>
                                                                                                             <subviews>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-U3-V2A">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
@@ -1288,7 +1288,7 @@
                                                                                                                         <constraint firstAttribute="height" constant="1" id="HbW-ed-5Er"/>
                                                                                                                     </constraints>
                                                                                                                 </view>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig6-yE-Hmu" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig6-yE-Hmu" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                                                                                                     <rect key="frame" x="0.0" y="11" width="341" height="30"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="height" constant="30" id="bRO-pC-WK0"/>
@@ -1308,8 +1308,8 @@
                                                                                                                 <constraint firstItem="cZQ-U3-V2A" firstAttribute="top" secondItem="BuL-Tg-kU2" secondAttribute="top" id="p20-2b-2mV"/>
                                                                                                             </constraints>
                                                                                                         </view>
-                                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLF-it-Bie">
-                                                                                                            <rect key="frame" x="0.0" y="51" width="341" height="24"/>
+                                                                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLF-it-Bie">
+                                                                                                            <rect key="frame" x="0.0" y="33" width="341" height="26"/>
                                                                                                             <subviews>
                                                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-gg-4b4">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
@@ -1318,7 +1318,7 @@
                                                                                                                         <constraint firstAttribute="height" constant="1" id="dYR-Yo-Bmr"/>
                                                                                                                     </constraints>
                                                                                                                 </view>
-                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pl7-vH-1Gv" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pl7-vH-1Gv" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                                                                                                     <rect key="frame" x="0.0" y="11" width="341" height="3"/>
                                                                                                                     <constraints>
                                                                                                                         <constraint firstAttribute="height" constant="30" id="77B-Wn-0RL"/>
@@ -1384,10 +1384,10 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxX-bd-Kj3">
-                                                                            <rect key="frame" x="0.0" y="199" width="394" height="195"/>
+                                                                            <rect key="frame" x="0.0" y="183" width="394" height="211"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="VSX-Qh-onD">
-                                                                                    <rect key="frame" x="10" y="10" width="374" height="175"/>
+                                                                                    <rect key="frame" x="10" y="10" width="374" height="191"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="RPI-PV-IvW">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="15"/>
@@ -1604,6 +1604,23 @@
                                                                                                 </label>
                                                                                             </subviews>
                                                                                         </stackView>
+                                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gcf-cM-CCC">
+                                                                                            <rect key="frame" x="0.0" y="176" width="374" height="15"/>
+                                                                                            <subviews>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Cancel Reason :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxV-HJ-b9Z">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="187" height="15"/>
+                                                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                    <color key="textColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSq-gv-lie">
+                                                                                                    <rect key="frame" x="187" y="0.0" width="187" height="15"/>
+                                                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                                    <color key="textColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                    <nil key="highlightedColor"/>
+                                                                                                </label>
+                                                                                            </subviews>
+                                                                                        </stackView>
                                                                                     </subviews>
                                                                                 </stackView>
                                                                             </subviews>
@@ -1673,6 +1690,8 @@
                                             <outlet property="lblBookingFee" destination="g9T-UE-j8a" id="KRz-7A-MH5"/>
                                             <outlet property="lblBookingFreeTitle" destination="qTh-UA-23b" id="JJf-rj-E4Z"/>
                                             <outlet property="lblBookingID" destination="TZS-E5-i2w" id="r7Q-F4-O4C"/>
+                                            <outlet property="lblCancelReason" destination="gSq-gv-lie" id="hYO-SN-YQd"/>
+                                            <outlet property="lblCancelReasonTitle" destination="hxV-HJ-b9Z" id="Sfa-NZ-eWe"/>
                                             <outlet property="lblDateAndTime" destination="ctr-BV-U6Y" id="MZM-R4-VY2"/>
                                             <outlet property="lblDriverName" destination="xp2-2T-qug" id="yns-Dn-fSA"/>
                                             <outlet property="lblDropoffAddress" destination="Ig6-yE-Hmu" id="qtI-xy-IEL"/>
@@ -1699,6 +1718,7 @@
                                             <outlet property="lblWaitingCostTitle" destination="Mc8-0k-m9r" id="SUO-X6-Y84"/>
                                             <outlet property="lblWaitingTime" destination="hAL-uN-pi1" id="Po9-Q9-WGb"/>
                                             <outlet property="lblWaitingTimeTitle" destination="ccO-Yz-yzg" id="TAa-zX-Mhd"/>
+                                            <outlet property="stackViewCancelReason" destination="gcf-cM-CCC" id="CwG-US-yay"/>
                                             <outlet property="stackViewDropLocation2" destination="kLF-it-Bie" id="0JR-Ku-CDO"/>
                                             <outlet property="stackViewNightFare" destination="xlc-3K-UaL" id="NSm-7g-Ejr"/>
                                             <outlet property="viewCell" destination="2iU-xJ-vj5" id="pBP-Ph-4b6"/>
@@ -2034,7 +2054,7 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyRecepitTableViewCell" rowHeight="380" id="DeW-ME-53b" customClass="MyRecepitTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="380"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="380"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DeW-ME-53b" id="tnb-tG-fb8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="380"/>
@@ -2512,7 +2532,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoDataFound" id="aVn-N4-9nY" customClass="DispatchedJobsForMyJobsTableViewCell" customModule="Book_A_Ride" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="404.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="424.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aVn-N4-9nY" id="pfN-wQ-92c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

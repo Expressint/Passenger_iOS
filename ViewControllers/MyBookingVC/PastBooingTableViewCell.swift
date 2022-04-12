@@ -38,6 +38,8 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPromoApplied: UILabel!
     @IBOutlet weak var lblLessTitle: UILabel!
     @IBOutlet weak var lblWaitingTimeTitle: UILabel!
+    @IBOutlet weak var lblCancelReasonTitle: UILabel!
+
     
     @IBOutlet weak var viewDetails: UIView!
     @IBOutlet weak var lblDriverName: UILabel!
@@ -49,7 +51,7 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPickupAddress: MarqueeLabel! // Pickup Address is PickupAddress
     @IBOutlet weak var stackViewPickupTime: UIStackView!
     @IBOutlet weak var lblPickupTime: UILabel!
-    @IBOutlet weak var stackViewDropoffTime: UIStackView!
+    @IBOutlet weak var stackViewCancelReason: UIStackView!
     @IBOutlet weak var lblDropoffTime: UILabel!
     @IBOutlet weak var stackViewDropLocation2: UIView!
     @IBOutlet weak var lblVehicleType: UILabel!
@@ -61,11 +63,9 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblTripStatus: UILabel!
     @IBOutlet weak var lblWaitingTime: UILabel!
     @IBOutlet weak var lblPromoCode: UILabel!
-//    @IBOutlet weak var lblTax: UILabel!
-//    @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblTotalAmount: UILabel!
     
-    
+    @IBOutlet weak var lblCancelReason: UILabel!
     @IBOutlet weak var lblNightFare: UILabel!
     
     @IBOutlet weak var stackViewDistanceTravelled: UIStackView!
