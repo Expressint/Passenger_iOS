@@ -670,7 +670,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 
                         UtilityClass.showAlertWithCompletion("", message: (result as! NSDictionary).object(forKey: "message") as! String, vc: self, completionHandler: { ACTION in
                             
-                            UIApplication.shared.open((NSURL(string: "itms-apps://itunes.apple.com/app/id1445179460")! as URL), options: [:], completionHandler: { (status) in
+                            UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
                                 
                             })//openURL(NSURL(string: "https://itunes.apple.com/us/app/pick-n-go/id1320783092?mt=8")! as URL)
                         })

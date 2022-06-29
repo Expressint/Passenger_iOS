@@ -81,7 +81,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
         
         //        webserviceOfTickPayStatus()
-        arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","iconHelp"]//img_mn_receipt_unselect
+        arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","img_mn_receipt_unselect" ,"iconHelp", "icon_InviteFriendUnselect"]//img_mn_receipt_unselect
         
     }
     
@@ -103,7 +103,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         //                            }
         //                        }
         //                    }
-        arrMenuTitle = ["My Bookings" , "Favourites", "Help"]//"My Receipts","My Ratings","Legal", "Support"]//,"Payment Options"
+        arrMenuTitle = ["My Bookings" , "Favourites", "My Receipts", "Help", "Invite Friends"]//"My Receipts","My Ratings","Legal", "Support"]//,"Payment Options"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -666,7 +666,8 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
             sideMenuController?.toggle()
         }
         else if arrMenuTitle[indexPath.row] == "Invite Friends" {
-            NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
+//            NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
+            self.inviteDriver()
             sideMenuController?.toggle()
         }
         else if arrMenuTitle[indexPath.row] == "My Ratings" {
@@ -695,6 +696,29 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
 //            self.dialNumber(number: helpLineNumber)
             self.alertForHelpOptions()
         }
+    }
+    
+    func inviteDriver()
+    {
+        let decodeResults = SingletonClass.sharedInstance.dictProfile
+        print(decodeResults)
+        var strName = String()
+        
+        if decodeResults.count != 0
+        {
+            
+            strName = (decodeResults.object(forKey: "Fullname") as? String)!
+        }
+        
+        let strInvitation1 = "has invited you to become a Book A ride Passenger".localized
+        let strInvitation2 = "Your invite code is:".localized
+        
+        let strContent = "\(strName) \(strInvitation1)\n \n click here \(appURL)"
+        let share = [strContent]
+        
+        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

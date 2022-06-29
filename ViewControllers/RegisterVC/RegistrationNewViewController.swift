@@ -91,7 +91,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         if SingletonClass.sharedInstance.isFromSocilaLogin == true
         {
             self.txtFullName.text = SingletonClass.sharedInstance.strSocialFullName
-            let url = URL(string: SingletonClass.sharedInstance.strSocialImage as! String)
+            let url = URL(string: SingletonClass.sharedInstance.strSocialImage )
             let data = try? Data(contentsOf: url!)
             
             if let imageData = data {
@@ -178,12 +178,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         
     }
     
-    func PickingImageFromGallery()
-    {
-        
+    func PickingImageFromGallery(){
         PHPhotoLibrary.requestAuthorization { status in
-            
-            
             switch status {
             case .authorized:
                 DispatchQueue.main.async {
@@ -237,10 +233,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     
     
-    func PickingImageFromCamera()
-    {
-        
-        
+    func PickingImageFromCamera(){
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
             if response {
                 DispatchQueue.main.async {
@@ -290,13 +283,11 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func pickupdateMethod(_ sender: UIDatePicker)
-    {
+    @objc func pickupdateMethod(_ sender: UIDatePicker){
         let dateFormaterView = DateFormatter()
         dateFormaterView.dateFormat = "yyyy-MM-dd"
         txtDOB.text = dateFormaterView.string(from: sender.date)
         strDateOfBirth = txtDOB.text!
-        
     }
 
     
@@ -314,16 +305,25 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         
     }
     
-    @IBAction func btnClickTerms(_ sender : UIButton)
-    {
+    @IBAction func btnClickTerms(_ sender : UIButton){
         btnTermsSignUp.isSelected = !btnTermsSignUp.isSelected
     }
     //MARK: - Validation
     
-    func checkValidation() -> Bool
-    {
-        if (txtFullName.text?.count == 0){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter user name") { (index, title) in
+    func checkValidation() -> Bool {
+        
+         if imgProfile.image == UIImage(named: "iconProfilePicBlank"){
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
+            }
+            return false
+        }
+        else if imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!) {
+              UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
+              }
+              return false
+        }
+        else if (txtFullName.text?.count == 0){
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter full name") { (index, title) in
             }
             return false
         }
@@ -340,13 +340,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //            }
 //            return false
 //        }
-//        else if imgProfile.image == UIImage(named: "iconProfilePicBlank")
-//        {
-//
-//            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
-//            }
-//            return false
-//        }
+ 
 //        else if strDateOfBirth == "" {
 //
 //            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose Date of Birth") { (index, title) in

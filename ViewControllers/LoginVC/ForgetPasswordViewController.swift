@@ -100,6 +100,10 @@ class ForgetPasswordViewController: UIViewController {
         return returnValue
     }
     
+    @IBAction func btnBack(_ sender: Any) {
+              self.navigationController?.popViewController(animated: true)
+    }
+    
     func webserviceForgotPassword()
     {
         var params = [String:AnyObject]()

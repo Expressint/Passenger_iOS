@@ -114,13 +114,7 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
         let strInvitation1 = "has invited you to become a TanTaxi Passenger".localized
         let strInvitation2 = "Your invite code is:".localized
         
-        let strContent = "\(strName) \(strInvitation1)\n \n click here \("https://itunes.apple.com/us/app/TanTaxi/id1445179460?ls=1&mt=8") \n\n \(strInvitation2) \(strReferralCode)"
-        // \n https://www.facebook.com/tesluxe \n https://www.instagram.com/teslux3 \n https://www.instagram.com/teslux3 \n https://twitter.com/TESLUX3"
-        //        name + " has invited you to become a Tesluxe Passenger.\n" +
-        //            "\n" +
-        //        click here (https://play.google.com/store/apps/details?id=com.Tesluxe) + "\n\n Your invite code is: "+ iniviteCode + "\n" + https://www.facebook.com/tesluxe
-        //            + "\n" + https://www.instagram.com/teslux3
-        //            + "\n" +https://twitter.com/TESLUX3
+        let strContent = "\(strName) \(strInvitation1)\n \n click here \(appURL) \n\n \(strInvitation2) \(strReferralCode)"
         let share = [strContent]
         
         let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)

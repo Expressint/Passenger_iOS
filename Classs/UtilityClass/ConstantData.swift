@@ -20,6 +20,7 @@ let themeGrayBGColor : UIColor = UIColor.init(hex: "DDDDDD")
 let themeGrayTextColor : UIColor = UIColor.init(hex: "7A7A7C")
 let currencySign = "$" //"KSh"
 let appName = "Book A Ride"
+let appURL = "itms-apps://itunes.apple.com/app/apple-store/id1541296701?mt=8"
 var helpLineNumber = ""//"0772506506"
 let googleAnalyticsTrackId = "UA-122360832-1"
 let supportURL = "https://www.tantaxitanzania.com/front/about"

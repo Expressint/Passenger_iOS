@@ -697,7 +697,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolCurrentLocation = true
 
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -713,7 +713,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -923,7 +923,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
            // Code you want to be delayed
             if SingletonClass.sharedInstance.aryEstimateFareData.count != 0 {
                 
-                var EstimateFare:String = ""
+//                var _:String = ""
                 if let indexPath = SingletonClass.sharedInstance.selectedIndexPath {
                     if let fareRange = (SingletonClass.sharedInstance.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "estimate_fare_range") as? String {
     //                    cell.lblPrices.text = fareRange

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cRf-l7-VjQ">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -2117,7 +2117,7 @@
                                                             <action selector="btnCall:" destination="qFc-oh-FJE" eventType="touchUpInside" id="3Xf-R1-0Fb"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-BP-PMC">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-BP-PMC">
                                                         <rect key="frame" x="225" y="190" width="40" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -4961,7 +4961,7 @@
             <objects>
                 <viewController storyboardIdentifier="CustomSideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8lO-1E-18h" customClass="CustomSideMenuViewController" customModule="Book_A_Ride" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8GI-9o-0Hg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="DGv-Ml-hVf"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6503,7 +6503,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvc-16-6RH">
-                                                                        <rect key="frame" x="32" y="50" width="42" height="14.5"/>
+                                                                        <rect key="frame" x="32" y="50" width="42.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                         <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -11195,6 +11195,7 @@
                                                                 <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                                 <state key="normal" image="icon_Back"/>
                                                                 <connections>
+                                                                    <action selector="btnBack:" destination="5GV-0l-Af3" eventType="touchUpInside" id="8cO-Pn-EGA"/>
                                                                     <segue destination="3mg-1I-I5A" kind="unwind" unwindAction="unwindToLoginVCWithSegue:" id="ALM-FZ-Y5y"/>
                                                                 </connections>
                                                             </button>
@@ -11315,10 +11316,10 @@
             <size key="intrinsicContentSize" width="27" height="18.5"/>
         </designable>
         <designable name="fwG-w4-Esk">
-            <size key="intrinsicContentSize" width="43" height="34"/>
+            <size key="intrinsicContentSize" width="57" height="34"/>
         </designable>
         <designable name="hMS-rA-t75">
-            <size key="intrinsicContentSize" width="65.5" height="18.5"/>
+            <size key="intrinsicContentSize" width="65" height="18.5"/>
         </designable>
         <designable name="lCc-dT-hOD">
             <size key="intrinsicContentSize" width="29" height="18.5"/>
@@ -11347,7 +11348,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="Kko-AZ-703"/>
-        <segue reference="24f-p1-b17"/>
+        <segue reference="oeb-Ea-QzW"/>
         <segue reference="ilW-4h-6HM"/>
     </inferredMetricsTieBreakers>
     <resources>
