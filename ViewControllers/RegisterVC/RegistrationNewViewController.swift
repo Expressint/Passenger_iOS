@@ -9,7 +9,7 @@
 import UIKit
 import ACFloatingTextfield_Swift
 import PhotosUI
-
+import SDWebImage
 //import TransitionButton
 
 class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -17,6 +17,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     
     var strDateOfBirth = String()
+    var isPassengerImage: Bool = false
 
     //-------------------------------------------------------------
     // MARK: - Outlets
@@ -30,10 +31,14 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     @IBOutlet weak var btnSignUp: ThemeButton!
     @IBOutlet weak var btnTermsSignUp: UIButton!
+    @IBOutlet weak var btnPassengerIId: UIButton!
+    @IBOutlet weak var imgPassengerId: UIImageView!
 
 
 //    var strEmail = String()
-    @IBOutlet weak var txtFullName: ThemeTextField!
+   // @IBOutlet weak var txtFullName: ThemeTextField!
+    @IBOutlet weak var txtFirstName: ThemeTextField!
+    @IBOutlet weak var txtLastName: ThemeTextField!
     
     @IBOutlet weak var txtTermsAndPrivacy: UITextView!
     
@@ -65,12 +70,16 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setLocalization()
+        
+       // self.btnSignUp.isMultipleTouchEnabled = false
        
     }
     func setLocalization() {
-        txtFullName.placeholder  =  "Full Name".localized
+       // txtFullName.placeholder  =  "Full Name".localized
+        txtFirstName.placeholder  =  "First Name".localized
+        txtLastName.placeholder  =  "Last Name".localized
         txtAddress.placeholder = "Address".localized
-        txtRafarralCode.placeholder  =  "Invite Code".localized
+        txtRafarralCode.placeholder  =  "Referral Code (Optional)".localized
         txtPostCode.placeholder = "Post Code".localized
         txtDateOfBirth.placeholder = "Date Of Birth".localized
         txtDOB.placeholder = "Date Of Birth".localized
@@ -90,17 +99,18 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         var image = UIImage()
         if SingletonClass.sharedInstance.isFromSocilaLogin == true
         {
-            self.txtFullName.text = SingletonClass.sharedInstance.strSocialFullName
-            let url = URL(string: SingletonClass.sharedInstance.strSocialImage )
-            let data = try? Data(contentsOf: url!)
+         //   self.txtFullName.text = SingletonClass.sharedInstance.strSocialFullName
+            self.txtFirstName.text = SingletonClass.sharedInstance.strSocialFirstName
+            self.txtLastName.text = SingletonClass.sharedInstance.strSocialLastName
             
-            if let imageData = data {
-                image = UIImage(data: imageData)!
-            }else {
-                image = UIImage(named: "iconUser")!
+            let url = URL(string: SingletonClass.sharedInstance.strSocialImage)
+            self.imgProfile.sd_setImage(with: url) { (image, error, cache, urls) in
+                if (error != nil) {
+                    self.imgProfile.image = UIImage(named: "iconUser")
+                } else {
+                    self.imgProfile.image = image
+                }
             }
-            
-            self.imgProfile.image = image
         }
         
         txtTermsAndPrivacy.text = "I agree with Terms & conditions and Privacy Policy"
@@ -272,8 +282,14 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imgProfile.contentMode = .scaleToFill
-            imgProfile.image = pickedImage
+            if(isPassengerImage){
+                imgPassengerId.contentMode = .scaleToFill
+                imgPassengerId.image = pickedImage
+            }else{
+                imgProfile.contentMode = .scaleToFill
+                imgProfile.image = pickedImage
+            }
+          
         }
         
         dismiss(animated: true, completion: nil)
@@ -322,8 +338,26 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
               }
               return false
         }
-        else if (txtFullName.text?.count == 0){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter full name") { (index, title) in
+        
+        else if imgPassengerId.image!.isEqualToImage(image: UIImage(named: "icon_Picture")!) {
+              UtilityClass.setCustomAlert(title: "Missing", message: "Please upload ID Proof Doc") { (index, title) in
+              }
+              return false
+        }
+//        else if (txtFullName.text?.count == 0){
+//            UtilityClass.setCustomAlert(title: "Missing", message: "Enter full name") { (index, title) in
+//            }
+//            return false
+//        }
+        
+        else if (txtFirstName.text?.count == 0){
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter first name") { (index, title) in
+            }
+            return false
+        }
+        
+        else if (txtLastName.text?.count == 0){
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter last name") { (index, title) in
             }
             return false
         }
@@ -375,12 +409,24 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     //MARK: - IBActions
     
     @IBAction func btnChooseImage(_ sender: Any) {
+        isPassengerImage = false
+        self.TapToProfilePicture()
+    }
+    
+    @IBAction func btnPassengereImage(_ sender: Any) {
+        isPassengerImage = true
         self.TapToProfilePicture()
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
+        
+        self.btnSignUp.isUserInteractionEnabled = false
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { _ in
+            self.btnSignUp.isUserInteractionEnabled = true
+        })
+        
         let isplaceholder = imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!)
-        guard (txtFullName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
+        guard (txtFirstName.text?.count != 0) || (txtLastName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter all details") { (index, title) in
             }
             return
@@ -399,26 +445,26 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     
     // MARK: - WebserviceCall
     
-    func webServiceCallForRegister()
-    {
+    func webServiceCallForRegister()  {
 
         let dictParams = NSMutableDictionary()
-        let FullName:String = self.txtFullName.text!
-        var FirstName:String = ""
-        var LastName:String = ""
         
-        if FullName.contains(" ") {
-            let arrNames = FullName.components(separatedBy: " ")
-            FirstName = arrNames[0]
-            if arrNames.count > 1 {
-                LastName = arrNames[1]
-            }
-        } else {
-            FirstName = FullName
-        }
+//        let FullName:String = self.txtFullName.text!
+//        var FirstName:String = ""
+//        var LastName:String = ""
+//
+//        if FullName.contains(" ") {
+//            let arrNames = FullName.components(separatedBy: " ")
+//            FirstName = arrNames[0]
+//            if arrNames.count > 1 {
+//                LastName = arrNames[1]
+//            }
+//        } else {
+//            FirstName = FullName
+//        }
         
-        dictParams.setObject(FirstName, forKey: "Firstname" as NSCopying)
-        dictParams.setObject(" ", forKey: "Lastname" as NSCopying)
+        dictParams.setObject(txtFirstName.text!, forKey: "Firstname" as NSCopying)
+        dictParams.setObject(txtLastName.text!, forKey: "Lastname" as NSCopying)
         dictParams.setObject(txtRafarralCode.text!, forKey: "ReferralCode" as NSCopying)
         dictParams.setObject(txtPostCode.text!, forKey: "ZipCode" as NSCopying)
         dictParams.setObject(txtAddress.text!, forKey: "Address" as NSCopying)
@@ -432,24 +478,56 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         dictParams.setObject("2348273489", forKey: "Lng" as NSCopying)
         dictParams.setObject(strDateOfBirth, forKey: "DOB" as NSCopying)
         
+        dictParams.setObject(SingletonClass.sharedInstance.strAppleId, forKey: "SocialId" as NSCopying)
+        if(SingletonClass.sharedInstance.isFromSocilaLogin){
+            dictParams.setObject("Apple", forKey: "SocialType" as NSCopying)
+            
+        }
+        
         UtilityClass.showACProgressHUD()
  
-        webserviceForRegistrationForUser(dictParams, image1: imgProfile.image!) { (result, status) in
+        webserviceForRegistrationForUser(dictParams, image1: imgProfile.image!, image2: imgPassengerId.image!, isRegister: true) { (result, status) in
             
             
             print(result)
+            AppDelegate.current?.isSocialLogin = false
+            SingletonClass.sharedInstance.strSocialEmail = ""
+            SingletonClass.sharedInstance.strSocialFullName = ""
+            SingletonClass.sharedInstance.strSocialImage = ""
             
             if ((result as! NSDictionary).object(forKey: "status") as! Int == 1)
             {
+                
+                SingletonClass.sharedInstance.isFromSocilaLogin = false
+                SingletonClass.sharedInstance.strAppleId = ""
+                
                 
                 DispatchQueue.main.async(execute: { () -> Void in
                 UtilityClass.hideACProgressHUD()
 //                    self.btnSignUp.stopAnimation(animationStyle: .normal, completion: {
                     
+                    if UserDefaults.standard.bool(forKey: kIsUpdateAvailable) == true {
+                        UtilityClass.showAlertWithCompletion("App Name".localized, message: "Registration completed successfully", vc: self, completionHandler: { ACTION in
+                            for controller in self.navigationController!.viewControllers as Array {
+                                if controller.isKind(of: LoginViewController.self) {
+                                    self.navigationController!.popToViewController(controller, animated: false)
+                                    break
+                                }
+                            }
+                           
+                        })
+                        return
+                    }
+                    
+                    
                         SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)   
                         SingletonClass.sharedInstance.isUserLoggedIN = true
                         SingletonClass.sharedInstance.strPassengerID = String(describing: SingletonClass.sharedInstance.dictProfile.object(forKey: "Id")!)
-                        UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                    
+//                        UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                    let data = NSKeyedArchiver.archivedData(withRootObject: SingletonClass.sharedInstance.dictProfile)
+                    UserDefaults.standard.set(data, forKey: "profileData")
+                    
                         appDelegate.GoToHome()
 
                 })
@@ -511,11 +589,6 @@ extension RegistrationNewViewController {
         //1 is female
         
         self.radioButtonsController.delegate = self //class should implement AKRadioButtonsControllerDelegate
-        
-
-        
-        
-        
         
     }
     

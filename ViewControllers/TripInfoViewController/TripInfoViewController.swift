@@ -29,15 +29,14 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var lblNightFare: UILabel!
     @IBOutlet weak var lblTollFree: UILabel!
     @IBOutlet weak var lblBookingCharge: UILabel!
-    @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet var btnViewCompleteTripData: UIView!
     
     @IBOutlet var lblTip: UILabel!
     @IBOutlet var lblPaymentType: UILabel!
     @IBOutlet var lblPickTime: UILabel!
     @IBOutlet var lblDropTime: UILabel!
-    @IBOutlet weak var lblDiscount: UILabel!
-    @IBOutlet weak var lblTax: UILabel!
+//    @IBOutlet weak var lblDiscount: UILabel!
+//    @IBOutlet weak var lblTax: UILabel!
     @IBOutlet weak var lblGrandTotal: UILabel!
     
     @IBOutlet weak var lblFlightNumber: UILabel!
@@ -46,6 +45,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var stackViewPomocide: UIStackView!
     @IBOutlet weak var stackViewFlightNumber: UIStackView!
     @IBOutlet weak var stackViewNote: UIStackView!
+    @IBOutlet weak var stackNightFare: UIStackView!
     
     @IBOutlet weak var lblBaseFare: UILabel!
     @IBOutlet weak var lblTripDistance: UILabel!
@@ -75,6 +75,13 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var lblPrompAppplied: UILabel!
     @IBOutlet weak var lblWaitingTimeTile: UILabel!
     
+    
+    @IBOutlet weak var lblBookingDate: UILabel!
+    @IBOutlet weak var lblProcessingDate: UILabel!
+    @IBOutlet weak var lblAuthorizationNumber: UILabel!
+    @IBOutlet weak var lblSubTotal: UILabel!
+    @IBOutlet weak var lblDiscount: UILabel!
+    @IBOutlet weak var lblTax: UILabel!
     
     
     var dictData = NSDictionary()
@@ -126,7 +133,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblWaitingTimeTile.text = "Waiting Time:".localized
         lblLess.text = "Less".localized
 //        lblPrompAppplied.text = "Promo Applied :".localized
-        lblTotalAmount.text = "Total Amount :".localized
+        lblTotalAmount.text = "Grand Total :".localized
         lblTripStatusTitle.text = "Trip Status:".localized
         lblNightFare.text = "lblNightFare".localized
         
@@ -151,6 +158,42 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
 //        dictData = NSMutableDictionary(dictionary: (dictData.object(forKey: "details") as! NSDictionary))
         print(dictData)
+        
+        let AuthorizationNumber = dictData.object(forKey: "Authorization_Number") as? String ?? "N/A"
+        self.lblAuthorizationNumber.text = (AuthorizationNumber) == "" ? "N/A" : AuthorizationNumber
+       
+        let SubTotal = dictData.object(forKey: "SubTotal") as? String ?? "0"
+        self.lblSubTotal.text = "\(SubTotal) \(currencySign)"
+        //
+        let Discount = dictData.object(forKey: "Discount") as? String ?? "0"
+        self.lblDiscount.text = "\(Discount) \(currencySign)"
+        //Tax
+        let Tax = dictData.object(forKey: "Tax") as? String ?? "0"
+        self.lblTax.text = "\(Tax) \(currencySign)"
+        
+        let nightFare = dictData.object(forKey: "NightFare") as? String ?? ""
+        if(nightFare == "" || nightFare == "0"){
+            stackNightFare.isHidden = true
+        }else{
+            stackNightFare.isHidden = false
+        }
+        
+        let createDate = dictData.object(forKey: "CreatedDate") as? String ?? ""
+        if(createDate.contains("T")){
+            let date = createDate.components(separatedBy: "T")
+            self.lblBookingDate.text = date[0]
+        }else{
+            self.lblBookingDate.text = createDate
+        }
+        
+        let PickDate = Double(dictData.object(forKey: "PickupTime") as! String)
+        guard let unixTimestamp1 = PickDate else { return }
+        let date1 = Date(timeIntervalSince1970: TimeInterval(unixTimestamp1))
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "yyyy/MM/dd"
+        let strDate1 = dateFormatter1.string(from: date1)
+        self.lblProcessingDate.text = strDate1
+        
         
         lblNightFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "NightFare") as? String))) ? "\(String(describing: dictData.object(forKey: "NightFare") as! String)) \(currencySign)": "-"
         
@@ -218,7 +261,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblDropTime.text = strDateDrop
     
         
-//        lblWaitingTimeCost.text = "\(dictData.object(forKey: "WaitingTimeCost") as! String) \(currencySign)"
+        lblWaitingTimeCost.text = "\(dictData.object(forKey: "WaitingTimeCost") as! String) \(currencySign)"
 //        lblFlightNumber.text = strDate//dictData.object(forKey: "PickupDateTime") as? String
 //
 //        lblNote.text = strDateDrop //dictData.object(forKey: "PickupDateTime") as? String
@@ -232,14 +275,13 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
 
 //        lblDiatnceFare.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "DistanceFare") as? String))) ? "\(String(describing: dictData.object(forKey: "DistanceFare") as! String)) \(currencySign)": "-"
-//          lblWaitingTime.text = dictData.object(forKey: "WaitingTime") as? String
+          lblWaitingTime.text = dictData.object(forKey: "WaitingTime") as? String
 
 //        lblExtraCharges.text = (!UtilityClass.isEmpty(str: (dictData.object(forKey: "ExtraCharges") as? String))) ? " \(String(describing: dictData.object(forKey: "ExtraCharges") as! String))": "-"
 
 
-//        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int((dictData.object(forKey: "WaitingTime") as? String)!) ?? 0)
-        
-//                lblWaitingTime.text = "\(getStringFrom(seconds: h)):\(getStringFrom(seconds: m)):\(getStringFrom(seconds: s))"
+        let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int((dictData.object(forKey: "WaitingTime") as? String)!) ?? 0)
+        lblWaitingTime.text = "\(getStringFrom(seconds: h)):\(getStringFrom(seconds: m)):\(getStringFrom(seconds: s))"
     }
     
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {

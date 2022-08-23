@@ -20,6 +20,7 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     @IBOutlet var iconUser: UIImageView!
     var strReferralCode = String()
     var strReferralMoney = String()
+    var selectedIndeex: Int = 0
     
     @IBOutlet var viewBottom: UIView!
 
@@ -28,10 +29,12 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     //-------------------------------------------------------------
     
     @IBOutlet var imgProfilePick: UIImageView!
-    @IBOutlet weak var lblReferralCode: UILabel!
+   // @IBOutlet weak var lblReferralCode: UILabel!
     @IBOutlet weak var lblReferralMoney: UILabel!
     @IBOutlet weak var lblWhenAFriendRegister: UILabel!
     @IBOutlet weak var btnShare: UIButton!
+    @IBOutlet weak var btnPassenger: UIButton!
+    @IBOutlet weak var btnDriver: UIButton!
     
     @IBOutlet weak var lblShareYourInviteCode: UILabel!
     override func viewDidLoad() {
@@ -39,10 +42,13 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
        
 
         let profileData = SingletonClass.sharedInstance.dictProfile
+        self.btnPassenger.isSelected = true
 
         if let ReferralCode = profileData.object(forKey: "ReferralCode") as? String {
             strReferralCode = ReferralCode
-            self.lblReferralCode.text = self.strReferralCode
+            let yourCode = "Your Referral Code : ".localized + strReferralCode
+            lblWhenAFriendRegister.text = yourCode
+        //    self.lblReferralCode.text = self.strReferralCode
         }
         
         if let RefarMoney = profileData.object(forKey: "ReferralAmount") as? Double {
@@ -84,11 +90,12 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.navigationBar.isHidden = false
         setLocalization()
     }
     func setLocalization()
     {
-        lblWhenAFriendRegister.text = "When a friend register with your code, you will recieve referal amount.".localized
+        
         lblShareYourInviteCode.text = "SHARE YOUR INVITE CODE".localized
         btnShare.setTitle("SHARE".localized, for: .normal)
     }
@@ -101,31 +108,89 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     
     @IBAction func btnShareClicked(_ sender: Any)
     {
-        let decodeResults = SingletonClass.sharedInstance.dictProfile
-        print(decodeResults)
-        var strName = String()
-        
-        if decodeResults.count != 0
-        {
-            
-            strName = (decodeResults.object(forKey: "Fullname") as? String)!
-        }
-        
-        let strInvitation1 = "has invited you to become a TanTaxi Passenger".localized
-        let strInvitation2 = "Your invite code is:".localized
-        
-        let strContent = "\(strName) \(strInvitation1)\n \n click here \(appURL) \n\n \(strInvitation2) \(strReferralCode)"
-        let share = [strContent]
-        
-        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
+        self.reloadData()
+//        let decodeResults = SingletonClass.sharedInstance.dictProfile
+//        print(decodeResults)
+//        var strName = String()
+//
+//        if decodeResults.count != 0
+//        {
+//
+//            strName = (decodeResults.object(forKey: "Fullname") as? String)!
+//        }
+//
+//        let strInvitation1 = "has invited you to become a TanTaxi Passenger".localized
+//        let strInvitation2 = "Your invite code is:".localized
+//
+//        let strContent = "\(strName) \(strInvitation1)\n \n click here \(appURL) \n\n \(strInvitation2) \(strReferralCode)"
+//        let share = [strContent]
+//
+//        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view
+//        self.present(activityViewController, animated: true, completion: nil)
     }
    
-
+    @IBAction func btnDriverClicked(_ sender: Any) {
+        selectedIndeex = 1
+        self.btnDriver.isSelected = true
+        self.btnPassenger.isSelected = false
+    }
   
+    @IBAction func btnPassengerClicked(_ sender: Any) {
+        selectedIndeex = 0
+        self.btnDriver.isSelected = false
+        self.btnPassenger.isSelected = true
+    }
    
-    
+    func reloadData(){
+        if(selectedIndeex == -1){
+            UtilityClass.setCustomAlert(title: "Missing", message: "Please select app type") { (index, title) in
+            }
+        }else if(selectedIndeex == 0) {
+            
+            let decodeResults = SingletonClass.sharedInstance.dictProfile
+            print(decodeResults)
+            var strName = String()
+            
+            if decodeResults.count != 0
+            {
+                strName = (decodeResults.object(forKey: "Fullname") as? String)!
+            }
+            
+            let strInvitation1 = "has invited you to become a Book A ride Passenger".localized
+            let referralCode = decodeResults["ReferralCode"] as? String ?? ""
+            let strInvitation = "Your Referral Code is : ".localized + referralCode
+          
+            let strContent = "\(strName) \(strInvitation1)\n \nFor iOS Click Here : \(appURLiOS) \n \nFor Android Click Here : \(appURLAndroid)\n\n\(strInvitation)"
+            let share = [strContent]
+            
+            let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }else{
+            let decodeResults = SingletonClass.sharedInstance.dictProfile
+            print(decodeResults)
+            var strName = String()
+            
+            if decodeResults.count != 0
+            {
+                strName = (decodeResults.object(forKey: "Fullname") as? String)!
+            }
+            
+            let strInvitation1 = "has invited you to become a Book A ride Driver".localized
+            
+            let referralCode = decodeResults["ReferralCode"] as? String ?? ""
+            let strInvitation = "Your Referral Code is : ".localized + referralCode
+          
+            let strContent = "\(strName) \(strInvitation1)\n\nFor iOS Click Here : \(kAPPUrliOS) \n\nFor Android Click Here : \(kAPPUrlAndroid)\n\n\(strInvitation)"
+            let share = [strContent]
+            
+            let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+       
+        }
+    }
     //-------------------------------------------------------------
     // MARK: - Custom Methods
     //-------------------------------------------------------------

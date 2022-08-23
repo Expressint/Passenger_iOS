@@ -16,13 +16,17 @@ import UIKit
     func didAddCard(cards: [String:Any])
 }
 
+protocol SelectCardForBookingDelegate {
+    func didSelectCard(cardId: String)
+}
+
 class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDelegate, AddCadsDelegate {
 
     
     weak var delegateForTopUp: SelectCardDelegate!
     weak var delegateForTransferToBank: SelectBankCardDelegate!
-    
     weak var delegateForHomeAddcard: CadsSelectionDelegate!
+    var delegateForSelectCardForBooking: SelectCardForBookingDelegate!
     
     var aryData = [[String:AnyObject]]()
     
@@ -38,7 +42,8 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
         return refreshControl
     }()
     
-   
+    var isFromPastPayment: Bool = false
+    var paymentURL: String = ""
     
     //-------------------------------------------------------------
     // MARK: - Base Methods
@@ -151,10 +156,11 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
         } else {
             
             let dictData = aryData[indexPath.section - 1] as [String:AnyObject]
-            let expiryDate = (dictData["Expiry"] as! String).split(separator: "/")
-            let month = expiryDate.first
-            let year = expiryDate.last
-            cell.lblMonthExpiry.text = "\(String(describing: month!)) / \(String(describing: year!))"
+//            let expiryDate = (dictData["Expiry"] as! String).split(separator: "/")
+//            let month = expiryDate.first
+//            let year = expiryDate.last
+//            cell.lblMonthExpiry.text = "\(String(describing: month!)) / \(String(describing: year!))"
+            cell.lblMonthExpiry.text = ""
             
             cell.viewCards.layoutIfNeeded()
             cell.viewCards.dropShadowToCardView(color: .gray, opacity: 1, offSet: CGSize(width: -1, height: 1), radius: 5, scale: true)
@@ -219,6 +225,13 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
                 self.navigationController?.popViewController(animated: true)
             }
             
+            if self.delegateForSelectCardForBooking != nil {
+                self.delegateForSelectCardForBooking.didSelectCard(cardId: (self.aryData[indexPath.row]["Id"]as! String))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            
             if SingletonClass.sharedInstance.isFromTopUP {
                 delegateForTopUp.didSelectCard(dictData: selectedData)
                 SingletonClass.sharedInstance.isFromTopUP = false
@@ -228,6 +241,15 @@ class WalletCardsVC: BaseViewController, UITableViewDataSource, UITableViewDeleg
                 delegateForTransferToBank.didSelectBankCard(dictData: selectedData)
                 SingletonClass.sharedInstance.isFromTransferToBank = false
                 self.navigationController?.popViewController(animated: true)
+            }
+            
+            if(self.isFromPastPayment){
+                let next = mainStoryboard.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
+                next.strUrl = self.paymentURL + "/\(self.aryData[indexPath.row]["Id"] as? String ?? "")"
+                next.isFrompastPayment = true
+                self.navigationController?.pushViewController(next, animated: true)
+//                let navController = UINavigationController.init(rootViewController: next)
+//                UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
             }
         }
         

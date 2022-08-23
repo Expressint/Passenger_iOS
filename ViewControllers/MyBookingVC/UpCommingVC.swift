@@ -120,7 +120,12 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             
             cell.lblDateAndTime.text = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "CreatedDate") as? String
 //            cell.lblPaymentType.text = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "PaymentType") as? String
-  
+            
+            let dateAndTime = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "CreatedDate") as? String ?? ""
+            if(dateAndTime.contains(" ")){
+                let date = dateAndTime.components(separatedBy: " ")
+                cell.lblBookingDate.text = date[0]
+            }
             
             if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                 if SelectedLanguage == "en"
@@ -154,6 +159,13 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             }
             
             cell.lblPickupTime.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "PickupDateTime", isNotHave: notAvailable)
+            
+            let date = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "PickupDateTime", isNotHave: notAvailable)
+            if(date.contains(" ")){
+                let time = date.components(separatedBy: " ")
+                cell.lblProcessingDate.text = time[0]
+            }
+            
 //            cell.lblDistanceTravelled.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "TripDistance", isNotHave: notAvailable)
             
             cell.lblBookingId.text = "\("Booking Id :".localized) \(checkDictionaryHaveValue(dictData: currentData, didHaveValue: "Id", isNotHave: notAvailable))"

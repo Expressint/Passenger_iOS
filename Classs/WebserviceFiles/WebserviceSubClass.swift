@@ -12,9 +12,11 @@ import Alamofire
 let DriverLogin = WebserviceURLs.kDriverLogin
 let Registration =  WebserviceURLs.kDriverRegister
 let SocialLogin               = WebserviceURLs.kSocialLogin
+let AppleSocialLogin               = WebserviceURLs.kAppleSocialLogin
 let ForgotPassword =  WebserviceURLs.kForgotPassword
 let CarLists =  WebserviceURLs.kGetCarList
 let MakeBookingRequest = WebserviceURLs.kMakeBookingRequest
+let WaitingListRequest = WebserviceURLs.kWaitingListRequest
 let bookLater = WebserviceURLs.kAdvancedBooking
 let CheckPromocode = WebserviceURLs.kCheckPromocode
 let GetPromoCodeList = WebserviceURLs.kGetPromoCodeList
@@ -32,6 +34,7 @@ let bookPackage = WebserviceURLs.kBookPackage
 let packageHistory = WebserviceURLs.kPackageBookingHistory
 let CurrentBooking = WebserviceURLs.kCurrentBooking
 let AddNewCard = WebserviceURLs.kAddNewCard
+let ChatHistory = WebserviceURLs.kChatHistory
 let AddMoney = WebserviceURLs.kAddMoney
 let TransactionHistory = WebserviceURLs.kTransactionHistory
 let SendMoney = WebserviceURLs.kSendMoney
@@ -41,6 +44,8 @@ let Tickpay = WebserviceURLs.kTickpay
 let AddAddress = WebserviceURLs.kAddAddress
 let GetDriverETA = WebserviceURLs.kGetDriverETA
 let GetAddress = WebserviceURLs.kGetAddress
+let DeleteAccount1 = WebserviceURLs.kDeleteAccount1
+let EditAddress = WebserviceURLs.kEditAddress
 let RemoveAddress = WebserviceURLs.kRemoveAddress
 let VarifyUser = WebserviceURLs.kVarifyUser
 let TickpayInvoice = WebserviceURLs.kTickpayInvoice
@@ -66,10 +71,10 @@ let Help = WebserviceURLs.kHelp
 // MARK: - Webservice For Registration
 //-------------------------------------------------------------
 
-func webserviceForRegistrationForUser(_ dictParams: AnyObject, image1: UIImage, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+func webserviceForRegistrationForUser(_ dictParams: AnyObject, image1: UIImage, image2: UIImage, isRegister: Bool = false, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = Registration
-    sendImage(dictParams as! [String : AnyObject], image1: image1, nsURL: url, completion: completion)
+    sendImage(dictParams as! [String : AnyObject], image1: image1, image2: image2, isRegister: isRegister, nsURL: url, completion: completion)
     
 }
 
@@ -122,6 +127,16 @@ func webserviceForTaxiRequest(_ dictParams: AnyObject, completion: @escaping(_ r
 }
 
 //-------------------------------------------------------------
+// MARK: - Webservice For Waitin List
+//-------------------------------------------------------------
+
+func webserviceForWaitingListRequest(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = WaitingListRequest
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
 // MARK: - Webservice For Book Later
 //-------------------------------------------------------------
 
@@ -163,12 +178,23 @@ func webserviceForAllDriversList(completion: @escaping(_ result: AnyObject, _ su
 // MARK: - Webservice For Social Login
 //-------------------------------------------------------------
 
-func webserviceForSocialLogin(_ dictParams: AnyObject,image1: UIImage,showHUD : Bool, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+func webserviceForSocialLogin(_ dictParams: AnyObject,image1: UIImage, showHUD : Bool, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = SocialLogin
     //    postData(dictParams, nsURL: url, showHUD: showHUD, completion: completion)
     sendImage(dictParams as! [String : AnyObject], image1: image1, nsURL: url, completion: completion)
 }
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Apple Social Login
+//-------------------------------------------------------------
+
+func webserviceForAppleSocialLogin(_ dictParams: AnyObject,image1: UIImage,showHUD : Bool, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = AppleSocialLogin
+    sendImage(dictParams as! [String : AnyObject], image1: image1, nsURL: url, completion: completion)
+}
+
 //-------------------------------------------------------------
 // MARK: - Webservice For Booking History
 //-------------------------------------------------------------
@@ -244,10 +270,10 @@ func webserviceForChangePassword(_ dictParams: AnyObject, completion: @escaping(
 // MARK: - Webservice For Update Profile
 //-------------------------------------------------------------
 
-func webserviceForUpdateProfile(_ dictParams: AnyObject, image1: UIImage, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+func webserviceForUpdateProfile(_ dictParams: AnyObject, image1: UIImage, image2: UIImage, isRegister: Bool = false, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = UpdateProfile
-    sendImage(dictParams as! [String : AnyObject], image1: image1, nsURL: url, completion: completion)
+    sendImage(dictParams as! [String : AnyObject], image1: image1, image2: image2, isRegister: isRegister, nsURL: url, completion: completion)
 }
 
 //-------------------------------------------------------------
@@ -317,6 +343,16 @@ func webserviceForBookPackage(_ dictParams: AnyObject, completion: @escaping(_ r
 func webserviceForAddCards(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = AddNewCard
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Chat Histoy
+//-------------------------------------------------------------
+
+func webserviceForChatHistory(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = ChatHistory
     postData(dictParams, nsURL: url, completion: completion)
 }
 
@@ -409,6 +445,26 @@ func webserviceForGetAddress(_ dictParams: AnyObject, completion: @escaping(_ re
 {
     let url = "\(GetAddress)/\(dictParams)"
     getData("" as AnyObject, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Get Address
+//-------------------------------------------------------------
+
+func webserviceForDeleteAccount(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = "\(DeleteAccount1)/\(dictParams)"
+    getData("" as AnyObject, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Edit Address
+//-------------------------------------------------------------
+
+func webserviceForEditAddress(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = EditAddress
+    postData(dictParams, nsURL: url, completion: completion)
 }
 
 //-------------------------------------------------------------

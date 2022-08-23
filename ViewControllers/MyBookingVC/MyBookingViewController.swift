@@ -60,8 +60,10 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
             PastBooking()
         }
         
-        // Do any additional setup after loading the view.
+        
     }
+    
+
 
     @IBOutlet weak var lbltitile: UILabel!
     override func didReceiveMemoryWarning() {

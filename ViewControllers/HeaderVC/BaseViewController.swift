@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false,isSOSNeeded:Bool=false){
+    func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false,isSOSNeeded:Bool=false, isWhatsApp: Bool = false){
         //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.tintColor = UIColor.white;
@@ -27,6 +27,12 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        } else {
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
         
         if #available(iOS 15, *) {
             let appearance = UINavigationBarAppearance()
@@ -41,32 +47,83 @@ class BaseViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         }
         
+        var arrLleftButtons = [UIBarButtonItem]()
+        
         let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_menu"), style: .plain, target: self, action: #selector(self.OpenMenuAction))
         self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        arrLleftButtons.append(leftNavBarButton)
+        
+        if(isSOSNeeded)
+        {
+            let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            btnRight.setImage(UIImage.init(named: "iconSOS"), for: .normal)
+            btnRight.addTarget(self, action: #selector(HomeViewController.btnSOS(_:)), for: .touchUpInside)
+            let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            viewRight.addSubview(btnRight)
+            let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+            btnRightBar.style = .plain
+            
+            let viewRightDummy = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            let btnRightBarDummy: UIBarButtonItem = UIBarButtonItem.init(customView: viewRightDummy)
+            btnRightBarDummy.style = .plain
+            arrLleftButtons.append(btnRightBarDummy)
+            
+            arrLleftButtons.append(btnRightBar)
+        }
+        self.navigationItem.leftBarButtonItems = arrLleftButtons
         
         if IsNeedRightButton == true {
+            var arrButtons = [UIBarButtonItem]()
 //            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
             
             if(isFavNeeded)
             {
                 
-                let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
+//                let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
+//                self.navigationItem.rightBarButtonItems = [rightFavBarButton]
                 
-                self.navigationItem.rightBarButtonItems = [rightFavBarButton]
+                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                btnRight.setImage(UIImage.init(named: "iconFavourites"), for: .normal)
+                btnRight.addTarget(self, action: #selector(HomeViewController.btnFavourite(_:)), for: .touchUpInside)
+                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                viewRight.addSubview(btnRight)
+                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+                btnRightBar.style = .plain
+                arrButtons.append(btnRightBar)
                 
             }
-            if(isSOSNeeded)
-            {
-                let rightSOSBarButton = UIBarButtonItem(image: UIImage(named: "iconSOS"), style: .plain, target: self, action: #selector(HomeViewController.btnSOS(_:)))
-                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
-                
-            }
-//            else
+//            if(isSOSNeeded)
 //            {
-//                self.navigationItem.rightBarButtonItem = nil
-//                self.navigationItem.rightBarButtonItem = rightNavBarButton
+////                let rightSOSBarButton = UIBarButtonItem(image: UIImage(named: "iconSOS"), style: .plain, target: self, action: #selector(HomeViewController.btnSOS(_:)))
+////                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
+//
+//                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//                btnRight.setImage(UIImage.init(named: "iconSOS"), for: .normal)
+//                btnRight.addTarget(self, action: #selector(HomeViewController.btnSOS(_:)), for: .touchUpInside)
+//                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//                viewRight.addSubview(btnRight)
+//                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+//                btnRightBar.style = .plain
+//                arrButtons.append(btnRightBar)
 //            }
+            
+            if(isWhatsApp)
+            {
+//                let image = UIImage(named: "ic_whatsApp")?.withRenderingMode(.alwaysOriginal)
+//                let rightSOSBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(HomeViewController.btnWhatsApp(_:)))
+//                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
+                
+                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                btnRight.setImage(UIImage.init(named: "ic_whatsApp"), for: .normal)
+                btnRight.addTarget(self, action: #selector(HomeViewController.btnWhatsApp(_:)), for: .touchUpInside)
+                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                viewRight.addSubview(btnRight)
+                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+                btnRightBar.style = .plain
+                arrButtons.append(btnRightBar)
+            }
+            self.navigationItem.rightBarButtonItems = arrButtons
+
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }

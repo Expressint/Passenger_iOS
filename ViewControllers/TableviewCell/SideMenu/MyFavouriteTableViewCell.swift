@@ -25,6 +25,7 @@ class MyFavouriteTableViewCell: UITableViewCell {
     @IBOutlet weak var imgItem: UIImageView!
     
     @IBOutlet weak var lblItemTitle: UILabel!
+    @IBOutlet weak var lblItemName: UILabel!
     
     
 

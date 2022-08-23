@@ -176,7 +176,9 @@ class EditAccountViewController: BaseViewController {
                 
                 SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)
                 
-                 UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                 //UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                let data = NSKeyedArchiver.archivedData(withRootObject: SingletonClass.sharedInstance.dictProfile)
+                UserDefaults.standard.set(data, forKey: "profileData")
                     
 //                    (result as! NSDictionary).object(forKey: "profile") as! NSMutableDictionary
                 

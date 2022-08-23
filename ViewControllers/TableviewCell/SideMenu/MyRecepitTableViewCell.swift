@@ -34,6 +34,7 @@ class MyRecepitTableViewCell: UITableViewCell {
     
     @IBOutlet var lblDriversNames: UILabel!
     @IBOutlet weak var btnGetReceipt: ThemeButton!
+    @IBOutlet weak var btnViewReceipt: ThemeButton!
     
     @IBOutlet var lblTripFare: UILabel!
     @IBOutlet var lblBookingFee: UILabel!
@@ -76,4 +77,15 @@ class MyRecepitTableViewCell: UITableViewCell {
     @IBOutlet weak var lblVehicleTypeTitle: UILabel!
     @IBOutlet weak var lblDropOffTimeTitle: UILabel!
     @IBOutlet var lblTripStatus: UILabel!
+    
+    @IBOutlet weak var stackViewReceipt: UIStackView!
+    
+    var btnViewTap : (()->())?
+    
+    @IBAction func btnViewReceiptAction(_ sender: Any) {
+        if let obj = self.btnViewTap{
+            obj()
+        }
+    }
+    
 }

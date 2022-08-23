@@ -30,7 +30,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
         pickerController = UIPickerView()
         pickerController?.delegate = self
         pickerController?.dataSource = self
-        txtDescription?.isHidden = true
+        //txtDescription?.isHidden = true
         txtDescription?.delegate = self
         txtReasons?.inputView = pickerController
         txtReasons?.delegate = self
@@ -123,7 +123,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
     //MARK: - Textview Methods
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        txtDescription?.isHidden = true
+       // txtDescription?.isHidden = true
         if(txtReasons?.text?.lowercased() == "other")
         {
             if(textView == txtDescription)
@@ -133,13 +133,17 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
                     textView.textColor = UIColor.lightGray
                 }
             }
-            txtDescription?.isHidden = false
+            //txtDescription?.isHidden = false
+        }
+        
+        if textView.text.isEmpty {
+            textView.text = placeHolder
+            textView.textColor = UIColor.lightGray
         }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if(textView == txtDescription)
-        {
+        if(textView == txtDescription) {
             if textView.textColor == UIColor.lightGray {
                 textView.text = nil
                 textView.textColor = UIColor.black

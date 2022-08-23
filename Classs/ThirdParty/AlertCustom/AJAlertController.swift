@@ -18,6 +18,7 @@ class AJAlertController: UIViewController {
     private var strAlertText = String()
     private var btnCancelTitle:String?
     private var btnOtherTitle:String?
+    private var showStack: Bool = true
     
     private let btnOtherColor  = UIColor.black//UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     private let btnCancelColor = UIColor.black//UIColor(red: 255.0/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
@@ -33,7 +34,11 @@ class AJAlertController: UIViewController {
     @IBOutlet var btnOther: UIButton!
     @IBOutlet var btnOK: UIButton!
     @IBOutlet var viewAlertBtns: UIView!
-   // @IBOutlet var alertWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var stackBtns: UIStackView!
+    @IBOutlet weak var btnCall: UIButton!
+    @IBOutlet weak var btnMsg: UIButton!
+    // @IBOutlet var alertWidthConstraint: NSLayoutConstraint!
     
     /// AlertController Completion handler
     typealias alertCompletionBlock = ((Int, String) -> Void)?
@@ -56,6 +61,11 @@ class AJAlertController: UIViewController {
         super.viewDidLoad()
         btnOK.setTitle("OK".localized, for: .normal)
         setupAJAlertController()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       
     }
     
     // MARK:- AJAlertController Private Functions
@@ -87,9 +97,10 @@ class AJAlertController: UIViewController {
 //        btnOK.backgroundColor = themeButtonColor
        
         btnOther.backgroundColor = themeAppMainColor
-               btnCancel.backgroundColor = themeAppMainColor
-                btnOK.backgroundColor = themeAppMainColor
+        btnCancel.backgroundColor = themeAppMainColor
+        btnOK.backgroundColor = themeAppMainColor
         
+        stackBtns.isHidden = showStack
         lblTitle.text = strAlertTitle
         lblAlertText?.text = strAlertText
         
@@ -132,18 +143,16 @@ class AJAlertController: UIViewController {
         
         case .mac: break
         }
-        
-        
-        
     }
     
     /// Create and Configure Alert Controller
-    private func configure(title: String, message:String, btnCancelTitle:String?, btnOtherTitle:String?)
+    private func configure(title: String, message:String, btnCancelTitle:String?, btnOtherTitle:String?, showStack: Bool = false)
     {
         self.strAlertTitle = title
         self.strAlertText = message
         self.btnCancelTitle = btnCancelTitle
         self.btnOtherTitle = btnOtherTitle
+        self.showStack = showStack
     }
     
     /// Show Alert Controller
@@ -203,6 +212,34 @@ class AJAlertController: UIViewController {
     // MARK:- UIButton Clicks
     // MARK:-
     
+    @IBAction func btnCallAcion(_ sender: Any) {
+        hide()
+        let contactNumber = helpLineNumber //strPassengerMobileNumber
+        if contactNumber == "" {
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
+            }
+        }
+        else {
+            callNumber(phoneNumber: contactNumber)
+        }
+    }
+    
+    private func callNumber(phoneNumber:String) {
+        
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+            
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    @IBAction func btnMsgAction(_ sender: Any) {
+        hide()
+        NotificationCenter.default.post(name: openChatForDispatcher1, object: nil)
+    }
+    
     @IBAction func btnCancelTapped(sender: UIButton) {
         block!!(0,btnCancelTitle!)
         hide()
@@ -228,7 +265,7 @@ class AJAlertController: UIViewController {
     /// Hide Alert Controller on background tap
     @objc func backgroundViewTapped(sender:AnyObject)
     {
-        hide()
+       // hide()
     }
 
     // MARK:- AJAlert Functions
@@ -261,9 +298,9 @@ class AJAlertController: UIViewController {
      - parameter completion:  Completion block. OK Button Index - 0
      */
     
-    public func showAlertWithOkButton( aStrTitle:String, aStrMessage:String,
+    public func showAlertWithOkButton( aStrTitle:String, aStrMessage:String,showStack:Bool = true,
                                 completion : alertCompletionBlock){
-        configure(title: aStrTitle, message: aStrMessage, btnCancelTitle: nil, btnOtherTitle: nil)
+        configure(title: aStrTitle, message: aStrMessage, btnCancelTitle: nil, btnOtherTitle: nil, showStack: showStack)
         show()
         block = completion
     }

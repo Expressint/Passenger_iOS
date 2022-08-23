@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -14,11 +14,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AJAlertController" customModule="Book_A_Ride" customModuleProvider="target">
             <connections>
+                <outlet property="btnCall" destination="iS6-Wc-4Lh" id="QCa-31-2P9"/>
                 <outlet property="btnCancel" destination="WKU-D5-GZU" id="faX-Wj-wBr"/>
+                <outlet property="btnMsg" destination="8qG-Kh-FeI" id="P85-rR-JBE"/>
                 <outlet property="btnOK" destination="38z-3l-aEb" id="XHF-7B-Rvl"/>
                 <outlet property="btnOther" destination="i9M-DL-0zE" id="ftI-Vr-1bY"/>
                 <outlet property="lblAlertText" destination="5ev-HP-eeU" id="pRy-Da-hSD"/>
                 <outlet property="lblTitle" destination="NVl-QY-5fD" id="Hyy-oW-Y1j"/>
+                <outlet property="stackBtns" destination="Gez-Xb-0zd" id="fQ2-cT-A7p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="ikd-YM-sSy"/>
                 <outlet property="viewAlert" destination="w8D-FK-Asz" id="K7F-ss-Awr"/>
                 <outlet property="viewSubAlert" destination="eAQ-ue-k9S" id="syz-gt-ZrV"/>
@@ -30,13 +33,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8D-FK-Asz">
-                    <rect key="frame" x="0.0" y="202.5" width="375" height="262"/>
+                    <rect key="frame" x="0.0" y="200" width="375" height="267"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAQ-ue-k9S">
-                            <rect key="frame" x="20" y="55" width="335" height="207"/>
+                            <rect key="frame" x="20" y="55" width="335" height="212"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jp7-n5-A8M">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="101"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="106"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="5wF-Zf-br4">
@@ -48,16 +51,37 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booking Confirmed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVl-QY-5fD">
-                                    <rect key="frame" x="0.0" y="66" width="335" height="35"/>
+                                    <rect key="frame" x="0.0" y="66" width="335" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="LuE-Y2-ugk"/>
+                                        <constraint firstAttribute="height" constant="40" id="LuE-Y2-ugk"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Gez-Xb-0zd">
+                                    <rect key="frame" x="111.5" y="71" width="112.5" height="35"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Kh-FeI">
+                                            <rect key="frame" x="0.0" y="0.0" width="36" height="35"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="ic_RedChat"/>
+                                            <connections>
+                                                <action selector="btnMsgAction:" destination="-1" eventType="touchUpInside" id="Cjv-hN-0hf"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-Wc-4Lh">
+                                            <rect key="frame" x="76" y="0.0" width="36.5" height="35"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="iconCallSmall"/>
+                                            <connections>
+                                                <action selector="btnCallAcion:" destination="-1" eventType="touchUpInside" id="1yy-mO-4kn"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41D-ZN-yew">
-                                    <rect key="frame" x="0.0" y="101" width="335" height="59"/>
+                                    <rect key="frame" x="0.0" y="106" width="335" height="59"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Booking has been Confirmed " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-HP-eeU">
                                             <rect key="frame" x="15" y="20" width="305" height="19"/>
@@ -76,7 +100,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFs-lu-ddj">
-                                    <rect key="frame" x="0.0" y="160" width="335" height="47"/>
+                                    <rect key="frame" x="0.0" y="165" width="335" height="47"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kW2-v4-KFD">
                                             <rect key="frame" x="0.0" y="0.0" width="335" height="47"/>
@@ -146,8 +170,10 @@
                                 <constraint firstItem="iFs-lu-ddj" firstAttribute="leading" secondItem="eAQ-ue-k9S" secondAttribute="leading" id="M5j-Kl-tta"/>
                                 <constraint firstItem="5wF-Zf-br4" firstAttribute="leading" secondItem="eAQ-ue-k9S" secondAttribute="leading" constant="55" id="PWJ-it-kOc"/>
                                 <constraint firstItem="41D-ZN-yew" firstAttribute="top" secondItem="NVl-QY-5fD" secondAttribute="bottom" id="RMc-ux-yKB"/>
+                                <constraint firstItem="Gez-Xb-0zd" firstAttribute="bottom" secondItem="NVl-QY-5fD" secondAttribute="bottom" id="Xg9-6k-8Bp"/>
                                 <constraint firstAttribute="trailing" secondItem="5wF-Zf-br4" secondAttribute="trailing" constant="55" id="ai7-IO-7QJ"/>
                                 <constraint firstItem="NVl-QY-5fD" firstAttribute="leading" secondItem="eAQ-ue-k9S" secondAttribute="leading" id="blp-ba-ir5"/>
+                                <constraint firstItem="Gez-Xb-0zd" firstAttribute="top" secondItem="NVl-QY-5fD" secondAttribute="top" constant="5" id="cIV-wm-KWe"/>
                                 <constraint firstAttribute="trailing" secondItem="jp7-n5-A8M" secondAttribute="trailing" id="eTh-Rf-na6"/>
                                 <constraint firstItem="iFs-lu-ddj" firstAttribute="top" secondItem="41D-ZN-yew" secondAttribute="bottom" id="gos-n2-gR6"/>
                                 <constraint firstAttribute="trailing" secondItem="41D-ZN-yew" secondAttribute="trailing" id="h41-3w-OSc"/>
@@ -158,7 +184,7 @@
                                 <constraint firstItem="jp7-n5-A8M" firstAttribute="top" secondItem="eAQ-ue-k9S" secondAttribute="top" id="zs4-aG-TyZ"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-xN-eIP">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-xN-eIP">
                             <rect key="frame" x="167.5" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="QgQ-Dq-yqS"/>
@@ -175,6 +201,8 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="eAQ-ue-k9S" firstAttribute="centerX" secondItem="w8D-FK-Asz" secondAttribute="centerX" id="708-Bj-SEl"/>
+                        <constraint firstItem="Gez-Xb-0zd" firstAttribute="width" secondItem="w8D-FK-Asz" secondAttribute="width" multiplier="0.3" id="7Ar-zd-3Y3"/>
+                        <constraint firstItem="Gez-Xb-0zd" firstAttribute="centerX" secondItem="w8D-FK-Asz" secondAttribute="centerX" id="CqW-pM-gWM"/>
                         <constraint firstAttribute="trailing" secondItem="eAQ-ue-k9S" secondAttribute="trailing" constant="20" id="EhU-jO-pBJ"/>
                         <constraint firstItem="eAQ-ue-k9S" firstAttribute="centerY" secondItem="w8D-FK-Asz" secondAttribute="centerY" constant="27.5" id="Mu2-E1-kdO"/>
                         <constraint firstItem="eAQ-ue-k9S" firstAttribute="leading" secondItem="w8D-FK-Asz" secondAttribute="leading" constant="20" id="VFe-m1-qgA"/>
@@ -195,6 +223,8 @@
         </view>
     </objects>
     <resources>
+        <image name="ic_RedChat" width="75" height="75"/>
+        <image name="iconCallSmall" width="26" height="26"/>
         <image name="iconCloseAlert" width="40" height="40"/>
         <image name="logo" width="277" height="86"/>
     </resources>

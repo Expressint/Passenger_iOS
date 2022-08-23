@@ -9,6 +9,9 @@
 import UIKit
 import MarqueeLabel
 class PastBooingTableViewCell: UITableViewCell {
+    
+    var btnFavTap : (()->())?
+    var btnPickFavTap : (()->())?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +42,14 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblLessTitle: UILabel!
     @IBOutlet weak var lblWaitingTimeTitle: UILabel!
     @IBOutlet weak var lblCancelReasonTitle: UILabel!
-
+    
+    @IBOutlet weak var lblBookingDate: UILabel!
+    @IBOutlet weak var lblProcessingDate: UILabel!
+    @IBOutlet weak var lblAuthorizationNumber: UILabel!
+    @IBOutlet weak var lblDistance: UILabel!
+    @IBOutlet weak var lblSubTotal: UILabel!
+    @IBOutlet weak var lblDiscount: UILabel!
+    @IBOutlet weak var lblTax: UILabel!
     
     @IBOutlet weak var viewDetails: UIView!
     @IBOutlet weak var lblDriverName: UILabel!
@@ -97,4 +107,17 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var stackViewTotalCost: UIStackView!
   
     @IBOutlet weak var btnPaymentOrReceipt: ThemeButton!
+    
+    @IBAction func btnFavDropLoc(_ sender: Any) {
+        if let obj = self.btnFavTap{
+            obj()
+        }
+    }
+    
+    @IBAction func btnFavPickLoc(_ sender: Any) {
+        if let obj = self.btnPickFavTap{
+            obj()
+        }
+    }
+    
 }

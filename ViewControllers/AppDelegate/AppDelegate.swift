@@ -29,12 +29,24 @@ let googlPlacesApiKey = googlApiKey
 let kGoogle_Client_ID : String = "968991622520-rrcn1f67kn2pai5gr526sfo6nthlaq44.apps.googleusercontent.com" //"1048315388776-2f8m0mndip79ae6jem9doe0uq0k25i7b.apps.googleusercontent.com"//"787787696945-nllfi2i6j9ts7m28immgteuo897u9vrl.apps.googleusercontent.com"
 let kDeviceType : String = "1"
 
+
 //AIzaSyBBQGfB0ca6oApMpqqemhx8-UV-gFls_Zk
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     var isAlreadyLaunched : Bool?
+    var isSocialLogin : Bool = false
+    
+    var isChatVisible: Bool = false
+    var currentChatID: String = ""
+    static var pushNotificationObj : NotificationObjectModel?
+    static var pushNotificationType : String?
+    
+    static var current: AppDelegate? {
+        UIApplication.shared.delegate as? AppDelegate
+    }
+    
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!)
     {
         
@@ -54,7 +66,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 
         // Set Stored Language from Local Database
         socket = manager.defaultSocket
-
+        
+        UserDefaults.standard.set(false, forKey: kIsUpdateAvailable)
+        UserDefaults.standard.synchronize()
+        
         if UserDefaults.standard.value(forKey: "i18n_language") == nil {
             UserDefaults.standard.set("en", forKey: "i18n_language")
             UserDefaults.standard.synchronize()
@@ -95,10 +110,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         SideMenuController.preferences.animating.statusBarBehaviour = .showUnderlay
         
         // ------------------------------------------------------------
-        
-        if ((UserDefaults.standard.object(forKey: "profileData")) != nil)
+        if ((UserDefaults.standard.data(forKey: "profileData")) != nil)
         {
-            SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: UserDefaults.standard.object(forKey: "profileData") as! NSDictionary)
+            let outData = UserDefaults.standard.data(forKey: "profileData")
+            let dict = NSKeyedUnarchiver.unarchiveObject(with: outData!) as! NSMutableDictionary
+            SingletonClass.sharedInstance.dictProfile = dict
             SingletonClass.sharedInstance.strPassengerID = String(describing: SingletonClass.sharedInstance.dictProfile.object(forKey: "Id")!)
 //            SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array:  UserDefaults.standard.object(forKey: "carLists") as! NSArray)
             SingletonClass.sharedInstance.isUserLoggedIN = true
@@ -238,6 +254,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if ((UIApplication.topViewController()?.isKind(of: LoginViewController.self) ?? false)) {
+            if UserDefaults.standard.bool(forKey: kIsUpdateAvailable) == true {
+                print("Update app...")
+                if !UIApplication.topViewController()!.isKind(of: UIAlertController.self) {
+                    
+                    let alert = UIAlertController(title: "App Name".localized, message: UserDefaults.standard.string(forKey: kIsUpdateMessage) ?? "", preferredStyle: .alert)
+                    let UPDATE = UIAlertAction(title: "Update".localized, style: .default, handler: { ACTION in
+                        UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
+
+                        })
+                    })
+                    let Cancel = UIAlertAction(title: "Register".localized, style: .default, handler: { ACTION in
+                        NotificationCenter.default.post(name: Notification.Name("goToRegister"), object: nil, userInfo: nil)
+                    })
+                    alert.addAction(UPDATE)
+                    alert.addAction(Cancel)
+                    self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -285,58 +321,105 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         let key = (userInfo as NSDictionary).object(forKey: "gcm.notification.type") ?? ""
-        
-        if(application.applicationState == .background)
-        {
-            self.pushAfterReceiveNotification(typeKey: key as! String)
+        if(application.applicationState == .background){
+            self.pushAfterReceiveNotification(typeKey: key as? String ?? "")
         }
-        
-        
-        
-        // Let FCM know about the message for analytics etc.
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        // handle your message
-        
-        // Print message ID.
-        //        if let messageID = userInfo[gcmMessageIDKey] {
-        //            print("Message ID: \(messageID)")
-        //        }
-        
-        // Print full message.
         print(userInfo)
-       
+        
         completionHandler(UIBackgroundFetchResult.newData)
         
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue:"NotificationBadges"), object: notification.request.content)
-        completionHandler([.alert, .sound])
-        
+        print(#function, notification)
+        let content = notification.request.content
+        let userInfo = notification.request.content.userInfo
+  
+        if let mainDic = userInfo as? [String: Any]{
+            
+            let pushObj = NotificationObjectModel()
+            if let bookingId = mainDic["gcm.notification.booking_id"]{
+                pushObj.booking_id = bookingId as? String ?? ""
+            }
+            if let sender = mainDic["gcm.notification.sender_id"]{
+                pushObj.sender_id = sender as? String ?? ""
+            }
+            if let type = mainDic["gcm.notification.type"]{
+                pushObj.type = type as? String ?? ""
+            }
+            if let title = mainDic["title"]{
+                pushObj.title = title as? String ?? ""
+            }
+            if let text = mainDic["text"]{
+                pushObj.text = text as? String ?? ""
+            }
+            
+            AppDelegate.pushNotificationObj = pushObj
+            AppDelegate.pushNotificationType = pushObj.type
+            
+            if pushObj.type == NotificationTypes.newMeassage.rawValue {
+                do {
+                    if(isChatVisible){
+                        let currentID = mainDic["gcm.notification.sender_id"] as? String ?? ""
+                        if(currentID == AppDelegate.current?.currentChatID){
+                            completionHandler([])
+                        }
+                    }
+                }catch{
+                    print("Error : detected")
+                }
+            }
+            
+            if pushObj.type == NotificationTypes.logout.rawValue {
+                
+            }
+            
+        completionHandler([.alert,.sound])
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void) {
-        print(#function)
+        
+        let userInfo = response.notification.request.content.userInfo
+        print("USER INFo : ",userInfo)
+        
+        if let mainDic = userInfo as? [String: Any]{
+            
+            let pushObj = NotificationObjectModel()
+            if let bookingId = mainDic["gcm.notification.id"]{
+                pushObj.booking_id = bookingId as? String ?? ""
+            }
+            if let sender = mainDic["gcm.notification.sender_id"]{
+                pushObj.sender_id = sender as? String ?? ""
+            }
+            if let type = mainDic["gcm.notification.type"]{
+                pushObj.type = type as? String ?? ""
+            }
+            if let title = mainDic["title"]{
+                pushObj.title = title as? String ?? ""
+            }
+            if let text = mainDic["text"]{
+                pushObj.text = text as? String ?? ""
+            }
+            
+            AppDelegate.pushNotificationObj = pushObj
+            AppDelegate.pushNotificationType = pushObj.type
+          
+            if pushObj.type == NotificationTypes.newMeassage.rawValue {
+                if(!isChatVisible){
+                    NotificationCenter.default.post(name: GoToChatScreen, object: nil)
+                }else{
+                    var DataDict: [String: AnyObject] = [:]
+                    DataDict["booking_id"] = mainDic["gcm.notification.id"] as AnyObject
+                    DataDict["receiver_Id"] = mainDic["gcm.notification.sender_id"] as AnyObject
+                    let isDispacherChat = ("\(mainDic["gcm.notification.id"] as AnyObject)" == "" || "\(mainDic["gcm.notification.id"] as AnyObject)" == "0") ? true : false
+                    DataDict["isDispacherChat"] = isDispacherChat as AnyObject
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReloadChatScreen"), object: nil, userInfo: DataDict)
+                }
+            }
+        }
+        
         completionHandler()
-        /*
-         // 1
-         let userInfo = response.notification.request.content.userInfo
-         let aps = userInfo["aps"] as! [String:AnyObject]
-         
-         // 2
-         if let newsItem = NewsItem.makeNewsItems(aps) {
-         (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
-         
-         // 3
-         if response.actionIdentifier == "viewActionIdentifier",
-         let url = URL(string: newsItem.link) {
-         let safari = SFSafariViewController(url: url)
-         window?.rootViewController?.present(safari, animated: true, completion: nil)
-         }
-         }
-         // 4
-        
-         */
-        
     }
     
     //-------------------------------------------------------------
@@ -599,3 +682,17 @@ extension String {
 }
 
 //i18n_language = sw
+
+class NotificationObjectModel: Codable {
+    var booking_id: String?
+    var sender_id: String?
+    var type: String?
+    var title: String?
+    var text: String?
+}
+
+enum NotificationTypes : String {
+    case newMeassage = "Chat"
+    case logout = "logout"
+    
+}

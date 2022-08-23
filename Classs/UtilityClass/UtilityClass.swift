@@ -224,7 +224,7 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
     }
     typealias alertCompletionBlockAJ = ((Int, String) -> Void)?
     
-    class func setCustomAlert(title: String, message: String,completionHandler: alertCompletionBlockAJ) -> Void {
+    class func setCustomAlert(title: String, message: String, showStack: Bool = true,completionHandler: alertCompletionBlockAJ) -> Void {
         
         if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window, let rootViewController = window?.rootViewController {
             
@@ -237,7 +237,7 @@ class UtilityClass: NSObject, alertViewMethodsDelegates {
         }
 
        
-        AJAlertController.initialization().showAlertWithOkButton(aStrTitle: appName, aStrMessage: message) { (index,title) in
+        AJAlertController.initialization().showAlertWithOkButton(aStrTitle: appName, aStrMessage: message, showStack: showStack) { (index,title) in
             
             if index == 0 {
                 completionHandler?(0,title)

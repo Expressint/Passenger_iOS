@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleMaps
+import CoreLocation
+import GooglePlaces
 
 
 class FavoriteViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
@@ -20,9 +23,12 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         }
     }
     var delegateForFavourite: FavouriteLocationDelegate!
+    var editAddressID: String = ""
+    var editAddressType: String = ""
     
     @IBOutlet weak var lblSwipeRightToLeftForRemoveAddress: UILabel!
-
+    @IBOutlet weak var btnAddnew: UIButton!
+    
     //-------------------------------------------------------------
     // MARK: - Base Methods
     //-------------------------------------------------------------
@@ -34,7 +40,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: ReloadFavLocations, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +52,10 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         
     }
     
+    @objc func reloadData() {
+        webserviceOfGetAddress()
+    }
+    
     
     func setLocalization()
     {
@@ -55,12 +65,29 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
             lblSwipeRightToLeftForRemoveAddress.text = "Please Swipe Right To Left for remove address.".localized
         }
     }
+    
+    func editLocation(){
+ 
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+    
+        let filter = GMSAutocompleteFilter()
+//        filter.country = "GY"
+        if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
+        {
+//            filter.country = "IN"
+        }
+        acController.autocompleteFilter = filter
+
+        
+        present(acController, animated: true, completion: nil)
+    }
+    
     //-------------------------------------------------------------
     // MARK: - Outlets
     //-------------------------------------------------------------
     
     @IBOutlet weak var tableView: UITableView!
-    
 
     //-------------------------------------------------------------
     // MARK: - Custom Methods
@@ -70,9 +97,14 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         
         self.labelNoData = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.labelNoData.text = "No Favourite Location Found!"
-        self.labelNoData.textAlignment = .center
+//        self.labelNoData.textAlignment = .center
         self.view.addSubview(self.labelNoData)
         
+    }
+    
+    @IBAction func btnAddNewAction(_ sender: Any) {
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+        self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     //-------------------------------------------------------------
@@ -96,10 +128,20 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         cell.selectionStyle = .none
         if let address = dataDict["Address"] as? String {
             cell.lblItemTitle.text = address
-
         }
-        if let iconType = dataDict["Type"] as? String {
-            cell.imgItem.image = UIImage(named: setIconType(str: iconType))
+        
+        if let Type = dataDict["Type"] as? String {
+            cell.lblItemName.text = Type
+        }
+        
+        if(dataDict["Type"]?.description.lowercased().contains("home") ?? false){
+            cell.imgItem.image = UIImage(named: setIconType(str: "Home"))
+        }else if(dataDict["Type"]?.description.lowercased().contains("office") ?? false){
+            cell.imgItem.image = UIImage(named: setIconType(str: "Office"))
+        }else if(dataDict["Type"]?.description.lowercased().contains("airport") ?? false){
+            cell.imgItem.image = UIImage(named: setIconType(str: "Airport"))
+        }else{
+            cell.imgItem.image = UIImage(named: setIconType(str: "Others"))
         }
         
         return cell
@@ -127,33 +169,70 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         return 70
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        let selectedData = aryAddress[indexPath.row]
-        
-        if editingStyle == .delete {
-            
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        let selectedData = aryAddress[indexPath.row]
+//
+//
+//
+//        if editingStyle == .delete {
+//
+//            if let selectedID = selectedData["Id"] as? String {
+//
+//                tableView.beginUpdates()
+//                aryAddress.remove(at: indexPath.row)
+//                webserviceOfDeleteAddress(addressID: selectedID)
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//                tableView.endUpdates()
+//
+//                if aryAddress.count == 0 {
+////                    let dict = [String:AnyObject]()
+////                    dict["Address"] = selectedData["Address"]
+////                    dict["Lat"] = selectedData[""]
+////                    dict["Lng"] = selectedData[""]
+//                    delegateForFavourite?.didEnterFavouriteDestination(Source: selectedData)
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        }
+//
+//    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
+            self.editAddressID = self.aryAddress[indexPath.row]["Id"] as? String ?? ""
+            self.editAddressType = self.aryAddress[indexPath.row]["Type"] as? String ?? ""
+            self.editLocation()
+        })
+
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+            print("Delete")
+            let selectedData = self.aryAddress[indexPath.row]
             if let selectedID = selectedData["Id"] as? String {
-            
+
                 tableView.beginUpdates()
-                aryAddress.remove(at: indexPath.row)
-                webserviceOfDeleteAddress(addressID: selectedID)
+                self.aryAddress.remove(at: indexPath.row)
+                self.webserviceOfDeleteAddress(addressID: selectedID)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.endUpdates()
-                
-                if aryAddress.count == 0 {
+
+                if self.aryAddress.count == 0 {
 //                    let dict = [String:AnyObject]()
 //                    dict["Address"] = selectedData["Address"]
 //                    dict["Lat"] = selectedData[""]
 //                    dict["Lng"] = selectedData[""]
-                    delegateForFavourite?.didEnterFavouriteDestination(Source: selectedData)
+                    self.delegateForFavourite?.didEnterFavouriteDestination(Source: selectedData)
                     self.navigationController?.popViewController(animated: true)
                 }
             }
-        }
-        
+        })
+
+        return [deleteAction, editAction]
     }
-    
     //-------------------------------------------------------------
     // MARK: - Custom Methods
     //-------------------------------------------------------------
@@ -269,6 +348,39 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
             
         }
     }
+    
+    func webserviceOfEditAddress(Lat: String, Lng: String, Address: String) {
+        
+        let dictParams = NSMutableDictionary()
+        dictParams.setObject(SingletonClass.sharedInstance.strPassengerID, forKey: "PassengerId" as NSCopying)
+        dictParams.setObject(self.editAddressType, forKey: "Type" as NSCopying)
+        dictParams.setObject(self.editAddressID, forKey: "Id" as NSCopying)
+        dictParams.setObject(Lat, forKey: "Lat" as NSCopying)
+        dictParams.setObject(Lng, forKey: "Lng" as NSCopying)
+        dictParams.setObject(Address, forKey: "Address" as NSCopying)
+        
+        webserviceForEditAddress(dictParams) { (result, status) in
+            
+            if (status) {
+                self.webserviceOfGetAddress()
+            }
+            else {
+                print(result)
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    }
+                }
+            }
+        }
+    }
 
 }
 //{
@@ -293,3 +405,26 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
 //    ]
 //}
 
+
+extension FavoriteViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        let Address = place.formattedAddress ?? "-"
+        print(Address)
+        self.webserviceOfEditAddress(Lat: "\(place.coordinate.latitude)", Lng: "\(place.coordinate.longitude)", Address: Address)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}

@@ -107,5 +107,10 @@ class SingletonClass: NSObject {
     
     var strSocialEmail = String()
     var strSocialFullName = String()
-    var strSocialImage = String()
+    var strSocialFirstName = ""
+    var strSocialLastName = ""
+    var strSocialImage = ""
+    var strAppleId = ""
+    
+    
 }

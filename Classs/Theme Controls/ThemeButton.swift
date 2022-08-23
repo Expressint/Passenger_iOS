@@ -12,11 +12,12 @@ class ThemeButton: UIButton {
 
     @IBInspectable public var isSubmitButton: Bool = false
     @IBInspectable public var NoNeedBackground: Bool = false
+    @IBInspectable public var FontSize: CGFloat = 15.0
     
     override func awakeFromNib() {
 //        self.titleLabel?.font = UIFont.bold(ofSize: 15.0)
         //self.layer.cornerRadius = 3.0
-                self.titleLabel?.font = UIFont.regular(ofSize: 15.0)
+        self.titleLabel?.font = UIFont.regular(ofSize: FontSize)
         self.layer.cornerRadius = self.frame.height/2
         self.layer.masksToBounds = true
 

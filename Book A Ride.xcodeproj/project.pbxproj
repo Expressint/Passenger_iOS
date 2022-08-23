@@ -419,6 +419,13 @@
 		5480321327A2DB3900ECD2BD /* CancelAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5480321127A2DB3800ECD2BD /* CancelAlertViewController.xib */; };
 		6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */; };
 		6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */; };
+		888B650F28892CA10006C669 /* AboutUsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888B650E28892CA10006C669 /* AboutUsVC.swift */; };
+		88948DBD2887E94D00090AC0 /* AddFavLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88948DBC2887E94D00090AC0 /* AddFavLocationVC.swift */; };
+		88BBE20028913EBA0024F935 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BBE1FF28913EBA0024F935 /* ChatVC.swift */; };
+		88BBE20528913F050024F935 /* ReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BBE20328913F050024F935 /* ReceiverCell.swift */; };
+		88BBE20628913F050024F935 /* ReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88BBE20428913F050024F935 /* ReceiverCell.xib */; };
+		88BBE20A28913F120024F935 /* SenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88BBE20828913F120024F935 /* SenderCell.xib */; };
+		88BBE20B28913F120024F935 /* SenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BBE20928913F120024F935 /* SenderCell.swift */; };
 		AD01829F2652420900595BAB /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD01829E2652420900595BAB /* BookingScreen.storyboard */; };
 		E8C9D082B65507939DF95E79 /* Pods_Book_A_Ride.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B15DD6CDE343A0B29EC2A6 /* Pods_Book_A_Ride.framework */; };
 /* End PBXBuildFile section */
@@ -858,6 +865,13 @@
 		5C887A7607BF7D1623FC535A /* Pods-TanTaxi User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TanTaxi User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TanTaxi User/Pods-TanTaxi User.release.xcconfig"; sourceTree = "<group>"; };
 		6A34BF5224BD901A0084F466 /* PreviousDueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueTableViewCell.swift; sourceTree = "<group>"; };
 		6A34BF5324BD901A0084F466 /* PreviousDueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousDueViewController.swift; sourceTree = "<group>"; };
+		888B650E28892CA10006C669 /* AboutUsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsVC.swift; sourceTree = "<group>"; };
+		88948DBC2887E94D00090AC0 /* AddFavLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavLocationVC.swift; sourceTree = "<group>"; };
+		88BBE1FF28913EBA0024F935 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		88BBE20328913F050024F935 /* ReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiverCell.swift; sourceTree = "<group>"; };
+		88BBE20428913F050024F935 /* ReceiverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceiverCell.xib; sourceTree = "<group>"; };
+		88BBE20828913F120024F935 /* SenderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SenderCell.xib; sourceTree = "<group>"; };
+		88BBE20928913F120024F935 /* SenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderCell.swift; sourceTree = "<group>"; };
 		8AB9D1AFC2E46418F626C956 /* Pods-TickTok User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TickTok User.release.xcconfig"; path = "Pods/Target Support Files/Pods-TickTok User/Pods-TickTok User.release.xcconfig"; sourceTree = "<group>"; };
 		AD01829E2652420900595BAB /* BookingScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BookingScreen.storyboard; sourceTree = "<group>"; };
 		AF52F47D5C41A2336F5A8C8E /* Pods-AllOut.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllOut.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AllOut/Pods-AllOut.debug.xcconfig"; sourceTree = "<group>"; };
@@ -977,7 +991,8 @@
 		3A4072DC21B512270015C494 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6A34BF5124BD901A0084F466 /* Previous Due */,
+				88BBE1FE28913E8B0024F935 /* Chat */,
+				888B650D28892C890006C669 /* AboutUs */,
 				18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */,
 				347A9FD82608C73900065C29 /* SelectDriverViewController.swift */,
 				3A84BC9C21C264E800EDA3A2 /* MyRatingViewController */,
@@ -1091,6 +1106,7 @@
 		3A40730621B512270015C494 /* SideMenuVC */ = {
 			isa = PBXGroup;
 			children = (
+				88948DBB2887E92C00090AC0 /* Add Fav Location */,
 				3A40730721B512270015C494 /* BarsAndClubsViewController.swift */,
 				3A40730821B512270015C494 /* BookTableSelectedDataViewController.swift */,
 				3A40730921B512270015C494 /* BookTableViewController.swift */,
@@ -1213,6 +1229,7 @@
 		3A40734421B512280015C494 /* Classs */ = {
 			isa = PBXGroup;
 			children = (
+				6A34BF5124BD901A0084F466 /* Previous Due */,
 				3A40734521B512280015C494 /* Extensions */,
 				3A40734721B512280015C494 /* Theme Controls */,
 				3A40734A21B512280015C494 /* ThirdParty */,
@@ -1694,6 +1711,58 @@
 			path = "Previous Due";
 			sourceTree = "<group>";
 		};
+		888B650D28892C890006C669 /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				888B650E28892CA10006C669 /* AboutUsVC.swift */,
+			);
+			path = AboutUs;
+			sourceTree = "<group>";
+		};
+		88948DBB2887E92C00090AC0 /* Add Fav Location */ = {
+			isa = PBXGroup;
+			children = (
+				88948DBC2887E94D00090AC0 /* AddFavLocationVC.swift */,
+			);
+			path = "Add Fav Location";
+			sourceTree = "<group>";
+		};
+		88BBE1FE28913E8B0024F935 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				88BBE1FF28913EBA0024F935 /* ChatVC.swift */,
+				88BBE20128913EDF0024F935 /* Cells */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		88BBE20128913EDF0024F935 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				88BBE20728913F120024F935 /* SenderCell */,
+				88BBE20228913F050024F935 /* ReceiverCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		88BBE20228913F050024F935 /* ReceiverCell */ = {
+			isa = PBXGroup;
+			children = (
+				88BBE20328913F050024F935 /* ReceiverCell.swift */,
+				88BBE20428913F050024F935 /* ReceiverCell.xib */,
+			);
+			path = ReceiverCell;
+			sourceTree = "<group>";
+		};
+		88BBE20728913F120024F935 /* SenderCell */ = {
+			isa = PBXGroup;
+			children = (
+				88BBE20828913F120024F935 /* SenderCell.xib */,
+				88BBE20928913F120024F935 /* SenderCell.swift */,
+			);
+			path = SenderCell;
+			sourceTree = "<group>";
+		};
 		EEFA6CA9220ECE30004F32E7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -1720,7 +1789,6 @@
 				A2933852BD74F8C0D508A763 /* [CP] Embed Pods Frameworks */,
 				0F3CCE603DFCC1C63FAF5F5C /* [CP] Copy Pods Resources */,
 				18B061AE256F7F2400BAA013 /* ShellScript */,
-				5429D50C2661282F00BE7C0C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1818,6 +1886,7 @@
 				5426B74A27229C1C001189DE /* GP.png in Resources */,
 				5426B7AD27229C1C001189DE /* MZ.png in Resources */,
 				5426B7B327229C1C001189DE /* MX.png in Resources */,
+				88BBE20628913F050024F935 /* ReceiverCell.xib in Resources */,
 				5426B78227229C1C001189DE /* GY.png in Resources */,
 				5426B7D327229C1C001189DE /* VA.png in Resources */,
 				5426B6FD27229C1B001189DE /* TD.png in Resources */,
@@ -1896,6 +1965,7 @@
 				5426B77C27229C1C001189DE /* ID.png in Resources */,
 				5426B5E8272296CB001189DE /* CountryCodes.json in Resources */,
 				5426B77E27229C1C001189DE /* EG.png in Resources */,
+				88BBE20A28913F120024F935 /* SenderCell.xib in Resources */,
 				5426B72627229C1B001189DE /* AT.png in Resources */,
 				5426B6FF27229C1B001189DE /* LB.png in Resources */,
 				5426B7A527229C1C001189DE /* AX.png in Resources */,
@@ -2126,23 +2196,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
-		5429D50C2661282F00BE7C0C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/FirebaseCrashlytics/upload-symbols -gsp ${PROJECT_DIR}/Resources/GoogleService-Info.plist -p ios ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n";
-		};
 		9B2149097BFB38C9959DC4A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2274,6 +2327,7 @@
 				3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */,
 				3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */,
 				3A40741321B512280015C494 /* WebserviceSubClass.swift in Sources */,
+				88BBE20028913EBA0024F935 /* ChatVC.swift in Sources */,
 				3A4073A621B512280015C494 /* CarsCollectionViewCell.swift in Sources */,
 				3A4073E521B512280015C494 /* WalletCardsVC.swift in Sources */,
 				3A4073D421B512280015C494 /* BarsAndClubsTableViewCell.swift in Sources */,
@@ -2305,6 +2359,7 @@
 				3A40740E21B512280015C494 /* CustomViewForShadow.swift in Sources */,
 				3A40739B21B512280015C494 /* AppDelegate.swift in Sources */,
 				3A4073C821B512280015C494 /* MyReceiptsViewController.swift in Sources */,
+				88948DBD2887E94D00090AC0 /* AddFavLocationVC.swift in Sources */,
 				3A4073B921B512280015C494 /* RegisterViewController.swift in Sources */,
 				3A4073EC21B512280015C494 /* webViewVC.swift in Sources */,
 				3A4073C721B512280015C494 /* MainHeaderTableViewCell.swift in Sources */,
@@ -2322,9 +2377,11 @@
 				3A4073ED21B512280015C494 /* Extensions.swift in Sources */,
 				3A40740421B512280015C494 /* Duration.swift in Sources */,
 				3A4073D521B512280015C494 /* BookTableSelectedDataTableViewCell.swift in Sources */,
+				888B650F28892CA10006C669 /* AboutUsVC.swift in Sources */,
 				3A4073B621B512280015C494 /* PackageHistoryViewController.swift in Sources */,
 				3A4073F621B512280015C494 /* ARCarMovement.swift in Sources */,
 				3A40741021B512280015C494 /* SingletonClass.swift in Sources */,
+				88BBE20528913F050024F935 /* ReceiverCell.swift in Sources */,
 				347A9FD92608C73900065C29 /* SelectDriverViewController.swift in Sources */,
 				3A4073D621B512280015C494 /* HotelReservationTableViewCell.swift in Sources */,
 				3A4073B721B512280015C494 /* PackageViewController.swift in Sources */,
@@ -2344,6 +2401,7 @@
 				3A40740B21B512280015C494 /* WWCalendarTimeSelector.swift in Sources */,
 				3A40740D21B512280015C494 /* ConstantData.swift in Sources */,
 				3A84BC9621C22B2E00EDA3A2 /* UIAlertController+Blocks.m in Sources */,
+				88BBE20B28913F120024F935 /* SenderCell.swift in Sources */,
 				3A40740721B512280015C494 /* NSDate+Timepiece.swift in Sources */,
 				3A40740821B512280015C494 /* NSDateComponents+Timepiece.swift in Sources */,
 				3A4073BD21B512280015C494 /* BookTableSelectedDataViewController.swift in Sources */,
@@ -2493,7 +2551,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.5;
+				CURRENT_PROJECT_VERSION = 1.5.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2504,7 +2562,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2525,7 +2583,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.5;
+				CURRENT_PROJECT_VERSION = 1.5.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2536,7 +2594,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

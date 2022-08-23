@@ -52,6 +52,7 @@ class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblPickupTime: UILabel!
     
-    
+    @IBOutlet weak var lblBookingDate: UILabel!
+    @IBOutlet weak var lblProcessingDate: UILabel!
     
 }

@@ -32,7 +32,7 @@ extension UIApplication {
 }
 
 
-class BookLaterViewController: BaseViewController, GMSAutocompleteViewControllerDelegate, UINavigationControllerDelegate, WWCalendarTimeSelectorProtocol, UIPickerViewDelegate, UIPickerViewDataSource, isHaveCardFromBookLaterDelegate, UITextFieldDelegate,SelectCardDelegate {
+class BookLaterViewController: BaseViewController, GMSAutocompleteViewControllerDelegate, UINavigationControllerDelegate, WWCalendarTimeSelectorProtocol, UIPickerViewDelegate, UIPickerViewDataSource, isHaveCardFromBookLaterDelegate, UITextFieldDelegate,SelectCardDelegate, SelectCardForBookingDelegate {
 
     let socket = (UIApplication.shared.delegate as! AppDelegate).socket
 
@@ -739,25 +739,15 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         DateTimeselector.optionCalendarBackgroundColorPastDatesHighlight = themeAppMainColor
         DateTimeselector.optionCalendarBackgroundColorFutureDatesHighlight = themeAppMainColor
         DateTimeselector.optionClockBackgroundColorMinuteHighlight = themeAppMainColor
-        
-        
         //        selector.optionStyles.showDateMonth(true)
         DateTimeselector.optionStyles.showYear(false)
         //        selector.optionStyles.showMonth(true)
-        
         DateTimeselector.optionStyles.showTime(true)
-        
         // 2. You can then set delegate, and any customization options
-        
         DateTimeselector.optionTopPanelTitle = "Please choose date"
-        
         DateTimeselector.optionIdentifier = "Time" as AnyObject
-        
         let dateCurrent = Date()
-        
-        
         DateTimeselector.optionCurrentDate = dateCurrent.addingTimeInterval(30 * 60)
-        
         // 3. Then you simply present it from your view controller when necessary!
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(DateTimeselector, animated: true, completion: nil)
         //        self.present(DateTimeselector, animated: true, completion: nil)
@@ -1327,6 +1317,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             self.imgCardForPaymentType.tintColor = .red
             self.PayCardView.backgroundColor = UIColor.black
             btnCardSelection.setTitleColor(themeAppMainColor, for: .normal)
+            
+            //self.presentCardListScreen()
 
 //            if(self.aryCards.count == 0)
 //            {
@@ -1340,6 +1332,19 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         }
         
     }
+    
+    func presentCardListScreen() {
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+      //  next.modalPresentationStyle = .automatic
+        next.delegateForSelectCardForBooking = self
+     //   self.navigationController?.present(next, animated: true)
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+    func didSelectCard(cardId: String) {
+        CardID = cardId
+    }
+    
     
     func didSelectCard(dictData: [String : AnyObject]) {
 
@@ -1626,6 +1631,15 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         }
         else {
             dictData["PaymentType"] = paymentType as AnyObject
+            if(paymentType == "card"){
+                if(self.CardID == ""){
+//                    UtilityClass.setCustomAlert(title: "Error", message: "Please select card") { (index, title) in}
+//                    return
+                    dictData[SubmitBookingRequest.kCardId] = "" as AnyObject
+                }else{
+                    dictData[SubmitBookingRequest.kCardId] = self.CardID as AnyObject
+                }
+            }
         }
         
 //        if CardID == "" {
@@ -1647,10 +1661,29 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             if (status) {
                 print(result)
                 
-                UtilityClass.setCustomAlert(title: "Success Message", message: "Thanks For Prebooking With \(appName).\nIf your plans change please cancel your booking.", completionHandler: { (index, title) in
-                    self.BookLaterCompleted.BookLaterComplete()
-                    self.navigationController?.popViewController(animated: true)
-                })
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Success Message", message: res) { (index, title) in
+                        self.BookLaterCompleted.BookLaterComplete()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Success Message", message: resDict.object(forKey: "message") as? String ?? "") { (index, title) in
+                        self.BookLaterCompleted.BookLaterComplete()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Success Message", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as? String ?? "") { (index, title) in
+                        self.BookLaterCompleted.BookLaterComplete()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                
+//                UtilityClass.setCustomAlert(title: "Success Message", message: "Thanks For Prebooking With \(appName).\nIf your plans change please cancel your booking.", completionHandler: { (index, title) in
+//                    self.BookLaterCompleted.BookLaterComplete()
+//                    self.navigationController?.popViewController(animated: true)
+//                })
                 
                 /*
                  {

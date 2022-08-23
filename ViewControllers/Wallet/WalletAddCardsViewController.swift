@@ -98,7 +98,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
     {
         txtCardNumber.placeholder = "Card Number".localized
         txtValidThrough.placeholder = "Expiry Date".localized
-        txtCVVNumber.placeholder = "CVV".localized
+        txtCVVNumber.placeholder = "Enter Card Holder Name"
         btnScanCard.setTitle("scanCard".localized, for: .normal)
         btnAddPaymentMethods.setTitle("Add Card".localized, for: .normal)
     }
@@ -238,25 +238,25 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
     
     func cardCVV() {
   
-        txtCVVNumber.inputType = .integer
-        txtCVVNumber.placeholder = "CVV"
+        txtValidThrough.inputType = .name
+        txtCVVNumber.placeholder = "Card Holder Name"
         txtCVVNumber.setValue(UIColor.black , forKeyPath: "placeholderLabel.textColor")
         txtCVVNumber.font = UIFont.regular(ofSize: 13.0)
         txtCVVNumber.textColor = UIColor.black
         //        var validation = Validation()
         
-        if self.cardTypeLabel == "Amex" {
-            self.validation.maximumLength = 4
-            self.validation.minimumLength = 4
-        }
-        else {
-            self.validation.maximumLength = 3
-            self.validation.minimumLength = 3
-        }
+//        if self.cardTypeLabel == "Amex" {
+//            self.validation.maximumLength = 4
+//            self.validation.minimumLength = 4
+//        }
+//        else {
+//            self.validation.maximumLength = 3
+//            self.validation.minimumLength = 3
+//        }
 
-        validation.characterSet = NSCharacterSet.decimalDigits
-        let inputValidator = InputValidator(validation: validation)
-        txtCVVNumber.inputValidator = inputValidator
+//        validation.characterSet = NSCharacterSet.decimalDigits
+//        let inputValidator = InputValidator(validation: validation)
+//        txtCVVNumber.inputValidator = inputValidator
         
         print("txtCVV.text : \(txtCVVNumber.text!)")
     }
@@ -346,7 +346,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
         }
         else if (txtCVVNumber.text!.count == 0) {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter CVV Number") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Card Holder Name") { (index, title) in
             }
             return false
         }
@@ -368,8 +368,7 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
     
     func webserviceOfAddCard() {
         // PassengerId,CardNo,Cvv,Expiry,Alias (CarNo : 4444555511115555,Expiry:09/20)
-        txtCardNumber.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+   
         var dictData = [String:AnyObject]()
  
         dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
@@ -380,10 +379,9 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
         else {
             dictData["CardNo"] = txtCardNumber.text!.replacingOccurrences(of: " ", with: "") as AnyObject
         }
-        
-        
-        dictData["Cvv"] = txtCVVNumber.text!.trimmingCharacters(in: .whitespacesAndNewlines) as AnyObject
+        dictData["card_holder_name"] = txtCVVNumber.text!.trimmingCharacters(in: .whitespacesAndNewlines) as AnyObject
         dictData["Expiry"] = txtValidThrough.text!.trimmingCharacters(in: .whitespacesAndNewlines) as AnyObject
+        
 //        dictData["Alias"] = txtAlies.text as AnyObject
         
         
@@ -412,17 +410,12 @@ class WalletAddCardsViewController: BaseViewController, UIPickerViewDataSource, 
                 let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in
                 
                     if self.checkPresentation() {
-                        
                         self.delegateAddCardFromHomeVC?.didAddCardFromHomeVC()
-                        
                         self.delegateAddCardFromBookLater?.didHaveCards()
-                        
                         self.dismiss(animated: true, completion: nil)
                     }
                     else {
-                        
                         self.navigationController?.popViewController(animated: true)
-                        
                     }
                 })
             

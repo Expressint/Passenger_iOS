@@ -32,7 +32,6 @@ class PreviousDueViewController: BaseViewController {
     
     @objc func btnPayAction(sender: UIButton) {
         
-        print("Pay Action")
         let dictData = aryData[sender.tag][""] as? [String:Any]
         let str = dictData?["Id"]
         model["PastDuesId"] = str

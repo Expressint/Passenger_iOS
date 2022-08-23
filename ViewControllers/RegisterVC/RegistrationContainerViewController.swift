@@ -15,6 +15,7 @@ class RegistrationContainerViewController: UIViewController,UIScrollViewDelegate
     @IBOutlet weak var scrollObject: UIScrollView!
     var strEmailSocila = String()
     var strFullName = String()
+    var strAppleID = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()

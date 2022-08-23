@@ -27,8 +27,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var btnCountryCode: UIButton!
     
+    @IBOutlet weak var stackPassword: UIStackView!
+    @IBOutlet weak var stackConfirmPassword: UIStackView!
+    
+    
     let countryPicker = CountryPickerView()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +51,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
 //        txtPhoneNumber.placeHolderColor = UIColor.red
         // Do any additional setup after loading the view.
+        
+        if(AppDelegate.current?.isSocialLogin ?? false){
+            self.stackPassword.isHidden = true
+            self.stackConfirmPassword.isHidden = true
+        }else{
+            self.stackPassword.isHidden = false
+            self.stackConfirmPassword.isHidden = false
+        }
     }
     
     
@@ -168,58 +179,60 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
             return false
         }
-        else if (txtPassword.text?.count == 0)
-        {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter password".localized) { (index, title) in
-            }
+        
+        if((AppDelegate.current?.isSocialLogin ?? false) == false){
+            if (txtPassword.text?.count == 0)
+            {
+                UtilityClass.setCustomAlert(title: "Missing", message: "Please enter password".localized) { (index, title) in
+                }
 
-            return false
-        }
-            
-        else if ((txtPassword.text?.hasPrefix(" ") == true) || (txtPassword.text?.hasSuffix(" ") == true))
-        {
-            UtilityClass.setCustomAlert(title: "Error", message: "Your password can’t start or end with a blank space".localized) { (index, title) in
+                return false
             }
+                
+            else if ((txtPassword.text?.hasPrefix(" ") == true) || (txtPassword.text?.hasSuffix(" ") == true))
+            {
+                UtilityClass.setCustomAlert(title: "Error", message: "Your password can’t start or end with a blank space".localized) { (index, title) in
+                }
 
-            return false
-        }
-        else if ((txtPassword.text?.count)! < 6)
-        {
-            UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+                return false
             }
+            else if ((txtPassword.text?.count)! < 6)
+            {
+                UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+                }
 
-            return false
-        }
-        else if (txtConfirmPassword.text?.count == 0)
-        {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm the password".localized) { (index, title) in
+                return false
             }
-            
-            return false
-        }
-            
-        else if ((txtConfirmPassword.text?.count)! < 6)
-        {
-            UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+            else if (txtConfirmPassword.text?.count == 0)
+            {
+                UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm the password".localized) { (index, title) in
+                }
+                
+                return false
             }
-            
-            return false
-        }
-        else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
-        {
-            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+                
+            else if ((txtConfirmPassword.text?.count)! < 6)
+            {
+                UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+                }
+                
+                return false
             }
-            
-            return false
-        }
-        else if (txtPassword.text != txtConfirmPassword.text)
-        {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Password and confirm password does not match".localized) { (index, title) in
+            else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
+            {
+                UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+                }
+                
+                return false
             }
+            else if (txtPassword.text != txtConfirmPassword.text)
+            {
+                UtilityClass.setCustomAlert(title: "Missing", message: "Password and confirm password does not match".localized) { (index, title) in
+                }
 
-            return false
+                return false
+            }
         }
-       
         
         return true
     }

@@ -31,6 +31,7 @@ class PesapalWebViewViewController: BaseViewController
     var webView: WKWebView!
     var strUrl = String()
     var delegate: delegatePesapalWebView?
+    var isFrompastPayment: Bool = false
     
     let progressView: UIProgressView = {
         let view = UIProgressView(progressViewStyle: .default)
@@ -43,8 +44,8 @@ class PesapalWebViewViewController: BaseViewController
         webView?.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
-    let successURL = "https://www.bookaridegy.com/payment/success"
-    let failURL = "https://www.bookaridegy.com/payment/failed"
+    let successURL = WebserviceURLs.kBasePaymentURL + "payment/success" //"https://www.bookaridegy.com/payment/success"
+    let failURL = WebserviceURLs.kBasePaymentURL + "payment/failed" //"https://www.bookaridegy.com/payment/failed"
     
     // ----------------------------------------------------
     // MARK: - Base Methods
@@ -116,7 +117,7 @@ class PesapalWebViewViewController: BaseViewController
 extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        UtilityClass.showHUD()
+     //   UtilityClass.showHUD()
         
        self.showProgressView()
         print("didStartProvisionalNavigation: \(String(describing: webView.url?.absoluteString))")
@@ -141,7 +142,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             }
         }
-        else if webView.url?.absoluteString == "https://www.bookaridegy.com/payment/failed" {
+        else if webView.url?.absoluteString == (WebserviceURLs.kBasePaymentURL + "payment/failed") { //"https://www.bookaridegy.com/payment/failed"
             
             let alert = UIAlertController(title: appName.localized, message: "Payment failed", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
@@ -169,7 +170,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
     
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        UtilityClass.hideHUD()
+     //   UtilityClass.hideHUD()
         self.hideProgressView()
         print("didFailProvisionalNavigation: \(String(describing: webView.url?.absoluteString))")
         
@@ -185,7 +186,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        UtilityClass.hideHUD()
+      //  UtilityClass.hideHUD()
         self.hideProgressView()
         print("didFinish: \(String(describing: webView.url?.absoluteString))")
         
@@ -196,18 +197,33 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                 alert.dismiss(animated: true) {
                     //                self.delegate?.PayPalPaymentSuccess(paymentID: "\(self.paymentid)")
                     
+                   
                     if(self.isModal)
                     {
                         self.dismiss(animated: true) {
+                            if(self.isFrompastPayment){
+                                self.navigationController?.popViewController(animated: true)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    NotificationCenter.default.post(name: Notification.Name("ReloadPastBooking"), object: nil)
+                                }
+                            }else{
+                                self.delegate?.didOrderPesapalStatus(status: true)
+                            }
+                        }
+                    } else {
+                        if(self.isFrompastPayment){
+                            self.navigationController?.popToRootViewController(animated: true)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                NotificationCenter.default.post(name: Notification.Name("ReloadPastBooking"), object: nil)
+                            }
+                        }else{
+                            self.navigationController?.popViewController(animated: false)
                             self.delegate?.didOrderPesapalStatus(status: true)
                         }
+                        
                     }
-                    else
-                    {
-                        self.navigationController?.popViewController(animated: false)
-                        self.delegate?.didOrderPesapalStatus(status: true)
+                    
 
-                    }
                 }
             }
             alert.addAction(ok)
@@ -247,7 +263,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
     }
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        UtilityClass.hideHUD()
+    //    UtilityClass.hideHUD()
         self.hideProgressView()
         print("didFail: \(String(describing: webView.url?.absoluteString))")
     }

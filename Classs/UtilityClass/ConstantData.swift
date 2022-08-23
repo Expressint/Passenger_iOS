@@ -19,9 +19,31 @@ let themeGrayColor: UIColor = UIColor.init(red: 114/255, green: 114/255, blue: 1
 let themeGrayBGColor : UIColor = UIColor.init(hex: "DDDDDD")
 let themeGrayTextColor : UIColor = UIColor.init(hex: "7A7A7C")
 let currencySign = "$" //"KSh"
-let appName = "Book A Ride"
+
+let kIsUpdateAvailable : String = "IsUpdateAvailable"
+let kIsUpdateMessage : String = "kIsUpdateMessage"
+
+let appName = "" //Book A Ride"
 let appURL = "itms-apps://itunes.apple.com/app/apple-store/id1541296701?mt=8"
-var helpLineNumber = ""//"0772506506"
+let appURLAndroid = "https://play.google.com/store/apps/details?id=com.bookride.passenger"
+let appURLiOS = "https://apps.apple.com/in/app/bookaridegy/id1541296701"
+let kAPPUrlAndroid = "https://play.google.com/store/apps/details?id=com.bookride.driver"
+let kAPPUrliOS = "https://apps.apple.com/in/app/bookaridegy-driver/id1541299485"
+
+
+var app_PrivacyPolicy = "https://www.bookaridegy.com/privacy_policy"
+var app_TermsAndCondition = "https://www.bookaridegy.com/terms_conditions"
+var app_RefundPolicy = "https://www.bookaridegy.com/refund_policy"
+
+
+var helpLineNumber = ""
+var WhatsUpNumber = ""
+var DispatchCall = ""
+var DispatchName = ""
+var DispatchId = ""
+
+var freeWaitingTime = 300
+
 let googleAnalyticsTrackId = "UA-122360832-1"
 let supportURL = "https://www.tantaxitanzania.com/front/about"
 let AppRegularFont:String = "ProximaNova-Regular"
@@ -65,17 +87,21 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 
 //let appCurrentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 
-
+//Live: https://www.bookaridegy.com/Passenger_Api/
+//Development: http://52.23.45.119/
 struct WebserviceURLs {
-    static let kBaseURL                                 = "https://www.bookaridegy.com/Passenger_Api/"
+    static let kBasePaymentURL                          = "http://52.23.45.119/"
+    static let kBaseURL                                 = "http://52.23.45.119/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
     static let kSocialLogin                             = "SocialLogin"
+    static let kAppleSocialLogin                        = "AppleLogin"
     static let kUpdateProfile                           = "UpdateProfile"
     static let kForgotPassword                          = "ForgotPassword"
     static let kGetCarList                              = "GetCarClass"
     static let kMakeBookingRequest                      = "SubmitBookingRequest"
+    static let kWaitingListRequest                      = "PassengerWaitingRequest"
     static let kAdvancedBooking                         = "AdvancedBooking"
     static let kCheckPromocode                          = "PromoCodeCheck"
     static let kGetPromoCodeList                        = "PromoCodeList"
@@ -93,6 +119,7 @@ struct WebserviceURLs {
     static let kBookPackage                             = "BookPackage"
     static let kCurrentBooking                          = "CurrentBooking/"
     static let kAddNewCard                              = "AddNewCard"
+    static let kChatHistory                             = "chat_history"
     static let kAddMoney                                = "AddMoney"
     static let kTransactionHistory                      = "TransactionHistory/"
     static let kSendMoney                               = "SendMoney"
@@ -101,6 +128,8 @@ struct WebserviceURLs {
     static let kTickpay                                 = "Tickpay"
     static let kAddAddress                              = "AddAddress"
     static let kGetAddress                              = "GetAddress/"
+    static let kDeleteAccount1                           = "DeleteAccount/"
+    static let kEditAddress                             = "EditAddress/"
     static let kRemoveAddress                           = "RemoveAddress/"
     static let kVarifyUser                              = "VarifyUser"
     static let kTickpayInvoice                          = "TickpayInvoice"
@@ -126,9 +155,11 @@ struct WebserviceURLs {
 }
 
 
+//Live: https://www.bookaridegy.com:8080
+//Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
+    static let kBaseURL                                     = "http://52.23.45.119:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"
@@ -161,20 +192,21 @@ struct SocketData {
     static let kReceiveTipsForBookLater                     = "ReceiveTipsForBookLater"
     static let kGetDriverCurrentLatLong                     = "GetDriverCurrentLatLong"
     
+    static let kGetDriverLocation                           = "GetDriverLocation"
+    
     static let SOS = "SOS"
-
+    static let sendMessage = "sendMessage"
+    static let receiveMessage = "receive_message"
     
 }
 
 struct SocketDataKeys {
     
     static let kBookingIdNow    = "BookingId"
-    static let kCancelReasons    = "Reason"
-    static let kUserType = "UserType"
+    static let kCancelReasons   = "Reason"
+    static let kUserType        = "UserType"
 
 }
-
-
 
 struct SubmitBookingRequest {
 // PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon
@@ -231,17 +263,12 @@ struct setiPhoneX {
     
 }
 
-
-
 let NotificationKeyFroAllDriver =  NSNotification.Name("NotificationKeyFroAllDriver")
-
 let NotificationBookNow = NSNotification.Name("NotificationBookNow")
 let NotificationBookLater = NSNotification.Name("NotificationBookLater")
-
 let NotificationTrackRunningTrip = NSNotification.Name("NotificationTrackRunningTrip")
 let NotificationForBookingNewTrip = NSNotification.Name("NotificationForBookingNewTrip")
 let NotificationForAddNewBooingOnSideMenu = NSNotification.Name("NotificationForAddNewBooingOnSideMenu")
-
 let OpenEditProfile = NSNotification.Name("OpenEditProfile")
 let OpenMyBooking = NSNotification.Name("OpenMyBooking")
 let OpenPaymentOption = NSNotification.Name("OpenPaymentOption")
@@ -253,9 +280,15 @@ let OpenSetting = NSNotification.Name("OpenSetting")
 let OpenSupport = NSNotification.Name("OpenSupport")
 let OpenHome = NSNotification.Name("OpenHome")
 let OpenPastDues = NSNotification.Name("OpenPastDues")
-
+let DeleteAccount = NSNotification.Name("DeleteAccount")
 let UpdateProfileNotification =  NSNotification.Name("UpdateProfile")
-
+let ReloadFavLocations = NSNotification.Name("ReloadFavLocations")
+let openNPP = NSNotification.Name("openPP")
+let openNTC = NSNotification.Name("openTC")
+let openNRP = NSNotification.Name("openRP")
+let openNAboutUs = NSNotification.Name("openAboutUs")
+let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
+let GoToChatScreen = NSNotification.Name("GoToChatScreen")
 
 
 //let NotificationHotelReservation = NSNotification.Name("NotificationHotelReservation")

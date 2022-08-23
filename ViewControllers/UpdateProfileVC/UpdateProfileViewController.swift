@@ -24,6 +24,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet weak var lblContactNumber: UILabel!
     var  imgUpdatedProfilePic = UIImage()
     @IBOutlet weak var txtFirstName: UITextField!
+    @IBOutlet weak var txtLastName: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhoneNumber: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
@@ -35,6 +36,10 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 //    @IBOutlet weak var btnSave: ThemeButton!
     
 //    @IBOutlet var viewChangePassword: UIView!
+    
+    var isPassengerImage: Bool = false
+    @IBOutlet weak var btnPassengerIId: UIButton!
+    @IBOutlet weak var imgPassengerId: UIImageView!
     
     @IBOutlet var btnChangePassword: UIButton!
     @IBOutlet var btnProfile: UIButton!
@@ -49,7 +54,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet weak var viewMobile: UIView!
     @IBOutlet weak var viewGender: UIView!
     @IBOutlet weak var viewDateofBirth: UIView!
-    @IBOutlet weak var lblFullName: UILabel!
+    @IBOutlet weak var lblFirstName: UILabel!
+    @IBOutlet weak var lbllastName: UILabel!
     @IBOutlet weak var lblAddress: UILabel!
     @IBOutlet weak var lblPhoneNum: UILabel!
     @IBOutlet weak var lblDateOfBirth: UILabel!
@@ -85,6 +91,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         
         
         UtilityClass.setLeftPaddingInTextfield(textfield: txtFirstName, padding: 10)
+        UtilityClass.setLeftPaddingInTextfield(textfield: txtLastName, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
@@ -92,6 +99,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 
         
         UtilityClass.setRightPaddingInTextfield(textfield: txtFirstName, padding: 10)
+        UtilityClass.setRightPaddingInTextfield(textfield: txtLastName, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
@@ -143,7 +151,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     func setLocalization()
     {
        
-        lblFullName.text = "Full Name".localized
+        lblFirstName.text = "First Name".localized
+        lbllastName.text = "Last Name".localized
         lblAddress.text = "Address".localized
         lblPhoneNum.text = "Phone Number".localized
         lblDateOfBirth.text =  "Date Of Birth".localized
@@ -217,9 +226,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     
     @IBAction func btnSubmit(_ sender: ThemeButton) {
     
-        if txtAddress.text == "" || txtFirstName.text == "" || gender == "" {
-            
-            
+        if txtAddress.text == "" || txtFirstName.text == "" || txtLastName.text == "" || gender == "" {
             UtilityClass.setCustomAlert(title: "Misssing", message: "Please fill all details".localized) { (index, title) in
             }
         }
@@ -228,10 +235,11 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
             webserviceOfUpdateProfile()
         }
         
+        
     }
     
     @IBAction func btnUploadImage(_ sender: UIButton) {
-        
+        isPassengerImage = false
         let alert = UIAlertController(title: "Choose Image From", message: nil, preferredStyle: .actionSheet)
         
         let Camera = UIAlertAction(title: "Camera", style: .default, handler: { ACTION in
@@ -252,6 +260,30 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func btnPassengereImage(_ sender: Any) {
+        isPassengerImage = true
+       
+        let alert = UIAlertController(title: "Choose Image From", message: nil, preferredStyle: .actionSheet)
+        
+        let Camera = UIAlertAction(title: "Camera", style: .default, handler: { ACTION in
+            
+            self.PickingImageFromCamera()
+        })
+        
+        let Gallery = UIAlertAction(title: "Gallery", style: .default, handler: { ACTION in
+            
+             self.PickingImageFromGallery()
+        })
+        
+        let Cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(Camera)
+        alert.addAction(Gallery)
+        alert.addAction(Cancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -287,9 +319,14 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imgProfile.contentMode = .scaleToFill
-            imgProfile.image = pickedImage
-            self.imgUpdatedProfilePic = pickedImage
+            if(isPassengerImage){
+                imgPassengerId.contentMode = .scaleToFill
+                imgPassengerId.image = pickedImage
+            }else{
+                imgProfile.contentMode = .scaleToFill
+                imgProfile.image = pickedImage
+                self.imgUpdatedProfilePic = pickedImage
+            }
         }
         
         dismiss(animated: true, completion: nil)
@@ -313,6 +350,10 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
             imgProfile.sd_setImage(with: URL(string: (getData.object(forKey: "Image") as! String)), completed: nil)
         }
         
+        imgPassengerId.sd_setShowActivityIndicatorView(true)
+        imgPassengerId.sd_setIndicatorStyle(.medium)
+        imgPassengerId.sd_setImage(with: URL(string: (getData.object(forKey: "passenger_id") as! String)), completed: nil)
+        
         // (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))
 //        imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)
         
@@ -327,6 +368,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         }
 
         fullName = getData.object(forKey: "Fullname") as? String ?? ""
+        firstName = getData.object(forKey: "Firstname") as? String ?? ""
+        lastName = getData.object(forKey: "Lastname") as? String ?? ""
   
 //        if fullName.contains(" ") {
 //            let arrNames = fullName.components(separatedBy: " ")
@@ -347,7 +390,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 //        }
         
 
-        txtFirstName.text = fullName
+        txtFirstName.text = firstName
+        txtLastName.text = lastName
         txtAddress.text = getData.object(forKey: "Address") as? String
         
         gender = getData.object(forKey: "Gender") as? String ?? ""
@@ -380,11 +424,15 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     
     func webserviceOfUpdateProfile()
     {
-        fullName = txtFirstName.text! // + " " + txtLastName.text!
+        fullName = txtFirstName.text!
+        firstName = txtFirstName.text!
+        lastName = txtLastName.text!
         
         var dictData = [String:AnyObject]()
         dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["Fullname"] = fullName as AnyObject
+        dictData["Firstname"] = firstName as AnyObject
+        dictData["Lastname"] = lastName as AnyObject
         dictData["MobileNo"] = txtPhoneNumber.text as AnyObject
         dictData["Email"] = txtEmail.text as AnyObject
         dictData["Gender"] = gender as AnyObject
@@ -396,7 +444,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         let activityData = ActivityData()
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
-        webserviceForUpdateProfile(dictData as AnyObject, image1: self.imgUpdatedProfilePic ) { (result, status) in
+        webserviceForUpdateProfile(dictData as AnyObject, image1: self.imgUpdatedProfilePic, image2: self.imgPassengerId.image!, isRegister: true ) { (result, status) in
             
             if (status) {
                 
@@ -406,7 +454,9 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
                 print("ATDebug :: \(NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary))")
                 SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)
                 
-                UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                //UserDefaults.standard.set(SingletonClass.sharedInstance.dictProfile, forKey: "profileData")
+                let data = NSKeyedArchiver.archivedData(withRootObject: SingletonClass.sharedInstance.dictProfile)
+                UserDefaults.standard.set(data, forKey: "profileData")
                 
                 NotificationCenter.default.post(name: UpdateProfileNotification, object: nil)
                

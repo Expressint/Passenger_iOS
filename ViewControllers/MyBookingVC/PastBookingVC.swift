@@ -10,7 +10,7 @@ import UIKit
 
 class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegate,delegatePesapalWebView
 {
-    
+
     var aryData = NSMutableArray()
     
     var strPickupLat = String()
@@ -20,6 +20,8 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     var strDropoffLng = String()
     
     var strNotAvailable: String = "N/A"
+    var cardID: String = ""
+    var paymentURL: String = ""
     
     var expandedCellPaths = Set<IndexPath>()
     
@@ -44,11 +46,16 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         // Register to receive notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadTableView), name: NSNotification.Name(rawValue: NotificationCenterName.keyForPastBooking), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReloadPastBooking(notification:)), name: Notification.Name("ReloadPastBooking"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+    }
+    
+    @objc func methodOfReloadPastBooking(notification: Notification) {
+        self.webserviceOfPastbookingpagination(index: 1)
     }
     
     func setLocalization()
@@ -63,7 +70,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @objc func reloadTableView()
     {
         self.webserviceOfPastbookingpagination(index: 1)
-        //        self.aryData = SingletonClass.sharedInstance.aryPastBooking
+        //        self.aryData = SingletonClas/s.sharedInstance.aryPastBooking
         self.tableView.reloadData()
     }
     
@@ -75,6 +82,12 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         refreshControl.endRefreshing()
     }
     
+    func goTofav(strLoca: String) {
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+        NextPage.destinationLocation = strLoca
+        NextPage.isFromHome = true
+        self.navigationController?.pushViewController(NextPage, animated: true)
+    }
     
     //-------------------------------------------------------------
     // MARK: - Outlets
@@ -98,6 +111,8 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         if aryData.count > 0 {
             
+
+            
             cell.lblBookingID.text = "Booking Id :".localized
             cell.lblPickupAddress.text = "First Description".localized
             cell.lblDropoffAddress.text = "Second Description".localized
@@ -114,7 +129,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             cell.lblWaitingTimeTitle.text = "Waiting Time".localized
             cell.lblLessTitle.text = "Less" .localized
             //            cell.lblPromoApplied.text = "Promo Applied:".localized
-            cell.lblTotlaAmountTitile.text = "Total Amount :".localized
+            cell.lblTotlaAmountTitile.text = "Grand Total :".localized
             cell.lblInclTax.text = "(incl tax)".localized
             cell.lblTripStatusTitle.text = "Trip Status:".localized
             cell.lblCancelReasonTitle.text = "Trip Cancel Reason:".localized
@@ -129,6 +144,18 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             let currentData = (aryData.object(at: indexPath.row) as! NSDictionary)
             cell.lblDriverName.text = ""
+            
+            cell.btnFavTap = {
+                let pickupLocationForFav = self.checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "DropoffLocation", isNotHave: self.strNotAvailable)
+                print(pickupLocationForFav)
+                self.goTofav(strLoca: pickupLocationForFav)
+            }
+            
+            cell.btnPickFavTap = {
+                let pickupLocationForFav = self.checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PickupLocation", isNotHave: self.strNotAvailable)
+                print(pickupLocationForFav)
+                self.goTofav(strLoca: pickupLocationForFav)
+            }
             
             if let name = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "DriverName") as? String
             {
@@ -161,14 +188,16 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             //            cell.lblBookingID.text = "Booking Id: \(String(describing: (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id")!))"
             
             if let dateAndTime = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "CreatedDate") as? String {
-                
                 if dateAndTime == "" {
                     cell.lblDateAndTime.isHidden = true
                 }
                 else {
                     cell.lblDateAndTime.text = dateAndTime
+                    if(dateAndTime.contains(" ")){
+                        let date = dateAndTime.components(separatedBy: " ")
+                        cell.lblProcessingDate.text = date[0]
+                    }
                 }
-                
             }
             //            cell.lblDateAndTime.text = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "CreatedDate") as? String
             
@@ -188,6 +217,22 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             //            PromoCode
             //            GrandTotal
             
+            let AuthorizationNumber = currentData["Authorization_Number"] as? String ?? "N/A"
+            cell.lblAuthorizationNumber.text = (AuthorizationNumber) == "" ? "N/A" : AuthorizationNumber
+            
+            let TripDistance = currentData["TripDistance"] as? String ?? "0"
+            cell.lblDistance.text = "\(TripDistance) KM"
+            
+            let SubTotal = currentData["SubTotal"] as? String ?? "0"
+            cell.lblSubTotal.text = "\(SubTotal) \(currencySign)"
+            
+            let Discount = currentData["Discount"] as? String ?? "0"
+            cell.lblDiscount.text = "\(Discount) \(currencySign)"
+            
+            let Tax = currentData["Tax"] as? String ?? "0"
+            cell.lblTax.text = "\(Tax) \(currencySign)"
+            
+            
             let pickupLocation = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "DropoffLocation", isNotHave: strNotAvailable)
             let dropoffLocation = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PickupLocation", isNotHave: strNotAvailable)
             let paymentStatus = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "PaymentStatus", isNotHave: strNotAvailable)
@@ -199,6 +244,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let strTripFare = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "TripFare", isNotHave: strNotAvailable)
             
             let strDropLocation2 = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "DropoffLocation2", isNotHave: strNotAvailable)
+            
             
             let strBookingFee = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "BookingCharge", isNotHave: strNotAvailable) //(aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "BookingCharge") as? String
             //            let strPromoCode = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "Discount", isNotHave: "0")// (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Discount") as? String
@@ -237,9 +283,6 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 cell.stackViewCancelReason.isHidden = false
                 cell.lblCancelReason.text = strCancelReason
             }
-            
-            
-            
             cell.btnPaymentOrReceipt.addTarget(self, action: #selector(btnCellPaymentReceiptClicked(_:)), for: .touchUpInside)
             
             let waitingTime = checkDictionaryHaveValue(dictData: currentData as! [String : AnyObject], didHaveValue: "WaitingTime", isNotHave: strNotAvailable)
@@ -272,6 +315,16 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 cell.lblPickupTime.text = pickupTime
             } else {
                 cell.lblPickupTime.text = setTimeStampToDate(timeStamp: pickupTime)
+            }
+            
+            if pickupTime == strNotAvailable {
+                cell.lblBookingDate.text = pickupTime
+            } else {
+                let date = setTimeStampToDate(timeStamp: pickupTime)
+                if(date.contains(" ")){
+                    let time = date.components(separatedBy: " ")
+                    cell.lblBookingDate.text = time[0]
+                }
             }
             
             if DropoffTime == strNotAvailable {
@@ -309,14 +362,23 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 }
             }
             cell.btnPaymentOrReceipt.isHidden = true
-            if let paymentURL = currentData.object(forKey: "PaymentURL") as? String
-            {
-                if !UtilityClass.isEmpty(str: paymentURL) && cell.lblPaymentType.text?.lowercased() == "card" && paymentStatus != "success"
-                {
-                    cell.btnPaymentOrReceipt.isHidden = false
-                    cell.btnPaymentOrReceipt.setTitle("Make Payment".localized, for: .normal)
-                }
+            let btnStatus = currentData.object(forKey: "is_payment_required") as? Int ?? 0
+            if(btnStatus == 1){
+                cell.btnPaymentOrReceipt.isHidden = false
+                cell.btnPaymentOrReceipt.setTitle("Make Payment".localized, for: .normal)
+            }else{
+                cell.btnPaymentOrReceipt.isHidden = true
             }
+            
+            
+//            if let paymentURL = currentData.object(forKey: "PaymentURL") as? String
+//            {
+//                if !UtilityClass.isEmpty(str: paymentURL) && cell.lblPaymentType.text?.lowercased() == "card" && paymentStatus != "success"
+//                {
+//                    cell.btnPaymentOrReceipt.isHidden = false
+//                    cell.btnPaymentOrReceipt.setTitle("Make Payment".localized, for: .normal)
+//                }
+//            }
             
             cell.lblNightFare.text = strNightFare
             //
@@ -409,7 +471,6 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 if strNightFare == "" {
                     cell.lblNightFare.isHidden = false
                     cell.stackViewNightFare.isHidden = false
-                    
                     cell.lblNightFare.text = "N/A"
                 }
                 else {
@@ -417,6 +478,11 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                     cell.lblNightFare.isHidden = false
                     cell.stackViewNightFare.isHidden = false
                 }
+            }
+            
+            let strNightFare1 = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "NightFare") as? String
+            if(strNightFare1 == "" || strNightFare1 == "0"){
+                cell.stackViewNightFare.isHidden = true
             }
             
             
@@ -571,8 +637,16 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    @IBAction func btnCellPaymentReceiptClicked(_ sender: UIButton)
-    {
+    @IBAction func btnCellPaymentReceiptClicked(_ sender: UIButton) {
+        
+//        let btnTag = sender.tag
+//        let currentData = (aryData.object(at: btnTag) as! NSDictionary)
+//        let paymentURL = currentData.object(forKey: "PaymentURL") as? String ?? ""
+//        let next = mainStoryboard.instantiateViewController(withIdentifier: "WalletCardsVC") as! WalletCardsVC
+//        next.paymentURL = paymentURL
+//        next.isFromPastPayment = true
+//        self.navigationController?.pushViewController(next, animated: true)
+        
         let btnTag = sender.tag
         let next = mainStoryboard.instantiateViewController(withIdentifier: "PesapalWebViewViewController") as! PesapalWebViewViewController
         next.delegate = self
@@ -584,19 +658,11 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         let navController = UINavigationController.init(rootViewController: next)
         UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: nil)
+        
     }
     
-    func didOrderPesapalStatus(status: Bool)
-    {
-        //        if status
-        //        {
+    func didOrderPesapalStatus(status: Bool) {
         self.webserviceOfPastbookingpagination(index: 1)
-        
-        //        }
-        //        else
-        //        {
-        ////            self.btnOK.setTitle("Make Payment", for: .normal)
-        //        }
     }
     
 }

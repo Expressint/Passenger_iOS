@@ -26,6 +26,9 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
+    @IBOutlet weak var btnLS: UIButton!
+    @IBOutlet weak var btnDelete: UIButton!
+//    @IBOutlet weak var btnLiveHelp: UIButton!
     
     @IBOutlet weak var btnSignout: ThemeButton!
     
@@ -64,6 +67,9 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             }
         }
         
+        self.btnLS.underline()
+        self.btnDelete.underline()
+        
         setProfileData()
         
         lblLaungageName.layer.cornerRadius = 5
@@ -81,7 +87,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
         
         //        webserviceOfTickPayStatus()
-        arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","img_mn_receipt_unselect" ,"iconHelp", "icon_InviteFriendUnselect"]//img_mn_receipt_unselect
+        arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","img_mn_receipt_unselect" ,"iconHelp", "icon_InviteFriendUnselect"]//icon_UnselectedCard//img_mn_receipt_unselect
         
     }
     
@@ -211,8 +217,69 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         
     }
     
+    func showSheet() {
+        let alert = UIAlertController(title: "Legal Stuff", message: "Please Select an Option", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "About Us", style: .default , handler:{ (UIAlertAction)in
+            NotificationCenter.default.post(name: openNAboutUs, object: nil)
+            self.sideMenuController?.toggle()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Refund Policy", style: .default , handler:{ (UIAlertAction)in
+            NotificationCenter.default.post(name: openNRP, object: nil)
+            self.sideMenuController?.toggle()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Privacy Policy", style: .default , handler:{ (UIAlertAction)in
+            NotificationCenter.default.post(name: openNPP, object: nil)
+            self.sideMenuController?.toggle()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Terms and Conditions", style: .default, handler:{ (UIAlertAction)in
+            NotificationCenter.default.post(name: openNTC, object: nil)
+            self.sideMenuController?.toggle()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Cancel")
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+    }
+    
+    func showDeleteSheet() {
+        let refreshAlert = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: UIAlertController.Style.alert)
+
+        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+            self.sideMenuController?.toggle()
+            NotificationCenter.default.post(name: DeleteAccount, object: nil)
+        }))
+
+        refreshAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+            self.sideMenuController?.toggle()
+              print("Handle No Logic here")
+        }))
+
+        present(refreshAlert, animated: true, completion: nil)
+    }
     
     // MARK:- IBAction Methods
+    
+    @IBAction func btnLSAction(_ sender: Any) {
+        self.showSheet()
+    }
+    
+    @IBAction func btnDeleteAction(_ sender: Any) {
+        self.showDeleteSheet()
+    }
+    
+//    @IBAction func btnLiveHelpAction(_ sender: Any) {
+//        
+//        self.sideMenuController?.toggle()
+//    }
+    
     
     @IBAction func btnSettings(_ sender: UIButton) {
         
@@ -226,8 +293,6 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             if (buttonIndex == 2) {
                 
                 let socket = (UIApplication.shared.delegate as! AppDelegate).socket
-                
-                
                 socket?.off(SocketData.kReceiveGetEstimateFare)
                 socket?.off(SocketData.kNearByDriverList)
                 socket?.off(SocketData.kAskForTipsToPassengerForBookLater)
@@ -246,12 +311,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
                 socket?.off(SocketData.kAdvancedBookingDetails)
                 socket?.off(SocketData.kInformPassengerForAdvancedTrip)
                 socket?.off(SocketData.kAcceptAdvancedBookingRequestNotify)
-                //                Singletons.sharedInstance.isPasscodeON = false
                 socket?.disconnect()
-                
-                
-                //                self.navigationController?.popToRootViewController(animated: true)
-                
                 (UIApplication.shared.delegate as! AppDelegate).GoToLogout()
             }
         })
@@ -700,25 +760,27 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
     
     func inviteDriver()
     {
-        let decodeResults = SingletonClass.sharedInstance.dictProfile
-        print(decodeResults)
-        var strName = String()
+        NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
         
-        if decodeResults.count != 0
-        {
-            
-            strName = (decodeResults.object(forKey: "Fullname") as? String)!
-        }
-        
-        let strInvitation1 = "has invited you to become a Book A ride Passenger".localized
-        let strInvitation2 = "Your invite code is:".localized
-        
-        let strContent = "\(strName) \(strInvitation1)\n \n click here \(appURL)"
-        let share = [strContent]
-        
-        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
+//        let decodeResults = SingletonClass.sharedInstance.dictProfile
+//        print(decodeResults)
+//        var strName = String()
+//
+//        if decodeResults.count != 0
+//        {
+//
+//            strName = (decodeResults.object(forKey: "Fullname") as? String)!
+//        }
+//
+//        let strInvitation1 = "has invited you to become a Book A ride Passenger".localized
+//        let strInvitation2 = "Your invite code is:".localized
+//
+//        let strContent = "\(strName) \(strInvitation1)\n \n For iOS Click Here : \(appURLiOS) \n \n For Android Click Here : \(appURLAndroid)"
+//        let share = [strContent]
+//
+//        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view
+//        self.present(activityViewController, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {

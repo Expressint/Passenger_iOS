@@ -33,7 +33,7 @@ class DriverInfoViewController: UIViewController {
     @IBOutlet weak var lblDropoffLocation: MarqueeLabel!
     @IBOutlet weak var lblDropoffLocation2: MarqueeLabel!
     @IBOutlet weak var viewDropoffLocation2: UIView!
-    
+    @IBOutlet weak var btnChat: UIButton!
     
     @IBOutlet weak var viewTimeToReachPickLocation: UIView!
     @IBOutlet weak var viewDistanceToReachPickLocation: UIView!
@@ -81,8 +81,10 @@ class DriverInfoViewController: UIViewController {
     var strDriverID = String()
     var homeVC : HomeViewController?
     
-    @IBOutlet var lblApproxTime: UILabel!
-    @IBOutlet var lblApproxDistanceToYourLocation: UILabel!
+    var delegate: deleagateGoToChat?
+    
+//    @IBOutlet var lblApproxTime: UILabel!
+//    @IBOutlet var lblApproxDistanceToYourLocation: UILabel!
 
 
     //-------------------------------------------------------------
@@ -156,21 +158,18 @@ class DriverInfoViewController: UIViewController {
             
             if let dictData = data.first as? [String:Any]
             {
-                if let dictInnerData = (dictData["data"] as? [[String:Any]])?.first
+                if let arrLocation = dictData["Location"] as? [Double]
                 {
-                    if let arrLocation = dictInnerData["Location"] as? [Double]
-                    {
-                        self.strCurrentLat = "\(arrLocation.first ?? 0.0)"
-                        self.strCurrentLng = "\(arrLocation.last ?? 0.0)"
-                    }
-                    else if let arrLocation = dictInnerData["Location"] as? [String]
-                    {
-                        self.strCurrentLat = arrLocation.first ?? "0.0"
-                        self.strCurrentLng = arrLocation.last ?? "0.0"
-                    }
+                    self.strCurrentLat = "\(arrLocation.first ?? 0.0)"
+                    self.strCurrentLng = "\(arrLocation.last ?? 0.0)"
+                }
+                else if let arrLocation = dictData["Location"] as? [String]
+                {
+                    self.strCurrentLat = arrLocation.first ?? "0.0"
+                    self.strCurrentLng = arrLocation.last ?? "0.0"
                 }
                 
-                self.getEstimate()
+              //  self.getEstimate()
             }
         })
     }
@@ -262,6 +261,19 @@ class DriverInfoViewController: UIViewController {
         
     }
     
+    func goToChat() {
+        delegate?.btndeleagateGoToChat()
+    }
+    
+    
+    @IBAction func btnChatAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.goToChat()
+            }
+        })
+       
+    }
     
     @IBAction func btnOK(_ sender: ThemeButton) {
    
@@ -271,7 +283,7 @@ class DriverInfoViewController: UIViewController {
     
     @IBAction func btnCall(_ sender: UIButton) {
         
-        let contactNumber = strPassengerMobileNumber
+        let contactNumber = helpLineNumber //strPassengerMobileNumber
         
         if contactNumber == "" {
             
@@ -283,6 +295,7 @@ class DriverInfoViewController: UIViewController {
         }
         
     }
+    
     
     //-------------------------------------------------------------
     // MARK: - Custom Methods
@@ -323,13 +336,13 @@ class DriverInfoViewController: UIViewController {
         }
         
         
-        self.lblApproxTime.text  = self.strApproxTimeToYourLocation
-        self.lblApproxDistanceToYourLocation.text = self.strApproxDistanceToYourLocation
-
-        self.lblApproxTime.isHidden  = (self.strApproxTimeToYourLocation == "")
-        self.lblApproxDistanceToYourLocation.isHidden = (self.strApproxDistanceToYourLocation == "")
-        self.viewTimeToReachPickLocation.isHidden = self.lblApproxTime.isHidden
-        self.viewDistanceToReachPickLocation.isHidden = self.lblApproxDistanceToYourLocation.isHidden
+//        self.lblApproxTime.text  = self.strApproxTimeToYourLocation
+//        self.lblApproxDistanceToYourLocation.text = self.strApproxDistanceToYourLocation
+//
+//        self.lblApproxTime.isHidden  = (self.strApproxTimeToYourLocation == "")
+//        self.lblApproxDistanceToYourLocation.isHidden = (self.strApproxDistanceToYourLocation == "")
+//        self.viewTimeToReachPickLocation.isHidden = self.lblApproxTime.isHidden
+//        self.viewDistanceToReachPickLocation.isHidden = self.lblApproxDistanceToYourLocation.isHidden
         
         
         self.lblVehicleMake.text = "\(strVehicleMake)"
@@ -345,7 +358,7 @@ class DriverInfoViewController: UIViewController {
    
     @IBAction func btnCallToDriver(_ sender: UIButton) {
         
-        let contactNumber = strPassengerMobileNumber
+        let contactNumber = helpLineNumber //strPassengerMobileNumber
         
         if contactNumber == "" {
     

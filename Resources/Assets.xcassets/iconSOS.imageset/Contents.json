@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_sos_select-1.png",
+      "filename" : "ic_sos_select@2x-6.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_sos_select@2x-1.png",
+      "filename" : "ic_sos_select@2x-7.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_sos_select@3x-1.png",
+      "filename" : "ic_sos_select@2x-5.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
