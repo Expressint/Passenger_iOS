@@ -59,7 +59,7 @@ let bookingsStoryboard = UIStoryboard(name: "BookingScreen", bundle: nil)
 let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 
 /* App Font Names
-
+ 
  Family : Proxima Nova Font Name : ProximaNova-Extrabld
  Family : Proxima Nova Font Name : ProximaNova-Light
  Family : Proxima Nova Font Name : ProximaNova-Black
@@ -70,7 +70,7 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
  Family : Proxima Nova Font Name : ProximaNova-SemiboldIt
  Family : Proxima Nova Font Name : ProximaNova-Regular
  Family : Proxima Nova Font Name : ProximaNova-LightIt
-
+ 
  */
 
 
@@ -90,8 +90,8 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 //Live: https://www.bookaridegy.com/Passenger_Api/
 //Development: http://52.23.45.119/
 struct WebserviceURLs {
-    static let kBasePaymentURL                          = "http://52.23.45.119/"
-    static let kBaseURL                                 = "http://52.23.45.119/Passenger_Api/"
+    static let kBasePaymentURL                          = "https://www.bookaridegy.com/"
+    static let kBaseURL                                 = "https://www.bookaridegy.com/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -151,7 +151,7 @@ struct WebserviceURLs {
     static let kGetDriverETA                            = "GetETA"
     static let kHelpOptions                             = "HelpOptions"
     static let kHelp                                    = "Help"
-//    https://pickngolk.info/web/Passenger_Api/OtpForRegister
+    //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
 
 
@@ -159,7 +159,7 @@ struct WebserviceURLs {
 //Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                     = "http://52.23.45.119:8080"
+    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"
@@ -205,12 +205,12 @@ struct SocketDataKeys {
     static let kBookingIdNow    = "BookingId"
     static let kCancelReasons   = "Reason"
     static let kUserType        = "UserType"
-
+    
 }
 
 struct SubmitBookingRequest {
-// PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon
-// PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon,PromoCode,Notes,PaymentType,CardId(If paymentType is card)
+    // PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon
+    // PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon,PromoCode,Notes,PaymentType,CardId(If paymentType is card)
     
     
     static let kModelId                 = "ModelId"
@@ -231,8 +231,6 @@ struct SubmitBookingRequest {
     
     static let kShareRide               = "ShareRide"
     static let kNoOfPassenger           = "NoOfPassenger"
-    
-    
 }
 
 struct NotificationCenterName {
@@ -241,8 +239,6 @@ struct NotificationCenterName {
     static let keyForOnGoing   = "keyForOnGoing"
     static let keyForUpComming = "keyForUpComming"
     static let keyForPastBooking = "keyForPastBooking"
-    
-
 }
 
 struct PassengerDataKeys {
@@ -326,19 +322,19 @@ let GoToChatScreen = NSNotification.Name("GoToChatScreen")
 //    }
 //}
 /*
-struct iPhoneDevices {
-    
-    let SCREEN_MAX_LENGTH = max(UIScreen.screenWidth, UIScreen.screenHeight)
-    let SCREEN_MIN_LENGTH = min(UIScreen.screenWidth, UIScreen.screenHeight)
-    
-    let IS_IPHONE_4_OR_LESS = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH < 568.0
-    let IS_IPHONE_5 = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 568.0
-    let IS_IPHONE_6 = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 667.0
-    let IS_IPHONE_6P = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 736.0
-    let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && SCREEN_MAX_LENGTH == 1024.0
-    let IS_IPHONE_X = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 812.0
-
-}
-*/
+ struct iPhoneDevices {
+ 
+ let SCREEN_MAX_LENGTH = max(UIScreen.screenWidth, UIScreen.screenHeight)
+ let SCREEN_MIN_LENGTH = min(UIScreen.screenWidth, UIScreen.screenHeight)
+ 
+ let IS_IPHONE_4_OR_LESS = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH < 568.0
+ let IS_IPHONE_5 = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 568.0
+ let IS_IPHONE_6 = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 667.0
+ let IS_IPHONE_6P = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 736.0
+ let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && SCREEN_MAX_LENGTH == 1024.0
+ let IS_IPHONE_X = UIDevice.current.userInterfaceIdiom == .phone && SCREEN_MAX_LENGTH == 812.0
+ 
+ }
+ */
 
 

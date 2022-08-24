@@ -56,36 +56,36 @@ func postData(_ dictParams: AnyObject, nsURL: String, completion: @escaping (_ r
 func getData(_ dictParams: AnyObject, nsURL: String,  completion: @escaping (_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = WebserviceURLs.kBaseURL + nsURL
-
+    
     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
     UtilityClass.showACProgressHUD()
     
     Alamofire.request(url, method: .get, parameters: dictParams as? [String : AnyObject], encoding: URLEncoding.default, headers: header)
         .validate()
         .responseJSON
-        { (response) in
+    { (response) in
+        
+        if let JSON = response.result.value
+        {
             
-            if let JSON = response.result.value
+            if (JSON as AnyObject).object(forKey:("status")) as! Bool == false
             {
-                
-                if (JSON as AnyObject).object(forKey:("status")) as! Bool == false
-                {
-                    completion(JSON as AnyObject, false)
-                    //                    HUD.flash(HUDContentType.systemActivity, delay: 0.0)
-                    UtilityClass.hideACProgressHUD()
-                }
-                else
-                {
-                    completion(JSON as AnyObject, true)
-                    UtilityClass.hideACProgressHUD()
-                    
-                }
+                completion(JSON as AnyObject, false)
+                //                    HUD.flash(HUDContentType.systemActivity, delay: 0.0)
+                UtilityClass.hideACProgressHUD()
             }
             else
             {
-                print("Data not Found")
+                completion(JSON as AnyObject, true)
                 UtilityClass.hideACProgressHUD()
+                
             }
+        }
+        else
+        {
+            print("Data not Found")
+            UtilityClass.hideACProgressHUD()
+        }
     }
 }
 

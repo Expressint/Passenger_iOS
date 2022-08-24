@@ -184,7 +184,7 @@
                                 <constraint firstItem="jp7-n5-A8M" firstAttribute="top" secondItem="eAQ-ue-k9S" secondAttribute="top" id="zs4-aG-TyZ"/>
                             </constraints>
                         </view>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-xN-eIP">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-xN-eIP">
                             <rect key="frame" x="167.5" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="QgQ-Dq-yqS"/>

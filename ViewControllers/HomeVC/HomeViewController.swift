@@ -5457,7 +5457,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -5486,7 +5486,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"

@@ -72,7 +72,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         acController.delegate = self
     
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"

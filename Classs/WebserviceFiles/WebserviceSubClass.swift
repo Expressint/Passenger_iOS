@@ -11,8 +11,8 @@ import Alamofire
 
 let DriverLogin = WebserviceURLs.kDriverLogin
 let Registration =  WebserviceURLs.kDriverRegister
-let SocialLogin               = WebserviceURLs.kSocialLogin
-let AppleSocialLogin               = WebserviceURLs.kAppleSocialLogin
+let SocialLogin = WebserviceURLs.kSocialLogin
+let AppleSocialLogin = WebserviceURLs.kAppleSocialLogin
 let ForgotPassword =  WebserviceURLs.kForgotPassword
 let CarLists =  WebserviceURLs.kGetCarList
 let MakeBookingRequest = WebserviceURLs.kMakeBookingRequest
@@ -28,7 +28,7 @@ let UpdateProfile = WebserviceURLs.kUpdateProfile
 let PastBooking = WebserviceURLs.kPastBooking
 let UpcomingBooking = WebserviceURLs.kUpcomingBooking
 let OngoingBooking = WebserviceURLs.kOngoingBooking
-let FeedbackList              = WebserviceURLs.kFeedbackList
+let FeedbackList = WebserviceURLs.kFeedbackList
 let cardsList = WebserviceURLs.kCardsList
 let bookPackage = WebserviceURLs.kBookPackage
 let packageHistory = WebserviceURLs.kPackageBookingHistory

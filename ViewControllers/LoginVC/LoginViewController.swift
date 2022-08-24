@@ -633,8 +633,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 }
                 else if let resDict = result as? NSDictionary
                 {
-                    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegistrationContainerViewController") as? RegistrationContainerViewController
                     AppDelegate.current?.isSocialLogin = true
+                    SingletonClass.sharedInstance.isFromSocilaLogin = true
+                    let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegistrationContainerViewController") as? RegistrationContainerViewController
                     SingletonClass.sharedInstance.strSocialEmail = dictData["Email"] as! String
                     SingletonClass.sharedInstance.strSocialFullName = "\(dictData["Firstname"] as! String) \(dictData["Lastname"] as! String)"
                     SingletonClass.sharedInstance.strSocialFirstName = dictData["Firstname"] as? String ?? ""
@@ -721,16 +722,14 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 let resDict = result as? NSDictionary
                 if(resDict?["message"] as! String == "User does not exist."){
-                    
+                    AppDelegate.current?.isSocialLogin = true
                     let viewController = self.storyboard?.instantiateViewController(withIdentifier: "RegistrationContainerViewController") as? RegistrationContainerViewController
-                    
                     SingletonClass.sharedInstance.strSocialEmail = dictData["Email"] as! String
                     SingletonClass.sharedInstance.strSocialFullName = "\(dictData["FirstName"] as! String) \(dictData["LastName"] as! String)"
-                    SingletonClass.sharedInstance.strSocialFirstName = dictData["Firstname"] as? String ?? ""
-                    SingletonClass.sharedInstance.strSocialLastName =  dictData["Lastname"] as? String ?? ""
+                    SingletonClass.sharedInstance.strSocialFirstName = dictData["FirstName"] as! String
+                    SingletonClass.sharedInstance.strSocialLastName =  dictData["LastName"] as! String
                     SingletonClass.sharedInstance.strSocialImage = ""
                     SingletonClass.sharedInstance.strAppleId = dictData["AppleID"] as! String
-                    
                     self.navigationController?.pushViewController(viewController!, animated: true)
                 }else{
                     UtilityClass.showAlert("", message: resDict?["message"] as! String, vc: self)

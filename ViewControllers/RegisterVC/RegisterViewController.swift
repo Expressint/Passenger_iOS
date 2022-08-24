@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 //        txtPhoneNumber.placeHolderColor = UIColor.red
         // Do any additional setup after loading the view.
         
-        if(AppDelegate.current?.isSocialLogin ?? false){
+        if(AppDelegate.current?.isSocialLogin ?? true){
             self.stackPassword.isHidden = true
             self.stackConfirmPassword.isHidden = true
         }else{
