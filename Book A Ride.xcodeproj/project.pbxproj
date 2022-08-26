@@ -155,6 +155,8 @@
 		3A84BC9B21C23CFC00EDA3A2 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9A21C23CFC00EDA3A2 /* RadioButton.m */; };
 		3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */; };
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
+		4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703D53D28B7611100D500B0 /* ImagePickerController.swift */; };
+		470DBDBF28B78B22003A0E5A /* ChatImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */; };
 		54056FFB266FEED40078D956 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 54056FFA266FEED40078D956 /* test.mp3 */; };
 		5415EC19277D9D5F00C66E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5415EC18277D9D5F00C66E5A /* Main.storyboard */; };
 		5415EC1B277DA5BA00C66E5A /* MyBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5415EC1A277DA5BA00C66E5A /* MyBookings.storyboard */; };
@@ -598,6 +600,8 @@
 		3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewCell.swift; sourceTree = "<group>"; };
 		3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewController.swift; sourceTree = "<group>"; };
 		46D6BDF823FFD22700A303B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4703D53D28B7611100D500B0 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewVC.swift; sourceTree = "<group>"; };
 		54056FFA266FEED40078D956 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
 		5415EC15277D966800C66E5A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5415EC18277D9D5F00C66E5A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -902,8 +906,8 @@
 				54056FFA266FEED40078D956 /* test.mp3 */,
 				1852C71B255A65B500CB0EE1 /* Book A Ride.entitlements */,
 				34E01A28220EEE2C000D048E /* Localizable.strings */,
-				3A40734421B512280015C494 /* Classs */,
 				3A4072D821B512270015C494 /* Fabric.framework */,
+				3A40734421B512280015C494 /* Classs */,
 				3A40734121B512270015C494 /* Libraries */,
 				EEFA6CA9220ECE30004F32E7 /* Storyboards */,
 				3A4072DC21B512270015C494 /* ViewControllers */,
@@ -1212,6 +1216,7 @@
 		3A40734121B512270015C494 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				4703D53D28B7611100D500B0 /* ImagePickerController.swift */,
 				3A84BC9821C23CFC00EDA3A2 /* RadioButton */,
 				3A84BC8821C22B2E00EDA3A2 /* RMUniversalAlert */,
 			);
@@ -1731,6 +1736,7 @@
 			isa = PBXGroup;
 			children = (
 				88BBE1FF28913EBA0024F935 /* ChatVC.swift */,
+				470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */,
 				88BBE20128913EDF0024F935 /* Cells */,
 			);
 			path = Chat;
@@ -2353,6 +2359,7 @@
 				3A84BC9521C22B2E00EDA3A2 /* UIActionSheet+Blocks.m in Sources */,
 				3A4073B421B512280015C494 /* PackageDetailViewController.swift in Sources */,
 				3A4073FA21B512280015C494 /* AKRadioButtonsController.swift in Sources */,
+				4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */,
 				3A4073C221B512280015C494 /* EditProfileViewController.swift in Sources */,
 				3A40740921B512280015C494 /* String+Timepiece.swift in Sources */,
 				3A40739F21B512280015C494 /* CustomAlertsViewController.swift in Sources */,
@@ -2405,6 +2412,7 @@
 				3A40740721B512280015C494 /* NSDate+Timepiece.swift in Sources */,
 				3A40740821B512280015C494 /* NSDateComponents+Timepiece.swift in Sources */,
 				3A4073BD21B512280015C494 /* BookTableSelectedDataViewController.swift in Sources */,
+				470DBDBF28B78B22003A0E5A /* ChatImageViewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

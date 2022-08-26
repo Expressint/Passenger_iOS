@@ -13,6 +13,11 @@ class SenderCell: UITableViewCell {
     @IBOutlet weak var lblMsgSender: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var vWMessage: UIView!
+    
+    @IBOutlet weak var lblImgDate: UILabel!
+    @IBOutlet weak var imgMsg: UIImageView!
+    @IBOutlet weak var vwImg: UIView!
+    
     var btnImgAction : (() -> ())?
     
     override func awakeFromNib() {

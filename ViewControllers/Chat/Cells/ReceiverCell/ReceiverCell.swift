@@ -14,6 +14,11 @@ class ReceiverCell: UITableViewCell {
     @IBOutlet weak var lblCompanyName: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var vWMessage: UIView!
+    
+    @IBOutlet weak var imgMsg: UIImageView!
+    @IBOutlet weak var lblImgDate: UILabel!
+    @IBOutlet weak var lblImgCompanyName: UILabel!
+    @IBOutlet weak var vwImg: UIView!
 
     var btnImgAction : (() -> ())?
     

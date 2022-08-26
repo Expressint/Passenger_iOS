@@ -18,6 +18,8 @@ import UserNotifications
 import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
+import PhotosUI
+
 
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
@@ -654,6 +656,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         SingletonClass.sharedInstance.isPasscodeON = false
         self.GoToLogin()
+    }
+    
+    static func showAlert(title: String?, message: String?, actions: [UIAlertAction]? = nil) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if let array = actions {
+            array.forEach { alertVC.addAction($0) }
+        } else {
+            alertVC.addAction(.init(title: "Ok", style: .cancel))
+        }
+        UIApplication.topViewController()?.present(alertVC, animated: true)
+    }
+
+    static func hasCameraAccess( result: @escaping (_ access: Bool) -> Void) {
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        switch authStatus {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
+                DispatchQueue.main.sync {
+                    result(granted)
+                }
+            }
+        case .restricted:
+            AppDelegate.showAlert(title: "Unable to access the Camera", message: "To enable access, go to Settings > Privacy > Camera and turn on Camera access for this app.")
+            result(false)
+        case .denied:
+            AppDelegate.showAlert(title: "Unable to access the Camera", message: "To enable access, go to Settings > Privacy > Camera and turn on Camera access for this app.")
+                result(false)
+
+        case .authorized:
+                 result(true)
+
+        @unknown default:
+                result(false)
+        }
+    }
+
+    static func hasPhotoLibraryAccess( result: @escaping (_ access: Bool) -> Void) {
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        switch authStatus {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { granted in
+                DispatchQueue.main.async {
+                    result(granted == .authorized)
+                }
+            }
+        case .restricted, .denied:
+            AppDelegate.showAlert(title: "Unable to access the Photos", message: "To enable access, go to Settings > Privacy > Photos and turn on Photos access for this app.")
+            DispatchQueue.main.async {
+                result(false)
+            }
+
+        case .authorized:
+            DispatchQueue.main.async {
+                result(true)
+            }
+        default:
+            DispatchQueue.main.async {
+                result(true)
+            }
+        }
     }
 }
 

@@ -753,6 +753,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //self.checkPassengerID()
+        
         self.setLocalization()
         //        self.btnDoneForLocationSelected.isHidden = true
         
@@ -813,6 +815,16 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //        }
         
 
+    }
+    
+    func checkPassengerID() {
+        let getData = SingletonClass.sharedInstance.dictProfile
+        let Url = getData.object(forKey: "passenger_id") as? String ?? ""
+        if(Url == ""){
+            UtilityClass.setCustomAlert(title: "Required", message: "Please upload ID Proof Doc") { (index, title) in
+                self.GotoProfilePage()
+            }
+        }
     }
     
     func setLocalization()
