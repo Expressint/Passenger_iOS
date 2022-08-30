@@ -34,7 +34,7 @@ class ChatVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.socketMethods()
         self.setupUI()
         self.getAllMessage()
         AppDelegate.current?.currentChatID = receiverId
@@ -44,7 +44,7 @@ class ChatVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.btnSelectImage.isHidden = (isDispacherChat) ? false : true
         AppDelegate.current?.isChatVisible = true
-        self.socketMethods()
+        
         self.setupKeyboard(false)
         self.hideKeyboard()
         self.registerForKeyboardNotifications()
