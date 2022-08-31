@@ -23,6 +23,10 @@ class ChatVC: BaseViewController {
     @IBOutlet weak var lblNavLocation: UILabel!
     @IBOutlet weak var lblNavBack: UIButton!
     
+    @IBOutlet weak var vwIsTyping: UIView!
+    @IBOutlet weak var lblTyping: UILabel!
+    var timer: Timer?
+    
     var receiverName: String = ""
     var receiverId: String = ""
     var bookingId: String = ""
@@ -43,6 +47,8 @@ class ChatVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.btnSelectImage.isHidden = (isDispacherChat) ? false : true
+        self.vwIsTyping.isHidden = true
+        
         AppDelegate.current?.isChatVisible = true
         
         self.setupKeyboard(false)
@@ -72,6 +78,7 @@ class ChatVC: BaseViewController {
     func setupUI(){
         self.imagePicker = ImagePickerController(presentationController: self, delegate: self)
         self.title = receiverName
+        
         txtMessage.delegate = self
         txtMessage.text = "Enter Message.."
         txtMessage.textColor = UIColor.black
@@ -103,6 +110,8 @@ class ChatVC: BaseViewController {
     {
         if(self.socket?.status == .connected) {
             self.socketOnForReceiveMessage()
+//            self.socketOnForStartTyping()
+//            self.socketOnForStopTyping()
         }else{
             var isSocketConnected = Bool()
             socket?.on(clientEvent: .disconnect) { (data, ack) in
@@ -125,10 +134,77 @@ class ChatVC: BaseViewController {
                 if (isSocketConnected == false) {
                     isSocketConnected = true
                     self.socketOnForReceiveMessage()
+//                    self.socketOnForStartTyping()
+//                    self.socketOnForStopTyping()
                 }
             }
             socket?.connect()
         }
+    }
+    
+    func socketOnForStartTyping() {
+        self.socket?.on(SocketData.starTyping, callback: { (data, ack) in
+            print ("response is : \(data)")
+            
+            let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
+            let senderType = dictData["sender_type"] as? String ?? ""
+            
+            if(self.isDispacherChat){
+                if(senderType == "dispatcher"){
+                    self.lblTyping.text = "\(self.receiverName) is typing..."
+                    self.vwIsTyping.isHidden = false
+                    self.scrollToBottom()
+                }
+            }else{
+                if(senderType != "dispatcher"){
+                    self.lblTyping.text = "\(self.receiverName) is typing..."
+                    self.vwIsTyping.isHidden = false
+                    self.scrollToBottom()
+                }
+            }
+        })
+    }
+    
+    func socketOnForStopTyping() {
+        self.socket?.on(SocketData.stopTyping, callback: { (data, ack) in
+            print ("response is : \(data)")
+            
+            let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
+            let senderType = dictData["sender_type"] as? String ?? ""
+            if(self.isDispacherChat){
+                if(senderType == "dispatcher"){
+                    self.vwIsTyping.isHidden = true
+                    self.scrollToBottom()
+                }
+            }else{
+                if(senderType != "dispatcher"){
+                    self.vwIsTyping.isHidden = true
+                    self.scrollToBottom()
+                }
+            }
+        })
+    }
+    
+    func emitForStartTyping(){
+        let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
+                      "receiver_id": receiverId,
+                      "message" : self.txtMessage.text ?? "",
+                      "sender_type" : "passenger",
+                      "receiver_type" : (isDispacherChat) ? "dispatcher" : "driver"] as [String : Any]
+        
+        self.socket?.emit(SocketData.DriverTyping, with: [myJSON], completion: nil)
+        print ("\(SocketData.DriverTyping) : \(myJSON)")
+    }
+    
+    func emitForStopTyping(){
+        let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
+                      "receiver_id": self.receiverId,
+                      "message" : self.txtMessage.text ?? "",
+                      "sender_type" : "passenger",
+                      "receiver_type" : (self.isDispacherChat) ? "dispatcher" : "driver"] as [String : Any]
+        
+        self.socket?.emit(SocketData.DriverStopTyping, with: [myJSON], completion: nil)
+        print ("\(SocketData.DriverStopTyping) : \(myJSON)")
     }
 
     func socketOnForReceiveMessage() {
@@ -154,6 +230,7 @@ class ChatVC: BaseViewController {
     }
     
     func sendMessage() {
+        //self.emitForStopTyping()
         let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
                       "receiver_id": receiverId,
                       "message" : self.txtMessage.text ?? "",
@@ -232,6 +309,20 @@ extension ChatVC: UITextViewDelegate {
             txtMessage.textColor = UIColor.black
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        timer?.invalidate()
+//        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+//            self.emitForStopTyping()
+//        })
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        //self.emitForStartTyping()
+    }
+
+
 }
 
 // MARK: - Image Picker Delegate

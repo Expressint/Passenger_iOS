@@ -198,6 +198,11 @@ struct SocketData {
     static let sendMessage = "sendMessage"
     static let receiveMessage = "receive_message"
     
+    static let starTyping = "start_typing"
+    static let stopTyping = "stop_typing"
+    static let DriverTyping = "is_typing"
+    static let DriverStopTyping = "is_stop_typing"
+    
 }
 
 struct SocketDataKeys {
