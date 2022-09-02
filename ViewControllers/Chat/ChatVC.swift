@@ -148,16 +148,19 @@ class ChatVC: BaseViewController {
             
             let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
             let senderType = dictData["sender_type"] as? String ?? ""
+            let senderTName = dictData["sender_fullname"] as? String ?? self.receiverName
             
             if(self.isDispacherChat){
                 if(senderType == "dispatcher"){
-                    self.lblTyping.text = "\(self.receiverName) is typing..."
+                    //self.lblTyping.text = "\(self.receiverName) is typing..."
+                    self.lblTyping.text = "\(senderTName) is typing..."
                     self.vwIsTyping.isHidden = false
                     self.scrollToBottom()
                 }
             }else{
                 if(senderType != "dispatcher"){
-                    self.lblTyping.text = "\(self.receiverName) is typing..."
+                    //self.lblTyping.text = "\(self.receiverName) is typing..."
+                    self.lblTyping.text = "\(senderTName) is typing..."
                     self.vwIsTyping.isHidden = false
                     self.scrollToBottom()
                 }

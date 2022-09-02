@@ -196,7 +196,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         
         let calendar = Calendar.current
-        let date = calendar.date(byAdding: .minute, value: 30, to: Date())
+        let date = calendar.date(byAdding: .minute, value: 0, to: Date())
         datePickerView.minimumDate = date
         txtDataAndTimeFromCalendar.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(self.pickupdateMethod(_:)), for: UIControl.Event.valueChanged)
@@ -820,6 +820,12 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             ValidationStatus = false
             ValidationMessage = "Select Payment Type"
         }
+        
+        let status = checkDuration(strPickTime: self.convertDateToString)
+        if(!status){
+            ValidationStatus = false
+            ValidationMessage = "Please select pickUp time one hour later"
+        }
 //        else if paymentType == "card" && CardID.count == 0 {
 //            ValidationStatus = false
 //            ValidationMessage = "Please Select Card or Change the Payment Method"
@@ -828,8 +834,39 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         return (ValidationMessage,ValidationStatus)
     }
     
+    func checkDuration(strPickTime: String) -> Bool {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .minute, value: 0, to: Date()) ?? Date()
+        let dateFormaterView = DateFormatter()
+        dateFormaterView.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date1 = dateFormaterView.string(from: date)
+        
+        let status = self.timeGapBetweenDates(previousDate:date1 , currentDate: strPickTime)
+        return status
+    }
     
-    
+    func timeGapBetweenDates(previousDate : String,currentDate : String) -> Bool {
+        let dateString1 = previousDate
+        let dateString2 = currentDate
+
+        let Dateformatter = DateFormatter()
+        Dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+
+        let date1 = Dateformatter.date(from: dateString1)
+        let date2 = Dateformatter.date(from: dateString2)
+
+
+        let distanceBetweenDates: TimeInterval? = date2?.timeIntervalSince(date1!)
+        let minsInAnHour: Double = 60
+
+        let minBetweenDates = Int((distanceBetweenDates! / minsInAnHour))
+        if minBetweenDates >= 60 {
+            return true
+        }else{
+            return false
+        }
+    }
     
     @IBAction func btnSubmit(_ sender: UIButton) {
         
@@ -3302,5 +3339,14 @@ extension UIImageView {
         let templateImage = self.image?.withRenderingMode(.alwaysTemplate)
         self.image = templateImage
         self.tintColor = color
+    }
+}
+
+extension Date {
+   func getFormattedDate(format: String) -> String {
+       let dateformat = DateFormatter()
+       dateformat.dateFormat = format
+       dateformat.timeZone = .current
+       return dateformat.string(from: self)
     }
 }
