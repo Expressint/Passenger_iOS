@@ -378,6 +378,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="gqf-xt-tCf"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1661,6 +1664,7 @@
                         <outlet property="lblWaitingTime" destination="rFc-Ne-fSD" id="1uU-QM-i4f"/>
                         <outlet property="lblYourRequestPendingStatusTitle" destination="zJL-fE-aQy" id="aUf-3y-qE1"/>
                         <outlet property="stackEstimatedView" destination="i9V-ae-eSG" id="x8J-Ih-krP"/>
+                        <outlet property="stackEstimatedViewHeight" destination="gqf-xt-tCf" id="d4h-rb-6fT"/>
                         <outlet property="stackViewNumberOfPassenger" destination="d44-D0-lA3" id="1xj-9h-cTL"/>
                         <outlet property="stackViewOfPromocode" destination="Sfb-Qj-hms" id="oSh-Ey-AlB"/>
                         <outlet property="txtAdditionalDestinationLocation" destination="QwI-K1-6nn" id="92y-Cu-2cm"/>

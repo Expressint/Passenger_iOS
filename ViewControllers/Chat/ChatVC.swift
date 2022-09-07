@@ -110,8 +110,8 @@ class ChatVC: BaseViewController {
     {
         if(self.socket?.status == .connected) {
             self.socketOnForReceiveMessage()
-//            self.socketOnForStartTyping()
-//            self.socketOnForStopTyping()
+            self.socketOnForStartTyping()
+            self.socketOnForStopTyping()
         }else{
             var isSocketConnected = Bool()
             socket?.on(clientEvent: .disconnect) { (data, ack) in
@@ -134,8 +134,8 @@ class ChatVC: BaseViewController {
                 if (isSocketConnected == false) {
                     isSocketConnected = true
                     self.socketOnForReceiveMessage()
-//                    self.socketOnForStartTyping()
-//                    self.socketOnForStopTyping()
+                    self.socketOnForStartTyping()
+                    self.socketOnForStopTyping()
                 }
             }
             socket?.connect()
@@ -233,7 +233,7 @@ class ChatVC: BaseViewController {
     }
     
     func sendMessage() {
-        //self.emitForStopTyping()
+        self.emitForStopTyping()
         let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
                       "receiver_id": receiverId,
                       "message" : self.txtMessage.text ?? "",
@@ -314,15 +314,15 @@ extension ChatVC: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        timer?.invalidate()
-//        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
-//            self.emitForStopTyping()
-//        })
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+            self.emitForStopTyping()
+        })
         return true
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        //self.emitForStartTyping()
+        self.emitForStartTyping()
     }
 
 

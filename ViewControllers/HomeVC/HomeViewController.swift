@@ -3938,6 +3938,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kAcceptBookingRequestNotification, callback: { (data, ack) in
             print("AcceptBooking data is \(data)")
             self.viewActivity.stopAnimating()
+            self.showEstimatedView()
             
             self.locationManager.startUpdatingLocation()
             self.timerToUpdatePassengerlocation?.invalidate()
@@ -4577,6 +4578,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kPickupPassengerNotification, callback: { (data, ack) in
             print("socketMethodForGettingPickUpNotification() is \(data)")
             self.hideWaitingTime()
+            self.hideEstimatedView()
             
             //            self.stopTimer()
             /*
@@ -4993,6 +4995,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kAcceptAdvancedBookingRequestNotification, callback: { (data, ack) in
             print("onAcceptBookLaterBookingRequestNotification() is \(data)")
             
+            self.showEstimatedView()
+            
             //            self.playSound(fileName: "RequestConfirm", extensionType: "mp3")
             
             //            UtilityClass.showAlertWithCompletion("", message: "Your request has been Accepted.", vc: self, completionHandler: { ACTION in
@@ -5048,7 +5052,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kAdvancedBookingPickupPassengerNotification, callback: { (data, ack) in
             print("onPickupPassengerByDriverInBookLaterRequestNotification() is \(data)")
             self.hideWaitingTime()
-            
+            self.hideEstimatedView()
             var bookingId = String()
             
             if let bookingInfoData = (data as! [[String:AnyObject]])[0]["BookingInfo"] as? [[String:AnyObject]] {
@@ -5396,6 +5400,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         self.socket?.on(SocketData.kAcceptAdvancedBookingRequestNotify, callback: { (data, ack) in
             print("onReceiveNotificationWhenDriverAcceptRequest is \(data)")
+            self.showEstimatedView()
             
             var bookingId = String()
             
@@ -5469,7 +5474,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -5498,7 +5503,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -6879,9 +6884,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             SingletonClass.sharedInstance.bookingId = self.bookingIDNow
                             
                             self.bookingTypeIsBookNowAndAccepted()
-                            
+                            self.showEstimatedView()
                         }
                         else if statusOfRequest == "traveling" {
+                            self.hideEstimatedView()
                             self.bookingIDNow = self.dictCurrentBookingInfoData.object(forKey: "Id") as! String
                             self.passengerId = SingletonClass.sharedInstance.strPassengerID
                             SingletonClass.sharedInstance.bookingId = self.bookingIDNow
@@ -6901,7 +6907,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         self.strBookingType = bookingType
                         
                         if statusOfRequest == "accepted" {
-                            
+                            self.showEstimatedView()
                             self.bookingIDNow = self.dictCurrentBookingInfoData.object(forKey: "Id") as! String
                             self.passengerId = SingletonClass.sharedInstance.strPassengerID
                             SingletonClass.sharedInstance.bookingId = self.bookingIDNow
@@ -6910,6 +6916,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             
                         }
                         else if statusOfRequest == "traveling" {
+                            self.hideEstimatedView()
                             self.bookingIDNow = self.dictCurrentBookingInfoData.object(forKey: "Id") as! String
                             self.passengerId = SingletonClass.sharedInstance.strPassengerID
                             SingletonClass.sharedInstance.bookingId = self.bookingIDNow
