@@ -14,9 +14,9 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "7114"
-            endingLineNumber = "7114"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            startingLineNumber = "7117"
+            endingLineNumber = "7117"
+            landmarkName = "bookingTypeIsBookNowAndAccepted()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -30,8 +30,8 @@
             filePath = "ViewControllers/RegisterVC/RegisterOTPVarificationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "btnResendOTP(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,9 +46,9 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5592"
-            endingLineNumber = "5592"
-            landmarkName = "clearDestinationLocation()"
+            startingLineNumber = "5595"
+            endingLineNumber = "5595"
+            landmarkName = "viewController(_:didAutocompleteWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5526"
-            endingLineNumber = "5526"
-            landmarkName = "btnClearDropOffLocation(_:)"
+            startingLineNumber = "5529"
+            endingLineNumber = "5529"
+            landmarkName = "viewController(_:didAutocompleteWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "5239"
-            endingLineNumber = "5239"
-            landmarkName = "onAdvanceTripInfoBeforeStartTrip()"
+            startingLineNumber = "5242"
+            endingLineNumber = "5242"
+            landmarkName = "onReceiveDriverLocationToPassenger()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4444"
-            endingLineNumber = "4444"
-            landmarkName = "socketMethodForGettingPickUpNotification()"
+            startingLineNumber = "4447"
+            endingLineNumber = "4447"
+            landmarkName = "socketMethodForGettingBookingRejectNotification()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -145,6 +145,22 @@
             startingLineNumber = "629"
             endingLineNumber = "629"
             landmarkName = "ChatScreen()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C789657-C059-461B-88F6-8CFC30D2C88B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/RegisterVC/RegisterViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "indexChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

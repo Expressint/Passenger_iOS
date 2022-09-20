@@ -33,7 +33,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     @IBOutlet weak var btnTermsSignUp: UIButton!
     @IBOutlet weak var btnPassengerIId: UIButton!
     @IBOutlet weak var imgPassengerId: UIImageView!
-
+    @IBOutlet weak var lblPassengerIdProof: UILabel!
+    
 
 //    var strEmail = String()
    // @IBOutlet weak var txtFullName: ThemeTextField!
@@ -86,6 +87,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         btnSignUp.setTitle("Submit".localized , for: .normal)
         btnmale.setTitle("Male".localized, for: .normal)
         btnFemail.setTitle("Female".localized, for: .normal)
+        lblPassengerIdProof.text = "ID Proof (License/ID card /Passport)".localized
         
     }
     //-------------------------------------------------------------
@@ -113,9 +115,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             }
         }
         
-        txtTermsAndPrivacy.text = "I agree with Terms & conditions and Privacy Policy"
-                self.txtTermsAndPrivacy.hyperLink(originalText: "I agree with Terms & conditions and Privacy Policy",
-                                                  linkTextsAndTypes: [("Terms & conditions"): termsLink,("Privacy Policy"): PrivacyLink])
+        txtTermsAndPrivacy.text = "\("I agree with".localized) \("Terms & conditions".localized) \("and".localized) \("Privacy Policy".localized)"
+        self.txtTermsAndPrivacy.hyperLink(originalText: "\("I agree with".localized) \("Terms & conditions".localized) \("and".localized) \("Privacy Policy".localized)",linkTextsAndTypes: [("Terms & conditions".localized): termsLink,("Privacy Policy".localized): PrivacyLink])
                 
                 self.txtTermsAndPrivacy.delegate = self
                 self.txtTermsAndPrivacy.textColor = .white
@@ -171,15 +172,15 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     // MARK: - Pick Image
      func TapToProfilePicture() {
         
-        let alert = UIAlertController(title: "Choose Options", message: nil, preferredStyle: .alert)
+         let alert = UIAlertController(title: "Choose Options".localized, message: nil, preferredStyle: .alert)
         
-        let Gallery = UIAlertAction(title: "Gallery", style: .default, handler: { ACTION in
+         let Gallery = UIAlertAction(title: "Gallery".localized, style: .default, handler: { ACTION in
             self.PickingImageFromGallery()
         })
-        let Camera  = UIAlertAction(title: "Camera", style: .default, handler: { ACTION in
+         let Camera  = UIAlertAction(title: "Camera".localized, style: .default, handler: { ACTION in
             self.PickingImageFromCamera()
         })
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+         let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         
         alert.addAction(Gallery)
         alert.addAction(Camera)
@@ -218,14 +219,14 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             case .denied:
                 DispatchQueue.main.async {
                     
-                    let alert = UIAlertController(title: "Photos", message: "Photo access is absolutely necessary to use this app", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Photos".localized, message: "Photo access is absolutely necessary to use this app".localized, preferredStyle: .alert)
                     
                     // Add "OK" Button to alert, pressing it will bring you to the settings app
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { action in
                         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Will do later", style: .default, handler: { action in
+                    alert.addAction(UIAlertAction(title: "Will do later".localized, style: .default, handler: { action in
                     }))
                     // Show the alert with animation
                     self.present(alert, animated: true)
@@ -259,14 +260,14 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             } else {
                 DispatchQueue.main.async {
                     
-                    let alert = UIAlertController(title: "Camera", message: "Camera access is absolutely necessary to use this app", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Camera".localized, message: "Camera access is absolutely necessary to use this app".localized, preferredStyle: .alert)
                     
                     // Add "OK" Button to alert, pressing it will bri≥ng you to the settings app
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { action in
                         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!)
                     }))
                     
-                    alert.addAction(UIAlertAction(title: "Will do later", style: .default, handler: { action in
+                    alert.addAction(UIAlertAction(title: "Will do later".localized, style: .default, handler: { action in
                     }))
                     // Show the alert with animation
                     self.present(alert, animated: true)
@@ -329,18 +330,15 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     func checkValidation() -> Bool {
         
          if imgProfile.image == UIImage(named: "iconProfilePicBlank"){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
+             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please choose profile picture".localized) { (index, title) in
             }
             return false
-        }
-        else if imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!) {
-              UtilityClass.setCustomAlert(title: "Missing", message: "Please choose profile picture") { (index, title) in
+        }else if imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!) {
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please choose profile picture".localized) { (index, title) in
               }
               return false
-        }
-        
-        else if imgPassengerId.image!.isEqualToImage(image: UIImage(named: "icon_Picture")!) {
-              UtilityClass.setCustomAlert(title: "Missing", message: "Please upload ID Proof Doc") { (index, title) in
+        }else if imgPassengerId.image!.isEqualToImage(image: UIImage(named: "icon_Picture")!) {
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please upload ID Proof Doc".localized) { (index, title) in
               }
               return false
         }
@@ -351,13 +349,13 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //        }
         
         else if (txtFirstName.text?.count == 0){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter first name") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Enter first name".localized) { (index, title) in
             }
             return false
         }
         
         else if (txtLastName.text?.count == 0){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter last name") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Enter last name".localized) { (index, title) in
             }
             return false
         }
@@ -382,16 +380,16 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
 //            return false
 //        }
         else if (txtAddress.text?.count == 0) {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter address") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter address".localized) { (index, title) in
             }
             return false
         } else if gender == "" {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please choose gender") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please choose gender".localized) { (index, title) in
             }
             return false
         }
         else if btnTermsSignUp.isSelected == false{
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please accept terms & condition and privacy policy") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please accept terms & condition and privacy policy".localized) { (index, title) in
             }
             return false
         }
@@ -427,7 +425,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         
         let isplaceholder = imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!)
         guard (txtFirstName.text?.count != 0) || (txtLastName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter all details") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter all details".localized) { (index, title) in
             }
             return
         }

@@ -1,44 +1,104 @@
 
 //LOGIN
 "Email/Mobile Number" = "Correo electrónico/Número de móvil";
+"Password" = "contraseña";
+"Don't have an Account?" = "¿No tienes una cuenta?";
+"Forgot Password?" = "Has olvidado tu contraseña?";
+"Sign In" = "Iniciar sesion";
+"Sign Up" = "Registrarse";
+"Missing" = "Desaparecido";
+"Enter Email/Mobile Number" = "Ingrese el número de correo electrónico / móvil";
+"Please enter password" =  "Por favor, ingrese contraseña";
+"Password must contain atleast 8 characters" =  "La contraseña debe contener al menos 8 caracteres.";
+"Success" = "Éxito";
+"Please fill all details" = "Por favor, rellene todos los detalles";
 
+//Registration
+"First Name"  = "Primer Nombre";
+"Last Name"  = "Apellido";
+"Address"  = "Direccion";
+"Referral Code (Optional)" = "Código de Referencia (Opcional)";
+"Post Code" = "Código Postal";
+"Date Of Birth" = "Fecha de nacimiento";
+"Submit" = "Enviar";
+"Male" = "Masculino";
+"Female" = "Femenino";
+"Phone Number" = "Número de teléfono";
+"Email" = "Correo Electronico";
+"Confirm Password"  = "Confirme su Contraseña";
+"Next" = "Siguiente";
+"Please enter phone number" = "Por favor, introduzca el número de teléfono";
+"Please enter email" = "Por favor ingrese el correo electrónico";
+"Please enter a valid email" = "Por favor introduzca una dirección de correo electrónico válida";
+"Your password can’t start or end with a blank space" = "La contraseña no puede comenzar ni finalizar con un espacio en blanco";
+"Password must contain at least 8 characters" = "La contraseña debe contener al menos 8 caracteres.";
+"Required" = "Obligatorio";
+"Please confirm the password" = "Por favor, confirme la contraseña";
+"Confirm password can’t start or end with a blank space" = "Confirmar que la contraseña no puede comenzar o finalizar con un espacio en blanco";
+"Password and confirm password does not match" = "La contraseña y la contraseña de confirmación no coinciden";
+"I agree with" = "Acepto los";
+"Terms & conditions" = "Términos y condiciones";
+"Privacy Policy" = "Política de privacidad";
+"and" = "y la";
+"Photo access is absolutely necessary to use this app" = "El acceso a las fotos es absolutamente necesario para usar esta aplicación";
+"Photos" = "Fotos";
+"OK" = "De acuerdo";
+"Will do later" = "Lo haré más tarde";
+"Camera access is absolutely necessary to use this app" = "El acceso a la cámara es absolutamente necesario para usar esta aplicación";
+"Camera" = "Cámara";
+"Please choose profile picture" = "Por favor, elija la foto de perfil";
+"Please upload ID Proof Doc" = "Por favor, cargue id proof doc";
+"Enter first name" = "Introduzca el nombre";
+"Enter last name" = "Introduzca el apellido";
+"Please enter address" = "Por favor ingrese la dirección";
+"Please choose gender" = "Por favor, elija el género";
+"Please accept terms & condition and privacy policy" = "Por favor acepte los términos y condiciones y la política de privacidad";
+"Please enter all details" = "Por favor, introduzca todos los detalles";
+"Registration completed successfully" = "Registro completado con éxito";
+"Submit" = "Enviar";
+"Choose Options" = "Elija opciones";
+"Gallery" = "Galería";
+"Cancel" = "Cancelar";
+"ID Proof (License/ID card /Passport)" = "Prueba de identificación (licencia / tarjeta de identificación / pasaporte)";
 
+//RegisterOTPVerification
+"Enter OTP" = "Ingrese OTP";
+"Resend OTP" = "Reenviar OTP";
+"Verify" = "Verificar";
+"OTP cannot be blank" = "OTP no puede estar en blanco";
+"Please enter valid OTP code" = "Introduzca un código OTP válido";
 
-
-
-
-
+//Navigetion drower
+"Settings" =  "Ajustes";
+"Sign out" = "desconectar";
+"Legal Stuff" = "Aspectos legales";
+"Delete Account" = "Borrar cuenta";
+"My Bookings" = "Mis Reservas";
+"Favourites" = "Favoritos";
+"My Receipts" = "Mis recibos";
+"Help" = "Ayuda";
+"Invite Friends" = "Invitar a amigos";
 
 "App Name" = ""; //"Book A Ride";
-"Phone Number" = "Phone Number";
 "Flight Number"  = "Flight Number";
 "Flight Number (If applicable)" = "Flight Number (If applicable)";
 "Notes"  = "Notes";
-"Password" = "Password";
-"Email" = "Email";
-"Confirm Password"  = "Confirm Password";
-"First Name"  = "First Name";
+
+
 "Full Name"  = "Full Name";
-"Address"  = "Address";
 "Toll Fee" = "Toll Fee";
 "Sub Total" =  "Sub Total";
 "Name"  = "Name";
-"Last Name"  = "Last Name";
 "Invite Code"  = "Invite Code";
 "Car not available!" = "Car not available!";
 "Book Car Now" = "Book Car Now";
 "Not Available" = "Not Available";
 "Book Car Later" = "Book Car Later";
 "Home" = "Home";
-"MY RECEIPTS" = "MY RECEIPTS";
-"INVITE FRIENDS" =  "INVITE FRIENDS";
 "PROFILE"= "PROFILE";
 "ACCOUNT" = "ACCOUNT";
-"My Bookings" = "My Bookings";
 "GPS is settings" = "GPS is settings";
 "GPS is not enabled. Do you want to go to settings menu?" = "GPS is not enabled. Do you want to go to settings menu?";
-"Settings" = "Settings";
-"Cancel" = "Cancel";
 "Permission Denied, You cannot access location data." = "Permission Denied, You cannot access location data.";
 "Request Cancelled" = "Request Cancelled";
 "NO" = "NO";
@@ -51,7 +111,6 @@
 "Need Camera Permission" = "Need Camera Permission";
 "This app needs camera permission." = "This app needs camera permission.";
 "Grant" = "Grant";
-"Cancel" = "Cancel";
 "Storage Permission" = "Storage Permission";
 "This app needs storage permission." = "This app needs storage permission.";
 "All Notifications" = "All Notifications";
@@ -76,10 +135,8 @@
 "Current Balance" = "Current Balance";
 "Add a Card" = "Add a Card";
 "Add New Card" = "Add New Card";
-"OK" = "OK";
 "Make Payment" = "Make Payment";
 "Not Available" = "Not Available";
-"Cancel" = "Cancel";
 "Done" = "Done";
 "Card Number" = "Card Number";
 "Expiry Date" = "Expiry Date";
@@ -91,17 +148,11 @@
 "Invalid card number." = "Invalid card number.";
 "Have a promocode?" = "Have a promocode?";
 "%1$s Applied" = "%1$s Applied";
-"OK" = "OK";
 "Card Number" = "Card Number";
 "Error Message" = "Error Message";
-"Please enter phone number" = "Please enter phone number";
 "Please enter a valid phone number" = "Please enter a valid phone number";
 "Enter Passcode" = "Enter Passcode";
 "Passcode Required" = "Passcode Required";
-"Please enter email" = "Please enter email";
-"Please enter a valid email" = "Please enter a valid email";
-"Please enter password" = "Please enter password";
-"Password must contain at least 8 characters" = "Password must contain at least 8 characters";
 "Please enter confirm password" = "Please enter confirm password";
 "Password and confirm password must be same" = "Password and confirm password must be same";
 "Please try again later" = "Please try again later";
@@ -112,28 +163,18 @@
 "Please select profile image" = "Please select profile image";
 "Please enter first name" = "Please enter first name";
 "Please select date of birth" = "Please select date of birth";
-"Please enter address" = "Please enter address";
 "Please first complete your trip" = "Please first complete your trip";
 "Please enter new password" = "Please enter new password";
-"Next" = "Next";
 "fonts/proxima-nova-586c8e081cb01.otf" = "fonts/proxima-nova-586c8e081cb01.otf";
-"Sign In" = "Sign In";
-"Sign Up" = "Sign Up";
-"Don't have an account?" = "Don't have an account?";
+
 "OR" = "OR";
-"Enter OTP" = "Enter OTP";
 "How was your experience with Driver" = "How was your experience with Driver";
-"Verify" = "Verify";
 "BALANCE" = "BALANCE";
 "HISTORY" = "HISTORY";
 "Card List" = "Card List";
-"Resend OTP" = "Resend OTP";
 "EDIT PROFILE" = "EDIT PROFILE";
 "ADD CARD" = "ADD CARD";
 "Image" = "Image";
-"Date Of Birth" = "Date Of Birth";
-"Post Code" = "Post Code";
-"Submit" = "Submit";
 "Success Message" = "Success Message";
 "Home" = "Home";
 "Legal" = "Legal";
@@ -175,17 +216,11 @@
 "Profile" = "Profile";
 "Gender" = "Gender";
 "Change Password" = "Change Password";
-"Male" = "Male";
-"Female" = "Female";
 "Save" = "Save";
 "Confirm" = "Confirm";
-"Confirm Password" = "Confirm Password";
 "New Password" = "New Password";
-"My Bookings" = "My Bookings";
 "Payment Options" = "Payment Options";
 "Wallet" = "Wallet";
-"My Receipts" = "My Receipts";
-"Invite Friends" = "Invite Friends";
 "My Ratings" = "My Ratings";
 "Comment" = "Comment";
 "Car Model:" = "Car Model:";
@@ -193,11 +228,8 @@
 "Flight Number (If applicable)" = "Flight Number (If applicable)";
 "Select Payment Method" = "Select Payment Method";
 "You will be notified with your driver detail after your request is submited." = "You will be notified with your driver detail after your request is submited.";
-"Submit" = "Submit";
 "Save" = "Save";
-"Signout" = "Signout";
 "Forgot Passwor" = "Forgot Password";
-"Forgot Password?" = "Forgot Password?";
 "PickupDate" = "Pickup Date";
 "SHARE" = "SHARE";
 "Driver Info" = "Driver Info";
@@ -310,7 +342,6 @@
 "Promo Code"  = "Promo Code";
 "SHARE YOUR INVITE CODE" = "SHARE YOUR INVITE CODE";
 "Please enter promocode" = "Please enter promocode";
-"Camera" = "Camera";
 "You need to grant access to&#160;" = "You need to grant access to&#160;";
 "Money added  successfully" = "Money added  successfully";
 "Transfer Success check your history" = "Transfer Success check your history";
@@ -333,7 +364,6 @@
 "condition" = "Conditions";
 "privacyPolicy" = "Privacy Policy";
 "select" = "Select";
-"cancel" = "Cancel";
 "addTip" = "Add Tip";
 "no" = "No";
 "yes" = "Yes";
@@ -389,7 +419,6 @@
 "Your trip has now started." = "Your trip has now started.";
 "Trip Status" = "Trip Status";
 "Thanks for feedback" = "Thanks for feedback";
-"Cancel" = "Cancel";
 "Add Tip" = "Add Tip";
 "Any other feedback(Optional)" = "Any other feedback(Optional)";
 "Tip Alert" = "Tip Alert";
@@ -397,7 +426,6 @@
 "Are you sure you want to logout?" = "Are you sure you want to logout?";
 "Please enter drop off location" = "Please enter drop off location";
 "Please enter pick up location" = "Please enter pick up location";
-"Please fill all details" = "Please fill all details";
 "All fields are required..." = "All fields are required...";
 "Your ride has been booked." = "Your ride has been booked.";
 "Please Select Car" = "Please Select Car";

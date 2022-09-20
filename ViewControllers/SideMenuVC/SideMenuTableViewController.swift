@@ -22,7 +22,6 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     @IBOutlet weak var CollectionView: UICollectionView!
     
-    @IBOutlet var lblLaungageName: UILabel!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMobileNumber: UILabel!
@@ -30,6 +29,8 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     @IBOutlet weak var btnDelete: UIButton!
 //    @IBOutlet weak var btnLiveHelp: UIButton!
     
+    @IBOutlet weak var btnSetting: UIButton!
+    @IBOutlet weak var segmentLang: UISegmentedControl!
     @IBOutlet weak var btnSignout: ThemeButton!
     
     @IBOutlet weak var btnSignOut1: UIButton! {
@@ -38,7 +39,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             btnSignOut1.layer.borderWidth = 1.0
             btnSignOut1.setTitleColor(UIColor.black, for: .normal)
             btnSignOut1.layer.cornerRadius = 20
-            btnSignOut1.setTitle("Sign out".localized, for: .normal)
+           
         }
     }
     // @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
@@ -59,23 +60,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         NotificationCenter.default.removeObserver(self, name: UpdateProfileNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setProfileData), name: UpdateProfileNotification, object: nil)
         
-        if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-            if SelectedLanguage == "en" {
-                lblLaungageName.text = "SW"
-            } else if SelectedLanguage == "sw" {
-                lblLaungageName.text = "EN"
-            }
-        }
-        
-        self.btnLS.underline()
-        self.btnDelete.underline()
-        
         setProfileData()
-        
-        lblLaungageName.layer.cornerRadius = 5
-        lblLaungageName.backgroundColor = themeYellowColor
-        lblLaungageName.layer.borderColor = UIColor.black.cgColor
-        lblLaungageName.layer.borderWidth = 0.5
         
         self.navigationController?.isNavigationBarHidden = false
         self.btnSignout.layer.cornerRadius = self.btnSignout.frame.size.height/2
@@ -110,6 +95,12 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
         //                        }
         //                    }
         arrMenuTitle = ["My Bookings" , "Favourites", "My Receipts", "Help", "Invite Friends"]//"My Receipts","My Ratings","Legal", "Support"]//,"Payment Options"
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        segmentLang.selectedConfiguration(color: .white)
+        segmentLang.selectedSegmentIndex = (Localize.currentLanguage() == Languages.English.rawValue) ? 0 : 1
+        segmentLang.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+        self.setLocalition()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,11 +109,27 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setLocalition()
     }
     
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        if segmentLang.selectedSegmentIndex == 0 {
+            Localize.setCurrentLanguage(Languages.English.rawValue)
+        } else if segmentLang.selectedSegmentIndex == 1 {
+            Localize.setCurrentLanguage(Languages.Spanish.rawValue)
+        }
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalition()
+    }
+    
+    
     func setLocalition() {
-        
+        self.CollectionView.reloadData()
+        self.btnSetting.setTitle("Settings".localized, for: .normal)
+        self.btnSignOut1.setTitle("Sign out".localized, for: .normal)
+        self.btnLS.underline(text: "Legal Stuff".localized)
+        self.btnDelete.underline(text: "Delete Account".localized)
     }
     
     @objc func setProfileData() {
@@ -395,57 +402,7 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
          */
     }
     
-    @IBAction func btnLaungageClicked(_ sender: Any)
-    {
-        
-        if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-            if SelectedLanguage == "en" {
-                setLayoutForswahilLanguage()
-                lblLaungageName.text = "EN"
-            } else if SelectedLanguage == "sw" {
-                setLayoutForenglishLanguage()
-                lblLaungageName.text = "SW"
-            }
-            
-            self.navigationController?.loadViewIfNeeded()
-            
-            self.CollectionView.reloadData()
-            (UIApplication.shared.delegate as! AppDelegate).isAlreadyLaunched = true
-            NotificationCenter.default.post(name: OpenHome, object: nil)
-            sideMenuController?.toggle()
-        }
-        
-        //        if strSelectedLaungage == KEnglish
-        //        {
-        //            strSelectedLaungage = KSwiley
-        //
-        //            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-        //                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-        //                        if language == "en"
-        //                        {
-        //                            setLayoutForswahilLanguage()
-        //
-        //                            print("Swahil")
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            strSelectedLaungage = KEnglish
-        //            if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-        //                if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-        //                    if language == "sw" {
-        ////                        setLayoutForEnglishLanguage()
-        //                        setLayoutForenglishLanguage()
-        //                        print("English")
-        //                    }
-        //                }
-        //            }
-        //        }
-        //
-        //        lblLaungageName.text = strSelectedLaungage
-    }
+    
     
     // MARK: - Table view data source
     
@@ -679,9 +636,6 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
         customCell.imgDetail?.image = UIImage.init(named:  "\(arrMenuIcons[indexPath.row])")
         customCell.lblTitle.text = arrMenuTitle[indexPath.row].localized
         //        customCell.lblTitle.font = UIFont.regular(ofSize: 12.0)
-        
-        
-        
         if(arrMenuTitle[indexPath.row].localized == "SOS")
         {
             customCell.lblTitle.textColor = .red

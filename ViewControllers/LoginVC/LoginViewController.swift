@@ -54,6 +54,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     @IBOutlet var lblLaungageName: UILabel!
     var manager = CLLocationManager()
 
+    @IBOutlet weak var btnSinghUp: UIButton!
     var strURLForSocialImage = String()
     //-------------------------------------------------------------
     // MARK: - Base Methods
@@ -196,16 +197,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         }
     }
     
-   func setLocalization()
-    {
+   func setLocalization(){
         txtMobile.placeholder = "Email/Mobile Number".localized
         txtPassword.placeholder = "Password".localized
-        lblDontAc.text = "Don't have an account?".localized
+        lblDontAc.text = "Don't have an Account?".localized
 //       lblOr.text = "OR".localized
         btnForgotPass.setTitle("Forgot Password?".localized, for: .normal)
         btnLogin.setTitle("Sign In".localized, for: .normal)
-        btnSignup.setTitle("Sign Up".localized, for: .normal)
-        
+       let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleThick.rawValue]
+       let underlineAttributedString = NSAttributedString(string: "Sign Up".localized, attributes: underlineAttribute)
+       btnSinghUp.setAttributedTitle(underlineAttributedString, for: .normal)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -229,7 +230,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         if (txtMobile.text?.count == 0)
         {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Email/Mobile Number") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Enter Email/Mobile Number".localized) { (index, title) in
             }
             
              // txtMobile.showErrorWithText(errorText: "Enter Email")
@@ -243,15 +244,14 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         else if (txtPassword.text?.count == 0)
         {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Password") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter password".localized) { (index, title) in
             }
 
             return false
         }
         else if (txtPassword.text!.count < 8) {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Password must contain atleast 8 characters") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Password must contain atleast 8 characters".localized) { (index, title) in
             }
-
             return false
         }
         return true
@@ -468,7 +468,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 
             if ((result as! NSDictionary).object(forKey: "status") as! Int == 1) {
   
-                 UtilityClass.setCustomAlert(title: "Success", message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Success".localized, message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
                 }
             }
             else {
@@ -903,7 +903,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         
         
         guard (txtMobile.text?.count != 0) || (txtPassword.text?.count != 0) else {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please fill all details") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please fill all details".localized) { (index, title) in
             }
             return
         }

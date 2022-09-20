@@ -84,8 +84,7 @@ extension NSObject {
 }
 
 extension UIButton {
-    func underline() {
-        guard let text = self.titleLabel?.text else { return }
+    func underline(text:String) {
         let attributedString = NSMutableAttributedString(string: text)
         //NSAttributedStringKey.foregroundColor : UIColor.blue
         attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: self.titleColor(for: .normal)!, range: NSRange(location: 0, length: text.count))

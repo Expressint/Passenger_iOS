@@ -12,7 +12,7 @@ import CountryPickerView
 class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var txtPhoneNumber: ThemeTextField!
-    
+    @IBOutlet weak var segmentLang: UISegmentedControl!
     @IBOutlet weak var txtEmail: ThemeTextField!
     
     @IBOutlet weak var txtPassword: ThemeTextField!
@@ -61,21 +61,34 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        segmentLang.selectedConfiguration(color: .white)
+        segmentLang.selectedSegmentIndex = (Localize.currentLanguage() == Languages.English.rawValue) ? 0 : 1
+        segmentLang.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         self.setLocalization()
     }
     
-    func setLocalization()
-    {
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        if segmentLang.selectedSegmentIndex == 0 {
+            Localize.setCurrentLanguage(Languages.English.rawValue)
+        } else if segmentLang.selectedSegmentIndex == 1 {
+            Localize.setCurrentLanguage(Languages.Spanish.rawValue)
+        }
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    func setLocalization(){
         txtPhoneNumber.placeholder = "Phone Number".localized
         txtEmail.placeholder = "Email".localized
         txtPassword.placeholder = "Password".localized
         txtConfirmPassword.placeholder = "Confirm Password".localized
         btnNext.setTitle("Next".localized, for: .normal)
     }
-    
     
     @IBAction func btnCountryCode(_ sender: Any) {
         countryPicker.showPhoneCodeInView = true
@@ -111,20 +124,14 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func btnNext(_ sender: Any) {
-        
-        
         guard (txtPhoneNumber.text?.count != 0) || (txtEmail.text?.count != 0) || (txtPassword.text?.count != 0) || (txtConfirmPassword.text?.count != 0) else {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please fill all details") { (index, str) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please fill all details".localized) { (index, str) in
             }
             return
         }
-        
-        
-        if (validateAllFields())
-        {
+        if (validateAllFields()){
             webserviceForGetOTPCode(email: txtEmail.text!, mobile: "\(txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")")
         }
-        
     }
     
     
@@ -152,7 +159,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         if (txtPhoneNumber.text?.count == 0)
         {
 
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter phone number".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter phone number".localized) { (index, title) in
             }
 
             return false
@@ -167,73 +174,47 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 //        }
         else if (txtEmail.text?.count == 0)
         {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter email".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter email".localized) { (index, title) in
             }
 
             return false
-        }
-        else if (!isEmailAddressValid)
-        {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter a valid email".localized) { (index, title) in
+        }else if (!isEmailAddressValid){
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter a valid email".localized) { (index, title) in
             }
-
             return false
         }
         
         if((AppDelegate.current?.isSocialLogin ?? false) == false){
-            if (txtPassword.text?.count == 0)
-            {
-                UtilityClass.setCustomAlert(title: "Missing", message: "Please enter password".localized) { (index, title) in
+            if (txtPassword.text?.count == 0){
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter password".localized) { (index, title) in
                 }
-
                 return false
-            }
-                
-            else if ((txtPassword.text?.hasPrefix(" ") == true) || (txtPassword.text?.hasSuffix(" ") == true))
-            {
+            }else if ((txtPassword.text?.hasPrefix(" ") == true) || (txtPassword.text?.hasSuffix(" ") == true)){
                 UtilityClass.setCustomAlert(title: "Error", message: "Your password can’t start or end with a blank space".localized) { (index, title) in
                 }
-
                 return false
-            }
-            else if ((txtPassword.text?.count)! < 6)
-            {
-                UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+            }else if ((txtPassword.text?.count)! < 6){
+                UtilityClass.setCustomAlert(title: "Required".localized, message: "Password must contain at least 8 characters".localized) { (index, title) in
                 }
-
                 return false
-            }
-            else if (txtConfirmPassword.text?.count == 0)
-            {
-                UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm the password".localized) { (index, title) in
+            }else if (txtConfirmPassword.text?.count == 0){
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please confirm the password".localized) { (index, title) in
                 }
-                
                 return false
-            }
-                
-            else if ((txtConfirmPassword.text?.count)! < 6)
-            {
-                UtilityClass.setCustomAlert(title: "Required", message: "Password must contain at least 8 characters".localized) { (index, title) in
+            }else if ((txtConfirmPassword.text?.count)! < 6){
+                UtilityClass.setCustomAlert(title: "Required".localized, message: "Password must contain at least 8 characters".localized) { (index, title) in
                 }
-                
                 return false
-            }
-            else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
-            {
-                UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+            }else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true)){
+                UtilityClass.setCustomAlert(title: "Required".localized, message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
                 }
-                
                 return false
-            }
-            else if (txtPassword.text != txtConfirmPassword.text)
-            {
-                UtilityClass.setCustomAlert(title: "Missing", message: "Password and confirm password does not match".localized) { (index, title) in
+            }else if (txtPassword.text != txtConfirmPassword.text){
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "Password and confirm password does not match".localized) { (index, title) in
                 }
-
                 return false
             }
         }
-        
         return true
     }
     
@@ -277,64 +258,49 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         param["CountryCode"] = btnCountryCode.titleLabel?.text as AnyObject
 
         webserviceForOTPRegister(param as AnyObject) { (result, status) in
-            
             if (status) {
                 print(result)
-                
                 let datas = (result as! [String:AnyObject])
-                
                 if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
                     if SelectedLanguage == "en" {
-                        
                         UtilityClass.showAlertWithCompletion("OTP Code", message: (datas["message"] as! String).firstCharacterUpperCase(), vc: self, completionHandler: { ACTION in
-                            
                             if let otp = datas["otp"] as? String {
                                 SingletonClass.sharedInstance.otpCode = otp
                             }else if let otp = datas["otp"] as? Int {
                                 SingletonClass.sharedInstance.otpCode = "\(otp)"
                             }
-                            
                             let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
                             registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
                         })
-                    }
-                    else //if SelectedLanguage == "sw"
+                    }else //if SelectedLanguage == "sw"
                     {
                         UtilityClass.showAlertWithCompletion("OTP Code".localized, message: datas["swahili_message"] as! String, vc: self, completionHandler: { ACTION in
-                            
                             if let otp = datas["otp"] as? String {
                                 SingletonClass.sharedInstance.otpCode = otp
                             }
                             else if let otp = datas["otp"] as? Int {
                                 SingletonClass.sharedInstance.otpCode = "\(otp)"
                             }
-                            
                             let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
                             registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
                         })
                     }
                 }
-            }
-            else {
+            }else {
                  print(result)
-                
                 if let res = result as? String {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
                     }
-                }
-                else if let resDict = result as? NSDictionary {
+                }else if let resDict = result as? NSDictionary {
                     UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
                     }
-                }
-                else if let resAry = result as? NSArray {
+                }else if let resAry = result as? NSArray {
                     UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
                     }
                 }
-                
             }
         }
     }
-    
 }
 
 //-------------------------------------------------------------
@@ -342,15 +308,12 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 //-------------------------------------------------------------
 
 extension RegisterViewController {
-    
     func SetLayout() {
-        
         self.lblFirstStep.layer.cornerRadius = 12.5
         self.lblSecondStep.layer.cornerRadius = 12.5
         self.lblFirstStep.layer.masksToBounds = true
         self.lblSecondStep.layer.masksToBounds = true
     }
-    
 }
 
 extension String {
@@ -366,7 +329,6 @@ extension String {
 extension RegisterViewController: CountryPickerViewDelegate {
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         btnCountryCode.setTitle(country.phoneCode, for: .normal)
-
     }
     
 //    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
@@ -375,7 +337,6 @@ extension RegisterViewController: CountryPickerViewDelegate {
 }
 
 extension RegisterViewController: CountryPickerViewDataSource {
-
     func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
         return "Select a Country"
     }

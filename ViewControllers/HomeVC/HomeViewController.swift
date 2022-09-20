@@ -936,6 +936,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBAction func btnDoneForLocationSelected(_ sender: ThemeButton) {
         
         clearMap()
+        self.strSelectedCarTotalFare = ""
         self.routePolyline.map = nil
         self.updateCounting()
         
@@ -2558,7 +2559,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func btnBookLater(_ sender: Any)
     {
-        
+        if (self.strSelectedCarTotalFare == ""){
+            return
+        }
         if(txtAdditionalDestinationLocation.text == "")
         
         {
