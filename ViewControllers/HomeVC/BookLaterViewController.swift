@@ -89,6 +89,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var NearByRegion:GMSCoordinateBounds!
     var isOpenPlacePickerController:Bool = false
     
+    var strSelectedCarTotalFare = ""
+    
 //    @IBOutlet weak var btnNumberOfPassenger: UIButton!
 //    var homeVC : HomeViewController?
     @IBOutlet weak var imgCardForPaymentType: UIImageView!
@@ -1646,6 +1648,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         dictData["PassengerContact"] = txtMobileNumber.text as AnyObject
         dictData["PickupDateTime"] = convertDateToString as AnyObject
         
+        dictData["EstimateFare"] = strSelectedCarTotalFare as AnyObject
         
         dictData["PickupLat"] = doublePickupLat as AnyObject
         dictData["PickupLng"] = doublePickupLng as AnyObject

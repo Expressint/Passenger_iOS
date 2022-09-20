@@ -28,6 +28,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     //-------------------------------------------------------------
     
 //      let loginButton = FBLoginButton()
+    @IBOutlet weak var segmentLang: UISegmentedControl!
     @IBOutlet weak var viewMain: UIView!
     @IBOutlet weak var viewFacebookLoginContainer: UIView?
 
@@ -108,9 +109,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         
 //        txtMobile.lineColor = UIColor.white
 //        txtPassword.lineColor = UIColor.white
-        lblLaungageName.text = "SW"
-        UserDefaults.standard.set("en", forKey: "i18n_language")
-        UserDefaults.standard.synchronize()
+//        lblLaungageName.text = "SW"
+//        UserDefaults.standard.set("en", forKey: "i18n_language")
+//        UserDefaults.standard.synchronize()
         
 //        if UIDevice.current.name == "Bhavesh iPhone" || UIDevice.current.name == "Excellent Web's iPhone 5s" || UIDevice.current.name == "Rahul's iPhone" {
 //
@@ -120,10 +121,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //        txtMobile.text = "9898989898"
 //        txtPassword.text = "12345678"
         GIDSignIn.sharedInstance()?.presentingViewController = self
-        lblLaungageName.layer.cornerRadius = 5
-        lblLaungageName.backgroundColor = themeYellowColor
-        lblLaungageName.layer.borderColor = UIColor.black.cgColor
-        lblLaungageName.layer.borderWidth = 0.5
+//        lblLaungageName.layer.cornerRadius = 5
+//        lblLaungageName.backgroundColor = themeYellowColor
+//        lblLaungageName.layer.borderColor = UIColor.black.cgColor
+//        lblLaungageName.layer.borderWidth = 0.5
         txtPassword.delegate = self
         txtMobile.delegate = self
 
@@ -140,6 +141,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        segmentLang.setTitleColor(.white)
+        segmentLang.selectedConfiguration(color: .white)
+        segmentLang.selectedSegmentIndex = (Localize.currentLanguage() == Languages.English.rawValue) ? 0 : 1
+        segmentLang.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        
         self.setLocalization()
         self.checkForAppUpdate()
     }
@@ -149,6 +157,18 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //        loginButton.frame = self.viewFacebookLoginContainer!.frame
 //        loginButton.center = self.viewFacebookLoginContainer!.center
         
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        if segmentLang.selectedSegmentIndex == 0 {
+            Localize.setCurrentLanguage(Languages.English.rawValue)
+        } else if segmentLang.selectedSegmentIndex == 1 {
+            Localize.setCurrentLanguage(Languages.Spanish.rawValue)
+        }
     }
     
     @objc func methodOfReceivedNotification(notification: Notification) {
@@ -178,7 +198,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
    func setLocalization()
     {
-        txtMobile.placeholder = "Email/Phone Number".localized
+        txtMobile.placeholder = "Email/Mobile Number".localized
         txtPassword.placeholder = "Password".localized
         lblDontAc.text = "Don't have an account?".localized
 //       lblOr.text = "OR".localized

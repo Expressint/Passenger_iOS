@@ -155,6 +155,7 @@
 		3A84BC9B21C23CFC00EDA3A2 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9A21C23CFC00EDA3A2 /* RadioButton.m */; };
 		3A84BC9F21C264E900EDA3A2 /* MyRatingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */; };
 		3A84BCA021C264E900EDA3A2 /* MyRatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */; };
+		4701754D28D8950F00C0F3F3 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4701754C28D8950F00C0F3F3 /* Localization.swift */; };
 		4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703D53D28B7611100D500B0 /* ImagePickerController.swift */; };
 		470DBDBF28B78B22003A0E5A /* ChatImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */; };
 		54056FFB266FEED40078D956 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 54056FFA266FEED40078D956 /* test.mp3 */; };
@@ -600,6 +601,9 @@
 		3A84BC9D21C264E800EDA3A2 /* MyRatingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewCell.swift; sourceTree = "<group>"; };
 		3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRatingViewController.swift; sourceTree = "<group>"; };
 		46D6BDF823FFD22700A303B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4701754C28D8950F00C0F3F3 /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		4701754E28D8953600C0F3F3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Storyboards/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4701754F28D8953600C0F3F3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4703D53D28B7611100D500B0 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewVC.swift; sourceTree = "<group>"; };
 		54056FFA266FEED40078D956 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
@@ -905,8 +909,8 @@
 			children = (
 				54056FFA266FEED40078D956 /* test.mp3 */,
 				1852C71B255A65B500CB0EE1 /* Book A Ride.entitlements */,
-				34E01A28220EEE2C000D048E /* Localizable.strings */,
 				3A4072D821B512270015C494 /* Fabric.framework */,
+				3A4072DD21B512270015C494 /* AppDelegate */,
 				3A40734421B512280015C494 /* Classs */,
 				3A40734121B512270015C494 /* Libraries */,
 				EEFA6CA9220ECE30004F32E7 /* Storyboards */,
@@ -1001,7 +1005,6 @@
 				347A9FD82608C73900065C29 /* SelectDriverViewController.swift */,
 				3A84BC9C21C264E800EDA3A2 /* MyRatingViewController */,
 				3A5DDCA521BA5C9200F9B5A3 /* TripInfoViewController */,
-				3A4072DD21B512270015C494 /* AppDelegate */,
 				3A4072DF21B512270015C494 /* CollectionCell */,
 				3A4072E221B512270015C494 /* CommingSoonViewController.swift */,
 				5480321427A2DBC800ECD2BD /* CancelAlert */,
@@ -1234,6 +1237,7 @@
 		3A40734421B512280015C494 /* Classs */ = {
 			isa = PBXGroup;
 			children = (
+				4701754B28D894FC00C0F3F3 /* Localization */,
 				6A34BF5124BD901A0084F466 /* Previous Due */,
 				3A40734521B512280015C494 /* Extensions */,
 				3A40734721B512280015C494 /* Theme Controls */,
@@ -1415,6 +1419,15 @@
 				3A84BC9E21C264E800EDA3A2 /* MyRatingViewController.swift */,
 			);
 			path = MyRatingViewController;
+			sourceTree = "<group>";
+		};
+		4701754B28D894FC00C0F3F3 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4701754C28D8950F00C0F3F3 /* Localization.swift */,
+				34E01A28220EEE2C000D048E /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		5426B5EB27229C1A001189DE /* Images */ = {
@@ -1838,6 +1851,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				es,
 			);
 			mainGroup = 008D22241FA08DCF001223DF;
 			productRefGroup = 008D222E1FA08DCF001223DF /* Products */;
@@ -2327,6 +2341,7 @@
 				3A4073AE21B512280015C494 /* PastBooingTableViewCell.swift in Sources */,
 				3A4073BF21B512280015C494 /* ContentTableViewCell.swift in Sources */,
 				3A4073EB21B512280015C494 /* WalletViewController.swift in Sources */,
+				4701754D28D8950F00C0F3F3 /* Localization.swift in Sources */,
 				3A4073DC21B512280015C494 /* WalletHistoryTableViewCell.swift in Sources */,
 				3A4073EA21B512280015C494 /* WalletTransferViewController.swift in Sources */,
 				3A84BC9721C22B2E00EDA3A2 /* UIAlertView+Blocks.m in Sources */,
@@ -2424,6 +2439,7 @@
 			children = (
 				46D6BDF823FFD22700A303B2 /* en */,
 				5415EC15277D966800C66E5A /* en */,
+				4701754F28D8953600C0F3F3 /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2432,6 +2448,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34E01A29220EEE2C000D048E /* en */,
+				4701754E28D8953600C0F3F3 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2559,7 +2576,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6.3;
+				CURRENT_PROJECT_VERSION = 1.6.4;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2570,7 +2587,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2591,7 +2608,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.6.3;
+				CURRENT_PROJECT_VERSION = 1.6.4;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2602,7 +2619,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

@@ -12,6 +12,25 @@ import UIKit
 
 // MARK:- UIColor
 
+extension UISegmentedControl {
+    
+    func defaultConfiguration(font: UIFont = UIFont.systemFont(ofSize: 12), color: UIColor = UIColor.gray) {
+        let defaultAttributes = [
+            NSAttributedStringKey.font.rawValue: font,
+            NSAttributedStringKey.foregroundColor.rawValue: color
+        ]
+        setTitleTextAttributes(defaultAttributes, for: .normal)
+    }
+    
+    func selectedConfiguration(font: UIFont = UIFont.boldSystemFont(ofSize: 12), color: UIColor = UIColor.red) {
+        let selectedAttributes = [
+            NSAttributedStringKey.font.rawValue: font,
+            NSAttributedStringKey.foregroundColor.rawValue: color
+        ]
+        setTitleTextAttributes(selectedAttributes, for: .selected)
+    }
+}
+
 extension UIColor {
     
     convenience init(hex: String) {

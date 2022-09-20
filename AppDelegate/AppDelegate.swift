@@ -149,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         // Push Notification Code
         registerForPushNotification()
+        checkAndSetDefaultLanguage()
         
         let remoteNotif = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary
         
@@ -190,6 +191,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
           )
 
       }
+    
+    func checkAndSetDefaultLanguage() {
+        let currentLang = Localize.currentLanguage()
+        Localize.setCurrentLanguage(currentLang)
+    }
     
 
 //    func googleAnalyticsTracking() {
@@ -719,29 +725,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     }
 }
 
-extension String {
-    var localized: String {
-//        if let _ = UserDefaults.standard.string(forKey: "i18n_language") {} else {
-//            // we set a default, just in case
+//extension String {
+//    var localized: String {
+////        if let _ = UserDefaults.standard.string(forKey: "i18n_language") {} else {
+////            // we set a default, just in case
+////
+////
+////
+////        }
+////        if  UserDefaults.standard.string(forKey: "i18n_language") == nil
+////        {
+////            UserDefaults.standard.set("en", forKey: "i18n_language")
+////            UserDefaults.standard.synchronize()
+////        }
 //
-//
-//
-//        }
-//        if  UserDefaults.standard.string(forKey: "i18n_language") == nil
-//        {
-//            UserDefaults.standard.set("en", forKey: "i18n_language")
-//            UserDefaults.standard.synchronize()
-//        }
-
-        let lang = UserDefaults.standard.string(forKey: "i18n_language")
-//        print(lang)
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-//        print(path ?? "")
-//        print(bundle ?? "")
-              return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-    }
-}
+//        let lang = UserDefaults.standard.string(forKey: "i18n_language")
+////        print(lang)
+//        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+//        let bundle = Bundle(path: path!)
+////        print(path ?? "")
+////        print(bundle ?? "")
+//              return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+//    }
+//}
 
 //i18n_language = sw
 

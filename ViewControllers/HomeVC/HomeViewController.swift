@@ -123,7 +123,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var strSelectedCarMarkerIcon = String()
     var ratingToDriver = Float()
     var commentToDriver = String()
-    var strSelectedCarTotalFare = String()
+    var strSelectedCarTotalFare = ""
     //    var currentLocationMarkerText = String()
     //    var destinationLocationMarkerText = String()
     
@@ -2582,6 +2582,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                         
                         SingletonClass.sharedInstance.isFromNotificationBookLater = false
+                        next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
                         next.BookLaterCompleted = self
                         next.strModelId = strCarModelID
                         next.strCarModelURL = strNavigateCarModel
@@ -2614,6 +2615,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     else {
                         let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                         next.BookLaterCompleted = self
+                        next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
                         next.strModelId = strCarModelID
                         next.strCarModelURL = strNavigateCarModel
                         next.strCarName = strCarModelClass
@@ -3158,6 +3160,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
             }
             else {
+                
+                self.strSelectedCarTotalFare = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "total") as! Int)"
                 
                 for i in 0..<self.aryMarkerOnlineCars.count {
                     
