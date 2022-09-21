@@ -71,7 +71,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setLocalization()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
        // self.btnSignUp.isMultipleTouchEnabled = false
        
     }
@@ -88,12 +88,9 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         btnmale.setTitle("Male".localized, for: .normal)
         btnFemail.setTitle("Female".localized, for: .normal)
         lblPassengerIdProof.text = "ID Proof (License/ID card /Passport)".localized
-        
     }
-    //-------------------------------------------------------------
-    // MARK: - Base Methods
-    //-------------------------------------------------------------
     
+    // MARK: - Base Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         gender = "male"
@@ -152,6 +149,10 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
                 print("self.scrollView.setNeedsLayout()")
             }
         }
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
     }
     
     func selectedButton(sender: AKRadioButton) {

@@ -42,7 +42,7 @@
 "and" = "y la";
 "Photo access is absolutely necessary to use this app" = "El acceso a las fotos es absolutamente necesario para usar esta aplicación";
 "Photos" = "Fotos";
-"OK" = "De acuerdo";
+"OK" = "OK";
 "Will do later" = "Lo haré más tarde";
 "Camera access is absolutely necessary to use this app" = "El acceso a la cámara es absolutamente necesario para usar esta aplicación";
 "Camera" = "Cámara";
@@ -68,7 +68,7 @@
 "OTP cannot be blank" = "OTP no puede estar en blanco";
 "Please enter valid OTP code" = "Introduzca un código OTP válido";
 
-//Navigetion drower
+//Navigation drawer
 "Settings" =  "Ajustes";
 "Sign out" = "desconectar";
 "Legal Stuff" = "Aspectos legales";
@@ -78,6 +78,12 @@
 "My Receipts" = "Mis recibos";
 "Help" = "Ayuda";
 "Invite Friends" = "Invitar a amigos";
+
+//Forgot password
+"Please enter mobile number or email" = "Introduzca el número de teléfono móvil o el correo electrónico";
+"Mobile Number" = "Número de teléfono móvil";
+"OR" = "O";
+"Forgot Password" = "Olvidé mi contraseña";
 
 "App Name" = ""; //"Book A Ride";
 "Flight Number"  = "Flight Number";
@@ -166,8 +172,6 @@
 "Please first complete your trip" = "Please first complete your trip";
 "Please enter new password" = "Please enter new password";
 "fonts/proxima-nova-586c8e081cb01.otf" = "fonts/proxima-nova-586c8e081cb01.otf";
-
-"OR" = "OR";
 "How was your experience with Driver" = "How was your experience with Driver";
 "BALANCE" = "BALANCE";
 "HISTORY" = "HISTORY";
@@ -229,7 +233,6 @@
 "Select Payment Method" = "Select Payment Method";
 "You will be notified with your driver detail after your request is submited." = "You will be notified with your driver detail after your request is submited.";
 "Save" = "Save";
-"Forgot Passwor" = "Forgot Password";
 "PickupDate" = "Pickup Date";
 "SHARE" = "SHARE";
 "Driver Info" = "Driver Info";

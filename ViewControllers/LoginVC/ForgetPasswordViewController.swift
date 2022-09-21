@@ -10,43 +10,44 @@ import UIKit
 import CountryPickerView
 
 class ForgetPasswordViewController: UIViewController {
-
+    
     @IBOutlet var txtPhoneNumber: ThemeTextField!
     @IBOutlet var btnCountryCode: UIButton!
+    @IBOutlet weak var lblOr: UILabel!
+    @IBOutlet weak var btnForgotPassword: ThemeButton!
     @IBOutlet var txtEmail: ThemeTextField!
     let countryPicker = CountryPickerView()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         txtPhoneNumber.delegate = self
         txtEmail.delegate = self
         countryPicker.delegate = self
         btnCountryCode.setTitle("+592", for: .normal)
-
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        self.setLocalization()
+        super.viewWillAppear(animated)
     }
-    */
-
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    func setLocalization(){
+        self.txtPhoneNumber.placeholder = "Mobile Number".localized
+        self.lblOr.text = "OR".localized
+        self.btnForgotPassword.setTitle("Forgot Password".localized, for: .normal)
+        self.txtEmail.placeholder = "Email".localized
+    }
+    
     @IBAction func btnForgetPassword(_ sender: Any) {
-        if(validation())
-        {
+        if(validation()){
             webserviceForgotPassword()
-        
         }
     }
-    
     
     @IBAction func btnCountryCode(_ sender: Any) {
         countryPicker.showPhoneCodeInView = true
@@ -54,31 +55,24 @@ class ForgetPasswordViewController: UIViewController {
     }
     
     
-    func validation() -> Bool
-    {
+    func validation() -> Bool{
         let isEmailAddressValid = isValidEmailAddress(emailID: txtEmail.text!)
-
-        if((txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0) && (txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0))
-        {
-            UtilityClass.showAlert("Missing", message: "Please enter mobile number or email", vc: self)
+        if((txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0) && (txtPhoneNumber.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0)){
+            UtilityClass.showAlert("Missing".localized, message: "Please enter mobile number or email".localized, vc: self)
             return false
-        }
-        else if ( (txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count != 0) && !isEmailAddressValid)
-        {
+        }else if ( (txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count != 0) && !isEmailAddressValid){
             UtilityClass.showAlert("App Name".localized, message: "Please enter a valid email".localized, vc: self)
-            
             return false
         }
-//        else if ((txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0) && txtPhoneNumber.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count != 0)
-//        {
-//            UtilityClass.showAlert("App Name".localized, message: "Please enter mobile number".localized, vc: self)
-//            return false
-//        }
+        //        else if ((txtEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0) && txtPhoneNumber.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).count != 0)
+        //        {
+        //            UtilityClass.showAlert("App Name".localized, message: "Please enter mobile number".localized, vc: self)
+        //            return false
+        //        }
         return true
     }
     
-    func isValidEmailAddress(emailID: String) -> Bool
-    {
+    func isValidEmailAddress(emailID: String) -> Bool{
         var returnValue = true
         let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z)-9.-]+\\.[A-Za-z]{2,3}"
         
@@ -101,7 +95,7 @@ class ForgetPasswordViewController: UIViewController {
     }
     
     @IBAction func btnBack(_ sender: Any) {
-              self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func webserviceForgotPassword()
@@ -111,12 +105,12 @@ class ForgetPasswordViewController: UIViewController {
         {
             params["MobileNo"] = txtPhoneNumber.text as AnyObject
             params["CountryCode"] = btnCountryCode.titleLabel?.text as AnyObject
-
+            
         }
         else
         {
             params["Email"] = txtEmail.text as AnyObject
-
+            
         }
         webserviceForForgotPassword(params as AnyObject) { (result, status) in
             
@@ -149,20 +143,20 @@ class ForgetPasswordViewController: UIViewController {
 extension ForgetPasswordViewController: CountryPickerViewDelegate {
     func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
         btnCountryCode.setTitle(country.phoneCode, for: .normal)
-
+        
     }
     
-//    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
-//        btnCountryCode.setTitle(country.phoneCode, for: .normal)
-//    }
+    //    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+    //        btnCountryCode.setTitle(country.phoneCode, for: .normal)
+    //    }
 }
 
 extension ForgetPasswordViewController: CountryPickerViewDataSource {
-
+    
     func navigationTitle(in countryPickerView: CountryPickerView) -> String? {
         return "Select a Country"
     }
-        
+    
     func searchBarPosition(in countryPickerView: CountryPickerView) -> SearchBarPosition {
         return .tableViewHeader
     }
@@ -172,7 +166,7 @@ extension ForgetPasswordViewController: CountryPickerViewDataSource {
     }
     
     func showCountryCodeInList(in countryPickerView: CountryPickerView) -> Bool {
-       return false
+        return false
     }
 }
 
