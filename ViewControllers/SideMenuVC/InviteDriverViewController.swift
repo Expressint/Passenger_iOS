@@ -28,6 +28,8 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     // MARK: - Outlets
     //-------------------------------------------------------------
     
+    @IBOutlet weak var lblWithDriver: UILabel!
+    @IBOutlet weak var lblWithPassenger: UILabel!
     @IBOutlet var imgProfilePick: UIImageView!
    // @IBOutlet weak var lblReferralCode: UILabel!
     @IBOutlet weak var lblReferralMoney: UILabel!
@@ -39,53 +41,36 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     @IBOutlet weak var lblShareYourInviteCode: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-
         let profileData = SingletonClass.sharedInstance.dictProfile
         self.btnPassenger.isSelected = true
-
         if let ReferralCode = profileData.object(forKey: "ReferralCode") as? String {
             strReferralCode = ReferralCode
-            let yourCode = "Your Referral Code : ".localized + strReferralCode
+            let yourCode = "\("Your Referral Code".localized) : ".localized + strReferralCode
             lblWhenAFriendRegister.text = yourCode
         //    self.lblReferralCode.text = self.strReferralCode
         }
-        
         if let RefarMoney = profileData.object(forKey: "ReferralAmount") as? Double {
             strReferralMoney = String(RefarMoney)
             self.lblReferralMoney.text = "\(currencySign) \(strReferralMoney)"
         }
-
         if let imgProfile = (profileData).object(forKey: "Image") as? String {
-            
             imgProfilePick.sd_setShowActivityIndicatorView(true)
             imgProfilePick.sd_setIndicatorStyle(.gray)
             imgProfilePick.sd_setImage(with: URL(string: imgProfile), completed: nil)
-            
         }
-        
-        
-
         // border
         viewBottom.layer.borderWidth = 1.0
         viewBottom.layer.borderColor = UIColor.clear.cgColor
-        
         // shadow
         viewBottom.layer.shadowColor = UIColor.gray.cgColor
         viewBottom.layer.shadowOffset = CGSize(width: 3, height: 3)
         viewBottom.layer.shadowOpacity = 0.7
         viewBottom.layer.shadowRadius = 4.0
-        
-        
-     
-        
         imgProfilePick.layer.cornerRadius = imgProfilePick.frame.width / 2
         imgProfilePick.layer.masksToBounds = true
         imgProfilePick.layer.borderColor = themeYellowColor.cgColor
         imgProfilePick.layer.borderWidth = 1.0
-        
         self.setNavBarWithBack(Title: "INVITE FRIENDS".localized, IsNeedRightButton: true)
-        // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +80,8 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
     }
     func setLocalization()
     {
-        
+        lblWithDriver.text = "With Driver App".localized
+        lblWithPassenger.text = "With Passenger App".localized
         lblShareYourInviteCode.text = "SHARE YOUR INVITE CODE".localized
         btnShare.setTitle("SHARE".localized, for: .normal)
     }
@@ -144,7 +130,7 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
    
     func reloadData(){
         if(selectedIndeex == -1){
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please select app type") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select app type".localized) { (index, title) in
             }
         }else if(selectedIndeex == 0) {
             
@@ -159,7 +145,7 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
             
             let strInvitation1 = "has invited you to become a Book A ride Passenger".localized
             let referralCode = decodeResults["ReferralCode"] as? String ?? ""
-            let strInvitation = "Your Referral Code is : ".localized + referralCode
+            let strInvitation = "\("Your Referral Code is".localized) : ".localized + referralCode
           
             let strContent = "\(strName) \(strInvitation1)\n \nFor iOS Click Here : \(appURLiOS) \n \nFor Android Click Here : \(appURLAndroid)\n\n\(strInvitation)"
             let share = [strContent]
@@ -180,7 +166,7 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
             let strInvitation1 = "has invited you to become a Book A ride Driver".localized
             
             let referralCode = decodeResults["ReferralCode"] as? String ?? ""
-            let strInvitation = "Your Referral Code is : ".localized + referralCode
+            let strInvitation = "\("Your Referral Code is".localized) : ".localized + referralCode
           
             let strContent = "\(strName) \(strInvitation1)\n\nFor iOS Click Here : \(kAPPUrliOS) \n\nFor Android Click Here : \(kAPPUrlAndroid)\n\n\(strInvitation)"
             let share = [strContent]
@@ -399,23 +385,23 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
         switch result {
         case MFMailComposeResult.cancelled:
             print("Mail cancelled")
-            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled".localized) { (index, title) in
             }
 
         case MFMailComposeResult.saved:
             print("Mail saved")
            
-            UtilityClass.setCustomAlert(title: "Done", message: "Mail saved") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail saved".localized) { (index, title) in
             }
         case MFMailComposeResult.sent:
             print("Mail sent")
             
-            UtilityClass.setCustomAlert(title: "Done", message: "Mail sent") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail sent".localized) { (index, title) in
             }
         case MFMailComposeResult.failed:
             print("Mail sent failure: \(String(describing: error?.localizedDescription))")
       
-            UtilityClass.setCustomAlert(title: "Error", message: "Mail sent failure: \(String(describing: error?.localizedDescription))") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Error", message: "\("Mail sent failure".localized): \(String(describing: error?.localizedDescription))") { (index, title) in
             }
         default:
             
@@ -434,17 +420,17 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
         case MessageComposeResult.cancelled:
             print("Mail cancelled")
 
-            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled".localized) { (index, title) in
             }
         case MessageComposeResult.sent:
             print("Mail sent")
             
-            UtilityClass.setCustomAlert(title: "Done", message: "Mail sent") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail sent".localized) { (index, title) in
             }
         case MessageComposeResult.failed:
             print("Mail sent failure")
 
-            UtilityClass.setCustomAlert(title: "Error", message: "Mail sent failure") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail sent failure".localized) { (index, title) in
             }
         default:
 
@@ -456,11 +442,8 @@ class InviteDriverViewController: BaseViewController, MFMailComposeViewControlle
         controller.dismiss(animated: true, completion: nil)
     }
 
-    //-------------------------------------------------------------
     // MARK: - Custom Methods
-    //-------------------------------------------------------------
-    
-    
+        
     func codeToSend() -> String
     {
         let profile = SingletonClass.sharedInstance.dictProfile

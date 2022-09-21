@@ -12,6 +12,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
   
     var arrReasons = ["Long pick up time","Driver delayed","No longer interested","Other"]
     var arrHelpOptions = [[String:Any]]()
+    @IBOutlet weak var btnOk: UIButton!
     @IBOutlet weak var txtReasons : UITextView?
     @IBOutlet weak var txtDescription : UITextView?
     @IBOutlet weak var lblLongDescription : UILabel?
@@ -19,7 +20,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
     var pickerController : UIPickerView?
     var isHelp = false
     var okPressedClosure : ((String) -> ()) = {reason in }
-    let placeHolder = "Enter reason here"
+    let placeHolder = "Enter reason here".localized
     
     //MARK: - Setup Methods
     override func viewDidLoad() {
@@ -36,9 +37,6 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
         txtReasons?.delegate = self
 //        UtilityClass.setLeftPaddingInTextfield(textfield: txtReasons ?? UITextField(), padding: 10)
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.50)
-        
-        
-        
         txtDescription?.text = placeHolder
         txtDescription?.textColor = UIColor.lightGray
 
@@ -47,7 +45,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
         {
             self.webserviceCallForReasonsForHelp()
             lblLongDescription?.text = ""
-            lblShortDescription?.text = "Please Select Help Reason"
+            lblShortDescription?.text = "Please Select Help Reason".localized
         }
         else
         {
@@ -56,6 +54,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
             lblLongDescription?.text = "Dear Customer. To Keep Our Driver Motivated. Please Note That Cancelling  a Trip 3 Mins After Booking Attracts A Fee of 50 Payable To The Driver. Please Confirm Whether You Still Wish To Cancel?"
             lblShortDescription?.text = "Please Select Cancel Reason"
         }
+        self.btnOk.setTitle("OK".localized, for: .normal)
     }
     
     

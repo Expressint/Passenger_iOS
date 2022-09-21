@@ -712,8 +712,7 @@ extension SideMenuTableViewController : UICollectionViewDataSource, UICollection
         }
     }
     
-    func inviteDriver()
-    {
+    func inviteDriver(){
         NotificationCenter.default.post(name: OpenInviteFriend, object: nil)
         
 //        let decodeResults = SingletonClass.sharedInstance.dictProfile

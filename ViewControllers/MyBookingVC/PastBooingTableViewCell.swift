@@ -43,6 +43,13 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblWaitingTimeTitle: UILabel!
     @IBOutlet weak var lblCancelReasonTitle: UILabel!
     
+    @IBOutlet weak var lblTitleAuthorizationNumber: UILabel!
+    @IBOutlet weak var lblTitleTaxIncluded: UILabel!
+    @IBOutlet weak var lblTitleDiscount: UILabel!
+    @IBOutlet weak var lblTitleSubTotal: UILabel!
+    @IBOutlet weak var lblTitleDistance: UILabel!
+    @IBOutlet weak var lblTitleProcesingDate: UILabel!
+    @IBOutlet weak var lblTitleCompnyName: UILabel!
     @IBOutlet weak var lblBookingDate: UILabel!
     @IBOutlet weak var lblProcessingDate: UILabel!
     @IBOutlet weak var lblAuthorizationNumber: UILabel!
@@ -50,6 +57,7 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblTax: UILabel!
+    @IBOutlet weak var lblTitleBookingDate: UILabel!
     
     @IBOutlet weak var viewDetails: UIView!
     @IBOutlet weak var lblDriverName: UILabel!

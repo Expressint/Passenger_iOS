@@ -168,12 +168,16 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             
 //            cell.lblDistanceTravelled.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "TripDistance", isNotHave: notAvailable)
             
-            cell.lblBookingId.text = "\("Booking Id :".localized) \(checkDictionaryHaveValue(dictData: currentData, didHaveValue: "Id", isNotHave: notAvailable))"
+            cell.lblBookingId.text = "\("\("Order Number/Booking Number".localized) :") \(checkDictionaryHaveValue(dictData: currentData, didHaveValue: "Id", isNotHave: notAvailable))"
             
             cell.lblVehicleTypeTitle.text = "Vehicle Type:".localized
             cell.lblPaymentTypeTitle.text = "Payment Type:".localized
             cell.lblTripStatusTitle.text = "Trip Status:".localized
-            
+            cell.lblTitleCompnyName.text = "\("Company name".localized):"
+            cell.lblTitleBookingDate.text = "\("Booking Date".localized):"
+            cell.lblTitleProcessingDate.text = "\("Processing Date".localized):"
+            cell.lblTitlePickUpTime.text = "\("Pickup Time".localized):"
+            cell.lblTitlePaymentType.text = "\("Payment Type".localized):"
             bookinType = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "BookingType") as! String
             cell.btnCancelRequest.setTitle("Cancel Request".localized, for: .normal)
             cell.btnCancelRequest.addTarget(self, action: #selector(self.CancelRequest), for: .touchUpInside)

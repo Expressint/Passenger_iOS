@@ -31,19 +31,14 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         self.counts = 0
-  
-        
-      
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        
 //        labelNoData = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
 //        self.labelNoData.text = "Loading..."
 //        labelNoData.textAlignment = .center
 //        self.view.addSubview(labelNoData)
 //        self.tableView.isHidden = true
-        
        webserviewOfMyReceipt()
           self.setNavBarWithBack(Title: "My Receipts".localized, IsNeedRightButton: true)
         self.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
@@ -91,21 +86,21 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
         
         
         cell.lblPickUpTimeTitle.text = "Pickup Time".localized
-        cell.lblDropOffTimeTitle.text = "DropoffTime:".localized
-        cell.lblVehicleTypeTitle.text = "Vehicle Type:".localized
-        cell.lblPaymentTypeTitle.text = "Payment Type:".localized
-        cell.lblBookingFeeTitle.text = "Booking Fee:".localized
-        cell.lblTripFareTitle.text = "Trip Fare:".localized
+        cell.lblDropOffTimeTitle.text = "\("DropoffTime".localized) :"
+        cell.lblVehicleTypeTitle.text = "\("Vehicle Type".localized) :"
+        cell.lblPaymentTypeTitle.text = "\("Payment Type".localized) :"
+        cell.lblBookingFeeTitle.text = "\("Booking Fee".localized) :"
+        cell.lblTripFareTitle.text = "\("Trip Fare".localized) :"
         cell.lblWaitingCostTitle.text = "Waiting Cost".localized
         cell.lblWaitingTimeTitle.text = "Waiting Time".localized
         cell.lblLessTitle.text = "Less".localized
-        cell.lblPromoAppliedTitle.text = "Promo Applied:".localized
-        cell.lblTotalAmountTitle.text = "Grand Total :".localized
+        cell.lblPromoAppliedTitle.text = "\("Promo Applied".localized) :"
+        cell.lblTotalAmountTitle.text = "\("Grand Total".localized) :"
         cell.lblInclTaxTitle.text = "(incl tax)".localized
-        cell.lblTripStatusTitlr.text = "Trip Status:".localized
+        cell.lblTripStatusTitlr.text = "\("Trip Status".localized) :"
         cell.btnGetReceipt.setTitle("GET RECEIPT".localized, for: .normal)
         cell.btnViewReceipt.setTitle("VIEW RECEIPT".localized, for: .normal)
-        cell.lblNightFareTitle.text = "Night Fare :".localized
+        cell.lblNightFareTitle.text = "\("Night Fare".localized) :"
         
         
         let dictData = self.newAryData.object(at: indexPath.row) as! NSDictionary
@@ -130,7 +125,7 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
         cell.btnViewReceipt.layer.masksToBounds = true
         
         if let bookingID = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id") as? String {
-            cell.lblBookingId.text = "\("Booking Id :".localized) \(bookingID)"
+            cell.lblBookingId.text = "\("Order Number/Booking Number".localized) : \(bookingID)"
         }
         
         //                "\("Booking Id :".localized) \(String(describing: dictData.object(forKey: "Id")))"
@@ -233,8 +228,6 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-
         if let cell = tableView.cellForRow(at: indexPath) as? MyRecepitTableViewCell {
             cell.viewDetails.isHidden = !cell.viewDetails.isHidden
             if cell.viewDetails.isHidden {
@@ -244,25 +237,19 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
             }
             tableView.beginUpdates()
             tableView.endUpdates()
-           
         }
-      
-        
     }
     
-    //-------------------------------------------------------------
     // MARK: - Custom Methods
-    //-------------------------------------------------------------
     
-    func nevigateToBack()
-    {
+    func nevigateToBack(){
         self.navigationController?.popViewController(animated: true)
     }
     
     func viewReceipt(receiptURL: String) {
         print(receiptURL)
         let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
-        next.headerName = "Receipt"
+        next.headerName = "Receipt".localized
         next.strURL = receiptURL
         self.navigationController?.pushViewController(next, animated: true)
     }

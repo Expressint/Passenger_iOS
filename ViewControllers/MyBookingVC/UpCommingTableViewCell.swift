@@ -39,6 +39,11 @@ class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewDetails: UIView!
     
+    @IBOutlet weak var lblTitlePaymentType: UILabel!
+    @IBOutlet weak var lblTitlePickUpTime: UILabel!
+    @IBOutlet weak var lblTitleProcessingDate: UILabel!
+    @IBOutlet weak var lblTitleBookingDate: UILabel!
+    @IBOutlet weak var lblTitleCompnyName: UILabel!
     @IBOutlet weak var lblVehicleType: UILabel!
     @IBOutlet weak var lblTripStatus: UILabel!
     

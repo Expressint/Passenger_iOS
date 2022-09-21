@@ -32,23 +32,15 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         heightOfLayer = 2.0
         heighMinusFromY = 2.0
-        
-        
         self.setNavBarWithBack(Title: "My Bookings".localized, IsNeedRightButton: true)
-        
         webserviceOfBookingHistory()
-     
         scrollObject.isUserInteractionEnabled = true
-        
         scrollObject.delegate = self
         scrollObject.layoutIfNeeded()
         scrollObject.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        
         if (isFromPushNotification) {
-            
             if bookingType == "accept" {
                 Upcomming()
             }
@@ -59,8 +51,6 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
         else {
             PastBooking()
         }
-        
-        
     }
     
 
@@ -73,11 +63,15 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         setLocalization()
-         
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        self.setLocalization()
     }
-    func setLocalization()
-    {
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    func setLocalization(){
         lbltitile.text = "My Bookings".localized
         btnOnGoing.setTitle("OnGoing".localized, for: .normal)
         btnUpComming.setTitle("UpComing".localized, for: .normal)
@@ -119,7 +113,7 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
         
         if contactNumber == "" {
             
-            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available".localized) { (index, title) in
             }
         }
         else

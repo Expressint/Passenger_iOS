@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1146,6 +1146,11 @@
                                             <outlet property="lblPickupAddress" destination="j83-VT-BZN" id="gUD-2X-c7p"/>
                                             <outlet property="lblPickupTime" destination="G6d-NY-2ix" id="0Bb-v7-3Lc"/>
                                             <outlet property="lblProcessingDate" destination="TN4-uh-FGt" id="Gug-n9-h9g"/>
+                                            <outlet property="lblTitleBookingDate" destination="vCS-n1-XKb" id="nGF-iu-C5M"/>
+                                            <outlet property="lblTitleCompnyName" destination="qfZ-YL-gHX" id="ekP-fB-Q7r"/>
+                                            <outlet property="lblTitlePaymentType" destination="xjc-ct-RTa" id="Bcw-1c-xku"/>
+                                            <outlet property="lblTitlePickUpTime" destination="vIj-pX-695" id="zq3-Xy-uRt"/>
+                                            <outlet property="lblTitleProcessingDate" destination="pQe-9L-DK5" id="YtZ-bZ-TWK"/>
                                             <outlet property="lblTripStatus" destination="2Zw-Jg-xxW" id="rnW-Az-6T8"/>
                                             <outlet property="lblTripStatusTitle" destination="vk8-k1-DEm" id="5s8-kd-CVl"/>
                                             <outlet property="lblVehicleType" destination="irJ-xW-Two" id="FaW-RU-bS3"/>
@@ -1940,6 +1945,14 @@
                                             <outlet property="lblProcessingDate" destination="vys-kh-dDQ" id="4HR-dX-iUP"/>
                                             <outlet property="lblSubTotal" destination="EtI-Rt-Ng8" id="NVw-LM-Pbe"/>
                                             <outlet property="lblTax" destination="gGE-3z-wW2" id="Hyl-P0-bMd"/>
+                                            <outlet property="lblTitleAuthorizationNumber" destination="Mi7-aK-rIB" id="yGL-Kg-AAA"/>
+                                            <outlet property="lblTitleBookingDate" destination="c2f-Nc-dSa" id="2pC-A7-WlO"/>
+                                            <outlet property="lblTitleCompnyName" destination="u4b-A8-iil" id="yaZ-xf-HhX"/>
+                                            <outlet property="lblTitleDiscount" destination="KRO-fk-Fad" id="Qw7-fm-fyL"/>
+                                            <outlet property="lblTitleDistance" destination="Qxr-CU-aAI" id="qGY-2M-zPP"/>
+                                            <outlet property="lblTitleProcesingDate" destination="458-n6-NVC" id="YtK-FP-uGN"/>
+                                            <outlet property="lblTitleSubTotal" destination="xdV-1h-MA5" id="QnI-Tg-dOz"/>
+                                            <outlet property="lblTitleTaxIncluded" destination="Tzc-IG-GJJ" id="ONz-lA-AHE"/>
                                             <outlet property="lblTotalAmount" destination="7fP-eu-Jvh" id="PnK-HW-NG2"/>
                                             <outlet property="lblTotlaAmountTitile" destination="CKk-9W-AXZ" id="lMQ-pJ-pAQ"/>
                                             <outlet property="lblTripFare" destination="Xcc-7Q-usa" id="9Xv-ec-Hma"/>

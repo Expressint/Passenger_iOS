@@ -28,6 +28,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var lblSwipeRightToLeftForRemoveAddress: UILabel!
     @IBOutlet weak var btnAddnew: UIButton!
+    @IBOutlet weak var lblAddFavourite: UILabel!
     
     //-------------------------------------------------------------
     // MARK: - Base Methods
@@ -57,13 +58,12 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     
-    func setLocalization()
-    {
+    func setLocalization(){
         lblSwipeRightToLeftForRemoveAddress.text = ""
-        if(aryAddress.count > 0)
-        {
+        if(aryAddress.count > 0){
             lblSwipeRightToLeftForRemoveAddress.text = "Please Swipe Right To Left for remove address.".localized
         }
+        lblAddFavourite.text = "Add Favourite Location".localized
     }
     
     func editLocation(){
@@ -96,7 +96,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     func setData() {
         
         self.labelNoData = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        self.labelNoData.text = "No Favourite Location Found!"
+        self.labelNoData.text = "No Favourite Location Found!".localized
 //        self.labelNoData.textAlignment = .center
         self.view.addSubview(self.labelNoData)
         
@@ -203,13 +203,13 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: { (action, indexPath) in
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit".localized, handler: { (action, indexPath) in
             self.editAddressID = self.aryAddress[indexPath.row]["Id"] as? String ?? ""
             self.editAddressType = self.aryAddress[indexPath.row]["Type"] as? String ?? ""
             self.editLocation()
         })
 
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete".localized, handler: { (action, indexPath) in
             print("Delete")
             let selectedData = self.aryAddress[indexPath.row]
             if let selectedID = selectedData["Id"] as? String {

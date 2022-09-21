@@ -17,7 +17,6 @@ class AddFavLocationVC: BaseViewController {
     @IBOutlet weak var txtLocationName: ACFloatingTextfield!
     @IBOutlet weak var txtAddress: ACFloatingTextfield!
     @IBOutlet weak var btnSubmit: ThemeButton!
-    
     var isFromHome: Bool = false
     var destinationLocation: String = ""
     var address: String = ""
@@ -26,7 +25,6 @@ class AddFavLocationVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.txtAddress.delegate = self
         self.txtAddress.text = self.destinationLocation
         if(isFromHome){
@@ -34,12 +32,22 @@ class AddFavLocationVC: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        self.setLocalization()
+    }
+    
+    func setLocalization(){
+        self.txtLocationName.placeholder = "Location Name (Ex: Home, Office)".localized
+        self.txtAddress.placeholder = "Address".localized
+        self.btnSubmit.setTitle("Submit".localized, for: .normal)
+    }
 
     @IBAction func btnSubmitAction(_ sender: Any) {
         if(self.txtAddress.text?.replacingOccurrences(of: " ", with: "") != "" && self.txtLocationName.text?.replacingOccurrences(of: " ", with: "") != ""){
             self.webserviceOfAddAddressToFavourite(lat: self.lat, lng: self.lng)
         }else{
-            UtilityClass.setCustomAlert(title: "Missing", message: "Add all fields".localized) { (index, title) in}
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Add all fields".localized) { (index, title) in}
         }
     }
     

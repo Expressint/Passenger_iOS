@@ -97,9 +97,9 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "OnGoingTableViewCell") as! OnGoingTableViewCell
         
-
+        
         cell.lblBookingID.text = "Booking Id".localized
-        cell.btnTrackYourTrip.setTitle("TrackYourTrip:".localized, for: .normal)
+        cell.btnTrackYourTrip.setTitle("\("TrackYourTrip".localized)", for: .normal)
         if aryData.count > 0 {
             
             cell.selectionStyle = .none
@@ -123,7 +123,7 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             let formattedString = NSMutableAttributedString()
             formattedString
-                .normal("\("Booking Id :".localized)")
+                .normal("\("Order Number/Booking Number".localized):")
                 .bold("\(String(describing: (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id")!))", 14)
             
            
@@ -135,7 +135,7 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             if let pickupTime = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "PickupTime") as? String {
                 if pickupTime == "" {
-                    cell.lblPickupTime.text = "Date and Time not available"
+                    cell.lblPickupTime.text = "Date and Time not available".localized
                 }
                 else {
                     cell.lblPickupTime.text = setTimeStampToDate(timeStamp: pickupTime)
@@ -144,7 +144,7 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             if let DropoffTime = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "DropTime") as? String {
                 if DropoffTime == "" {
-                    cell.lblDropoffTime.text = "Date and Time not available"
+                    cell.lblDropoffTime.text = "Date and Time not available".localized
                 }
                 else {
                     cell.lblDropoffTime.text = setTimeStampToDate(timeStamp: DropoffTime)

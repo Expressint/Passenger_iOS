@@ -85,6 +85,82 @@
 "OR" = "O";
 "Forgot Password" = "Olvidé mi contraseña";
 
+//My Booking
+"OnGoing" = "Encurso";
+"UpComing" = "Próximamente";
+"Past Booking" = "Reserva pasada";
+"Contact number is not available" = "El número de contacto no está disponible";
+"Booking Id" = "ID DE RESERVA";
+"Order Number/Booking Number" = "Número de orden/Número de reserva";
+"TrackYourTrip" = "Seguimiento de su viaje";
+"Date and Time not available" = "Fecha y hora no disponible";
+"First Description" = "Maelezo ya Kwanza";
+"Second Description" = "Maelezo ya Pili";
+"Pickup Time" = "Hora de recogida";
+"Dropoff Time" = "Hora de entrega";
+"Vehicle Type" = "Seleccione el tipo de vehículo";
+"Payment Type" = "Tipo de pago";
+"Booking Fee" = "Tarifa de reserva";
+"Trip Fare" = "Tarifa de viaje";
+"Waiting Cost" = "Costo de espera";
+"Waiting Time" = "Tiempo de espera";
+"Less" = "Menos";
+"Grand Total" = "Gran total";
+"(incl tax)" = "(impuestos incluidos)";
+"Trip Status" = "Estado del viaje";
+"Trip Cancel Reason"= "Trasgar Razón de cancelación";
+"Make Payment" = "Hacer el pago";
+"Company name" = "Nombre de empresa";
+"Booking Date" = "Fecha para registrarse";
+"Processing Date" = "Fecha de procesamiento";
+"Authorization Number" = "Numero de autorización";
+"Distance" = "Distancia";
+"Subtotal" = "Total parcial";
+"Discount" = "Descuento";
+"Trip Status" = "Estado del viaje";
+"Tax(Included)" = "Impuesto incluido)";
+"Cancel Request" = "Cancelar petición";
+
+//My Receipts
+"DropoffTime" = "Hora de entrega";
+"Promo Applied" = "Promoción aplicada";
+"GET RECEIPT" = "Obtener recibo";
+"VIEW RECEIPT" = "Ver recibo";
+"Night Fare" = "Tarifa nocturna";
+"Receipt" = "Recibo";
+
+//Favorite
+"Please Swipe Right To Left for remove address." = "Deslice el dedo de derecha a izquierda para eliminar la dirección.";
+"Add Favourite Location" = "Agregar ubicación favorita";
+"No Favourite Location Found!" = "¡No se ha encontrado ninguna ubicación favorita!";
+"Edit" = "Editar";
+"Delete" = "Borrar";
+"Location Name (Ex: Home, Office)" = "Nombre de la ubicación (por ejemplo, casa, oficina)";
+"Add all fields" = "Agregar todos los campos";
+
+//Cancle Alart
+"Enter reason here" = "Introduzca el motivo aquí";
+"Please Select Help Reason" = "Seleccione el motivo de la ayuda";
+"Please Select Cancel Reason" = "Seleccione el motivo de cancelación";
+
+//INVITE FRIENDS
+"INVITE FRIENDS" =  "INVITAR A AMIGOS";
+"SHARE YOUR INVITE CODE" = "Comparte tu código de invitación";
+"SHARE" = "CUOTA";
+"Please select app type" = "Seleccione el tipo de aplicación";
+"has invited you to become a Book A ride Passenger" = "te ha invitado a convertirte en Pasajero de Book A ride";
+"Your Referral Code is" = "Su código de referencia es";
+"has invited you to become a Book A ride Driver" = "te ha invitado a convertirte en un conductor de Book A ride";
+"Mail cancelled" = "Correo cancelado";
+"Mail saved" = "Correo guardado";
+"Done" = "Listo";
+"Mail sent" = "Correo enviado";
+"Mail sent failure" = "Error de envío de correo";
+"Your Referral Code" = "Su código de referencia";
+"With Driver App" = "Con aplicación de conductor";
+"With Passenger App" = "Con aplicación para pasajeros";
+
+
 "App Name" = ""; //"Book A Ride";
 "Flight Number"  = "Flight Number";
 "Flight Number (If applicable)" = "Flight Number (If applicable)";
@@ -132,7 +208,6 @@
 "Transfer To Bank" = "Transfer To Bank";
 "Transfer To Bank Account" = "Transfer To Bank Account";
 "History" = "History";
-"Upcoming" = "Upcoming";
 "Send Money" = "Send Money";
 "Receive Money" = "Receive Money";
 "Set Amount" = "Set Amount";
@@ -141,9 +216,7 @@
 "Current Balance" = "Current Balance";
 "Add a Card" = "Add a Card";
 "Add New Card" = "Add New Card";
-"Make Payment" = "Make Payment";
 "Not Available" = "Not Available";
-"Done" = "Done";
 "Card Number" = "Card Number";
 "Expiry Date" = "Expiry Date";
 "Alias" = "Alias";
@@ -189,22 +262,12 @@
 "Cash" = "Cash";
 "CHANGE PASSWORD" = "BADILISHA NENO LA SIRI";
 "Booking Fee:" = "Booking Fee:";
-"Trip Fare:" = "Trip Fare:";
-"Pickup Time:" = "Pickup Time:";
-"Pickup Time" = "Pickup Time";
 "Dropoff Time:" = "Dropoff Time:";
-"Vehicle Type:" = "Vehicle Type:";
 "Distance Travelled:" = "Distance Travelled:";
 "Distance Fare:" = "Distance Fare:";
 "Tax:" = "Tax:";
-"Total Amount :" = "Booking Fee :";
-"Grand Total :" = "Grand Total :";
-"(incl tax)" = "(incl tax)";
-"Night Fare:" = "Night Fare:";
 "Promo Applied:" = "Promo Applied:";
-"Payment Type:" = "Payment Type:";
 "Total Amount:\n(incl tax)" = "Total Amount:\n(incl tax)";
-"Trip Status:" = "Trip Status:";
 "Image" = "Image";
 "Cards" = "Cards";
 "Card" = "Card";
@@ -234,7 +297,6 @@
 "You will be notified with your driver detail after your request is submited." = "You will be notified with your driver detail after your request is submited.";
 "Save" = "Save";
 "PickupDate" = "Pickup Date";
-"SHARE" = "SHARE";
 "Driver Info" = "Driver Info";
 "Track Your Trip" = "Track Your Trip";
 "Please select car model" = "Please select car model";
@@ -250,8 +312,6 @@
 "Please enter Bank Name" = "Please enter Bank Name";
 "Please enter Branch Code" = "Please enter Branch Code";
 "Please enter Bank Account Number" = "Please enter Bank Account Number";
-"GET RECEIPT" = "GET RECEIPT";
-"VIEW RECEIPT" = "VIEW RECEIPT";
 "Please select Gender" = "Please select Gender";
 "Please select card" = "Please select card";
 "Please enter amount" = "Please enter amount";
@@ -281,12 +341,8 @@
 "Others" = "Others";
 "Book Now" = "Book Now";
 "Book Later" = "Book Later";
-"Done" = "Done";
 "Start Trip" = "Start Trip";
 //"Cancel Request" = "Cancel Request";
-"OnGoing" = "OnGoing";
-"UpComing" = "UpComing";
-"Past Booking" = "Past Booking";
 "No data Found" = "No data Found";
 "Account" = "Account";
 "Trip Detail" = "Trip Detail";
@@ -296,13 +352,8 @@
 "How was your experience with %1$s?" = "How was your experience with %1$s?";
 "Tap to activate Scanner" = "Tap to activate Scanner";
 "Your request canceled successfully" = "Your request canceled successfully";
-"Delete" = "Delete";
-"First Description" = "Maelezo ya Kwanza";
-"Second Description" = "Maelezo ya Pili";
-"Discount" = "Discount";
 //"Payment Type:" = "Payment Type:";
 "Promo Applied:" = "Promo Applied:";
-"Pickup Time" = "Pickup Time";
 "Connection Error" = "Connection Error";
 "Internet connection not available" = "Internet connection not available";
 "MY RATING" = "MY RATING";
@@ -323,13 +374,11 @@
 "Your booking request has been confirmed" = "Your booking request has been confirmed";
 "Choose Image" = "Choose Image";
 "Open Camera" = "Open Camera";
-"Booking Id" = "Booking Id";
 "Choose From Gallery" = "Choose From Gallery";
 "Select a card" = "Select a card";
 "Pickup Location" = "Pickup Location:";
 "Dropoff Location" = "Dropoff Location:";
 "Old Password" = "Old Password";
-"Share Your Invite Code" = "Share Your Invite Code";
 "Account Holder Name" = "Account Holder Name";
 "Bank Account Name" = "Bank Account Name";
 "Branch Code" = "Branch Code";
@@ -338,12 +387,7 @@
 "Description" = "Description";
 "Tip" = "Tip";
 "Please enter tip amount" = "Please enter tip amount";
-"Waiting Cost" = "Waiting Cost";
-"Waiting Time" = "Waiting Time";
-"Less" = "Less";
-"Grand Total" = "Grand Total";
 "Promo Code"  = "Promo Code";
-"SHARE YOUR INVITE CODE" = "SHARE YOUR INVITE CODE";
 "Please enter promocode" = "Please enter promocode";
 "You need to grant access to&#160;" = "You need to grant access to&#160;";
 "Money added  successfully" = "Money added  successfully";
@@ -375,7 +419,6 @@
 "logoutmsg" = "Are you sure you want to logout?";
 "yourInviteCode" = "\n\n Your invite code is:&#160";
 "scanCard" = "Scan Card";
-"TrackYourTrip:" = "TrackYourTrip:";
 "PICK UP TIME:" = "PICK UP TIME:";
 "DROPOFF TIME:" = "DROPOFF TIME :";
 "VEHICLE TYPE:" = "VEHICLE TYPE :";
@@ -388,7 +431,6 @@
 "WAITING COST:" = "WAITING COST  :";
 "BOOKING CHAGE:" = "BOOKING CHAGE :";
 "TAX:" = "TAX :";
-"DISCOUNT:" = "DISCOUNT :";
 "PAYMENT TYPE:" = "PAYMENT TYPE :";
 "TOTAL COST:" = "TOTAL COST :";
 "DROP LOCATION:" = "DROP LOCATION :";
@@ -402,7 +444,6 @@
 //HOME
 
 "HOME" = "Home";
-"Done" = "Done";
 "Update Dropoff Location" = "Update Dropoff Location";
 "Dropoff Location" = "Dropoff Location";
 "Pickup Location" = "Pickup Location";
@@ -411,7 +452,6 @@
 "Have a promocode?" = "Have a promocode?";
 "REQUEST NOW" = "REQUEST NOW";
 "Your request status pending..." = "Your request status pending...";
-"Cancel Request" = "Cancel Request";
 "Driver Info" = "Driver Info";
 "Your Email Id is not configured from settings. Please configure it from Settings -> Mail" = "Your Email Id is not configured from settings. Please configure it from Settings -> Mail";
 "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?" = "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?";
@@ -420,12 +460,10 @@
 "Your trip has been completed" = "Your trip has been completed";
 "Your request has been rejected." = "Your request has been rejected.";
 "Your trip has now started." = "Your trip has now started.";
-"Trip Status" = "Trip Status";
 "Thanks for feedback" = "Thanks for feedback";
 "Add Tip" = "Add Tip";
 "Any other feedback(Optional)" = "Any other feedback(Optional)";
 "Tip Alert" = "Tip Alert";
-"DropoffTime" = "DropoffTime";
 "Are you sure you want to logout?" = "Are you sure you want to logout?";
 "Please enter drop off location" = "Please enter drop off location";
 "Please enter pick up location" = "Please enter pick up location";

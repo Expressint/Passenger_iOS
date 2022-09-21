@@ -51,16 +51,19 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
     
     @objc func methodOfReloadPastBooking(notification: Notification) {
         self.webserviceOfPastbookingpagination(index: 1)
     }
     
-    func setLocalization()
-    {
-        
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    func setLocalization(){
+        self.tableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -110,29 +113,42 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "PastBooingTableViewCell") as! PastBooingTableViewCell
         
         if aryData.count > 0 {
+            cell.lblTitleCompnyName.text = "\("Company name".localized) :"
             
-
+            cell.lblTitleBookingDate.text = "\("Booking Date".localized) :"
             
-            cell.lblBookingID.text = "Booking Id :".localized
+            cell.lblTitleProcesingDate.text = "\("Processing Date".localized) :"
+            
+            cell.lblTitleAuthorizationNumber.text = "\("Authorization Number".localized) :"
+            
+            cell.lblTitleDistance.text = "\("Distance".localized) :"
+            
+            cell.lblTitleDiscount.text = "\("Discount".localized) :"
+            
+            cell.lblTitleSubTotal.text = "\("Subtotal".localized) :"
+            
+            cell.lblTripStatusTitle.text = "\("Trip Status".localized) :"
+            cell.lblTitleTaxIncluded.text = "\("Tax(Included)".localized) :"
+            cell.lblBookingID.text = "\("Order Number/Booking Number".localized) :"
             cell.lblPickupAddress.text = "First Description".localized
             cell.lblDropoffAddress.text = "Second Description".localized
-            cell.lblPickupTimeTitle.text = "Pickup Time:".localized
+            cell.lblPickupTimeTitle.text = "\("Pickup Time".localized):"
             //            cell.lblPickupTimeTitle.text = "Booking Fee:".localized
             cell.lblDropoffTimeTitle.text = "Dropoff Time".localized
             //            cell.lblDropoffTimeTitle.text = "Trip Fare:".localized
-            cell.lblVehicleTypeTitle.text = "Vehicle Type:".localized
-            cell.lblPaymentTypeTitle.text = "Payment Type:".localized
-            cell.lblBookingFreeTitle.text = "Total Amount :".localized
-            cell.lblTripFareTitle.text = "Trip Fare:".localized
+            cell.lblVehicleTypeTitle.text = "\("Vehicle Type".localized):"
+            cell.lblPaymentTypeTitle.text = "\("Payment Type".localized):"
+            cell.lblBookingFreeTitle.text = "\("Booking Fee".localized) :"
+            cell.lblTripFareTitle.text = "\("Trip Fare".localized):".localized
             //            cell.lblTripTitle.text = "Tip".localized
             cell.lblWaitingCostTitle.text = "Waiting Cost".localized
             cell.lblWaitingTimeTitle.text = "Waiting Time".localized
             cell.lblLessTitle.text = "Less" .localized
             //            cell.lblPromoApplied.text = "Promo Applied:".localized
-            cell.lblTotlaAmountTitile.text = "Grand Total :".localized
+            cell.lblTotlaAmountTitile.text = "\("Grand Total".localized):".localized
             cell.lblInclTax.text = "(incl tax)".localized
-            cell.lblTripStatusTitle.text = "Trip Status:".localized
-            cell.lblCancelReasonTitle.text = "Trip Cancel Reason:".localized
+            cell.lblTripStatusTitle.text = "\("Trip Status".localized):"
+            cell.lblCancelReasonTitle.text = "\("Trip Cancel Reason".localized):"
 
             cell.selectionStyle = .none
             //            cell.viewCell.layer.cornerRadius = 10
@@ -177,7 +193,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             }
             let formattedString = NSMutableAttributedString()
             formattedString
-                .normal("\("Booking Id :".localized)")
+                .normal("\("Order Number/Booking Number".localized) :")
                 .bold("\(String(describing: (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id")!))", 14)
             
             let lbl = UILabel()
