@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -677,6 +677,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="CHW-Lp-4yG"/>
                                                                         </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <state key="normal" title="Book Now">
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
@@ -693,6 +694,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="zYU-cA-eEk"/>
                                                                         </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <state key="normal" title="Book Later">
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
@@ -1663,6 +1665,7 @@
                         <outlet property="lblSelectPaymentTitle" destination="5OL-zD-fql" id="NgD-Fw-0Zk"/>
                         <outlet property="lblWaitingTime" destination="rFc-Ne-fSD" id="1uU-QM-i4f"/>
                         <outlet property="lblYourRequestPendingStatusTitle" destination="zJL-fE-aQy" id="aUf-3y-qE1"/>
+                        <outlet property="lblselectPaymentMethod" destination="w4v-xE-t5i" id="qkl-Fe-eJj"/>
                         <outlet property="stackEstimatedView" destination="i9V-ae-eSG" id="x8J-Ih-krP"/>
                         <outlet property="stackEstimatedViewHeight" destination="gqf-xt-tCf" id="d4h-rb-6fT"/>
                         <outlet property="stackViewNumberOfPassenger" destination="d44-D0-lA3" id="1xj-9h-cTL"/>

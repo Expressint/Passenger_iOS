@@ -14,7 +14,6 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     
     //-------------------------------------------------------------
     // MARK: - Outlets
-    //-------------------------------------------------------------
     var delegate: delegateRateGiven!
     @IBOutlet weak var lblPickupLocation: MarqueeLabel!
     @IBOutlet weak var lblDropOffLocation: MarqueeLabel!
@@ -31,6 +30,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var lblBookingCharge: UILabel!
     @IBOutlet var btnViewCompleteTripData: UIView!
     
+    @IBOutlet weak var lblTitleTripDetail: UILabel!
     @IBOutlet var lblTip: UILabel!
     @IBOutlet var lblPaymentType: UILabel!
     @IBOutlet var lblPickTime: UILabel!
@@ -82,7 +82,15 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var lblSubTotal: UILabel!
     @IBOutlet weak var lblDiscount: UILabel!
     @IBOutlet weak var lblTax: UILabel!
+    @IBOutlet weak var lblTitleCompnyName: UILabel!
     
+    @IBOutlet weak var lblTitleTaxIncluded: UILabel!
+    @IBOutlet weak var lblTitleDiscount: UILabel!
+    @IBOutlet weak var lblTitleProcessingDate: UILabel!
+    @IBOutlet weak var lblTitleBookingDate: UILabel!
+    @IBOutlet weak var lblTitleAuthorizationNumber: UILabel!
+    @IBOutlet weak var lblTitleNightFare: UILabel!
+    @IBOutlet weak var lblTitleSubTotal: UILabel!
     
     var dictData = NSDictionary()
     
@@ -113,28 +121,43 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewWillAppear(_ animated: Bool)
-    {
+    override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
         setLocalizaton()
         setData()
     }
-    func setLocalizaton()
-    {
-        lblbookingID.text = "Booking Id".localized
+    
+    @objc func changeLanguage(){
+        self.setLocalizaton()
+    }
+    
+    func setLocalizaton(){
+        lblbookingID.text = "Order Number/Booking Number".localized
+        lblTitleTripDetail.text = "Trip Detail".localized
+        lblTitleCompnyName.text = "\("Company name".localized) :"
+        lblTitleBookingDate.text = "\("Booking Date".localized) :"
+        lblTitleProcessingDate.text = "\("Processing Date".localized) :"
+        lblTitleAuthorizationNumber.text = "\("Authorization Number".localized) :"
+        lblPaymentTypeTitle.text = "\("Payment Type".localized) :"
+        lblDisstanceTravelledTitle.text = "\("Distance Travelled".localized):"
+        lblWaitingTimeTile.text = "\("Waiting Time".localized):"
+        WaitingCostTitle.text = "Waiting Cost".localized
+        lblBookingFreeTitle.text = "\("Booking Fee".localized) :"
+        lblTitleNightFare.text = "\("Night Fare".localized) :"
+        lblTitleSubTotal.text = "\("Subtotal".localized) :"
+        lblTitleDiscount.text = "\("Discount".localized) :"
+        lblTitleTaxIncluded.text = "\("Tax(Included)".localized) :"
+        lblTotalAmount.text = "\("Grand Total".localized) :"
+        lblTripStatusTitle.text = "\("Trip Status".localized):"
+        
         lblPickupLocation.text = "Address".localized
         lblDropOffLocation.text = "Address".localized
         lblDropoffTimeTitle.text = "Dropoff Time".localized
         lblPickUpTimeTitle.text = "Pickup Time".localized
-        lblDisstanceTravelledTitle.text = "Distance Travelled:".localized
-        lblBookingFreeTitle.text = "Booking Fee :".localized
-        lblTripFee.text = "Trip Fare:".localized
-        WaitingCostTitle.text = "Waiting Cost".localized
-        lblWaitingTimeTile.text = "Waiting Time:".localized
+        lblTripFee.text = "\("Trip Fare".localized):"
         lblLess.text = "Less".localized
 //        lblPrompAppplied.text = "Promo Applied :".localized
-        lblTotalAmount.text = "Grand Total :".localized
-        lblTripStatusTitle.text = "Trip Status:".localized
         lblNightFare.text = "lblNightFare".localized
         
         if (dictData.object(forKey: "PaymentType") as? String ?? "") != "card"
@@ -145,7 +168,6 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         {
             btnOK.setTitle("Make Payment".localized, for: .normal)
         }
-        lblPaymentTypeTitle.text = "Payment Type:".localized
         lblWaitingTimeTile.text = "Waiting Time".localized
     }
     
@@ -218,7 +240,7 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         
         
         
-        lblbookingID.text = "\("Booking Id :".localized) \(dictData.object(forKey: "Id") as! Int)"
+        lblbookingID.text = "\("\("Order Number/Booking Number".localized) :") \(dictData.object(forKey: "Id") as! Int)"
 
         lblTripStatus.text = (dictData.object(forKey: "Status") as? String)?.capitalizingFirstLetter()
         if((!UtilityClass.isEmpty(str: (dictData.object(forKey: "PromoCode") as? String))))

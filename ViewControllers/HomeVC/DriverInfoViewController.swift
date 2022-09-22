@@ -24,6 +24,10 @@ class DriverInfoViewController: UIViewController {
 //    @IBOutlet weak var lblCareName: UILabel!
     @IBOutlet weak var lblCarClassModel: UILabel!
     
+    @IBOutlet weak var lblTitleVehicleColor: UILabel!
+    @IBOutlet weak var lblTitleVehicleType: UILabel!
+    @IBOutlet weak var lblTitleVehiclePlateNum: UILabel!
+    @IBOutlet weak var lblTitleVehicleMake: UILabel!
     @IBOutlet weak var lblVehicleMake: UILabel!
     @IBOutlet weak var lblVehiclePlateNum: UILabel!
     @IBOutlet weak var lblVehicleType: UILabel!
@@ -93,8 +97,9 @@ class DriverInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        setLocalization()
 //        fillAllFields()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        self.setLocalization()
     }
     
     override func viewDidLoad() {
@@ -133,8 +138,11 @@ class DriverInfoViewController: UIViewController {
         }
     }
     
-    func socketMethodForEmitingToGetDriverLocation()
-    {
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    func socketMethodForEmitingToGetDriverLocation(){
         let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "DriverId": strDriverID] as [String : Any]
         homeVC?.socket?.emit(SocketData.kGetDriverCurrentLatLong , with: [myJSON], completion: nil)
         print("Method name is \(SocketData.kGetDriverCurrentLatLong) and value is \(myJSON)")
@@ -209,15 +217,17 @@ class DriverInfoViewController: UIViewController {
         
         
     }
-    func setLocalization()
-    {
-        
+    
+    func setLocalization(){
         lblDriverInfo.text = "Driver Info".localized
+        lblTitleVehicleMake.text = "Vehicle Make".localized
+        lblTitleVehicleType.text = "Vehicle Type".localized
+        lblTitleVehiclePlateNum.text = "Vehicle Plate Num".localized
+        lblTitleVehicleColor.text = "Vehicle Color".localized
         lblDriverName.text = "Jina la dereva".localized
 //        lblCareName.text = "Jina la Gari".localized
         lblPickupLocation.text = "Pickup Location".localized
         lblDropoffLocation.text = "Dropoff Location".localized
-        
     }
     
 

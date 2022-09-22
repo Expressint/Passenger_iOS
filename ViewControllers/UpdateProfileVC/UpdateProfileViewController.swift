@@ -28,6 +28,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhoneNumber: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
+    @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var txtDateOfBirth: UITextField!
     
 //    @IBOutlet weak var viewMale: M13Checkbox!
@@ -64,6 +65,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet var btnMale: RadioButton!
     @IBOutlet var btnFemale: RadioButton!
     @IBOutlet weak var btnCamera: UIButton!
+    @IBOutlet weak var lblIdProof: UILabel!
     @IBOutlet var iconCamera: UIImageView!
     @IBOutlet var viewRadioGender: UIView!
 //    @IBOutlet weak var btnChangePassword: UIButton!
@@ -156,6 +158,8 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         lblAddress.text = "Address".localized
         lblPhoneNum.text = "Phone Number".localized
         lblDateOfBirth.text =  "Date Of Birth".localized
+        lblEmail.text = "Email".localized
+        lblIdProof.text = "ID Proof (License/ID card /Passport)".localized
         lblGender.text = "Gender".localized
         btnSave.setTitle("Save".localized, for: .normal)
         btnMale.setTitle("Male".localized, for: .normal)
@@ -227,7 +231,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBAction func btnSubmit(_ sender: ThemeButton) {
     
         if txtAddress.text == "" || txtFirstName.text == "" || txtLastName.text == "" || gender == "" {
-            UtilityClass.setCustomAlert(title: "Misssing", message: "Please fill all details".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please fill all details".localized) { (index, title) in
             }
         }
         else
@@ -240,19 +244,19 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     
     @IBAction func btnUploadImage(_ sender: UIButton) {
         isPassengerImage = false
-        let alert = UIAlertController(title: "Choose Image From", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Choose Image From".localized, message: nil, preferredStyle: .actionSheet)
         
-        let Camera = UIAlertAction(title: "Camera", style: .default, handler: { ACTION in
+        let Camera = UIAlertAction(title: "Camera".localized, style: .default, handler: { ACTION in
             
             self.PickingImageFromCamera()
         })
         
-        let Gallery = UIAlertAction(title: "Gallery", style: .default, handler: { ACTION in
+        let Gallery = UIAlertAction(title: "Gallery".localized, style: .default, handler: { ACTION in
             
              self.PickingImageFromGallery()
         })
         
-        let Cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let Cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         
         alert.addAction(Camera)
         alert.addAction(Gallery)
@@ -264,41 +268,29 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     
     @IBAction func btnPassengereImage(_ sender: Any) {
         isPassengerImage = true
-       
-        let alert = UIAlertController(title: "Choose Image From", message: nil, preferredStyle: .actionSheet)
-        
-        let Camera = UIAlertAction(title: "Camera", style: .default, handler: { ACTION in
-            
+        let alert = UIAlertController(title: "Choose Image From".localized, message: nil, preferredStyle: .actionSheet)
+        let Camera = UIAlertAction(title: "Camera".localized, style: .default, handler: { ACTION in
             self.PickingImageFromCamera()
         })
-        
-        let Gallery = UIAlertAction(title: "Gallery", style: .default, handler: { ACTION in
-            
+        let Gallery = UIAlertAction(title: "Gallery".localized, style: .default, handler: { ACTION in
              self.PickingImageFromGallery()
         })
-        
-        let Cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
+        let Cancel = UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil)
         alert.addAction(Camera)
         alert.addAction(Gallery)
         alert.addAction(Cancel)
-        
         self.present(alert, animated: true, completion: nil)
     }
     
     
-    func PickingImageFromGallery()
-    {
+    func PickingImageFromGallery(){
         let picker = UIImagePickerController()
         picker.delegate = self
-        
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
-        
         // picker.stopVideoCapture()
 //        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         picker.mediaTypes = [(kUTTypeImage as String)]
-        
 //        picker.mediaTypes = []
         present(picker, animated: true, completion: nil)
     }
@@ -460,7 +452,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
                 
                 NotificationCenter.default.post(name: UpdateProfileNotification, object: nil)
                
-                UtilityClass.setCustomAlert(title: "Done", message: "Your profile updated successfully".localized) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Done".localized, message: "Your profile updated successfully".localized) { (index, title) in
                     self.navigationController?.popViewController(animated: true)
                 }
             }

@@ -66,8 +66,7 @@ class GiveRatingViewController: UIViewController, FloatRatingViewDelegate {
        setLoclization()
     }
     
-     func setLoclization()
-     {
+     func setLoclization(){
         txtFeedbackFinal.placeholder = "Any other feedback(Optional)".localized
         btnSubmit.setTitle("Submit".localized, for: .normal)
         let strLoc = "How was your experience with Driver".localized

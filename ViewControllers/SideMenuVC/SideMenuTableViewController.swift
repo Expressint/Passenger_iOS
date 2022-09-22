@@ -27,8 +27,6 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     @IBOutlet weak var lblMobileNumber: UILabel!
     @IBOutlet weak var btnLS: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
-//    @IBOutlet weak var btnLiveHelp: UIButton!
-    
     @IBOutlet weak var btnSetting: UIButton!
     @IBOutlet weak var segmentLang: UISegmentedControl!
     @IBOutlet weak var btnSignout: ThemeButton!
@@ -39,39 +37,26 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
             btnSignOut1.layer.borderWidth = 1.0
             btnSignOut1.setTitleColor(UIColor.black, for: .normal)
             btnSignOut1.layer.cornerRadius = 20
-           
         }
     }
-    // @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
     @IBOutlet weak var CollectionHeight: NSLayoutConstraint!
-    
     var ProfileData = NSDictionary()
-    
     var arrMenuIcons = [String]()
     var arrMenuTitle = [String]()
     var strSelectedLaungage = String()
     //-------------------------------------------------------------
     // MARK: - Base Methods
-    //-------------------------------------------------------------
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.removeObserver(self, name: UpdateProfileNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.setProfileData), name: UpdateProfileNotification, object: nil)
-        
         setProfileData()
-        
         self.navigationController?.isNavigationBarHidden = false
         self.btnSignout.layer.cornerRadius = self.btnSignout.frame.size.height/2
         self.btnSignout.layer.masksToBounds = true
         self.btnSignout.setTitleColor(UIColor.black, for: .normal)
-        
-        //        giveGradientColor()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.SetRating), name: NSNotification.Name(rawValue: "rating"), object: nil)
-        
-        //        webserviceOfTickPayStatus()
         arrMenuIcons = ["icon_MyBookingUnselect","icon_FavouriteUnselect","img_mn_receipt_unselect" ,"iconHelp", "icon_InviteFriendUnselect"]//icon_UnselectedCard//img_mn_receipt_unselect
         
     }
@@ -225,29 +210,29 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     }
     
     func showSheet() {
-        let alert = UIAlertController(title: "Legal Stuff", message: "Please Select an Option", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Legal Stuff".localized, message: "Please Select an Option".localized, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "About Us", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "About Us".localized, style: .default , handler:{ (UIAlertAction)in
             NotificationCenter.default.post(name: openNAboutUs, object: nil)
             self.sideMenuController?.toggle()
         }))
         
-        alert.addAction(UIAlertAction(title: "Refund Policy", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Refund Policy".localized, style: .default , handler:{ (UIAlertAction)in
             NotificationCenter.default.post(name: openNRP, object: nil)
             self.sideMenuController?.toggle()
         }))
         
-        alert.addAction(UIAlertAction(title: "Privacy Policy", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "privacyPolicy".localized, style: .default , handler:{ (UIAlertAction)in
             NotificationCenter.default.post(name: openNPP, object: nil)
             self.sideMenuController?.toggle()
         }))
         
-        alert.addAction(UIAlertAction(title: "Terms and Conditions", style: .default, handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Terms and Conditions".localized, style: .default, handler:{ (UIAlertAction)in
             NotificationCenter.default.post(name: openNTC, object: nil)
             self.sideMenuController?.toggle()
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
             print("User click Cancel")
         }))
         
@@ -257,14 +242,14 @@ class SideMenuTableViewController: UIViewController, delegateForTiCKPayVerifySta
     }
     
     func showDeleteSheet() {
-        let refreshAlert = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: UIAlertController.Style.alert)
+        let refreshAlert = UIAlertController(title: "Delete Account".localized, message: "Are you sure you want to delete your account?".localized, preferredStyle: UIAlertController.Style.alert)
 
-        refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action: UIAlertAction!) in
             self.sideMenuController?.toggle()
             NotificationCenter.default.post(name: DeleteAccount, object: nil)
         }))
 
-        refreshAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: { (action: UIAlertAction!) in
             self.sideMenuController?.toggle()
               print("Handle No Logic here")
         }))

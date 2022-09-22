@@ -45,7 +45,7 @@ class ChangePasswordVC: BaseViewController {
         lblChangePassWorld.text = "Change Password".localized
         
         txtNewPassword.placeholder = "New Password".localized
-        
+        txtCurrentPassword.placeholder = "Current Password".localized
         txtConfirmPassword.placeholder = "Confirm Password".localized
         btnSubmit.setTitle("Submit".localized, for: .normal)
         
@@ -72,33 +72,33 @@ class ChangePasswordVC: BaseViewController {
         
 //        txtNewPassword.placeholder
         guard !txtCurrentPassword.text!.isEmpty else {
-             UtilityClass.setCustomAlert(title: "Missing", message: "Please enter current password".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter current password".localized) { (index, title) in
              }
              return
          }
         
         guard !txtNewPassword.text!.isEmpty else {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter new password".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter new password".localized) { (index, title) in
             }
             return
         }
         
         guard !txtConfirmPassword.text!.isEmpty else {
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please confirm password".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please confirm password".localized) { (index, title) in
             }
             return
         }
         
         if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
         {
-            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Required".localized, message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
             }
             
             return
         }
         else if ((txtConfirmPassword.text?.hasPrefix(" ") == true) || (txtConfirmPassword.text?.hasSuffix(" ") == true))
         {
-            UtilityClass.setCustomAlert(title: "Required", message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Required".localized, message: "Confirm password can’t start or end with a blank space".localized) { (index, title) in
             }
             
             return
@@ -109,12 +109,12 @@ class ChangePasswordVC: BaseViewController {
                 webserviceOfChangePassword()
             }
             else {
-                UtilityClass.setCustomAlert(title: "Missing", message: "Password must contain at least 8 characters".localized) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "Password must contain at least 8 characters".localized) { (index, title) in
             }
             }
         }
         else {
-            UtilityClass.setCustomAlert(title: "Password did not match", message: "Password and confirm password must be same".localized) { (index, title) in
+            UtilityClass.setCustomAlert(title: "Password did not match".localized, message: "Password and confirm password must be same".localized) { (index, title) in
             }
         }
     }
@@ -132,7 +132,7 @@ class ChangePasswordVC: BaseViewController {
         
         if contactNumber == "" {
             
-            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available".localized) { (index, title) in
             }
         }
         else

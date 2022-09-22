@@ -57,7 +57,7 @@ class ThemeButtonForRide: UIButton {
     override func awakeFromNib() {
         //        self.titleLabel?.font = UIFont.bold(ofSize: 15.0)
         //self.layer.cornerRadius = 3.0
-        self.titleLabel?.font = UIFont.regular(ofSize: 15.0)
+        self.titleLabel?.font = UIFont.regular(ofSize: 13.0)
         self.layer.cornerRadius = 5.0
         self.layer.masksToBounds = true
         self.titleLabel?.textColor = .black

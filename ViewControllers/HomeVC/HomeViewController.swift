@@ -250,7 +250,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @objc func updateTimer() {
-        self.lblWaitingTime.text = "Waiting time will start in \(self.timeFormatted(self.totalWaitingTime))"
+        self.lblWaitingTime.text = "\("Waiting time will start in".localized) \(self.timeFormatted(self.totalWaitingTime))"
         if totalWaitingTime != 0 {
             totalWaitingTime -= 1  // decrease counter timer
         } else {
@@ -265,7 +265,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @objc func updatePositiveTimer() {
-        self.lblWaitingTime.text = "Waiting time \(self.timeFormatted(self.totalWaitingTime))"
+        self.lblWaitingTime.text = "\("Waiting time".localized) \(self.timeFormatted(self.totalWaitingTime))"
         totalWaitingTime += 1
     }
     
@@ -754,7 +754,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         super.viewWillAppear(animated)
         
         //self.checkPassengerID()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
         self.setLocalization()
         //        self.btnDoneForLocationSelected.isHidden = true
         
@@ -769,7 +769,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
                 //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                 //                }
-                UtilityClass.setCustomAlert(title: "Missing", message: "No Driver Available Right Now.".localized) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "No Driver Available Right Now.".localized) { (index, title) in
                 }
             }
             else if strDestinationLocationForBookLater != "" {
@@ -794,7 +794,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.navigationController?.pushViewController(next, animated: true)
             } else {
                 
-                UtilityClass.setCustomAlert(title: "Missing", message: "We did not get proper address") { (index, title) in
+                UtilityClass.setCustomAlert(title: "Missing".localized, message: "We did not get proper address".localized) { (index, title) in
                 }
             }
         }
@@ -817,22 +817,29 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
     }
     
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
     func checkPassengerID() {
         let getData = SingletonClass.sharedInstance.dictProfile
         let Url = getData.object(forKey: "passenger_id") as? String ?? ""
         if(Url == ""){
-            UtilityClass.setCustomAlert(title: "Required", message: "Please upload ID Proof Doc") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Required".localized, message: "Please upload ID Proof Doc".localized) { (index, title) in
                 self.GotoProfilePage()
             }
         }
     }
     
-    func setLocalization()
-    {
+    func setLocalization(){
+        self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true, isWhatsApp: true)
+        lblselectPaymentMethod.text = "Select Payment Method".localized
+        lblCurrentLocation.text = "Drag Marker To Set Location".localized
         //        lblEditProfile.text =  "Edit Profile".localized
         //        lblAccount.text =  "Account".localized
         txtCurrentLocation.placeholder = "Pickup Location".localized
         txtDestinationLocation.placeholder = "Dropoff Location".localized
+        txtAdditionalDestinationLocation.placeholder = "Additional Dropoff Location".localized
         btnDoneForLocationSelected.setTitle("Done".localized, for: .normal)
         btnBookNow.setTitle("Book Now".localized, for: .normal)
         btnBookLater.setTitle("Book Later".localized, for: .normal)
@@ -845,6 +852,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         btnDriverInfo.setTitle("Driver Info".localized, for: .normal)
         txtHavePromocode.placeholder = "Enter Promocode".localized
         btnPesaPal.setTitle("pesapal".localized, for: .normal)
+        btnCardSelection.setTitle("Card".localized, for: .normal)
+        btnCash.setTitle("Cash".localized, for: .normal)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -1256,9 +1265,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
            NextPage.isFromHome = false
            self.navigationController?.pushViewController(NextPage, animated: true)
        } else {
-            let alert = UIAlertController(title: "Add Favourite Location", message: "Please Select an Option", preferredStyle: .actionSheet)
+           let alert = UIAlertController(title: "Add Favourite Location".localized, message: "Please Select an Option".localized, preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: "PickUp Location", style: .default , handler:{ (UIAlertAction)in
+           alert.addAction(UIAlertAction(title: "PickUp Location".localized, style: .default , handler:{ (UIAlertAction)in
                 let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
                 NextPage.destinationLocation = self.txtCurrentLocation.text ?? ""
                 NextPage.lat = "\(self.doublePickupLat)"
@@ -1267,7 +1276,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.navigationController?.pushViewController(NextPage, animated: true)
             }))
             
-            alert.addAction(UIAlertAction(title: "DropOff Location", style: .default , handler:{ (UIAlertAction)in
+           alert.addAction(UIAlertAction(title: "DropOff Location".localized, style: .default , handler:{ (UIAlertAction)in
                 let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
                 NextPage.destinationLocation = self.txtDestinationLocation.text ?? ""
                 NextPage.lat = "\(self.doubleDropOffLat)"
@@ -1276,7 +1285,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.navigationController?.pushViewController(NextPage, animated: true)
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:{ (UIAlertAction)in
+           alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
                 print("User click Cancel")
             }))
             
@@ -2171,10 +2180,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     var cardData = [[String:AnyObject]]()
     
     @objc func newBooking(_ sender: UIButton) {
-        let alert = UIAlertController(title: "New Booking", message: "This will clear old trip details on map for temporary now.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "New Booking".localized, message: "This will clear old trip details on map for temporary now.".localized, preferredStyle: .alert)
         let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in            self.clearSetupMapForNewBooking()
         })
-        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { ACTION in
+        let cancel = UIAlertAction(title: "Cancel".localized, style: .default, handler: { ACTION in
         })
         alert.addAction(OK)
         alert.addAction(cancel)
@@ -2217,21 +2226,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             {
                 if txtCurrentLocation.text!.count == 0 {
                     
-                    UtilityClass.setCustomAlert(title: "Missing", message: "Please enter your pickup location again") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your pickup location again".localized) { (index, title) in
                     }
                 }
                 else if txtDestinationLocation.text!.count == 0 {
                     
-                    UtilityClass.setCustomAlert(title: "Missing", message: "Please enter your destination again") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your destination again".localized) { (index, title) in
                     }
                 }
                 else if strCarModelID == "" {
-                    UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle".localized) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select a vehicle".localized) { (index, title) in
                     }
                 }
                 else if strModelId == "" {
                     self.webserviceCallForWaitingList()
-                    UtilityClass.setCustomAlert(title: "Missing", message: "We are sorry no cars are available in your area you can contact the Book A Ride team".localized, showStack: false) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: "We are sorry no cars are available in your area you can contact the Book A Ride team".localized, showStack: false) { (index, title) in
                         
                     }
                     
@@ -2266,7 +2275,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else {
                     
-                    UtilityClass.setCustomAlert(title: "Missing", message: "Locations or select available car") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: "Locations or select available car".localized) { (index, title) in
                     }
                 }
                 
@@ -2275,33 +2284,33 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
                 
                 let myAttribute = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-                let myString = NSMutableAttributedString(string: "Pickup location : \n", attributes: myAttribute )
+                let myString = NSMutableAttributedString(string: "\("Pickup Location".localized) : \n", attributes: myAttribute )
               
                 let fare = (aryEstimateFareData.object(at: selectedIndexPath?.item ?? 0) as? NSDictionary)?.object(forKey: "estimate_fare_range") as? String ?? "0.0"
                 
                 myString.append(NSAttributedString(string:txtCurrentLocation.text ?? ""))
-                myString.append(NSAttributedString(string:"\n\nDestination Location : ",attributes: myAttribute))
+                myString.append(NSAttributedString(string:"\n\n\("Destination Location".localized) : ",attributes: myAttribute))
                 myString.append(NSAttributedString(string:txtDestinationLocation.text ?? ""))
 
                 if(txtAdditionalDestinationLocation.text != "")
                 {
-                    myString.append(NSAttributedString(string:"\n\nAdditional Destination Location : ",attributes: myAttribute))
+                    myString.append(NSAttributedString(string:"\n\n\("Additional Destination Location".localized) : ",attributes: myAttribute))
                     myString.append(NSAttributedString(string:txtAdditionalDestinationLocation.text ?? ""))
                 }
                 
-                myString.append(NSAttributedString(string:"\n\nApproximate Fare : \n",attributes: myAttribute))
+                myString.append(NSAttributedString(string:"\n\n\("Approximate Fare".localized) : \n",attributes: myAttribute))
                 myString.append(NSAttributedString(string:fare))
 
                 let alert = UIAlertController(title: appName, message: "", preferredStyle: UIAlertControllerStyle.alert)
                     alert.setValue(myString, forKey: "attributedMessage")
 
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
                     self.strSpecialRequest = "0"
                     self.bookingRequest()
                     self.SetPaymentOption(SelectionIndex: 0)
                 }))
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (action) in
 
                 }))
                 
@@ -2311,7 +2320,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
         }
         else {
-            UtilityClass.showAlert("", message: "Internet connection not available", vc: self)
+            UtilityClass.showAlert("", message: "Internet connection not available".localized, vc: self)
         }
     }
     
@@ -2347,6 +2356,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     @IBOutlet weak var lblSelectPaymentTitle: UILabel!
     
+    @IBOutlet weak var lblselectPaymentMethod: UILabel!
     @IBOutlet weak var lblPromocode: UILabel!
     @IBOutlet weak var PayCashView: UIView!
     
@@ -2417,7 +2427,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.PayCashView.backgroundColor = UIColor.black
             paymentType = "cash"
             btnCash.setTitleColor(themeAppMainColor, for: .normal)
-            btnCardSelection.setTitle("Card", for: .normal)
+            btnCardSelection.setTitle("Card".localized, for: .normal)
             CardID = ""
             
         } else if SelectionIndex == 1 {
@@ -2471,7 +2481,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     func didAddCard(cards: [String : Any]) {
         let cardPostfix = (cards["CardNum2"] as? String ?? "").components(separatedBy: " ").last ?? ""
         CardID = cards["Id"] as? String ?? ""
-        btnCardSelection.setTitle("Card (\(cardPostfix))", for: .normal)
+        btnCardSelection.setTitle("\("Card".localized) (\(cardPostfix))", for: .normal)
     }
     
     @IBAction func btnAddCard(_ sender: Any) {
@@ -2577,7 +2587,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         
                         //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                         //                }
-                        UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle type.".localized) { (index, title) in
+                        UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select a vehicle type.".localized) { (index, title) in
                         }
                     }
                     else
@@ -2612,7 +2622,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     if strCarModelID == "" && strCarModelIDIfZero == ""{
                         //                UtilityClass.setCustomAlert(title: "Missing", message: "Please Select Car".localized) { (index, title) in
                         //                }
-                        UtilityClass.setCustomAlert(title: "Missing", message: "Please select a vehicle type.".localized) { (index, title) in
+                        UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select a vehicle type.".localized) { (index, title) in
                         }
                     }
                     else {
@@ -2640,12 +2650,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
             } else {
-                UtilityClass.showAlert("", message: "Internet connection not available", vc: self)
+                UtilityClass.showAlert("", message: "Internet connection not available".localized, vc: self)
             }
         }
         else
         {
-            UtilityClass.showAlert("", message: "Multiple Dropoff is not allowed for book later request.", vc: self)
+            UtilityClass.showAlert("", message: "Multiple Dropoff is not allowed for book later request.".localized, vc: self)
         }
     }
     
@@ -2653,7 +2663,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         if txtCurrentLocation.text == "" || txtDestinationLocation.text == "" {
             
-            UtilityClass.setCustomAlert(title: "Missing", message: "Please enter both address.") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter both address.".localized) { (index, title) in
             }
         } else {
             self.postPickupAndDropLocationForEstimateFare()
@@ -2755,7 +2765,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func btnCancelStartedTrip(_ sender: UIButton) {
-        UtilityClass.showAlert("", message: "Currently this feature is not available.", vc: self)
+        UtilityClass.showAlert("", message: "Currently this feature is not available.".localized, vc: self)
     }
     
     //-------------------------------------------------------------
@@ -2949,11 +2959,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     
                 }
                 if let minute = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "est_duration") as? Int {
-                    cell.lblMinutes.text = "\(minute) min ETA"
+                    cell.lblMinutes.text = "\(minute) \("min ETA".localized)"
                 }
                 
                 if let minute = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "est_duration") as? Int {
-                    cell.lblMinutes.text = "\(minute) min ETA"
+                    cell.lblMinutes.text = "\(minute) \("min ETA".localized)"
                 }
                 
                 if let capacity = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "capacity") as? String {
@@ -2963,7 +2973,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                cell.lblCapacity.backgroundColor = .red
                 
                 if let strAvilCAR = dictOnlineCarData["carCount"] as? Int {
-                    cell.lblAvailableCars.text = "Avail \(strAvilCAR)"
+                    cell.lblAvailableCars.text = "\("Avail".localized) \(strAvilCAR)"
                     if(selectedIndexPath == indexPath)
                     {
                         
@@ -3014,7 +3024,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 
                 if let strDistance = (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "driver_distance") as? Double {
-                    cell.lblDistance.text = "Distance \(strDistance) km"
+                    cell.lblDistance.text = "\("Distance".localized) \(strDistance) \("km".localized)"
                 }
             }
 //         }
@@ -5189,8 +5199,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             let estimatedTime = ((data as NSArray).object(at: 0) as! NSDictionary).object(forKey: "duration") as? String ?? ""
             let estimatedDistance = ((data as NSArray).object(at: 0) as! NSDictionary).object(forKey: "distance") as? String ?? ""
-            self.lblEstimatedTimeNew.text = "Estimated Time : \(estimatedTime)"
-            self.lblEstimatedDistanceNew.text = "Estimated Distance : \(estimatedDistance)"
+            self.lblEstimatedTimeNew.text = "\("Estimated Time".localized) : \(estimatedTime)"
+            self.lblEstimatedDistanceNew.text = "\("Estimated Distance".localized) : \(estimatedDistance)"
         })
     }
     

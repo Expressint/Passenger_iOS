@@ -40,7 +40,13 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBOutlet weak var btnCancelPromocode: UIButton!
     @IBOutlet weak var btnApplyPromocode: UIButton!
     
+    @IBOutlet weak var btnPromoCancel: UIButton!
+    @IBOutlet weak var lblPleaceCompleteBooking: UILabel!
+    @IBOutlet weak var lblDriverAwayTime: UILabel!
+    @IBOutlet weak var lblDriverAwayKm: UILabel!
+    @IBOutlet weak var lblEstimatedFare: UILabel!
     
+    @IBOutlet weak var lblSelectPaymentMethod: UILabel!
     @IBOutlet weak var PayCashView: UIView!
     @IBOutlet weak var btnCash: UIButton!
 
@@ -170,7 +176,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         //        txtDataAndTimeFromCalendar.isUserInteractionEnabled = false
         
         imgCareModel.sd_setImage(with: URL(string: strCarModelURL), completed: nil)
-        lblCareModelClass.text = "Vehicle Type: \(strCarName)"
+        lblCareModelClass.text = "\("Vehicle Type".localized): \(strCarName)"
         
         //        lblPassenger.text = "(maximum \(self.PasangerDefinedLimit) passengers)"
         if strCarName == "VAN" {
@@ -207,10 +213,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         let mySelectedAttributedTitle = NSAttributedString(string: "Have a Promocode?",
                                                            attributes: [NSAttributedString.Key.foregroundColor : themeAppMainColor,NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         self.btnSelectPromocode.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
-        self.btnSelectPromocode.setTitle("Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
+        self.btnSelectPromocode.setTitle("\("Promocode Applied".localized) \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
         self.btnApplyPromocode.backgroundColor = themeYellowColor
         self.btnApplyPromocode.setTitleColor(.black, for: .normal)
         self.txtMobileNumber.leftMargin = 0
+        
 
     }
 
@@ -245,7 +252,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 
             fillTextFields()
         }
-        
+        self.setLocalization()
         self.isOpenPlacePickerController = false
         
         //        getPlaceFromLatLong()
@@ -257,6 +264,27 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func setLocalization(){
+        txtFullName.placeholder = "Full Name".localized
+        txtMobileNumber.placeholder = "Mobile Number".localized
+        txtPickupLocation.placeholder = "Pickup Location".localized
+        txtDropOffLocation.placeholder = "Dropoff Location".localized
+        txtDataAndTimeFromCalendar.placeholder = "Pickup Time".localized
+        lblDriverAwayTime.text = "Driver away time".localized
+        lblDriverAwayKm.text = "Driver away km".localized
+        lblEstimatedFare.text = "Estimated Fare".localized
+        lblSelectPaymentMethod.text = "Select Payment Method".localized
+        btnCardSelection.setTitle("Card".localized, for: .normal)
+        btnCash.setTitle("Cash".localized, for: .normal)
+        btnSubmit.setTitle("Submit".localized, for: .normal)
+        self.btnSelectPromocode.underline(text: "Have a promocode?".localized)
+        lblPleaceCompleteBooking.text = "Please complete booking details.".localized
+        lblTitleApplyPromoCode.text = "Apply Promocode".localized
+        txtPromoCode.placeholder = "Enter Promocode".localized
+        btnApplyPromocode.setTitle("Apply".localized, for: .normal)
+        btnPromoCancel.setTitle("Cancel".localized, for: .normal)
+     }
     
     func fillTextFields() {
         txtPickupLocation.text = strPickupLocation
@@ -363,6 +391,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBOutlet weak var viewProocode: UIView!
     @IBOutlet weak var btnSubmit: UIButton!
     
+    @IBOutlet weak var lblTitleApplyPromoCode: UILabel!
     //    @IBOutlet weak var viewMySelf: M13Checkbox!
     //    @IBOutlet weak var viewOthers: M13Checkbox!
     @IBOutlet weak var viewFlightNumber: M13Checkbox!
@@ -746,7 +775,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         //        selector.optionStyles.showMonth(true)
         DateTimeselector.optionStyles.showTime(true)
         // 2. You can then set delegate, and any customization options
-        DateTimeselector.optionTopPanelTitle = "Please choose date"
+        DateTimeselector.optionTopPanelTitle = "Please choose date".localized
         DateTimeselector.optionIdentifier = "Time" as AnyObject
         let dateCurrent = Date()
         DateTimeselector.optionCurrentDate = dateCurrent.addingTimeInterval(30 * 60)
@@ -786,7 +815,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
 //            UtilityClass.presentOverAlert(vc: TimeSelector)
             
         } else {
-            UtilityClass.showAlert("", message: "Please select date first!", vc: self)
+            UtilityClass.showAlert("", message: "Please select date first!".localized, vc: self)
         }
     }
     
@@ -799,35 +828,40 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         if txtFullName.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please enter name!"
+            ValidationMessage = "Please enter name!".localized
         } else if txtMobileNumber.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please enter contact number!"
+            ValidationMessage = "Please enter contact number!".localized
         } else if self.convertDateToString == "" {
             ValidationStatus = false
-            ValidationMessage = "Please select pickup date and time!"
+            ValidationMessage = "Please select pickup date and time!".localized
         } else if txtPickupLocation.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please select pickup location!"
+            ValidationMessage = "Please select pickup location!".localized
         } else if txtDropOffLocation.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please select drop off location!"
+            ValidationMessage = "Please select drop off location!".localized
         } else if self.viewFlightNumber.checkState == .checked && self.txtFlightNumber.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please enter flight number!"
+            ValidationMessage = "Please enter flight number!".localized
         } else if self.CheckArrivalTime.checkState == .checked && self.txtFlightArrivalTime.text == "" {
             ValidationStatus = false
-            ValidationMessage = "Please select flight arrival time!"
+            ValidationMessage = "Please select flight arrival time!".localized
         }else if paymentType == "" {
             ValidationStatus = false
-            ValidationMessage = "Select Payment Type"
-        }
-        
-        let status = checkDuration(strPickTime: self.convertDateToString)
-        if(!status){
+            ValidationMessage = "Select Payment Type".localized
+        }else if txtDataAndTimeFromCalendar.text == ""{
             ValidationStatus = false
-            ValidationMessage = "Please select pickUp time one hour later"
+            ValidationMessage = "Please select pickup date and time!".localized
         }
+        if self.convertDateToString != ""{
+            let status = checkDuration(strPickTime: self.convertDateToString)
+            if(!status){
+                ValidationStatus = false
+                ValidationMessage = "Please select pickUp time one hour later".localized
+            }
+        }
+       
 //        else if paymentType == "card" && CardID.count == 0 {
 //            ValidationStatus = false
 //            ValidationMessage = "Please Select Card or Change the Payment Method"
@@ -1471,7 +1505,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                 } else {
                     txtFlightArrivalTime.text = ""
                 }
-                UtilityClass.setCustomAlert(title: "Invalid Request", message: "System Does Not Accept Prebook Option If Pick Up Time Is Within 30 Minutes.") { (index, title) in
+                UtilityClass.setCustomAlert(title: "Invalid Request".localized, message: "System Does Not Accept Prebook Option If Pick Up Time Is Within 30 Minutes.".localized) { (index, title) in
                 }
             }
         }
@@ -1522,7 +1556,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func webServiceOfCheckPromoCode() {
         if Connectivity.isConnectedToInternet() == false {
             
-                        UtilityClass.setCustomAlert(title: "Connection Error", message: "Internet connection not available") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Connection Error".localized, message: "Internet connection not available".localized) { (index, title) in
             }
             return
         }
@@ -1544,10 +1578,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     //                self.lblPromoCode.text = self.txtPromoCode.text
                     //                self.lblPromoCode.isHidden = false
                     
-                    let mySelectedAttributedTitle = NSAttributedString(string: "Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")",
+                    let mySelectedAttributedTitle = NSAttributedString(string: "\("Promocode Applied".localized) \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")",
                         attributes: [NSAttributedString.Key.foregroundColor : UIColor.green])
                     self.btnSelectPromocode.setAttributedTitle(mySelectedAttributedTitle, for: .normal)
-                    self.btnSelectPromocode.setTitle("Promocode Applied \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
+                    self.btnSelectPromocode.setTitle("\("Promocode Applied".localized) \(self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")", for: .normal)
                     self.viewProocode.isHidden = true
                     self.btnCancelPromocode.isHidden = false
                     self.strAppliedPromocode = self.txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -1577,7 +1611,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func webserviceOFBookLater() {
         if Connectivity.isConnectedToInternet() == false {
             
-            UtilityClass.setCustomAlert(title: "Connection Error", message: "Internet connection not available") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Connection Error".localized, message: "Internet connection not available".localized) { (index, title) in
             }
             return
         }
@@ -1666,7 +1700,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         if paymentType == "" {
             
-            UtilityClass.setCustomAlert(title: "Missing", message: "Select Payment Type") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Select Payment Type".localized) { (index, title) in
             }
         }
         else {
@@ -1702,19 +1736,19 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                 print(result)
                 
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Success Message", message: res) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: res) { (index, title) in
                         self.BookLaterCompleted.BookLaterComplete()
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Success Message", message: resDict.object(forKey: "message") as? String ?? "") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: resDict.object(forKey: "message") as? String ?? "") { (index, title) in
                         self.BookLaterCompleted.BookLaterComplete()
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Success Message", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as? String ?? "") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as? String ?? "") { (index, title) in
                         self.BookLaterCompleted.BookLaterComplete()
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -1791,7 +1825,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func webserviceOfCardList(setCardInButton : Bool) {
         if Connectivity.isConnectedToInternet() == false {
             
-            UtilityClass.setCustomAlert(title: "Connection Error", message: "Internet connection not available") { (index, title) in
+            UtilityClass.setCustomAlert(title: "Connection Error".localized, message: "Internet connection not available".localized) { (index, title) in
             }
             return
         }
