@@ -212,7 +212,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
             if(success)
             {
                 self.dismiss(animated: false)
-                UtilityClass.showAlert(appName, message: result["message"] as? String ?? "", vc: self)
+                UtilityClass.showAlert(appName, message: result[GetResponseMessageKey()] as? String ?? "", vc: self)
 //                print("Hello")
             }
         }

@@ -293,7 +293,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 })
             } else {
                 UtilityClass.hideACProgressHUD()
-                UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                 }
             }
         }
@@ -467,13 +467,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
 
             if ((result as! NSDictionary).object(forKey: "status") as! Int == 1) {
-  
-                UtilityClass.setCustomAlert(title: "Success".localized, message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                UtilityClass.setCustomAlert(title: "Success".localized, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                 }
             }
             else {
 
-                 UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                 UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                 }
             }
         }
@@ -668,7 +667,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 }
                 else if let resAry = result as? NSArray
                 {
-                    UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
+                    UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String, vc: self)
                 }
             }
         }
@@ -752,7 +751,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                     SingletonClass.sharedInstance.strAppleId = dictData["AppleID"] as! String
                     self.navigationController?.pushViewController(viewController!, animated: true)
                 }else{
-                    UtilityClass.showAlert("", message: resDict?["message"] as! String, vc: self)
+                    UtilityClass.showAlert("", message: resDict?[GetResponseMessageKey()] as! String, vc: self)
                 }
             }
         }
@@ -799,7 +798,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 if ((result as! NSDictionary).object(forKey: "update") as? Bool) != nil {
                     
-                    let alert = UIAlertController(title: nil, message: (result as! NSDictionary).object(forKey: "message") as? String, preferredStyle: .alert)
+                    let alert = UIAlertController(title: nil, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String, preferredStyle: .alert)
                     let UPDATE = UIAlertAction(title: "UPDATE", style: .default, handler: { ACTION in
                         
                         UIApplication.shared.open((NSURL(string: "itms-apps://itunes.apple.com/app/id1445179460")! as URL), options: [:], completionHandler: { (status) in
@@ -843,7 +842,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 //                            })
 //                        })
                         
-                        let alert = UIAlertController(title: "App Name".localized, message: (result as! NSDictionary).object(forKey: "message") as? String ?? "", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "App Name".localized, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", preferredStyle: .alert)
                         let UPDATE = UIAlertAction(title: "Update".localized, style: .default, handler: { ACTION in
                             UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
 
@@ -859,7 +858,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                     }
                     else {
 
-                         UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                         UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                             if (index == 0)
                             {
                                 UIApplication.shared.open((NSURL(string: "itms-apps://itunes.apple.com/app/id1445179460")! as URL), options: [:], completionHandler: { (status) in

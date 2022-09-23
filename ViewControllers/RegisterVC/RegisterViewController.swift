@@ -261,41 +261,52 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             if (status) {
                 print(result)
                 let datas = (result as! [String:AnyObject])
-                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                    if SelectedLanguage == "en" {
-                        UtilityClass.showAlertWithCompletion("OTP Code", message: (datas["message"] as! String).firstCharacterUpperCase(), vc: self, completionHandler: { ACTION in
-                            if let otp = datas["otp"] as? String {
-                                SingletonClass.sharedInstance.otpCode = otp
-                            }else if let otp = datas["otp"] as? Int {
-                                SingletonClass.sharedInstance.otpCode = "\(otp)"
-                            }
-                            let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
-                            registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
-                        })
-                    }else //if SelectedLanguage == "sw"
-                    {
-                        UtilityClass.showAlertWithCompletion("OTP Code".localized, message: datas["swahili_message"] as! String, vc: self, completionHandler: { ACTION in
-                            if let otp = datas["otp"] as? String {
-                                SingletonClass.sharedInstance.otpCode = otp
-                            }
-                            else if let otp = datas["otp"] as? Int {
-                                SingletonClass.sharedInstance.otpCode = "\(otp)"
-                            }
-                            let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
-                            registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
-                        })
+                
+                UtilityClass.showAlertWithCompletion("OTP Code", message: (datas[GetResponseMessageKey()] as! String).firstCharacterUpperCase(), vc: self, completionHandler: { ACTION in
+                    if let otp = datas["otp"] as? String {
+                        SingletonClass.sharedInstance.otpCode = otp
+                    }else if let otp = datas["otp"] as? Int {
+                        SingletonClass.sharedInstance.otpCode = "\(otp)"
                     }
-                }
+                    let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
+                    registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
+                })
+                
+//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                    if SelectedLanguage == "en" {
+//                        UtilityClass.showAlertWithCompletion("OTP Code", message: (datas[GetResponseMessageKey()] as! String).firstCharacterUpperCase(), vc: self, completionHandler: { ACTION in
+//                            if let otp = datas["otp"] as? String {
+//                                SingletonClass.sharedInstance.otpCode = otp
+//                            }else if let otp = datas["otp"] as? Int {
+//                                SingletonClass.sharedInstance.otpCode = "\(otp)"
+//                            }
+//                            let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
+//                            registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
+//                        })
+//                    }else //if SelectedLanguage == "sw"
+//                    {
+//                        UtilityClass.showAlertWithCompletion("OTP Code".localized, message: datas["swahili_message"] as! String, vc: self, completionHandler: { ACTION in
+//                            if let otp = datas["otp"] as? String {
+//                                SingletonClass.sharedInstance.otpCode = otp
+//                            }
+//                            else if let otp = datas["otp"] as? Int {
+//                                SingletonClass.sharedInstance.otpCode = "\(otp)"
+//                            }
+//                            let registrationContainerVC = self.navigationController?.viewControllers.last as! RegistrationContainerViewController
+//                            registrationContainerVC.scrollObject.setContentOffset(CGPoint(x: self.view.frame.size.width, y: 0), animated: true)
+//                        })
+//                    }
+//                }
             }else {
                  print(result)
                 if let res = result as? String {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
                     }
                 }else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "live chat Black (English).png",
+      "filename" : "live chat white.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "live chat Black (English)@2x.png",
+      "filename" : "live chat white@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "live chat Black (English)@3x.png",
+      "filename" : "live chat white@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

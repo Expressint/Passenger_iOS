@@ -269,11 +269,11 @@ class PackageDetailViewController: UIViewController,UIPickerViewDelegate, UIPick
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }
@@ -341,7 +341,7 @@ class PackageDetailViewController: UIViewController,UIPickerViewDelegate, UIPick
             if (status)
             {
                 print(result)
-                let alert = UIAlertController(title: nil, message: result["message"] as? String, preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: result[GetResponseMessageKey()] as? String, preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { [weak alert] (_) in
                     self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
@@ -421,7 +421,7 @@ class PackageDetailViewController: UIViewController,UIPickerViewDelegate, UIPick
 
 
                 
-                let alert = UIAlertController(title: nil, message: result["message"] as? String, preferredStyle: .alert)
+                let alert = UIAlertController(title: nil, message: result[GetResponseMessageKey()] as? String, preferredStyle: .alert)
                 
                 let OK = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(OK)

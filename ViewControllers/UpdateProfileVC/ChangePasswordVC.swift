@@ -176,7 +176,7 @@ class ChangePasswordVC: BaseViewController {
                 self.txtNewPassword.text = ""
                 self.txtConfirmPassword.text = ""
                 
-                UtilityClass.setCustomAlert(title: appName, message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                UtilityClass.setCustomAlert(title: appName, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     
                     self.navigationController?.popViewController(animated: true)
             }

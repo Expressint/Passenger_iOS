@@ -196,44 +196,14 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.completeTripInfo()
             }
             else {
-                if let res = result as? String
-                {
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en"
-                        {
-                            UtilityClass.showAlert("Error", message: res, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.showAlert("Error", message: res, vc: self)
-                        }
-                    }
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
                 }
                 else if let resDict = result as? NSDictionary {
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en"
-                        {
-                            UtilityClass.showAlert("Error", message: resDict.object(forKey: "message") as! String, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.showAlert("Error", message: resDict.object(forKey: "swahili_message") as! String, vc: self)
-                        }
-                    }
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
                 else if let resAry = result as? NSArray {
-                    
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en" {
-                            UtilityClass.showAlert("Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw" {
-                            UtilityClass.showAlert("Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "swahili_message") as! String, vc: self)
-                        }
-                    }
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
             }
         }
@@ -677,11 +647,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }
@@ -1478,17 +1448,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if let res = result as? String {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
                     }
-                }
-                else if let resDict = result as? NSDictionary {
-                    if((resDict.object(forKey: "message") as? NSArray) != nil) {
-                        UtilityClass.setCustomAlert(title: "Error", message: (resDict.object(forKey: "message") as! NSArray).object(at: 0) as! String) { (index, title) in
-                        }
-                    } else {
-                        UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
-                        }
+                } else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 } else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }
@@ -1922,11 +1886,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }
@@ -1989,7 +1953,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             {
                                 
                                 let alert = UIAlertController(title: "",
-                                                              message: "Book Now cars not available. Please click OK to Book Later.",
+                                                              message: "Book Now cars not available. Please click OK to Book Later.".localized,
                                                               preferredStyle: UIAlertControllerStyle.alert)
                                 
                                 
@@ -1997,7 +1961,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                                     self.btnBookLater((Any).self)
                                 }))
                                 
-                                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (action) in
+                                alert.addAction(UIAlertAction(title: "Dismiss".localized, style: .default, handler: { (action) in
                                 }))
                                 
                                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -2033,17 +1997,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.startwaitingTime()
             if (((data as NSArray).firstObject as? NSDictionary) != nil) {
                 _ = (data as! [[String:AnyObject]])
-                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                    if SelectedLanguage == "en" {
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                    else if SelectedLanguage == "sw"
-                    {
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                }
+                
+                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+                })
+                
+//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                    if SelectedLanguage == "en" {
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                    else if SelectedLanguage == "sw"
+//                    {
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                }
             }
         })
     }
@@ -2074,7 +2042,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else if let res = result as? NSDictionary {
                     
-                    let alert = UIAlertController(title: nil, message: res.object(forKey: "message") as? String, preferredStyle: .alert)
+                    let alert = UIAlertController(title: nil, message: res.object(forKey: GetResponseMessageKey()) as? String, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in
                         
                         UIView.transition(with: self.viewForMainFavourite, duration: 0.4, options: .transitionCrossDissolve, animations: {() -> Void in
@@ -3797,7 +3765,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.showTimerProgressViaInstance()
             let msg = (data as NSArray)
             let alertForTip = UIAlertController(title: "Tip Alert".localized,
-                                                message: (msg.object(at: 0) as! NSDictionary).object(forKey: "message") as? String,
+                                                message: (msg.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String,
                                                 preferredStyle: UIAlertControllerStyle.alert)
             
             //2. Add the text field. You can configure it however you need.
@@ -3888,7 +3856,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             
             
             let alertForTip = UIAlertController(title: "Tip Alert".localized,
-                                                message: (msg.object(at: 0) as! NSDictionary).object(forKey: "message") as? String,
+                                                message: (msg.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String,
                                                 preferredStyle: UIAlertControllerStyle.alert)
             
             //2. Add the text field. You can configure it however you need.
@@ -3972,18 +3940,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             bookingIdIs = nowBookingID
                         }
                         print("bookingIdIs: \(bookingIdIs)")
-                        if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                            if SelectedLanguage == "en" {
-                                
-                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                                })
-                            }
-                            else if SelectedLanguage == "sw"
-                            {
-                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-                                })
-                            }
-                        }
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+                        })
+//                        if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                            if SelectedLanguage == "en" {
+//
+//                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+//                                })
+//                            }
+//                            else if SelectedLanguage == "sw"
+//                            {
+//                                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+//                                })
+//                            }
+//                        }
                         if SingletonClass.sharedInstance.bookingId != "" {
                             if SingletonClass.sharedInstance.bookingId == bookingIdIs {
                                 self.DriverInfoAndSetToMap(driverData: NSArray(array: data))
@@ -4449,38 +4419,42 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     self.TempBookingInfoDict.removeAll()
                     self.viewMainActivityIndicator.isHidden = true
                     
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en" {
-                            
-                            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, showStack: false, completionHandler: { (index, title) in
-                            })
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, showStack: false, completionHandler: { (index, title) in
-                            })
-                        }
-                    }
+                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, showStack: false, completionHandler: { (index, title) in
+                    })
+                    
+//                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                        if SelectedLanguage == "en" {
+//
+//                            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, showStack: false, completionHandler: { (index, title) in
+//                            })
+//                        }
+//                        else if SelectedLanguage == "sw"
+//                        {
+//                            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, showStack: false, completionHandler: { (index, title) in
+//                            })
+//                        }
+//                    }
                 }
             }
             else {
                 self.viewActivity.stopAnimating()
                 self.viewMainActivityIndicator.isHidden = true
-                //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                //
-                //                    })
-                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                    if SelectedLanguage == "en" {
-                        
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, showStack: false, completionHandler: { (index, title) in
-                        })
-                    }
-                    else if SelectedLanguage == "sw"
-                    {
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, showStack: false, completionHandler: { (index, title) in
-                        })
-                    }
-                }
+  
+                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, showStack: false, completionHandler: { (index, title) in
+                })
+                
+//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                    if SelectedLanguage == "en" {
+//
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, showStack: false, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                    else if SelectedLanguage == "sw"
+//                    {
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, showStack: false, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                }
             }
             //            }
             
@@ -4542,19 +4516,23 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
                 //
                 //                        })
-                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                    if SelectedLanguage == "en" {
-                        
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                    else if SelectedLanguage == "sw"
-                    {
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                    //                        }
-                }
+                
+                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+                })
+                
+//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                    if SelectedLanguage == "en" {
+//
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                    else if SelectedLanguage == "sw"
+//                    {
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                    //                        }
+//                }
             } else {
                 self.viewActivity.stopAnimating()
                 self.viewMainActivityIndicator.isHidden = true
@@ -4572,19 +4550,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
                 //
                 //                    })
+                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+                })
                 
-                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                    if SelectedLanguage == "en" {
-                        
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                    else if SelectedLanguage == "sw"
-                    {
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-                        })
-                    }
-                }
+//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                    if SelectedLanguage == "en" {
+//
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                    else if SelectedLanguage == "sw"
+//                    {
+//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
+//                        })
+//                    }
+//                }
             }
             //            }
         })
@@ -4618,19 +4598,21 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             //            alertWindow.makeKeyAndVisible()
             //            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
             
+            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0][GetResponseMessageKey()]! as? String ?? "", completionHandler: { (index, title) in
+            })
             
-            if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                if SelectedLanguage == "en" {
-                    
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0]["message"]! as? String ?? "----", completionHandler: { (index, title) in
-                    })
-                }
-                else if SelectedLanguage == "sw"
-                {
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"] as? String ?? "----", completionHandler: { (index, title) in
-                    })
-                }
-            }
+//            if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
+//                if SelectedLanguage == "en" {
+//
+//                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0]["message"]! as? String ?? "----", completionHandler: { (index, title) in
+//                    })
+//                }
+//                else if SelectedLanguage == "sw"
+//                {
+//                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"] as? String ?? "----", completionHandler: { (index, title) in
+//                    })
+//                }
+//            }
             
             self.btnRequest.isHidden = true
             self.btnCancelStartedTrip.isHidden = true
@@ -4894,7 +4876,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         //            }
         //        })
         
-        UtilityClass.setCustomAlert(title: appName, message: "Your trip has been completed") { (index, str) in
+        UtilityClass.setCustomAlert(title: appName, message: "Your trip has been completed".localized) { (index, str) in
             self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
             
@@ -5034,7 +5016,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if SingletonClass.sharedInstance.bookingId != "" {
                     if SingletonClass.sharedInstance.bookingId == bookingId {
                         
-                        UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.") { (index, title) in
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.".localized) { (index, title) in
                             //               self.stopSound(fileName: "RequestConfirm", extensionType: "mp3")
                         }
                         self.strBookingType = "BookLater"
@@ -5042,7 +5024,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
                 else {
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.".localized) { (index, title) in
                         //               self.stopSound(fileName: "RequestConfirm", extensionType: "mp3")
                     }
                     self.strBookingType = "BookLater"
@@ -5128,41 +5110,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             var message = String()
             message = "Trip on Hold"
             
-            if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                if SelectedLanguage == "en" {
-                    
-                    let resAry = NSArray(array: data) //as? NSArray {
-                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "----"
-                        //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-//                    }
-//                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-//
-//                    alert.addAction(OK)
-//
-//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-//
-                    
-                    UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
-
-                }
-                else if SelectedLanguage == "sw"
-                {
-                     let resAry = NSArray(array: data) //as? NSArray {
-                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "swahili_message") as? String ?? "----"
-                        //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-//                    }
-//                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-//
-//                    alert.addAction(OK)
-//
-//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-                    
-                    UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
-
-                }
-            }
+            let resAry = NSArray(array: data)
+            message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
+            UtilityClass.setCustomAlert(title: "", message: message, completionHandler: nil)
         })
     }
     
@@ -5175,7 +5125,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             message = "Trip on Hold"
             
             let resAry = NSArray(array: data) //as? NSArray {
-                message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? ""
+                message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
                 //                UtilityClass.showAlert("", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
        //     }
 //
@@ -5187,7 +5137,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             
             
-            UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
+            UtilityClass.setCustomAlert(title: "", message: message, completionHandler: nil)
 
             
         })
@@ -5393,21 +5343,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             var message = String()
             message = "Trip on Hold"
             
-             let resAry = NSArray(array: data) //as? NSArray {
-                message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? ""
-                
-         //   }
-            
-//            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//            let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-//
-//            alert.addAction(OK)
-//
-//            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-            
-            
+            let resAry = NSArray(array: data) //as? NSArray {
+            message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
             UtilityClass.setCustomAlert(title: "", message: message.localized, completionHandler: nil)
-
             
         })
         
@@ -5439,7 +5377,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         message = "Trip on Hold"
                         
                         let resAry = NSArray(array: data) //as? NSArray //{
-                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "---"
+                        message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
                         //}
                         
                         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -5456,7 +5394,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     message = "Trip on Hold"
                     
                      let resAry = NSArray(array: data) //as? NSArray {
-                    message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: "message") as? String ?? "----"
+                    message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
                   //  }
                     
                     let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -5491,7 +5429,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -5520,7 +5458,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -6991,7 +6929,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if status {
                     if let dictResult = result as? [String:Any] {
                         
-                        if let message = dictResult["message"] as? String {
+                        if let message = dictResult[GetResponseMessageKey()] as? String {
                             let alert = UIAlertController(title: appName, message: message, preferredStyle: .alert)
                             let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                                 self.webserviceOfCurrentBooking()

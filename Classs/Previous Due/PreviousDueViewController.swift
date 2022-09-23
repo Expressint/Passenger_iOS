@@ -53,7 +53,7 @@ class PreviousDueViewController: BaseViewController {
                     self.aryData = [res]
                 }
             } else {
-                UtilityClass.showAlert("", message: response["message"] as? String ?? "Something went wrong", vc: self)
+                UtilityClass.showAlert("", message: response[GetResponseMessageKey()] as? String ?? "Something went wrong", vc: self)
             }
             
             self.tableView.reloadData()
@@ -74,12 +74,12 @@ class PreviousDueViewController: BaseViewController {
             UtilityClass.hideHUD()
             if status {
                 
-                UtilityClass.showAlert("", message: (response["message"] as? String) ?? "", vc: self)
+                UtilityClass.showAlert("", message: (response[GetResponseMessageKey()] as? String) ?? "", vc: self)
                 
              
                 
             } else {
-              UtilityClass.showAlert("", message: (response["message"] as? String) ?? "", vc: self)
+              UtilityClass.showAlert("", message: (response[GetResponseMessageKey()] as? String) ?? "", vc: self)
             }
             
         }

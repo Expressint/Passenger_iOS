@@ -114,7 +114,7 @@ class BaseViewController: UIViewController {
 //                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
                 
                 let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-                btnRight.setImage(UIImage.init(named: "ic_whatsApp"), for: .normal)
+                btnRight.setImage(UIImage.init(named: (Localize.currentLanguage() == Languages.English.rawValue) ? "ic_whatsApp" : "ic_whatsApp_es"), for: .normal)
                 btnRight.addTarget(self, action: #selector(HomeViewController.btnWhatsApp(_:)), for: .touchUpInside)
                 let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
                 viewRight.addSubview(btnRight)

@@ -65,7 +65,8 @@ class AJAlertController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
+        let image = (Localize.currentLanguage() == Languages.English.rawValue) ? "ic_RedChat" : "ic_RedChat_es"
+        self.btnMsg.setBackgroundImage(UIImage(named: image), for: .normal)
     }
     
     // MARK:- AJAlertController Private Functions

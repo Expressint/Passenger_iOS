@@ -123,7 +123,7 @@ class RegisterOTPVarificationViewController: UIViewController {
                 let datas = (result as! [String:AnyObject])
                 
                 
-                UtilityClass.showAlertWithCompletion("OTP Code", message: datas["message"] as! String, vc: self, completionHandler: { ACTION in
+                UtilityClass.showAlertWithCompletion("OTP Code", message: datas[GetResponseMessageKey()] as! String, vc: self, completionHandler: { ACTION in
                     
                     if let otp = datas["otp"] as? String {
                         SingletonClass.sharedInstance.otpCode = otp
@@ -142,11 +142,11 @@ class RegisterOTPVarificationViewController: UIViewController {
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 

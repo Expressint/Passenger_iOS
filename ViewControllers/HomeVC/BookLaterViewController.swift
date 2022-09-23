@@ -728,7 +728,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolCurrentLocation = true
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -744,7 +744,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -1592,12 +1592,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     //                self.lblPromoCode.isHidden = true
                     if let res = result as? String {
                         UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in }
-                    }
-                    else if let resDict = result as? [String:Any] {
-                        UtilityClass.setCustomAlert(title: "Error", message: resDict["message"] as! String) { (index, title) in }
-                    }
-                    else if let resAry = result as? NSArray {
-                        UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in }
+                    } else if let resDict = result as? NSDictionary {
+                        UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                        }
+                    } else if let resAry = result as? NSArray {
+                        UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                     }
                     
                 }
@@ -1742,13 +1741,13 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: resDict.object(forKey: "message") as? String ?? "") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: resDict.object(forKey:  GetResponseMessageKey()) as? String ?? "") { (index, title) in
                         self.BookLaterCompleted.BookLaterComplete()
                         self.navigationController?.popViewController(animated: true)
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as? String ?? "") { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Success Message".localized, message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "") { (index, title) in
                         self.BookLaterCompleted.BookLaterComplete()
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -1800,11 +1799,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 
@@ -1934,11 +1933,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     }
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
             }

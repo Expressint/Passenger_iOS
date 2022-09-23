@@ -234,6 +234,16 @@
 "Estimated Distance" = "Estimated Distance";
 "Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
 "YES" = "YES";
+"Your request has been Accepted." = "Your request has been Accepted.";
+"Your request has been rejected." = "Your request has been rejected.";
+"Your trip has now started." = "Your trip has now started.";
+"Dismiss" = "Dismiss";
+"Thanks for feedback" = "Thanks for feedback";
+
+//chat
+"Enter Message.." = "Enter Message..";
+"Missing" = "Missing";
+"Please enter message" = "Please enter message";
 
 //Driver Info
 "Vehicle Make" = "Vehicle Make";
@@ -292,6 +302,7 @@
 "Toll Fee" = "Toll Fee";
 "Sub Total" =  "Sub Total";
 "Name"  = "Name";
+"Your trip has been completed" = "Your trip has been completed";
 
 "Invite Code"  = "Invite Code";
 "Car not available!" = "Car not available!";
@@ -552,18 +563,15 @@
 "Comments:" = "Comments:";
 
 
-//HOME
-
 "Pickup Location" = "Pickup Location";
 "Your Email Id is not configured from settings. Please configure it from Settings -> Mail" = "Your Email Id is not configured from settings. Please configure it from Settings -> Mail";
 "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?" = "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?";
 "NO" = "NO";
 "YES" = "YES";
-"Your trip has been completed" = "Your trip has been completed";
-"Your request has been rejected." = "Your request has been rejected.";
-"Your trip has now started." = "Your trip has now started.";
+
+
 "Trip Status" = "Trip Status";
-"Thanks for feedback" = "Thanks for feedback";
+
 "Any other feedback(Optional)" = "Any other feedback(Optional)";
 "All fields are required..." = "All fields are required...";
 "Your ride has been booked." = "Your ride has been booked.";

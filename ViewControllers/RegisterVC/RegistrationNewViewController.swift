@@ -536,7 +536,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             {
 //                self.btnSignUp.stopAnimation(animationStyle: .shake, revertAfterDelay: 0, completion: {
                     UtilityClass.hideACProgressHUD()
-                    UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: "message") as! String) { (index, title) in
+                    UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                     
 //                })

@@ -189,53 +189,16 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
             }
             else
             {
-                print(result)
-                
-                if let res = result as? String
-                {
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en"
-                        {
-                            UtilityClass.showAlert("Error", message: res, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.showAlert("Error", message: res, vc: self)
-                        }
-                    }
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
                 }
-                else if let resDict = result as? NSDictionary
-                {
-                    
-                    
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en"
-                        {
-                            UtilityClass.showAlert("Error", message: resDict.object(forKey: "message") as! String, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.showAlert("Error", message: resDict.object(forKey: "swahili_message") as! String, vc: self)
-                        }
-                    }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
-                else if let resAry = result as? NSArray
-                {
-                    
-                    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                        if SelectedLanguage == "en"
-                        {
-                            UtilityClass.showAlert("Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String, vc: self)
-                            
-                        }
-                        else if SelectedLanguage == "sw"
-                        {
-                            UtilityClass.showAlert("Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "swahili_message") as! String, vc: self)
-                        }
-                    }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
+
             }
         }
  

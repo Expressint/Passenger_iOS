@@ -55,7 +55,7 @@ class AddFavLocationVC: BaseViewController {
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
     }
@@ -96,7 +96,7 @@ extension AddFavLocationVC {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in }
                 }
                 else if let res = result as? NSDictionary {
-                    let alert = UIAlertController(title: nil, message: res.object(forKey: "message") as? String, preferredStyle: .alert)
+                    let alert = UIAlertController(title: nil, message: res.object(forKey:  GetResponseMessageKey()) as? String, preferredStyle: .alert)
                     let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in
                         if(!self.isFromHome){
                             NotificationCenter.default.post(name: ReloadFavLocations, object: nil)

@@ -80,7 +80,7 @@ class ChatVC: BaseViewController {
         self.title = receiverName
         
         txtMessage.delegate = self
-        txtMessage.text = "Enter Message.."
+        txtMessage.text = "Enter Message..".localized
         txtMessage.textColor = UIColor.black
         
         self.tblData.delegate = self
@@ -261,7 +261,7 @@ class ChatVC: BaseViewController {
         
         self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
         print ("\(SocketData.sendMessage) : \(myJSON)")
-        txtMessage.text = "Enter Message.."
+        txtMessage.text = "Enter Message..".localized
         txtMessage.textColor = UIColor.black
     }
     
@@ -283,10 +283,10 @@ class ChatVC: BaseViewController {
     }
     
     @IBAction func btnSendAction(_ sender: Any) {
-        if(self.txtMessage.text.trimmingCharacters(in: .whitespaces) != "" && self.txtMessage.text != "Enter Message.."){
+        if(self.txtMessage.text.trimmingCharacters(in: .whitespaces) != "" && self.txtMessage.text != "Enter Message..".localized){
             self.sendMessage()
         }else{
-          UtilityClass.setCustomAlert(title: "Misssing", message: "Please enter message".localized) { (index, title) in }
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter message".localized) { (index, title) in }
         }
     }
     
@@ -308,7 +308,7 @@ extension ChatVC: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if txtMessage.text.isEmpty {
-            txtMessage.text = "Enter Message.."
+            txtMessage.text = "Enter Message..".localized
             txtMessage.textColor = UIColor.black
         }
     }
@@ -373,10 +373,10 @@ extension ChatVC {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: "message") as! String) { (index, title) in }
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String) { (index, title) in }
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
             }
         }

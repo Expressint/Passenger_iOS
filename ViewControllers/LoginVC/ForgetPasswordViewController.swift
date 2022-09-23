@@ -185,9 +185,8 @@ extension ForgetPasswordViewController : UITextFieldDelegate
 
 
 func GetResponseMessageKey() -> String {
-    var MessageKey:String = ""
-    if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-        MessageKey = (SelectedLanguage == "en") ? "message" : "swahili_message"
-    }
+    var MessageKey: String = ""
+    let currentLang = Localize.currentLanguage()
+    MessageKey = (currentLang == Languages.English.rawValue) ? "message" : "spanish_message"
     return MessageKey
 }

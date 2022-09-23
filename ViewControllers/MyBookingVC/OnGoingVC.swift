@@ -247,10 +247,10 @@ class OnGoingVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     msg = res
                 }
                 else if let resDict = result as? NSDictionary {
-                    msg = resDict.object(forKey: "message") as! String
+                    msg = resDict.object(forKey:  GetResponseMessageKey()) as! String
                 }
                 else if let resAry = result as? NSArray {
-                    msg = (resAry.object(at: 0) as! NSDictionary).object(forKey: "message") as! String
+                    msg = (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String
                 }
                 
                 let alert = UIAlertController(title: appName, message: msg, preferredStyle: .alert)

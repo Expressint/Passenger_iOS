@@ -236,6 +236,17 @@
 "Estimated Distance" = "Distancia estimada";
 "Are you sure you want to cancel the trip?" = "¿Seguro que quieres cancelar el viaje?";
 "YES" = "SÍ";
+"Your request has been Accepted." = "Tu petición ha sido aceptada.";
+"Your request has been rejected." = "Su solicitud ha sido rechazada.";
+"Your trip has now started." = "Tu viaje ya ha comenzado.";
+"Dismiss" = "Despedir";
+"Thanks for feedback" = "Gracias por la retroalimentación";
+"Your trip has been completed" = "Tu viaje ha sido completado";
+
+//chat
+"Enter Message.." = "Ingrese Mensaje..";
+"Missing" = "Perdida";
+"Please enter message" = "Por favor ingrese el mensaje";
 
 //Driver Info
 "Vehicle Make" = "Marca del vehiculo";
@@ -529,10 +540,9 @@
 //HOME
 "Your Email Id is not configured from settings. Please configure it from Settings -> Mail" = "Your Email Id is not configured from settings. Please configure it from Settings -> Mail";
 "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?" = "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?";
-"Your trip has been completed" = "Your trip has been completed";
-"Your request has been rejected." = "Your request has been rejected.";
-"Your trip has now started." = "Your trip has now started.";
-"Thanks for feedback" = "Thanks for feedback";
+
+
+
 "All fields are required..." = "All fields are required...";
 "Your ride has been booked." = "Your ride has been booked.";
 "Please Select Car" = "Please Select Car";
