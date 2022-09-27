@@ -224,10 +224,10 @@ class DriverInfoViewController: UIViewController {
         lblTitleVehicleType.text = "Vehicle Type".localized
         lblTitleVehiclePlateNum.text = "Vehicle Plate Num".localized
         lblTitleVehicleColor.text = "Vehicle Color".localized
-        lblDriverName.text = "Jina la dereva".localized
+        //lblDriverName.text = "Jina la dereva".localized
 //        lblCareName.text = "Jina la Gari".localized
-        lblPickupLocation.text = "Pickup Location".localized
-        lblDropoffLocation.text = "Dropoff Location".localized
+//        lblPickupLocation.text = "Pickup Location".localized
+//        lblDropoffLocation.text = "Dropoff Location".localized
     }
     
 

@@ -3012,6 +3012,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         MarkerCurrntLocation.isHidden = true
         lblCurrentLocation.isHidden = true
         
+//        if(self.arrNumberOfOnlineCars.count <= 0 || aryEstimateFareData.count <= 0){
+//            return
+//        }
+        
         if self.arrNumberOfOnlineCars.count == 0 {
             // do nothing here
             
