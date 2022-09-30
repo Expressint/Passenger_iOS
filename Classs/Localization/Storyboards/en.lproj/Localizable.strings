@@ -193,6 +193,7 @@
 "We did not get proper address" = "We did not get proper address";
 "Pickup Location" = "Pickup Location";
 "Dropoff Location" = "Dropoff Location";
+"Second Dropoff Location" = "Additional Dropoff Location";
 "Book Later" = "Book Later";
 "Book Now" = "Book Now";
 "REQUEST NOW" = "REQUEST NOW";
@@ -263,6 +264,7 @@
 "Please select pickup date and time!" = "Please select pickup date and time!";
 "Please select pickup location!" = "Please select pickup location!";
 "Please select drop off location!" = "Please select drop off location!";
+"Please select second drop off location!" = "Please select second drop off location!";
 "Please enter flight number!" = "Please enter flight number!";
 "Please select flight arrival time!" = "Please select flight arrival time!";
 "Select Payment Type" = "Select Payment Type";

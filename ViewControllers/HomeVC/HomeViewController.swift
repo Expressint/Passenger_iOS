@@ -2540,9 +2540,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if (self.strSelectedCarTotalFare == ""){
             return
         }
-        if(txtAdditionalDestinationLocation.text == "")
-        
-        {
+//        if(txtAdditionalDestinationLocation.text == "") {
+            
             if Connectivity.isConnectedToInternet() {
                 
                 let profileData = SingletonClass.sharedInstance.dictProfile
@@ -2582,6 +2581,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         next.doubleDropOffLat = doubleDropOffLat
                         next.doubleDropOffLng = doubleDropOffLng
                         
+                        if(txtAdditionalDestinationLocation.text != "") {
+                            next.doubleDropOffLat2 = doubleUpdateNewLat
+                            next.doubleDropOffLng2 = doubleUpdateNewLng
+                            next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
+                            next.isMultiDropReq = true
+                        }
+                        
                         self.navigationController?.pushViewController(next, animated: true)
                     }
                 }
@@ -2611,6 +2617,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         next.doubleDropOffLat = doubleDropOffLat
                         next.doubleDropOffLng = doubleDropOffLng
                         
+                        if(txtAdditionalDestinationLocation.text != "") {
+                            next.doubleDropOffLat2 = doubleUpdateNewLat
+                            next.doubleDropOffLng2 = doubleUpdateNewLng
+                            next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
+                            next.isMultiDropReq = true
+                        }
+                        
                         next.strFullname = profileData.object(forKey: "Fullname") as! String
                         next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
                         
@@ -2620,11 +2633,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             } else {
                 UtilityClass.showAlert("", message: "Internet connection not available".localized, vc: self)
             }
-        }
-        else
-        {
-            UtilityClass.showAlert("", message: "Multiple Dropoff is not allowed for book later request.".localized, vc: self)
-        }
+//        } else {
+//            UtilityClass.showAlert("", message: "Multiple Dropoff is not allowed for book later request.".localized, vc: self)
+//        }
     }
     
     @IBAction func btnGetFareEstimate(_ sender: Any) {
@@ -3978,9 +3989,15 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kBookingDetailsDropoffs) { data, ack in
             print("data \(data)")
             if data.count != 0 {
+                
                 if let BookingInfo = (data as? [[String:Any]])?.first?["BookingInfo"] as? [[String:Any]] {
                     let aryFilterData = BookingInfo.filter{$0["Status"] as! String == "pending" }
                     self.BookingDetailsDropoffsToSetOnMap(tempAryFilterData: aryFilterData)
+     
+                    if(aryFilterData.count > 0){
+                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:Any]])?.first?[GetResponseMessageKey()] as? String ?? "") { (index, title) in
+                        }
+                    }
                 }
             }
         }
@@ -4262,8 +4279,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
         
         // ------------------------------------------------------------
-        let DropOffLat = bookingInfo.object(forKey: "DropOffLat") as? String ?? ""
-        let DropOffLon = bookingInfo.object(forKey: "DropOffLon") as? String ?? ""
+        let currentcount = Int(bookingInfo["CurrentCount"] as? String ?? "") ?? 0
+        let DropOffLat = (dropLocation2.trimmingCharacters(in: .whitespacesAndNewlines) != "" && currentcount > 0) ? bookingInfo.object(forKey: "DropOffLat2") as? String ?? "" : bookingInfo.object(forKey: "DropOffLat") as? String ?? ""
+        let DropOffLon = (dropLocation2.trimmingCharacters(in: .whitespacesAndNewlines) != "" && currentcount > 0) ? bookingInfo.object(forKey: "DropOffLon2") as? String ?? "" : bookingInfo.object(forKey: "DropOffLon") as? String ?? ""
+        
         
         let picklat = bookingInfo.object(forKey: "PickupLat") as? String ?? ""
         let picklng = bookingInfo.object(forKey: "PickupLng") as? String ?? ""
@@ -5433,7 +5452,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.delegate = self
         acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -5462,7 +5481,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         acController.autocompleteBounds = bounds
 
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
         if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
         {
 //            filter.country = "IN"
@@ -6917,7 +6936,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             dictParam["DropoffLocation"] = dropLocation
             dictParam["PassengerId"] = bookingInfo.object(forKey: "PassengerId")
             dictParam["DriverId"] = DriverInfo.object(forKey: "Id")
-            dictParam["BookingId"] = bookingIDNow == "" ? SingletonClass.sharedInstance.bookingId : bookingIDNow
+            dictParam["BookingId"] = bookingInfo.object(forKey: "Id")
             dictParam["DropOffLat"] = lat
             dictParam["DropOffLon"] = lng
             dictParam["BookingType"] = strBookingType

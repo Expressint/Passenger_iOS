@@ -61,6 +61,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var pickerViewForInvoiceType = UIPickerView()
     var strModelId = String()
     var BoolCurrentLocation = Bool()
+    var BoolDropLocation : Bool = false
+    var BoolAdditionalDropLocation : Bool = false
     var isCalenderFordateTime = Bool()
     var strCarModelURL = String()
     var strPassengerType = String()
@@ -114,6 +116,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         PayCardView.isHidden = false
+        self.viewSecondDestinationLocation.isHidden = (isMultiDropReq) ? false : true
 
 //        self.title = "Schedule Trip"
         self.setNavBarWithBack(Title: "Book Later".localized, IsNeedRightButton: false)
@@ -129,6 +132,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         txtDropOffLocation.delegate = self
         txtPickupLocation.delegate = self
+        txtScondDropOffLocation.delegate = self
+        
         self.btnSelectPromocode.setTitle("Select Promocode", for: .normal)
         //        UIApplication.shared.statusBarView?.backgroundColor = UIColor.black
         
@@ -270,6 +275,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         txtMobileNumber.placeholder = "Mobile Number".localized
         txtPickupLocation.placeholder = "Pickup Location".localized
         txtDropOffLocation.placeholder = "Dropoff Location".localized
+        txtScondDropOffLocation.placeholder = "Second Dropoff Location".localized
         txtDataAndTimeFromCalendar.placeholder = "Pickup Time".localized
         lblDriverAwayTime.text = "Driver away time".localized
         lblDriverAwayKm.text = "Driver away km".localized
@@ -289,6 +295,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     func fillTextFields() {
         txtPickupLocation.text = strPickupLocation
         txtDropOffLocation.text = strDropoffLocation
+        txtScondDropOffLocation.text = strSecondDropoffLocation
         postPickupAndDropLocationForEstimateFare()
     }
     
@@ -398,6 +405,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     @IBOutlet weak var viewDestinationLocation: UIView!
     @IBOutlet weak var viewCurrentLocation: UIView!
+    @IBOutlet weak var viewSecondDestinationLocation: UIView!
     
     //    @IBOutlet weak var lblMySelf: UILabel!
     //    @IBOutlet weak var lblOthers: UILabel!
@@ -407,6 +415,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     @IBOutlet weak var txtPickupLocation: UITextField!
     @IBOutlet weak var txtDropOffLocation: UITextField!
+    @IBOutlet weak var txtScondDropOffLocation: UITextField!
     
     @IBOutlet weak var txtFullName: UITextField!
     @IBOutlet weak var txtMobileNumber: FormTextField!
@@ -726,9 +735,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         BoolCurrentLocation = true
+        BoolDropLocation = false
+        BoolAdditionalDropLocation = false
 
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -744,16 +755,32 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+//        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
 //        }
         acController.autocompleteFilter = filter
         BoolCurrentLocation = false
+        BoolDropLocation = true
+        BoolAdditionalDropLocation = false
         
         present(acController, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func txtSecondDropOffLocation(_ sender: UITextField) {
+        self.isOpenPlacePickerController = true
+        let acController = GMSAutocompleteViewController()
+        acController.delegate = self
+        BoolCurrentLocation = false
+        BoolDropLocation = false
+        BoolAdditionalDropLocation = true
+
+        let filter = GMSAutocompleteFilter()
+//        filter.country = "GY"
+        acController.autocompleteFilter = filter
+        present(acController, animated: true, completion: nil)
     }
     
     @IBAction func btnCalendar(_ sender: UIButton) {
@@ -841,6 +868,9 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         } else if txtDropOffLocation.text == "" {
             ValidationStatus = false
             ValidationMessage = "Please select drop off location!".localized
+        } else if txtScondDropOffLocation.text == "" && isMultiDropReq{
+            ValidationStatus = false
+            ValidationMessage = "Please select second drop off location".localized
         } else if self.viewFlightNumber.checkState == .checked && self.txtFlightNumber.text == "" {
             ValidationStatus = false
             ValidationMessage = "Please enter flight number!".localized
@@ -965,6 +995,12 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     var doubleDropOffLat = Double()
     var doubleDropOffLng = Double()
+    
+    var doubleDropOffLat2 = Double()
+    var doubleDropOffLng2 = Double()
+    var strSecondDropoffLocation = ""
+    var isMultiDropReq: Bool = false
+    
     /// if intShareRide = 1 than ON and if intShareRide = 0 OFF
     var intShareRide:Int = 0
 //    let socket = SocketIOClient(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(false), .compress])
@@ -1046,11 +1082,16 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             doublePickupLat = place.coordinate.latitude
             doublePickupLng = place.coordinate.longitude
             
-        }else {
+        }else if BoolDropLocation {
             txtDropOffLocation.text = place.formattedAddress
             strDropoffLocation = place.formattedAddress!
             doubleDropOffLat = place.coordinate.latitude
             doubleDropOffLng = place.coordinate.longitude
+        } else {
+            txtScondDropOffLocation.text = place.formattedAddress
+            strSecondDropoffLocation = place.formattedAddress!
+            doubleDropOffLat2 = place.coordinate.latitude
+            doubleDropOffLat2 = place.coordinate.longitude
         }
         postPickupAndDropLocationForEstimateFare()
         dismiss(animated: true, completion: nil)
@@ -1079,6 +1120,9 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             return false
         }else if textField == txtPickupLocation {
             self.txtPickupLocation(txtPickupLocation)
+            return false
+        }else if textField == txtScondDropOffLocation {
+            self.txtSecondDropOffLocation(txtScondDropOffLocation)
             return false
         }
         
@@ -1688,6 +1732,12 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         dictData["DropOffLat"] = doubleDropOffLat as AnyObject
         dictData["DropOffLon"] = doubleDropOffLng as AnyObject
         
+        if(isMultiDropReq){
+            dictData["DropoffLocation2"] = txtScondDropOffLocation.text as AnyObject
+            dictData["DropOffLat2"] = doubleDropOffLat2 as AnyObject
+            dictData["DropOffLon2"] = doubleDropOffLng2 as AnyObject
+        }
+        
         if lblPromoCode.text == "" {
             
         }
@@ -2006,6 +2056,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     @IBAction func btnClearDropOffLocation(_ sender: UIButton) {
         txtDropOffLocation.text = ""
+    }
+    
+    @IBAction func btnClearSecondDropOffLocation(_ sender: UIButton) {
+        txtScondDropOffLocation.text = ""
     }
     
     

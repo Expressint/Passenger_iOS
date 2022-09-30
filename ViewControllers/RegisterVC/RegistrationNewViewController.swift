@@ -65,8 +65,8 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     var strPassword = String()
     var gender = String()
     
-    var termsLink = "https://www.bookaridegy.com/TermsAndCondition"
-    var PrivacyLink = "https://www.bookaridegy.com/PrivacyPolicy"
+    var termsLink = app_TermsAndCondition
+    var PrivacyLink = app_PrivacyPolicy
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

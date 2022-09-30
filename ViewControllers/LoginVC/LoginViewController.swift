@@ -779,6 +779,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 helpLineNumber = result["DispatchCall"] as? String ?? ""
                 WhatsUpNumber = result["DispatchWhatsapp"] as? String ?? ""
                 DispatchCall = result["DispatchCall"] as? String ?? ""
+                app_TermsAndCondition = result["TermsAndCondition"] as? String ?? ""
+                app_PrivacyPolicy = result["PrivacyPolicy"] as? String ?? ""
                 
                 let dispatcherInfo =  result["dispatcher_detail"] as? [String:Any]
                 DispatchName = dispatcherInfo?["Fullname"] as? String ?? ""

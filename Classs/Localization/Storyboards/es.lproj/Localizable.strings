@@ -194,6 +194,7 @@
 "We did not get proper address" = "No obtuvimos la dirección correcta";
 "Pickup Location" = "Lugar de recogida";
 "Dropoff Location" = "Punto de entrega";
+"Second Dropoff Location" = "Lugar de entrega adicional";
 "Book Now" = "Reservar ahora";
 "Book Later" = "Reservar más tarde";
 "REQUEST NOW" = "SOLICITE AHORA";
@@ -205,6 +206,9 @@
 "pesapal" = "pesapal";
 "Please enter pick up location" = "Por favor ingrese la ubicación de recogida";
 "Please enter drop off location" = "Por favor ingrese la ubicación de entrega";
+
+"Please select second drop off location!" = "¡Seleccione la segunda ubicación de entrega!";
+
 "Update Dropoff Location" = "Actualizar ubicación de entrega";
 "Internet connection not available" = "Conexión a Internet no disponible";
 "Book Now cars not available. Please click OK to Book Later." = "Reservar ahora coches no disponibles. Haga clic en Aceptar para reservar más tarde.";
