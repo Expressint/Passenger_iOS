@@ -739,7 +739,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolAdditionalDropLocation = false
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -755,7 +755,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
 //        acController.autocompleteBounds = NearByRegion
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
 //        if(UIDevice.current.name.lowercased() == "rahul's iphone")
 //        {
 //            filter.country = "IN"
@@ -778,7 +778,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolAdditionalDropLocation = true
 
         let filter = GMSAutocompleteFilter()
-//        filter.country = "GY"
+        filter.country = "GY"
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
     }
@@ -1075,14 +1075,13 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        
         if BoolCurrentLocation {
             txtPickupLocation.text = place.formattedAddress
             strPickupLocation = place.formattedAddress!
             doublePickupLat = place.coordinate.latitude
             doublePickupLng = place.coordinate.longitude
             
-        }else if BoolDropLocation {
+        } else if BoolDropLocation {
             txtDropOffLocation.text = place.formattedAddress
             strDropoffLocation = place.formattedAddress!
             doubleDropOffLat = place.coordinate.latitude

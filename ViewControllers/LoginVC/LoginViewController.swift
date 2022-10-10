@@ -15,7 +15,7 @@ import GoogleSignIn
 import NVActivityIndicatorView
 import CoreLocation
 import AuthenticationServices
-
+import DropDown
 
 
 
@@ -56,6 +56,10 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
 
     @IBOutlet weak var btnSinghUp: UIButton!
     var strURLForSocialImage = String()
+    
+    var arrLang: [String] = ["English","Spanish"]
+    @IBOutlet weak var btnSelectLanguage: UIButton!
+    @IBOutlet weak var btnEnglish: UIButton!
     //-------------------------------------------------------------
     // MARK: - Base Methods
     //-------------------------------------------------------------
@@ -106,6 +110,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnSelectLanguage.titleLabel?.numberOfLines = 0
+        
 //        viewMain.isHidden = true
         
 //        txtMobile.lineColor = UIColor.white
@@ -143,10 +150,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if((Localize.currentLanguage() == Languages.English.rawValue)){
+            self.btnEnglishAction(self.btnEnglish)
+        }else{
+            self.btnSelectLangAction(self.btnSelectLanguage)
+        }
+        
 //        segmentLang.setTitleColor(.white)
-        segmentLang.selectedConfiguration(color: .white)
-        segmentLang.selectedSegmentIndex = (Localize.currentLanguage() == Languages.English.rawValue) ? 0 : 1
-        segmentLang.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
+//        segmentLang.selectedConfiguration(color: .white)
+//        segmentLang.selectedSegmentIndex = (Localize.currentLanguage() == Languages.English.rawValue) ? 0 : 1
+//        segmentLang.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
         
         self.setLocalization()
@@ -157,6 +170,42 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         super.viewDidLayoutSubviews()
 //        loginButton.frame = self.viewFacebookLoginContainer!.frame
 //        loginButton.center = self.viewFacebookLoginContainer!.center
+        
+    }
+    
+    @IBAction func btnSelectLangAction(_ sender: Any) {
+        self.btnSelectLanguage.isSelected = true
+        self.btnEnglish.isSelected = false
+        Localize.setCurrentLanguage(Languages.Spanish.rawValue)
+        
+        self.btnSelectLanguage.layer.borderColor = UIColor(hex: "02A64D").cgColor
+        self.btnSelectLanguage.backgroundColor = UIColor(hex: "02A64D")
+        self.btnSelectLanguage.layer.borderWidth = 1
+        self.btnSelectLanguage.layer.cornerRadius = 5
+        
+        self.btnEnglish.layer.borderColor = UIColor.white.cgColor
+        self.btnEnglish.backgroundColor = UIColor.clear
+        self.btnEnglish.layer.borderWidth = 1
+        self.btnEnglish.layer.cornerRadius = 5
+    }
+    
+  
+    @IBAction func btnEnglishAction(_ sender: Any) {
+       // self.SelectLangDropdownSetup()
+        
+        self.btnSelectLanguage.isSelected = false
+        self.btnEnglish.isSelected = true
+        Localize.setCurrentLanguage(Languages.English.rawValue)
+        
+        self.btnEnglish.layer.borderColor = UIColor(hex: "02A64D").cgColor
+        self.btnEnglish.backgroundColor = UIColor(hex: "02A64D")
+        self.btnEnglish.layer.borderWidth = 1
+        self.btnEnglish.layer.cornerRadius = 5
+        
+        self.btnSelectLanguage.layer.borderColor = UIColor.white.cgColor
+        self.btnSelectLanguage.backgroundColor = UIColor.clear
+        self.btnSelectLanguage.layer.borderWidth = 1
+        self.btnSelectLanguage.layer.cornerRadius = 5
         
     }
     
@@ -207,6 +256,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleThick.rawValue]
        let underlineAttributedString = NSAttributedString(string: "Sign Up".localized, attributes: underlineAttribute)
        btnSinghUp.setAttributedTitle(underlineAttributedString, for: .normal)
+      // btnSelectLanguage.setTitle("Select Language".localized, for: .normal)
     }
     
     override var prefersStatusBarHidden: Bool {

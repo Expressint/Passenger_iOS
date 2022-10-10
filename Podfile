@@ -26,5 +26,6 @@ target 'Book A Ride' do
   pod 'MarqueeLabel/Swift' #, '3.1.4'
   pod 'CountryPickerView'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'DropDown' #, '2.3.1'
 
 end

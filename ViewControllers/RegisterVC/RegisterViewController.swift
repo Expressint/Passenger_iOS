@@ -8,6 +8,7 @@
 
 import UIKit
 import CountryPickerView
+import DropDown
 
 class RegisterViewController: UIViewController, UITextFieldDelegate {
     
@@ -30,11 +31,15 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var stackPassword: UIStackView!
     @IBOutlet weak var stackConfirmPassword: UIStackView!
     
+    var arrLang: [String] = ["English","Spanish"]
+    @IBOutlet weak var btnSelectLanguage: UIButton!
     
     let countryPicker = CountryPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnSelectLanguage.titleLabel?.numberOfLines = 0
         
         txtPhoneNumber.delegate = self
         txtEmail.delegate = self
@@ -78,6 +83,29 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func btnSelectLangAction(_ sender: Any) {
+        self.SelectLangDropdownSetup()
+    }
+    
+    func SelectLangDropdownSetup() {
+        let dropDown = DropDown()
+        dropDown.anchorView = self.btnSelectLanguage
+        dropDown.dataSource = self.arrLang
+        dropDown.show()
+        
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+            if(index == 0){
+                Localize.setCurrentLanguage(Languages.English.rawValue)
+            }else{
+                Localize.setCurrentLanguage(Languages.Spanish.rawValue)
+            }
+            dropDown.hide()
+        }
+        dropDown.width = self.btnSelectLanguage.frame.width
+        self.view.endEditing(true)
+    }
+    
     @objc func changeLanguage(){
         self.setLocalization()
     }
@@ -88,6 +116,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         txtPassword.placeholder = "Password".localized
         txtConfirmPassword.placeholder = "Confirm Password".localized
         btnNext.setTitle("Next".localized, for: .normal)
+        btnSelectLanguage.setTitle("Select Language".localized, for: .normal)
     }
     
     @IBAction func btnCountryCode(_ sender: Any) {

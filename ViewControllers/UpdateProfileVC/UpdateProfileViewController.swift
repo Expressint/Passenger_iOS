@@ -334,7 +334,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         let getData = SingletonClass.sharedInstance.dictProfile
         
         imgProfile.sd_setShowActivityIndicatorView(true)
-        imgProfile.sd_setIndicatorStyle(.medium)
+        imgProfile.sd_setIndicatorStyle(.white)
         
         if SingletonClass.sharedInstance.isFromSocilaLogin {
             imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)

@@ -25,6 +25,7 @@ PODS:
   - CHIPageControl/Puya (0.1.4)
   - CountryPickerView (3.3.0)
   - CreditCardForm (0.1.5)
+  - DropDown (2.3.13)
   - FBSDKCoreKit (7.0.0):
     - FBSDKCoreKit/Basics (= 7.0.0)
     - FBSDKCoreKit/Core (= 7.0.0)
@@ -160,6 +161,7 @@ DEPENDENCIES:
   - CHIPageControl
   - CountryPickerView
   - CreditCardForm
+  - DropDown
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Crashlytics
@@ -186,6 +188,7 @@ SPEC REPOS:
     - CHIPageControl
     - CountryPickerView
     - CreditCardForm
+    - DropDown
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -226,6 +229,7 @@ SPEC CHECKSUMS:
   CHIPageControl: 032b5ab68506c00711d5a61bd83e9fdf2a7ecb22
   CountryPickerView: 6322ada32a80b0cd721b0267282a5c24f406f263
   CreditCardForm: 9ae830341997229abb0e284e66f301f834afe942
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   FBSDKCoreKit: 8ad31cd09f793d1d7e84cf20fd6cebfe80ad318d
   FBSDKLoginKit: 5d1e321dc45ab1fa09198b77fc17c32a06f008c0
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
@@ -259,6 +263,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: ec6a79831b698cc2eaa7fc6a2e6d6b0c59ef4aea
+PODFILE CHECKSUM: ae0a2a671a7d64074740ff811f0495002d2f1e66
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
