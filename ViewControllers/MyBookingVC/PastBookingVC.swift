@@ -125,6 +125,9 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             cell.lblTitleDiscount.text = "\("Discount".localized) :"
             
+            cell.lblTitleExtraCharge.text = "\("Extra Charge".localized) :"
+            cell.lblTitleExtraChargeReason.text = "\("Extra Charge Reason".localized) :"
+            
             cell.lblTitleSubTotal.text = "\("Subtotal".localized) :"
             
             cell.lblTripStatusTitle.text = "\("Trip Status".localized) :"
@@ -244,6 +247,14 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             let Discount = currentData["Discount"] as? String ?? "0"
             cell.lblDiscount.text = "\(Discount) \(currencySign)"
+            
+            let ExtraCharge = currentData["ExtraCharge"] as? String ?? "0"
+            cell.lblExtraCharge.text = "\(ExtraCharge) \(currencySign)"
+            cell.stackViewExtraCharge.isHidden = (ExtraCharge == "0") ? true : false
+            
+            let ExtraChargeReason = currentData["ExtraChargeReason"] as? String ?? ""
+            cell.lblExtraChargeReason.text = "\(ExtraChargeReason)"
+            cell.stackViewExtraChargeReason.isHidden = (ExtraChargeReason == "") ? true : false
             
             let Tax = currentData["Tax"] as? String ?? "0"
             cell.lblTax.text = "\(Tax) \(currencySign)"

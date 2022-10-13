@@ -92,6 +92,13 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var lblTitleNightFare: UILabel!
     @IBOutlet weak var lblTitleSubTotal: UILabel!
     
+    @IBOutlet weak var lblTitleExtraCharge: UILabel!
+    @IBOutlet weak var lblTitleExtraChargeReason: UILabel!
+    @IBOutlet weak var lblExtraCharge: UILabel!
+    @IBOutlet weak var lblExtraChargeReason: UILabel!
+    @IBOutlet weak var stackViewExtraCharge: UIStackView!
+    @IBOutlet weak var stackViewExtraChargeReason: UIStackView!
+    
     var dictData = NSDictionary()
     
    
@@ -150,6 +157,8 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblTitleTaxIncluded.text = "\("Tax(Included)".localized) :"
         lblTotalAmount.text = "\("Grand Total".localized) :"
         lblTripStatusTitle.text = "\("Trip Status".localized):"
+        lblTitleExtraCharge.text = "\("Extra Charge".localized) :"
+        lblTitleExtraChargeReason.text = "\("Extra Charge Reason".localized) :"
         
         lblPickupLocation.text = "Address".localized
         lblDropOffLocation.text = "Address".localized
@@ -199,6 +208,14 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         }else{
             stackNightFare.isHidden = false
         }
+        
+        let ExtraCharge = dictData.object(forKey: "ExtraCharge") as? String ?? "0"
+        lblExtraCharge.text = "\(ExtraCharge) \(currencySign)"
+        stackViewExtraCharge.isHidden = (ExtraCharge == "0") ? true : false
+        
+        let ExtraChargeReason = dictData.object(forKey: "ExtraChargeReason") as? String ?? ""
+        lblExtraChargeReason.text = "\(ExtraChargeReason)"
+        stackViewExtraChargeReason.isHidden = (ExtraChargeReason == "") ? true : false
         
         let createDate = dictData.object(forKey: "CreatedDate") as? String ?? ""
         if(createDate.contains("T")){

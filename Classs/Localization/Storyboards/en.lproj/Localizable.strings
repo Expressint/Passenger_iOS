@@ -127,6 +127,8 @@
 "Distance" = "Distance";
 "Subtotal" = "Subtotal";
 "Discount" = "Discount";
+"Extra Charge" = "Extra Charge";
+"Extra Charge Reason" = "Extra Charge Reason";
 "Trip Status" = "Trip Status";
 "Tax(Included)" = "Tax(Included)";
 "Cancel Request" = "Cancel Request";

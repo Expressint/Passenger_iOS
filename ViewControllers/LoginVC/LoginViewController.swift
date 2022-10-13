@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     @IBOutlet weak var btnGoogle: UIButton!
     
     @IBOutlet weak var btnApple: UIButton!
-    
+
     @IBOutlet var lblLaungageName: UILabel!
     var manager = CLLocationManager()
 
@@ -853,7 +853,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                     let alert = UIAlertController(title: nil, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String, preferredStyle: .alert)
                     let UPDATE = UIAlertAction(title: "UPDATE", style: .default, handler: { ACTION in
                         
-                        UIApplication.shared.open((NSURL(string: "itms-apps://itunes.apple.com/app/id1445179460")! as URL), options: [:], completionHandler: { (status) in
+                        UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
 
                         })
                     })
@@ -913,7 +913,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                          UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                             if (index == 0)
                             {
-                                UIApplication.shared.open((NSURL(string: "itms-apps://itunes.apple.com/app/id1445179460")! as URL), options: [:], completionHandler: { (status) in
+                                UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
                                     
                                 })
                             }

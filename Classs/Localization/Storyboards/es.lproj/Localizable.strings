@@ -129,6 +129,8 @@
 "Distance" = "Distancia";
 "Subtotal" = "Total parcial";
 "Discount" = "Descuento";
+"Extra Charge" = "Carga extra";
+"Extra Charge Reason" = "Motivo del cargo adicional";
 "Trip Status" = "Estado del viaje";
 "Tax(Included)" = "Impuesto incluido)";
 "Cancel Request" = "Cancelar petición";
