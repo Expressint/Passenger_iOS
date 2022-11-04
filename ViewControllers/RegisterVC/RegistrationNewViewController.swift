@@ -46,6 +46,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     @IBOutlet weak var txtDateOfBirth: ThemeTextField!
     
     @IBOutlet weak var txtAddress: ThemeTextField!
+    @IBOutlet weak var txtIdNumber: ThemeTextField!
     
     @IBOutlet weak var txtRafarralCode: ThemeTextField!
     
@@ -80,6 +81,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         txtFirstName.placeholder  =  "First Name".localized
         txtLastName.placeholder  =  "Last Name".localized
         txtAddress.placeholder = "Address".localized
+        txtIdNumber.placeholder = "(License/ID card /Passport) Number".localized
         txtRafarralCode.placeholder  =  "Referral Code (Optional)".localized
         txtPostCode.placeholder = "Post Code".localized
         txtDateOfBirth.placeholder = "Date Of Birth".localized
@@ -384,6 +386,10 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter address".localized) { (index, title) in
             }
             return false
+        } else if (txtIdNumber.text?.count == 0) {
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter Id".localized) { (index, title) in
+            }
+            return false
         } else if gender == "" {
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please choose gender".localized) { (index, title) in
             }
@@ -413,6 +419,15 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
     }
     
     @IBAction func btnPassengereImage(_ sender: Any) {
+//        if(!imgPassengerId.image!.isEqualToImage(image: UIImage(named: "icon_Picture")!)){
+//            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatImageViewVC") as! ChatImageViewVC
+//            NextPage.imgTemp = imgPassengerId.image ?? UIImage(named: "icon_Picture")
+//            NextPage.ischat = false
+//            NextPage.modalPresentationStyle = .formSheet
+//            self.present(NextPage, animated: true, completion: nil)
+//            return
+//        }
+        
         isPassengerImage = true
         self.TapToProfilePicture()
     }
@@ -425,7 +440,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         })
         
         let isplaceholder = imgProfile.image!.isEqualToImage(image: UIImage(named: "icon_UserImage")!)
-        guard (txtFirstName.text?.count != 0) || (txtLastName.text?.count != 0) || (txtAddress.text?.count != 0) || isplaceholder != true || gender != "" else {
+        guard (txtFirstName.text?.count != 0) || (txtLastName.text?.count != 0) || (txtAddress.text?.count != 0) || (txtIdNumber.text?.count != 0) || isplaceholder != true || gender != "" else {
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter all details".localized) { (index, title) in
             }
             return
@@ -467,6 +482,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
         dictParams.setObject(txtRafarralCode.text!, forKey: "ReferralCode" as NSCopying)
         dictParams.setObject(txtPostCode.text!, forKey: "ZipCode" as NSCopying)
         dictParams.setObject(txtAddress.text!, forKey: "Address" as NSCopying)
+        dictParams.setObject(txtIdNumber.text!, forKey: "identification_number" as NSCopying)
         dictParams.setObject(strPhoneNumber, forKey: "MobileNo" as NSCopying)
         dictParams.setObject(strEmail, forKey: "Email" as NSCopying)
         dictParams.setObject(strPassword, forKey: "Password" as NSCopying)

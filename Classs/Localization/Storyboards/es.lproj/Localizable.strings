@@ -16,6 +16,7 @@
 //Registration
 "First Name"  = "Primer Nombre";
 "Last Name"  = "Apellido";
+"(License/ID card /Passport) Number"  = "(Licencia/DNI/Pasaporte) Número";
 "Address"  = "Direccion";
 "Referral Code (Optional)" = "Código de Referencia (Opcional)";
 "Post Code" = "Código Postal";
@@ -51,6 +52,7 @@
 "Enter first name" = "Introduzca el nombre";
 "Enter last name" = "Introduzca el apellido";
 "Please enter address" = "Por favor ingrese la dirección";
+"Please enter Id" = "Por favor ingrese número de identificación";
 "Please choose gender" = "Por favor, elija el género";
 "Please accept terms & condition and privacy policy" = "Por favor acepte los términos y condiciones y la política de privacidad";
 "Please enter all details" = "Por favor, introduzca todos los detalles";
@@ -134,6 +136,8 @@
 "Trip Status" = "Estado del viaje";
 "Tax(Included)" = "Impuesto incluido)";
 "Cancel Request" = "Cancelar petición";
+"Phone Number :" = "Número de teléfono :";
+"Email :" = "Correo electrónico :";
 
 //My Receipts
 "DropoffTime" = "Hora de entrega";
@@ -293,7 +297,7 @@
 "Please enter flight number!" = "¡Por favor ingrese el número de vuelo!";
 "Please select flight arrival time!" = "¡Seleccione la hora de llegada del vuelo!";
 "Select Payment Type" = "Seleccionar tipo de pago";
-"Please select pickUp time one hour later" = "Seleccione la hora de recogida una hora más tarde";
+"Please select pickUp time one hour later" = "Seleccione la hora de recogida dos horas más tarde";
 "Please select date first!" = "¡Seleccione la fecha primero!";
 "Please choose date" = "Por favor elige la fecha";
 "Please enter promocode!" = "Por favor, introduzca código de promoción!";
@@ -303,6 +307,9 @@
 "Enter Promocode" = "Introduce el código de promoción";
 "Apply Promocode" = "Aplicar código promocional";
 "Apply" = "Aplicar";
+
+"BeforeRegisterMessage" = "¡Gracias por elegir BookARide! \nPor su seguridad y la nuestra, cada usuario debe ser verificado por nuestro equipo de seguridad y cumplimiento de Book A Ride antes de que pueda reservar un viaje. \n\nSe le pedirá que cargue una identificación con foto emitida por el gobierno y una foto reciente de la cabeza junto con otra información personal. \nLas formas de identificación aceptables son pasaporte, licencia de conducir o tarjeta de identificación emitida por el gobierno. \n\nPara que podamos acelerar el proceso de verificación, envíe toda la información con precisión. Nuestro equipo está en espera las 24 horas del día, los 7 días de la semana para verificar su perfil. Puede llamar a nuestro equipo de servicio al cliente con cualquier pregunta o inquietud.";
+
 
 "App Name" = ""; //"Book A Ride";
 "Flight Number"  = "Flight Number";

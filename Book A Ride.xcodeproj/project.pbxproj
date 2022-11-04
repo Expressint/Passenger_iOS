@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -449,7 +449,7 @@
 		347A9FD82608C73900065C29 /* SelectDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDriverViewController.swift; sourceTree = "<group>"; };
 		347A9FDB2608CC2500065C29 /* DriverList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DriverList.storyboard; sourceTree = "<group>"; };
 		34E01A29220EEE2C000D048E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Storyboards/en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		34E01A2E220F1108000D048E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		34E01A2E220F1108000D048E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3A4072B421B512270015C494 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A4072BB21B512270015C494 /* proxima-nova-black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proxima-nova-black.otf"; sourceTree = "<group>"; };
 		3A4072BC21B512270015C494 /* proxima-nova-bold-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proxima-nova-bold-italic.otf"; sourceTree = "<group>"; };
@@ -999,16 +999,18 @@
 		3A4072DC21B512270015C494 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				88BBE1FE28913E8B0024F935 /* Chat */,
-				888B650D28892C890006C669 /* AboutUs */,
 				18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */,
 				347A9FD82608C73900065C29 /* SelectDriverViewController.swift */,
+				3A4072E221B512270015C494 /* CommingSoonViewController.swift */,
+				3A4072E321B512270015C494 /* CustomAlertsViewController.swift */,
+				3A40732E21B512270015C494 /* TempData.swift */,
+				3A40732F21B512270015C494 /* TempDataOfWebservice.swift */,
+				88BBE1FE28913E8B0024F935 /* Chat */,
+				888B650D28892C890006C669 /* AboutUs */,
 				3A84BC9C21C264E800EDA3A2 /* MyRatingViewController */,
 				3A5DDCA521BA5C9200F9B5A3 /* TripInfoViewController */,
 				3A4072DF21B512270015C494 /* CollectionCell */,
-				3A4072E221B512270015C494 /* CommingSoonViewController.swift */,
 				5480321427A2DBC800ECD2BD /* CancelAlert */,
-				3A4072E321B512270015C494 /* CustomAlertsViewController.swift */,
 				3A4072E421B512270015C494 /* HeaderVC */,
 				3A4072E921B512270015C494 /* HomeVC */,
 				3A4072F021B512270015C494 /* LoginVC */,
@@ -1017,8 +1019,6 @@
 				3A40730121B512270015C494 /* RegisterVC */,
 				3A40730621B512270015C494 /* SideMenuVC */,
 				3A40732221B512270015C494 /* TableviewCell */,
-				3A40732E21B512270015C494 /* TempData.swift */,
-				3A40732F21B512270015C494 /* TempDataOfWebservice.swift */,
 				3A40733021B512270015C494 /* TripDetailsVC */,
 				3A40733321B512270015C494 /* UpdateProfileVC */,
 				3A40733621B512270015C494 /* Wallet */,
@@ -1807,7 +1807,7 @@
 				008D222B1FA08DCF001223DF /* Resources */,
 				A2933852BD74F8C0D508A763 /* [CP] Embed Pods Frameworks */,
 				0F3CCE603DFCC1C63FAF5F5C /* [CP] Copy Pods Resources */,
-				18B061AE256F7F2400BAA013 /* ShellScript */,
+				475E5CC228F8293500B36A86 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1854,6 +1854,9 @@
 				es,
 			);
 			mainGroup = 008D22241FA08DCF001223DF;
+			packageReferences = (
+				475E5CC328F82C3D00B36A86 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 008D222E1FA08DCF001223DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2197,7 +2200,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		18B061AE256F7F2400BAA013 /* ShellScript */ = {
+		475E5CC228F8293500B36A86 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2214,7 +2217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 		9B2149097BFB38C9959DC4A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2563,7 +2566,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2578,7 +2582,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.2;
+				CURRENT_PROJECT_VERSION = 1.7.5;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2588,8 +2592,11 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2610,7 +2617,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.2;
+				CURRENT_PROJECT_VERSION = 1.7.5;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2620,8 +2627,11 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.3.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2655,6 +2665,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		475E5CC328F82C3D00B36A86 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 008D22251FA08DCF001223DF /* Project object */;
 }

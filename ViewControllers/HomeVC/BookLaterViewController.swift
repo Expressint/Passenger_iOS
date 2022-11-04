@@ -922,12 +922,11 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         let date1 = Dateformatter.date(from: dateString1)
         let date2 = Dateformatter.date(from: dateString2)
 
-
         let distanceBetweenDates: TimeInterval? = date2?.timeIntervalSince(date1!)
         let minsInAnHour: Double = 60
 
         let minBetweenDates = Int((distanceBetweenDates! / minsInAnHour))
-        if minBetweenDates >= 60 {
+        if minBetweenDates >= 120 {
             return true
         }else{
             return false
@@ -1776,6 +1775,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         else {
             dictData["FlightNumber"] = txtFlightNumber.text as AnyObject
         }
+        
+        dictData["language"] = Localize.currentLanguage() as AnyObject
         
         print("book later.. \(dictData)")
         webserviceForBookLater(dictData as AnyObject) { (result, status) in

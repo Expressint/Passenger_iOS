@@ -8,8 +8,9 @@
 
 import UIKit
 import Foundation
+import MessageUI
 
-class AJAlertController: UIViewController {
+class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate  {
     
     // MARK:- Private Properties
     // MARK:-
@@ -19,6 +20,7 @@ class AJAlertController: UIViewController {
     private var btnCancelTitle:String?
     private var btnOtherTitle:String?
     private var showStack: Bool = true
+    private var showContact: Bool = true
     
     private let btnOtherColor  = UIColor.black//UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     private let btnCancelColor = UIColor.black//UIColor(red: 255.0/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
@@ -38,6 +40,10 @@ class AJAlertController: UIViewController {
     @IBOutlet weak var stackBtns: UIStackView!
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnMsg: UIButton!
+    
+    @IBOutlet weak var btnEmail: UIButton!
+    @IBOutlet weak var btnPhone: UIButton!
+    
     // @IBOutlet var alertWidthConstraint: NSLayoutConstraint!
     
     /// AlertController Completion handler
@@ -60,6 +66,13 @@ class AJAlertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         btnOK.setTitle("OK".localized, for: .normal)
+        
+        self.btnEmail.isHidden = true
+        self.btnPhone.isHidden = true
+        
+        self.btnPhone.underline(text: "\("Phone Number :".localized) +592-223-9988")
+        self.btnEmail.underline(text: "\("Email :".localized) info@bookaridegy.com")
+        
         setupAJAlertController()
         
     }
@@ -102,8 +115,15 @@ class AJAlertController: UIViewController {
         btnOK.backgroundColor = themeAppMainColor
         
         stackBtns.isHidden = showStack
+        btnEmail.isHidden = showContact
+        btnPhone.isHidden = showContact
+        
+        btnPhone.setTitle("\("Phone Number :".localized) +592-223-9988", for: .normal)
+        btnEmail.setTitle("\("Email :".localized) info@bookaridegy.com", for: .normal)
+        
         lblTitle.text = strAlertTitle
         lblAlertText?.text = strAlertText
+        lblAlertText?.textAlignment = (showContact) ? .center : .left
         
         if let aCancelTitle = btnCancelTitle {
             btnCancel.setTitle(aCancelTitle, for: .normal)
@@ -147,13 +167,14 @@ class AJAlertController: UIViewController {
     }
     
     /// Create and Configure Alert Controller
-    private func configure(title: String, message:String, btnCancelTitle:String?, btnOtherTitle:String?, showStack: Bool = false)
+    private func configure(title: String, message:String, btnCancelTitle:String?, btnOtherTitle:String?, showStack: Bool = false, showContact: Bool = false)
     {
         self.strAlertTitle = title
         self.strAlertText = message
         self.btnCancelTitle = btnCancelTitle
         self.btnOtherTitle = btnOtherTitle
         self.showStack = showStack
+        self.showContact = showContact
     }
     
     /// Show Alert Controller
@@ -212,6 +233,92 @@ class AJAlertController: UIViewController {
     
     // MARK:- UIButton Clicks
     // MARK:-
+    @IBAction func btnPhoneAction(_ sender: Any) {
+        hide()
+        let contactNumber = DispatchCall 
+        if contactNumber == "" {
+            UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
+            }
+        }
+        else {
+            callNumber(phoneNumber: contactNumber)
+        }
+    }
+    
+    @IBAction func btnEmailAction(_ sender: Any) {
+        hide()
+        if !MFMailComposeViewController.canSendMail() {
+            return
+        }
+        
+        let composeVC = MFMailComposeViewController()
+        composeVC.mailComposeDelegate = self
+        composeVC.setToRecipients(["info@bookaridegy.com"])
+        composeVC.setSubject("")
+        composeVC.setMessageBody("", isHTML: false)
+        self.present(composeVC, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller:MFMailComposeViewController, didFinishWith result:MFMailComposeResult, error:Error?) {
+        switch result {
+        case MFMailComposeResult.cancelled:
+            print("Mail cancelled")
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled".localized) { (index, title) in
+            }
+
+        case MFMailComposeResult.saved:
+            print("Mail saved")
+           
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail saved".localized) { (index, title) in
+            }
+        case MFMailComposeResult.sent:
+            print("Mail sent")
+            
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail sent".localized) { (index, title) in
+            }
+        case MFMailComposeResult.failed:
+            print("Mail sent failure: \(String(describing: error?.localizedDescription))")
+      
+            UtilityClass.setCustomAlert(title: "Error", message: "\("Mail sent failure".localized): \(String(describing: error?.localizedDescription))") { (index, title) in
+            }
+        default:
+            
+             UtilityClass.setCustomAlert(title: "Error", message: "Something went wrong") { (index, title) in
+             }
+            break
+        }
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        //... handle sms screen actions
+        switch result {
+        case MessageComposeResult.cancelled:
+            print("Mail cancelled")
+
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail cancelled".localized) { (index, title) in
+            }
+        case MessageComposeResult.sent:
+            print("Mail sent")
+            
+            UtilityClass.setCustomAlert(title: "Done".localized, message: "Mail sent".localized) { (index, title) in
+            }
+        case MessageComposeResult.failed:
+            print("Mail sent failure")
+
+            UtilityClass.setCustomAlert(title: "Error", message: "Mail sent failure".localized) { (index, title) in
+            }
+        default:
+
+             UtilityClass.setCustomAlert(title: "Error", message: "Something went wrong") { (index, title) in
+             }
+            break
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func btnCallAcion(_ sender: Any) {
         hide()
@@ -299,9 +406,8 @@ class AJAlertController: UIViewController {
      - parameter completion:  Completion block. OK Button Index - 0
      */
     
-    public func showAlertWithOkButton( aStrTitle:String, aStrMessage:String,showStack:Bool = true,
-                                completion : alertCompletionBlock){
-        configure(title: aStrTitle, message: aStrMessage, btnCancelTitle: nil, btnOtherTitle: nil, showStack: showStack)
+    public func showAlertWithOkButton( aStrTitle:String, aStrMessage:String,showStack:Bool = true, showContact: Bool = true,completion : alertCompletionBlock){
+        configure(title: aStrTitle, message: aStrMessage, btnCancelTitle: nil, btnOtherTitle: nil, showStack: showStack, showContact: showContact)
         show()
         block = completion
     }

@@ -1422,6 +1422,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             dictParams.setObject(intNumberOfPassengerOnShareRiding, forKey: SubmitBookingRequest.kNoOfPassenger as NSCopying)
         }
         
+        dictParams.setObject(Localize.currentLanguage(), forKey: SubmitBookingRequest.kLanguage as NSCopying)
+        
         self.view.bringSubview(toFront: self.viewMainActivityIndicator)
         self.viewMainActivityIndicator.isHidden = false
         webserviceForTaxiRequest(dictParams) { (result, status) in
@@ -3768,10 +3770,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
     }
     
-    func methodsAfterConnectingToSocket()
-    {
+    func methodsAfterConnectingToSocket() {
         scheduledTimerWithTimeInterval()
     }
+    
     func socketMethodForGiveTipToDriverBookLater()
     {
         self.socket?.on(SocketData.kAskForTipsToPassengerForBookLater, callback: { (data, ack) in
@@ -3989,7 +3991,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.socket?.on(SocketData.kBookingDetailsDropoffs) { data, ack in
             print("data \(data)")
             if data.count != 0 {
-                
                 if let BookingInfo = (data as? [[String:Any]])?.first?["BookingInfo"] as? [[String:Any]] {
                     let aryFilterData = BookingInfo.filter{$0["Status"] as! String == "pending" }
                     self.BookingDetailsDropoffsToSetOnMap(tempAryFilterData: aryFilterData)
@@ -4050,7 +4051,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.ConstantViewCarListsHeight.constant = 0
         self.viewCarLists.isHidden = true
     
-        
         self.viewActivity.stopAnimating()
         self.viewMainActivityIndicator.isHidden = true
         self.btnRequest.isHidden = false
@@ -4196,7 +4196,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         lblCurrentLocation.isHidden = true
         
         SingletonClass.sharedInstance.isTripContinue = true
-        
         destinationCordinate = CLLocationCoordinate2D(latitude: dropoffLat, longitude: dropoffLng)
         
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: true)
@@ -4936,7 +4935,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.viewTripActions.isHidden = true
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
 
-        //        self.viewCarLists.isHidden = false
+        //        self.viewCarLists.isHi  dden = false
         //        self.ConstantViewCarListsHeight.constant = 150
         clearDataAfteCompleteTrip()
     }
@@ -5093,8 +5092,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                        let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
 //                        alert.addAction(OK)
 //                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-                        
-                        
+    
                         UtilityClass.setCustomAlert(title: "", message: "Your trip has now started.".localized, showStack: false, completionHandler: nil)
 
                         
@@ -5193,8 +5191,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if let lat = SingletonClass.sharedInstance.driverLocation["Location"]! as? [Double] {
                 DoubleLat = lat[0]
                 DoubleLng = lat[1]
-            }
-            else if let lat = SingletonClass.sharedInstance.driverLocation["Location"]! as? [String] {
+            } else if let lat = SingletonClass.sharedInstance.driverLocation["Location"]! as? [String] {
                 DoubleLat = Double(lat[0])!
                 DoubleLng = Double(lat[1])!
             }
@@ -5254,7 +5251,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         driverIDTimer = driverID
         passengerIDTimer = passengerID
         if timerToGetDriverLocation == nil {
-//            timerToGetDriverLocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.getDriverLocation), userInfo: nil, repeats: true)
+            //            timerToGetDriverLocation = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(HomeViewController.getDriverLocation), userInfo: nil, repeats: true)
         }
         
     }
@@ -5316,13 +5313,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     
                     if SingletonClass.sharedInstance.bookingId != "" {
                         if SingletonClass.sharedInstance.bookingId == bookingId {
-                            
                             if (SingletonClass.sharedInstance.passengerTypeOther) {
-                                
                                 SingletonClass.sharedInstance.passengerTypeOther = false
                                 self.completeTripInfo()
-                            }
-                            else {
+                            } else {
                                 self.completeTripInfo()
                                 //                let next = mainStoryborad.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
                                 //                next.strBookingType = self.strBookingType
@@ -5519,8 +5513,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.mapView.camera = camera
 //            mapView.animate(to: camera)
             
-        }
-        else if locationEnteredType == .dropOffFirst{
+        } else if locationEnteredType == .dropOffFirst {
             
             locationEnteredType = .dropOffFirst
             self.ConstantViewCarListsHeight.constant = 0
@@ -5784,7 +5777,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         let DropOffLat = "\(aryDummyLineData.last![0])"
         let DropOffLon = "\(aryDummyLineData.last![1])"
-        
         
         let dummyLatitude = Double(PickupLat)! - Double(DropOffLat)!
         let dummyLongitude = Double(PickupLng)! - Double(DropOffLon)!
@@ -6756,7 +6748,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 //                let tempLon = Double("\(aryFilterData.first?["PickupLng"]! ?? "0")")
                 
                 let originalLoc: String = "\(PickupLat ),\(PickupLng)"
-                var destiantionLoc: String = "\(DropOffLat ),\(DropOffLon ?? 0)"
+                var destiantionLoc: String = "\(DropOffLat ),\(DropOffLon )"
                 
                 if !SingletonClass.sharedInstance.isTripContinue {
                     destiantionLoc = "\(DropOffLat),\(DropOffLon)"
@@ -6932,7 +6924,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
             
             var dictParam = [String:Any]()
-                    
             dictParam["DropoffLocation"] = dropLocation
             dictParam["PassengerId"] = bookingInfo.object(forKey: "PassengerId")
             dictParam["DriverId"] = DriverInfo.object(forKey: "Id")
@@ -7027,6 +7018,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                         }
                         
                     }
+                    
                     else if bookingType == "BookLater" {
                         
                         self.dictCurrentBookingInfoData = ((resultData).object(forKey: "BookingInfo") as! NSArray).object(at: 0) as! NSDictionary

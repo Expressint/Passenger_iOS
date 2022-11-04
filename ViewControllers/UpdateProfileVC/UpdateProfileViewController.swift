@@ -30,6 +30,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var txtDateOfBirth: UITextField!
+    @IBOutlet weak var txtIdNumber: UITextField!
     
 //    @IBOutlet weak var viewMale: M13Checkbox!
 //    @IBOutlet weak var viewFemale: M13Checkbox!
@@ -66,6 +67,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     @IBOutlet var btnFemale: RadioButton!
     @IBOutlet weak var btnCamera: UIButton!
     @IBOutlet weak var lblIdProof: UILabel!
+    @IBOutlet weak var lblIdNumber: UILabel!
     @IBOutlet var iconCamera: UIImageView!
     @IBOutlet var viewRadioGender: UIView!
 //    @IBOutlet weak var btnChangePassword: UIButton!
@@ -81,9 +83,11 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     {
         super.viewDidLoad()
         txtDateOfBirth.delegate = self
+        txtIdNumber.delegate = self
      
         self.btnMale.isSelected = true
         self.txtPhoneNumber.isUserInteractionEnabled = false
+        //self.txtIdNumber.isUserInteractionEnabled = false
         self.txtEmail.isUserInteractionEnabled = false
 
 //        self.setShadowToTextFieldView(txtField: txtFirstName)
@@ -97,6 +101,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         UtilityClass.setLeftPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
+        UtilityClass.setLeftPaddingInTextfield(textfield: txtIdNumber, padding: 10)
         UtilityClass.setLeftPaddingInTextfield(textfield: txtEmail, padding: 10)
 
         
@@ -105,6 +110,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         UtilityClass.setRightPaddingInTextfield(textfield: txtAddress, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtPhoneNumber, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtDateOfBirth, padding: 10)
+        UtilityClass.setRightPaddingInTextfield(textfield: txtIdNumber, padding: 10)
         UtilityClass.setRightPaddingInTextfield(textfield: txtEmail, padding: 10)
 
         
@@ -160,6 +166,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         lblDateOfBirth.text =  "Date Of Birth".localized
         lblEmail.text = "Email".localized
         lblIdProof.text = "ID Proof (License/ID card /Passport)".localized
+        lblIdNumber.text = "(License/ID card /Passport) Number".localized
         lblGender.text = "Gender".localized
         btnSave.setTitle("Save".localized, for: .normal)
         btnMale.setTitle("Male".localized, for: .normal)
@@ -230,7 +237,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
     
     @IBAction func btnSubmit(_ sender: ThemeButton) {
     
-        if txtAddress.text == "" || txtFirstName.text == "" || txtLastName.text == "" || gender == "" {
+        if txtAddress.text == "" || txtFirstName.text == "" || txtLastName.text == "" || gender == ""  || txtIdNumber.text == "" {
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please fill all details".localized) { (index, title) in
             }
         }
@@ -350,6 +357,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
 //        imgProfile.sd_setImage(with: URL(string: (WebserviceURLs.kImageBaseURL + (getData.object(forKey: "Image") as! String))), completed: nil)
         
         txtPhoneNumber.text = getData.object(forKey: "MobileNo") as? String
+        txtIdNumber.text = getData.object(forKey: "identification_number") as? String ?? ""
         
         let dob = getData.object(forKey: "DOB") as? String
         
@@ -426,6 +434,7 @@ class UpdateProfileViewController: BaseViewController, UIImagePickerControllerDe
         dictData["Firstname"] = firstName as AnyObject
         dictData["Lastname"] = lastName as AnyObject
         dictData["MobileNo"] = txtPhoneNumber.text as AnyObject
+        dictData["identification_number"] = txtIdNumber.text as AnyObject
         dictData["Email"] = txtEmail.text as AnyObject
         dictData["Gender"] = gender as AnyObject
         dictData["Address"] = txtAddress.text as AnyObject

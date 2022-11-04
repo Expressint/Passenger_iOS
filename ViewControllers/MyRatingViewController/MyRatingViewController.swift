@@ -25,7 +25,6 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
         self.tblview.dataSource = self
         self.tblview.delegate = self
         
-        
         self.tblview.tableFooterView = UIView()
 //        SideMenuController.preferences.SideMenuController.preferences.interaction.swipingEnabled = false
 
@@ -94,7 +93,6 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyRatingViewCell") as! MyRatingViewCell
         //        let cell2 = tableView.dequeueReusableCell(withIdentifier: "NoDataFound") as! FutureBookingTableViewCell
         cell.lblCommentTitle.text = "Comments".localized
@@ -109,7 +107,6 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
         cell.viewCell.layer.shadowOffset = CGSize (width: 1.0, height: 1.0)
         cell.viewCell.layer.shadowOpacity = 1.0
 
-        
         cell.imgProfile.layer.cornerRadius = cell.imgProfile.frame.width / 2
         cell.imgProfile.clipsToBounds = true
         cell.imgProfile.layer.borderColor = themeYellowColor.cgColor
@@ -161,6 +158,7 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
     {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return UITableViewAutomaticDimension
@@ -198,9 +196,7 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
                 else if let resAry = result as? NSArray {
                     UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                 }
-
             }
         }
- 
     }
 }

@@ -15,15 +15,23 @@ class ChatImageViewVC: BaseViewController {
     @IBOutlet weak var btnClose: UIButton!
     
     var strUrl : String = ""
+    var imgTemp : UIImage!
+    var ischat : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(!ischat){
+            self.imgChat.image = imgTemp
+        }else{
+            self.imgChat.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage(named: "icon_Picture"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
+                if (error == nil) {
+                    self.imgChat.image = image
+                }
+            })
+        }
 
-        self.imgChat.sd_setImage(with: URL(string: strUrl), placeholderImage: UIImage(named: "icon_Picture"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
-            if (error == nil) {
-                self.imgChat.image = image
-            }
-        })
+
     }
     
     @IBAction func btnCloseAction(_ sender: Any) {

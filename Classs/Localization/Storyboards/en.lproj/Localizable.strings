@@ -18,6 +18,7 @@
 //Registration
 "First Name"  = "First Name";
 "Address"  = "Address";
+"(License/ID card /Passport) Number"  = "(License/ID card /Passport) Number";
 "Last Name"  = "Last Name";
 "Referral Code (Optional)" = "Referral Code (Optional)";
 "Post Code" = "Post Code";
@@ -26,7 +27,9 @@
 "Male" = "Male";
 "Female" = "Female";
 "Phone Number" = "Phone Number";
+"Phone Number :" = "Phone Number :";
 "Email" = "Email";
+"Email :" = "Email :";
 "Confirm Password"  = "Confirm Password";
 "Next" = "Next";
 "Please enter phone number" = "Please enter phone number";
@@ -52,6 +55,7 @@
 "Enter first name" = "Enter first name";
 "Enter last name" = "Enter last name";
 "Please enter address" = "Please enter address";
+"Please enter Id" = "Please enter identification number";
 "Please choose gender" = "Please choose gender";
 "Please accept terms & condition and privacy policy" = "Please accept terms & condition and privacy policy";
 "Please enter all details" = "Please enter all details";
@@ -271,13 +275,14 @@
 "Please enter flight number!" = "Please enter flight number!";
 "Please select flight arrival time!" = "Please select flight arrival time!";
 "Select Payment Type" = "Select Payment Type";
-"Please select pickUp time one hour later" = "Please select pickUp time one hour later";
+"Please select pickUp time one hour later" = "Please select pickUp time two hours later";
 "Please select date first!" = "Please select date first!";
 "Please choose date" = "Please choose date";
 "Please enter promocode!" = "Please enter promocode!";
 "Invalid Request" = "Invalid Request";
 "System Does Not Accept Prebook Option If Pick Up Time Is Within 30 Minutes." = "System Does Not Accept Prebook Option If Pick Up Time Is Within 30 Minutes.";
 "Success Message" = "Success Message";
+"BeforeRegisterMessage" = "Thank you for choosing BookARide! \nFor your safety and ours each user must be verified by our Book A Ride safety and compliance team before you can Book A Ride. \n\nYou will be required to upload a government issue photo ID and a recent head shot photo along with other personal information. \nAcceptable forms of IDs are Passport,Driver's license or government issued ID card. \n\nFor us to expedite the verification process please submit all information accurately. Our team is on standby 24/7 to verify your profile. You can call our customer service team with any questions or concerns.";
 
 "Enter Promocode" = "Enter Promocode";
 "Apply Promocode" = "Apply Promocode";

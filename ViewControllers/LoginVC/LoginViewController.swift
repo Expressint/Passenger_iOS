@@ -457,7 +457,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 var strFullName = ""
                 
-                
+                 
                 if !UtilityClass.isEmpty(str: strFirstName)
                 {
                     strFullName = strFullName + ("\(strFirstName)")
@@ -783,7 +783,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                   UserDefaults.standard.set(data, forKey: "profileData")
                   
                   self.webserviceForAllDrivers()
-                
+                  
                 (UIApplication.shared.delegate as! AppDelegate).GoToHome()
             } else {
 
@@ -852,7 +852,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                     
                     let alert = UIAlertController(title: nil, message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String, preferredStyle: .alert)
                     let UPDATE = UIAlertAction(title: "UPDATE", style: .default, handler: { ACTION in
-                        
                         UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
 
                         })
@@ -966,7 +965,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     }
     
     @IBAction func btnSignup(_ sender: Any) {
-        self.goToRegister()
+        
+        UtilityClass.setCustomAlert(title: "Error", message: "BeforeRegisterMessage".localized, showContact: false) { (index, title) in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.goToRegister()
+            }
+        }
     }
     
     func goToRegister() {
