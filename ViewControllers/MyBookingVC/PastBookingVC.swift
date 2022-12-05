@@ -152,6 +152,7 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             cell.lblInclTax.text = "(incl tax)".localized
             cell.lblTripStatusTitle.text = "\("Trip Status".localized):"
             cell.lblCancelReasonTitle.text = "\("Trip Cancel Reason".localized):"
+            cell.lblTitlePricingModel.text = "\("Pricing Model".localized):"
 
             cell.selectionStyle = .none
             //            cell.viewCell.layer.cornerRadius = 10
@@ -255,6 +256,9 @@ class PastBookingVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             let ExtraChargeReason = currentData["ExtraChargeReason"] as? String ?? ""
             cell.lblExtraChargeReason.text = "\(ExtraChargeReason)"
             cell.stackViewExtraChargeReason.isHidden = (ExtraChargeReason == "") ? true : false
+            
+            let PriceTypeLabel = (Localize.currentLanguage() == Languages.English.rawValue) ? currentData["PriceTypeLabel"] as? String ?? "" : currentData["PriceTypeLabelSpanish"] as? String ?? ""
+            cell.lblPricingModel.text = "\(PriceTypeLabel)"
             
             let Tax = currentData["Tax"] as? String ?? "0"
             cell.lblTax.text = "\(Tax) \(currencySign)"

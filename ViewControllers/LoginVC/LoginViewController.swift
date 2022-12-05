@@ -832,6 +832,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 app_TermsAndCondition = result["TermsAndCondition"] as? String ?? ""
                 app_PrivacyPolicy = result["PrivacyPolicy"] as? String ?? ""
                 
+                msgNoCarsAvailable = result["NoCarsAvailableMessage"] as? String ?? ""
+                msgNoCarsAvailable_Spanish = result["NoCarsAvailableMessageSpanish"] as? String ?? ""
+                
                 let dispatcherInfo =  result["dispatcher_detail"] as? [String:Any]
                 DispatchName = dispatcherInfo?["Fullname"] as? String ?? ""
                 DispatchId = dispatcherInfo?["Id"] as? String ?? ""

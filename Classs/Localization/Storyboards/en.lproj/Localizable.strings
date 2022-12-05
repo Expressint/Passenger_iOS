@@ -122,6 +122,7 @@
 "Grand Total" = "Grand Total";
 "(incl tax)" = "(incl tax)";
 "Trip Status" = "Trip Status";
+"Pricing Model" = "Pricing Model";
 "Trip Cancel Reason:"= "Trip Cancel Reason:";
 "Make Payment" = "Make Payment";
 "Company name" = "Company name";
@@ -216,7 +217,7 @@
 "Please enter your pickup location again" = "Please enter your pickup location again";
 "Please enter your destination again" = "Please enter your destination again";
 "Please select a vehicle" = "Please select a vehicle";
-"We are sorry no cars are available in your area you can contact the Book A Ride team" = "We are sorry no cars are available in your area you can contact the Book A Ride team";
+"We are sorry no cars are available in your area you can contact the Book A Ride team" = "Thank you for choosing BookARide. Due to a surge in demand, we currently have no available rides. You may contact our customer service team for further assistance or keep checking rfor rides to become available in your area.";
 "Locations or select available car" = "Locations or select available car";
 "Please select a vehicle type." = "Please select a vehicle type.";
 "Multiple Dropoff is not allowed for book later request." = "Multiple Dropoff is not allowed for book later request.";

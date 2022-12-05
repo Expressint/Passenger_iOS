@@ -225,7 +225,7 @@
 "Please enter your pickup location again" = "Por favor, introduzca su lugar de recogida de nuevo";
 "Please enter your destination again" = "Por favor, introduzca su destino de nuevo";
 "Please select a vehicle" = "Por favor seleccione un vehículo";
-"We are sorry no cars are available in your area you can contact the Book A Ride team" = "Lo sentimos, no hay autos disponibles en su área, puede comunicarse con el equipo de Book A Ride";
+"We are sorry no cars are available in your area you can contact the Book A Ride team" = "Gracias por elegir BookARide. Debido a un aumento en la demanda, actualmente no tenemos viajes disponibles. Puede comunicarse con nuestro equipo de servicio al cliente para obtener más ayuda o seguir buscando viajes disponibles en su área";
 "Locations or select available car" = "Ubicaciones o selecciona auto disponible";
 "Please select a vehicle type." = "Seleccione un tipo de vehículo.";
 "Multiple Dropoff is not allowed for book later request." = "No se permite la devolución múltiple para una solicitud de reserva posterior.";
@@ -233,6 +233,7 @@
 "Currently this feature is not available." = "Actualmente esta función no está disponible.";
 "km" = "km";
 "Add Tip" = "Agregar sugerencia";
+"Pricing Model" = "Modelo de precios";
 "NO" = "NO";
 "Tip Alert" = "Alerta de propina";
 "Update Dropoff Location" = "Actualizar ubicación de entrega";

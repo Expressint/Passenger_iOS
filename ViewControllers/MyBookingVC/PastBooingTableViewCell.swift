@@ -99,6 +99,9 @@ class PastBooingTableViewCell: UITableViewCell {
     @IBOutlet weak var stackViewTripFare: UIStackView!
 //    @IBOutlet weak var lblTripFare: UILabel!
     
+    @IBOutlet weak var lblPricingModel: UILabel!
+    @IBOutlet weak var lblTitlePricingModel: UILabel!
+    
     @IBOutlet weak var stackViewNightFare: UIStackView!
     
     

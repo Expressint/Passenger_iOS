@@ -99,6 +99,9 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
     @IBOutlet weak var stackViewExtraCharge: UIStackView!
     @IBOutlet weak var stackViewExtraChargeReason: UIStackView!
     
+    @IBOutlet weak var lblPriceModel: UILabel!
+    @IBOutlet weak var lblPriceModelTitle: UILabel!
+    
     var dictData = NSDictionary()
     
    
@@ -166,6 +169,9 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         lblPickUpTimeTitle.text = "Pickup Time".localized
         lblTripFee.text = "\("Trip Fare".localized):"
         lblLess.text = "Less".localized
+        
+        lblPriceModelTitle.text = "Pricing Model".localized
+        
 //        lblPrompAppplied.text = "Promo Applied :".localized
         lblNightFare.text = "lblNightFare".localized
         
@@ -216,6 +222,9 @@ class TripInfoViewController: UIViewController,delegatePesapalWebView//,delegate
         let ExtraChargeReason = dictData.object(forKey: "ExtraChargeReason") as? String ?? ""
         lblExtraChargeReason.text = "\(ExtraChargeReason)"
         stackViewExtraChargeReason.isHidden = (ExtraChargeReason == "") ? true : false
+        
+        let PriceTypeLabel = (Localize.currentLanguage() == Languages.English.rawValue) ? dictData.object(forKey: "PriceTypeLabel") as? String ?? "" : dictData.object(forKey: "PriceTypeLabelSpanish") as? String ?? ""
+        lblPriceModel.text = "\(PriceTypeLabel)"
         
         let createDate = dictData.object(forKey: "CreatedDate") as? String ?? ""
         if(createDate.contains("T")){

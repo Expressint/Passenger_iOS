@@ -122,9 +122,9 @@ class MyRatingViewController: BaseViewController,UITableViewDataSource, UITableV
         cell.lblPassengerName.text = data.object(forKey: "DriverName") as? String
         //
         //
-        ////
+        //
         cell.lblDropUpAddress.text = (data.object(forKey: "DropoffLocation") as? String)
-        ////
+        //
         let strDate = data.object(forKey: "Date") as! String
         let arrDate = strDate.components(separatedBy: " ")
         

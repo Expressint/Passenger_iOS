@@ -30,7 +30,6 @@ let appURLiOS = "https://apps.apple.com/in/app/bookaridegy/id1541296701"
 let kAPPUrlAndroid = "https://play.google.com/store/apps/details?id=com.bookride.driver"
 let kAPPUrliOS = "https://apps.apple.com/in/app/bookaridegy-driver/id1541299485"
 
-
 var app_PrivacyPolicy = "https://www.bookaridegy.com/privacy_policy"
 var app_TermsAndCondition = "https://www.bookaridegy.com/terms_conditions"
 var app_RefundPolicy = "https://www.bookaridegy.com/refund_policy"
@@ -41,6 +40,9 @@ var WhatsUpNumber = ""
 var DispatchCall = ""
 var DispatchName = ""
 var DispatchId = ""
+
+var msgNoCarsAvailable = ""
+var msgNoCarsAvailable_Spanish = ""
 
 
 var freeWaitingTime = 300
@@ -89,10 +91,10 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 //let appCurrentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 
 //Live: https://www.bookaridegy.com/Passenger_Api/
-//Development: http://52.23.45.119/
+//Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
-    static let kBasePaymentURL                          = "https://www.bookaridegy.com/"
-    static let kBaseURL                                 = "https://www.bookaridegy.com/Passenger_Api/"
+    static let kBasePaymentURL                          = "https://www.bookaridegy.com/v2/"
+    static let kBaseURL                                 = "https://www.bookaridegy.com/v2/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
