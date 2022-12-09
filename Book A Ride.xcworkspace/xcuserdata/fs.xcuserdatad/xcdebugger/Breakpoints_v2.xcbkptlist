@@ -62,9 +62,41 @@
             filePath = "ViewControllers/HomeVC/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2211"
-            endingLineNumber = "2211"
+            startingLineNumber = "2222"
+            endingLineNumber = "2222"
             landmarkName = "btnBookNow(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82EBC75F-7B43-45E5-B340-F831B7F037D7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/BookLaterViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1029"
+            endingLineNumber = "1029"
+            landmarkName = "webserviceForEstimateFare(date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3E5A327-7517-4EA1-A237-686EEA774FBB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ViewControllers/HomeVC/BookLaterViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1035"
+            endingLineNumber = "1035"
+            landmarkName = "webserviceForEstimateFare(date:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

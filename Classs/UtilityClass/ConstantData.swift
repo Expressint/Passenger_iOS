@@ -44,6 +44,7 @@ var DispatchId = ""
 var msgNoCarsAvailable = ""
 var msgNoCarsAvailable_Spanish = ""
 
+var currentPricingModel = ""
 
 var freeWaitingTime = 300
 
@@ -115,6 +116,7 @@ struct WebserviceURLs {
     static let kUpcomingBooking                         = "UpcomingBooking"
     static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
+    static let kGetEstimateFareForBookLater            = "GetEstimateFareForBookLater"
     static let kImageBaseURL                            = "http://3.83.58.5/"
     static let kFeedbackList                            = "FeedbackList/"
     static let kCardsList                               = "Cards/"

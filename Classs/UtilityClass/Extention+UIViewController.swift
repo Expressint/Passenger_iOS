@@ -9,6 +9,37 @@
 import Foundation
 import UIKit
 
+
+extension String {
+    var html2AttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: Data(utf8),
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
+        } catch {
+            print("error: ", error)
+            return nil
+        }
+    }
+}
+
+extension NSAttributedString {
+
+    func trimmedAttributedString() -> NSAttributedString {
+        let invertedSet = CharacterSet.whitespacesAndNewlines.inverted
+        let startRange = string.rangeOfCharacter(from: invertedSet)
+        let endRange = string.rangeOfCharacter(from: invertedSet, options: .backwards)
+        guard let startLocation = startRange?.upperBound, let endLocation = endRange?.lowerBound else {
+            return NSAttributedString(string: string)
+        }
+        let location = string.distance(from: string.startIndex, to: startLocation) - 1
+        let length = string.distance(from: startLocation, to: endLocation) + 2
+        let range = NSRange(location: location, length: length)
+        return attributedSubstring(from: range)
+    }
+}
+
 extension UIViewController {
 /*
     /// Convert Any data to String From Dictionary

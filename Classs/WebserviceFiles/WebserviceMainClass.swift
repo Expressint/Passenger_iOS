@@ -367,23 +367,13 @@ func estimateMethod(_ dictParams: AnyObject, nsURL: String, completion: @escapin
                 if (JSON as AnyObject).object(forKey:("status")) as! Bool == false
                 {
                     completion(JSON as AnyObject, false)
-//                    UtilityClass.hideACProgressHUD()
                 }
                 else
                 {
                     completion(JSON as AnyObject, true)
-//                    UtilityClass.hideACProgressHUD()
                 }
             }
             else {
-//                UtilityClass.hideACProgressHUD()
-                
-                //                    let alert = UIAlertController(title: nil, message: res, preferredStyle: .alert)
-                //                    let OK = UIAlertAction(title: "OK", style: .default, handler: nil)
-                //                    alert.addAction(OK)
-                //                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-                
-                
             }
     }
 }

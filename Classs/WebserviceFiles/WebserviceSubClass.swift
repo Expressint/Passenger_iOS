@@ -23,6 +23,7 @@ let GetPromoCodeList = WebserviceURLs.kGetPromoCodeList
 let driverList = WebserviceURLs.kDriver
 let BookingHistory = WebserviceURLs.kBookingHistory
 let GetEstimateFare =  WebserviceURLs.kGetEstimateFare
+let GetEstimateFareForBookLater =  WebserviceURLs.kGetEstimateFareForBookLater
 let ChangePassword = WebserviceURLs.kChangePassword
 let UpdateProfile = WebserviceURLs.kUpdateProfile
 let PastBooking = WebserviceURLs.kPastBooking
@@ -254,6 +255,16 @@ func webserviceForGetEstimateFare(_ dictParams: AnyObject, completion: @escaping
 {
     let url = GetEstimateFare
     estimateMethod(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Estiimate Fare For Book Later
+//-------------------------------------------------------------
+
+func webserviceForEstimateFareForbookLater(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = GetEstimateFareForBookLater
+    postData(dictParams, nsURL: url, completion: completion)
 }
 
 //-------------------------------------------------------------

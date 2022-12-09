@@ -10922,7 +10922,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiE-un-K9t">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="903"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="747"/>
                                         <subviews>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4M-D4-Jhf">
                                                 <rect key="frame" x="106" y="579" width="108" height="30"/>
@@ -11293,7 +11293,7 @@
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Pickup Time" textAlignment="justified" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Jnf-Pu-ieD">
                                                                 <rect key="frame" x="10" y="5" width="285" height="40"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="piI-La-Ahf" id="yfu-1P-Llb"/>
@@ -11374,54 +11374,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1bE-cP-kHn">
-                                                <rect key="frame" x="10" y="402" width="300" height="229"/>
+                                                <rect key="frame" x="10" y="402" width="300" height="73"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FIJ-14-dJe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="73"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver away time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCx-qa-5D2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="25" id="fbg-Il-eTA"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LxK-Ic-Ob2">
-                                                                <rect key="frame" x="0.0" y="33" width="300" height="40"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="aH5-x3-WVv"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="em7-IU-N6R">
-                                                        <rect key="frame" x="0.0" y="78" width="300" height="73"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver away km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDi-f8-oZz">
-                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="25" id="zYH-5u-GnP"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dEb-09-7jU">
-                                                                <rect key="frame" x="0.0" y="33" width="300" height="40"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="Qjf-21-gnd"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                        </subviews>
-                                                    </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qs1-QW-chw">
-                                                        <rect key="frame" x="0.0" y="156" width="300" height="73"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="73"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimated Fare" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-fA-M1g">
                                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="25"/>
@@ -11691,7 +11647,7 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-3U-QzP">
-                                                <rect key="frame" x="10" y="643" width="300" height="40"/>
+                                                <rect key="frame" x="10" y="487" width="300" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEF-SE-RZS">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
@@ -11752,7 +11708,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ef-aB-7fB">
-                                                <rect key="frame" x="10" y="693" width="300" height="25"/>
+                                                <rect key="frame" x="10" y="537" width="300" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="CpV-zp-dd8"/>
                                                 </constraints>
@@ -11761,7 +11717,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98V-Pf-nzg">
-                                                <rect key="frame" x="10" y="733" width="300" height="100"/>
+                                                <rect key="frame" x="10" y="577" width="300" height="100"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="yuB-ih-eKM">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
@@ -11910,7 +11866,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSl-ol-87T" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="853" width="300" height="40"/>
+                                                <rect key="frame" x="10" y="697" width="300" height="40"/>
                                                 <color key="backgroundColor" red="0.92941176469999998" green="0.47843137250000001" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="MyK-lV-2KC"/>
@@ -12119,8 +12075,6 @@
                         <outlet property="imgCareModel" destination="Fby-P1-wCd" id="ykx-am-Gmb"/>
                         <outlet property="imgCashForPaymentType" destination="fIb-ue-5nm" id="exX-D9-cTy"/>
                         <outlet property="lblCareModelClass" destination="GPd-a4-6gf" id="0hA-2X-YDm"/>
-                        <outlet property="lblDriverAwayKm" destination="GDi-f8-oZz" id="yFb-qw-14o"/>
-                        <outlet property="lblDriverAwayTime" destination="GCx-qa-5D2" id="2rr-A7-TAF"/>
                         <outlet property="lblEstimatedFare" destination="Rez-fA-M1g" id="7L6-Zb-h8d"/>
                         <outlet property="lblPleaceCompleteBooking" destination="ZAp-ls-kUf" id="WM2-Ea-fiu"/>
                         <outlet property="lblPromoCode" destination="Yqe-Zo-wTq" id="BJ4-s8-lLF"/>
@@ -12128,8 +12082,6 @@
                         <outlet property="lblTitleApplyPromoCode" destination="VrR-TH-Vw8" id="Rki-jQ-dpF"/>
                         <outlet property="txtDataAndTimeFromCalendar" destination="Jnf-Pu-ieD" id="dGC-g1-JaV"/>
                         <outlet property="txtDescription" destination="XI9-g1-2sz" id="3vM-W6-eF7"/>
-                        <outlet property="txtDriverAwayKm" destination="dEb-09-7jU" id="b11-8M-hBv"/>
-                        <outlet property="txtDriverAwayTime" destination="LxK-Ic-Ob2" id="F41-Ee-uBW"/>
                         <outlet property="txtDropOffLocation" destination="Qkq-jl-7kf" id="iIK-8C-vZs"/>
                         <outlet property="txtEstimatedFare" destination="7w7-G6-Dfv" id="MQO-Io-3Cc"/>
                         <outlet property="txtFlightArrivalTime" destination="xpf-KV-rQL" id="PFA-vG-X0r"/>

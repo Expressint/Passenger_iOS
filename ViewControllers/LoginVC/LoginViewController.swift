@@ -826,6 +826,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 freeWaitingTime = result["free_waiting_time_counter"] as? Int ?? 300
            
+                currentPricingModel = result["Current_Price_Model"] as? String ?? ""
                 helpLineNumber = result["DispatchCall"] as? String ?? ""
                 WhatsUpNumber = result["DispatchWhatsapp"] as? String ?? ""
                 DispatchCall = result["DispatchCall"] as? String ?? ""

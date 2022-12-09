@@ -482,7 +482,7 @@
 		3A4072E221B512270015C494 /* CommingSoonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommingSoonViewController.swift; sourceTree = "<group>"; };
 		3A4072E321B512270015C494 /* CustomAlertsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertsViewController.swift; sourceTree = "<group>"; };
 		3A4072E521B512270015C494 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		3A4072EB21B512270015C494 /* BookLaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookLaterViewController.swift; sourceTree = "<group>"; };
+		3A4072EB21B512270015C494 /* BookLaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookLaterViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		3A4072EC21B512270015C494 /* CarsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A4072ED21B512270015C494 /* DriverInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverInfoViewController.swift; sourceTree = "<group>"; };
 		3A4072EE21B512270015C494 /* GiveRatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveRatingViewController.swift; sourceTree = "<group>"; };
@@ -2582,7 +2582,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.7;
+				CURRENT_PROJECT_VERSION = 1.7.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2596,7 +2596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2617,7 +2617,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.7;
+				CURRENT_PROJECT_VERSION = 1.7.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2631,7 +2631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.9;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

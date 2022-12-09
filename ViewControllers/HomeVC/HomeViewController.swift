@@ -553,8 +553,19 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.setNavBarWithMenu(Title: "Home".localized, IsNeedRightButton: true,isFavNeeded: true, isWhatsApp: true)
 
         checkForNotification()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            if(currentPricingModel != ""){
+                let alertController = UIAlertController(title: "", message: currentPricingModel, preferredStyle: .alert)
+                alertController.setValue(currentPricingModel.html2AttributedString?.trimmedAttributedString(), forKey: "attributedMessage")
+                let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okButton)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
+
     func setNotificationcenter()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.setLocationFromBarAndClub(_:)), name: NotificationBookNow, object: nil)
@@ -1981,7 +1992,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                             {
                                 if let bookLaterVC = navVC as? BookLaterViewController
                                 {
-                                    bookLaterVC.postPickupAndDropLocationForEstimateFare()
+                                   // bookLaterVC.postPickupAndDropLocationForEstimateFare()
                                 }
                             }
                         }
@@ -2558,64 +2569,33 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                     else
                     {
+                        let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
                         
-                        let myAttribute = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-                        let myAttribute1 = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : themeRedColor]
-                        let myString = NSMutableAttributedString(string: "\("Pickup Location".localized) : \n", attributes: myAttribute )
-                      
-                        let fare = (aryEstimateFareData.object(at: selectedIndexPath?.item ?? 0) as? NSDictionary)?.object(forKey: "estimate_fare_range") as? String ?? "0.0"
+                        SingletonClass.sharedInstance.isFromNotificationBookLater = false
+                        next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
+                        next.BookLaterCompleted = self
+                        next.strModelId = self.strCarModelID
+                        next.strCarModelURL = self.strNavigateCarModel
+                        next.strCarName = self.strCarModelClass
+                        next.dictSelectedDriver = self.dictSelectedDriver
+                        next.strFullname = profileData.object(forKey: "Fullname") as! String
+                        next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
+                        next.strPickupLocation = self.strPickupLocation
+                        next.doublePickupLat = self.doublePickupLat
+                        next.doublePickupLng = self.doublePickupLng
+                        next.strDropoffLocation = self.strDropoffLocation
+                        next.doubleDropOffLat = self.doubleDropOffLat
+                        next.doubleDropOffLng = self.doubleDropOffLng
+                        next.priceType = self.priceType
                         
-                        myString.append(NSAttributedString(string:txtCurrentLocation.text ?? ""))
-                        myString.append(NSAttributedString(string:"\n\n\("Destination Location".localized) : ",attributes: myAttribute))
-                        myString.append(NSAttributedString(string:txtDestinationLocation.text ?? ""))
-
-                        if(txtAdditionalDestinationLocation.text != "") {
-                            myString.append(NSAttributedString(string:"\n\n\("Additional Destination Location".localized) : ",attributes: myAttribute))
-                            myString.append(NSAttributedString(string:txtAdditionalDestinationLocation.text ?? ""))
+                        if(self.txtAdditionalDestinationLocation.text != "") {
+                            next.doubleDropOffLat2 = self.doubleUpdateNewLat
+                            next.doubleDropOffLng2 = self.doubleUpdateNewLng
+                            next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
+                            next.isMultiDropReq = true
                         }
                         
-                        myString.append(NSAttributedString(string: "\n\n" + self.msgPriceModel.capitalized + " \n",attributes: myAttribute1))
-                        myString.append(NSAttributedString(string:"\("Approximate Fare".localized) : \n",attributes: myAttribute))
-                        myString.append(NSAttributedString(string:fare))
-
-                        let alert = UIAlertController(title: appName, message: "", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.setValue(myString, forKey: "attributedMessage")
-                        
-                        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
-                            let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
-                            
-                            SingletonClass.sharedInstance.isFromNotificationBookLater = false
-                            next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
-                            next.BookLaterCompleted = self
-                            next.strModelId = self.strCarModelID
-                            next.strCarModelURL = self.strNavigateCarModel
-                            next.strCarName = self.strCarModelClass
-                            next.dictSelectedDriver = self.dictSelectedDriver
-                            next.strFullname = profileData.object(forKey: "Fullname") as! String
-                            next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
-                            next.strPickupLocation = self.strPickupLocation
-                            next.doublePickupLat = self.doublePickupLat
-                            next.doublePickupLng = self.doublePickupLng
-                            next.strDropoffLocation = self.strDropoffLocation
-                            next.doubleDropOffLat = self.doubleDropOffLat
-                            next.doubleDropOffLng = self.doubleDropOffLng
-                            next.priceType = self.priceType
-                            
-                            if(self.txtAdditionalDestinationLocation.text != "") {
-                                next.doubleDropOffLat2 = self.doubleUpdateNewLat
-                                next.doubleDropOffLng2 = self.doubleUpdateNewLng
-                                next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
-                                next.isMultiDropReq = true
-                            }
-                            
-                            self.navigationController?.pushViewController(next, animated: true)
-                        }))
-                        
-                        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (action) in
-
-                        }))
-                        
-                        self.present(alert, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(next, animated: true)
                     }
                 }
                 else {
@@ -2628,65 +2608,34 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                     else {
                         
-                        let myAttribute = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-                        let myAttribute1 = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : themeRedColor]
-                        let myString = NSMutableAttributedString(string: "\("Pickup Location".localized) : \n", attributes: myAttribute )
-                      
-                        let fare = (aryEstimateFareData.object(at: selectedIndexPath?.item ?? 0) as? NSDictionary)?.object(forKey: "estimate_fare_range") as? String ?? "0.0"
+                        let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
+                        next.BookLaterCompleted = self
+                        next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
+                        next.strModelId = self.strCarModelID
+                        next.strCarModelURL = self.strNavigateCarModel
+                        next.strCarName = self.strCarModelClass
                         
-                        myString.append(NSAttributedString(string:txtCurrentLocation.text ?? ""))
-                        myString.append(NSAttributedString(string:"\n\n\("Destination Location".localized) : ",attributes: myAttribute))
-                        myString.append(NSAttributedString(string:txtDestinationLocation.text ?? ""))
-
-                        if(txtAdditionalDestinationLocation.text != "")
-                        {
-                            myString.append(NSAttributedString(string:"\n\n\("Additional Destination Location".localized) : ",attributes: myAttribute))
-                            myString.append(NSAttributedString(string:txtAdditionalDestinationLocation.text ?? ""))
+                        next.dictSelectedDriver = self.dictSelectedDriver
+                        next.strPickupLocation = self.strPickupLocation
+                        next.doublePickupLat = self.doublePickupLat
+                        next.doublePickupLng = self.doublePickupLng
+                        
+                        next.strDropoffLocation = self.strDropoffLocation
+                        next.doubleDropOffLat = self.doubleDropOffLat
+                        next.doubleDropOffLng = self.doubleDropOffLng
+                        next.priceType = self.priceType
+                        
+                        if(self.txtAdditionalDestinationLocation.text != "") {
+                            next.doubleDropOffLat2 = self.doubleUpdateNewLat
+                            next.doubleDropOffLng2 = self.doubleUpdateNewLng
+                            next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
+                            next.isMultiDropReq = true
                         }
                         
-                        myString.append(NSAttributedString(string: "\n\n" + self.msgPriceModel.capitalized + " \n",attributes: myAttribute1))
-                        myString.append(NSAttributedString(string:"\("Approximate Fare".localized) : \n",attributes: myAttribute))
-                        myString.append(NSAttributedString(string:fare))
-
-                        let alert = UIAlertController(title: appName, message: "", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.setValue(myString, forKey: "attributedMessage")
+                        next.strFullname = profileData.object(forKey: "Fullname") as! String
+                        next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
                         
-                        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: { (action) in
-                            let next = mainStoryboard.instantiateViewController(withIdentifier: "BookLaterViewController") as! BookLaterViewController
-                            next.BookLaterCompleted = self
-                            next.strSelectedCarTotalFare = self.strSelectedCarTotalFare
-                            next.strModelId = self.strCarModelID
-                            next.strCarModelURL = self.strNavigateCarModel
-                            next.strCarName = self.strCarModelClass
-                            
-                            next.dictSelectedDriver = self.dictSelectedDriver
-                            next.strPickupLocation = self.strPickupLocation
-                            next.doublePickupLat = self.doublePickupLat
-                            next.doublePickupLng = self.doublePickupLng
-                            
-                            next.strDropoffLocation = self.strDropoffLocation
-                            next.doubleDropOffLat = self.doubleDropOffLat
-                            next.doubleDropOffLng = self.doubleDropOffLng
-                            next.priceType = self.priceType
-                            
-                            if(self.txtAdditionalDestinationLocation.text != "") {
-                                next.doubleDropOffLat2 = self.doubleUpdateNewLat
-                                next.doubleDropOffLng2 = self.doubleUpdateNewLng
-                                next.strSecondDropoffLocation = self.strAdditionalDropoffLocation
-                                next.isMultiDropReq = true
-                            }
-                            
-                            next.strFullname = profileData.object(forKey: "Fullname") as! String
-                            next.strMobileNumber = profileData.object(forKey: "MobileNo") as! String
-                            
-                            self.navigationController?.pushViewController(next, animated: true)
-                        }))
-                        
-                        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: { (action) in
-
-                        }))
-                        
-                        self.present(alert, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(next, animated: true)
                         
                     }
                 }
