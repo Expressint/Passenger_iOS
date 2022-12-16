@@ -61,6 +61,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var priceType = ""
     var BackView = UIView()
     var isAddCardSelected = Bool()
+    var msgPriceModel = ""
     
     var placesClient = GMSPlacesClient()
     var locationManager = CLLocationManager()
@@ -76,6 +77,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var strSelectedCarTotalFare = ""
     var validationsMobileNumber = Validation()
     var inputValidatorMobileNumber = InputValidator()
+    var priceModel = ""
     
     var strPickupLocation = String()
     var strDropoffLocation = String()
@@ -92,6 +94,9 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     var aryCards = [[String:AnyObject]]()
     var selectDate = Date()
     
+    @IBOutlet weak var TitlePickupLoc: UILabel!
+    @IBOutlet weak var TitleDropOffLoc: UILabel!
+    @IBOutlet weak var TitleAdditionalDropOffLoc: UILabel!
     
     @IBOutlet weak var viewNotes: UIView!
     @IBOutlet weak var imgCardForPaymentType: UIImageView!
@@ -203,10 +208,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             // Fallback on earlier versions
         }
         
-        
         let calendar = Calendar.current
         let date = calendar.date(byAdding: .minute, value: 0, to: Date())
         datePickerView.minimumDate = date
+        
         txtDataAndTimeFromCalendar.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(self.pickupdateMethod(_:)), for: UIControl.Event.valueChanged)
         
@@ -229,14 +234,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         self.btnApplyPromocode.setTitleColor(.black, for: .normal)
         self.txtMobileNumber.leftMargin = 0
         
-        
+        self.lblEstimatedFare.textColor = themeRedColor
     }
     
     @objc func onClickDoneButton() {
         self.view.endEditing(true)
         
         let dateFormaterView1 = DateFormatter()
-        dateFormaterView1.dateFormat = "MM-dd-yyyy hh:mm"
+        dateFormaterView1.dateFormat = "yyyy-MM-dd HH:mm"
         let date = dateFormaterView1.string(from: self.selectDate)
         self.webserviceForEstimateFare(date: date)
     }
@@ -276,6 +281,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         txtPromoCode.placeholder = "Enter Promocode".localized
         btnApplyPromocode.setTitle("Apply".localized, for: .normal)
         btnPromoCancel.setTitle("Cancel".localized, for: .normal)
+        
+        TitlePickupLoc.text = "Pickup Location".localized
+        TitleDropOffLoc.text = "Dropoff Location".localized
+        TitleAdditionalDropOffLoc.text = "Second Dropoff Location".localized
     }
     
     func fillTextFields() {
@@ -602,11 +611,43 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         let validation = self.isValidateRequest()
         if validation.1 == true {
-            self.btnSubmit.isEnabled = false
-            webserviceOFBookLater()
+            self.showConfirmation()
         } else {
             UtilityClass.showAlert("", message: validation.0, vc: self)
         }
+    }
+    
+    func showConfirmation() {
+        let myAttribute = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
+        let myAttribute1 = [ NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : themeRedColor]
+        let myString = NSMutableAttributedString(string: "\("Pickup Location".localized) : \n", attributes: myAttribute )
+        myString.append(NSAttributedString(string:self.strPickupLocation))
+        myString.append(NSAttributedString(string:"\n\n\("Destination Location".localized) : \n",attributes: myAttribute))
+        myString.append(NSAttributedString(string:self.strDropoffLocation))
+        if(self.strSecondDropoffLocation != ""){
+            myString.append(NSAttributedString(string:"\n\n\("Additional Destination Location".localized) : ",attributes: myAttribute))
+            myString.append(NSAttributedString(string:self.strSecondDropoffLocation))
+        }
+        
+        if(self.priceModel != ""){
+            myString.append(NSAttributedString(string: "\n\n" + self.msgPriceModel.capitalized,attributes: myAttribute1))
+        }
+        
+        myString.append(NSAttributedString(string:"\n\n\("Estimated Fare".localized) : \n",attributes: myAttribute1))
+        myString.append(NSAttributedString(string:self.txtEstimatedFare.text ?? ""))
+
+        let alert = UIAlertController(title: appName, message: "", preferredStyle: UIAlertControllerStyle.alert)
+        alert.setValue(myString, forKey: "attributedMessage")
+        
+        alert.addAction(UIAlertAction(title: "Decline".localized, style: .default, handler: { (action) in
+
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Accept".localized, style: .default, handler: { (action) in
+            self.btnSubmit.isEnabled = false
+            self.webserviceOFBookLater()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func checkMobileNumber() {
@@ -1039,10 +1080,14 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                 
                 let priceModel = ((result as! NSDictionary).object(forKey: "estimate_fare") as! NSDictionary).object(forKey: "price_name") as? String ?? ""
                 if(priceModel != ""){
+                    self.priceModel = priceModel
                     let spanishText = ((result as! NSDictionary).object(forKey: "estimate_fare") as! NSDictionary).object(forKey: "price_name_spanish") as? String ?? ""
                     self.lblEstimatedFare.text = "Estimated Fare".localized + " " + "(" + "\((Localize.currentLanguage() == Languages.English.rawValue) ? priceModel : spanishText)" + ")"
-                    self.lblEstimatedFare.textColor = themeRedColor
+//                    self.lblEstimatedFare.textColor = themeRedColor
                 }
+                
+                let msg = (Localize.currentLanguage() == Languages.English.rawValue) ? ((result as! NSDictionary).object(forKey: "estimate_fare") as! NSDictionary).object(forKey: "notify_message") as? String ?? "" : ((result as! NSDictionary).object(forKey: "estimate_fare") as! NSDictionary).object(forKey: "notify_message_spanish") as? String ?? ""
+                self.msgPriceModel = msg
                 
             } else {
                 if let res = result as? String {
@@ -1067,7 +1112,6 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         var dictData = [String:AnyObject]()
         if let strPromocode = txtPromoCode.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         {
-            
             dictData["PromoCode"] = strPromocode as AnyObject
             webserviceForCheckPromocode(dictData as AnyObject) { (result, status) in
                 if (status) {
@@ -1089,10 +1133,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
                     } else if let resAry = result as? NSArray {
                         UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
                     }
-                    
                 }
                 self.txtPromoCode.text = ""
-                
             }
         }
         
@@ -1351,7 +1393,6 @@ extension BookLaterViewController: CLLocationManagerDelegate {
     
     // Handle location manager errors.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
         print("Error: \(error)")
     }
 }

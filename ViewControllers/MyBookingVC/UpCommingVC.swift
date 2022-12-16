@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate { 
 
-    
-//    var aryData = NSArray()
-    
     var aryData = NSMutableArray()
-    
     var strPickupLat = String()
     var strPickupLng = String()
-    
     var strDropoffLat = String()
     var strDropoffLng = String()
     let notAvailable: String = "N/A"
-    
     var bookinType = String()
     
+    var toolBar = UIToolbar()
+    var picker  = UIDatePicker()
+    var selectDate = ""
+    
+    var bookIdToChange = ""
+    var pickTimeToChange = ""
     
     var expandedCellPaths = Set<IndexPath>()
     
@@ -153,9 +154,11 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             
             if let bookingID = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id") as? String {
                 cell.btnCancelRequest.tag = Int(bookingID)!
+                cell.btnRescheduleRequst.tag = Int(bookingID)!
             }
             else if let bookingID = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "Id") as? Int {
                 cell.btnCancelRequest.tag = bookingID
+                cell.btnRescheduleRequst.tag = bookingID
             }
             
             cell.lblPickupTime.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "PickupDateTime", isNotHave: notAvailable)
@@ -164,6 +167,17 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             if(date.contains(" ")){
                 let time = date.components(separatedBy: " ")
                 cell.lblProcessingDate.text = time[0]
+            }
+            
+            cell.rescheduleTap = {
+                self.RescheduleRequest(bookingId: "\(cell.btnRescheduleRequst.tag)", Pickup: date)
+            }
+            
+            let rescheduleStatus = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "rescheduleAllowed") as? Bool ?? false
+            if(rescheduleStatus){
+                cell.btnRescheduleRequst.isHidden = false
+            }else{
+                cell.btnRescheduleRequst.isHidden = true
             }
             
 //            cell.lblDistanceTravelled.text = checkDictionaryHaveValue(dictData: currentData, didHaveValue: "TripDistance", isNotHave: notAvailable)
@@ -181,6 +195,8 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             bookinType = (aryData.object(at: indexPath.row) as! NSDictionary).object(forKey: "BookingType") as! String
             cell.btnCancelRequest.setTitle("Cancel Request".localized, for: .normal)
             cell.btnCancelRequest.addTarget(self, action: #selector(self.CancelRequest), for: .touchUpInside)
+            
+            cell.btnRescheduleRequst.setTitle("Reschedule".localized, for: .normal)
             
             cell.btnCancelRequest.layer.cornerRadius = 5
             cell.btnCancelRequest.layer.masksToBounds = true
@@ -238,6 +254,131 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                 webserviceOfUpcommingpagination(index: self.pageNo)
             }
         }
+    }
+    
+    func RescheduleRequest(bookingId: String, Pickup: String)
+    {
+ 
+        self.bookIdToChange = bookingId
+        self.pickTimeToChange = Pickup
+        
+        self.setupToolbar()
+        self.setupPicker()
+    }
+    
+    func setupToolbar(){
+        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 400, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.barStyle = .default
+        
+        let doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        doneButton.setTitle("Done".localized, for: .normal)
+        doneButton.contentHorizontalAlignment = .right
+        doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: .bold)
+        doneButton.backgroundColor = UIColor.clear
+        doneButton.setTitleColor(UIColor.systemBlue, for: .normal)
+        doneButton.layer.masksToBounds = true
+        doneButton.tintColor = UIColor.black
+        doneButton.addTarget(self, action: #selector(self.onDoneButtonTapped), for: .touchUpInside)
+        
+        toolBar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(customView: doneButton),
+        ]
+    }
+    
+    @objc func onDoneButtonTapped() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.toolBar.alpha = 0
+            self.picker.alpha = 0
+        }) { _ in
+            self.toolBar.removeFromSuperview()
+            self.picker.removeFromSuperview()
+        }
+       
+        self.validateDate()
+    }
+    
+    func validateDate() {
+        if(self.selectDate != ""){
+            let tempDate =  UtilityClass.formattedDateFromString(dateString: self.selectDate, fromFormat: "MM-dd-yyyy hh:mm a", withFormat: "yyyy-MM-dd HH:mm:ss") ?? ""
+            
+            let status = checkDuration(strPickTime: tempDate)
+            if(!status){
+                UtilityClass.setCustomAlert(title: "", message: "Please select pickUp time one hour later".localized) { (index, title) in}
+            }else{
+                self.webserviceForRescheduleBookLater(date: tempDate)
+            }
+        }
+    }
+    
+    func checkDuration(strPickTime: String) -> Bool {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .minute, value: 0, to: Date()) ?? Date()
+        let dateFormaterView = DateFormatter()
+        dateFormaterView.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date1 = dateFormaterView.string(from: date)
+        
+        let status = self.timeGapBetweenDates(previousDate:date1 , currentDate: strPickTime)
+        return status
+    }
+    
+    func timeGapBetweenDates(previousDate : String,currentDate : String) -> Bool {
+        let dateString1 = previousDate
+        let dateString2 = currentDate
+        
+        let Dateformatter = DateFormatter()
+        Dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
+        let date1 = Dateformatter.date(from: dateString1)
+        let date2 = Dateformatter.date(from: dateString2)
+        
+        let distanceBetweenDates: TimeInterval? = date2?.timeIntervalSince(date1!)
+        let minsInAnHour: Double = 60
+        
+        let minBetweenDates = Int((distanceBetweenDates! / minsInAnHour))
+        if minBetweenDates >= 120 {
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    func setupPicker() {
+        
+        picker.backgroundColor = UIColor.white
+        picker.datePickerMode = UIDatePicker.Mode.dateAndTime
+        if #available(iOS 13.4, *) {
+            picker.preferredDatePickerStyle = .wheels
+        }
+
+        picker.frame = CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 400, width: UIScreen.main.bounds.size.width, height: 400)
+        picker.addTarget(self, action: #selector(self.pickupdateMethod(_:)), for: UIControl.Event.valueChanged)
+       // self.picker.selectRow(self.vehicleList[0].id, inComponent: 0, animated: false)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat =  "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: self.pickTimeToChange)
+        picker.date = date ?? Date()
+        picker.minimumDate = Date()
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.view.addSubview(self.picker)
+            self.view.addSubview(self.toolBar)
+            self.picker.backgroundColor = UIColor.white
+            self.picker.alpha = 1
+            self.toolBar.alpha = 1
+        }) { status in
+        }
+    }
+    
+    @objc func pickupdateMethod(_ sender: UIDatePicker)
+    {
+        
+        let dateFormaterView = DateFormatter()
+        dateFormaterView.dateFormat = "MM-dd-yyyy hh:mm a"
+        print(dateFormaterView.string(from: sender.date))
+        self.selectDate = dateFormaterView.string(from: sender.date)
     }
     
     
@@ -394,6 +535,52 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             }
             else {
                 //                UtilityClass.showAlertOfAPIResponse(param: result, vc: self)
+            }
+        }
+    }
+    
+    //-------------------------------------------------------------
+    // MARK: - Webservice For Book Later
+    //-------------------------------------------------------------
+    func webserviceForRescheduleBookLater(date: String) {
+        
+        var dictData = [String:AnyObject]()
+        dictData["PickupDateTime"] = date as AnyObject
+        dictData["BookingId"] = self.bookIdToChange as AnyObject
+       
+        let activityData = ActivityData()
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        webserviceForRscheduleBookLater(dictData as AnyObject) { (result, status) in
+            
+            if (status) {
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                print(result)
+             
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "", message: res) { (index, title) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } else {
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                }
             }
         }
     }

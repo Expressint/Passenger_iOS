@@ -45,6 +45,10 @@ var msgNoCarsAvailable = ""
 var msgNoCarsAvailable_Spanish = ""
 
 var currentPricingModel = ""
+var currentPricingModelSpanish = ""
+
+var NotifyMessageForBookLater = ""
+var NotifyMessageForBookLaterSpanish = ""
 
 var freeWaitingTime = 300
 
@@ -94,8 +98,8 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 //Live: https://www.bookaridegy.com/Passenger_Api/
 //Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
-    static let kBasePaymentURL                          = "https://www.bookaridegy.com/v2/"
-    static let kBaseURL                                 = "https://www.bookaridegy.com/v2/Passenger_Api/"
+    static let kBasePaymentURL                          = "http://52.23.45.119/v2/"
+    static let kBaseURL                                  = "http://52.23.45.119/v2/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -117,6 +121,7 @@ struct WebserviceURLs {
     static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
     static let kGetEstimateFareForBookLater            = "GetEstimateFareForBookLater"
+    static let kRescheduleBooklater                   = "reschedule_booklater"
     static let kImageBaseURL                            = "http://3.83.58.5/"
     static let kFeedbackList                            = "FeedbackList/"
     static let kCardsList                               = "Cards/"
@@ -164,7 +169,7 @@ struct WebserviceURLs {
 //Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
+    static let kBaseURL                                     = "http://52.23.45.119:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"

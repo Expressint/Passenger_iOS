@@ -2582,7 +2582,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.8;
+				CURRENT_PROJECT_VERSION = 1.8.0;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2596,7 +2596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2617,7 +2617,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.7.8;
+				CURRENT_PROJECT_VERSION = 1.8.0;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2631,7 +2631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

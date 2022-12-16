@@ -825,8 +825,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             if (status) {
                 
                 freeWaitingTime = result["free_waiting_time_counter"] as? Int ?? 300
+                
+                NotifyMessageForBookLater = result["NotifyMessageForBookLater"] as? String ?? ""
+                NotifyMessageForBookLaterSpanish = result["NotifyMessageForBookLaterSpanish"] as? String ?? ""
            
                 currentPricingModel = result["Current_Price_Model"] as? String ?? ""
+                currentPricingModelSpanish = result["Current_Price_Model_Spanish"] as? String ?? ""
+                
                 helpLineNumber = result["DispatchCall"] as? String ?? ""
                 WhatsUpNumber = result["DispatchWhatsapp"] as? String ?? ""
                 DispatchCall = result["DispatchCall"] as? String ?? ""

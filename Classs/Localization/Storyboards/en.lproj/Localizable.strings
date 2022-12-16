@@ -137,6 +137,7 @@
 "Trip Status" = "Trip Status";
 "Tax(Included)" = "Tax(Included)";
 "Cancel Request" = "Cancel Request";
+"Reschedule" = "Reschedule";
 
 //My Receipts
 "DropoffTime" = "DropoffTime";
@@ -242,6 +243,8 @@
 "Estimated Distance" = "Estimated Distance";
 "Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
 "YES" = "YES";
+"Accept" = "Accept";
+"Decline" = "Decline";
 "Your request has been Accepted." = "Your request has been Accepted.";
 "Your request has been rejected." = "Your request has been rejected.";
 "Your trip has now started." = "Your trip has now started.";

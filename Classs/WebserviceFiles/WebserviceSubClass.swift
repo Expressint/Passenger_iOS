@@ -24,6 +24,7 @@ let driverList = WebserviceURLs.kDriver
 let BookingHistory = WebserviceURLs.kBookingHistory
 let GetEstimateFare =  WebserviceURLs.kGetEstimateFare
 let GetEstimateFareForBookLater =  WebserviceURLs.kGetEstimateFareForBookLater
+let RescheduleBookLater =  WebserviceURLs.kRescheduleBooklater
 let ChangePassword = WebserviceURLs.kChangePassword
 let UpdateProfile = WebserviceURLs.kUpdateProfile
 let PastBooking = WebserviceURLs.kPastBooking
@@ -267,6 +268,11 @@ func webserviceForEstimateFareForbookLater(_ dictParams: AnyObject, completion: 
     postData(dictParams, nsURL: url, completion: completion)
 }
 
+func webserviceForRscheduleBookLater(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = RescheduleBookLater
+    postData(dictParams, nsURL: url, completion: completion)
+}
 //-------------------------------------------------------------
 // MARK: - Webservice For Change Password
 //-------------------------------------------------------------

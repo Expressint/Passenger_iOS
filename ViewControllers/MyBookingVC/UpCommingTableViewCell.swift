@@ -36,6 +36,8 @@ class UpCommingTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPaymentType: UILabel!
     
     @IBOutlet weak var btnCancelRequest: ThemeButton!
+    @IBOutlet weak var btnRescheduleRequst: ThemeButtonForRide!
+    var rescheduleTap : (()->()) = { }
     
     @IBOutlet weak var viewDetails: UIView!
     
@@ -59,5 +61,9 @@ class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblBookingDate: UILabel!
     @IBOutlet weak var lblProcessingDate: UILabel!
+    
+    @IBAction func btnRescheduleAction(_ sender: Any) {
+        rescheduleTap()
+    }
     
 }

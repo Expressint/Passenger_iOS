@@ -797,30 +797,51 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuO-D6-NOC">
                                                     <rect key="frame" x="10" y="10" width="394" height="242"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz6-aC-97q" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="202" width="394" height="40"/>
-                                                            <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="5Qe-uM-J8L"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                                            <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
-                                                            <state key="normal" title="Cancel Request">
-                                                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </state>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSubmitButton" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </button>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r7e-hA-1Aq">
+                                                            <rect key="frame" x="2" y="200" width="390" height="40"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uz6-aC-97q" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="192.5" height="40"/>
+                                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="40" id="5Qe-uM-J8L"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                                    <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                                                                    <state key="normal" title="Cancel Request">
+                                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSubmitButton" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xu4-p6-aNX" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
+                                                                    <rect key="frame" x="197.5" y="0.0" width="192.5" height="40"/>
+                                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.25098039220000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                                    <inset key="titleEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
+                                                                    <state key="normal" title="Reschedule">
+                                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSubmitButton" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="btnRescheduleAction:" destination="m4x-dA-beN" eventType="touchUpInside" id="rv4-98-8pX"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVc-U2-e1b">
-                                                            <rect key="frame" x="0.0" y="10" width="394" height="197"/>
+                                                            <rect key="frame" x="0.0" y="10" width="394" height="188"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WMs-qv-Bel">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="197"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="188"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-IU-MT4">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="97"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="394" height="88"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Driver Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apu-fk-hvY">
                                                                                     <rect key="frame" x="151.5" y="5" width="91" height="25"/>
@@ -860,13 +881,13 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XLz-xK-6mj">
-                                                                                    <rect key="frame" x="10" y="62" width="374" height="30"/>
+                                                                                    <rect key="frame" x="10" y="62" width="374" height="21"/>
                                                                                     <subviews>
                                                                                         <view contentMode="scaleToFill" verticalHuggingPriority="241" translatesAutoresizingMaskIntoConstraints="NO" id="POs-AX-Cxd">
-                                                                                            <rect key="frame" x="0.0" y="4" width="10" height="19"/>
+                                                                                            <rect key="frame" x="0.0" y="4" width="10" height="10"/>
                                                                                             <subviews>
                                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to-from-address-ico" translatesAutoresizingMaskIntoConstraints="NO" id="Jta-GT-vu9">
-                                                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="19"/>
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="width" constant="10" id="hOL-k7-EIn"/>
                                                                                                     </constraints>
@@ -881,13 +902,13 @@
                                                                                             </constraints>
                                                                                         </view>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="First Description  Description  Description Description Description Description Description " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j83-VT-BZN">
-                                                                                            <rect key="frame" x="15" y="2" width="354" height="2.5"/>
+                                                                                            <rect key="frame" x="15" y="2" width="354" height="0.0"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                             <color key="textColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZv-kA-HCA">
-                                                                                            <rect key="frame" x="15" y="14.5" width="349" height="1"/>
+                                                                                            <rect key="frame" x="15" y="10.5" width="349" height="0.0"/>
                                                                                             <color key="backgroundColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="0.13" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="height" constant="1" id="AFv-hE-D9T"/>
@@ -897,7 +918,7 @@
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Second Description Description Description Description Description Description " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWi-Lm-Lpn">
-                                                                                            <rect key="frame" x="15" y="23.5" width="354" height="1.5"/>
+                                                                                            <rect key="frame" x="15" y="16" width="354" height="0.0"/>
                                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                             <color key="textColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                             <nil key="highlightedColor"/>
@@ -942,7 +963,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNw-8R-IHt">
-                                                                            <rect key="frame" x="0.0" y="97" width="394" height="100"/>
+                                                                            <rect key="frame" x="0.0" y="88" width="394" height="100"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vBL-J1-ZOM">
                                                                                     <rect key="frame" x="10" y="10" width="374" height="85"/>
@@ -1096,11 +1117,11 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="r7e-hA-1Aq" secondAttribute="bottom" constant="2" id="2wf-Wb-UYM"/>
                                                         <constraint firstItem="rVc-U2-e1b" firstAttribute="top" secondItem="FuO-D6-NOC" secondAttribute="top" constant="10" id="3d9-oW-x6G"/>
-                                                        <constraint firstAttribute="bottom" secondItem="uz6-aC-97q" secondAttribute="bottom" id="OKI-Kb-dM6"/>
-                                                        <constraint firstItem="uz6-aC-97q" firstAttribute="leading" secondItem="FuO-D6-NOC" secondAttribute="leading" id="VbB-EW-9rT"/>
-                                                        <constraint firstItem="uz6-aC-97q" firstAttribute="top" secondItem="rVc-U2-e1b" secondAttribute="bottom" constant="-5" id="Vdf-hV-smo"/>
-                                                        <constraint firstAttribute="trailing" secondItem="uz6-aC-97q" secondAttribute="trailing" id="i9K-m3-5DF"/>
+                                                        <constraint firstItem="r7e-hA-1Aq" firstAttribute="leading" secondItem="FuO-D6-NOC" secondAttribute="leading" constant="2" id="DkB-ZT-axm"/>
+                                                        <constraint firstItem="r7e-hA-1Aq" firstAttribute="top" secondItem="rVc-U2-e1b" secondAttribute="bottom" constant="2" id="bP2-r1-bqZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="r7e-hA-1Aq" secondAttribute="trailing" constant="2" id="d7N-qG-cse"/>
                                                         <constraint firstAttribute="trailing" secondItem="rVc-U2-e1b" secondAttribute="trailing" id="uqq-zd-64a"/>
                                                         <constraint firstItem="rVc-U2-e1b" firstAttribute="leading" secondItem="FuO-D6-NOC" secondAttribute="leading" id="wMt-7W-ShZ"/>
                                                     </constraints>
@@ -1136,6 +1157,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="btnCancelRequest" destination="uz6-aC-97q" id="b8X-4n-Vjj"/>
+                                            <outlet property="btnRescheduleRequst" destination="xu4-p6-aNX" id="PI4-TJ-hN2"/>
                                             <outlet property="lblBookingDate" destination="a41-6h-idW" id="6uV-1e-LXA"/>
                                             <outlet property="lblBookingId" destination="W9A-2L-wK5" id="HZH-fs-zna"/>
                                             <outlet property="lblDateAndTime" destination="YTo-1e-aha" id="4dX-Z3-U6s"/>
@@ -1229,7 +1251,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-1367" y="3394"/>
+            <point key="canvasLocation" x="-1368.1159420289855" y="3393.75"/>
         </scene>
         <!--Past BookingVC-->
         <scene sceneID="03N-7c-dtZ">
@@ -1337,7 +1359,7 @@
                                                                                                     <rect key="frame" x="25" y="32" width="341" height="7"/>
                                                                                                     <subviews>
                                                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BuL-Tg-kU2">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="50"/>
+                                                                                                            <rect key="frame" x="0.0" y="0.0" width="341" height="7"/>
                                                                                                             <subviews>
                                                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-U3-V2A">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>
@@ -1381,7 +1403,7 @@
                                                                                                             </constraints>
                                                                                                         </view>
                                                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLF-it-Bie">
-                                                                                                            <rect key="frame" x="0.0" y="-43" width="341" height="50"/>
+                                                                                                            <rect key="frame" x="0.0" y="7" width="341" height="0.0"/>
                                                                                                             <subviews>
                                                                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-gg-4b4">
                                                                                                                     <rect key="frame" x="0.0" y="0.0" width="341" height="1"/>

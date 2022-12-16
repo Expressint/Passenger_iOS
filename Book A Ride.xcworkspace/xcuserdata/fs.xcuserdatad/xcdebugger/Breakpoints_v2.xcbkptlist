@@ -55,31 +55,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A2C6BC6F-D970-4508-A970-E97327C3769D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ViewControllers/HomeVC/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2222"
-            endingLineNumber = "2222"
-            landmarkName = "btnBookNow(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "82EBC75F-7B43-45E5-B340-F831B7F037D7"
+            uuid = "666E1B12-7D6C-4E69-AE95-5D84F64E6597"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewControllers/HomeVC/BookLaterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1029"
-            endingLineNumber = "1029"
+            startingLineNumber = "1075"
+            endingLineNumber = "1075"
             landmarkName = "webserviceForEstimateFare(date:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -87,15 +71,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B3E5A327-7517-4EA1-A237-686EEA774FBB"
+            uuid = "E758D6B7-A768-4EA3-89B9-8C5D66588579"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ViewControllers/HomeVC/BookLaterViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1035"
-            endingLineNumber = "1035"
+            startingLineNumber = "1070"
+            endingLineNumber = "1070"
             landmarkName = "webserviceForEstimateFare(date:)"
             landmarkType = "7">
          </BreakpointContent>

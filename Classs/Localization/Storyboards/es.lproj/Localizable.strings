@@ -234,7 +234,10 @@
 "km" = "km";
 "Add Tip" = "Agregar sugerencia";
 "Pricing Model" = "Modelo de precios";
+"Reschedule" = "Reprogramar";
 "NO" = "NO";
+"Accept" = "Aceptar";
+"Decline" = "Rechazar";
 "Tip Alert" = "Alerta de propina";
 "Update Dropoff Location" = "Actualizar ubicación de entrega";
 "Additional Dropoff Location" = "Lugar de entrega adicional";
