@@ -65,6 +65,8 @@
 "Gallery" = "Gallery";
 "Cancel" = "Cancel";
 "ID Proof (License/ID card /Passport)" = "ID Proof (License/ID card /Passport)";
+"Please select model" = "Please select model";
+"Please select package" = "Please select package";
 
 //RegisterOTPVerification
 "Enter OTP" = "Enter OTP";
@@ -76,9 +78,10 @@
 //navigetion drower
 "Settings" = "Settings";
 "Sign out" = "Sign out";
-"Legal Stuff" = "Legal Stuff";
+"Legal Stuff" = "Legal";
 "Delete Account" = "Delete Account";
 "My Bookings" = "My Bookings";
+"Hourly Bookings" = "Hourly Bookings";
 "Favourites" = "Favourites";
 "My Receipts" = "My Receipts";
 "Help" = "Help";
@@ -223,7 +226,6 @@
 "Please select a vehicle type." = "Please select a vehicle type.";
 "Multiple Dropoff is not allowed for book later request." = "Multiple Dropoff is not allowed for book later request.";
 "Please enter both address." = "Please enter both address.";
-"Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
 "Currently this feature is not available." = "Currently this feature is not available.";
 "km" = "km";
 "Add Tip" = "Add Tip";
@@ -241,7 +243,6 @@
 "Cash" = "Cash";
 "Estimated Time" = "Estimated Time";
 "Estimated Distance" = "Estimated Distance";
-"Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
 "YES" = "YES";
 "Accept" = "Accept";
 "Decline" = "Decline";
@@ -590,7 +591,7 @@
 "All fields are required..." = "All fields are required...";
 "Your ride has been booked." = "Your ride has been booked.";
 "Please Select Car" = "Please Select Car";
-"Are you sure you want to cancel the trip?" = "Are you sure you want to cancel the trip?";
+"Are you sure you want to cancel the trip?" = "If your cancelation of this ride was accepted by a BookARide driver more than 5 minutes ago, then you will be charged a 50% cancelation fee. You will be required to pay attempt charges on your next ride. If you have any questions please contact our customer service team";
 
 
 "BSB" = "BSB";

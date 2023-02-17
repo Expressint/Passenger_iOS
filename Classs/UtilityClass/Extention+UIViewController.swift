@@ -8,6 +8,27 @@
 
 import Foundation
 import UIKit
+import SideMenu
+
+public extension UIViewController {
+
+    /// Access the nearest ancestor view controller hierarchy that is a side menu controller.
+    var sideMenuSwiftController: SideMenuController? {
+        return findSideMenuController(from: self)
+    }
+
+    fileprivate func findSideMenuController(from viewController: UIViewController) -> SideMenuController? {
+        var sourceViewController: UIViewController? = viewController
+        repeat {
+            sourceViewController = sourceViewController?.parent
+            if let sideMenuController = sourceViewController as? SideMenuController {
+                return sideMenuController
+            }
+        } while (sourceViewController != nil)
+        return nil
+    }
+}
+
 
 
 extension String {

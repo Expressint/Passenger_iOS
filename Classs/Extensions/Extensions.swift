@@ -94,6 +94,100 @@ extension UIButton {
     }
 }
 
+extension UIScrollView {
+   func scrollToBottom(animated: Bool) {
+     if self.contentSize.height < self.bounds.size.height { return }
+     let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
+     self.setContentOffset(bottomOffset, animated: animated)
+  }
+}
+
+extension UINavigationController {
+  func popToViewController(ofClass: AnyClass, animated: Bool = true) {
+    if let vc = viewControllers.last(where: { $0.isKind(of: ofClass) }) {
+      popToViewController(vc, animated: animated)
+    }
+  }
+}
+
+extension String {
+
+    var nsRange : NSRange {
+        return NSRange(self.startIndex..., in: self)
+    }
+
+    func nsRange(of string: String) -> NSRange {
+        return (self as NSString).range(of: string)
+    }
+
+    var trimmed: String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    func convertToUnderLineAttributedString(font: UIFont, color: UIColor) -> NSAttributedString {
+        let attr: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
+        return NSAttributedString(string: self, attributes: attr)
+    }
+
+    func secondsToTimeFormate() -> String? {
+        Int(self)?.secondsToTimeFormate()
+    }
+
+    func toTimeFormate() -> String? {
+        guard let minutes = Int(self) else {
+            return nil
+        }
+        if minutes < 60 {
+            return "\(minutes) Min"
+        } else {
+            let hr = minutes / 60
+            let restMinutes = minutes % 60
+            return "\(hr)Hr \(restMinutes)Min"
+        }
+    }
+
+ 
+
+
+    func toDistanceString() -> String {
+        guard let doubleValue = Double(self) else {
+            return self
+        }
+        return "\(doubleValue) Km"
+        /*if doubleValue >= 2 {
+            return "\(doubleValue) Miles"
+        } else {
+            return "\(doubleValue) Mile"
+        }*/
+    }
+    
+   
+}
+
+extension Int {
+    func secondsToTimeFormate() -> String? {
+        let seconds = self
+        if seconds < 60 {
+            return "\(seconds)s"
+        }
+        let minutes = seconds / 60
+        if minutes < 60 {
+            let restSeconds = seconds % 60
+            return "\(minutes)m \(restSeconds)s"
+        }
+        let hours = minutes / 60
+        let restMinutes = minutes % 60
+        return "\(hours)h \(restMinutes)m"
+    }
+
+    func secondsToMeterTimeFormate() -> String {
+        let hours = self / 3600
+        let minutes = (self % 3600) / 60
+        let seconds = (self % 3600) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+}
+
 //MARK:- UIFont
 
 extension UIFont {

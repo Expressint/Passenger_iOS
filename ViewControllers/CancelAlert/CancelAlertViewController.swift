@@ -51,7 +51,7 @@ class CancelAlertViewController: UIViewController, UIPickerViewDataSource,UIPick
         {
             txtReasons?.text = arrReasons.first?.localized
 
-            lblLongDescription?.text = "Dear Customer. To Keep Our Driver Motivated. Please Note That Cancelling  a Trip 3 Mins After Booking Attracts A Fee of 50 Payable To The Driver. Please Confirm Whether You Still Wish To Cancel?".localized
+            lblLongDescription?.text = "Dear Customer. To Keep Our Driver Motivated. Please Note That Cancelling a Trip 3 Mins After Booking Attracts A Fee of 50 Payable To The Driver. Please Confirm Whether You Still Wish To Cancel?".localized
             lblShortDescription?.text = "Please Select Cancel Reason".localized
         }
         self.btnOk.setTitle("OK".localized, for: .normal)

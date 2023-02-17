@@ -73,12 +73,13 @@
 //Navigation drawer
 "Settings" =  "Ajustes";
 "Sign out" = "desconectar";
-"Legal Stuff" = "Aspectos legales";
+"Legal Stuff" = "Legal";
 "Delete Account" = "Borrar cuenta";
 
 "Select Language" = "Seleccione el idioma";
 
 "My Bookings" = "Mis Reservas";
+"Hourly Bookings" = "Reservas por hora";
 "Favourites" = "Favoritos";
 "My Receipts" = "Mis recibos";
 "Help" = "Ayuda";
@@ -251,7 +252,7 @@
 "Cash" = "Dinero";
 "Estimated Time" = "Hora prevista";
 "Estimated Distance" = "Distancia estimada";
-"Are you sure you want to cancel the trip?" = "¿Seguro que quieres cancelar el viaje?";
+"Are you sure you want to cancel the trip?" = "Si un conductor de BookARide aceptó la cancelación de este viaje hace más de 5 minutos, se le cobrará una tarifa de cancelación del 50 %. Se le pedirá que pague los cargos por intento en su próximo viaje. Si tiene alguna pregunta, póngase en contacto con nuestro equipo de atención al cliente.";
 "YES" = "SÍ";
 "Your request has been Accepted." = "Tu petición ha sido aceptada.";
 "Your request has been rejected." = "Su solicitud ha sido rechazada.";
@@ -259,6 +260,8 @@
 "Dismiss" = "Despedir";
 "Thanks for feedback" = "Gracias por la retroalimentación";
 "Your trip has been completed" = "Tu viaje ha sido completado";
+"Please select model" = "Por favor seleccione modelo";
+"Please select package" = "Seleccione el paquete";
 
 //chat
 "Enter Message.." = "Ingrese Mensaje..";

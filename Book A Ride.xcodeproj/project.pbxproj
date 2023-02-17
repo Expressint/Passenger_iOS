@@ -158,6 +158,27 @@
 		4701754D28D8950F00C0F3F3 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4701754C28D8950F00C0F3F3 /* Localization.swift */; };
 		4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703D53D28B7611100D500B0 /* ImagePickerController.swift */; };
 		470DBDBF28B78B22003A0E5A /* ChatImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */; };
+		4727BFF12975411300F3C926 /* RequestLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727BFF02975411300F3C926 /* RequestLoadingVC.swift */; };
+		473CF01A2951860A00EB22E6 /* SelectModelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF0192951860900EB22E6 /* SelectModelVC.swift */; };
+		473CF01F2951875C00EB22E6 /* SelectModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF01D2951875C00EB22E6 /* SelectModelCell.swift */; };
+		473CF0202951875C00EB22E6 /* SelectModelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 473CF01E2951875C00EB22E6 /* SelectModelCell.xib */; };
+		473CF02B2951978800EB22E6 /* ConfirmLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF02A2951978800EB22E6 /* ConfirmLocationVC.swift */; };
+		473FE81C296FD3B00019B237 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473FE81B296FD3B00019B237 /* Initial.storyboard */; };
+		473FE81F296FD3E10019B237 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FE81E296FD3E10019B237 /* IntroVC.swift */; };
+		47521585299CD0F400453463 /* SideMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47521584299CD0F400453463 /* SideMenuTableVC.swift */; };
+		47521588299CD22600453463 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 47521587299CD22600453463 /* SideMenu */; };
+		4757DC4C299F5A6200E43B56 /* TourTripHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */; };
+		4757DC57299F669C00E43B56 /* TourTripHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757DC55299F669C00E43B56 /* TourTripHistoryCell.swift */; };
+		4757DC58299F669C00E43B56 /* TourTripHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4757DC56299F669C00E43B56 /* TourTripHistoryCell.xib */; };
+		475D45D72992262C00F7D5E6 /* CancelRentalTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D45D62992262C00F7D5E6 /* CancelRentalTripVC.swift */; };
+		475D45DB29922A6900F7D5E6 /* CancelRentalReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D45D929922A6900F7D5E6 /* CancelRentalReasonCell.swift */; };
+		475D45DC29922A6900F7D5E6 /* CancelRentalReasonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 475D45DA29922A6900F7D5E6 /* CancelRentalReasonCell.xib */; };
+		476D87A5297FA75400783D35 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476D87A4297FA75400783D35 /* LocationManager.swift */; };
+		477C73BE2966A950009B5009 /* PickFromMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477C73BD2966A950009B5009 /* PickFromMapVC.swift */; };
+		478AFCC2298BC57D00B6E4BB /* TourDriverInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AFCC1298BC57C00B6E4BB /* TourDriverInfoVC.swift */; };
+		47C169C62966E73F0030BA47 /* SubmitRentalReqVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C169C52966E73F0030BA47 /* SubmitRentalReqVC.swift */; };
+		47C8C57429659E6F00F747D5 /* DurationPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8C57329659E6F00F747D5 /* DurationPopupVC.swift */; };
+		47DE8839298D16B800D7F266 /* TourInvoiceVVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DE8838298D16B800D7F266 /* TourInvoiceVVC.swift */; };
 		54056FFB266FEED40078D956 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 54056FFA266FEED40078D956 /* test.mp3 */; };
 		5415EC19277D9D5F00C66E5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5415EC18277D9D5F00C66E5A /* Main.storyboard */; };
 		5415EC1B277DA5BA00C66E5A /* MyBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5415EC1A277DA5BA00C66E5A /* MyBookings.storyboard */; };
@@ -606,6 +627,26 @@
 		4701754F28D8953600C0F3F3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4703D53D28B7611100D500B0 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewVC.swift; sourceTree = "<group>"; };
+		4727BFF02975411300F3C926 /* RequestLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoadingVC.swift; sourceTree = "<group>"; };
+		473CF0192951860900EB22E6 /* SelectModelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelVC.swift; sourceTree = "<group>"; };
+		473CF01D2951875C00EB22E6 /* SelectModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelCell.swift; sourceTree = "<group>"; };
+		473CF01E2951875C00EB22E6 /* SelectModelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectModelCell.xib; sourceTree = "<group>"; };
+		473CF02A2951978800EB22E6 /* ConfirmLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLocationVC.swift; sourceTree = "<group>"; };
+		473FE81B296FD3B00019B237 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
+		473FE81E296FD3E10019B237 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		47521584299CD0F400453463 /* SideMenuTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableVC.swift; sourceTree = "<group>"; };
+		4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryVC.swift; sourceTree = "<group>"; };
+		4757DC55299F669C00E43B56 /* TourTripHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryCell.swift; sourceTree = "<group>"; };
+		4757DC56299F669C00E43B56 /* TourTripHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TourTripHistoryCell.xib; sourceTree = "<group>"; };
+		475D45D62992262C00F7D5E6 /* CancelRentalTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRentalTripVC.swift; sourceTree = "<group>"; };
+		475D45D929922A6900F7D5E6 /* CancelRentalReasonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRentalReasonCell.swift; sourceTree = "<group>"; };
+		475D45DA29922A6900F7D5E6 /* CancelRentalReasonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelRentalReasonCell.xib; sourceTree = "<group>"; };
+		476D87A4297FA75400783D35 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		477C73BD2966A950009B5009 /* PickFromMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickFromMapVC.swift; sourceTree = "<group>"; };
+		478AFCC1298BC57C00B6E4BB /* TourDriverInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourDriverInfoVC.swift; sourceTree = "<group>"; };
+		47C169C52966E73F0030BA47 /* SubmitRentalReqVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitRentalReqVC.swift; sourceTree = "<group>"; };
+		47C8C57329659E6F00F747D5 /* DurationPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPopupVC.swift; sourceTree = "<group>"; };
+		47DE8838298D16B800D7F266 /* TourInvoiceVVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourInvoiceVVC.swift; sourceTree = "<group>"; };
 		54056FFA266FEED40078D956 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
 		5415EC15277D966800C66E5A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5415EC18277D9D5F00C66E5A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -897,6 +938,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C9D082B65507939DF95E79 /* Pods_Book_A_Ride.framework in Frameworks */,
+				47521588299CD22600453463 /* SideMenu in Frameworks */,
 				5426B7E72722BEA0001189DE /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -999,6 +1041,8 @@
 		3A4072DC21B512270015C494 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				473FE81D296FD3CA0019B237 /* Introduction */,
+				473CF018295185D700EB22E6 /* Book Rental */,
 				18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */,
 				347A9FD82608C73900065C29 /* SelectDriverViewController.swift */,
 				3A4072E221B512270015C494 /* CommingSoonViewController.swift */,
@@ -1237,6 +1281,7 @@
 		3A40734421B512280015C494 /* Classs */ = {
 			isa = PBXGroup;
 			children = (
+				476D87A3297FA73D00783D35 /* Location Manageer */,
 				4701754B28D894FC00C0F3F3 /* Localization */,
 				6A34BF5124BD901A0084F466 /* Previous Due */,
 				3A40734521B512280015C494 /* Extensions */,
@@ -1428,6 +1473,150 @@
 				34E01A28220EEE2C000D048E /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		4727BFEF297540A000F3C926 /* RequestLoading */ = {
+			isa = PBXGroup;
+			children = (
+				4727BFF02975411300F3C926 /* RequestLoadingVC.swift */,
+			);
+			path = RequestLoading;
+			sourceTree = "<group>";
+		};
+		473CF018295185D700EB22E6 /* Book Rental */ = {
+			isa = PBXGroup;
+			children = (
+				4757DC4D299F65F300E43B56 /* Histoy */,
+				475D45D52992260A00F7D5E6 /* Cancel rental Trip */,
+				47DE8837298D169A00D7F266 /* Invoice */,
+				478AFCC0298BC55D00B6E4BB /* DriverInfo */,
+				473CF01B2951871B00EB22E6 /* Select Model */,
+				473CF0292951976600EB22E6 /* Confirm Location */,
+				477C73BC2966A92B009B5009 /* PickFromMap */,
+				473CF02129518FE000EB22E6 /* Select Duration */,
+				47C169C42966E71C0030BA47 /* Submit Booking */,
+			);
+			path = "Book Rental";
+			sourceTree = "<group>";
+		};
+		473CF01B2951871B00EB22E6 /* Select Model */ = {
+			isa = PBXGroup;
+			children = (
+				473CF0192951860900EB22E6 /* SelectModelVC.swift */,
+				4727BFEF297540A000F3C926 /* RequestLoading */,
+				473CF01C2951872700EB22E6 /* Cell */,
+			);
+			path = "Select Model";
+			sourceTree = "<group>";
+		};
+		473CF01C2951872700EB22E6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				473CF01D2951875C00EB22E6 /* SelectModelCell.swift */,
+				473CF01E2951875C00EB22E6 /* SelectModelCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		473CF02129518FE000EB22E6 /* Select Duration */ = {
+			isa = PBXGroup;
+			children = (
+				47C8C57329659E6F00F747D5 /* DurationPopupVC.swift */,
+			);
+			path = "Select Duration";
+			sourceTree = "<group>";
+		};
+		473CF0292951976600EB22E6 /* Confirm Location */ = {
+			isa = PBXGroup;
+			children = (
+				473CF02A2951978800EB22E6 /* ConfirmLocationVC.swift */,
+			);
+			path = "Confirm Location";
+			sourceTree = "<group>";
+		};
+		473FE81D296FD3CA0019B237 /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				473FE81E296FD3E10019B237 /* IntroVC.swift */,
+				47521584299CD0F400453463 /* SideMenuTableVC.swift */,
+			);
+			path = Introduction;
+			sourceTree = "<group>";
+		};
+		4757DC4D299F65F300E43B56 /* Histoy */ = {
+			isa = PBXGroup;
+			children = (
+				4757DC4E299F65FF00E43B56 /* Cell */,
+				4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */,
+			);
+			path = Histoy;
+			sourceTree = "<group>";
+		};
+		4757DC4E299F65FF00E43B56 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4757DC55299F669C00E43B56 /* TourTripHistoryCell.swift */,
+				4757DC56299F669C00E43B56 /* TourTripHistoryCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		475D45D52992260A00F7D5E6 /* Cancel rental Trip */ = {
+			isa = PBXGroup;
+			children = (
+				475D45D829922A4100F7D5E6 /* Cell */,
+				475D45D62992262C00F7D5E6 /* CancelRentalTripVC.swift */,
+			);
+			path = "Cancel rental Trip";
+			sourceTree = "<group>";
+		};
+		475D45D829922A4100F7D5E6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				475D45D929922A6900F7D5E6 /* CancelRentalReasonCell.swift */,
+				475D45DA29922A6900F7D5E6 /* CancelRentalReasonCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		476D87A3297FA73D00783D35 /* Location Manageer */ = {
+			isa = PBXGroup;
+			children = (
+				476D87A4297FA75400783D35 /* LocationManager.swift */,
+			);
+			path = "Location Manageer";
+			sourceTree = "<group>";
+		};
+		477C73BC2966A92B009B5009 /* PickFromMap */ = {
+			isa = PBXGroup;
+			children = (
+				477C73BD2966A950009B5009 /* PickFromMapVC.swift */,
+			);
+			path = PickFromMap;
+			sourceTree = "<group>";
+		};
+		478AFCC0298BC55D00B6E4BB /* DriverInfo */ = {
+			isa = PBXGroup;
+			children = (
+				478AFCC1298BC57C00B6E4BB /* TourDriverInfoVC.swift */,
+			);
+			path = DriverInfo;
+			sourceTree = "<group>";
+		};
+		47C169C42966E71C0030BA47 /* Submit Booking */ = {
+			isa = PBXGroup;
+			children = (
+				47C169C52966E73F0030BA47 /* SubmitRentalReqVC.swift */,
+			);
+			path = "Submit Booking";
+			sourceTree = "<group>";
+		};
+		47DE8837298D169A00D7F266 /* Invoice */ = {
+			isa = PBXGroup;
+			children = (
+				47DE8838298D16B800D7F266 /* TourInvoiceVVC.swift */,
+			);
+			path = Invoice;
 			sourceTree = "<group>";
 		};
 		5426B5EB27229C1A001189DE /* Images */ = {
@@ -1785,11 +1974,12 @@
 		EEFA6CA9220ECE30004F32E7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				34E01A27220EED13000D048E /* LaunchScreen.storyboard */,
 				5415EC18277D9D5F00C66E5A /* Main.storyboard */,
 				5415EC1A277DA5BA00C66E5A /* MyBookings.storyboard */,
 				AD01829E2652420900595BAB /* BookingScreen.storyboard */,
-				34E01A27220EED13000D048E /* LaunchScreen.storyboard */,
 				347A9FDB2608CC2500065C29 /* DriverList.storyboard */,
+				473FE81B296FD3B00019B237 /* Initial.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1807,13 +1997,15 @@
 				008D222B1FA08DCF001223DF /* Resources */,
 				A2933852BD74F8C0D508A763 /* [CP] Embed Pods Frameworks */,
 				0F3CCE603DFCC1C63FAF5F5C /* [CP] Copy Pods Resources */,
-				475E5CC228F8293500B36A86 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Book A Ride";
+			packageProductDependencies = (
+				47521587299CD22600453463 /* SideMenu */,
+			);
 			productName = "TickTok User";
 			productReference = 008D222D1FA08DCF001223DF /* Book A Ride.app */;
 			productType = "com.apple.product-type.application";
@@ -1856,6 +2048,7 @@
 			mainGroup = 008D22241FA08DCF001223DF;
 			packageReferences = (
 				475E5CC328F82C3D00B36A86 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				47521586299CD22600453463 /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 008D222E1FA08DCF001223DF /* Products */;
 			projectDirPath = "";
@@ -1886,6 +2079,7 @@
 				5426B70527229C1B001189DE /* CM.png in Resources */,
 				5426B76727229C1C001189DE /* PH.png in Resources */,
 				5426B79A27229C1C001189DE /* GI.png in Resources */,
+				475D45DC29922A6900F7D5E6 /* CancelRentalReasonCell.xib in Resources */,
 				5426B7BB27229C1C001189DE /* BV.png in Resources */,
 				5426B76E27229C1C001189DE /* ES.png in Resources */,
 				5426B6FB27229C1B001189DE /* VN.png in Resources */,
@@ -1960,6 +2154,7 @@
 				5426B79B27229C1C001189DE /* DE.png in Resources */,
 				5426B76827229C1C001189DE /* SS.png in Resources */,
 				3A40740A21B512280015C494 /* WWCalendarTimeSelector.storyboard in Resources */,
+				473CF0202951875C00EB22E6 /* SelectModelCell.xib in Resources */,
 				3A40738821B512280015C494 /* proxima-nova-regular-italic.otf in Resources */,
 				5426B73F27229C1C001189DE /* SV.png in Resources */,
 				5426B77F27229C1C001189DE /* FK.png in Resources */,
@@ -1991,6 +2186,7 @@
 				88BBE20A28913F120024F935 /* SenderCell.xib in Resources */,
 				5426B72627229C1B001189DE /* AT.png in Resources */,
 				5426B6FF27229C1B001189DE /* LB.png in Resources */,
+				4757DC58299F669C00E43B56 /* TourTripHistoryCell.xib in Resources */,
 				5426B7A527229C1C001189DE /* AX.png in Resources */,
 				5415EC1B277DA5BA00C66E5A /* MyBookings.storyboard in Resources */,
 				5426B76927229C1C001189DE /* QA.png in Resources */,
@@ -2026,6 +2222,7 @@
 				5426B7D027229C1C001189DE /* NG.png in Resources */,
 				5426B7BF27229C1C001189DE /* MN.png in Resources */,
 				3A40738E21B512280015C494 /* amazon.jpg in Resources */,
+				473FE81C296FD3B00019B237 /* Initial.storyboard in Resources */,
 				5426B78427229C1C001189DE /* KM.png in Resources */,
 				5426B79627229C1C001189DE /* SN.png in Resources */,
 				5426B7A427229C1C001189DE /* CG.png in Resources */,
@@ -2200,25 +2397,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Book A Ride/Pods-Book A Ride-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		475E5CC228F8293500B36A86 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
-		};
 		9B2149097BFB38C9959DC4A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2253,6 +2431,7 @@
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework",
 				"${BUILT_PRODUCTS_DIR}/FormTextField/FormTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -2282,6 +2461,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FittedSheets.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FormTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -2316,14 +2496,18 @@
 				3A4073B021B512280015C494 /* UpCommingTableViewCell.swift in Sources */,
 				3A4073CA21B512280015C494 /* SettingPasscodeVC.swift in Sources */,
 				3A4073AF21B512280015C494 /* PastBookingVC.swift in Sources */,
+				473CF01A2951860A00EB22E6 /* SelectModelVC.swift in Sources */,
 				3A4073CE21B512280015C494 /* SideMenuTableViewController.swift in Sources */,
+				4757DC4C299F5A6200E43B56 /* TourTripHistoryVC.swift in Sources */,
 				3A4073E121B512280015C494 /* ChangePasswordVC.swift in Sources */,
 				3A4073CB21B512280015C494 /* VerifyPasswordViewController.swift in Sources */,
 				3A4073B121B512280015C494 /* UpCommingVC.swift in Sources */,
 				3A40740F21B512280015C494 /* Extention+UIViewController.swift in Sources */,
 				3A4073FF21B512280015C494 /* MTRipple.swift in Sources */,
 				6A34BF5424BD901A0084F466 /* PreviousDueTableViewCell.swift in Sources */,
+				476D87A5297FA75400783D35 /* LocationManager.swift in Sources */,
 				18546BD2225DE9BE009DF334 /* PesapalWebViewViewController.swift in Sources */,
+				473FE81F296FD3E10019B237 /* IntroVC.swift in Sources */,
 				3A4073DE21B512280015C494 /* TempDataOfWebservice.swift in Sources */,
 				3A4073A721B512280015C494 /* DriverInfoViewController.swift in Sources */,
 				3A4073A521B512280015C494 /* BookLaterViewController.swift in Sources */,
@@ -2336,14 +2520,17 @@
 				3A4073E221B512280015C494 /* UpdateProfileViewController.swift in Sources */,
 				3A4073E621B512280015C494 /* WalletCollectionViewCell.swift in Sources */,
 				3A40739D21B512280015C494 /* SideMenuCollectionViewCell.swift in Sources */,
+				47C8C57429659E6F00F747D5 /* DurationPopupVC.swift in Sources */,
 				3A4073AA21B512280015C494 /* LoginViewController.swift in Sources */,
 				6A34BF5524BD901A0084F466 /* PreviousDueViewController.swift in Sources */,
 				3A4073EE21B512280015C494 /* ThemeButton.swift in Sources */,
 				3A40739C21B512280015C494 /* BookTableCollectionViewCell.swift in Sources */,
+				475D45D72992262C00F7D5E6 /* CancelRentalTripVC.swift in Sources */,
 				3A4073B821B512280015C494 /* RegisterOTPVarificationViewController.swift in Sources */,
 				3A4073DB21B512280015C494 /* WalletCardsTableViewCell.swift in Sources */,
 				3A4073F721B512280015C494 /* CreditCardValidationType.swift in Sources */,
 				3A4073AE21B512280015C494 /* PastBooingTableViewCell.swift in Sources */,
+				4727BFF12975411300F3C926 /* RequestLoadingVC.swift in Sources */,
 				3A4073BF21B512280015C494 /* ContentTableViewCell.swift in Sources */,
 				3A4073EB21B512280015C494 /* WalletViewController.swift in Sources */,
 				4701754D28D8950F00C0F3F3 /* Localization.swift in Sources */,
@@ -2361,12 +2548,14 @@
 				5480321227A2DB3900ECD2BD /* CancelAlertViewController.swift in Sources */,
 				3A4073AC21B512280015C494 /* OnGoingTableViewCell.swift in Sources */,
 				3A4073AB21B512280015C494 /* MyBookingViewController.swift in Sources */,
+				47C169C62966E73F0030BA47 /* SubmitRentalReqVC.swift in Sources */,
 				3A4073D721B512280015C494 /* MyFavouriteTableViewCell.swift in Sources */,
 				3A4073F921B512280015C494 /* FloatRatingView.swift in Sources */,
 				3A4073E421B512280015C494 /* WalletBalanceMainVC.swift in Sources */,
 				3A4073A821B512280015C494 /* GiveRatingViewController.swift in Sources */,
 				3A4073C021B512280015C494 /* CustomSideMenuViewController.swift in Sources */,
 				3A4073BC21B512280015C494 /* BarsAndClubsViewController.swift in Sources */,
+				47DE8839298D16B800D7F266 /* TourInvoiceVVC.swift in Sources */,
 				3A4073AD21B512280015C494 /* OnGoingVC.swift in Sources */,
 				34E01A2F220F1109000D048E /* HomeViewController.swift in Sources */,
 				3A4073E721B512280015C494 /* WalletHistoryViewController.swift in Sources */,
@@ -2379,6 +2568,7 @@
 				3A84BC9521C22B2E00EDA3A2 /* UIActionSheet+Blocks.m in Sources */,
 				3A4073B421B512280015C494 /* PackageDetailViewController.swift in Sources */,
 				3A4073FA21B512280015C494 /* AKRadioButtonsController.swift in Sources */,
+				473CF02B2951978800EB22E6 /* ConfirmLocationVC.swift in Sources */,
 				4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */,
 				3A4073C221B512280015C494 /* EditProfileViewController.swift in Sources */,
 				3A40740921B512280015C494 /* String+Timepiece.swift in Sources */,
@@ -2392,6 +2582,7 @@
 				3A4073C721B512280015C494 /* MainHeaderTableViewCell.swift in Sources */,
 				3A4073F021B512280015C494 /* ACHUD+Animation.swift in Sources */,
 				3A4073C921B512280015C494 /* SetPasscodeViewController.swift in Sources */,
+				475D45DB29922A6900F7D5E6 /* CancelRentalReasonCell.swift in Sources */,
 				54761341274D29B60073E3B5 /* ForgetPasswordViewController.swift in Sources */,
 				3A4073B221B512280015C494 /* PacageHoursDaysTableViewCell.swift in Sources */,
 				3A4073F421B512280015C494 /* AJAlertController.swift in Sources */,
@@ -2407,6 +2598,7 @@
 				888B650F28892CA10006C669 /* AboutUsVC.swift in Sources */,
 				3A4073B621B512280015C494 /* PackageHistoryViewController.swift in Sources */,
 				3A4073F621B512280015C494 /* ARCarMovement.swift in Sources */,
+				477C73BE2966A950009B5009 /* PickFromMapVC.swift in Sources */,
 				3A40741021B512280015C494 /* SingletonClass.swift in Sources */,
 				88BBE20528913F050024F935 /* ReceiverCell.swift in Sources */,
 				347A9FD92608C73900065C29 /* SelectDriverViewController.swift in Sources */,
@@ -2414,19 +2606,23 @@
 				3A4073B721B512280015C494 /* PackageViewController.swift in Sources */,
 				3A84BC9321C22B2E00EDA3A2 /* RMPopoverPresentationController.m in Sources */,
 				3A4073B321B512280015C494 /* PackageCarListCollectionViewCell.swift in Sources */,
+				473CF01F2951875C00EB22E6 /* SelectModelCell.swift in Sources */,
 				3A40740C21B512280015C494 /* ButtonUtility.swift in Sources */,
 				3A4073D821B512280015C494 /* MyRecepitTableViewCell.swift in Sources */,
 				3A4073C621B512280015C494 /* InviteDriverViewController.swift in Sources */,
 				3A40740521B512280015C494 /* Int+Timepiece.swift in Sources */,
 				3A4073D921B512280015C494 /* ShoppingTableViewCell.swift in Sources */,
 				3A4073F121B512280015C494 /* ACProgressHUD.swift in Sources */,
+				47521585299CD0F400453463 /* SideMenuTableVC.swift in Sources */,
 				3A40741221B512280015C494 /* WebserviceMainClass.swift in Sources */,
 				3A4073F821B512280015C494 /* CreditCardValidator.swift in Sources */,
+				478AFCC2298BC57D00B6E4BB /* TourDriverInfoVC.swift in Sources */,
 				3A5DDCA721BA5C9200F9B5A3 /* TripInfoViewController.swift in Sources */,
 				3A4073DD21B512280015C494 /* TempData.swift in Sources */,
 				3A40741121B512280015C494 /* UtilityClass.swift in Sources */,
 				3A40740B21B512280015C494 /* WWCalendarTimeSelector.swift in Sources */,
 				3A40740D21B512280015C494 /* ConstantData.swift in Sources */,
+				4757DC57299F669C00E43B56 /* TourTripHistoryCell.swift in Sources */,
 				3A84BC9621C22B2E00EDA3A2 /* UIAlertController+Blocks.m in Sources */,
 				88BBE20B28913F120024F935 /* SenderCell.swift in Sources */,
 				3A40740721B512280015C494 /* NSDate+Timepiece.swift in Sources */,
@@ -2582,7 +2778,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.0;
+				CURRENT_PROJECT_VERSION = 1.8.1;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2596,7 +2792,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2617,7 +2813,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.0;
+				CURRENT_PROJECT_VERSION = 1.8.1;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2631,7 +2827,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2667,6 +2863,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		47521586299CD22600453463 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kukushi/SideMenu.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		475E5CC328F82C3D00B36A86 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -2676,6 +2880,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		47521587299CD22600453463 /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47521586299CD22600453463 /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 008D22251FA08DCF001223DF /* Project object */;
 }

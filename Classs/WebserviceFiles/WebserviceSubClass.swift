@@ -68,7 +68,17 @@ let TrackRunningTrip = WebserviceURLs.kTrackRunningTrip
 let PastDuesList = WebserviceURLs.kPastDuesList
 let PayPastDues = WebserviceURLs.kPayPastDues
 let HelpOptions = WebserviceURLs.kHelpOptions
+let RentalModels = WebserviceURLs.kRentalModels
+let ModelPackages = WebserviceURLs.kModelPackages
 let Help = WebserviceURLs.kHelp
+
+// Rental
+let RentalCurrentBooking = WebserviceURLs.kRentalCurrentBooking
+let RentalReviewRating = WebserviceURLs.kRentalReviewRating
+let RentalTripHistory = WebserviceURLs.kRentalTripHistory
+
+
+let SubmitTourReq = WebserviceURLs.kSubmitRentalBookingRequest
 //-------------------------------------------------------------
 // MARK: - Webservice For Registration
 //-------------------------------------------------------------
@@ -268,6 +278,12 @@ func webserviceForEstimateFareForbookLater(_ dictParams: AnyObject, completion: 
     postData(dictParams, nsURL: url, completion: completion)
 }
 
+func webserviceForRentalHistory(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = RentalTripHistory
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
 func webserviceForRscheduleBookLater(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = RescheduleBookLater
@@ -302,6 +318,13 @@ func webserviceForCurrentTrip(_ dictParams: AnyObject, completion: @escaping(_ r
     let url = "\(CurrentBooking)/\(dictParams)"
     getData("" as AnyObject, nsURL: url, completion: completion)
 }
+
+func webserviceForRntalCurrentTrip(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url =  RentalCurrentBooking
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
 //-------------------------------------------------------------
 // MARK: - Webservice For Previous due
 //-------------------------------------------------------------
@@ -583,6 +606,12 @@ func webserviceForRatingAndComment(_ dictParams: AnyObject, completion: @escapin
     postData(dictParams, nsURL: url, completion: completion)
 }
 
+func webserviceForRentalRating(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = RentalReviewRating
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
 //-------------------------------------------------------------
 // MARK: - Webservice For Tickpay Approval Status
 //-------------------------------------------------------------
@@ -674,5 +703,27 @@ func webserviceForHelpOptions(_ dictParams: AnyObject, completion: @escaping(_ r
 func webserviceForSendingHelpRequest(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = Help
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+//-------------------------------------------------------------
+// MARK: - Webservice For Rental Model options
+//-------------------------------------------------------------
+
+func webserviceForRentalModels(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = RentalModels
+    getData("" as AnyObject, nsURL: url, completion: completion)
+}
+
+func webserviceForModelPackages(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = ModelPackages
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+func webserviceForSubmitTourRequest(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = SubmitTourReq
     postData(dictParams, nsURL: url, completion: completion)
 }

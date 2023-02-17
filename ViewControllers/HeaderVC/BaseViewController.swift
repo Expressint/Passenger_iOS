@@ -9,20 +9,19 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Do any additional setup after loading the view.
     }
-
+    
     func setNavBarWithMenu(Title:String, IsNeedRightButton:Bool, isFavNeeded:Bool=false,isSOSNeeded:Bool=false, isWhatsApp: Bool = false){
         //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.barTintColor = themeYellowColor;
-        
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -40,7 +39,7 @@ class BaseViewController: UIViewController {
             appearance.backgroundColor = themeYellowColor
             appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
                                               .foregroundColor: UIColor.white]
-
+            
             // Customizing our navigation bar
             navigationController?.navigationBar.tintColor = .white
             navigationController?.navigationBar.standardAppearance = appearance
@@ -49,7 +48,7 @@ class BaseViewController: UIViewController {
         
         var arrLleftButtons = [UIBarButtonItem]()
         
-        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_menu"), style: .plain, target: self, action: #selector(self.OpenMenuAction))
+        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_BackWhite"), style: .plain, target: self, action:#selector(self.btnBackAction))
         self.navigationItem.leftBarButtonItem = nil
         arrLleftButtons.append(leftNavBarButton)
         
@@ -74,13 +73,13 @@ class BaseViewController: UIViewController {
         
         if IsNeedRightButton == true {
             var arrButtons = [UIBarButtonItem]()
-//            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
+            //            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
             
             if(isFavNeeded)
             {
                 
-//                let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
-//                self.navigationItem.rightBarButtonItems = [rightFavBarButton]
+                //                let rightFavBarButton = UIBarButtonItem(image: UIImage(named: "iconFavourites"), style: .plain, target: self, action: #selector(HomeViewController.btnFavourite(_:)))
+                //                self.navigationItem.rightBarButtonItems = [rightFavBarButton]
                 
                 let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
                 btnRight.setImage(UIImage.init(named: "iconFavourites"), for: .normal)
@@ -92,26 +91,26 @@ class BaseViewController: UIViewController {
                 arrButtons.append(btnRightBar)
                 
             }
-//            if(isSOSNeeded)
-//            {
-////                let rightSOSBarButton = UIBarButtonItem(image: UIImage(named: "iconSOS"), style: .plain, target: self, action: #selector(HomeViewController.btnSOS(_:)))
-////                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
-//
-//                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-//                btnRight.setImage(UIImage.init(named: "iconSOS"), for: .normal)
-//                btnRight.addTarget(self, action: #selector(HomeViewController.btnSOS(_:)), for: .touchUpInside)
-//                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-//                viewRight.addSubview(btnRight)
-//                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
-//                btnRightBar.style = .plain
-//                arrButtons.append(btnRightBar)
-//            }
+            //            if(isSOSNeeded)
+            //            {
+            ////                let rightSOSBarButton = UIBarButtonItem(image: UIImage(named: "iconSOS"), style: .plain, target: self, action: #selector(HomeViewController.btnSOS(_:)))
+            ////                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
+            //
+            //                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            //                btnRight.setImage(UIImage.init(named: "iconSOS"), for: .normal)
+            //                btnRight.addTarget(self, action: #selector(HomeViewController.btnSOS(_:)), for: .touchUpInside)
+            //                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            //                viewRight.addSubview(btnRight)
+            //                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+            //                btnRightBar.style = .plain
+            //                arrButtons.append(btnRightBar)
+            //            }
             
             if(isWhatsApp)
             {
-//                let image = UIImage(named: "ic_whatsApp")?.withRenderingMode(.alwaysOriginal)
-//                let rightSOSBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(HomeViewController.btnWhatsApp(_:)))
-//                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
+                //                let image = UIImage(named: "ic_whatsApp")?.withRenderingMode(.alwaysOriginal)
+                //                let rightSOSBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(HomeViewController.btnWhatsApp(_:)))
+                //                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
                 
                 let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
                 btnRight.setImage(UIImage.init(named: (Localize.currentLanguage() == Languages.English.rawValue) ? "ic_whatsApp" : "ic_whatsApp_es"), for: .normal)
@@ -123,7 +122,7 @@ class BaseViewController: UIViewController {
                 arrButtons.append(btnRightBar)
             }
             self.navigationItem.rightBarButtonItems = arrButtons
-
+            
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }
@@ -131,22 +130,74 @@ class BaseViewController: UIViewController {
         
     }
     
-    func setNavBarWithBack(Title:String, IsNeedRightButton:Bool) {
-//        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationItem.title = Title.uppercased().localizedUppercase
-        self.navigationController?.navigationBar.barTintColor = themeYellowColor;
+    func setNavBarWithSideMenu(Title:String, IsNeedRightButton:Bool){
+        //        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.tintColor = UIColor.white;
-        
+        self.navigationController?.navigationBar.barTintColor = themeYellowColor;
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_BackWhite"), style: .plain, target: self, action: #selector(self.btnBackAction))
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        } else {
+            navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        }
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = themeYellowColor
+            appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                              .foregroundColor: UIColor.white]
+            
+            // Customizing our navigation bar
+            navigationController?.navigationBar.tintColor = .white
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        }
+        
+        var arrLleftButtons = [UIBarButtonItem]()
+        
+        let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_menu"), style: .plain, target: self, action: #selector(self.OpenSideMenuAction))
         self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        arrLleftButtons.append(leftNavBarButton)
+        
+        self.navigationItem.leftBarButtonItems = arrLleftButtons
+        
+        self.navigationItem.rightBarButtonItem = nil
         
         
+    }
+    
+    func setNavBarWithBack(Title:String, IsNeedRightButton:Bool, IsNeedBackButton:Bool = true) {
+        //        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.title = Title.uppercased().localizedUppercase
+        self.navigationController?.navigationBar.barTintColor = themeYellowColor;
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = themeYellowColor
+        appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 20.0),
+                                          .foregroundColor: UIColor.white]
+        
+        // Customizing our navigation bar
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        
+        if IsNeedBackButton {
+            let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_BackWhite"), style: .plain, target: self, action: #selector(self.btnBackAction))
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.leftBarButtonItem = leftNavBarButton
+        } else {
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.hidesBackButton = true
+        }
         
         if IsNeedRightButton == true {
             let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
@@ -155,28 +206,25 @@ class BaseViewController: UIViewController {
         } else {
             self.navigationItem.rightBarButtonItem = nil
         }
-        if UserDefaults.standard.value(forKey: "i18n_language") != nil {
-            if let language = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-                if language == "sw" {
-//                    btnLeft.semanticContentAttribute = .forceLeftToRight
-                    
-//                    image = UIImage.init(named: "icon_BackWhite")?.imageFlippedForRightToLeftLayoutDirection()
-                }
-            }
-        }
     }
     
     
     // MARK:- Navigation Bar Button Action Methods
     
-    @objc func OpenMenuAction(){
-         sideMenuController?.toggle()
+    @objc func OpenMenuAction() {
+        sideMenuController?.toggle()
     }
     
-    @objc func btnBackAction()
-    {
+    @objc func OpenSideMenuAction() {
+        sideMenuSwiftController?.revealMenu()
+    }
+    
+    @objc func btnBackAction() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    // MARK:- Navigation Bar Button Action Methods
     
     @objc func btnCallAction() {
         
@@ -184,9 +232,7 @@ class BaseViewController: UIViewController {
         if contactNumber == "" {
             UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
             }
-        }
-        else
-        {
+        } else {
             callNumber(phoneNumber: contactNumber)
         }
     }
@@ -203,6 +249,19 @@ class BaseViewController: UIViewController {
         }
     }
     
+    func requestLoading() -> RequestLoadingVC {
+        let viewCtr = bookingsStoryboard.instantiateViewController(withIdentifier: "RequestLoadingVC") as! RequestLoadingVC
+        viewCtr.modalPresentationStyle = .overCurrentContext
+        viewCtr.modalTransitionStyle = .crossDissolve
+        return viewCtr
+    }
+    
+    func closeViewController<T: UIViewController>(ofType: T.Type) {
+        if let presentedVC = self.presentedViewController as? T {
+            presentedVC.dismiss(animated: true)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -210,15 +269,15 @@ class BaseViewController: UIViewController {
     
     
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

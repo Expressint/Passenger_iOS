@@ -46,6 +46,7 @@ var msgNoCarsAvailable_Spanish = ""
 
 var currentPricingModel = ""
 var currentPricingModelSpanish = ""
+var currentTripType = ""
 
 var NotifyMessageForBookLater = ""
 var NotifyMessageForBookLaterSpanish = ""
@@ -65,6 +66,7 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 let bookingsStoryboard = UIStoryboard(name: "BookingScreen", bundle: nil)
 let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
+let InitialStoryboard = UIStoryboard(name: "Initial", bundle: nil)
 
 /* App Font Names
  
@@ -98,8 +100,9 @@ let myBookingsStoryboard = UIStoryboard(name: "MyBookings", bundle: nil)
 //Live: https://www.bookaridegy.com/Passenger_Api/
 //Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
-    static let kBasePaymentURL                          = "http://52.23.45.119/v2/"
-    static let kBaseURL                                  = "http://52.23.45.119/v2/Passenger_Api/"
+    static let kBaseImageURL                            = "http://52.23.45.119/"
+    static let kBasePaymentURL                          = "http://52.23.45.119/v3/"
+    static let kBaseURL                                  = "http://52.23.45.119/v3/Passenger_Api/"
     static let kDriverRegister                          = "Register"
     static let kDriverLogin                             = "Login"
     static let kChangePassword                          = "ChangePassword"
@@ -160,7 +163,16 @@ struct WebserviceURLs {
     
     static let kGetDriverETA                            = "GetETA"
     static let kHelpOptions                             = "HelpOptions"
+    static let kRentalModels                           = "RentalModel"
+    static let kModelPackages                          = "RentalModePackages"
     static let kHelp                                    = "Help"
+    
+    //Tours
+    static let kSubmitRentalBookingRequest           = "SubmitRentalBookingRequest"
+    static let kRentalCurrentBooking                  = "RentalCurrentBooking"
+    static let kRentalReviewRating                    = "RentalReviewRating"
+    static let kRentalTripHistory                     = "RentalBookingHistory"
+    
     //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
 
@@ -213,6 +225,14 @@ struct SocketData {
     static let DriverTyping = "is_typing"
     static let DriverStopTyping = "is_stop_typing"
     
+    // Tours
+    static let RejectRentalBookingRequest = "RejectRentalBookingRequestNotification"
+    static let AcceptRentalBookingRequest = "AcceptRentalBookingRequestNotification"
+    static let RentalDriverArrived = "RentalDriverArrived"
+    static let PickupRentalPassengerNotification = "PickupRentalPassengerNotification"
+    static let RentalTripCompleted = "RentalBookingDetails"
+    static let CancelRentalTripByPassenger = "CancelRentalTripByPassenger"
+    static let CancelRentalTripNotification = "PassengerCancelRentalTripNotification"
 }
 
 struct SocketDataKeys {
@@ -283,6 +303,7 @@ let NotificationForBookingNewTrip = NSNotification.Name("NotificationForBookingN
 let NotificationForAddNewBooingOnSideMenu = NSNotification.Name("NotificationForAddNewBooingOnSideMenu")
 let OpenEditProfile = NSNotification.Name("OpenEditProfile")
 let OpenMyBooking = NSNotification.Name("OpenMyBooking")
+let OpenHourlyBooking = NSNotification.Name("OpenHourlyBooking")
 let OpenPaymentOption = NSNotification.Name("OpenPaymentOption")
 let OpenWallet = NSNotification.Name("OpenWallet")
 let OpenMyReceipt = NSNotification.Name("OpenMyReceipt")
@@ -301,6 +322,7 @@ let openNRP = NSNotification.Name("openRP")
 let openNAboutUs = NSNotification.Name("openAboutUs")
 let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
 let GoToChatScreen = NSNotification.Name("GoToChatScreen")
+let RequestForTaxiHourly = NSNotification.Name("RequestForTaxiHourly")
 
 
 //let NotificationHotelReservation = NSNotification.Name("NotificationHotelReservation")

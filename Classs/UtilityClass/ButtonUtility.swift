@@ -12,7 +12,6 @@ import Foundation
 class ButtonUtility: UIButton {
     
    @IBInspectable let corner_radius : CGFloat =  10.0
-
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -23,8 +22,6 @@ class ButtonUtility: UIButton {
         self.clipsToBounds = true
 
     }
- 
-
 }
 
 class PaddingLabel: UILabel {

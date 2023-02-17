@@ -19,7 +19,7 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 import PhotosUI
-
+import SideMenu
 
 
 //"AIzaSyDDhx61DtSR4k174_60MQ6EyiQIF-qrd4o"
@@ -111,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.animating.statusBarBehaviour = .showUnderlay
         
+        self.setupSideMenu()
+        
         // ------------------------------------------------------------
         if ((UserDefaults.standard.data(forKey: "profileData")) != nil)
         {
@@ -177,6 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
   
         
         FirebaseApp.configure()
+        LocationManager.shared.start()
         return true
     }
     
@@ -309,8 +312,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         if fcmToken == nil {
             
-        }
-        else {
+        } else {
             SingletonClass.sharedInstance.deviceToken = fcmToken!
             UserDefaults.standard.set(SingletonClass.sharedInstance.deviceToken, forKey: "Token")
         }
@@ -338,6 +340,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         completionHandler(UIBackgroundFetchResult.newData)
         
     }
+    
+    func setupSideMenu() {
+        SideMenuController.preferences.basic.menuWidth = UIScreen.main.bounds.size.width - 60 //((SCREEN_WIDTH * 25) / 100)
+        SideMenuController.preferences.basic.defaultCacheKey = "0"
+        SideMenuController.preferences.basic.position = .above
+        SideMenuController.preferences.basic.direction = .left
+        SideMenuController.preferences.basic.enablePanGesture = true
+        SideMenuController.preferences.basic.enableRubberEffectWhenPanning = false
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print(#function, notification)
         let content = notification.request.content
@@ -373,7 +385,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                             completionHandler([])
                         }
                     }
-                }catch{
+                } catch {
                     print("Error : detected")
                 }
             }
@@ -464,17 +476,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     func getNotificationSettings() {
         
         UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {(settings) in
-            
             print("Notification Settings: \(settings)")
-            
-            
             guard settings.authorizationStatus == .authorized else { return }
-            
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
-                
             }
-            
+
         })
     }
     
@@ -537,7 +544,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 notificationController.bookingType = "accept"
                 notificationController.isFromPushNotification = true
                 
-                navController?.present(notificationController ?? UIViewController(), animated: true, completion: {
+                navController?.present(notificationController, animated: true, completion: {
                     
                 })
             }
@@ -549,7 +556,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 let notificationController = navController?.storyboard?.instantiateViewController(withIdentifier: "MyBookingViewController")  as! MyBookingViewController
                 notificationController.bookingType = "reject"
                 notificationController.isFromPushNotification = true
-                navController?.present(notificationController ?? UIViewController(), animated: true, completion: {
+                navController?.present(notificationController, animated: true, completion: {
                     
                 })
             }
@@ -561,7 +568,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 let notificationController = navController?.storyboard?.instantiateViewController(withIdentifier: "MyBookingViewController") as! MyBookingViewController
                 notificationController.bookingType = "accept"
                 notificationController.isFromPushNotification = true
-                navController?.present(notificationController ?? UIViewController(), animated: true, completion: {
+                navController?.present(notificationController, animated: true, completion: {
                     
                 })
             }
@@ -573,7 +580,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 let notificationController = navController?.storyboard?.instantiateViewController(withIdentifier: "MyBookingViewController")  as! MyBookingViewController
                 notificationController.bookingType = "reject"
                 notificationController.isFromPushNotification = true
-                navController?.present(notificationController ?? UIViewController(), animated: true, completion: {
+                navController?.present(notificationController, animated: true, completion: {
                     
                 })
             }
@@ -585,7 +592,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 let notificationController = navController?.storyboard?.instantiateViewController(withIdentifier: "MyBookingViewController")  as! MyBookingViewController
                 notificationController.bookingType = "reject"
                 notificationController.isFromPushNotification = true
-                navController?.present(notificationController ?? UIViewController(), animated: true, completion: {
+                navController?.present(notificationController, animated: true, completion: {
                     
                 })
             }
@@ -613,25 +620,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         //        }
     }
     
-    // MARK:- Login & Logout Methods
-    
+    // MARK: - Navigation Methods
     func GoToHome() {
-//        let storyborad = UIStoryboard(name: "Main", bundle: nil)
         let CustomSideMenu = mainStoryboard.instantiateViewController(withIdentifier: "CustomSideMenuViewController") as! CustomSideMenuViewController
         let NavHomeVC = UINavigationController(rootViewController: CustomSideMenu)
         NavHomeVC.isNavigationBarHidden = true
-        UIApplication.shared.keyWindow?.rootViewController = NavHomeVC
+        UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController = NavHomeVC
     }
     
+    func GoToIntro() {
+        let CustomSideMenu = InitialStoryboard.instantiateViewController(withIdentifier: "IntroVC") as! IntroVC
+        let NavHomeVC = UINavigationController(rootViewController: CustomSideMenu)
+        NavHomeVC.isNavigationBarHidden = false
+        let profileViewController = InitialStoryboard.instantiateViewController(withIdentifier: "SideMenuTableVC") as! SideMenuTableVC
+        window?.rootViewController = SideMenuController(contentViewController: NavHomeVC,menuViewController: profileViewController)
+    }
+
     func GoToLogin() {
-        
-//        let storyborad = UIStoryboard(name: "MyBookings", bundle: nil)
         let Login = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        //        let customNavigation = UINavigationController(rootViewController: Login)
         let NavHomeVC = UINavigationController(rootViewController: Login)
         NavHomeVC.isNavigationBarHidden = true
-        UIApplication.shared.keyWindow?.rootViewController = NavHomeVC
-        
+        UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.rootViewController = NavHomeVC
     }
     
     func GoToLogout() {
@@ -646,13 +655,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
                 UserDefaults.standard.removeObject(forKey: key)
             }
         }
-        //        UserDefaults.standard.set(false, forKey: kIsSocketEmited)
-        //        UserDefaults.standard.synchronize()
-        
+
         SingletonClass.sharedInstance.strPassengerID = ""
         UserDefaults.standard.removeObject(forKey: "profileData")
         SingletonClass.sharedInstance.isUserLoggedIN = false
-         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         
         UserDefaults.standard.removeObject(forKey: "Passcode")
         SingletonClass.sharedInstance.setPasscode = ""

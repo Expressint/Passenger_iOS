@@ -36,7 +36,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setNavBarWithBack(Title: "Favourites".localized, IsNeedRightButton: false)
         webserviceOfGetAddress()
         
         tableView.separatorStyle = .none
@@ -73,10 +73,6 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
-        if(UIDevice.current.name.lowercased() == "rahul’s iphone" || UIDevice.current.name.lowercased() == "iphone (6)")
-        {
-//            filter.country = "IN"
-        }
         acController.autocompleteFilter = filter
 
         
@@ -110,7 +106,6 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     //-------------------------------------------------------------
     // MARK: - TableView Methods
     //-------------------------------------------------------------
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -343,9 +338,7 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
                     UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }
-                
             }
-            
         }
     }
     

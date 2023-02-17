@@ -369,7 +369,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 SingletonClass.sharedInstance.allDiverShowOnBirdView = self.aryAllDrivers
                 
-                appDelegate.GoToHome()
+                //appDelegate.GoToHome()
+                appDelegate.GoToIntro()
 
             }
             else {
@@ -819,7 +820,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         print("Vewsion : \(version)")
         
         var param = String()
-        param = version + "/" + "IOSPassenger"
+        param = version + "/" + "IOSPassenger/" + SingletonClass.sharedInstance.strPassengerID
         webserviceForAppSetting(param as AnyObject) { (result, status) in
             
             if (status) {
@@ -831,6 +832,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
            
                 currentPricingModel = result["Current_Price_Model"] as? String ?? ""
                 currentPricingModelSpanish = result["Current_Price_Model_Spanish"] as? String ?? ""
+                currentTripType = result["CurrentlyRunningTrip"] as? String ?? "4"
                 
                 helpLineNumber = result["DispatchCall"] as? String ?? ""
                 WhatsUpNumber = result["DispatchWhatsapp"] as? String ?? ""
@@ -869,7 +871,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                         
                         if(SingletonClass.sharedInstance.isUserLoggedIN)
                         {
-                              appDelegate.GoToHome()
+                             // appDelegate.GoToHome()
+                            appDelegate.GoToIntro()
                         }
                     })
                     alert.addAction(UPDATE)
@@ -879,7 +882,8 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 else {
                     
                     if(SingletonClass.sharedInstance.isUserLoggedIN) {
-                        appDelegate.GoToHome()
+                       // appDelegate.GoToHome()
+                        appDelegate.GoToIntro()
                      }
                 }
             }

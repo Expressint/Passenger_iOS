@@ -256,22 +256,6 @@ class MyReceiptsViewController: BaseViewController, UITableViewDataSource, UITab
     
     
     @objc func getReceipt(sender: UIButton) {
-//        let messageBody = urlForMail
-//        let toRecipents = [""]
-//
-//
-//        if MFMailComposeViewController.canSendMail() {
-//            let mail = MFMailComposeViewController()
-//            mail.mailComposeDelegate = self
-//            mail.setToRecipients(toRecipents)
-//            mail.setMessageBody(messageBody, isHTML: true)
-//
-//            present(mail, animated: true)
-//        } else {
-//            UtilityClass.setCustomAlert(title: "Missing", message: "Your Email Id is not configured from settings. Please configure it from Settings -> Mail".localized) { (index, title) in
-//            }
-//        }
-        
         let strContent = "Please download your receipt from the below link\n\n\(urlForMail)"
         let share = [strContent]
         let activityViewController = UIActivityViewController(activityItems: share as [Any], applicationActivities: nil)

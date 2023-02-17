@@ -4297,7 +4297,7 @@
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gWv-sh-1KA" firstAttribute="leading" secondItem="amr-fI-f0D" secondAttribute="leading" id="8e4-74-1tW"/>
-                            <constraint firstItem="gWv-sh-1KA" firstAttribute="top" secondItem="NKc-Ns-oEK" secondAttribute="top" id="CwO-lQ-qkW"/>
+                            <constraint firstItem="gWv-sh-1KA" firstAttribute="top" secondItem="amr-fI-f0D" secondAttribute="top" id="9eG-Xf-MbS"/>
                             <constraint firstAttribute="bottom" secondItem="gWv-sh-1KA" secondAttribute="bottom" id="ZY5-Za-0IK"/>
                             <constraint firstItem="amr-fI-f0D" firstAttribute="trailing" secondItem="gWv-sh-1KA" secondAttribute="trailing" id="ssl-xX-ezA"/>
                         </constraints>
@@ -5717,7 +5717,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="MmL-cO-fEk"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="rW1-Go-bZC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemGreenColor"/>
                         <textAttributes key="titleTextAttributes">
@@ -8223,10 +8223,10 @@
                         <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="QEV-LU-ed9" secondAttribute="bottom" id="4mu-lX-fhj"/>
+                            <constraint firstItem="QEV-LU-ed9" firstAttribute="top" secondItem="TO2-SL-sZ7" secondAttribute="top" id="D7T-tQ-TwI"/>
                             <constraint firstItem="LSB-vU-liN" firstAttribute="height" secondItem="kdl-px-0je" secondAttribute="height" multiplier="0.45" id="FtR-BP-VmH"/>
                             <constraint firstItem="QEV-LU-ed9" firstAttribute="leading" secondItem="TO2-SL-sZ7" secondAttribute="leading" id="H9B-S3-F1b"/>
                             <constraint firstItem="TO2-SL-sZ7" firstAttribute="trailing" secondItem="QEV-LU-ed9" secondAttribute="trailing" id="kT9-ng-xdZ"/>
-                            <constraint firstItem="QEV-LU-ed9" firstAttribute="top" secondItem="kdl-px-0je" secondAttribute="top" id="uAG-bK-IQT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -12794,7 +12794,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Kko-AZ-703"/>
+        <segue reference="GVu-AP-73y"/>
         <segue reference="oeb-Ea-QzW"/>
     </inferredMetricsTieBreakers>
     <resources>

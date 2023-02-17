@@ -10,19 +10,12 @@ import UIKit
 import WebKit
 
 protocol delegatePesapalWebView {
-    
     func didOrderPesapalStatus(status: Bool)
-//    @objc optional func didOrderFailed()
 }
 
 
-class PesapalWebViewViewController: BaseViewController
-{
+class PesapalWebViewViewController: BaseViewController {
     
-
-    // ----------------------------------------------------
-    // MARK: - Outlets
-    // ----------------------------------------------------
     @IBOutlet weak var viewForWebView: UIView!
     
     // ----------------------------------------------------

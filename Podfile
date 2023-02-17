@@ -27,5 +27,6 @@ target 'Book A Ride' do
   pod 'CountryPickerView'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'DropDown' #, '2.3.1'
+  pod 'FittedSheets'
 
 end

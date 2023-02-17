@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SingletonClass: NSObject {
     /// Online cars for book later
@@ -17,7 +18,7 @@ class SingletonClass: NSObject {
     var selectedIndexPath: IndexPath?
     
     var dictProfile = NSMutableDictionary()
-    var strPassengerID = String()
+    var strPassengerID = ""
     var isUserLoggedIN = Bool()
     var arrCarLists = NSMutableArray()
     static let sharedInstance = SingletonClass()
@@ -29,6 +30,10 @@ class SingletonClass: NSObject {
     
     var currentLatitude = String()
     var currentLongitude = String()
+    
+    var passengerLocation: CLLocationCoordinate2D? {
+        LocationManager.shared.mostRecentLocation?.coordinate
+    }
     
     var aryHistory = NSArray()
     var aryOnGoing = NSArray()

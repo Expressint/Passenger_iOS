@@ -101,6 +101,15 @@
         }
       },
       {
+        "package": "SideMenu",
+        "repositoryURL": "https://github.com/kukushi/SideMenu.git",
+        "state": {
+          "branch": null,
+          "revision": "c168c143a1acb690ebb992406d9a03ce8791f47c",
+          "version": "2.0.9"
+        }
+      },
+      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
