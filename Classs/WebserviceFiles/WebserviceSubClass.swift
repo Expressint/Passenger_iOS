@@ -76,6 +76,7 @@ let Help = WebserviceURLs.kHelp
 let RentalCurrentBooking = WebserviceURLs.kRentalCurrentBooking
 let RentalReviewRating = WebserviceURLs.kRentalReviewRating
 let RentalTripHistory = WebserviceURLs.kRentalTripHistory
+let AdvertisementList = WebserviceURLs.AdvertisementList
 
 
 let SubmitTourReq = WebserviceURLs.kSubmitRentalBookingRequest
@@ -174,6 +175,12 @@ func webserviceForCheckPromocode(_ dictParams: AnyObject, completion: @escaping(
 func webserviceForPromoCodeList(completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = "\(GetPromoCodeList)/\(SingletonClass.sharedInstance.strPassengerID)"
+    getData([String : AnyObject].self as AnyObject, nsURL: url, completion: completion)
+}
+
+func webserviceForAdvList(completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = "\(AdvertisementList)"
     getData([String : AnyObject].self as AnyObject, nsURL: url, completion: completion)
 }
 //-------------------------------------------------------------

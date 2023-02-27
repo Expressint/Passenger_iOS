@@ -89,8 +89,8 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.7)
     - GoogleUtilities/UserDefaults (~> 6.7)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - FittedSheets (2.5.3)
   - FormTextField (2.0.0)
+  - FSPagerView (0.8.3)
   - GoogleAppMeasurement (6.9.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
@@ -167,8 +167,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Crashlytics
   - Firebase/Messaging
-  - FittedSheets
   - FormTextField
+  - FSPagerView
   - GoogleMaps (= 3.0.3)
   - GooglePlaces (= 3.0.3)
   - GoogleSignIn
@@ -201,8 +201,8 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseInstanceID
     - FirebaseMessaging
-    - FittedSheets
     - FormTextField
+    - FSPagerView
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleMaps
@@ -243,8 +243,8 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseInstanceID: bd3ffc24367f901a43c063b36c640b345a4a5dd1
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
-  FittedSheets: c22df4c06036515f247951fa174912e8a65c8ce4
   FormTextField: 40016d44fc3371410be6c5a0c968498e43f00d33
+  FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   GoogleAppMeasurement: a6a3a066369828db64eda428cb2856dc1cdc7c4e
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleMaps: fd5c9fa58871781b9fb94d4936f19c69fe60ce32
@@ -267,6 +267,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: a5d1b5c1becc12ea35ecad405585606dded58227
+PODFILE CHECKSUM: b3e1df4965cf499c75914c760a994963b2be0916
 
 COCOAPODS: 1.11.3

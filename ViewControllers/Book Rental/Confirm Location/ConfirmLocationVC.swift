@@ -21,9 +21,15 @@ class ConfirmLocationVC: BaseViewController {
     @IBOutlet weak var txtDropOffLoc: UITextField!
     @IBOutlet weak var txtPickUpDate: UITextField!
     @IBOutlet weak var btnBookNow: UIButton!
+    @IBOutlet weak var btnBookLaterMain: UIButton!
     @IBOutlet weak var btnBookLater: UIButton!
     @IBOutlet weak var stackPickUpDate: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var lblTitleModel: UILabel!
+    @IBOutlet weak var lblTitlePackage: UILabel!
+    @IBOutlet weak var lblTitlePaymentType: UILabel!
+    @IBOutlet weak var lblTitlePickUpDate: UILabel!
+    @IBOutlet weak var btnRemoveTime: UIButton!
     
     @IBOutlet weak var imgCardForPaymentType: UIImageView!
     @IBOutlet weak var imgCashForPaymentType: UIImageView!
@@ -61,12 +67,33 @@ class ConfirmLocationVC: BaseViewController {
         super.viewDidLoad()
         
         self.setPickUpLocation()
-        self.btnMapPick.underline(text: "Find on Map")
-        self.btnMapDrop.underline(text: "Find on Map")
+        self.btnMapPick.underline(text: "Find on Map".localized)
+        self.btnMapDrop.underline(text: "Find on Map".localized)
         self.stackPickUpDate.isHidden = true
         self.lblModel.text = self.modelName
         self.lblPackage.text = self.durationName
         self.setNavBarWithBack(Title: "Confirm Location".localized, IsNeedRightButton: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setLocalization()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblPickUpLoc.text = "Pickup Location".localized
+        self.lblDropOffLoc.text = "Final Destination".localized
+        self.lblTitleModel.text = "Model".localized
+        self.lblTitlePackage.text = "Package".localized
+        self.lblTitlePaymentType.text = "Payment Type".localized
+        self.lblTitlePickUpDate.text = "PickupDate".localized
+        self.btnBookNow.setTitle("Book Now".localized, for: .normal)
+        self.btnBookLaterMain.setTitle("Book Later".localized, for: .normal)
+        self.btnCard.setTitle("Card".localized, for: .normal)
+        self.btnCash.setTitle("Cash".localized, for: .normal)
     }
     
     //MARK: - Custom Methods
@@ -114,6 +141,7 @@ class ConfirmLocationVC: BaseViewController {
         toolBar = UIToolbar.init(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 44))
         toolBar.setItems([UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil), doneButton], animated: true)
         txtPickUpDate.inputAccessoryView = toolBar
+        txtPickUpDate.becomeFirstResponder()
     }
     
     @objc func datePickerDone() {
@@ -124,9 +152,8 @@ class ConfirmLocationVC: BaseViewController {
                 }
             }
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.confirmBookLater()
-            }
+            self.btnBookNow.isHidden = true
+            self.btnBookLaterMain.isHidden = false
         }
     }
     
@@ -186,7 +213,6 @@ class ConfirmLocationVC: BaseViewController {
             self.PayCashView.backgroundColor = UIColor.black
             self.paymentType = "cash"
             btnCash.setTitleColor(themeAppMainColor, for: .normal)
-            btnCard.setTitle("Card", for: .normal)
             
         } else if(sender.tag == 2) {
             self.paymentType = "wallet"
@@ -203,7 +229,6 @@ class ConfirmLocationVC: BaseViewController {
     }
     
     @IBAction func btnBookNowActiion(_ sender: Any) {
-        stackPickUpDate.isHidden = true
         if self.txtPickUpLoc.text == ""{
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your pickup location again".localized) { (index, title) in
             }
@@ -216,6 +241,17 @@ class ConfirmLocationVC: BaseViewController {
         } else {
             gotoFinalScreen(pickTime: "")
         }
+    }
+    
+    @IBAction func btnRemoveTimeAction(_ sender: Any) {
+        self.stackPickUpDate.isHidden = true
+        self.txtPickUpDate.text = ""
+        self.btnBookNow.isHidden = false
+        self.btnBookLaterMain.isHidden = true
+    }
+    
+    @IBAction func btnBookLaterMainAction(_ sender: Any) {
+        self.confirmBookLater()
     }
     
     func openMap(lat: Double, Lng: Double, address: String) {
@@ -252,7 +288,10 @@ class ConfirmLocationVC: BaseViewController {
     
     @IBAction func btnMapDropAction(_ sender: Any) {
         self.isPickUpMapMoved = false
-        self.openMap(lat: dropOffLat ?? 0.0, Lng: dropOffLong ?? 0.0, address: self.txtDropOffLoc.text ?? "")
+        let dropLat = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0) : dropOffLat)
+        let dropLng = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0) : dropOffLong)
+        
+        self.openMap(lat: dropLat ?? 0.0, Lng: dropLng ?? 0.0, address: self.txtDropOffLoc.text ?? "")
     }
 }
 

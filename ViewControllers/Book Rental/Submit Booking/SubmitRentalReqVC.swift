@@ -19,6 +19,13 @@ class SubmitRentalReqVC: BaseViewController {
     @IBOutlet weak var vWPickUpTime: UIView!
     @IBOutlet weak var btnConfirm: UIButton!
     
+    @IBOutlet weak var lblTitlePickUpLoc: UILabel!
+    @IBOutlet weak var lblTitleDropOffLoc: UILabel!
+    @IBOutlet weak var lblTitleModel: UILabel!
+    @IBOutlet weak var lblTitlePackage: UILabel!
+    @IBOutlet weak var lblTitlePaymentType: UILabel!
+    @IBOutlet weak var lblTitlePickUpDate: UILabel!
+    
     var modelId: Int?
     var modelName:String = ""
     var durationId: Int?
@@ -45,7 +52,25 @@ class SubmitRentalReqVC: BaseViewController {
         self.lblPaymentType.text = paymentType.capitalized
         self.lblPickUpDate.text = pickUpDateTime
         self.vWPickUpTime.isHidden = (self.pickUpDateTime == "") ? true : false
-        self.btnConfirm.setTitle("Confirm \(modelName) Tour", for: .normal)
+        self.btnConfirm.setTitle("\("Confirm".localized) \(modelName) \("Tour".localized)", for: .normal)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setLocalization()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblTitlePickUpLoc.text = "Pickup Location".localized
+        self.lblTitleDropOffLoc.text = "Final Destination".localized
+        self.lblTitleModel.text = "Model".localized
+        self.lblTitlePackage.text = "Package".localized
+        self.lblTitlePaymentType.text = "Payment Type".localized
+        self.lblTitlePickUpDate.text = "PickupDate".localized
+      
     }
     
     func backToRoot() {

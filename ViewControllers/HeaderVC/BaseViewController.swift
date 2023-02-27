@@ -108,13 +108,9 @@ class BaseViewController: UIViewController {
             
             if(isWhatsApp)
             {
-                //                let image = UIImage(named: "ic_whatsApp")?.withRenderingMode(.alwaysOriginal)
-                //                let rightSOSBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(HomeViewController.btnWhatsApp(_:)))
-                //                self.navigationItem.rightBarButtonItems?.insert(rightSOSBarButton, at: self.navigationItem.rightBarButtonItems?.count ?? 0)
-                
                 let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
                 btnRight.setImage(UIImage.init(named: (Localize.currentLanguage() == Languages.English.rawValue) ? "ic_whatsApp" : "ic_whatsApp_es"), for: .normal)
-                btnRight.addTarget(self, action: #selector(HomeViewController.btnWhatsApp(_:)), for: .touchUpInside)
+                btnRight.addTarget(self, action: #selector(self.openChatForDispatcher), for: .touchUpInside)
                 let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
                 viewRight.addSubview(btnRight)
                 let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
@@ -130,7 +126,7 @@ class BaseViewController: UIViewController {
         
     }
     
-    func setNavBarWithSideMenu(Title:String, IsNeedRightButton:Bool){
+    func setNavBarWithSideMenu(Title:String, IsNeedRightButton:Bool, isWhatsApp: Bool = false){
         //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased()
         self.navigationController?.navigationBar.tintColor = UIColor.white;
@@ -159,6 +155,8 @@ class BaseViewController: UIViewController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         }
         
+
+        
         var arrLleftButtons = [UIBarButtonItem]()
         
         let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_menu"), style: .plain, target: self, action: #selector(self.OpenSideMenuAction))
@@ -167,12 +165,33 @@ class BaseViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItems = arrLleftButtons
         
-        self.navigationItem.rightBarButtonItem = nil
-        
+        if IsNeedRightButton == true {
+            var arrButtons = [UIBarButtonItem]()
+            let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
+            arrButtons.append(rightNavBarButton)
+            
+            
+            if(isWhatsApp)
+            {
+                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                btnRight.setImage(UIImage.init(named: (Localize.currentLanguage() == Languages.English.rawValue) ? "ic_whatsApp" : "ic_whatsApp_es"), for: .normal)
+                btnRight.addTarget(self, action: #selector(self.openChatForDispatcher), for: .touchUpInside)
+                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                viewRight.addSubview(btnRight)
+                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+                btnRightBar.style = .plain
+                arrButtons.append(btnRightBar)
+            }
+            
+            
+            self.navigationItem.rightBarButtonItems = arrButtons
+        } else {
+            self.navigationItem.rightBarButtonItems = nil
+        }
         
     }
     
-    func setNavBarWithBack(Title:String, IsNeedRightButton:Bool, IsNeedBackButton:Bool = true) {
+    func setNavBarWithBack(Title:String, IsNeedRightButton:Bool, IsNeedBackButton:Bool = true, isSOSNeeded:Bool=false) {
         //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationItem.title = Title.uppercased().localizedUppercase
         self.navigationController?.navigationBar.barTintColor = themeYellowColor;
@@ -191,13 +210,37 @@ class BaseViewController: UIViewController {
         
         
         if IsNeedBackButton {
+            var arrLleftButtons = [UIBarButtonItem]()
+            
             let leftNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_BackWhite"), style: .plain, target: self, action: #selector(self.btnBackAction))
-            self.navigationItem.leftBarButtonItem = nil
-            self.navigationItem.leftBarButtonItem = leftNavBarButton
+            arrLleftButtons.append(leftNavBarButton)
+            
+            
+            if(isSOSNeeded){
+                let btnRight = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                btnRight.setImage(UIImage.init(named: "iconSOS"), for: .normal)
+                btnRight.addTarget(self, action: #selector(self.CallSOS), for: .touchUpInside)
+                let viewRight = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+                viewRight.addSubview(btnRight)
+                let btnRightBar: UIBarButtonItem = UIBarButtonItem.init(customView: viewRight)
+                btnRightBar.style = .plain
+                
+//                let viewRightDummy = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//                let btnRightBarDummy: UIBarButtonItem = UIBarButtonItem.init(customView: viewRightDummy)
+//                btnRightBarDummy.style = .plain
+//                arrLleftButtons.append(btnRightBarDummy)
+                
+                arrLleftButtons.append(btnRightBar)
+            }
+            
+            self.navigationItem.leftBarButtonItems = arrLleftButtons
+            
         } else {
-            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.leftBarButtonItems = nil
             self.navigationItem.hidesBackButton = true
         }
+        
+        
         
         if IsNeedRightButton == true {
             let rightNavBarButton = UIBarButtonItem(image: UIImage(named: "icon_Call"), style: .plain, target: self, action: #selector(self.btnCallAction))
@@ -208,8 +251,20 @@ class BaseViewController: UIViewController {
         }
     }
     
+    @objc func CallSOS() {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "TourSOS"), object: nil)
+    }
+    
     
     // MARK:- Navigation Bar Button Action Methods
+    @objc func openChatForDispatcher(){
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        NextPage.receiverName = DispatchName
+        NextPage.bookingId = ""
+        NextPage.isDispacherChat = true
+        NextPage.receiverId = DispatchId
+        self.navigationController?.pushViewController(NextPage, animated: true)
+    }
     
     @objc func OpenMenuAction() {
         sideMenuController?.toggle()
@@ -238,10 +293,8 @@ class BaseViewController: UIViewController {
     }
     
     
-    private func callNumber(phoneNumber:String) {
-        
+    func callNumber(phoneNumber:String) {
         if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
-            
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
                 application.open(phoneCallURL, options: [:], completionHandler: nil)

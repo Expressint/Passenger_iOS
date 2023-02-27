@@ -19,9 +19,12 @@ class CancelRentalTripVC: BaseViewController {
     @IBOutlet weak var tblDataHeight: NSLayoutConstraint!
     @IBOutlet weak var btnCancelTrip: UIButton!
     @IBOutlet weak var vWMain: UIView!
+    @IBOutlet weak var btnClose: UIButton!
+    @IBOutlet weak var lblReason: UILabel!
+    
     
     weak var delegate: CancelRentalTripProtocol?
-    var arrData = ["Long pick up time","Driver delayed","No longer interested","Other"]
+    var arrData = ["Long pick up time".localized,"Driver delayed".localized,"No longer interested".localized,"Other".localized]
     var selectedReason: String?
     let placeHolder = "Enter reason here".localized
     
@@ -50,6 +53,8 @@ class CancelRentalTripVC: BaseViewController {
         self.registerNib()
         self.txtOthers.isHidden = true
         self.tblData.reloadData()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +62,8 @@ class CancelRentalTripVC: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0.3) {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
+        self.setLocalization()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,6 +76,15 @@ class CancelRentalTripVC: BaseViewController {
         UIView.animate(withDuration: 0.5) {
             self.updateViewConstraints()
         }
+        
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblReason.text = "Please Select Reason".localized
+        self.btnCancelTrip.setTitle("Cancel Trip".localized, for: .normal)
     }
     
     func registerNib(){
@@ -79,11 +95,11 @@ class CancelRentalTripVC: BaseViewController {
     @IBAction func btnCancelAction(_ sender: Any) {
         var reason = ""
         if self.selectedReason == nil {
-            UtilityClass.setCustomAlert(title: "Required", message: "Please select reason to cancel trip") { (index, title) in}
-        } else if self.selectedReason?.lowercased() == "other" {
+            UtilityClass.setCustomAlert(title: "Required".localized, message: "Please select reason to cancel trip".localized) { (index, title) in}
+        } else if self.selectedReason == "Other".localized {
             let other = self.txtOthers.text ?? ""
             if(other == "" || other == "Enter reason here".localized){
-                UtilityClass.setCustomAlert(title: "Required", message: "Please enter reason to cancel trip") { (index, title) in}
+                UtilityClass.setCustomAlert(title: "Required".localized, message: "Please enter reason to cancel trip".localized) { (index, title) in}
             } else {
                 reason = self.txtOthers.text ?? ""
             }
@@ -99,6 +115,10 @@ class CancelRentalTripVC: BaseViewController {
     }
     
     @IBAction func btnCloseAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func CloseAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
 }
@@ -120,7 +140,7 @@ extension CancelRentalTripVC: UITableViewDelegate, UITableViewDataSource {
             cell.imgSelected.isHidden = true
         }
         
-        if(self.selectedReason?.lowercased() == "other"){
+        if(self.selectedReason == "Other".localized){
             self.txtOthers.isHidden = false
         } else {
             self.txtOthers.isHidden = true

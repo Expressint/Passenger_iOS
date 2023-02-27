@@ -13,6 +13,7 @@ import SocketIO
 class RequestLoadingVC: BaseViewController {
 
     // MARK: - Outlets
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var viewActivity: UIView!
     @IBOutlet weak var viewActivityAnimation: NVActivityIndicatorView!
     
@@ -24,6 +25,7 @@ class RequestLoadingVC: BaseViewController {
     // MARK: - Base Method
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.lblTitle.text = "Booking Request Processing".localized
         viewActivityAnimation.startAnimating()
         // Do any additional setup after loading the view.
     }

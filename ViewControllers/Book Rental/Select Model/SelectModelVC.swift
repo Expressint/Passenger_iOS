@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import FittedSheets
 import SocketIO
 import CoreLocation
 import GoogleMaps
@@ -66,6 +65,7 @@ class SelectModelVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setLocalization()
         
         LocationManager.shared.delegate = self
         moveMent = ARCarMovement()
@@ -84,14 +84,33 @@ class SelectModelVC: BaseViewController {
         
         if currentTripType == "2" {
             self.getRentalCurrentBookingData()
-            self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: false)
+            self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: true, isSOSNeeded: true)
         } else {
             self.webserviceCallForRentalModels()
-            self.setNavBarWithBack(Title: "Select Model".localized, IsNeedRightButton: false)
+            self.setNavBarWithBack(Title: "Select Model".localized, IsNeedRightButton: true)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(sosCall), name: Notification.Name(rawValue: "TourSOS"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    
+    @objc func sosCall(){
+        self.socketEmitForSOS()
+    }
+    
+    func setLocalization(){
+        //self.lblServices.text = "Services".localized
+        self.btnNext.setTitle("Next".localized, for: .normal)
+        self.btnCancelTrip.setTitle("Cancel Trip".localized, for: .normal)
         
     }
     
@@ -104,6 +123,7 @@ class SelectModelVC: BaseViewController {
             UtilityClass.hideHUD()
             if(success) {
                 let resultData = (result as! NSDictionary)
+                print(result)
                 self.dictCurrentBookingInfoData = resultData.object(forKey: "BookingInfo") as! NSDictionary
                 self.dictCurrentDriverInfoData = resultData.object(forKey: "DriverInfo") as! NSDictionary
                 self.setupViewForTripAccepted(bookingInfo: self.dictCurrentBookingInfoData, driverInfo: self.dictCurrentDriverInfoData)
@@ -122,14 +142,12 @@ class SelectModelVC: BaseViewController {
                     let df = DateFormatter()
                     df.dateFormat = "HH:mm:ss"
                     let currentTime = df.string(from: date)
-                    
                     self.totalSecond = Int(Double(self.findDateDiff(time1Str: self.convertDate(strDate: pickUpTime), time2Str: currentTime)) ?? 0)
                     self.startTimer()
                 }
                 
                 let camera = GMSCameraPosition.camera(withLatitude: Double(driverLat) ?? 0.0,longitude: Double(driverLong) ?? 0.0, zoom: self.zoomLevel)
                 self.mapView.animate(to: camera)
-                
                 self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
             }
         }
@@ -165,7 +183,7 @@ class SelectModelVC: BaseViewController {
     }
     //372
     func setupViewForTripAccepted(bookingInfo: NSDictionary, driverInfo: NSDictionary) {
-        self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: false)
+        self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: false, isSOSNeeded: true)
         self.vwNoTrip.isHidden = true
         self.vwTrip.isHidden = false
         
@@ -189,6 +207,7 @@ class SelectModelVC: BaseViewController {
     
     func openDriverInfo() {
         let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "TourDriverInfoVC") as! TourDriverInfoVC
+        vc.delegate = self
         vc.dictCurrentBookingInfoData = self.dictCurrentBookingInfoData
         vc.dictCurrentPassengerInfoData = self.dictCurrentDriverInfoData
         vc.modalPresentationStyle = .overCurrentContext
@@ -219,7 +238,7 @@ class SelectModelVC: BaseViewController {
     }
     
     @IBAction func btnCancelTripAction(_ sender: Any) {
-        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel the trip?".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to cancel the trip".localized, preferredStyle: .alert)
         let OK = UIAlertAction(title: "Accept".localized, style: .default, handler: { ACTION in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "CancelRentalTripVC") as! CancelRentalTripVC
@@ -301,7 +320,6 @@ extension SelectModelVC {
             }
         }
     }
-    
 }
 
 extension SelectModelVC : DurationProtocol{
@@ -344,6 +362,7 @@ extension SelectModelVC {
         self.socketForPickupRentalPassenger()
         self.socketForRentalTripComplete()
         self.socketForRentalTripCancelled()
+        self.socketForSOS()
     }
     
     func RentalOffMethods() {
@@ -353,6 +372,7 @@ extension SelectModelVC {
         self.socket?.off(SocketData.PickupRentalPassengerNotification)
         self.socket?.off(SocketData.RentalTripCompleted)
         self.socket?.off(SocketData.CancelRentalTripNotification)
+        self.socket?.off(SocketData.SOS)
     }
     
     func socketTourRequestRejected() {
@@ -401,7 +421,7 @@ extension SelectModelVC {
                     
                     let driverInfo = infoData["DriverInfo"] as? [[String:AnyObject]]
                     self.dictCurrentDriverInfoData = driverInfo![0] as NSDictionary
-                    
+                    //BookingType
                     let driverLat = self.dictCurrentDriverInfoData.object(forKey: "Lat") as? String ?? "0.0"
                     let driverLong = self.dictCurrentDriverInfoData.object(forKey: "Lng") as? String ?? "0.0"
                     let pickUpTime = self.dictCurrentBookingInfoData.object(forKey: "PickupTime") as? String ?? ""
@@ -410,12 +430,16 @@ extension SelectModelVC {
                     
                     
                     UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
-                        self.closeViewController(ofType: RequestLoadingVC.self)
-                        self.setupViewForTripAccepted(bookingInfo: self.dictCurrentBookingInfoData, driverInfo: self.dictCurrentDriverInfoData)
-                        
-                        let camera = GMSCameraPosition.camera(withLatitude: Double(driverLat) ?? 0.0,longitude: Double(driverLong) ?? 0.0, zoom: self.zoomLevel)
-                        self.mapView.animate(to: camera)
-                        self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
+                        let bookingType = self.dictCurrentBookingInfoData.object(forKey: "BookingType") as? Int ?? 1
+                        let onTheWay = self.dictCurrentBookingInfoData.object(forKey: "OnTheWay") as? String ?? ""
+                        if(bookingType != 2  || onTheWay == "1") {
+                            self.closeViewController(ofType: RequestLoadingVC.self)
+                            self.setupViewForTripAccepted(bookingInfo: self.dictCurrentBookingInfoData, driverInfo: self.dictCurrentDriverInfoData)
+                            
+                            let camera = GMSCameraPosition.camera(withLatitude: Double(driverLat) ?? 0.0,longitude: Double(driverLong) ?? 0.0, zoom: self.zoomLevel)
+                            self.mapView.animate(to: camera)
+                            self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
+                        }
                     })
                 }
             }
@@ -483,6 +507,7 @@ extension SelectModelVC {
     func socketForRentalDriverArrived() {
         self.socket?.on(SocketData.RentalDriverArrived, callback: { (data, ack) in
             print("RentalDriverArrived: \(data)")
+            currentTripType = "2"
             UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
             })
         })
@@ -516,7 +541,7 @@ extension SelectModelVC {
                     
                     self.vwDuration.isHidden = false
                     let bookingTime = self.dictCurrentBookingInfoData.object(forKey: "PickupTime") as? String
-                   
+                    
                     let date = Date()
                     let df = DateFormatter()
                     df.dateFormat = "HH:mm:ss"
@@ -571,7 +596,7 @@ extension SelectModelVC {
         hours = totalSecond / 3600
         minutes = (totalSecond % 3600) / 60
         seconds = (totalSecond % 3600) % 60
-        self.lbltripDuration.text = "Trip Duration : \(String(format: "%02d:%02d:%02d", hours, minutes, seconds))"
+        self.lbltripDuration.text = "\("Trip Duration".localized) : \(String(format: "%02d:%02d:%02d", hours, minutes, seconds))"
         
         let packageInfo = self.dictCurrentBookingInfoData.object(forKey: "PackageInfo") as? NSDictionary
         let packageHours = Int(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") ?? 0
@@ -588,6 +613,7 @@ extension SelectModelVC {
             print("RentalTripCompleted: \(data)")
             self.timer?.invalidate()
             self.timer = nil
+            currentTripType = ""
             
             if let getInfoFromData = data as? [[String:AnyObject]] {
                 let infoData = getInfoFromData[0]
@@ -601,6 +627,23 @@ extension SelectModelVC {
                     }
                 }
             }
+        })
+    }
+    
+    func socketEmitForSOS() {
+        let myJSON = ["UserId" : SingletonClass.sharedInstance.strPassengerID,
+                      "BookingId": "\(self.dictCurrentBookingInfoData.object(forKey: "Id") as AnyObject)",
+                      "UserType": "Passenger","Lat": "\(SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0)", "Lng": "\(SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0)"] as [String : Any]
+        
+        self.socket?.emit(SocketData.RentalSOS, with: [myJSON], completion: nil)
+        print ("\(SocketData.RentalSOS) : \(myJSON)")
+    }
+    
+    func socketForSOS() {
+        self.socket?.on(SocketData.RentalSOS, callback: { (data, ack) in
+            print ("SOS Driver Notify : \(data)")
+            let msg = (data as NSArray)
+            UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
         })
     }
     
@@ -723,5 +766,23 @@ extension SelectModelVC : CancelRentalTripProtocol {
     func CancelRentalTrip(Reason: String) {
         let myJSON = [SocketDataKeys.kBookingIdNow : self.dictCurrentBookingInfoData.object(forKey: "Id") as? String ?? "", SocketDataKeys.kCancelReasons : Reason] as [String : Any]
         socket?.emit(SocketData.CancelRentalTripByPassenger , with: [myJSON], completion: nil)
+    }
+}
+
+extension SelectModelVC: ChatWithDriverprotocol {
+    func gotoChat() {
+        print("chat...")
+        currentTripType = "2"
+        
+        let strBookingID = "\(self.dictCurrentBookingInfoData.object(forKey: "Id") as AnyObject)"
+        let setDriverId =  "\(self.dictCurrentDriverInfoData.object(forKey: "Id") as AnyObject)"
+        let DriverName = self.dictCurrentDriverInfoData.object(forKey: "Fullname") as? String ?? ""
+      
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        NextPage.receiverName = DriverName
+        NextPage.bookingId = String(strBookingID)
+        NextPage.receiverId = String(setDriverId)
+        self.navigationController?.pushViewController(NextPage, animated: true)
+        
     }
 }

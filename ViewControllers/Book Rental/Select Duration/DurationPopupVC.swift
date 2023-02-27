@@ -21,6 +21,8 @@ class DurationPopupVC: BaseViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var lblIntro: UILabel!
     
+    @IBOutlet weak var lblSelectPackage: UILabel!
+    
     weak var delegate: DurationProtocol?
     var modelSelected: Int?
     var arrData = [[String:Any]]()
@@ -38,10 +40,20 @@ class DurationPopupVC: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0.3) {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
+        self.setLocalization()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.view.backgroundColor = UIColor.clear
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblSelectPackage.text = "Please select a suitable package".localized
+        self.btnCancel.setTitle("Cancel".localized, for: .normal)
     }
   
     func prepareView() {
@@ -57,7 +69,7 @@ class DurationPopupVC: BaseViewController {
         self.vWMain.layer.cornerRadius = 10
         self.vWMain.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         self.vWMain.layer.shadowOpacity = 0.15
-        self.btnConfirm.setTitle("Confirm \(strSelectedModel) Tour", for: .normal)
+        self.btnConfirm.setTitle("\("Confirm".localized) \(strSelectedModel) \("Tour".localized)", for: .normal)
     }
     
     func setupData() {
@@ -65,7 +77,7 @@ class DurationPopupVC: BaseViewController {
     }
     
     func setIntroText(amount: String, cancelAmount: String) {
-        lblIntro.text = "Extra time will be charged to you at $\(amount) per minute. Cancellation fees charged to you at $\(cancelAmount), If you cancel trip, after driver accept ride."
+        lblIntro.text = "\("Extra time will be charged to you at".localized) $\(amount) \("per minute".localized). \("Cancellation fees charged to you at".localized) $\(cancelAmount), \("If you cancel trip, after driver accept ride".localized)."
     }
 
     @IBAction func btnCancelAction(_ sender: Any) {
@@ -75,7 +87,7 @@ class DurationPopupVC: BaseViewController {
     @IBAction func btnConfirmAction(_ sender: Any) {
         if(duratonId == ""){
             duratonId = arrData[0]["Id"] as? String ?? ""
-            self.duratonName = "\(arrData[0]["MinimumHours"] as? String ?? "") Hr/\(arrData[0]["MinimumKm"] as? String ?? "") km $\(arrData[0]["MinimumAmount"] as? String ?? "")"
+            self.duratonName = "\(arrData[0]["MinimumHours"] as? String ?? "") hrs/\(arrData[0]["MinimumKm"] as? String ?? "") km $\(arrData[0]["MinimumAmount"] as? String ?? "")"
         }
         self.dismiss(animated: true, completion: {
             self.delegate?.selectedDuration(id: Int(self.duratonId) ?? 0, Name: self.duratonName)
@@ -95,7 +107,7 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
             pickerLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = "\(arrData[row]["MinimumHours"] as? String ?? "") Hr/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+        pickerLabel?.text = "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
         pickerLabel?.textColor = UIColor.black
         return pickerLabel!
     }
@@ -109,12 +121,12 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
         
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(arrData[row]["MinimumHours"] as? String ?? "") Hr/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+        return "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
     }
         
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.duratonId = arrData[row]["Id"] as? String ?? ""
-        self.duratonName = "\(arrData[row]["MinimumHours"] as? String ?? "") Hr/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+        self.duratonName = "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
     }
         
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {

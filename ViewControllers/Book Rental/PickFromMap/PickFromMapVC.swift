@@ -31,6 +31,7 @@ class PickFromMapVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.btnConfirm.setTitle("Confirm Location".localized, for: .normal)
         
         self.mapView.delegate = self
         self.lblAddress.text = address

@@ -101,30 +101,30 @@ let InitialStoryboard = UIStoryboard(name: "Initial", bundle: nil)
 //Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
     static let kBaseImageURL                            = "http://52.23.45.119/"
-    static let kBasePaymentURL                          = "http://52.23.45.119/v3/"
+    static let kBasePaymentURL                          = "http://52.23.45.119/"
     static let kBaseURL                                  = "http://52.23.45.119/v3/Passenger_Api/"
-    static let kDriverRegister                          = "Register"
-    static let kDriverLogin                             = "Login"
-    static let kChangePassword                          = "ChangePassword"
-    static let kSocialLogin                             = "SocialLogin"
-    static let kAppleSocialLogin                        = "AppleLogin"
-    static let kUpdateProfile                           = "UpdateProfile"
-    static let kForgotPassword                          = "ForgotPassword"
-    static let kGetCarList                              = "GetCarClass"
+    static let kDriverRegister                           = "Register"
+    static let kDriverLogin                              = "Login"
+    static let kChangePassword                           = "ChangePassword"
+    static let kSocialLogin                              = "SocialLogin"
+    static let kAppleSocialLogin                         = "AppleLogin"
+    static let kUpdateProfile                            = "UpdateProfile"
+    static let kForgotPassword                           = "ForgotPassword"
+    static let kGetCarList                               = "GetCarClass"
     static let kMakeBookingRequest                      = "SubmitBookingRequest"
     static let kWaitingListRequest                      = "PassengerWaitingRequest"
     static let kAdvancedBooking                         = "AdvancedBooking"
     static let kCheckPromocode                          = "PromoCodeCheck"
     static let kGetPromoCodeList                        = "PromoCodeList"
-    static let kDriver                                  = "Driver"
+    static let kDriver                                   = "Driver"
     static let kBookingHistory                          = "BookingHistory"
-    static let kUpdateDropoffLocation                   = "UpdateDropoffLocation"
+    static let kUpdateDropoffLocation                  = "UpdateDropoffLocation"
     static let kPastBooking                             = "PastBooking"
     static let kUpcomingBooking                         = "UpcomingBooking"
     static let kOngoingBooking                          = "OngoingBooking"
     static let kGetEstimateFare                         = "GetEstimateFare"
     static let kGetEstimateFareForBookLater            = "GetEstimateFareForBookLater"
-    static let kRescheduleBooklater                   = "reschedule_booklater"
+    static let kRescheduleBooklater                    = "reschedule_booklater"
     static let kImageBaseURL                            = "http://3.83.58.5/"
     static let kFeedbackList                            = "FeedbackList/"
     static let kCardsList                               = "Cards/"
@@ -134,20 +134,20 @@ struct WebserviceURLs {
     static let kAddNewCard                              = "AddNewCard"
     static let kChatHistory                             = "chat_history"
     static let kAddMoney                                = "AddMoney"
-    static let kTransactionHistory                      = "TransactionHistory/"
+    static let kTransactionHistory                     = "TransactionHistory/"
     static let kSendMoney                               = "SendMoney"
     static let kQRCodeDetails                           = "QRCodeDetails"
     static let kRemoveCard                              = "RemoveCard/"
     static let kTickpay                                 = "Tickpay"
     static let kAddAddress                              = "AddAddress"
     static let kGetAddress                              = "GetAddress/"
-    static let kDeleteAccount1                           = "DeleteAccount/"
+    static let kDeleteAccount1                          = "DeleteAccount/"
     static let kEditAddress                             = "EditAddress/"
     static let kRemoveAddress                           = "RemoveAddress/"
     static let kVarifyUser                              = "VarifyUser"
     static let kTickpayInvoice                          = "TickpayInvoice"
     static let kGetTickpayRate                          = "GetTickpayRate"
-    static let kInit                                    = "Init/"
+    static let kInit                                     = "Init/"
     
     static let kReviewRating                            = "ReviewRating"
     static let kGetTickpayApprovalStatus                = "GetTickpayApprovalStatus/"
@@ -172,6 +172,7 @@ struct WebserviceURLs {
     static let kRentalCurrentBooking                  = "RentalCurrentBooking"
     static let kRentalReviewRating                    = "RentalReviewRating"
     static let kRentalTripHistory                     = "RentalBookingHistory"
+    static let AdvertisementList                     = "AdvertisementList"
     
     //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
@@ -233,6 +234,7 @@ struct SocketData {
     static let RentalTripCompleted = "RentalBookingDetails"
     static let CancelRentalTripByPassenger = "CancelRentalTripByPassenger"
     static let CancelRentalTripNotification = "PassengerCancelRentalTripNotification"
+    static let RentalSOS = "RentalSOS"
 }
 
 struct SocketDataKeys {
@@ -320,7 +322,7 @@ let openNPP = NSNotification.Name("openPP")
 let openNTC = NSNotification.Name("openTC")
 let openNRP = NSNotification.Name("openRP")
 let openNAboutUs = NSNotification.Name("openAboutUs")
-let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
+//let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
 let GoToChatScreen = NSNotification.Name("GoToChatScreen")
 let RequestForTaxiHourly = NSNotification.Name("RequestForTaxiHourly")
 

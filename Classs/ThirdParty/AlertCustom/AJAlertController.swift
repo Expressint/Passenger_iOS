@@ -344,8 +344,17 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     }
     
     @IBAction func btnMsgAction(_ sender: Any) {
+        openChatForDispatcher()
         hide()
-        NotificationCenter.default.post(name: openChatForDispatcher1, object: nil)
+    }
+    
+    func openChatForDispatcher(){
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        NextPage.receiverName = DispatchName
+        NextPage.bookingId = ""
+        NextPage.isDispacherChat = true
+        NextPage.receiverId = DispatchId
+        self.navigationController?.pushViewController(NextPage, animated: true)
     }
     
     @IBAction func btnCancelTapped(sender: UIButton) {

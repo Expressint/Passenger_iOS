@@ -57,7 +57,6 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
         webserviceOfGetAddress()
     }
     
-    
     func setLocalization(){
         lblSwipeRightToLeftForRemoveAddress.text = ""
         if(aryAddress.count > 0){
@@ -67,15 +66,12 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func editLocation(){
- 
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
     
         let filter = GMSAutocompleteFilter()
         filter.country = "GY"
         acController.autocompleteFilter = filter
-
-        
         present(acController, animated: true, completion: nil)
     }
     
@@ -90,12 +86,10 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     //-------------------------------------------------------------
     
     func setData() {
-        
         self.labelNoData = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         self.labelNoData.text = "No Favourite Location Found!".localized
 //        self.labelNoData.textAlignment = .center
         self.view.addSubview(self.labelNoData)
-        
     }
     
     @IBAction func btnAddNewAction(_ sender: Any) {
@@ -144,20 +138,17 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-         let dataDict = aryAddress[indexPath.row]
-        
-        if (dataDict["Address"] as? String) != nil {
-            
-            var dict = [String:AnyObject]()
-            dict["Address"] = dataDict["Address"] as AnyObject
-            dict["Lat"] = dataDict["Lat"] as AnyObject
-            dict["Lng"] = dataDict["Lng"] as AnyObject
-            
-            delegateForFavourite?.didEnterFavouriteDestination(Source: dict)
-            self.navigationController?.popViewController(animated: true)
+        if(delegateForFavourite != nil) {
+            let dataDict = aryAddress[indexPath.row]
+            if (dataDict["Address"] as? String) != nil {
+                var dict = [String:AnyObject]()
+                dict["Address"] = dataDict["Address"] as AnyObject
+                dict["Lat"] = dataDict["Lat"] as AnyObject
+                dict["Lng"] = dataDict["Lng"] as AnyObject
+                delegateForFavourite?.didEnterFavouriteDestination(Source: dict)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

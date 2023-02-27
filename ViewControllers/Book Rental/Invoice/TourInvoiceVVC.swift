@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MarqueeLabel
 
 class TourInvoiceVVC: BaseViewController {
 
@@ -16,6 +17,7 @@ class TourInvoiceVVC: BaseViewController {
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var llTotalPrice: UILabel!
     @IBOutlet weak var llDateTime: UILabel!
+    @IBOutlet weak var llDropDateTime: UILabel!
     @IBOutlet weak var llServiceType: UILabel!
     @IBOutlet weak var lblVehicleInfo: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
@@ -27,15 +29,54 @@ class TourInvoiceVVC: BaseViewController {
     @IBOutlet weak var stackPayment: UIStackView!
     @IBOutlet weak var vwRating: UIView!
     
+    @IBOutlet weak var lblTitlePickUp: UILabel!
+    @IBOutlet weak var lblTitleDropOff: UILabel!
+    @IBOutlet weak var lblTitleTime: UILabel!
+    @IBOutlet weak var lblTitleDistance: UILabel!
+    @IBOutlet weak var lblTitleGrandTotal: UILabel!
+    @IBOutlet weak var lblTitleDateTime: UILabel!
+    @IBOutlet weak var lblTitleDropDateTime: UILabel!
+    @IBOutlet weak var lblTitleService: UILabel!
+    @IBOutlet weak var lblTitleVehicle: UILabel!
+    @IBOutlet weak var lblTitlePackage: UILabel!
+    @IBOutlet weak var lblTitlePayable: UILabel!
+    @IBOutlet weak var lblTitleRating: UILabel!
+    @IBOutlet weak var btnSubmit: UIButton!
+    
     var ratingToDriver: Float = 0
     var dictCompleteTripData = NSDictionary()
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.setLocalization()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavBarWithBack(Title: "Invoice".localized, IsNeedRightButton: false)
+        self.setNavBarWithBack(Title: "Invoice".localized, IsNeedRightButton: true)
         self.giveRating.delegate = self
         
         self.setupData()
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblTitlePickUp.text = "Pickup Location".localized
+        self.lblTitleDropOff.text = "Final Destination".localized
+        self.lblTitleTime.text = "Total Time".localized
+        self.lblTitleDistance.text = "Distance".localized
+        self.lblTitleGrandTotal.text = "Grand Total".localized
+        self.lblTitleDateTime.text = "\("Pickup Date & Time".localized) :"
+        self.lblTitleDropDateTime.text = "\("Dropoff Date & Time".localized) :"
+        self.lblTitleService.text = "Service Type".localized
+        self.lblTitleVehicle.text = "Vehicle Info".localized
+        self.lblTitlePackage.text = "Package Info".localized
+        self.lblTitlePayable.text = "Total Payable".localized
+        self.lblTitleRating.text = "How was your experience with Driver?".localized
+        self.btnSubmit.setTitle("Submit".localized, for: .normal)
+        self.btnPayment.setTitle("Make Payment", for: .normal)
     }
     
     func setupData() {
@@ -46,13 +87,14 @@ class TourInvoiceVVC: BaseViewController {
         self.llTotalPrice.text = "$\(self.dictCompleteTripData.object(forKey: "GrandTotal") as? String ?? "0")"
         self.lblPrice.text = "$\(self.dictCompleteTripData.object(forKey: "GrandTotal") as? String ?? "0")"
         self.llDateTime.text = self.dictCompleteTripData.object(forKey: "PickupDateTime") as? String
-        self.llServiceType.text = "BookARide Tours"
+        self.llDropDateTime.text = self.dictCompleteTripData.object(forKey: "DropoffDateTime") as? String
+        self.llServiceType.text = "BookARide Rental"
         
         let vehicleInfo = self.dictCompleteTripData.object(forKey: "CarInfo") as? NSDictionary
         let packageInfo = self.dictCompleteTripData.object(forKey: "PackageInfo") as? NSDictionary
         
         self.lblVehicleInfo.text = vehicleInfo?.object(forKey: "Name") as? String ?? ""
-        self.lblPackageInfo.text = "\(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") Hr/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
+        self.lblPackageInfo.text = "\(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") hrs/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
         
         let paymentType = self.dictCompleteTripData.object(forKey: "PaymentType") as? String ?? ""
         if paymentType.lowercased() == "cash" {
@@ -76,7 +118,6 @@ class TourInvoiceVVC: BaseViewController {
         self.navigationController?.pushViewController(next, animated: true)
     }
     
-    
     @IBAction func btnSubmitFinalRating(_ sender: UIButton) {
         
         var param = [String:AnyObject]()
@@ -91,8 +132,8 @@ class TourInvoiceVVC: BaseViewController {
                 self.txtFeedbackFinal.text = ""
                 self.ratingToDriver = 0.0
                 self.giveRating.rating = 0.0
-                UtilityClass.setCustomAlert(title: "Success".localized, message: result.object(forKey: "message") as? String ?? "") { (index, title) in
-                    self.navigationController?.popViewController(animated: true)
+                UtilityClass.setCustomAlert(title: "Success".localized, message: result.object(forKey: GetResponseMessageKey()) as? String ?? "") { (index, title) in
+                    self.navigationController?.popToViewController(ofClass: IntroVC.self, animated: true)
                 }
             } else {
                 if let res = result as? String {

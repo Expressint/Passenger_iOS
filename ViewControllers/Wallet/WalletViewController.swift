@@ -133,17 +133,6 @@ class WalletViewController: BaseViewController, UIScrollViewDelegate {
             callNumber(phoneNumber: contactNumber)
         }
     }
-    
-    private func callNumber(phoneNumber:String) {
-        
-        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
-            
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL)) {
-                application.open(phoneCallURL, options: [:], completionHandler: nil)
-            }
-        }
-    }
     @IBAction func btnBalance(_ sender: UIButton) {
         
         let next = self.storyboard?.instantiateViewController(withIdentifier: "WalletBalanceMainVC") as! WalletBalanceMainVC

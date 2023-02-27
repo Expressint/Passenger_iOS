@@ -272,7 +272,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     // ----------------------------------------------------------------------
     //MARK:- Driver Details
-    @IBOutlet weak var btnBookRental: UIButton!
 
     @IBOutlet weak var lblDriverName: UILabel!
     @IBOutlet weak var lblDriverEmail: UILabel!
@@ -688,26 +687,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    @IBAction func btnBookRental(_ sender: Any) {
-        
-        if txtCurrentLocation.text!.count == 0 {
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your pickup location again".localized) { (index, title) in
-            }
-        } else if txtDestinationLocation.text!.count == 0 {
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your destination again".localized) { (index, title) in
-            }
-        } else {
-            let viewController = bookingsStoryboard.instantiateViewController(withIdentifier: "SelectModelVC") as? SelectModelVC
-            viewController?.pickUpLocation = txtCurrentLocation.text ?? ""
-            viewController?.pickUpLat = doublePickupLat
-            viewController?.pickUpLng = doublePickupLng
-            viewController?.dropOffLocation = txtDestinationLocation.text ?? ""
-            viewController?.dropOffLat = doubleDropOffLat
-            viewController?.dropOffpLng = doubleDropOffLng
-            self.navigationController?.pushViewController(viewController!, animated: true)
-        }
-    }
-    
     //-------------------------------------------------------------
     // MARK: - setMap and Location Methods
     //-------------------------------------------------------------
@@ -984,96 +963,76 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var btnFavourite: UIButton!
     @IBAction func btnFavourite(_ sender: UIButton) {
         
-//        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
-//        NextPage.delegateForFavourite = self
-//        self.navigationController?.pushViewController(NextPage, animated: true)
-      
-        if txtCurrentLocation.text!.count != 0 && txtDestinationLocation.text!.count == 0 {
-//            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Destination Address") { (index, title) in
-//            }
-            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-            NextPage.destinationLocation = txtCurrentLocation.text ?? ""
-            NextPage.lat = "\(self.doublePickupLat)"
-            NextPage.lng = "\(self.doublePickupLng)"
-            NextPage.isFromHome = false
-            self.navigationController?.pushViewController(NextPage, animated: true)
-      
-        } else if txtDestinationLocation.text!.count != 0  && txtCurrentLocation.text!.count == 0 {
-//            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Destination Address") { (index, title) in
-//            }
-            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-            NextPage.destinationLocation = txtDestinationLocation.text ?? ""
-            NextPage.lat = "\(self.doubleDropOffLat)"
-            NextPage.lng = "\(self.doubleDropOffLng)"
-            NextPage.isFromHome = false
-            self.navigationController?.pushViewController(NextPage, animated: true)
-        }
-//        else if txtAdditionalDestinationLocation.text!.count != 0 {
-////            UtilityClass.setCustomAlert(title: "", message: "Cannot store multiple drop offs, please remove additional location") { (index, title) in
-////            }
+        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "FavoriteViewController") as! FavoriteViewController
+        NextPage.delegateForFavourite = self
+        self.navigationController?.pushViewController(NextPage, animated: true)
+    
+//        if txtCurrentLocation.text!.count != 0 && txtDestinationLocation.text!.count == 0 {
 //            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-//            NextPage.destinationLocation =  ""
+//            NextPage.destinationLocation = txtCurrentLocation.text ?? ""
+//            NextPage.lat = "\(self.doublePickupLat)"
+//            NextPage.lng = "\(self.doublePickupLng)"
 //            NextPage.isFromHome = false
 //            self.navigationController?.pushViewController(NextPage, animated: true)
+//
+//        } else if txtDestinationLocation.text!.count != 0  && txtCurrentLocation.text!.count == 0 {
+//            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+//            NextPage.destinationLocation = txtDestinationLocation.text ?? ""
+//            NextPage.lat = "\(self.doubleDropOffLat)"
+//            NextPage.lng = "\(self.doubleDropOffLng)"
+//            NextPage.isFromHome = false
+//            self.navigationController?.pushViewController(NextPage, animated: true)
+//        } else if txtDestinationLocation.text!.count == 0  && txtCurrentLocation.text!.count == 0 {
+//           let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+//           NextPage.destinationLocation = ""
+//           NextPage.isFromHome = false
+//           self.navigationController?.pushViewController(NextPage, animated: true)
+//        } else {
+//            let alert = UIAlertController(title: "Add Favourite Location".localized, message: "Please Select an Option".localized, preferredStyle: .actionSheet)
+//            alert.addAction(UIAlertAction(title: "PickUp Location".localized, style: .default , handler:{ (UIAlertAction)in
+//                let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+//                NextPage.destinationLocation = self.txtCurrentLocation.text ?? ""
+//                NextPage.lat = "\(self.doublePickupLat)"
+//                NextPage.lng = "\(self.doublePickupLng)"
+//                NextPage.isFromHome = false
+//                self.navigationController?.pushViewController(NextPage, animated: true)
+//            }))
+//
+//            alert.addAction(UIAlertAction(title: "DropOff Location".localized, style: .default , handler:{ (UIAlertAction)in
+//                let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
+//                NextPage.destinationLocation = self.txtDestinationLocation.text ?? ""
+//                NextPage.lat = "\(self.doubleDropOffLat)"
+//                NextPage.lng = "\(self.doubleDropOffLng)"
+//                NextPage.isFromHome = false
+//                self.navigationController?.pushViewController(NextPage, animated: true)
+//            }))
+//
+//            alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
+//                print("User click Cancel")
+//            }))
+//
+//            self.present(alert, animated: true, completion: {
+//                print("completion block")
+//            })
 //        }
-        else if txtDestinationLocation.text!.count == 0  && txtCurrentLocation.text!.count == 0 {
-//            UtilityClass.setCustomAlert(title: "Missing", message: "Enter Destination Address") { (index, title) in
-//            }
-           let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-           NextPage.destinationLocation = ""
-           NextPage.isFromHome = false
-           self.navigationController?.pushViewController(NextPage, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Add Favourite Location".localized, message: "Please Select an Option".localized, preferredStyle: .actionSheet)
-            
-            alert.addAction(UIAlertAction(title: "PickUp Location".localized, style: .default , handler:{ (UIAlertAction)in
-                let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-                NextPage.destinationLocation = self.txtCurrentLocation.text ?? ""
-                NextPage.lat = "\(self.doublePickupLat)"
-                NextPage.lng = "\(self.doublePickupLng)"
-                NextPage.isFromHome = false
-                self.navigationController?.pushViewController(NextPage, animated: true)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "DropOff Location".localized, style: .default , handler:{ (UIAlertAction)in
-                let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-                NextPage.destinationLocation = self.txtDestinationLocation.text ?? ""
-                NextPage.lat = "\(self.doubleDropOffLat)"
-                NextPage.lng = "\(self.doubleDropOffLng)"
-                NextPage.isFromHome = false
-                self.navigationController?.pushViewController(NextPage, animated: true)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler:{ (UIAlertAction)in
-                print("User click Cancel")
-            }))
-            
-            self.present(alert, animated: true, completion: {
-                print("completion block")
-            })
-            
-            //            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "AddFavLocationVC") as! AddFavLocationVC
-            //            NextPage.destinationLocation = txtDestinationLocation.text ?? ""
-            //            NextPage.isFromHome = true
-            //            self.navigationController?.pushViewController(NextPage, animated: true)
-        }
     }
     
     @IBAction func btnSOS(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "SOS".localized, message: "Are you sure you want to trigger SOS?", preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: "Cancel \(SosTimerCount)".localized, style: .default, handler: {
-            action in
-            self.SosTimer?.invalidate()
-            self.SosTimer = nil
-            self.SosTimerCount = 10
-            self.dismiss(animated: true, completion: nil)
-        })
-        
-        alertController.addAction(okAction)
-        present(alertController, animated: true) {
-            self.SosTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDownTimer), userInfo: nil, repeats: true)
-        }
+        socketEmitForSOS()
+//        let alertController = UIAlertController(title: "SOS".localized, message: "Are you sure you want to trigger SOS?", preferredStyle: .alert)
+//
+//        let okAction = UIAlertAction(title: "Cancel \(SosTimerCount)".localized, style: .default, handler: {
+//            action in
+//            self.SosTimer?.invalidate()
+//            self.SosTimer = nil
+//            self.SosTimerCount = 10
+//            self.dismiss(animated: true, completion: nil)
+//        })
+//
+//        alertController.addAction(okAction)
+//        present(alertController, animated: true) {
+//            self.SosTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.countDownTimer), userInfo: nil, repeats: true)
+//        }
     }
     
     @objc func countDownTimer() {
@@ -1095,25 +1054,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func btnWhatsApp(_ sender: UIButton) {
-        NotificationCenter.default.post(name: openChatForDispatcher1, object: nil)
-//        let phoneNumber = WhatsUpNumber
-//        let textMsg = ""
-//        let appURL = URL(string: "https://api.whatsapp.com/send?phone=\(phoneNumber)&text=\(textMsg)")!
-//        if UIApplication.shared.canOpenURL(appURL) {
-//            if #available(iOS 10.0, *) {
-//                UIApplication.shared.open(appURL, options: [:]
-//                                           , completionHandler: nil)
-//            }
-//            else {
-//                UIApplication.shared.openURL(appURL)
-//            }
-//        }else{
-//            print("Whatsapp is not installed on this device. Please install Whatsapp and try again.")
-//        }
+        //NotificationCenter.default.post(name: openChatForDispatcher1, object: nil)
     }
     
-    func socketEmitForSOS()
-    {
+    func socketEmitForSOS() {
         let myJSON = ["UserId" : SingletonClass.sharedInstance.strPassengerID,
                       "BookingId": SingletonClass.sharedInstance.bookingId,
                       "BookingType" : self.strBookingType,
@@ -1124,16 +1068,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func onSOS() {
-        
         self.socket?.on(SocketData.SOS, callback: { (data, ack) in
             print ("SOS Driver Notify : \(data)")
-            
             let msg = (data as NSArray)
-            
             UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
-    
         })
-        
     }
     
     
@@ -4311,21 +4250,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 //                    })
                 UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
                 })
-                
-//                if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                    if SelectedLanguage == "en" {
-//
-//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-//                        })
-//                    }
-//                    else if SelectedLanguage == "sw"
-//                    {
-//                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"]! as! String, completionHandler: { (index, title) in
-//                        })
-//                    }
-//                }
             }
-            //            }
         })
     }
     
@@ -4335,97 +4260,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             print("socketMethodForGettingPickUpNotification() is \(data)")
             self.hideWaitingTime()
             self.hideEstimatedView()
-            
-            //            self.stopTimer()
-            /*
-             [{
-             BookingId = 7625;
-             DriverId = 70;
-             message = "Your trip has now started.";
-             }]
-             */
-            
-            //            let alert = UIAlertController(title: appName, message: "Your trip has now started.", preferredStyle: .alert)
-            //            let OK = UIAlertAction(title: "OK", style: .default, handler: { ACTION in
-            //            })
-            //            alert.addAction(OK)
-            //            //            self.present(alert, animated: true, completion: nil)
-            //
-            //            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            //            alertWindow.rootViewController = UIViewController()
-            //            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-            //            alertWindow.makeKeyAndVisible()
-            //            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
-            
             UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0][GetResponseMessageKey()]! as? String ?? "", completionHandler: { (index, title) in
             })
-            
-//            if let SelectedLanguage = UserDefaults.standard.value(forKey: "i18n_language") as? String {
-//                if SelectedLanguage == "en" {
-//
-//                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as? [[String:AnyObject]])?[0]["message"]! as? String ?? "----", completionHandler: { (index, title) in
-//                    })
-//                }
-//                else if SelectedLanguage == "sw"
-//                {
-//                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["swahili_message"] as? String ?? "----", completionHandler: { (index, title) in
-//                    })
-//                }
-//            }
-            
             self.btnRequest.isHidden = true
             self.btnCancelStartedTrip.isHidden = true
-            
             self.methodAfterStartTrip(tripData: NSArray(array: data))
-            
-            //            var bookingIdIs = String()
-            //
-            //            if let bookingData = data as? [[String:AnyObject]] {
-            //                if let id = bookingData[0]["BookingId"] as? String {
-            //                    bookingIdIs = id
-            //                }
-            //                else if let id = bookingData[0]["BookingId"] as? Int {
-            //                    bookingIdIs = "\(id)"
-            //                }
-            //
-            //                if SingletonClass.sharedInstance.bookingId != "" {
-            //                    if SingletonClass.sharedInstance.bookingId == bookingIdIs {
-            //                        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-            //                        UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-            //
-            //                        })
-            //
-            //                        self.btnRequest.isHidden = true
-            //                        self.btnCancelStartedTrip.isHidden = true
-            //
-            //                        self.methodAfterStartTrip(tripData: NSArray(array: data))
-            //                    }
-            //                }
-            //                else {
-            //                    NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-            //                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-            //
-            //                    })
-            //
-            //                    self.btnRequest.isHidden = true
-            //                    self.btnCancelStartedTrip.isHidden = true
-            //
-            //                    self.methodAfterStartTrip(tripData: NSArray(array: data))
-            //                }
-            //
-            //            }
-            
-            
-            //            NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-            //            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0]["message"]! as! String, completionHandler: { (index, title) in
-            //
-            //            })
-            //
-            //            self.btnRequest.isHidden = true
-            //            self.btnCancelStartedTrip.isHidden = true
-            //
-            //            self.methodAfterStartTrip(tripData: NSArray(array: data))
-            
         })
     }
     
@@ -4455,8 +4294,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         
         })
     }
-    func delegateforGivingRate()
-    {
+    func delegateforGivingRate() {
         let ViewController = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as? GiveRatingViewController
         ViewController?.delegateRating = self
         ViewController?.strBookingType = strBookingType
@@ -4473,114 +4311,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.TempBookingInfoDict.removeAll()
         self.txtCurrentLocation.isUserInteractionEnabled = true
 
-//        let alert = UIAlertController(title: appName, message: "Your trip has been completed".localized, preferredStyle: .alert)
-//        let OK = UIAlertAction(title: "OK".localized, style: .default, handler: { ACTION in
-//
-//
-//            //                self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
-//            self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
-//
-//            self.dismiss(animated: true, completion: nil)
-//            //                    self.socket?.off(SocketData.kBookingCompletedNotification)
-//            self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
-//
-//            self.viewTripActions.isHidden = true
-//            self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
-//
-//            self.viewCarLists.isHidden = false
-//            //                self.viewShareRideView.isHidden = false
-//            self.ConstantViewCarListsHeight.constant = 150
-//            //                    self.constraintTopSpaceViewDriverInfo.constant = 170
-//            self.viewMainFinalRating.isHidden = true
-//            SingletonClass.sharedInstance.passengerTypeOther = false
-//
-//            self.viewCarLists.isHidden = true
-//            self.ConstantViewCarListsHeight.constant = 150
-//            self.currentLocationAction()
-//            self.getPlaceFromLatLong()
-//            self.getRaringNotification()
-//
-//
-//            self.clearDataAfteCompleteTrip()
-//            //                self.performSegue(withIdentifier: "seguePresentTripDetails", sender: nil)
-//
-//
-//            //            let viewController = mainStoryborad.instantiateViewController(withIdentifier: "TripDetailsViewController") as? TripDetailsViewController
-//            //            viewController?.arrData = self.arrDataAfterCompletetionOfTrip as NSMutableArray
-//            //            viewController?.delegate = self
-//            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
-//            viewController.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
-//            viewController.delegate = self
-//
-//            DispatchQueue.main.async
-//            {
-//                self.btnCurrentLocation(self.btnCurrentLocation)
-//            }
-//
-//
-//            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-//            alertWindow.rootViewController = UIViewController()
-//            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-//            alertWindow.makeKeyAndVisible()
-//            alertWindow.rootViewController?.present(viewController, animated: true, completion: nil)
-//
-//            //            let next = mainStoryborad.instantiateViewController(withIdentifier: "TripInfoViewController") as! TripInfoViewController
-//            //            next.dictData = self.arrDataAfterCompletetionOfTrip[0] as! NSDictionary
-//            //            next.delegate = self
-//            //            DispatchQueue.main.async
-//            //                {
-//            //                    //                    self.btnCurrentLocation(self.btnCurrentLocationIcon)
-//            //                    self.btnCurrentLocation(self.btnCurrentLocation)
-//            //            }
-//            //            Utilities.presentPopupOverScreen(next)
-//
-//        })
-//
-//        alert.addAction(OK)
-        //        Sj Change:
-        //                self.present(alert, animated: true, completion: nil)
-        
-        
-        //        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-        //        alertWindow.rootViewController = UIViewController()
-        //        alertWindow.windowLevel = UIWindowLevelAlert + 1;
-        //        alertWindow.makeKeyAndVisible()
-        //        alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
-        
-        //        UtilityClass.showAlertWithCompletion("Your trip has been completed", message: "", vc: self, completionHandler: { (status) in
-        //
-        //            if (status == true)
-        //            {
-        //
-        //
-        //
-        ////                self.performSegue(withIdentifier: "seguePresentTripDetails", sender: nil)
-        //
-        ////                let drinkViewController = segue.destination as! TripDetailsViewController
-        ////                drinkViewController.arrData = arrDataAfterCompletetionOfTrip as NSMutableArray
-        ////                drinkViewController.delegate = self
-        //
-        //
-        //
-        //
-        //
-        ////                UIApplication.shared.keyWindow?.rootViewController?.present(viewController!, animated: true, completion: nil)
-        //
-        //                //                if (SingletonClass.sharedInstance.passengerTypeOther) {
-        //                //                }
-        //                //                else {
-        //                //
-        //                //                    self.openRatingView()
-        //                //                }
-        //
-        //
-        //            }
-        //            else
-        //            {
-        //                print("Else Part")
-        //            }
-        //        })
-        
         UtilityClass.setCustomAlert(title: appName, message: "Your trip has been completed".localized) { (index, str) in
             self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
@@ -4611,15 +4341,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func clearSetupMapForNewBooking() {
-        
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
         clearMap()
         self.currentLocationAction()
         self.viewTripActions.isHidden = true
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
-
-        //        self.viewCarLists.isHi  dden = false
-        //        self.ConstantViewCarListsHeight.constant = 150
         clearDataAfteCompleteTrip()
     }
     
@@ -4666,8 +4392,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @objc func openRatingView() {
         let next = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as! GiveRatingViewController
         next.strBookingType = self.strBookingType
-        //        next.delegate = self
-        //            self.presentingViewController?.modalPresentationStyle
         self.present(next, animated: true, completion: nil)
     }
     
@@ -4706,9 +4430,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
                 if SingletonClass.sharedInstance.bookingId != "" {
                     if SingletonClass.sharedInstance.bookingId == bookingId {
-                        
                         UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.".localized) { (index, title) in
-                            //               self.stopSound(fileName: "RequestConfirm", extensionType: "mp3")
                         }
                         self.strBookingType = "BookLater"
                         self.DriverInfoAndSetToMap(driverData: NSArray(array: data))
@@ -4716,7 +4438,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 else {
                     UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.".localized) { (index, title) in
-                        //               self.stopSound(fileName: "RequestConfirm", extensionType: "mp3")
                     }
                     self.strBookingType = "BookLater"
                     self.DriverInfoAndSetToMap(driverData: NSArray(array: data))
@@ -4734,7 +4455,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func onPickupPassengerByDriverInBookLaterRequestNotification() {
-        
         self.socket?.on(SocketData.kAdvancedBookingPickupPassengerNotification, callback: { (data, ack) in
             print("onPickupPassengerByDriverInBookLaterRequestNotification() is \(data)")
             self.hideWaitingTime()
@@ -4750,38 +4470,19 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 }
                 
                 if SingletonClass.sharedInstance.bookingId != "" {
-                    
                     if SingletonClass.sharedInstance.bookingId == bookingId {
                         self.strBookingType = "BookLater"
-//                        let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
-//                        let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-//                        alert.addAction(OK)
-//                        (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-    
                         UtilityClass.setCustomAlert(title: "", message: "Your trip has now started.".localized, showStack: false, completionHandler: nil)
-
-                        
                         self.btnRequest.isHidden = true
                         self.btnCancelStartedTrip.isHidden = true
-                        //            SingletonClass.sharedInstance.isTripContinue = true
                         self.methodAfterStartTrip(tripData: NSArray(array: data))
-                        
                     }
                 }
                 else {
                     self.strBookingType = "BookLater"
-//                    let alert = UIAlertController(title: nil, message: "Your trip has now started.".localized, preferredStyle: .alert)
-//                    let OK = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
-//                    alert.addAction(OK)
-//                    (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
-                    
-                    
                     UtilityClass.setCustomAlert(title: "", message: "Your trip has now started.".localized, showStack: false, completionHandler: nil)
-
-                    
                     self.btnRequest.isHidden = true
                     self.btnCancelStartedTrip.isHidden = true
-                    //            SingletonClass.sharedInstance.isTripContinue = true
                     self.methodAfterStartTrip(tripData: NSArray(array: data))
                 }
             }
@@ -4789,13 +4490,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func onTripHoldingNotificationForPassenger() {
-        
         self.socket?.on(SocketData.kReceiveHoldingNotificationToPassenger, callback: { (data, ack) in
             print("onTripHoldingNotificationForPassenger() is \(data)")
-            
             var message = String()
             message = "Trip on Hold"
-            
             let resAry = NSArray(array: data)
             message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
             UtilityClass.setCustomAlert(title: "", message: message, completionHandler: nil)
@@ -4803,7 +4501,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func onTripHoldingNotificationForPassengerLater() {
-        
         self.socket?.on(SocketData.kAdvancedBookingTripHoldNotification, callback: { (data, ack) in
             print("onTripHoldingNotificationForPassengerLater() is \(data)")
             var message = String()
@@ -4811,8 +4508,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             let resAry = NSArray(array: data) //as? NSArray {
             message = (resAry.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? ""
             UtilityClass.setCustomAlert(title: "", message: message, completionHandler: nil)
-
-            
         })
     }
     
@@ -4831,6 +4526,10 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
         self.socket?.on(SocketData.kReceiveDriverLocationToPassenger, callback: { (data, ack) in
             print("onReceiveDriverLocationToPassenger() is \(data)")
+            
+            if(self.bookingIDNow == "" && self.advanceBookingID == ""){
+                return
+            }
             
             SingletonClass.sharedInstance.driverLocation = (data as NSArray).object(at: 0) as! [String : AnyObject]
             
@@ -4879,7 +4578,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if self.destinationCordinate != nil {
                 CATransaction.commit()
             }
-
             
             if (self.arrivedRoutePath != nil && !(GMSGeometryIsLocationOnPathTolerance(self.driverMarker.position, self.arrivedRoutePath!, true, 100)))
             {
@@ -5104,7 +4802,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func txtCurrentLocation(_ sender: UITextField) {
-        
         let visibleRegion = mapView.projection.visibleRegion()
         let bounds = GMSCoordinateBounds(coordinate: visibleRegion.farLeft, coordinate: visibleRegion.nearRight)
         
@@ -5118,7 +4815,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         locationEnteredType = .pickup
         present(acController, animated: true, completion: nil)
     }
-    
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
@@ -5141,7 +4837,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             currentLocationMarker.map = nil
             let camera = GMSCameraPosition.camera(withLatitude: place.coordinate.latitude,longitude: place.coordinate.longitude, zoom: 17)
             self.mapView.camera = camera
-//            mapView.animate(to: camera)
             
         } else if locationEnteredType == .dropOffFirst {
             
@@ -5160,10 +4855,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if(isDropLocationChange){
                 btnDoneForLocationSelected.setTitle("Update Dropoff Location".localized, for: .normal)
             }
-            
-//            mapView.animate(to: camera)
-            
         }
+        
         else if locationEnteredType == .dropOffSecond{
             
             locationEnteredType = .dropOffSecond

@@ -82,7 +82,7 @@
 "Delete Account" = "Delete Account";
 "My Bookings" = "My Bookings";
 "Hourly Bookings" = "Hourly Bookings";
-"Favourites" = "Favourites";
+"Favourites" = "Favourite Locations";
 "My Receipts" = "My Receipts";
 "Help" = "Help";
 "Invite Friends" = "Invite Friends";
@@ -268,7 +268,7 @@
 "Driver delayed" = "Driver delayed";
 "No longer interested" = "No longer interested";
 "Other" = "Other";
-"Select Language" = "Select Language";
+"Select Language" = "Change Language";
 "Dear Customer. To Keep Our Driver Motivated. Please Note That Cancelling  a Trip 3 Mins After Booking Attracts A Fee of 50 Payable To The Driver. Please Confirm Whether You Still Wish To Cancel?" = "Dear Customer. To Keep Our Driver Motivated. Please Note That Cancelling  a Trip 3 Mins After Booking Attracts A Fee of 50 Payable To The Driver. Please Confirm Whether You Still Wish To Cancel?";
 "Please Select Cancel Reason" = "Please Select Cancel Reason";
 "Please enter name!" = "Please enter name!";
@@ -593,6 +593,8 @@
 "Please Select Car" = "Please Select Car";
 "Are you sure you want to cancel the trip?" = "If your cancelation of this ride was accepted by a BookARide driver more than 5 minutes ago, then you will be charged a 50% cancelation fee. You will be required to pay attempt charges on your next ride. If you have any questions please contact our customer service team";
 
+"Are you sure you want to cancel the trip" = "Are you sure you want to cancel the trip?";
+
 
 "BSB" = "BSB";
 "Bank Account Name" = "Bank Account Name";
@@ -605,3 +607,55 @@
 "Your invite code is:" = "Your invite code is:";
 "Please confirm password" = "Please confirm password";
 "Please fill all the details" = "Please fill all the details";
+
+// Rental Flow
+"Services" = "Services";
+"GoAnywhere" = "Go anywhere, get anything";
+"Ride" = "Ride";
+"Hourly" = "Hourly";
+"Corporate" = "Corporate";
+
+"Select Model" = "Select Model";
+"Rental Trip" = "Rental Trip";
+"Cancel Trip" = "Cancel Trip";
+
+"Driver Info" = "Driver Info";
+"Package Info" = "Package Info";
+"Package" = "Package";
+
+"Please Select Reason" = "Please Select Reason";
+"Long pick up time" = "Long pick up time";
+"Driver delayed" = "Driver delayed";
+"No longer interested" = "No longer interested";
+"Other" = "Other";"Please select reason to cancel trip" = "Please select reason to cancel trip";
+"Please enter reason to cancel trip" = "Please enter reason to cancel trip";
+
+"Please select a suitable package" = "Please select a suitable package";
+"Extra time will be charged to you at" = "Extra time will be charged to you at";
+"per minute" = "per minute";
+"Cancellation fees charged to you at" = "Cancellation fees charged to you at";
+"If you cancel trip, after driver accept ride" = "If you cancel trip, after driver accept ride";
+"Confirm" = "Confirm";
+"Tour" = "Tour";
+
+"Final Destination" = "Final Destination";
+"Find on Map" = "Find on Map";
+"Model" = "Model";
+"Confirm Location" = "Confirm Location";
+"Confirm Details" = "Confirm Details";
+
+"Booking Request Processing" = "Booking Request Processing";
+
+"Total Time" = "Total Time";
+"Distance" = "Distance";
+"Grand Total" = "Grand Total";
+"Date & Time" = "Date & Time";
+"Service Type" = "Service Type";
+"Vehicle Info" = "Vehicle Info";
+"Package Info" = "Package Info";
+"Total Payable" = "Total Payable";
+"How was your experience with Driver?" = "How was your experience with Driver?";
+"Invoice" = "Invoice";
+"Trip Duration" = "Trip Duration";
+"Pickup Date & Time" = "Pickup Time";
+"Dropoff Date & Time" = "Dropoff Time";

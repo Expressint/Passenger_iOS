@@ -122,17 +122,7 @@ class MyBookingViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
     
-    private func callNumber(phoneNumber:String) {
-        
-        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
-            
-            let application:UIApplication = UIApplication.shared
-            if (application.canOpenURL(phoneCallURL)) {
-                application.open(phoneCallURL, options: [:], completionHandler: nil)
-            }
-        }
-    }
-    
+
     @IBAction func lblOnGoing(_ sender: UIButton) {
         OnGoing()
         

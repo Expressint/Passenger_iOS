@@ -113,12 +113,7 @@ class DriverInfoViewController: UIViewController {
         viewCarAndDriverInfo.layer.masksToBounds = true
         btnCallGreen.layer.cornerRadius = btnCallGreen.frame.width / 2
         btnCallGreen.clipsToBounds = true
-//        self.webserviceForGetEstimateETA()
-        
 
-//        self.fillAllFields()
-        
-       
         if(shouldShow)
         {
             self.strApproxTimeToYourLocation = "calculating..."
@@ -359,11 +354,6 @@ class DriverInfoViewController: UIViewController {
         self.lblVehiclePlateNum.text = "\(strCarPlateNumber)"
         self.lblVehicleType.text = "\(strVehicleType)"
         self.lblVehicleColor.text = "\(strVehicleColor)"
-        
-        
-    
-
-
     }
    
     @IBAction func btnCallToDriver(_ sender: UIButton) {

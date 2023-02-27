@@ -20,7 +20,7 @@ class TourTripHistoryVC: BaseViewController {
     var isPageEnd: Bool = false
     var aryData : [[String:AnyObject]] = [[:]]
     let socket = (UIApplication.shared.delegate as! AppDelegate).socket
-    
+  
     override func viewDidDisappear(_ animated: Bool) {
         self.RentalOffMethods()
     }
@@ -41,7 +41,7 @@ class TourTripHistoryVC: BaseViewController {
         
         self.registerNib()
 
-        self.setNavBarWithBack(Title: "Hourly Bookings".localized, IsNeedRightButton: false)
+        self.setNavBarWithBack(Title: "Hourly Bookings".localized, IsNeedRightButton: true)
         self.reloadTopView(index: selectedTyoe)
         self.APIForHistory(index: selectedTyoe)
         
@@ -82,7 +82,7 @@ class TourTripHistoryVC: BaseViewController {
     }
     
     func CancelRequest(Id: String) {
-        RMUniversalAlert.show(in: self, withTitle:appName, message: "Are you sure you want to cancel the trip?".localized, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: ["Accept".localized, "Decline".localized], tap: {(alert, buttonIndex) in
+        RMUniversalAlert.show(in: self, withTitle:appName, message: "Are you sure you want to cancel the trip".localized, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: ["Accept".localized, "Decline".localized], tap: {(alert, buttonIndex) in
             if (buttonIndex == 2){
                 let myJSON = [SocketDataKeys.kBookingIdNow : Id, SocketDataKeys.kCancelReasons : ""] as [String : Any]
                 self.socket?.emit(SocketData.CancelRentalTripByPassenger , with: [myJSON], completion: nil)
@@ -149,26 +149,44 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
         cell.lblPickUpLoc.text = self.aryData[indexPath.row]["PickupLocation"] as? String ?? ""
         cell.lblDropOffLoc.text = self.aryData[indexPath.row]["DropoffLocation"] as? String ?? ""
         
-        
         cell.lblBookingDate.text = "\(self.aryData[indexPath.row]["CreatedDate"] as? String ?? "")".components(separatedBy: " ")[0]
         cell.lblPickUpDate.text = self.aryData[indexPath.row]["PickupDateTime"] as? String ?? ""
+        cell.lblDropOffDate.text = self.aryData[indexPath.row]["DropoffDateTime"] as? String ?? ""
         cell.lblPaymentType.text = self.aryData[indexPath.row]["PaymentType"] as? String ?? ""
         cell.lblTripStatus.text = self.aryData[indexPath.row]["StatusName"] as? String ?? ""
         
+        let packageInfo = self.aryData[indexPath.row]["PackageInfo"] as? NSDictionary
+        cell.lblPackageName.text = "\(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") Hr/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
+        cell.lblTotalDistance.text = "\(self.aryData[indexPath.row]["TripDistance"] as? String ?? "") km"
+        cell.lblTotalDuration.text = "\(self.aryData[indexPath.row]["TripDuration"] as? String ?? "")".secondsToTimeFormate()
+        cell.lblGrandTotal.text = "$\(self.aryData[indexPath.row]["GrandTotal"] as? String ?? "")"
+        
         if selectedTyoe == "1" {
             cell.stackBtns.isHidden = true
-        } else if selectedTyoe == "2"{
+            cell.stackgrandtotal.isHidden = true
+            cell.stackDistance.isHidden = true
+            cell.stackDuration.isHidden = true
+            cell.stackDropOffDate.isHidden = true
+        } else if selectedTyoe == "2" {
             cell.stackBtns.isHidden = false
             cell.btnCancel.isHidden = false
             cell.btnGetReceipt.isHidden = true
             cell.btnViewReceipt.isHidden = true
             cell.btnPayment.isHidden = true
+            cell.stackgrandtotal.isHidden = true
+            cell.stackDistance.isHidden = true
+            cell.stackDropOffDate.isHidden = true
+            cell.stackDuration.isHidden = true
         } else {
-            cell.stackBtns.isHidden = (self.aryData[indexPath.row]["StatusName"] as? String ?? "" == "Canceled") ? true : false
+            cell.stackgrandtotal.isHidden = false
+            cell.stackDistance.isHidden = false
+            cell.stackDuration.isHidden = false
+            cell.stackDropOffDate.isHidden = (self.aryData[indexPath.row]["StatusName"] as? String ?? "" == "Canceled") ? true : false
+            cell.stackBtns.isHidden = ((self.aryData[indexPath.row]["StatusName"] as? String ?? "" == "Canceled") && (self.aryData[indexPath.row]["IsPaymentRequired"] as! Int == 0)) ? true : false
             cell.btnCancel.isHidden = true
-            cell.btnGetReceipt.isHidden = false
-            cell.btnViewReceipt.isHidden = false
-            cell.btnPayment.isHidden = ((self.aryData[indexPath.row]["PaymentType"] as? String ?? "").lowercased() == "card" && self.aryData[indexPath.row]["IsPaymentRequired"] as? Int ?? 0 == 1) ? false : true
+            cell.btnPayment.isHidden = (self.aryData[indexPath.row]["IsPaymentRequired"] as? Int ?? 0 == 1) ? false : true
+            cell.btnGetReceipt.isHidden = !cell.btnPayment.isHidden
+            cell.btnViewReceipt.isHidden = !cell.btnPayment.isHidden
         }
         
         cell.cancelTap = {
@@ -186,7 +204,7 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
         cell.paymentTap = {
             self.doPayment(Url: self.aryData[indexPath.row]["PaymentURL"] as? String ?? "")
         }
-        
+  
         return cell
     }
     
@@ -195,6 +213,11 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? TourTripHistoryCell {
+            tableView.beginUpdates()
+            cell.stackMain.isHidden = !cell.stackMain.isHidden
+            tableView.endUpdates()
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -207,7 +230,6 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
             APIForHistory(index: selectedTyoe)
         }
     }
-
 }
 
 extension TourTripHistoryVC {
@@ -217,7 +239,7 @@ extension TourTripHistoryVC {
         dictData["PassengerId"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["Status"] = selectedTyoe as AnyObject
         dictData["page_number"] = currentPage as AnyObject
-      
+
         webserviceForRentalHistory(dictData as AnyObject) { (result, status) in
             if (status) {
                 print(result)
@@ -229,7 +251,6 @@ extension TourTripHistoryVC {
                     self.isPageEnd = true
                 }
                 self.tblData.reloadData()
-
                 
             } else {
                 if let res = result as? String {

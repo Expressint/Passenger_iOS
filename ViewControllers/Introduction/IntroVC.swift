@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import FSPagerView
+import SDWebImage
+import SafariServices
 
 class IntroVC: BaseViewController {
     
+    @IBOutlet weak var lblServices: UILabel!
+    @IBOutlet weak var lblGoAnywhere: UILabel!
+    @IBOutlet weak var lblRide: UILabel!
+    @IBOutlet weak var lblHourly: UILabel!
+    @IBOutlet weak var lblCorporate: UILabel!
+    @IBOutlet weak var vWAdvertisement: FSPagerView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    var arrAdvImages : [[String: AnyObject]] = []
+    
     override func viewWillAppear(_ animated: Bool) {
-        self.setNavBarWithSideMenu(Title: "Services".localized, IsNeedRightButton: false)
         self.setNotificationcenter()
         self.checkForNotification()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -23,7 +37,36 @@ class IntroVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.webserviceOfAdvList()
+        
+        self.setLocalization()
         self.setupRedirection()
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.setNavBarWithSideMenu(Title: "Services".localized, IsNeedRightButton: true, isWhatsApp: true)
+        self.lblServices.text = "Services".localized
+        self.lblGoAnywhere.text = "GoAnywhere".localized
+        self.lblRide.text = "Ride".localized
+        self.lblHourly.text = "Hourly".localized
+        self.lblCorporate.text = "Corporate".localized
+    }
+    
+    func setupPagerView() {
+        pageControl.numberOfPages = arrAdvImages.count
+        pageControl.currentPage = 0
+        
+        vWAdvertisement.dataSource = self
+        vWAdvertisement.delegate = self
+        
+        vWAdvertisement.automaticSlidingInterval = 3.0
+        vWAdvertisement.isInfinite = true
+        vWAdvertisement.transformer = FSPagerViewTransformer(type: .linear)
+        vWAdvertisement.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        vWAdvertisement.reloadData()
     }
     
     @IBAction func btnRideAction(_ sender: Any) {
@@ -41,7 +84,10 @@ class IntroVC: BaseViewController {
     }
     
     func setupRedirection() {
-        if currentTripType == "2" {
+        if currentTripType == "1" {
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(next, animated: true)
+        }else if currentTripType == "2" {
             let profileViewController = bookingsStoryboard.instantiateViewController(withIdentifier: "SelectModelVC") as! SelectModelVC
             self.navigationController?.pushViewController(profileViewController, animated: true)
         }
@@ -62,7 +108,6 @@ class IntroVC: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.openTC), name: openNTC, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.openRP), name: openNRP, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.openAboutUs), name: openNAboutUs, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.openChatForDispatcher), name: openChatForDispatcher1, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.goChatScreen), name: GoToChatScreen, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.deleteAccount), name: DeleteAccount, object: nil)
     }
@@ -82,7 +127,6 @@ class IntroVC: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: openNTC, object: nil)
         NotificationCenter.default.removeObserver(self, name: openNRP, object: nil)
         NotificationCenter.default.removeObserver(self, name: openNAboutUs, object: nil)
-        NotificationCenter.default.removeObserver(self, name: openChatForDispatcher1, object: nil)
         NotificationCenter.default.removeObserver(self, name: GoToChatScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: DeleteAccount, object: nil)
     }
@@ -236,17 +280,86 @@ class IntroVC: BaseViewController {
         self.navigationController?.pushViewController(next, animated: true)
     }
     
-    @objc func openChatForDispatcher(){
-        let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
-        NextPage.receiverName = DispatchName
-        NextPage.bookingId = ""
-        NextPage.isDispacherChat = true
-        NextPage.receiverId = DispatchId
-        self.navigationController?.pushViewController(NextPage, animated: true)
-    }
-    
     @objc func openAboutUs(){
         let next = mainStoryboard.instantiateViewController(withIdentifier: "AboutUsVC") as! AboutUsVC
         self.navigationController?.pushViewController(next, animated: true)
+    }
+}
+
+extension IntroVC: FSPagerViewDataSource, FSPagerViewDelegate {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return self.arrAdvImages.count
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+   
+        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
+            if (error == nil) {
+                cell.imageView?.image = image
+            }
+        })
+        
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.cornerRadius = 10
+        cell.contentMode = .scaleAspectFit
+        cell.clipsToBounds = true
+        cell.layer.masksToBounds = true
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        pagerView.deselectItem(at: index, animated: true)
+        self.viewAdv(URLMain: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+       // self.gotoPage(strUrl: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+    }
+    
+    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+        self.pageControl.currentPage = targetIndex
+    }
+    
+    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
+        self.pageControl.currentPage = pagerView.currentIndex
+    }
+}
+
+extension IntroVC {
+    func webserviceOfAdvList() {
+        webserviceForAdvList { (result, status) in
+            if (status) {
+                print(result)
+                let data = result["data"] as? [[String: AnyObject]] ?? [[:]]
+                self.arrAdvImages = data
+                self.setupPagerView()
+            }else {
+                print(result)
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+            }
+        }
+    }
+    
+    func gotoPage(strUrl: String) {
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
+        next.headerName = "BookARide"
+        next.strURL = strUrl
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+    func viewAdv(URLMain: String) {
+        guard let url = URL(string: URLMain) else {return}
+        let svc = SFSafariViewController(url: url)
+        present(svc, animated: true, completion: nil)
     }
 }

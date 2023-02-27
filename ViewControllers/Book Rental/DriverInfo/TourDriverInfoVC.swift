@@ -9,15 +9,26 @@
 import UIKit
 import SDWebImage
 
+protocol ChatWithDriverprotocol: AnyObject {
+    func gotoChat()
+}
+
 class TourDriverInfoVC: BaseViewController {
     
     @IBOutlet weak var vWMain: UIView!
     @IBOutlet weak var lblDriverName: UILabel!
-    @IBOutlet weak var btnPhoneNumber: UIButton!
     @IBOutlet weak var btnOutside: UIButton!
     @IBOutlet weak var imgDriver: UIImageView!
     @IBOutlet weak var lblHours: UILabel!
+    @IBOutlet weak var lblDriverInfo: UILabel!
+    @IBOutlet weak var lblPassengerInfo: UILabel!
     
+    @IBOutlet weak var lblTitlePickUpLoc: UILabel!
+    @IBOutlet weak var lblPickUpLoc: UILabel!
+    @IBOutlet weak var lblTitleDropOffLoc: UILabel!
+    @IBOutlet weak var lblDropOffLoc: UILabel!
+    
+    weak var delegate: ChatWithDriverprotocol?
     var dictCurrentBookingInfoData = NSDictionary()
     var dictCurrentPassengerInfoData = NSDictionary()
     
@@ -32,11 +43,24 @@ class TourDriverInfoVC: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0.3) {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
     }
     
     func prepareView() {
         self.setupUI()
         self.setupData()
+        self.setLocalization()
+    }
+    
+    @objc func changeLanguage(){
+        self.setLocalization()
+    }
+    func setLocalization(){
+        self.lblDriverInfo.text = "Driver Info".localized
+        self.lblPassengerInfo.text = "Package Info".localized + " :"
+        self.lblTitlePickUpLoc.text = "Pickup Location".localized
+        self.lblTitleDropOffLoc.text = "Dropoff Location".localized
+        //self.btnCancelTrip.setTitle("Next".localized, for: .normal)
     }
     
     func setupUI() {
@@ -57,11 +81,12 @@ class TourDriverInfoVC: BaseViewController {
     func setupData() {
         let packageInfo = self.dictCurrentBookingInfoData.object(forKey: "PackageInfo") as? NSDictionary
         
+        self.lblPickUpLoc.text =  self.dictCurrentBookingInfoData.object(forKey: "PickupLocation") as? String ?? ""
+        self.lblDropOffLoc.text =  self.dictCurrentBookingInfoData.object(forKey: "DropoffLocation") as? String ?? ""
         self.lblDriverName.text = self.dictCurrentPassengerInfoData.object(forKey: "Fullname") as? String ?? ""
-        self.btnPhoneNumber.underline(text: self.dictCurrentPassengerInfoData.object(forKey: "MobileNo") as? String ?? "")
-        self.lblHours.text = "Package : \(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") Hr/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
+        self.lblHours.text = "\(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") hrs/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
       
-        let urlLogo = "\(WebserviceURLs.kImageBaseURL)\(dictCurrentPassengerInfoData.object(forKey: "Image") as? String ?? "")"
+        let urlLogo = "\(WebserviceURLs.kBaseImageURL)\(dictCurrentPassengerInfoData.object(forKey: "Image") as? String ?? "")"
         self.imgDriver.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "icon_UserImage"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
                 self.imgDriver.image = image
@@ -83,5 +108,18 @@ class TourDriverInfoVC: BaseViewController {
         self.dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func btncloseAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func btncallAction(_ sender: Any) {
+        callNumber(phoneNumber: DispatchCall)
+    }
+    
+    @IBAction func btnChatAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: {
+            self.delegate?.gotoChat()
+        })
+    }
 }
 

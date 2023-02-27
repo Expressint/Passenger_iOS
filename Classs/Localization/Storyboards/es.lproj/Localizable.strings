@@ -76,11 +76,11 @@
 "Legal Stuff" = "Legal";
 "Delete Account" = "Borrar cuenta";
 
-"Select Language" = "Seleccione el idioma";
+"Select Language" = "Cambiar idioma";
 
 "My Bookings" = "Mis Reservas";
 "Hourly Bookings" = "Reservas por hora";
-"Favourites" = "Favoritos";
+"Favourites" = "Ubicaciones favoritas";
 "My Receipts" = "Mis recibos";
 "Help" = "Ayuda";
 "Invite Friends" = "Invitar a amigos";
@@ -433,7 +433,7 @@
 "Notes (Optional)" = "Notes (Optional)";
 "Flight Number (If applicable)" = "Flight Number (If applicable)";
 "You will be notified with your driver detail after your request is submited." = "You will be notified with your driver detail after your request is submited.";
-"PickupDate" = "Pickup Date";
+"PickupDate" = "Fecha de recogida";
 "Track Your Trip" = "Track Your Trip";
 "Please select car model" = "Please select car model";
 "Please enter a valid drop off location" = "Please enter a valid drop off location";
@@ -564,8 +564,6 @@
 "Your Email Id is not configured from settings. Please configure it from Settings -> Mail" = "Your Email Id is not configured from settings. Please configure it from Settings -> Mail";
 "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?" = "If you cancel the trip then you will be partially charged. Are you sure you want to cancel the trip?";
 
-
-
 "All fields are required..." = "All fields are required...";
 "Your ride has been booked." = "Your ride has been booked.";
 "Please Select Car" = "Please Select Car";
@@ -580,3 +578,57 @@
 "has invited you to become a AllOut Passenger" = "has invited you to become a AllOut Passenger";
 "Your invite code is:" = "Your invite code is:";
 "Please fill all the details" = "Please fill all the details";
+
+// Rental Flow
+"Services" = "Servicios";
+"GoAnywhere" = "Ve a cualquier lugar, consigue cualquier cosa";
+"Ride" = "Conducir";
+"Hourly" = "Cada hora";
+"Corporate" = "Corporativo";
+
+"Select Model" = "Seleccionar modelo";
+"Rental Trip" = "Viaje de alquiler";
+"Cancel Trip" = "Cancelar viaje";
+
+"Driver Info" = "Información del conductor";
+"Package Info" = "Información del paquete";
+"Package" = "Paquete";
+
+"Please Select Reason" = "Seleccione el motivo";
+"Long pick up time" = "Largo tiempo de recogida";
+"Driver delayed" = "Conductor retrasado";
+"No longer interested" = "Ya no está interesado";
+"Other" = "Otro";
+"Please select reason to cancel trip" = "Seleccione el motivo para cancelar el viaje";
+"Please enter reason to cancel trip" = "Ingrese el motivo para cancelar el viaje";
+
+"Please select a suitable package" = "Seleccione un paquete adecuado";
+"Extra time will be charged to you at" = "El tiempo extra se le cobrará en";
+"per minute" = "por minuto";
+"Cancellation fees charged to you at" = "Cargos por cancelación cobrados a usted en";
+"If you cancel trip, after driver accept ride" = "Si cancela el viaje, después de que el conductor acepte el viaje";
+"Confirm" = "Confirmar";
+"Tour" = "Recorrido";
+
+"Final Destination" = "Destino final";
+"Find on Map" = "Buscar en el mapa";
+"Model" = "Modelo";
+"Confirm Location" = "Confirmar ubicación";
+"Confirm Details" = "Confirmar detalles";
+
+"Booking Request Processing" = "Procesamiento de solicitudes de reserva";
+
+"Total Time" = "Tiempo Total";
+"Distance" = "Distancia";
+"Grand Total" = "Gran total";
+"Date & Time" = "Fecha y hora";
+"Service Type" = "Tipo de servicio";
+"Vehicle Info" = "Información del vehículo";
+"Package Info" = "Información del paquete";
+"Total Payable" = "Total a pagar";
+"How was your experience with Driver?" = "¿Cómo fue tu experiencia con Driver?";
+"Invoice" = "Factura";
+"Trip Duration" = "Duración del viaje";
+"Pickup Date & Time" = "Hora de recogida";
+"Dropoff Date & Time" = "Hora de entrega";
+"Are you sure you want to cancel the trip" = "¿Estás segura de que deseas cancelar el viaje?";
