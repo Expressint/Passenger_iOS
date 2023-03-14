@@ -63,6 +63,7 @@ class SubmitRentalReqVC: BaseViewController {
     @objc func changeLanguage(){
         self.setLocalization()
     }
+    
     func setLocalization(){
         self.lblTitlePickUpLoc.text = "Pickup Location".localized
         self.lblTitleDropOffLoc.text = "Final Destination".localized
@@ -70,7 +71,6 @@ class SubmitRentalReqVC: BaseViewController {
         self.lblTitlePackage.text = "Package".localized
         self.lblTitlePaymentType.text = "Payment Type".localized
         self.lblTitlePickUpDate.text = "PickupDate".localized
-      
     }
     
     func backToRoot() {

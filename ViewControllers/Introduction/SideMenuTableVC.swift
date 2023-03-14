@@ -56,9 +56,8 @@ class SideMenuTableVC: UIViewController {
         self.imgProfile.layer.borderWidth = 1.0
         self.imgProfile.layer.borderColor = UIColor.white.cgColor
         self.imgProfile.layer.masksToBounds = true
-        
         self.imgProfile.sd_setShowActivityIndicatorView(true)
-        self.imgProfile.sd_setIndicatorStyle(.whiteLarge)
+        self.imgProfile.sd_setIndicatorStyle(.medium)
         
         lblLogout.text = "Sign out".localized
         deleteButton.setTitle("Delete Account".localized, for: .normal)
@@ -131,14 +130,12 @@ class SideMenuTableVC: UIViewController {
 // MARK: - Table view data source
 extension SideMenuTableVC: UITableViewDelegate, UITableViewDataSource {
 
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arrMenuTitle.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellMenu = tableView.dequeueReusableCell(withIdentifier: "side_menu_cell", for: indexPath) as! SideMenuCell
-        //cellMenu.setValues(menuItemArray[indexPath.row])
         cellMenu.iconImageView?.image = UIImage.init(named:  "\(arrMenuIcons[indexPath.row])")
         cellMenu.titleLabel.text = arrMenuTitle[indexPath.row]
         cellMenu.iconImageView?.tintColor = UIColor.black
@@ -148,11 +145,6 @@ extension SideMenuTableVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //        if arrMenuTitle[indexPath.row] == "New Booking" {
-        //            NotificationCenter.default.post(name: NotificationForBookingNewTrip, object: nil)
-        //            sideMenuController?.toggle()
-        //
-        //        }
         if arrMenuTitle[indexPath.row] == "My Bookings".localized {
             NotificationCenter.default.post(name: OpenMyBooking, object: nil)
         } else if arrMenuTitle[indexPath.row] == "Hourly Bookings".localized {
@@ -181,8 +173,6 @@ extension SideMenuTableVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         else if arrMenuTitle[indexPath.row] == "Help".localized {
-            //            UtilityClass.showAlert(appName, message: "This feature is coming soon", vc: self)
-//            self.dialNumber(number: helpLineNumber)
             self.alertForHelpOptions()
         }
         sideMenuSwiftController?.hideMenu()
@@ -220,8 +210,7 @@ extension SideMenuTableVC: UITableViewDelegate, UITableViewDataSource {
         })
     }
     
-    func alertForHelpOptions()
-    {
+    func alertForHelpOptions() {
         let reasonsVC = CancelAlertViewController(nibName: "CancelAlertViewController", bundle: nil)
         
         reasonsVC.isHelp = true

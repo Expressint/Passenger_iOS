@@ -35,8 +35,7 @@ class RequestLoadingVC: BaseViewController {
         viewActivityAnimation.stopAnimating()
     }
     
-    // MARK: - Action
-
+    //MARK: - Action
     func onCancelRide() {
         viewActivityAnimation.stopAnimating()
         self.dismiss(animated: false, completion: nil)

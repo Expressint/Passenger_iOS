@@ -31,6 +31,23 @@ extension UISegmentedControl {
     }
 }
 
+extension NSLayoutConstraint {
+    func change(multiplier: CGFloat) {
+        let newConstraint = NSLayoutConstraint(item: firstItem!,
+                                               attribute: firstAttribute,
+                                               relatedBy: relation,
+                                               toItem: secondItem,
+                                               attribute: secondAttribute,
+                                               multiplier: multiplier,
+                                               constant: constant)
+
+        newConstraint.priority = self.priority
+
+        NSLayoutConstraint.deactivate([self])
+        NSLayoutConstraint.activate([newConstraint])
+    }
+}
+
 extension UIColor {
     
     convenience init(hex: String) {

@@ -77,9 +77,10 @@ let RentalCurrentBooking = WebserviceURLs.kRentalCurrentBooking
 let RentalReviewRating = WebserviceURLs.kRentalReviewRating
 let RentalTripHistory = WebserviceURLs.kRentalTripHistory
 let AdvertisementList = WebserviceURLs.AdvertisementList
-
+let RecommendedHoursForRentalTrip = WebserviceURLs.RecommendedHoursForRentalTrip
 
 let SubmitTourReq = WebserviceURLs.kSubmitRentalBookingRequest
+
 //-------------------------------------------------------------
 // MARK: - Webservice For Registration
 //-------------------------------------------------------------
@@ -732,5 +733,11 @@ func webserviceForModelPackages(_ dictParams: AnyObject, completion: @escaping(_
 func webserviceForSubmitTourRequest(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
 {
     let url = SubmitTourReq
+    postData(dictParams, nsURL: url, completion: completion)
+}
+
+func webserviceForRecommendedHoursForRentalTrip(_ dictParams: AnyObject, completion: @escaping(_ result: AnyObject, _ success: Bool) -> Void)
+{
+    let url = RecommendedHoursForRentalTrip
     postData(dictParams, nsURL: url, completion: completion)
 }

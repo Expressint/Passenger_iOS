@@ -15,6 +15,8 @@ import NVActivityIndicatorView
 import M13Checkbox
 import AVFoundation
 import CoreLocation
+import FSPagerView
+import SafariServices
 
 protocol FavouriteLocationDelegate {
     func didEnterFavouriteDestination(Source: [String: AnyObject])
@@ -127,9 +129,28 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var stackEstimatedView: UIStackView!
     @IBOutlet weak var stackEstimatedViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var vWAdvertisement: FSPagerView!
+    @IBOutlet weak var advHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var btnCloseAdv: UIButton!
+    var arrAdvImages : [[String: AnyObject]] = []
+    
     func floatRatingView(_ ratingView: FloatRatingView, didUpdate rating: Float) {
         giveRating.rating = rating
         ratingToDriver = giveRating.rating
+    }
+    
+    func setupPagerView() {
+//        pageControl.numberOfPages = arrAdvImages.count
+//        pageControl.currentPage = 0
+//
+        vWAdvertisement.dataSource = self
+        vWAdvertisement.delegate = self
+        
+        vWAdvertisement.automaticSlidingInterval = 3.0
+        vWAdvertisement.isInfinite = true
+        vWAdvertisement.transformer = FSPagerViewTransformer(type: .linear)
+        vWAdvertisement.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        vWAdvertisement.reloadData()
     }
     
     func hideEstimatedView() {
@@ -238,6 +259,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
         NextPage.receiverName = DriverName
         NextPage.bookingId = String(strBookingID)
+        NextPage.bookingType = self.strBookingType
         NextPage.receiverId = String(setDriverId)
         self.navigationController?.pushViewController(NextPage, animated: true)
     }
@@ -401,6 +423,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.viewBookNowLater.isHidden = true
         
         webserviceOfCardList()
+        self.webserviceOfAdvList()
         
         self.stackViewNumberOfPassenger.isHidden = true
         
@@ -460,6 +483,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         viewHavePromocode.boxType = .square
         
         viewTripActions.isHidden = true
+        vWAdvertisement.isHidden = true
+        btnCloseAdv.isHidden = true
+        
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
         
         //        webserviceOfCardList()
@@ -693,7 +719,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var btnDoneForLocationSelected: ThemeButton!
     @IBAction func btnDoneForLocationSelected(_ sender: ThemeButton) {
         
-        clearMap()
+        self.clearMap()
         self.strSelectedCarTotalFare = ""
         self.routePolyline.map = nil
         self.updateCounting()
@@ -724,7 +750,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             } else {
                 if UtilityClass.isEmpty(str: txtCurrentLocation.text!) {
                     UtilityClass.showAlert("", message: "Please enter pick up location".localized, vc: self)
-                    
+                        
                 } else if UtilityClass.isEmpty(str: txtDestinationLocation.text!) {
                     UtilityClass.showAlert("", message: "Please enter drop off location".localized, vc: self)
                 } else {
@@ -773,7 +799,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             }
             if txtDestinationLocation.text?.trimmingCharacters(in: .whitespacesAndNewlines).count != 0 && txtAdditionalDestinationLocation.text?.trimmingCharacters(in: .whitespacesAndNewlines).count != 0 {
                 aryMyWayPoints.append("\(DropOffLat),\(DropOffLon)")
-                //                aryMyWayPoints.append("\(self.doubleUpdateNewLat),\(self.doubleUpdateNewLng)")
                 destiantionLoc = "\(self.doubleUpdateNewLat),\(self.doubleUpdateNewLng)"
             }
             
@@ -1927,6 +1952,13 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     var dictSelectedDriver : [String : AnyObject]?
     
+    @IBAction func btnCloseAdv(_ sender: Any) {
+      //  advHeightConstraints.change(multiplier: 0)
+        btnCloseAdv.isHidden = true
+        vWAdvertisement.isHidden = true
+        self.view.updateConstraintsIfNeeded()
+    }
+    
     @IBAction func btnBookNow(_ sender: Any) {
         
         if Connectivity.isConnectedToInternet()
@@ -2422,6 +2454,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     //        }
                     
                     self.viewTripActions.isHidden = true
+                    self.vWAdvertisement.isHidden = true
+                    self.btnCloseAdv.isHidden = true
+                    
                     self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
 
                     self.viewCarLists.isHidden = false
@@ -3732,6 +3767,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.lblCurrentLocation.isHidden = true
         
         self.viewTripActions.isHidden = false
+        vWAdvertisement.isHidden = false
+        btnCloseAdv.isHidden = false
+        
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(600)
 
         self.ConstantViewCarListsHeight.constant = 0
@@ -3886,6 +3924,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: true)
         self.TempBookingInfoDict = tripData[0] as? [String:Any] ?? [:]
         self.viewTripActions.isHidden = false
+        vWAdvertisement.isHidden = false
+        btnCloseAdv.isHidden = false
+        
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(600)
 
         self.ConstantViewCarListsHeight.constant = 0
@@ -4206,6 +4247,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 
                 self.viewTripActions.isHidden = true
+                self.vWAdvertisement.isHidden = true
+                self.btnCloseAdv.isHidden = true
+                
                 self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
 
                 SingletonClass.sharedInstance.passengerTypeOther = false
@@ -4241,6 +4285,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
                 
                 self.viewTripActions.isHidden = true
+                self.vWAdvertisement.isHidden = true
+                self.btnCloseAdv.isHidden = true
+                
                 self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
 
                 SingletonClass.sharedInstance.passengerTypeOther = false
@@ -4316,6 +4363,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.arrDataAfterCompletetionOfTrip = NSMutableArray(array: (self.aryCompleterTripData[0] as! NSDictionary).object(forKey: "Info") as! NSArray)
             
             self.viewTripActions.isHidden = true
+            self.vWAdvertisement.isHidden = true
+            self.btnCloseAdv.isHidden = true
+            
             self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
 
             self.viewCarLists.isHidden = false
@@ -4345,6 +4395,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         clearMap()
         self.currentLocationAction()
         self.viewTripActions.isHidden = true
+        vWAdvertisement.isHidden = true
+        btnCloseAdv.isHidden = true
+        
         self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
         clearDataAfteCompleteTrip()
     }
@@ -6628,5 +6681,83 @@ extension HomeViewController : SendBackSelectedDriverDelegate {
         {
             self.btnBookLater(UIButton())
         }
+    }
+}
+
+extension HomeViewController: FSPagerViewDataSource, FSPagerViewDelegate {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return self.arrAdvImages.count
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+   
+        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
+            if (error == nil) {
+                cell.imageView?.image = image
+            }
+        })
+        
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.cornerRadius = 10
+        cell.contentMode = .scaleAspectFit
+        cell.clipsToBounds = true
+        cell.layer.masksToBounds = true
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        pagerView.deselectItem(at: index, animated: true)
+        self.viewAdv(URLMain: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+       // self.gotoPage(strUrl: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+    }
+    
+//    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+//        self.pageControl.currentPage = targetIndex
+//    }
+//
+//    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
+//        self.pageControl.currentPage = pagerView.currentIndex
+//    }
+}
+
+extension HomeViewController {
+    func webserviceOfAdvList() {
+        webserviceForAdvList { (result, status) in
+            if (status) {
+                print(result)
+                let data = result["data"] as? [[String: AnyObject]] ?? [[:]]
+                self.arrAdvImages = data
+                self.setupPagerView()
+            }else {
+                print(result)
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+            }
+        }
+    }
+    
+    func gotoPage(strUrl: String) {
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
+        next.headerName = "BookARide"
+        next.strURL = strUrl
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+    func viewAdv(URLMain: String) {
+        guard let url = URL(string: URLMain) else {return}
+        let svc = SFSafariViewController(url: url)
+        present(svc, animated: true, completion: nil)
     }
 }

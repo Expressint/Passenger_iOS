@@ -22,7 +22,6 @@ class CancelRentalTripVC: BaseViewController {
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var lblReason: UILabel!
     
-    
     weak var delegate: CancelRentalTripProtocol?
     var arrData = ["Long pick up time".localized,"Driver delayed".localized,"No longer interested".localized,"Other".localized]
     var selectedReason: String?

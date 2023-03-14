@@ -143,9 +143,18 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     @IBOutlet weak var btnSelectPromocode: UIButton!
     @IBOutlet weak var btnTimeCalender: UIButton!
     
+    @IBOutlet weak var vWMobileNumber: UIView!
+    @IBOutlet weak var vwFullName: UIView!
+    @IBOutlet weak var btnBookForSomeone: UIButton!
+    @IBOutlet weak var lblblookForSomeone: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         PayCardView.isHidden = false
+        
+        vwFullName.isHidden = true
+        vWMobileNumber.isHidden = true
+        
         self.viewSecondDestinationLocation.isHidden = (isMultiDropReq) ? false : true
         
         //        self.title = "Schedule Trip"
@@ -193,8 +202,8 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         
         //        self.btnNumberOfPassenger.setTitle(self.arrNumberOfPassengerList[0], for: .normal)
         
-        txtFullName.text = strFullname
-        txtMobileNumber.text = strMobileNumber
+//        txtFullName.text = strFullname
+//        txtMobileNumber.text = strMobileNumber
         
         checkMobileNumber()
         
@@ -285,6 +294,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         TitlePickupLoc.text = "Pickup Location".localized
         TitleDropOffLoc.text = "Dropoff Location".localized
         TitleAdditionalDropOffLoc.text = "Second Dropoff Location".localized
+        lblblookForSomeone.text = "Booking for someone else".localized
     }
     
     func fillTextFields() {
@@ -374,6 +384,19 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
             txtDescription.isEnabled = false
         }
     }
+    
+    @IBAction func btnBookForSomeoneAction(_ sender: Any) {
+        if btnBookForSomeone.isSelected {
+            btnBookForSomeone.isSelected = false
+            vwFullName.isHidden = true
+            vWMobileNumber.isHidden = true
+        } else {
+            btnBookForSomeone.isSelected = true
+            vwFullName.isHidden = false
+            vWMobileNumber.isHidden = false
+        }
+    }
+    
     
     func textFieldDidEndEditing(_ textField: UITextField)
     {
@@ -533,10 +556,10 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         var ValidationStatus:Bool = true
         var ValidationMessage:String = ""
         
-        if txtFullName.text == "" {
+        if txtFullName.text == "" && btnBookForSomeone.isSelected {
             ValidationStatus = false
             ValidationMessage = "Please enter name!".localized
-        } else if txtMobileNumber.text == "" {
+        } else if txtMobileNumber.text == ""  && btnBookForSomeone.isSelected  {
             ValidationStatus = false
             ValidationMessage = "Please enter contact number!".localized
         } else if self.convertDateToString == "" {
@@ -1160,9 +1183,9 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         dictData["ModelId"] = strModelId as AnyObject
         dictData["PickupLocation"] = txtPickupLocation.text as AnyObject
         dictData["DropoffLocation"] = txtDropOffLocation.text as AnyObject
-        dictData["PassengerType"] = strPassengerType as AnyObject
-        dictData["PassengerName"] = txtFullName.text as AnyObject
-        dictData["PassengerContact"] = txtMobileNumber.text as AnyObject
+        dictData["PassengerType"] = (btnBookForSomeone.isSelected) ? "other" as AnyObject : "myself" as AnyObject
+        dictData["PassengerName"] = (btnBookForSomeone.isSelected) ? txtFullName.text as AnyObject : strFullname as AnyObject
+        dictData["PassengerContact"] = (btnBookForSomeone.isSelected) ? txtMobileNumber.text as AnyObject : strMobileNumber as AnyObject
         dictData["PickupDateTime"] = convertDateToString as AnyObject
         dictData["EstimateFare"] = strSelectedCarTotalFare as AnyObject
         dictData["PickupLat"] = doublePickupLat as AnyObject

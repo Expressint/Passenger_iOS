@@ -11,6 +11,8 @@ import SDWebImage
 import SocketIO
 import CoreLocation
 import GoogleMaps
+import FSPagerView
+import SafariServices
 
 class SelectModelVC: BaseViewController {
     
@@ -25,6 +27,9 @@ class SelectModelVC: BaseViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var vwDuration: UIView!
     @IBOutlet weak var lbltripDuration: UILabel!
+    @IBOutlet weak var vWAdvertisement: FSPagerView!
+    @IBOutlet weak var advHeightConstraints: NSLayoutConstraint!
+    @IBOutlet weak var btnCloseAdv: UIButton!
     
     let socket = (UIApplication.shared.delegate as! AppDelegate).socket
     var pickUpLocation: String = ""
@@ -62,6 +67,7 @@ class SelectModelVC: BaseViewController {
     
     var totalSecond = Int()
     var timer:Timer?
+    var arrAdvImages : [[String: AnyObject]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +90,7 @@ class SelectModelVC: BaseViewController {
         
         if currentTripType == "2" {
             self.getRentalCurrentBookingData()
+            self.webserviceOfAdvList()
             self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: true, isSOSNeeded: true)
         } else {
             self.webserviceCallForRentalModels()
@@ -97,6 +104,20 @@ class SelectModelVC: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         
+    }
+    
+    func setupPagerView() {
+//        pageControl.numberOfPages = arrAdvImages.count
+//        pageControl.currentPage = 0
+//
+        vWAdvertisement.dataSource = self
+        vWAdvertisement.delegate = self
+        
+        vWAdvertisement.automaticSlidingInterval = 3.0
+        vWAdvertisement.isInfinite = true
+        vWAdvertisement.transformer = FSPagerViewTransformer(type: .linear)
+        vWAdvertisement.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        vWAdvertisement.reloadData()
     }
     
     @objc func changeLanguage(){
@@ -228,10 +249,8 @@ class SelectModelVC: BaseViewController {
             let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.coverVertical
             vc.modalTransitionStyle = modalStyle
             self.present(vc, animated: true, completion: nil)
-            
         }
     }
-    
     
     @IBAction func btnDriverInfoAction(_ sender: Any) {
         self.openDriverInfo()
@@ -256,6 +275,11 @@ class SelectModelVC: BaseViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func btnCloseAdv(_ sender: Any) {
+        advHeightConstraints.change(multiplier: 0)
+        btnCloseAdv.isHidden = true
+        self.view.updateConstraintsIfNeeded()
+    }
 }
 
 extension SelectModelVC: UITableViewDelegate, UITableViewDataSource {
@@ -433,6 +457,9 @@ extension SelectModelVC {
                         let bookingType = self.dictCurrentBookingInfoData.object(forKey: "BookingType") as? Int ?? 1
                         let onTheWay = self.dictCurrentBookingInfoData.object(forKey: "OnTheWay") as? String ?? ""
                         if(bookingType != 2  || onTheWay == "1") {
+                            self.webserviceOfAdvList()
+                            currentTripType = "2"
+                            
                             self.closeViewController(ofType: RequestLoadingVC.self)
                             self.setupViewForTripAccepted(bookingInfo: self.dictCurrentBookingInfoData, driverInfo: self.dictCurrentDriverInfoData)
                             
@@ -646,7 +673,6 @@ extension SelectModelVC {
             UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
         })
     }
-    
 }
 
 extension SelectModelVC: LocationManagerDelegate {
@@ -694,7 +720,6 @@ extension SelectModelVC {
                                 self.overviewPolyline = self.selectedRoute["overview_polyline"] as? Dictionary<String, AnyObject>
                                 
                                 let legs = self.selectedRoute["legs"] as! Array<Dictionary<String, AnyObject>>
-                                
                                 let startLocationDictionary = legs[0]["start_location"] as! Dictionary<String, AnyObject>
                                 self.originCoordinate = CLLocationCoordinate2DMake(startLocationDictionary["lat"] as! Double, startLocationDictionary["lng"] as! Double)
                                 
@@ -731,7 +756,7 @@ extension SelectModelVC {
                                     }
                                     aryDistance.append(finalDistance)
                                 }
-                                //781600
+                                
                                 print("aryDistance : \(aryDistance)")
                                 let route = self.overviewPolyline["points"] as! String
                                 self.arrivedRoutePath = GMSPath(fromEncodedPath: route)!
@@ -741,13 +766,10 @@ extension SelectModelVC {
                                 routePolyline.strokeColor = themeYellowColor
                                 routePolyline.strokeWidth = 3.0
                                 print("line draw : \(#line) function name : \(#function)")
-                                
-                               
                             } else {
                                 print("OVER_QUERY_LIMIT Line number : \(#line) function name : \(#function)")
                             }
-                        }
-                        catch {
+                        } catch {
                             print("Catch Not able to get location due to free api key please restart app")
                         }
                     })
@@ -771,7 +793,6 @@ extension SelectModelVC : CancelRentalTripProtocol {
 
 extension SelectModelVC: ChatWithDriverprotocol {
     func gotoChat() {
-        print("chat...")
         currentTripType = "2"
         
         let strBookingID = "\(self.dictCurrentBookingInfoData.object(forKey: "Id") as AnyObject)"
@@ -779,10 +800,91 @@ extension SelectModelVC: ChatWithDriverprotocol {
         let DriverName = self.dictCurrentDriverInfoData.object(forKey: "Fullname") as? String ?? ""
       
         let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        NextPage.bookingType = "Rental"
         NextPage.receiverName = DriverName
         NextPage.bookingId = String(strBookingID)
         NextPage.receiverId = String(setDriverId)
         self.navigationController?.pushViewController(NextPage, animated: true)
         
+    }
+}
+
+
+extension SelectModelVC: FSPagerViewDataSource, FSPagerViewDelegate {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return self.arrAdvImages.count
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+   
+        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
+            if (error == nil) {
+                cell.imageView?.image = image
+            }
+        })
+        
+   
+        cell.imageView?.contentMode = .scaleAspectFit
+        cell.cornerRadius = 10
+        cell.contentMode = .scaleAspectFit
+        cell.clipsToBounds = true
+        cell.layer.masksToBounds = true
+        return cell
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        pagerView.deselectItem(at: index, animated: true)
+        self.viewAdv(URLMain: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+       // self.gotoPage(strUrl: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+    }
+    
+//    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
+//        self.pageControl.currentPage = targetIndex
+//    }
+//
+//    func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView) {
+//        self.pageControl.currentPage = pagerView.currentIndex
+//    }
+}
+
+extension SelectModelVC {
+    func webserviceOfAdvList() {
+        webserviceForAdvList { (result, status) in
+            if (status) {
+                print(result)
+                let data = result["data"] as? [[String: AnyObject]] ?? [[:]]
+                self.arrAdvImages = data
+                self.setupPagerView()
+            }else {
+                print(result)
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
+                    }
+                }
+                else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+                else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                    }
+                }
+            }
+        }
+    }
+    
+    func gotoPage(strUrl: String) {
+        let next = mainStoryboard.instantiateViewController(withIdentifier: "webViewVC") as! webViewVC
+        next.headerName = "BookARide"
+        next.strURL = strUrl
+        self.navigationController?.pushViewController(next, animated: true)
+    }
+    
+    func viewAdv(URLMain: String) {
+        guard let url = URL(string: URLMain) else {return}
+        let svc = SFSafariViewController(url: url)
+        present(svc, animated: true, completion: nil)
     }
 }

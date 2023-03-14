@@ -165,6 +165,7 @@
 		473CF02B2951978800EB22E6 /* ConfirmLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF02A2951978800EB22E6 /* ConfirmLocationVC.swift */; };
 		473FE81C296FD3B00019B237 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473FE81B296FD3B00019B237 /* Initial.storyboard */; };
 		473FE81F296FD3E10019B237 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FE81E296FD3E10019B237 /* IntroVC.swift */; };
+		474AA61029BF09B200835569 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 474AA60F29BF09B100835569 /* demo.mp4 */; };
 		47521585299CD0F400453463 /* SideMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47521584299CD0F400453463 /* SideMenuTableVC.swift */; };
 		47521588299CD22600453463 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 47521587299CD22600453463 /* SideMenu */; };
 		4757DC4C299F5A6200E43B56 /* TourTripHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */; };
@@ -634,6 +635,7 @@
 		473CF02A2951978800EB22E6 /* ConfirmLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmLocationVC.swift; sourceTree = "<group>"; };
 		473FE81B296FD3B00019B237 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		473FE81E296FD3E10019B237 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		474AA60F29BF09B100835569 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		47521584299CD0F400453463 /* SideMenuTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableVC.swift; sourceTree = "<group>"; };
 		4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryVC.swift; sourceTree = "<group>"; };
 		4757DC55299F669C00E43B56 /* TourTripHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryCell.swift; sourceTree = "<group>"; };
@@ -949,6 +951,7 @@
 		008D22241FA08DCF001223DF = {
 			isa = PBXGroup;
 			children = (
+				474AA60F29BF09B100835569 /* demo.mp4 */,
 				54056FFA266FEED40078D956 /* test.mp3 */,
 				1852C71B255A65B500CB0EE1 /* Book A Ride.entitlements */,
 				3A4072D821B512270015C494 /* Fabric.framework */,
@@ -2017,7 +2020,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = "Excellent Webworld";
 				TargetAttributes = {
 					008D222C1FA08DCF001223DF = {
@@ -2098,6 +2101,7 @@
 				5426B6F527229C1B001189DE /* CO.png in Resources */,
 				5426B6F127229C1B001189DE /* CY.png in Resources */,
 				5426B7B527229C1C001189DE /* MO.png in Resources */,
+				474AA61029BF09B200835569 /* demo.mp4 in Resources */,
 				5426B72127229C1B001189DE /* YE.png in Resources */,
 				3A40738121B512280015C494 /* proxima-nova-condensed-regular-italic.otf in Resources */,
 				5426B74A27229C1C001189DE /* GP.png in Resources */,
@@ -2672,6 +2676,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2679,8 +2684,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2706,7 +2713,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2731,6 +2738,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2738,8 +2746,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2759,7 +2769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -2778,7 +2788,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.4;
+				CURRENT_PROJECT_VERSION = 1.8.6;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2792,7 +2802,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2813,7 +2823,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.4;
+				CURRENT_PROJECT_VERSION = 1.8.6;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2827,7 +2837,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.5;
+				MARKETING_VERSION = 1.4.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

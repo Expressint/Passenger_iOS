@@ -622,6 +622,7 @@
 "Driver Info" = "Driver Info";
 "Package Info" = "Package Info";
 "Package" = "Package";
+"Recommended Tip Hours" = "Recommended Tip Hours";
 
 "Please Select Reason" = "Please Select Reason";
 "Long pick up time" = "Long pick up time";
@@ -637,6 +638,7 @@
 "If you cancel trip, after driver accept ride" = "If you cancel trip, after driver accept ride";
 "Confirm" = "Confirm";
 "Tour" = "Tour";
+"Booking for someone else" = "Booking for someone else";
 
 "Final Destination" = "Final Destination";
 "Find on Map" = "Find on Map";

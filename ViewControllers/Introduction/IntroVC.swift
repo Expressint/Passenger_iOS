@@ -23,6 +23,8 @@ class IntroVC: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     var arrAdvImages : [[String: AnyObject]] = []
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
     
     override func viewWillAppear(_ animated: Bool) {
         self.setNotificationcenter()
@@ -293,7 +295,35 @@ extension IntroVC: FSPagerViewDataSource, FSPagerViewDelegate {
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
-   
+        
+//        cell.imageView?.image = nil
+//        if index.isMultiple(of: 2) {
+//            let videoURL = Bundle.main.url(forResource: "demo", withExtension: "mp4")!
+//            let asset = AVAsset(url: videoURL)
+//            let durationInSeconds = CMTimeGetSeconds(asset.duration)
+//            player = AVPlayer(url: videoURL)
+//            playerLayer = AVPlayerLayer(player: player)
+//            playerLayer?.frame = cell.contentView.bounds
+//            cell.contentView.layer.addSublayer(playerLayer!)
+//            player?.play()
+//            vWAdvertisement.automaticSlidingInterval = durationInSeconds
+//
+//        } else {
+//            vWAdvertisement.automaticSlidingInterval = 3
+//            let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+//            cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
+//                if (error == nil) {
+//                    cell.imageView?.image = image
+//                }
+//            })
+//
+//            cell.contentView.layer.sublayers?.forEach({ layer in
+//                if layer is AVPlayerLayer {
+//                    layer.removeFromSuperlayer()
+//                }
+//            })
+//        }
+
         let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
         cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
@@ -333,16 +363,13 @@ extension IntroVC {
                 self.arrAdvImages = data
                 self.setupPagerView()
             }else {
-                print(result)
                 if let res = result as? String {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
                     }
-                }
-                else if let resDict = result as? NSDictionary {
+                } else if let resDict = result as? NSDictionary {
                     UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
                     }
-                }
-                else if let resAry = result as? NSArray {
+                } else if let resAry = result as? NSArray {
                     UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                     }
                 }

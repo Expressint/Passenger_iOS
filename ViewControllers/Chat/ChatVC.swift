@@ -30,6 +30,7 @@ class ChatVC: BaseViewController {
     var receiverName: String = ""
     var receiverId: String = ""
     var bookingId: String = ""
+    var bookingType: String = ""
     var aryData = [[String:AnyObject]]()
     var isDispacherChat: Bool = false
     var isFromPush: Bool = false
@@ -241,7 +242,8 @@ class ChatVC: BaseViewController {
                       "imageUrl" : "",
                       "sender_type" : "passenger",
                       "receiver_type" : (isDispacherChat) ? "dispatcher" : "driver",
-                      "booking_id" : (isDispacherChat) ? "" : bookingId] as [String : Any]
+                      "booking_id" : (isDispacherChat) ? "" : bookingId,
+                      "booking_type": (isDispacherChat) ? "" : bookingType] as [String : Any]
         
         self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
         print ("\(SocketData.sendMessage) : \(myJSON)")
@@ -257,7 +259,8 @@ class ChatVC: BaseViewController {
                       "imageUrl" : strUrl,
                       "sender_type" : "passenger",
                       "receiver_type" : (isDispacherChat) ? "dispatcher" : "driver",
-                      "booking_id" : (isDispacherChat) ? "" : bookingId] as [String : Any]
+                      "booking_id" : (isDispacherChat) ? "" : bookingId,
+                      "booking_type": (isDispacherChat) ? "" : bookingType] as [String : Any]
         
         self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
         print ("\(SocketData.sendMessage) : \(myJSON)")
@@ -347,6 +350,7 @@ extension ChatVC {
         var dictData = [String:AnyObject]()
         dictData["user_id"] = SingletonClass.sharedInstance.strPassengerID as AnyObject
         dictData["booking_id"] = bookingId as AnyObject
+        dictData["booking_type"] = bookingType as AnyObject
         dictData["receiver_id"] = receiverId as AnyObject
         
         UtilityClass.showACProgressHUD()

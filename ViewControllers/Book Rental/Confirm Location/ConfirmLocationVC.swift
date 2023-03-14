@@ -43,6 +43,11 @@ class ConfirmLocationVC: BaseViewController {
     @IBOutlet weak var lblPackage: UILabel!
     @IBOutlet weak var lblModel: UILabel!
     
+    @IBOutlet weak var vwRecommended: UIView!
+    @IBOutlet weak var lblTitleRecommended: UILabel!
+    @IBOutlet weak var lblRecommended: UILabel!
+    
+    
     var modelId: Int?
     var modelName:String = ""
     var durationId: Int?
@@ -66,10 +71,11 @@ class ConfirmLocationVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.vwRecommended.isHidden = true
+        self.stackPickUpDate.isHidden = true
         self.setPickUpLocation()
         self.btnMapPick.underline(text: "Find on Map".localized)
         self.btnMapDrop.underline(text: "Find on Map".localized)
-        self.stackPickUpDate.isHidden = true
         self.lblModel.text = self.modelName
         self.lblPackage.text = self.durationName
         self.setNavBarWithBack(Title: "Confirm Location".localized, IsNeedRightButton: true)
@@ -83,11 +89,13 @@ class ConfirmLocationVC: BaseViewController {
     @objc func changeLanguage(){
         self.setLocalization()
     }
+    
     func setLocalization(){
         self.lblPickUpLoc.text = "Pickup Location".localized
         self.lblDropOffLoc.text = "Final Destination".localized
         self.lblTitleModel.text = "Model".localized
         self.lblTitlePackage.text = "Package".localized
+        self.lblTitleRecommended.text = "Recommended Tip Hours".localized
         self.lblTitlePaymentType.text = "Payment Type".localized
         self.lblTitlePickUpDate.text = "PickupDate".localized
         self.btnBookNow.setTitle("Book Now".localized, for: .normal)
@@ -101,7 +109,7 @@ class ConfirmLocationVC: BaseViewController {
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         let filter = GMSAutocompleteFilter()
-       // filter.country = "GY"
+        filter.country = "GY"
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
     }
@@ -193,8 +201,22 @@ class ConfirmLocationVC: BaseViewController {
         }
     }
     
-    @IBAction func selectPaymentMethod(_ sender: UIButton)
-    {
+    @IBAction func btnChangeDuration(_ sender: Any) {
+        self.selectDuatioin()
+    }
+    
+    func selectDuatioin() {
+        let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "DurationPopupVC") as! DurationPopupVC
+        vc.modelSelected = self.modelId
+        vc.delegate = self
+        vc.strSelectedModel = modelName
+        vc.modalPresentationStyle = .overCurrentContext
+        let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalTransitionStyle = modalStyle
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func selectPaymentMethod(_ sender: UIButton) {
         self.imgCashForPaymentType.image = UIImage(named: "icon_CashUnselected")
         self.imgCardForPaymentType.image = UIImage(named: "icon_UnselectedCard")
         self.PayCashView.backgroundColor = UIColor.init(hex: "E5E5E5")
@@ -205,8 +227,8 @@ class ConfirmLocationVC: BaseViewController {
         //cardID = ""
         imgCashForPaymentType.isHighlighted = false
         imgCardForPaymentType.isHighlighted = false
-        if(sender.tag == 1)
-        {
+        
+        if(sender.tag == 1) {
             self.btnCash.setTitleColor(themeYellowColor, for: .normal)
             self.imgCashForPaymentType.image = UIImage(named: "icon_SelectedCash")
             self.imgCashForPaymentType.tintColor = .red
@@ -224,7 +246,6 @@ class ConfirmLocationVC: BaseViewController {
             self.imgCardForPaymentType.tintColor = .red
             self.PayCardView.backgroundColor = UIColor.black
             btnCard.setTitleColor(themeAppMainColor, for: .normal)
-            
         }
     }
     
@@ -290,7 +311,6 @@ class ConfirmLocationVC: BaseViewController {
         self.isPickUpMapMoved = false
         let dropLat = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0) : dropOffLat)
         let dropLng = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0) : dropOffLong)
-        
         self.openMap(lat: dropLat ?? 0.0, Lng: dropLng ?? 0.0, address: self.txtDropOffLoc.text ?? "")
     }
 }
@@ -313,7 +333,9 @@ extension ConfirmLocationVC: GMSAutocompleteViewControllerDelegate {
             self.dropOffLong = place.coordinate.longitude
             
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.getRecommandatoinAPI()
+        })
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -348,6 +370,46 @@ extension ConfirmLocationVC: LocationProtocol {
             self.txtDropOffLoc.text = Address
             self.dropOffLat = lat
             self.dropOffLong = lng
+        }
+        self.getRecommandatoinAPI()
+    }
+}
+
+extension ConfirmLocationVC : DurationProtocol{
+    func selectedDuration(id: Int, Name: String) {
+        self.durationId = id
+        self.durationName = Name
+        self.lblPackage.text = Name
+    }
+}
+
+extension ConfirmLocationVC {
+    func getRecommandatoinAPI() {
+        
+        let dictParams = NSMutableDictionary()
+        dictParams.setObject("\(modelId ?? 0)", forKey: "ModelId" as NSCopying)
+        dictParams.setObject(txtPickUpLoc.text ?? "", forKey: "PickupLocation" as NSCopying)
+        dictParams.setObject("\(pickUpLat ?? 0.0)", forKey: "PickupLat" as NSCopying)
+        dictParams.setObject("\(pickUpLong ?? 0.0)", forKey: "PickupLng" as NSCopying)
+        dictParams.setObject(txtDropOffLoc ?? "", forKey: "DropoffLocation" as NSCopying)
+        dictParams.setObject("\(dropOffLat ?? 0.0)", forKey: "DropOffLat" as NSCopying)
+        dictParams.setObject("\(dropOffLong ?? 0.0)", forKey: "DropOffLng" as NSCopying)
+  
+        webserviceForRecommendedHoursForRentalTrip(dictParams) { (result, status) in
+            if (status) {
+                print(result)
+                let resultData = (result as! NSDictionary)
+                self.lblRecommended.text = resultData.object(forKey: "data") as? String ?? ""
+                self.vwRecommended.isHidden = false
+            } else {
+                if let res = result as? String {
+                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
+                } else if let resDict = result as? NSDictionary {
+                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                } else if let resAry = result as? NSArray {
+                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                }
+            }
         }
     }
 }

@@ -100,9 +100,9 @@ let InitialStoryboard = UIStoryboard(name: "Initial", bundle: nil)
 //Live: https://www.bookaridegy.com/Passenger_Api/
 //Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
-    static let kBaseImageURL                            = "http://52.23.45.119/"
-    static let kBasePaymentURL                          = "http://52.23.45.119/"
-    static let kBaseURL                                  = "http://52.23.45.119/v3/Passenger_Api/"
+    static let kBaseImageURL                            = "https://www.bookaridegy.com/"
+    static let kBasePaymentURL                          = "https://www.bookaridegy.com/"
+    static let kBaseURL                                  = "https://www.bookaridegy.com/v3/Passenger_Api/"
     static let kDriverRegister                           = "Register"
     static let kDriverLogin                              = "Login"
     static let kChangePassword                           = "ChangePassword"
@@ -172,7 +172,8 @@ struct WebserviceURLs {
     static let kRentalCurrentBooking                  = "RentalCurrentBooking"
     static let kRentalReviewRating                    = "RentalReviewRating"
     static let kRentalTripHistory                     = "RentalBookingHistory"
-    static let AdvertisementList                     = "AdvertisementList"
+    static let AdvertisementList                      = "AdvertisementList"
+    static let RecommendedHoursForRentalTrip                      = "RecommendedHoursForRentalTrip"
     
     //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }
@@ -182,7 +183,7 @@ struct WebserviceURLs {
 //Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                     = "http://52.23.45.119:8080"
+    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
     static let kNearByDriverList                            = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"
@@ -242,14 +243,9 @@ struct SocketDataKeys {
     static let kBookingIdNow    = "BookingId"
     static let kCancelReasons   = "Reason"
     static let kUserType        = "UserType"
-    
 }
 
 struct SubmitBookingRequest {
-    // PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon
-    // PassengerId,ModelId,PickupLocation,DropoffLocation,PickupLat,PickupLng,DropOffLat,DropOffLon,PromoCode,Notes,PaymentType,CardId(If paymentType is card)
-    
-    
     static let kModelId                 = "ModelId"
     static let kPickupLocation          = "PickupLocation"
     static let kDropoffLocation         = "DropoffLocation"
@@ -265,15 +261,12 @@ struct SubmitBookingRequest {
     static let kPaymentType             = "PaymentType"
     static let kCardId                  = "CardId"
     static let kSpecial                 = "Special"
-    static let kLanguage                 = "language"
-    
+    static let kLanguage                = "language"
     static let kShareRide               = "ShareRide"
     static let kNoOfPassenger           = "NoOfPassenger"
 }
 
 struct NotificationCenterName {
-    
-    // Define identifier
     static let keyForOnGoing   = "keyForOnGoing"
     static let keyForUpComming = "keyForUpComming"
     static let keyForPastBooking = "keyForPastBooking"
