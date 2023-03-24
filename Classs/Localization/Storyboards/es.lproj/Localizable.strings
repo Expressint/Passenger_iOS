@@ -582,9 +582,9 @@
 // Rental Flow
 "Services" = "Servicios";
 "GoAnywhere" = "Ve a cualquier lugar, consigue cualquier cosa";
-"Ride" = "Conducir";
-"Hourly" = "Cada hora";
-"Corporate" = "Corporativo";
+"Ride" = "Reserve un viaje";
+"Hourly" = "Reservar por hora";
+"Corporate" = "Reservar Corporativo";
 
 "Select Model" = "Seleccionar modelo";
 "Rental Trip" = "Viaje de alquiler";
@@ -610,7 +610,7 @@
 "Cancellation fees charged to you at" = "Cargos por cancelación cobrados a usted en";
 "If you cancel trip, after driver accept ride" = "Si cancela el viaje, después de que el conductor acepte el viaje";
 "Confirm" = "Confirmar";
-"Tour" = "Recorrido";
+"Tour" = "Cada hora";
 
 "Final Destination" = "Destino final";
 "Find on Map" = "Buscar en el mapa";

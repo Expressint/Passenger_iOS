@@ -52,8 +52,6 @@ class CancelRentalTripVC: BaseViewController {
         self.registerNib()
         self.txtOthers.isHidden = true
         self.tblData.reloadData()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,11 +92,11 @@ class CancelRentalTripVC: BaseViewController {
     @IBAction func btnCancelAction(_ sender: Any) {
         var reason = ""
         if self.selectedReason == nil {
-            UtilityClass.setCustomAlert(title: "Required".localized, message: "Please select reason to cancel trip".localized) { (index, title) in}
+            Toast.show(message: "Please select reason to cancel trip".localized, state: .success)
         } else if self.selectedReason == "Other".localized {
             let other = self.txtOthers.text ?? ""
             if(other == "" || other == "Enter reason here".localized){
-                UtilityClass.setCustomAlert(title: "Required".localized, message: "Please enter reason to cancel trip".localized) { (index, title) in}
+                Toast.show(message: "Please enter reason to cancel trip".localized, state: .success)
             } else {
                 reason = self.txtOthers.text ?? ""
             }

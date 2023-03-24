@@ -204,7 +204,7 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
         cell.paymentTap = {
             self.doPayment(Url: self.aryData[indexPath.row]["PaymentURL"] as? String ?? "")
         }
-  
+        
         return cell
     }
     
@@ -254,13 +254,13 @@ extension TourTripHistoryVC {
                 
             } else {
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
+                    Toast.show(message: res, state: .failure)
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }
@@ -298,9 +298,11 @@ extension TourTripHistoryVC {
     func socketForRentalTripCancelled() {
         self.socket?.on(SocketData.CancelRentalTripNotification, callback: { (data, ack) in
             print("CancelRentalTripNotification: \(data)")
-            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+            Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .success)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.aryData = []
                 self.APIForHistory(index: self.selectedTyoe)
-            })
+            }
         })
     }
 }

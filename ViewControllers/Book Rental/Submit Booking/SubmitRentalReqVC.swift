@@ -108,20 +108,20 @@ extension SubmitRentalReqVC {
                 if(self.pickUpDateTime == ""){
                     self.backToRoot()
                 } else {
-                    UtilityClass.setCustomAlert(title: "Success".localized, message: result.object(forKey: "message") as? String ?? "You request is submited.") { (index, title) in
-                        print(result)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.navigationController?.popToViewController(ofClass: IntroVC.self)
-                        }
+                    Toast.show(message: result.object(forKey: "message") as? String ?? "You request is submited.", state: .success)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.navigationController?.popToViewController(ofClass: IntroVC.self)
                     }
                 }
             } else {
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
-                } else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
-                } else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: res, state: .failure)
+                }
+                else if let resDict = result as? NSDictionary {
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
+                }
+                else if let resAry = result as? NSArray {
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }

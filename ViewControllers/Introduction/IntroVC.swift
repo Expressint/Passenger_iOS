@@ -25,6 +25,7 @@ class IntroVC: BaseViewController {
     var arrAdvImages : [[String: AnyObject]] = []
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
+    let socket = (UIApplication.shared.delegate as! AppDelegate).socket
     
     override func viewWillAppear(_ animated: Bool) {
         self.setNotificationcenter()
@@ -38,11 +39,32 @@ class IntroVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.socketMethods()
         
         self.webserviceOfAdvList()
         
         self.setLocalization()
         self.setupRedirection()
+    }
+    
+    func socketMethods() {
+        socket?.on(clientEvent: .disconnect) { (data, ack) in
+            print ("socket? is disconnected please reconnect")
+        }
+        
+        socket?.on(clientEvent: .reconnect) { (data, ack) in
+            print ("socket? is reconnected")
+        }
+        
+        socket?.on(clientEvent: .connect) { data, ack in
+            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? connected")
+        }
+        
+        if socket?.status == .connected {
+       } else {
+            self.socket?.connect()
+        }
     }
     
     @objc func changeLanguage(){
@@ -246,16 +268,13 @@ class IntroVC: BaseViewController {
             else {
                 print(result)
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
-                    }
+                    Toast.show(message: res, state: .failure)
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
-                    }
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
-                    }
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }
@@ -364,14 +383,13 @@ extension IntroVC {
                 self.setupPagerView()
             }else {
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
-                    }
-                } else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
-                    }
-                } else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
-                    }
+                    Toast.show(message: res, state: .failure)
+                }
+                else if let resDict = result as? NSDictionary {
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
+                }
+                else if let resAry = result as? NSArray {
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }

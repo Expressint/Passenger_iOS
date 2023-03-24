@@ -239,7 +239,7 @@ class SelectModelVC: BaseViewController {
     
     @IBAction func brrnNextAction(_ sender: Any) {
         if(modelId == nil){
-            UtilityClass.setCustomAlert(title: "Error", message: "Please select model".localized) { (index, title) in}
+            Toast.show(message: "Please select model".localized, state: .failure)
         } else {
             let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "DurationPopupVC") as! DurationPopupVC
             vc.modelSelected = self.modelId
@@ -333,13 +333,13 @@ extension SelectModelVC {
                 }
             } else {
                 if let res = response as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
+                    Toast.show(message: res, state: .failure)
                 }
                 else if let resDict = response as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
                 else if let resAry = response as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }
@@ -405,8 +405,7 @@ extension SelectModelVC {
             
             self.closeViewController(ofType: RequestLoadingVC.self)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, showStack: false, completionHandler: { (index, title) in
-                })
+                Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .failure)
             }
        })
     }
@@ -452,8 +451,8 @@ extension SelectModelVC {
                     let DestinationLat = (pickUpTime == "") ? self.dictCurrentBookingInfoData.object(forKey: "PickupLat") as? String ?? "0.0" : self.dictCurrentBookingInfoData.object(forKey: "DropOffLat") as? String ?? "0.0"
                     let DestinationLong = (pickUpTime == "") ? self.dictCurrentBookingInfoData.object(forKey: "PickupLng") as? String ?? "0.0" : self.dictCurrentBookingInfoData.object(forKey: "DropOffLng") as? String ?? "0.0"
                     
-                    
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+                    Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .success)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         let bookingType = self.dictCurrentBookingInfoData.object(forKey: "BookingType") as? Int ?? 1
                         let onTheWay = self.dictCurrentBookingInfoData.object(forKey: "OnTheWay") as? String ?? ""
                         if(bookingType != 2  || onTheWay == "1") {
@@ -467,7 +466,7 @@ extension SelectModelVC {
                             self.mapView.animate(to: camera)
                             self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
                         }
-                    })
+                    }
                 }
             }
        })
@@ -535,8 +534,7 @@ extension SelectModelVC {
         self.socket?.on(SocketData.RentalDriverArrived, callback: { (data, ack) in
             print("RentalDriverArrived: \(data)")
             currentTripType = "2"
-            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
-            })
+            Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .success)
         })
     }
     
@@ -560,12 +558,6 @@ extension SelectModelVC {
                     let DestinationLat = (pickUpTime == "") ? self.dictCurrentBookingInfoData.object(forKey: "PickupLat") as? String ?? "0.0" : self.dictCurrentBookingInfoData.object(forKey: "DropOffLat") as? String ?? "0.0"
                     let DestinationLong = (pickUpTime == "") ? self.dictCurrentBookingInfoData.object(forKey: "PickupLng") as? String ?? "0.0" : self.dictCurrentBookingInfoData.object(forKey: "DropOffLng") as? String ?? "0.0"
                     
-                    UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
-                        let camera = GMSCameraPosition.camera(withLatitude: Double(driverLat) ?? 0.0,longitude: Double(driverLong) ?? 0.0, zoom: self.zoomLevel)
-                        self.mapView.animate(to: camera)
-                        self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
-                    })
-                    
                     self.vwDuration.isHidden = false
                     let bookingTime = self.dictCurrentBookingInfoData.object(forKey: "PickupTime") as? String
                     
@@ -576,6 +568,13 @@ extension SelectModelVC {
                     
                     self.totalSecond = Int(Double(self.findDateDiff(time1Str: self.convertDate(strDate: bookingTime ?? ""), time2Str: currentTime)) ?? 0)
                     self.startTimer()
+                    
+                    Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .success)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        let camera = GMSCameraPosition.camera(withLatitude: Double(driverLat) ?? 0.0,longitude: Double(driverLong) ?? 0.0, zoom: self.zoomLevel)
+                        self.mapView.animate(to: camera)
+                        self.LoadMapView(destinationLat: DestinationLat, destinationLong: DestinationLong, driverLat: driverLat, driverLong: driverLong)
+                    }
                 }
             }
         })
@@ -584,9 +583,10 @@ extension SelectModelVC {
     func socketForRentalTripCancelled() {
         self.socket?.on(SocketData.CancelRentalTripNotification, callback: { (data, ack) in
             print("CancelRentalTripNotification: \(data)")
-            UtilityClass.setCustomAlert(title: "\(appName)", message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as! String, completionHandler: { (index, title) in
+            Toast.show(message: (data as! [[String:AnyObject]])[0][GetResponseMessageKey()]! as? String ?? "", state: .success)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.setupInitialView()
-            })
+            }
         })
     }
     
@@ -646,7 +646,9 @@ extension SelectModelVC {
                 let infoData = getInfoFromData[0]
                 if let bookingInfo = infoData["Info"] as? [[String:AnyObject]] {
                     self.dictCompleteTripData = bookingInfo[0] as NSDictionary
-                    UtilityClass.setCustomAlert(title: appName, message: "Your trip has been completed".localized) { (index, str) in
+                    
+                    Toast.show(message: "Your trip has been completed".localized, state: .success)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.setupInitialView()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             self.goTonvoice(tripData: self.dictCompleteTripData)
@@ -670,7 +672,8 @@ extension SelectModelVC {
         self.socket?.on(SocketData.RentalSOS, callback: { (data, ack) in
             print ("SOS Driver Notify : \(data)")
             let msg = (data as NSArray)
-            UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
+            Toast.show(message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .success)
+//            UtilityClass.showAlert("", message: (msg.object(at: 0) as? NSDictionary)?.object(forKey: GetResponseMessageKey()) as? String ?? "", vc: self)
         })
     }
 }
@@ -805,7 +808,6 @@ extension SelectModelVC: ChatWithDriverprotocol {
         NextPage.bookingId = String(strBookingID)
         NextPage.receiverId = String(setDriverId)
         self.navigationController?.pushViewController(NextPage, animated: true)
-        
     }
 }
 
@@ -860,16 +862,13 @@ extension SelectModelVC {
             }else {
                 print(result)
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in
-                    }
+                    Toast.show(message: res, state: .failure)
                 }
                 else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey:  GetResponseMessageKey()) as! String) { (index, title) in
-                    }
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
                 else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
-                    }
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }

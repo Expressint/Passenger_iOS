@@ -2783,9 +2783,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         MarkerCurrntLocation.isHidden = true
         lblCurrentLocation.isHidden = true
         
-        self.priceType = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "price_type") as? Int ?? 0)"
-        let msg = (Localize.currentLanguage() == Languages.English.rawValue) ? (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message") as? String ?? "" : (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message_spanish") as? String ?? ""
-        self.msgPriceModel = msg
+        if self.aryEstimateFareData.count <= 0 { return }
+       
         //(self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "price_type") as! Int
         
 //        if(self.arrNumberOfOnlineCars.count <= 0 || aryEstimateFareData.count <= 0){
@@ -2832,6 +2831,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             if dictOnlineCarData.object(forKey: "carCount") as! Int != 0 {
                 
                 self.markerOnlineCars.map = nil
+                
+                self.priceType = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "price_type") as? Int ?? 0)"
+                let msg = (Localize.currentLanguage() == Languages.English.rawValue) ? (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message") as? String ?? "" : (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message_spanish") as? String ?? ""
+                self.msgPriceModel = msg
+                
                 self.strSelectedCarTotalFare = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "total") as! Int)"
                 for i in 0..<self.aryMarkerOnlineCars.count {
                     self.aryMarkerOnlineCars[i].map = nil
@@ -2903,8 +2907,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 } else {
                     strModelId = "0"
                 }
-            }
-            else {
+            } else {
+                
+                self.priceType = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "price_type") as? Int ?? 0)"
+                let msg = (Localize.currentLanguage() == Languages.English.rawValue) ? (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message") as? String ?? "" : (self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "notify_message_spanish") as? String ?? ""
+                self.msgPriceModel = msg
                 
                 self.strSelectedCarTotalFare = "\((self.aryEstimateFareData.object(at: indexPath.row) as! NSDictionary).object(forKey: "total") as! Int)"
                 
@@ -4831,16 +4838,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     //    var BoolCurrentLocation = Bool()
     
     @IBAction func txtDestinationLocation(_ sender: UITextField) {
-        
-        let visibleRegion = mapView.projection.visibleRegion()
-        let bounds = GMSCoordinateBounds(coordinate: visibleRegion.farLeft, coordinate: visibleRegion.nearRight)
-        
-        
+
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
-        acController.autocompleteBounds = bounds
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         if(sender.tag == 0)
         {
@@ -4855,15 +4857,11 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func txtCurrentLocation(_ sender: UITextField) {
-        let visibleRegion = mapView.projection.visibleRegion()
-        let bounds = GMSCoordinateBounds(coordinate: visibleRegion.farLeft, coordinate: visibleRegion.nearRight)
-        
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
-        acController.autocompleteBounds = bounds
-
+      
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         locationEnteredType = .pickup
         present(acController, animated: true, completion: nil)
@@ -6147,10 +6145,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     var strBookingType = String()
     
-    
-    
-    
-    
+
     
     func webserviceOfCurrentBooking() {
         
@@ -6164,10 +6159,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         webserviceForCurrentTrip(param as AnyObject) { (result, status) in
             
             if (status) {
-                // print(result)
-                
                 self.clearMap()
-                
                 let resultData = (result as! NSDictionary)
                 
                 let ArrbookingInfo = resultData.object(forKey: "BookingInfo") as! [[String:AnyObject]]
@@ -6659,6 +6651,12 @@ extension HomeViewController: CLLocationManagerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
         return touch.view == gestureRecognizer.view
+    }
+}
+
+extension Double {
+    var degreesToRadians: Double {
+        return self * .pi / 180.0
     }
 }
 

@@ -20,6 +20,7 @@ class DurationPopupVC: BaseViewController {
     @IBOutlet weak var btnConfirm: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var lblIntro: UILabel!
+    @IBOutlet weak var lblPerMinuteCharge: UILabel!
     
     @IBOutlet weak var lblSelectPackage: UILabel!
     
@@ -29,6 +30,7 @@ class DurationPopupVC: BaseViewController {
     var duratonId: String = ""
     var duratonName: String = ""
     var strSelectedModel: String = ""
+    var perminuteChage: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,8 +108,20 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
             pickerLabel = UILabel()
             pickerLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             pickerLabel?.textAlignment = .center
+            pickerLabel?.numberOfLines = 0
         }
-        pickerLabel?.text = "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+        
+        let strPackage = "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+
+//        let yourAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
+//        let yourOtherAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular)]
+//        let partOne = NSMutableAttributedString(string: strPackage, attributes: yourAttributes)
+//        let partTwo = NSMutableAttributedString(string: perminuteChage, attributes: yourOtherAttributes)
+//        let combination = NSMutableAttributedString()
+//        combination.append(partOne)
+//        combination.append(partTwo)
+        
+        pickerLabel?.text = strPackage
         pickerLabel?.textColor = UIColor.black
         return pickerLabel!
     }
@@ -120,9 +134,9 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
         return arrData.count
     }
         
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
-    }
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
+//    }
         
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.duratonId = arrData[row]["Id"] as? String ?? ""
@@ -147,15 +161,19 @@ extension DurationPopupVC {
                 let amount = resultData.object(forKey: "ChargeByTime") as? String ?? "0"
                 let CancelAmount = resultData.object(forKey: "ChargeByCancelled") as? String ?? "0"
                 self.setIntroText(amount: amount, cancelAmount: CancelAmount)
+                self.perminuteChage = (Localize.currentLanguage() == Languages.English.rawValue) ? resultData.object(forKey: "PerMinutesChargeMessage") as? String ?? "" : resultData.object(forKey: "PerMinutesChargeSpanishMessage") as? String ?? ""
+                self.lblPerMinuteCharge.text = self.perminuteChage
                 self.arrData = (result as? [String:Any])?["data"] as? [[String:Any]] ?? []
                 self.pickerView.reloadAllComponents()
             } else {
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
-                } else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
-                } else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: res, state: .failure)
+                }
+                else if let resDict = result as? NSDictionary {
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
+                }
+                else if let resAry = result as? NSArray {
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }

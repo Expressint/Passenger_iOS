@@ -173,7 +173,7 @@ struct WebserviceURLs {
     static let kRentalReviewRating                    = "RentalReviewRating"
     static let kRentalTripHistory                     = "RentalBookingHistory"
     static let AdvertisementList                      = "AdvertisementList"
-    static let RecommendedHoursForRentalTrip                      = "RecommendedHoursForRentalTrip"
+    static let RecommendedHoursForRentalTrip         = "RecommendedHoursForRentalTrip"
     
     //    https://pickngolk.info/web/Passenger_Api/OtpForRegister
 }

@@ -688,7 +688,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 //                }
                 
                 
-                (UIApplication.shared.delegate as! AppDelegate).GoToHome()
+                (UIApplication.shared.delegate as! AppDelegate).GoToIntro()
                 
                 
 
@@ -728,7 +728,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         print("Apple...")
         self.handleAppleIdRequest()
     }
-    
 
     func handleAppleIdRequest() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -785,7 +784,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                   
                   self.webserviceForAllDrivers()
                   
-                (UIApplication.shared.delegate as! AppDelegate).GoToHome()
+                (UIApplication.shared.delegate as! AppDelegate).GoToIntro()
             } else {
 
                 print(result)

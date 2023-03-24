@@ -55,7 +55,7 @@ class AddFavLocationVC: BaseViewController {
         let acController = GMSAutocompleteViewController()
         acController.delegate = self
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
     }

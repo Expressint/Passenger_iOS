@@ -104,16 +104,6 @@ class ConfirmLocationVC: BaseViewController {
         self.btnCash.setTitle("Cash".localized, for: .normal)
     }
     
-    //MARK: - Custom Methods
-    func openPlacePiicker() {
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
-        let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
-        acController.autocompleteFilter = filter
-        present(acController, animated: true, completion: nil)
-    }
-    
     func setPickUpLocation() {
         self.txtPickUpLoc.text = self.getAddressForLatLng(latitude: "\(SingletonClass.sharedInstance.latitude ?? 0.0)", longitude: "\(SingletonClass.sharedInstance.longitude ?? 0.0)")
         self.pickUpLat = SingletonClass.sharedInstance.latitude ?? 0.0
@@ -156,8 +146,7 @@ class ConfirmLocationVC: BaseViewController {
         txtPickUpDate.resignFirstResponder()
         if(txtPickUpDate.text == ""){
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select pickup date and time!".localized) { (index, title) in
-                }
+                Toast.show(message: "Please select pickup date and time!".localized, state: .failure)
             }
         } else {
             self.btnBookNow.isHidden = true
@@ -194,8 +183,7 @@ class ConfirmLocationVC: BaseViewController {
     
     func confirmBookLater() {
         if paymentType == "" {
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select payment method.".localized) { (index, title) in
-            }
+            Toast.show(message: "Please select payment method.".localized, state: .failure)
         } else {
             gotoFinalScreen(pickTime: self.txtPickUpDate.text ?? "")
         }
@@ -245,20 +233,17 @@ class ConfirmLocationVC: BaseViewController {
             self.paymentType = "card"
             self.imgCardForPaymentType.tintColor = .red
             self.PayCardView.backgroundColor = UIColor.black
-            btnCard.setTitleColor(themeAppMainColor, for: .normal)
+            self.btnCard.setTitleColor(themeAppMainColor, for: .normal)
         }
     }
     
     @IBAction func btnBookNowActiion(_ sender: Any) {
         if self.txtPickUpLoc.text == ""{
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your pickup location again".localized) { (index, title) in
-            }
+           Toast.show(message: "Please enter your pickup location again".localized, state: .failure)
         } else if self.txtDropOffLoc.text == ""{
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your destination again".localized) { (index, title) in
-            }
+            Toast.show(message: "Please enter your destination again".localized, state: .failure)
         }else if paymentType == "" {
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select payment method.".localized) { (index, title) in
-            }
+            Toast.show(message: "Please select payment method.".localized, state: .failure)
         } else {
             gotoFinalScreen(pickTime: "")
         }
@@ -287,15 +272,12 @@ class ConfirmLocationVC: BaseViewController {
     }
     
     @IBAction func btnBookLaterAction(_ sender: Any) {
-        if self.txtPickUpLoc.text == ""{
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your pickup location again".localized) { (index, title) in
-            }
-        } else if self.txtDropOffLoc.text == ""{
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please enter your destination again".localized) { (index, title) in
-            }
-        }else if paymentType == "" {
-            UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please select payment method.".localized) { (index, title) in
-            }
+        if self.txtPickUpLoc.text == "" {
+            Toast.show(message: "Please enter your pickup location again".localized, state: .failure)
+        } else if self.txtDropOffLoc.text == "" {
+            Toast.show(message: "Please enter your destination again".localized, state: .failure)
+        } else if paymentType == "" {
+           Toast.show(message: "Please select payment method.".localized, state: .failure)
         } else {
             stackPickUpDate.isHidden = !stackPickUpDate.isHidden
             self.setupDatePicker()
@@ -315,35 +297,26 @@ class ConfirmLocationVC: BaseViewController {
     }
 }
 
-//MARK: - GMSAutocompleteViewControllerDelegate Methods
-extension ConfirmLocationVC: GMSAutocompleteViewControllerDelegate {
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        if(isPickUpSelected != nil && isPickUpSelected == true){
-            
-            let Location = place.formattedAddress ?? "-"
-            self.txtPickUpLoc.text = Location
-            self.pickUpLat = place.coordinate.latitude
-            self.pickUpLong = place.coordinate.longitude
-            
-        }else{
-            
-            let Location = place.formattedAddress ?? "-"
-            self.txtDropOffLoc.text = Location
-            self.dropOffLat = place.coordinate.latitude
-            self.dropOffLong = place.coordinate.longitude
-            
+extension ConfirmLocationVC {
+    func presentPlacePickerViewController(isPicking: Bool) {
+        let addressPicker = AddressPickerVC { [weak self, isPicking] location in
+            if isPicking {
+                let Location = location.address
+                self?.txtPickUpLoc.text = Location
+                self?.pickUpLat = location.coordinate.latitude
+                self?.pickUpLong = location.coordinate.longitude
+                if self?.txtDropOffLoc.text != "" {
+                    self?.getRecommandatoinAPI()
+                }
+            } else {
+                let Location = location.address
+                self?.txtDropOffLoc.text = Location
+                self?.dropOffLat = location.coordinate.latitude
+                self?.dropOffLong = location.coordinate.longitude
+                self?.getRecommandatoinAPI()
+            }
         }
-        dismiss(animated: true, completion: {
-            self.getRecommandatoinAPI()
-        })
-    }
-    
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true, completion: nil)
+        present(addressPicker.bindToSystemNavigation(), animated: true, completion: nil)
     }
 }
 
@@ -352,10 +325,10 @@ extension ConfirmLocationVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == txtPickUpLoc {
             isPickUpSelected = true
-            self.openPlacePiicker()
+            self.presentPlacePickerViewController(isPicking: true)
         }else if textField == txtDropOffLoc {
             isPickUpSelected = false
-            self.openPlacePiicker()
+            self.presentPlacePickerViewController(isPicking: false)
         }
     }
 }
@@ -371,7 +344,9 @@ extension ConfirmLocationVC: LocationProtocol {
             self.dropOffLat = lat
             self.dropOffLong = lng
         }
-        self.getRecommandatoinAPI()
+        if txtDropOffLoc.text != "" {
+            self.getRecommandatoinAPI()
+        }
     }
 }
 
@@ -394,7 +369,7 @@ extension ConfirmLocationVC {
         dictParams.setObject(txtDropOffLoc ?? "", forKey: "DropoffLocation" as NSCopying)
         dictParams.setObject("\(dropOffLat ?? 0.0)", forKey: "DropOffLat" as NSCopying)
         dictParams.setObject("\(dropOffLong ?? 0.0)", forKey: "DropOffLng" as NSCopying)
-  
+        
         webserviceForRecommendedHoursForRentalTrip(dictParams) { (result, status) in
             if (status) {
                 print(result)
@@ -403,13 +378,17 @@ extension ConfirmLocationVC {
                 self.vwRecommended.isHidden = false
             } else {
                 if let res = result as? String {
-                    UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
-                } else if let resDict = result as? NSDictionary {
-                    UtilityClass.setCustomAlert(title: "Error", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
-                } else if let resAry = result as? NSArray {
-                    UtilityClass.setCustomAlert(title: "Error", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in }
+                    Toast.show(message: res, state: .failure)
+                }
+                else if let resDict = result as? NSDictionary {
+                    Toast.show(message: resDict.object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
+                }
+                else if let resAry = result as? NSArray {
+                    Toast.show(message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as? String ?? "", state: .failure)
                 }
             }
         }
     }
 }
+
+

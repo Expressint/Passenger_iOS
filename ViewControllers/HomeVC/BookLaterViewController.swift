@@ -460,7 +460,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolAdditionalDropLocation = false
         
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
         
@@ -472,7 +472,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         acController.delegate = self
         
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         BoolCurrentLocation = false
         BoolDropLocation = true
@@ -491,7 +491,7 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
         BoolAdditionalDropLocation = true
         
         let filter = GMSAutocompleteFilter()
-        filter.country = "GY"
+        filter.countries = ["GY"]
         acController.autocompleteFilter = filter
         present(acController, animated: true, completion: nil)
     }

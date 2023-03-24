@@ -611,9 +611,9 @@
 // Rental Flow
 "Services" = "Services";
 "GoAnywhere" = "Go anywhere, get anything";
-"Ride" = "Ride";
-"Hourly" = "Hourly";
-"Corporate" = "Corporate";
+"Ride" = "Book A Ride";
+"Hourly" = "Book Hourly";
+"Corporate" = "Book Corporate";
 
 "Select Model" = "Select Model";
 "Rental Trip" = "Rental Trip";
@@ -622,7 +622,7 @@
 "Driver Info" = "Driver Info";
 "Package Info" = "Package Info";
 "Package" = "Package";
-"Recommended Tip Hours" = "Recommended Tip Hours";
+"Recommended Tip Hours" = "Recommended Trip Hours";
 
 "Please Select Reason" = "Please Select Reason";
 "Long pick up time" = "Long pick up time";
@@ -637,7 +637,7 @@
 "Cancellation fees charged to you at" = "Cancellation fees charged to you at";
 "If you cancel trip, after driver accept ride" = "If you cancel trip, after driver accept ride";
 "Confirm" = "Confirm";
-"Tour" = "Tour";
+"Tour" = "Hourly";
 "Booking for someone else" = "Booking for someone else";
 
 "Final Destination" = "Final Destination";

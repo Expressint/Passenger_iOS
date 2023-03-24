@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2016 Google LLC. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -17,15 +17,17 @@
 
 #import <GooglePlaces/GooglePlaces.h>
 
+
 // The cell reuse identifier we are going to use.
+static NSString *gOverrideVersion = nil;
 static NSString *const kCellIdentifier = @"DemoCellIdentifier";
-static CGFloat kSelectionHeight = 40;
-static CGFloat kSelectionSwitchWidth = 50;
-static CGFloat kEdgeBuffer = 8;
+static const CGFloat kSelectionHeight = 40;
+static const CGFloat kSelectionSwitchWidth = 50;
+static const CGFloat kEdgeBuffer = 8;
 
 @implementation DemoListViewController {
   UIViewController *_editSelectionsViewController;
-  NSMutableDictionary<NSNumber *, UISwitch *> *_autocompleteFiltersSelectionMap;
+  NSMutableDictionary<NSString *, UISwitch *> *_autocompleteFiltersSelectionMap;
   NSMutableDictionary<NSNumber *, UISwitch *> *_placeFieldsSelectionMap;
   NSMutableDictionary<NSString *, UISwitch *> *_restrictionBoundsMap;
   CGFloat _nextSelectionYPos;
@@ -49,7 +51,7 @@ static CGFloat kEdgeBuffer = 8;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  // Clear the title to make room for next view to share the header space in splitsreen view.
+  // Clear the title to make room for next view to share the header space in splitscreen view.
   self.title = nil;
   [super viewWillDisappear:animated];
 }
@@ -57,7 +59,19 @@ static CGFloat kEdgeBuffer = 8;
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  // Set up the edit selections UI.
+  UINavigationBar *navBar = self.navigationController.navigationBar;
+  if (@available(iOS 13, *)) {
+    UINavigationBarAppearance *navBarAppearance = [[UINavigationBarAppearance alloc] init];
+    [navBarAppearance configureWithOpaqueBackground];
+    navBarAppearance.backgroundColor = [UIColor systemBackgroundColor];
+    [navBarAppearance
+        setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor labelColor]}];
+
+    navBar.standardAppearance = navBarAppearance;
+    navBar.scrollEdgeAppearance = navBarAppearance;
+  } else {
+    navBar.translucent = NO;
+  }
   [self setUpEditSelectionsUI];
 
   // Add button to the header to edit the place field selections.
@@ -83,28 +97,31 @@ static CGFloat kEdgeBuffer = 8;
  * @param demo The demo to show.
  */
 - (void)showDemo:(Demo *)demo {
-  GMSAutocompleteBoundsMode boundsMode = kGMSAutocompleteBoundsModeBias;
-  GMSCoordinateBounds *bounds;
+  CLLocationCoordinate2D northEast = kCLLocationCoordinate2DInvalid;
+  CLLocationCoordinate2D southWest = kCLLocationCoordinate2DInvalid;
+  GMSAutocompleteFilter *autocompleteFilter = [self autocompleteFilter];
 
   // Check for restriction bounds settings.
   if (_restrictionBoundsMap[@"Kansas"].on) {
-    boundsMode = kGMSAutocompleteBoundsModeRestrict;
-    CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(39.0, -95.0);
-    CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(37.5, -100.0);
-    bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
+    northEast = CLLocationCoordinate2DMake(39.0, -95.0);
+    southWest = CLLocationCoordinate2DMake(37.5, -100.0);
+    autocompleteFilter.origin = [[CLLocation alloc] initWithLatitude:northEast.latitude
+                                                           longitude:northEast.longitude];
+    autocompleteFilter.locationRestriction =
+        GMSPlaceRectangularLocationOption(northEast, southWest);
   } else if (_restrictionBoundsMap[@"Canada"].on) {
-    boundsMode = kGMSAutocompleteBoundsModeRestrict;
-    CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(70.0, -60.0);
-    CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(50.0, -140.0);
-    bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
+    northEast = CLLocationCoordinate2DMake(70.0, -60.0);
+    southWest = CLLocationCoordinate2DMake(50.0, -140.0);
+    autocompleteFilter.origin = [[CLLocation alloc] initWithLatitude:northEast.latitude
+                                                           longitude:northEast.longitude];
+    autocompleteFilter.locationRestriction =
+        GMSPlaceRectangularLocationOption(northEast, southWest);
   }
 
   // Create view controller with the autocomplete filters, bounds and selected place fields.
   UIViewController *viewController =
-      [demo createViewControllerWithAutocompleteBoundsMode:boundsMode
-                                        autocompleteBounds:bounds
-                                        autocompleteFilter:[self autcompleteFilter]
-                                               placeFields:[self selectedPlaceFields]];
+      [demo createViewControllerWithAutocompleteFilter:autocompleteFilter
+                                           placeFields:[self selectedPlaceFields]];
   [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -113,24 +130,37 @@ static CGFloat kEdgeBuffer = 8;
 - (void)setUpEditSelectionsUI {
   // Initialize the place fields selection UI.
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+#if defined(__IPHONE_13_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0)
+  if (@available(iOS 13.0, *)) {
+    scrollView.backgroundColor = [UIColor systemBackgroundColor];
+  } else {
+    scrollView.backgroundColor = [UIColor whiteColor];
+  }
+#else
   scrollView.backgroundColor = [UIColor whiteColor];
+#endif  // defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
 
   // Add heading for the autocomplete type filters.
   _nextSelectionYPos = [UIApplication sharedApplication].statusBarFrame.size.height;
-  [scrollView addSubview:[self headerLabelForTitle:@"Autcomplete Filters"]];
+  [scrollView addSubview:[self headerLabelForTitle:@"Autocomplete Filters"]];
 
   // Set up the individual autocomplete type filters we can limit the results to.
   // Add a heading for the place fields that we can request.
   _nextSelectionYPos += kSelectionHeight;
-  for (NSInteger autocompleteFilterType = kGMSPlacesAutocompleteTypeFilterGeocode;
-       autocompleteFilterType <= kGMSPlacesAutocompleteTypeFilterCity; ++autocompleteFilterType) {
-    [scrollView
-        addSubview:[self selectionButtonForAutocompleteFilterType:(GMSPlacesAutocompleteTypeFilter)
-                                                                      autocompleteFilterType]];
-  }
+  [scrollView addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeRestaurant]];
+  [scrollView addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeAirport]];
+  [scrollView addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeGeocode]];
+  [scrollView
+      addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeEstablishment]];
+  [scrollView
+      addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeCollectionAddress]];
+  [scrollView
+      addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeCollectionRegion]];
+  [scrollView
+      addSubview:[self selectionButtonForAutocompleteFilterType:kGMSPlaceTypeCollectionCity]];
 
   // Add heading for the autocomplete restriction bounds.
-  [scrollView addSubview:[self headerLabelForTitle:@"Autcomplete Restriction Bounds"]];
+  [scrollView addSubview:[self headerLabelForTitle:@"Autocomplete Restriction Bounds"]];
 
   // Set up the restriction bounds for testing purposes.
   _nextSelectionYPos += kSelectionHeight;
@@ -145,10 +175,11 @@ static CGFloat kEdgeBuffer = 8;
 
   // Set up the individual place fields that we can request.
   _nextSelectionYPos += kSelectionHeight;
-  for (NSUInteger placeField = GMSPlaceFieldName; placeField <= GMSPlaceFieldUserRatingsTotal;
+  for (NSUInteger placeField = GMSPlaceFieldName; placeField <= GMSPlaceFieldIconBackgroundColor;
        placeField <<= 1) {
     [scrollView addSubview:[self selectionButtonForPlaceField:(GMSPlaceField)placeField]];
   }
+
 
   // Add the close button to dismiss the selection UI.
   UIButton *close =
@@ -233,6 +264,10 @@ static CGFloat kEdgeBuffer = 8;
     @(GMSPlaceFieldViewport) : @"Viewport",
     @(GMSPlaceFieldAddressComponents) : @"Address Components",
     @(GMSPlaceFieldPhotos) : @"Photos",
+    @(GMSPlaceFieldUTCOffsetMinutes) : @"UTC Offset Minutes",
+    @(GMSPlaceFieldBusinessStatus) : @"Business Status",
+    @(GMSPlaceFieldIconImageURL) : @"Icon Image URL",
+    @(GMSPlaceFieldIconBackgroundColor) : @"Icon Background Color",
   };
   UIButton *selectionButton = [self selectionButtonForTitle:fieldsMapping[@(placeField)]];
   UISwitch *selectionSwitch = [self switchFromButton:selectionButton];
@@ -242,22 +277,14 @@ static CGFloat kEdgeBuffer = 8;
   return selectionButton;
 }
 
-- (UIButton *)selectionButtonForAutocompleteFilterType:
-    (GMSPlacesAutocompleteTypeFilter)autocompleteFilter {
-  NSDictionary<NSNumber *, NSString *> *fieldsMapping = @{
-    @(kGMSPlacesAutocompleteTypeFilterGeocode) : @"Geocode",
-    @(kGMSPlacesAutocompleteTypeFilterAddress) : @"Address",
-    @(kGMSPlacesAutocompleteTypeFilterEstablishment) : @"Establishment",
-    @(kGMSPlacesAutocompleteTypeFilterRegion) : @"Region",
-    @(kGMSPlacesAutocompleteTypeFilterCity) : @"City",
-  };
-  UIButton *selectionButton = [self selectionButtonForTitle:fieldsMapping[@(autocompleteFilter)]];
+- (UIButton *)selectionButtonForAutocompleteFilterType:(NSString *)autocompleteFilter {
+  UIButton *selectionButton = [self selectionButtonForTitle:autocompleteFilter];
   [selectionButton addTarget:self
                       action:@selector(disableOtherAutocompleteFilterExceptForTapped:)
             forControlEvents:UIControlEventTouchUpInside];
   UISwitch *selectionSwitch = [self switchFromButton:selectionButton];
   [selectionSwitch setOn:NO];
-  _autocompleteFiltersSelectionMap[@(autocompleteFilter)] = selectionSwitch;
+  _autocompleteFiltersSelectionMap[autocompleteFilter] = selectionSwitch;
   _nextSelectionYPos += selectionButton.frame.size.height;
   return selectionButton;
 }
@@ -288,8 +315,8 @@ static CGFloat kEdgeBuffer = 8;
 
 - (void)disableOtherAutocompleteFilterExceptForTapped:(UIButton *)sender {
   UISwitch *tappedSwitch = [self switchFromButton:sender];
-  for (NSNumber *number in _autocompleteFiltersSelectionMap) {
-    UISwitch *selectionSwitch = _autocompleteFiltersSelectionMap[number];
+  for (NSString *filterType in _autocompleteFiltersSelectionMap) {
+    UISwitch *selectionSwitch = _autocompleteFiltersSelectionMap[filterType];
     if (selectionSwitch != tappedSwitch) {
       [selectionSwitch setOn:NO animated:YES];
     }
@@ -316,6 +343,11 @@ static CGFloat kEdgeBuffer = 8;
   UIScrollView *scrollView = (UIScrollView *)_editSelectionsViewController.view;
   [scrollView setContentOffset:CGPointZero animated:NO];
 
+  // Default modalPresentationStyle reduces width of view on iPad, view needs to be full width
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    _editSelectionsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+  }
+
   // Present the selection UI to edit which place fields to request.
   [self.navigationController presentViewController:_editSelectionsViewController
                                           animated:YES
@@ -326,12 +358,12 @@ static CGFloat kEdgeBuffer = 8;
   [_editSelectionsViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (GMSAutocompleteFilter *)autcompleteFilter {
+- (GMSAutocompleteFilter *)autocompleteFilter {
   GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-  for (NSNumber *number in _autocompleteFiltersSelectionMap) {
-    UISwitch *selectionSwitch = _autocompleteFiltersSelectionMap[number];
+  for (NSString *filterType in _autocompleteFiltersSelectionMap) {
+    UISwitch *selectionSwitch = _autocompleteFiltersSelectionMap[filterType];
     if ([selectionSwitch isOn]) {
-      filter.type = (GMSPlacesAutocompleteTypeFilter)[number integerValue];
+      filter.types = @[ filterType ];
       break;
     }
   }
@@ -350,13 +382,8 @@ static CGFloat kEdgeBuffer = 8;
 }
 
 - (CGFloat)horizontalInset {
-#if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
   // Take into account the safe areas of the device screen and do not use that space.
-  if (@available(iOS 11.0, *)) {
-    return MAX(self.view.safeAreaInsets.left, self.view.safeAreaInsets.right) + kEdgeBuffer;
-  }
-#endif
-  return kEdgeBuffer;
+  return MAX(self.view.safeAreaInsets.left, self.view.safeAreaInsets.right) + kEdgeBuffer;
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -372,8 +399,8 @@ static CGFloat kEdgeBuffer = 8;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   // Dequeue a table view cell to use.
-  UITableViewCell *cell =
-      [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
+                                                          forIndexPath:indexPath];
 
   // Grab the demo object.
   Demo *demo = _demoData.sections[indexPath.section].demos[indexPath.row];
@@ -394,11 +421,16 @@ static CGFloat kEdgeBuffer = 8;
   [self showDemo:demo];
 }
 
++ (NSString *)overrideVersion {
+  return [[[NSProcessInfo processInfo] environment] objectForKey:@"PLACES_VERSION_NUMBER_OVERRIDE"];
+}
+
 + (NSString *)titleText {
   NSString *titleFormat = NSLocalizedString(
       @"App.NameAndVersion", @"The name of the app to display in a navigation bar along with a "
                              @"placeholder for the SDK version number");
-  return [NSString stringWithFormat:titleFormat, [GMSPlacesClient SDKVersion]];
+  return [NSString
+      stringWithFormat:titleFormat, [self overrideVersion] ?: [GMSPlacesClient SDKLongVersion]];
 }
 
 #pragma mark - Handle Orientation Changes

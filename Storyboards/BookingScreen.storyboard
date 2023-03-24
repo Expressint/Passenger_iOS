@@ -3018,10 +3018,10 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mb4-jb-hSP">
-                                <rect key="frame" x="0.0" y="359" width="414" height="537"/>
+                                <rect key="frame" x="0.0" y="347.5" width="414" height="548.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwf-AM-8Hq">
-                                        <rect key="frame" x="20" y="437" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="448.5" width="374" height="50"/>
                                         <color key="backgroundColor" red="0.58464020596246824" green="0.58707971967325034" blue="0.6576291599224523" alpha="0.13470973838754252" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="iEm-ax-sx6"/>
@@ -3053,7 +3053,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvT-hU-ml8">
-                                        <rect key="frame" x="20" y="367" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="378.5" width="374" height="50"/>
                                         <color key="backgroundColor" red="0.0078431372550000003" green="0.65098039220000004" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Confirm Rental">
@@ -3112,10 +3112,18 @@
                                             <constraint firstAttribute="bottom" secondItem="RL3-bC-Y85" secondAttribute="bottom" id="MzX-VP-qSG"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per Minutes Charge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-mR-OpA">
+                                        <rect key="frame" x="20" y="347" width="374" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Yzb-2n-Uyo" firstAttribute="top" secondItem="Eux-5e-Pls" secondAttribute="bottom" constant="5" id="19o-ca-ua4"/>
+                                    <constraint firstItem="bvT-hU-ml8" firstAttribute="top" secondItem="gMM-mR-OpA" secondAttribute="bottom" constant="10" id="DOB-gN-IYd"/>
+                                    <constraint firstItem="gMM-mR-OpA" firstAttribute="leading" secondItem="RL3-bC-Y85" secondAttribute="leading" id="Ene-KN-ZMx"/>
                                     <constraint firstItem="bvT-hU-ml8" firstAttribute="height" secondItem="hwf-AM-8Hq" secondAttribute="height" id="LGW-9H-ZVv"/>
                                     <constraint firstItem="Yzb-2n-Uyo" firstAttribute="trailing" secondItem="Eux-5e-Pls" secondAttribute="trailing" id="OtD-3B-6J2"/>
                                     <constraint firstItem="hwf-AM-8Hq" firstAttribute="top" secondItem="bvT-hU-ml8" secondAttribute="bottom" constant="20" id="PPW-oe-vez"/>
@@ -3124,13 +3132,14 @@
                                     <constraint firstItem="Yzb-2n-Uyo" firstAttribute="leading" secondItem="Eux-5e-Pls" secondAttribute="leading" id="UPf-lp-aTY"/>
                                     <constraint firstItem="3wo-iH-8Js" firstAttribute="top" secondItem="Yzb-2n-Uyo" secondAttribute="bottom" constant="20" id="WdV-s6-Zpl"/>
                                     <constraint firstItem="bvT-hU-ml8" firstAttribute="leading" secondItem="hwf-AM-8Hq" secondAttribute="leading" id="ZIi-wv-ZYs"/>
-                                    <constraint firstItem="bvT-hU-ml8" firstAttribute="top" secondItem="3wo-iH-8Js" secondAttribute="bottom" constant="20" id="aob-QW-7ge"/>
                                     <constraint firstItem="Eux-5e-Pls" firstAttribute="top" secondItem="Mb4-jb-hSP" secondAttribute="top" constant="20" id="b7o-o6-kSn"/>
                                     <constraint firstAttribute="bottom" secondItem="hwf-AM-8Hq" secondAttribute="bottom" constant="50" id="fWg-74-2m1"/>
                                     <constraint firstAttribute="trailing" secondItem="Eux-5e-Pls" secondAttribute="trailing" constant="20" id="hyL-BT-8bE"/>
                                     <constraint firstItem="hwf-AM-8Hq" firstAttribute="leading" secondItem="Mb4-jb-hSP" secondAttribute="leading" constant="20" id="lEk-hf-k1W"/>
+                                    <constraint firstItem="gMM-mR-OpA" firstAttribute="trailing" secondItem="RL3-bC-Y85" secondAttribute="trailing" id="qje-LS-fkE"/>
                                     <constraint firstItem="Eux-5e-Pls" firstAttribute="leading" secondItem="Mb4-jb-hSP" secondAttribute="leading" constant="20" id="rEp-vp-mOA"/>
                                     <constraint firstAttribute="trailing" secondItem="hwf-AM-8Hq" secondAttribute="trailing" constant="20" id="tFx-4K-yRY"/>
+                                    <constraint firstItem="gMM-mR-OpA" firstAttribute="top" secondItem="RL3-bC-Y85" secondAttribute="bottom" id="vsf-pA-Ic7"/>
                                     <constraint firstItem="3wo-iH-8Js" firstAttribute="trailing" secondItem="Yzb-2n-Uyo" secondAttribute="trailing" id="ysA-w5-Ntm"/>
                                 </constraints>
                             </view>
@@ -3152,6 +3161,7 @@
                         <outlet property="btnCancel" destination="hwf-AM-8Hq" id="Bxn-Y8-gsZ"/>
                         <outlet property="btnConfirm" destination="bvT-hU-ml8" id="yxv-Nr-JGw"/>
                         <outlet property="lblIntro" destination="Yzb-2n-Uyo" id="eP1-O7-rpp"/>
+                        <outlet property="lblPerMinuteCharge" destination="gMM-mR-OpA" id="Kht-ed-3o4"/>
                         <outlet property="lblSelectPackage" destination="Eux-5e-Pls" id="C33-ak-e7U"/>
                         <outlet property="pickerView" destination="RL3-bC-Y85" id="rKk-bb-2a6"/>
                         <outlet property="vWMain" destination="Mb4-jb-hSP" id="p4R-Lt-isT"/>

@@ -104,8 +104,7 @@ PODS:
   - GoogleMaps/Base (3.0.3)
   - GoogleMaps/Maps (3.0.3):
     - GoogleMaps/Base
-  - GooglePlaces (3.0.3):
-    - GoogleMaps/Base (= 3.0.3)
+  - GooglePlaces (7.2.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -169,8 +168,8 @@ DEPENDENCIES:
   - Firebase/Messaging
   - FormTextField
   - FSPagerView
-  - GoogleMaps (= 3.0.3)
-  - GooglePlaces (= 3.0.3)
+  - GoogleMaps
+  - GooglePlaces (~> 7.2.0)
   - GoogleSignIn
   - IQDropDownTextField
   - IQKeyboardManagerSwift
@@ -248,7 +247,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: a6a3a066369828db64eda428cb2856dc1cdc7c4e
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
   GoogleMaps: fd5c9fa58871781b9fb94d4936f19c69fe60ce32
-  GooglePlaces: f09e76993c9c3ee4af8f4f7f535bb94d6aa3b649
+  GooglePlaces: 590dea495d69431454ea92217033c3184995165d
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
@@ -267,6 +266,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: b3e1df4965cf499c75914c760a994963b2be0916
+PODFILE CHECKSUM: f312cf687d19c5a8ff658cf447f96b6b4f71de41
 
 COCOAPODS: 1.11.3

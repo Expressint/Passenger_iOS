@@ -158,6 +158,7 @@
 		4701754D28D8950F00C0F3F3 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4701754C28D8950F00C0F3F3 /* Localization.swift */; };
 		4703D53E28B7611100D500B0 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703D53D28B7611100D500B0 /* ImagePickerController.swift */; };
 		470DBDBF28B78B22003A0E5A /* ChatImageViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */; };
+		47149B0429C19DB100BC6E2F /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47149B0329C19DB100BC6E2F /* Toast.swift */; };
 		4727BFF12975411300F3C926 /* RequestLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4727BFF02975411300F3C926 /* RequestLoadingVC.swift */; };
 		473CF01A2951860A00EB22E6 /* SelectModelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF0192951860900EB22E6 /* SelectModelVC.swift */; };
 		473CF01F2951875C00EB22E6 /* SelectModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473CF01D2951875C00EB22E6 /* SelectModelCell.swift */; };
@@ -166,6 +167,8 @@
 		473FE81C296FD3B00019B237 /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 473FE81B296FD3B00019B237 /* Initial.storyboard */; };
 		473FE81F296FD3E10019B237 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473FE81E296FD3E10019B237 /* IntroVC.swift */; };
 		474AA61029BF09B200835569 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 474AA60F29BF09B100835569 /* demo.mp4 */; };
+		474BAAE929C8556200F9BD5A /* AddressPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474BAAE729C8556200F9BD5A /* AddressPickerVC.swift */; };
+		474BAAEB29C855D300F9BD5A /* LocationInfoWithCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474BAAEA29C855D200F9BD5A /* LocationInfoWithCoordinates.swift */; };
 		47521585299CD0F400453463 /* SideMenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47521584299CD0F400453463 /* SideMenuTableVC.swift */; };
 		47521588299CD22600453463 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 47521587299CD22600453463 /* SideMenu */; };
 		4757DC4C299F5A6200E43B56 /* TourTripHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */; };
@@ -628,6 +631,7 @@
 		4701754F28D8953600C0F3F3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4703D53D28B7611100D500B0 /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		470DBDBE28B78B22003A0E5A /* ChatImageViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageViewVC.swift; sourceTree = "<group>"; };
+		47149B0329C19DB100BC6E2F /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		4727BFF02975411300F3C926 /* RequestLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoadingVC.swift; sourceTree = "<group>"; };
 		473CF0192951860900EB22E6 /* SelectModelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelVC.swift; sourceTree = "<group>"; };
 		473CF01D2951875C00EB22E6 /* SelectModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectModelCell.swift; sourceTree = "<group>"; };
@@ -636,6 +640,8 @@
 		473FE81B296FD3B00019B237 /* Initial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
 		473FE81E296FD3E10019B237 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		474AA60F29BF09B100835569 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
+		474BAAE729C8556200F9BD5A /* AddressPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressPickerVC.swift; sourceTree = "<group>"; };
+		474BAAEA29C855D200F9BD5A /* LocationInfoWithCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfoWithCoordinates.swift; sourceTree = "<group>"; };
 		47521584299CD0F400453463 /* SideMenuTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableVC.swift; sourceTree = "<group>"; };
 		4757DC4B299F5A6200E43B56 /* TourTripHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryVC.swift; sourceTree = "<group>"; };
 		4757DC55299F669C00E43B56 /* TourTripHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourTripHistoryCell.swift; sourceTree = "<group>"; };
@@ -1284,6 +1290,8 @@
 		3A40734421B512280015C494 /* Classs */ = {
 			isa = PBXGroup;
 			children = (
+				47149B0329C19DB100BC6E2F /* Toast.swift */,
+				474BAAE529C8556200F9BD5A /* AddressPickerVC */,
 				476D87A3297FA73D00783D35 /* Location Manageer */,
 				4701754B28D894FC00C0F3F3 /* Localization */,
 				6A34BF5124BD901A0084F466 /* Previous Due */,
@@ -1544,6 +1552,15 @@
 				47521584299CD0F400453463 /* SideMenuTableVC.swift */,
 			);
 			path = Introduction;
+			sourceTree = "<group>";
+		};
+		474BAAE529C8556200F9BD5A /* AddressPickerVC */ = {
+			isa = PBXGroup;
+			children = (
+				474BAAE729C8556200F9BD5A /* AddressPickerVC.swift */,
+				474BAAEA29C855D200F9BD5A /* LocationInfoWithCoordinates.swift */,
+			);
+			path = AddressPickerVC;
 			sourceTree = "<group>";
 		};
 		4757DC4D299F65F300E43B56 /* Histoy */ = {
@@ -2563,6 +2580,7 @@
 				3A4073AD21B512280015C494 /* OnGoingVC.swift in Sources */,
 				34E01A2F220F1109000D048E /* HomeViewController.swift in Sources */,
 				3A4073E721B512280015C494 /* WalletHistoryViewController.swift in Sources */,
+				47149B0429C19DB100BC6E2F /* Toast.swift in Sources */,
 				3A4073EF21B512280015C494 /* ThemeTextField.swift in Sources */,
 				3A4073B521B512280015C494 /* PackageHistoryListTableViewCell.swift in Sources */,
 				3A4073BB21B512280015C494 /* RegistrationNewViewController.swift in Sources */,
@@ -2579,7 +2597,9 @@
 				3A40739F21B512280015C494 /* CustomAlertsViewController.swift in Sources */,
 				3A40740E21B512280015C494 /* CustomViewForShadow.swift in Sources */,
 				3A40739B21B512280015C494 /* AppDelegate.swift in Sources */,
+				474BAAEB29C855D300F9BD5A /* LocationInfoWithCoordinates.swift in Sources */,
 				3A4073C821B512280015C494 /* MyReceiptsViewController.swift in Sources */,
+				474BAAE929C8556200F9BD5A /* AddressPickerVC.swift in Sources */,
 				88948DBD2887E94D00090AC0 /* AddFavLocationVC.swift in Sources */,
 				3A4073B921B512280015C494 /* RegisterViewController.swift in Sources */,
 				3A4073EC21B512280015C494 /* webViewVC.swift in Sources */,
@@ -2788,9 +2808,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.6;
+				CURRENT_PROJECT_VERSION = 1.8.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2802,7 +2822,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2823,9 +2843,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.8.6;
+				CURRENT_PROJECT_VERSION = 1.8.8;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2837,7 +2857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

@@ -543,7 +543,7 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
                     let data = NSKeyedArchiver.archivedData(withRootObject: SingletonClass.sharedInstance.dictProfile)
                     UserDefaults.standard.set(data, forKey: "profileData")
                     
-                        appDelegate.GoToHome()
+                        appDelegate.GoToIntro()
 
                 })
                 

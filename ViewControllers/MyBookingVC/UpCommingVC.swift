@@ -38,9 +38,6 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         return refreshControl
     }()
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,10 +51,6 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        
-        
-//        webserviceOfUpcommingpagination(index: 1)
-        
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -69,8 +62,6 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         
     @objc func reloadDataTableView()
     {
-//        self.aryData = SingletonClass.sharedInstance.aryUpComming
-        
         webserviceOfUpcommingpagination(index: 1)
         
         self.tableView.reloadData()
@@ -385,16 +376,16 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     @objc func CancelRequest(sender: UIButton)
     {
         
-         let bookingID = sender.tag
+        let bookingID = sender.tag
         
         RMUniversalAlert.show(in: self, withTitle:appName, message: "Are you sure you want to cancel the trip?".localized, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: ["Accept".localized, "Decline".localized], tap: {(alert, buttonIndex) in
             if (buttonIndex == 2)
             {
                
                 
-                let socketData = (self.navigationController?.childViewControllers[0] as! HomeViewController).socket
+                let socketData = (self.navigationController?.childViewControllers[0] as! IntroVC).socket
                 //((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0].childViewControllers[0] as! HomeViewController).socket
-                let showTopView = self.navigationController?.childViewControllers[0] as! HomeViewController //((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0].childViewControllers[0] as! HomeViewController)
+                let showTopView = self.navigationController?.childViewControllers[0] as! IntroVC //((self.navigationController?.childViewControllers[1] as! CustomSideMenuViewController).childViewControllers[0].childViewControllers[0] as! HomeViewController)
                 
                 if (SingletonClass.sharedInstance.isTripContinue) {
                     
@@ -412,13 +403,6 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                         let myJSON = [SocketDataKeys.kBookingIdNow : bookingID] as [String : Any]
                         socketData?.emit(SocketData.kCancelTripByPassenger , with: [myJSON], completion: nil)
                         
-                        showTopView.setHideAndShowTopViewWhenRequestAcceptedAndTripStarted(status: false)
-                        
-                        //                UtilityClass.showAlertWithCompletion("", message: "Your request cancelled successfully", vc: self, completionHandler: { ACTION in
-                        //                    self.navigationController?.popViewController(animated: true)
-                        //                })
-                        
-                        //                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.navigationController?.popViewController(animated: true)
                         //                }
                         
@@ -429,7 +413,6 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     }
                     else {
                         let myJSON = [SocketDataKeys.kBookingIdNow : bookingID] as [String : Any]
-                        print(socketData?.status.rawValue)
                         socketData?.emit(SocketData.kAdvancedBookingCancelTripByPassenger , with: [myJSON], completion: nil)
                         
                         //                UtilityClass.showAlertWithCompletion("", message: "Your request cancelled successfully", vc: self, completionHandler: { ACTION in
@@ -560,13 +543,11 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
                     UtilityClass.setCustomAlert(title: "", message: res) { (index, title) in
                         self.navigationController?.popViewController(animated: true)
                     }
-                }
-                else if let resDict = result as? NSDictionary {
+                } else if let resDict = result as? NSDictionary {
                     UtilityClass.setCustomAlert(title: "", message: resDict.object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                         self.navigationController?.popViewController(animated: true)
                     }
-                }
-                else if let resAry = result as? NSArray {
+                } else if let resAry = result as? NSArray {
                     UtilityClass.setCustomAlert(title: "", message: (resAry.object(at: 0) as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -584,6 +565,5 @@ class UpCommingVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
             }
         }
     }
-    
     
 }
