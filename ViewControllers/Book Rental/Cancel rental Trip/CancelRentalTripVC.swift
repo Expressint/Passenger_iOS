@@ -73,12 +73,12 @@ class CancelRentalTripVC: BaseViewController {
         UIView.animate(withDuration: 0.5) {
             self.updateViewConstraints()
         }
-        
     }
     
     @objc func changeLanguage(){
         self.setLocalization()
     }
+    
     func setLocalization(){
         self.lblReason.text = "Please Select Reason".localized
         self.btnCancelTrip.setTitle("Cancel Trip".localized, for: .normal)
@@ -93,6 +93,7 @@ class CancelRentalTripVC: BaseViewController {
         var reason = ""
         if self.selectedReason == nil {
             Toast.show(message: "Please select reason to cancel trip".localized, state: .success)
+            
         } else if self.selectedReason == "Other".localized {
             let other = self.txtOthers.text ?? ""
             if(other == "" || other == "Enter reason here".localized){
@@ -100,6 +101,7 @@ class CancelRentalTripVC: BaseViewController {
             } else {
                 reason = self.txtOthers.text ?? ""
             }
+            
         } else {
             reason = self.selectedReason ?? ""
         }
@@ -107,6 +109,7 @@ class CancelRentalTripVC: BaseViewController {
         if reason == "" {
             return
         }
+        
         self.delegate?.CancelRentalTrip(Reason: reason)
         self.dismiss(animated: true, completion: nil)
     }

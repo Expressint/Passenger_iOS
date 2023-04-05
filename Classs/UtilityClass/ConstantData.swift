@@ -183,11 +183,11 @@ struct WebserviceURLs {
 //Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                     = "https://www.bookaridegy.com:8080"
-    static let kNearByDriverList                            = "NearByDriverListIOS"
-    static let kUpdatePassengerLatLong                      = "UpdatePassengerLatLong"
+    static let kBaseURL                                       = "https://www.bookaridegy.com:8080"
+    static let kNearByDriverList                             = "NearByDriverListIOS"
+    static let kUpdatePassengerLatLong                       = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"
-    static let kBookingDetailsDropoffs                      = "BookingDetailsDropoffs"
+    static let kBookingDetailsDropoffs                       = "BookingDetailsDropoffs"
     static let kRejectBookingRequestNotification            = "RejectBookingRequestNotification"
     static let kPickupPassengerNotification                 = "PickupPassengerNotification"
     static let kBookingCompletedNotification                = "BookingDetails"
@@ -236,6 +236,8 @@ struct SocketData {
     static let CancelRentalTripByPassenger = "CancelRentalTripByPassenger"
     static let CancelRentalTripNotification = "PassengerCancelRentalTripNotification"
     static let RentalSOS = "RentalSOS"
+    static let AdvertisementReportReponse = "AdvertisementReportReponse"
+    static let AdvertisementReportCreate = "AdvertisementReportCreate"
 }
 
 struct SocketDataKeys {
@@ -318,7 +320,6 @@ let openNAboutUs = NSNotification.Name("openAboutUs")
 //let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
 let GoToChatScreen = NSNotification.Name("GoToChatScreen")
 let RequestForTaxiHourly = NSNotification.Name("RequestForTaxiHourly")
-
 
 //let NotificationHotelReservation = NSNotification.Name("NotificationHotelReservation")
 //let NotificationBookaTable = NSNotification.Name("NotificationBookaTable")

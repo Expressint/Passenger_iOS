@@ -28,24 +28,26 @@ class IntroVC: BaseViewController {
     let socket = (UIApplication.shared.delegate as! AppDelegate).socket
     
     override func viewWillAppear(_ animated: Bool) {
-        self.setNotificationcenter()
+       
         self.checkForNotification()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
+        self.socketMethods()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.removeObserver()
+        self.RentalOffMethods()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.socketMethods()
-        
         self.webserviceOfAdvList()
         
         self.setLocalization()
         self.setupRedirection()
+        self.setNotificationcenter()
     }
+    
     
     func socketMethods() {
         socket?.on(clientEvent: .disconnect) { (data, ack) in
@@ -59,12 +61,22 @@ class IntroVC: BaseViewController {
         socket?.on(clientEvent: .connect) { data, ack in
             print("socket? BaseURl : \(SocketData.kBaseURL)")
             print("socket? connected")
+            self.RentalOnMethods()
         }
         
         if socket?.status == .connected {
+            self.RentalOnMethods()
        } else {
             self.socket?.connect()
         }
+    }
+    
+    func RentalOnMethods() {
+        self.socketForAdv()
+    }
+    
+    func RentalOffMethods() {
+        self.socket?.off(SocketData.AdvertisementReportReponse)
     }
     
     @objc func changeLanguage(){
@@ -134,6 +146,17 @@ class IntroVC: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.openAboutUs), name: openNAboutUs, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.goChatScreen), name: GoToChatScreen, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(IntroVC.deleteAccount), name: DeleteAccount, object: nil)
+        
+        let AdvNotification = "AdvNotification"
+        let notificationName = Notification.Name(AdvNotification)
+        NotificationCenter.default.removeObserver(self, name: notificationName, object: nil)
+        NotificationCenter.default.addObserver(forName: notificationName, object: nil, queue: nil) { notification in
+            if let data = notification.userInfo as? [String: String] {
+                let Id = data["Id"]
+                let Url = data["Url"]
+                self.socketEmitForAdv(id: Id ?? "", Url: Url ?? "")
+            }
+        }
     }
     
     func removeObserver() {
@@ -153,6 +176,7 @@ class IntroVC: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: openNAboutUs, object: nil)
         NotificationCenter.default.removeObserver(self, name: GoToChatScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: DeleteAccount, object: nil)
+        
     }
     
     func checkForNotification(){
@@ -360,8 +384,7 @@ extension IntroVC: FSPagerViewDataSource, FSPagerViewDelegate {
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
-        self.viewAdv(URLMain: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
-       // self.gotoPage(strUrl: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+        self.socketEmitForAdv(id: arrAdvImages[index]["Id"] as? String ?? "", Url: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
     }
     
     func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
@@ -406,5 +429,26 @@ extension IntroVC {
         guard let url = URL(string: URLMain) else {return}
         let svc = SFSafariViewController(url: url)
         present(svc, animated: true, completion: nil)
+    }
+}
+
+extension IntroVC {
+    func socketForAdv() {
+        self.socket?.on(SocketData.AdvertisementReportReponse, callback: { (data, ack) in
+            print ("AdvertisementReportReponse : \(data)")
+            let msg = (data as NSArray)
+        })
+    }
+    
+    func socketEmitForAdv(id: String, Url: String) {
+        let myJSON = ["UserId" : SingletonClass.sharedInstance.strPassengerID,
+                      "AdvertisementId": id,
+                      "Lat": "\(SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0)",
+                      "Long": "\(SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0)"] as [String : Any]
+        
+        self.socket?.emit(SocketData.AdvertisementReportCreate, with: [myJSON], completion: nil)
+        print ("\(SocketData.AdvertisementReportCreate) : \(myJSON)")
+        
+        self.viewAdv(URLMain: Url)
     }
 }

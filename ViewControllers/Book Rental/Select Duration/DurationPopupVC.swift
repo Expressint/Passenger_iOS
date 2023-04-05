@@ -53,11 +53,12 @@ class DurationPopupVC: BaseViewController {
     @objc func changeLanguage(){
         self.setLocalization()
     }
+    
     func setLocalization(){
         self.lblSelectPackage.text = "Please select a suitable package".localized
         self.btnCancel.setTitle("Cancel".localized, for: .normal)
     }
-  
+    
     func prepareView() {
         self.setupUI()
         self.setupData()
@@ -112,14 +113,6 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         
         let strPackage = "\(arrData[row]["MinimumHours"] as? String ?? "") hrs/\(arrData[row]["MinimumKm"] as? String ?? "") km $\(arrData[row]["MinimumAmount"] as? String ?? "")"
-
-//        let yourAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .medium)]
-//        let yourOtherAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular)]
-//        let partOne = NSMutableAttributedString(string: strPackage, attributes: yourAttributes)
-//        let partTwo = NSMutableAttributedString(string: perminuteChage, attributes: yourOtherAttributes)
-//        let combination = NSMutableAttributedString()
-//        combination.append(partOne)
-//        combination.append(partTwo)
         
         pickerLabel?.text = strPackage
         pickerLabel?.textColor = UIColor.black
@@ -149,8 +142,7 @@ extension DurationPopupVC: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension DurationPopupVC {
-    func webserviceCallForModelPackages()
-    {
+    func webserviceCallForModelPackages() {
         UtilityClass.showHUD()
         var dictData = [String:Any]()
         dictData["ModelId"] =  self.modelSelected

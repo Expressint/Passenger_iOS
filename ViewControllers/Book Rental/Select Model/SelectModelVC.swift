@@ -826,7 +826,6 @@ extension SelectModelVC: FSPagerViewDataSource, FSPagerViewDelegate {
                 cell.imageView?.image = image
             }
         })
-        
    
         cell.imageView?.contentMode = .scaleAspectFit
         cell.cornerRadius = 10
@@ -838,8 +837,11 @@ extension SelectModelVC: FSPagerViewDataSource, FSPagerViewDelegate {
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
-        self.viewAdv(URLMain: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
-       // self.gotoPage(strUrl: arrAdvImages[index]["WebsiteURL"] as? String ?? "")
+        
+        let AdvNotification = "AdvNotification"
+        let notificationName = Notification.Name(AdvNotification)
+        let data = ["Id": arrAdvImages[index]["Id"] as? String ?? "", "Url" : arrAdvImages[index]["WebsiteURL"] as? String ?? ""]
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: data)
     }
     
 //    func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
