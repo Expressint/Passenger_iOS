@@ -453,47 +453,86 @@ class BookLaterViewController: BaseViewController, GMSAutocompleteViewController
     
     @IBAction func txtPickupLocation(_ sender: UITextField) {
         self.isOpenPlacePickerController = true
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
         BoolCurrentLocation = true
         BoolDropLocation = false
         BoolAdditionalDropLocation = false
         
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
-        present(acController, animated: true, completion: nil)
+        self.openAddressPicker()
+        
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//
+//
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        present(acController, animated: true, completion: nil)
         
     }
     
     @IBAction func txtDropOffLocation(_ sender: UITextField) {
         self.isOpenPlacePickerController = true
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
-        
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
         BoolCurrentLocation = false
         BoolDropLocation = true
         BoolAdditionalDropLocation = false
         
-        present(acController, animated: true, completion: nil)
+        self.openAddressPicker()
+        
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        present(acController, animated: true, completion: nil)
         
     }
     
     @IBAction func txtSecondDropOffLocation(_ sender: UITextField) {
         self.isOpenPlacePickerController = true
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
         BoolCurrentLocation = false
         BoolDropLocation = false
         BoolAdditionalDropLocation = true
         
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
-        present(acController, animated: true, completion: nil)
+        self.openAddressPicker()
+        
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//       
+//        
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        present(acController, animated: true, completion: nil)
+    }
+    
+    func openAddressPicker() {
+        let addressPicker = AddressPickerVC { [weak self] location in
+            if self?.BoolCurrentLocation ?? false {
+                self?.txtPickupLocation.text = location.address
+                self?.strPickupLocation = location.address
+                self?.doublePickupLat = location.coordinate.latitude
+                self?.doublePickupLng = location.coordinate.longitude
+                
+            } else if self?.BoolDropLocation ?? false {
+                self?.txtDropOffLocation.text = location.address
+                self?.strDropoffLocation = location.address
+                self?.doubleDropOffLat = location.coordinate.latitude
+                self?.doubleDropOffLng = location.coordinate.longitude
+            } else {
+                self?.txtScondDropOffLocation.text = location.address
+                self?.strSecondDropoffLocation = location.address
+                self?.doubleDropOffLat2 = location.coordinate.latitude
+                self?.doubleDropOffLat2 = location.coordinate.longitude
+            }
+            
+            self?.lblEstimatedFare.text = "Estimated Fare".localized
+            self?.lblEstimatedFare.textColor = UIColor.black
+            self?.txtDataAndTimeFromCalendar.text = ""
+            self?.txtEstimatedFare.text = ""
+        }
+        
+        present(addressPicker.bindToSystemNavigation(), animated: true, completion: nil)
     }
     
     @IBAction func btnCalendar(_ sender: UIButton) {

@@ -252,6 +252,9 @@
 "Dismiss" = "Dismiss";
 "Thanks for feedback" = "Thanks for feedback";
 
+"Yes, I'll wait for the next available car" = "Yes,\n I'll wait for the next available car";
+"No problem, I'll find another means of transportation" = "No problem,\n I'll find another means of transportation";
+
 //chat
 "Enter Message.." = "Enter Message..";
 "Missing" = "Missing";

@@ -27,6 +27,9 @@ class ChatVC: BaseViewController {
     @IBOutlet weak var lblTyping: UILabel!
     var timer: Timer?
     
+    var sendDefaultmsg: Bool = false
+    var sendNoWillWaitmsg: Bool = false
+    
     var receiverName: String = ""
     var receiverId: String = ""
     var bookingId: String = ""
@@ -92,12 +95,12 @@ class ChatVC: BaseViewController {
         
         self.registerNib()
         self.tblData.reloadData()
- }
+    }
     
     func setupHeader(name: String, receiverID: String) {
         self.title = name
         self.receiverId = receiverID
-       // AppDelegate.current?.currentChatID = receiverId
+        // AppDelegate.current?.currentChatID = receiverId
     }
     
     func registerNib(){
@@ -107,8 +110,7 @@ class ChatVC: BaseViewController {
         self.tblData.register(nib2, forCellReuseIdentifier: ReceiverCell.className)
     }
     
-    func socketMethods()
-    {
+    func socketMethods(){
         if(self.socket?.status == .connected) {
             self.socketOnForReceiveMessage()
             self.socketOnForStartTyping()
@@ -210,14 +212,14 @@ class ChatVC: BaseViewController {
         self.socket?.emit(SocketData.DriverStopTyping, with: [myJSON], completion: nil)
         print ("\(SocketData.DriverStopTyping) : \(myJSON)")
     }
-
+    
     func socketOnForReceiveMessage() {
         self.socket?.on(SocketData.receiveMessage, callback: { (data, ack) in
             print ("Chat response is :  \(data)")
             let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
             let senderId = dictData["sender_id"] as? String ?? ""
             if(senderId == self.receiverId || senderId == SingletonClass.sharedInstance.strPassengerID){
-               self.aryData.append(dictData)
+                self.aryData.append(dictData)
                 self.tblData.reloadData()
                 self.scrollToBottom()
             }
@@ -268,7 +270,7 @@ class ChatVC: BaseViewController {
         txtMessage.textColor = UIColor.black
     }
     
-    func convertDate(strDate: String) -> String{
+    func convertDate(strDate: String) -> String {
         let PickDate = Double(strDate)
         guard let unixTimestamp1 = PickDate else { return "" }
         let date1 = Date(timeIntervalSince1970: TimeInterval(unixTimestamp1))
@@ -299,8 +301,6 @@ class ChatVC: BaseViewController {
     
 }
 
-
-
 extension ChatVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if txtMessage.textColor == UIColor.black {
@@ -327,8 +327,6 @@ extension ChatVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.emitForStartTyping()
     }
-
-
 }
 
 // MARK: - Image Picker Delegate
@@ -372,6 +370,36 @@ extension ChatVC {
                     self.scrollToBottom()
                 }
                 
+                if(self.sendDefaultmsg && self.isDispacherChat){
+                    let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
+                                  "receiver_id": self.receiverId,
+                                  "message" : NoCarsAvailableDefaultMessage,
+                                  "msg_type" : "text",
+                                  "imageUrl" : "",
+                                  "sender_type" : "passenger",
+                                  "receiver_type" : (self.isDispacherChat) ? "dispatcher" : "driver",
+                                  "booking_id" : (self.isDispacherChat) ? "" : self.bookingId,
+                                  "booking_type": (self.isDispacherChat) ? "" : self.bookingType] as [String : Any]
+                    
+                    self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
+                    print ("\(SocketData.sendMessage) : \(myJSON)")
+                }
+                
+                if(self.sendNoWillWaitmsg && self.isDispacherChat){
+                    let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
+                                  "receiver_id": self.receiverId,
+                                  "message" : NoCarsAvailableNoDefaultMessage,
+                                  "msg_type" : "text",
+                                  "imageUrl" : "",
+                                  "sender_type" : "passenger",
+                                  "receiver_type" : (self.isDispacherChat) ? "dispatcher" : "driver",
+                                  "booking_id" : (self.isDispacherChat) ? "" : self.bookingId,
+                                  "booking_type": (self.isDispacherChat) ? "" : self.bookingType] as [String : Any]
+                    
+                    self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
+                    print ("\(SocketData.sendMessage) : \(myJSON)")
+                }
+                
             } else {
                 if let res = result as? String {
                     UtilityClass.setCustomAlert(title: "Error", message: res) { (index, title) in}
@@ -399,8 +427,8 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let dictData = aryData[indexPath.row] as [String:AnyObject]
-        
         let senderId = dictData["sender_id"] as? String
+        
         if(senderId == SingletonClass.sharedInstance.strPassengerID){
             let cell = tblData.dequeueReusableCell(withIdentifier: SenderCell.className) as! SenderCell
             cell.selectionStyle = .none
@@ -419,22 +447,22 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
                         cell.imgMsg.image = image
                     }
                 })
-                cell.lblImgDate.text = self.convertDate(strDate: dictData["created_at"] as? String ?? "")
                 
+                cell.lblImgDate.text = self.convertDate(strDate: dictData["created_at"] as? String ?? "")
                 cell.btnImgAction = {
                     print("sender called")
                     let url = dictData["image"] as? String ?? ""
                     self.openImage(strImage: url)
                 }
                 
-            }else{
+            } else {
                 cell.vwImg.isHidden = true
                 cell.lblMsgSender.text = dictData["message"] as? String ?? ""
                 cell.lblDate.text = self.convertDate(strDate: dictData["created_at"] as? String ?? "")
             }
             return cell
             
-        }else{
+        } else {
             let cell = tblData.dequeueReusableCell(withIdentifier: ReceiverCell.className) as! ReceiverCell
             cell.selectionStyle = .none
             
@@ -462,8 +490,7 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
                     let url = dictData["image"] as? String ?? ""
                     self.openImage(strImage: url)
                 }
-                
-            }else{
+            } else {
                 cell.vwImg.isHidden = true
                 cell.lblMsgReceiver.text = dictData["message"] as? String ?? ""
                 cell.lblCompanyName.text = dictData["company_name"] as? String ?? ""

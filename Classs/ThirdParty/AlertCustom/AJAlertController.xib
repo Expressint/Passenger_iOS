@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,9 +18,11 @@
                 <outlet property="btnCancel" destination="WKU-D5-GZU" id="faX-Wj-wBr"/>
                 <outlet property="btnEmail" destination="srO-vw-sxU" id="meE-In-ZpE"/>
                 <outlet property="btnMsg" destination="8qG-Kh-FeI" id="P85-rR-JBE"/>
+                <outlet property="btnNo" destination="uZ8-gg-qH5" id="oG1-F6-o46"/>
                 <outlet property="btnOK" destination="38z-3l-aEb" id="XHF-7B-Rvl"/>
                 <outlet property="btnOther" destination="i9M-DL-0zE" id="ftI-Vr-1bY"/>
                 <outlet property="btnPhone" destination="wCu-sR-pQQ" id="IXU-Xj-1bl"/>
+                <outlet property="btnYes" destination="hTn-ys-iRv" id="bNC-Qt-Cew"/>
                 <outlet property="lblAlertText" destination="5ev-HP-eeU" id="pRy-Da-hSD"/>
                 <outlet property="lblTitle" destination="NVl-QY-5fD" id="Hyy-oW-Y1j"/>
                 <outlet property="stackBtns" destination="Gez-Xb-0zd" id="fQ2-cT-A7p"/>
@@ -35,10 +37,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8D-FK-Asz">
-                    <rect key="frame" x="0.0" y="165" width="375" height="337"/>
+                    <rect key="frame" x="0.0" y="43.5" width="375" height="580"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAQ-ue-k9S">
-                            <rect key="frame" x="20" y="55" width="335" height="282"/>
+                            <rect key="frame" x="20" y="55" width="335" height="525"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jp7-n5-A8M">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="106"/>
@@ -128,17 +130,37 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFs-lu-ddj">
-                                    <rect key="frame" x="0.0" y="235" width="335" height="47"/>
+                                    <rect key="frame" x="0.0" y="235" width="335" height="290"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kW2-v4-KFD">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="47"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kW2-v4-KFD">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="290"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38z-3l-aEb" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.1803921568627451" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="bki-Yo-FwO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                    <state key="normal" title="OK">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="btnOkTappedWithSender:" destination="-1" eventType="touchUpInside" id="bzT-DD-gbp"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKU-D5-GZU" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="47"/>
+                                                    <rect key="frame" x="0.0" y="60" width="335" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="g34-TQ-dEz"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" title="CANCEL">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
@@ -148,11 +170,14 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9M-DL-0zE" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
-                                                    <rect key="frame" x="115" y="0.0" width="105" height="47"/>
+                                                    <rect key="frame" x="0.0" y="120" width="335" height="50"/>
                                                     <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="nki-EI-cXk"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" title="DONE">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
@@ -161,29 +186,48 @@
                                                         <action selector="btnOtherTappedWithSender:" destination="-1" eventType="touchUpInside" id="bPp-E3-ry7"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38z-3l-aEb" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
-                                                    <rect key="frame" x="230" y="0.0" width="105" height="47"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.1803921568627451" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                                                    <state key="normal" title="OK">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTn-ys-iRv" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="180" width="335" height="50"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="oBf-7b-VhH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="Yes, I'll wait for the next available car">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="btnOkTappedWithSender:" destination="-1" eventType="touchUpInside" id="bzT-DD-gbp"/>
+                                                        <action selector="btnYes:" destination="-1" eventType="touchUpInside" id="lgi-ZZ-TrL"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZ8-gg-qH5" customClass="ThemeButtonForRide" customModule="Book_A_Ride" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="240" width="335" height="50"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.18039215689999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="fyN-UW-Zqa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" title="No problem, I'll find another means of transportation">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSelectedButton" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="btnNo:" destination="-1" eventType="touchUpInside" id="b43-5R-fbn"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="0.63921568630000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </stackView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="kW2-v4-KFD" firstAttribute="top" secondItem="iFs-lu-ddj" secondAttribute="top" id="55b-yX-nS5"/>
                                         <constraint firstItem="kW2-v4-KFD" firstAttribute="leading" secondItem="iFs-lu-ddj" secondAttribute="leading" id="6WO-C8-jAM"/>
-                                        <constraint firstAttribute="height" constant="47" id="Rkm-dL-j5f"/>
                                         <constraint firstAttribute="trailing" secondItem="kW2-v4-KFD" secondAttribute="trailing" id="YLC-ID-ala"/>
                                         <constraint firstAttribute="bottom" secondItem="kW2-v4-KFD" secondAttribute="bottom" id="ooZ-7c-oxv"/>
                                     </constraints>

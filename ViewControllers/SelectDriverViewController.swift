@@ -118,6 +118,7 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
        
         return cell
     }
+    
     @IBAction func callClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
             if let driverCallNumber = dict["DriverPhoneNumber"] as? String {
@@ -131,12 +132,14 @@ extension SelectDriverViewController : UITableViewDelegate, UITableViewDataSourc
             }
         }
     }
+    
     @IBAction func bookNowClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
             delegate?.didSelectDriver(dict, isBookNow: true)
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
     @IBAction func bookLaterClick(_ sender: UIButton) {
         if let dict = arrCurrentModelSelectedCars[sender.tag] as? [String: AnyObject] {
             self.navigationController?.popViewController(animated: false)

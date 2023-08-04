@@ -16,6 +16,7 @@ class TourTripHistoryCell: UITableViewCell {
     @IBOutlet weak var lblOrderID: UILabel!
     @IBOutlet weak var lblPickUpLoc: MarqueeLabel!
     @IBOutlet weak var lblDropOffLoc: MarqueeLabel!
+    @IBOutlet weak var lblDropOffLoc2: MarqueeLabel!
     @IBOutlet weak var stackBtns: UIStackView!
     @IBOutlet weak var stackBookingDate: UIStackView!
     @IBOutlet weak var stackPickUpDate: UIStackView!

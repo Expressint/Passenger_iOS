@@ -12,7 +12,6 @@ import MarqueeLabel
 class TourInvoiceVVC: BaseViewController {
 
     @IBOutlet weak var lblPickUpLoc: UILabel!
-    @IBOutlet weak var lblDropOfLoc: UILabel!
     @IBOutlet weak var lblTotalTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var llTotalPrice: UILabel!
@@ -31,6 +30,7 @@ class TourInvoiceVVC: BaseViewController {
     
     @IBOutlet weak var lblTitlePickUp: UILabel!
     @IBOutlet weak var lblTitleDropOff: UILabel!
+    @IBOutlet weak var lblDropOfLoc: UILabel!
     @IBOutlet weak var lblTitleTime: UILabel!
     @IBOutlet weak var lblTitleDistance: UILabel!
     @IBOutlet weak var lblTitleGrandTotal: UILabel!
@@ -42,6 +42,10 @@ class TourInvoiceVVC: BaseViewController {
     @IBOutlet weak var lblTitlePayable: UILabel!
     @IBOutlet weak var lblTitleRating: UILabel!
     @IBOutlet weak var btnSubmit: UIButton!
+    
+    @IBOutlet weak var lblTitleDropOff2: UILabel!
+    @IBOutlet weak var lblDropOfLoc2: UILabel!
+    @IBOutlet weak var stackDrop2: UIStackView!
     
     var ratingToDriver: Float = 0
     var dictCompleteTripData = NSDictionary()
@@ -65,6 +69,7 @@ class TourInvoiceVVC: BaseViewController {
     func setLocalization(){
         self.lblTitlePickUp.text = "Pickup Location".localized
         self.lblTitleDropOff.text = "Final Destination".localized
+        self.lblTitleDropOff2.text = "Dropoff Location".localized
         self.lblTitleTime.text = "Total Time".localized
         self.lblTitleDistance.text = "Distance".localized
         self.lblTitleGrandTotal.text = "Grand Total".localized
@@ -82,6 +87,8 @@ class TourInvoiceVVC: BaseViewController {
     func setupData() {
         self.lblPickUpLoc.text = self.dictCompleteTripData.object(forKey: "PickupLocation") as? String
         self.lblDropOfLoc.text = self.dictCompleteTripData.object(forKey: "DropoffLocation") as? String
+        self.stackDrop2.isHidden = ((self.dictCompleteTripData.object(forKey: "DropoffLocation2") as? String ?? "") == "") ? true : false
+        self.lblDropOfLoc2.text = self.dictCompleteTripData.object(forKey: "DropoffLocation2") as? String ?? ""
         self.lblTotalTime.text = "\(self.dictCompleteTripData.object(forKey: "TripDuration") as? String ?? "0")".secondsToTimeFormate()
         self.lblDistance.text = "\(self.dictCompleteTripData.object(forKey: "TripDistance") as? String ?? "0") Km"
         self.llTotalPrice.text = "$\(self.dictCompleteTripData.object(forKey: "GrandTotal") as? String ?? "0")"

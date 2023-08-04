@@ -43,6 +43,8 @@ var DispatchId = ""
 
 var msgNoCarsAvailable = ""
 var msgNoCarsAvailable_Spanish = ""
+var NoCarsAvailableDefaultMessage = ""
+var NoCarsAvailableNoDefaultMessage = ""
 
 var currentPricingModel = ""
 var currentPricingModelSpanish = ""
@@ -317,6 +319,9 @@ let openNPP = NSNotification.Name("openPP")
 let openNTC = NSNotification.Name("openTC")
 let openNRP = NSNotification.Name("openRP")
 let openNAboutUs = NSNotification.Name("openAboutUs")
+
+let sendNoCarYesMsg = NSNotification.Name("sendNoCarYesMsg")
+let sendNoCarWillWaitMsg = NSNotification.Name("sendNoCarWillWaitMsg")
 //let openChatForDispatcher1 = NSNotification.Name("openChatForDispatcher")
 let GoToChatScreen = NSNotification.Name("GoToChatScreen")
 let RequestForTaxiHourly = NSNotification.Name("RequestForTaxiHourly")

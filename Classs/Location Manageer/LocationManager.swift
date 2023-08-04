@@ -64,9 +64,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         self.mostRecentLocation = mostRecentLocation
         delegate?.locationManager(self, didUpdateLocation: mostRecentLocation)
-        
-       // MeterManager.shared.locationUpdate(location: mostRecentLocation)
-    }
+   }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {

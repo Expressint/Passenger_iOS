@@ -52,12 +52,24 @@ class AddFavLocationVC: BaseViewController {
     }
     
     func openPlacePicker() {
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
-        present(acController, animated: true, completion: nil)
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        present(acController, animated: true, completion: nil)
+//
+        self.openAddressPicker()
+    }
+    
+    func openAddressPicker() {
+        let addressPicker = AddressPickerVC { [weak self] location in
+            self?.address = location.address
+            self?.lat = "\(location.coordinate.latitude)"
+            self?.lng = "\(location.coordinate.longitude)"
+            self?.txtAddress.text = self?.address
+        }
+        present(addressPicker.bindToSystemNavigation(), animated: true, completion: nil)
     }
     
     func getLatLongFromAddress(address: String) {

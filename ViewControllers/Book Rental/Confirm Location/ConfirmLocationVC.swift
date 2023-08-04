@@ -260,17 +260,6 @@ class ConfirmLocationVC: BaseViewController {
         self.confirmBookLater()
     }
     
-    func openMap(lat: Double, Lng: Double, address: String) {
-        let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "PickFromMapVC") as! PickFromMapVC
-        vc.delegate = self
-        vc.pickUpLat = lat
-        vc.pickUpLong = Lng
-        vc.modalPresentationStyle = .overCurrentContext
-        let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.coverVertical
-        vc.modalTransitionStyle = modalStyle
-        self.present(vc, animated: true, completion: nil)
-    }
-    
     @IBAction func btnBookLaterAction(_ sender: Any) {
         if self.txtPickUpLoc.text == "" {
             Toast.show(message: "Please enter your pickup location again".localized, state: .failure)
@@ -294,6 +283,17 @@ class ConfirmLocationVC: BaseViewController {
         let dropLat = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0) : dropOffLat)
         let dropLng = (dropOffLat == nil ? (SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0) : dropOffLong)
         self.openMap(lat: dropLat ?? 0.0, Lng: dropLng ?? 0.0, address: self.txtDropOffLoc.text ?? "")
+    }
+    
+    func openMap(lat: Double, Lng: Double, address: String) {
+        let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "PickFromMapVC") as! PickFromMapVC
+        vc.delegate = self
+        vc.pickUpLat = lat
+        vc.pickUpLong = Lng
+        vc.modalPresentationStyle = .overCurrentContext
+        let modalStyle: UIModalTransitionStyle = UIModalTransitionStyle.coverVertical
+        vc.modalTransitionStyle = modalStyle
+        self.present(vc, animated: true, completion: nil)
     }
 }
 
@@ -344,7 +344,7 @@ extension ConfirmLocationVC: LocationProtocol {
             self.dropOffLat = lat
             self.dropOffLong = lng
         }
-        if txtDropOffLoc.text != "" {
+        if self.txtDropOffLoc.text != "" {
             self.getRecommandatoinAPI()
         }
     }

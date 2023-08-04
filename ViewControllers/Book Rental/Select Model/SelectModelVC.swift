@@ -158,7 +158,7 @@ class SelectModelVC: BaseViewController {
                 if(pickUpTime != ""){
                     self.vwDuration.isHidden = false
                     self.stackBtns.isHidden = true
-                   
+                    
                     let date = Date()
                     let df = DateFormatter()
                     df.dateFormat = "HH:mm:ss"
@@ -189,7 +189,7 @@ class SelectModelVC: BaseViewController {
         self.navigationController?.pushViewController(viewController!, animated: true)
     }
     
-    func registerNib(){
+    func registerNib() {
         let nib = UINib(nibName: SelectModelCell.className, bundle: nil)
         self.tblData.register(nib, forCellReuseIdentifier: SelectModelCell.className)
     }
@@ -202,7 +202,7 @@ class SelectModelVC: BaseViewController {
         let viewCtr = requestLoading()
         self.present(viewCtr, animated: true)
     }
-    //372
+ 
     func setupViewForTripAccepted(bookingInfo: NSDictionary, driverInfo: NSDictionary) {
         self.setNavBarWithBack(Title: "Rental Trip".localized, IsNeedRightButton: false, isSOSNeeded: true)
         self.vwNoTrip.isHidden = true
@@ -219,12 +219,10 @@ class SelectModelVC: BaseViewController {
         currentTripType = "4"
     }
     
-    func updateLocation(){
+    func updateLocation() {
         let myJSON = ["PassengerId" : SingletonClass.sharedInstance.strPassengerID, "Lat": "\(SingletonClass.sharedInstance.passengerLocation?.latitude ?? 0.0)", "Long": "\(SingletonClass.sharedInstance.passengerLocation?.longitude ?? 0.0)", "Token" : SingletonClass.sharedInstance.deviceToken, "ShareRide": SingletonClass.sharedInstance.isShareRide] as [String : Any]
         socket?.emit(SocketData.kUpdatePassengerLatLong , with: [myJSON], completion: nil)
     }
-    
-    
     
     func openDriverInfo() {
         let vc = bookingsStoryboard.instantiateViewController(withIdentifier: "TourDriverInfoVC") as! TourDriverInfoVC
@@ -496,15 +494,13 @@ extension SelectModelVC {
                 self.driverMarker = GMSMarker(position: DriverCordinate) // self.originCoordinate
                 self.driverMarker.icon = UIImage(named: "dummyCar")
                 self.driverMarker.map = self.mapView
-            }
-            else {
+            } else {
                 self.driverMarker.icon = UIImage.init(named: "dummyCar")
             }
             
             self.driverMarker.map = self.mapView
             
-            if(self.destinationCordinate == nil)
-            {
+            if(self.destinationCordinate == nil){
                 self.destinationCordinate = CLLocationCoordinate2DMake(DriverCordinate.latitude, DriverCordinate.longitude)
             }
             
@@ -520,7 +516,7 @@ extension SelectModelVC {
                 let camera = GMSCameraPosition.camera(withTarget: CLLocationCoordinate2DMake(DriverCordinate.latitude, DriverCordinate.longitude), zoom: 17, bearing: bearing, viewingAngle: 45)
                 self.mapView.animate(to: camera)
             }
-
+            
             self.moveMent.ARCarMovement(marker: self.driverMarker, oldCoordinate: self.destinationCordinate, newCoordinate: DriverCordinate, mapView: self.mapView, bearing: 0)
             
             self.destinationCordinate = DriverCordinate
@@ -618,7 +614,7 @@ extension SelectModelVC {
         var hours: Int
         var minutes: Int
         var seconds: Int
-
+        
         totalSecond = totalSecond + 1
         hours = totalSecond / 3600
         minutes = (totalSecond % 3600) / 60
@@ -826,7 +822,7 @@ extension SelectModelVC: FSPagerViewDataSource, FSPagerViewDelegate {
                 cell.imageView?.image = image
             }
         })
-   
+        
         cell.imageView?.contentMode = .scaleAspectFit
         cell.cornerRadius = 10
         cell.contentMode = .scaleAspectFit

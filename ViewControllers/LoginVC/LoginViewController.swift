@@ -250,13 +250,11 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         txtMobile.placeholder = "Email/Mobile Number".localized
         txtPassword.placeholder = "Password".localized
         lblDontAc.text = "Don't have an Account?".localized
-//       lblOr.text = "OR".localized
         btnForgotPass.setTitle("Forgot Password?".localized, for: .normal)
         btnLogin.setTitle("Sign In".localized, for: .normal)
        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.styleThick.rawValue]
        let underlineAttributedString = NSAttributedString(string: "Sign Up".localized, attributes: underlineAttribute)
        btnSinghUp.setAttributedTitle(underlineAttributedString, for: .normal)
-      // btnSelectLanguage.setTitle("Select Language".localized, for: .normal)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -337,9 +335,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                     let data = NSKeyedArchiver.archivedData(withRootObject: SingletonClass.sharedInstance.dictProfile)
                     UserDefaults.standard.set(data, forKey: "profileData")
 //                        UserDefaults.standard.set(SingletonClass.sharedInstance.arrCarLists, forKey: "carLists")
-
-                        self.webserviceForAllDrivers()
-                        
+                    self.webserviceForAllDrivers()
                 })
             } else {
                 UtilityClass.hideACProgressHUD()
@@ -348,8 +344,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             }
         }
     }
-    
-   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "segueToHomeVC") {
@@ -768,8 +762,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
         }
     }
     
-    func webserviceForAppleSocilLogin(_ dictData : AnyObject, ImgPic : UIImage)
-    {
+    func webserviceForAppleSocilLogin(_ dictData : AnyObject, ImgPic : UIImage) {
         webserviceForAppleSocialLogin(dictData as AnyObject, image1: ImgPic, showHUD: true) { (result, status) in
               if(status) {
                 print(result)
@@ -786,9 +779,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                   
                 (UIApplication.shared.delegate as! AppDelegate).GoToIntro()
             } else {
-
-                print(result)
-                
+                  
                 let resDict = result as? NSDictionary
                 if(resDict?["message"] as! String == "User does not exist."){
                     AppDelegate.current?.isSocialLogin = true
@@ -841,11 +832,13 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 msgNoCarsAvailable = result["NoCarsAvailableMessage"] as? String ?? ""
                 msgNoCarsAvailable_Spanish = result["NoCarsAvailableMessageSpanish"] as? String ?? ""
+                NoCarsAvailableDefaultMessage = result["NoCarsAvailableDefaultMessage"] as? String ?? ""
+                NoCarsAvailableNoDefaultMessage = result["NoCarsAvailableNoDefaultMessage"] as? String ?? ""
                 
                 let dispatcherInfo =  result["dispatcher_detail"] as? [String:Any]
                 DispatchName = dispatcherInfo?["Fullname"] as? String ?? ""
                 DispatchId = dispatcherInfo?["Id"] as? String ?? ""
-              
+                
                 print("result is : \(result)")
                 SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)
                  
@@ -918,20 +911,15 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                         alert.addAction(Cancel)
                         self.present(alert, animated: true, completion: nil)
                         
-                    }
-                    else {
-
-                         UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
-                            if (index == 0)
-                            {
+                    } else {
+                        UtilityClass.setCustomAlert(title: "Error", message: (result as! NSDictionary).object(forKey: GetResponseMessageKey()) as! String) { (index, title) in
+                            if (index == 0) {
                                 UIApplication.shared.open((NSURL(string: appURL)! as URL), options: [:], completionHandler: { (status) in
                                     
                                 })
                             }
                         }
-
                     }
-                    
                 }
 /*
                 if let res = result as? String {
@@ -958,12 +946,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
     @IBAction func unwindToVC(segue: UIStoryboardSegue) {
     }
     
-    
-    
     @IBAction func btnLogin(_ sender: Any) {
-        
-        
-        
         guard (txtMobile.text?.count != 0) || (txtPassword.text?.count != 0) else {
             UtilityClass.setCustomAlert(title: "Missing".localized, message: "Please fill all details".localized) { (index, title) in
             }

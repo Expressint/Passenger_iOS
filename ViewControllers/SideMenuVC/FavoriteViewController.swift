@@ -66,13 +66,23 @@ class FavoriteViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func editLocation(){
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        present(acController, animated: true, completion: nil)
+        
+        self.openAddressPicker()
+    }
     
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
-        present(acController, animated: true, completion: nil)
+    func openAddressPicker() {
+        let addressPicker = AddressPickerVC { [weak self] location in
+            let Address = location.address
+            self?.webserviceOfEditAddress(Lat: "\(location.coordinate.latitude)", Lng: "\(location.coordinate.longitude)", Address: Address)
+        }
+        present(addressPicker.bindToSystemNavigation(), animated: true, completion: nil)
     }
     
     //-------------------------------------------------------------

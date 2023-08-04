@@ -527,6 +527,9 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.setBookLaterDestinationAddress(_:)), name: NotificationBookLater, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.webserviceOfRunningTripTrack), name: NotificationTrackRunningTrip, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.newBooking(_:)), name: NotificationForBookingNewTrip, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.sendYesMsg(_:)), name: sendNoCarYesMsg, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.sendNoMsg(_:)), name: sendNoCarWillWaitMsg, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -1236,7 +1239,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    func webserviceCallForWaitingList() {
+    func webserviceCallForWaitingList(strOption: String = "yes") {
         
         let dictParams = NSMutableDictionary()
         if let dict = self.dictSelectedDriver {
@@ -1264,6 +1267,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         dictParams.setObject(txtNote.text!, forKey: SubmitBookingRequest.kNotes as NSCopying)
         dictParams.setObject(strSpecialRequest, forKey: SubmitBookingRequest.kSpecial as NSCopying)
         dictParams.setObject(self.strSelectedCarTotalFare, forKey: "EstimateFare" as NSCopying)
+        dictParams.setObject(strOption, forKey: "WaitingRequestStatus" as NSCopying)
         if paymentType == "" {
         }
         else {
@@ -1281,7 +1285,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
         
         webserviceForWaitingListRequest(dictParams) { (result, status) in
-            
+            print("Called..")
             if (status) {
               //  UtilityClass.setCustomAlert(title: "Success", message: result.object(forKey: "message") as? String ?? "You request is submited.") { (index, title) in}
             } else {
@@ -1934,6 +1938,32 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         self.present(alert, animated: true, completion: nil)
     }
     
+    @objc func sendYesMsg(_ sender: UIButton) {
+        webserviceCallForWaitingList(strOption: "yes")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+            NextPage.receiverName = DispatchName
+            NextPage.bookingId = ""
+            NextPage.isDispacherChat = true
+            NextPage.receiverId = DispatchId
+            NextPage.sendDefaultmsg = true
+            self.navigationController?.pushViewController(NextPage, animated: true)
+        }
+    }
+    
+    @objc func sendNoMsg(_ sender: UIButton) {
+        webserviceCallForWaitingList(strOption: "no")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            let NextPage = mainStoryboard.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+            NextPage.receiverName = DispatchName
+            NextPage.bookingId = ""
+            NextPage.isDispacherChat = true
+            NextPage.receiverId = DispatchId
+            NextPage.sendNoWillWaitmsg = true
+            self.navigationController?.pushViewController(NextPage, animated: true)
+        }
+    }
+    
     @IBAction func btnCollectionViewScrollRight(_ sender: Any) {
         if (arrTotalNumberOfCars.count <= 3) {
             //            self.collectionViewCars.scrollToItem(at: NSIndexPath(row: 0, section: 0) as IndexPath, at: .right, animated: true)
@@ -1990,9 +2020,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                     }
                 }
                 else if strModelId == "" {
-                    self.webserviceCallForWaitingList()
-                    UtilityClass.setCustomAlert(title: "Missing".localized, message: (Localize.currentLanguage() == Languages.English.rawValue) ? msgNoCarsAvailable : msgNoCarsAvailable_Spanish, showStack: false) { (index, title) in
-                        
+                 //   self.webserviceCallForWaitingList()
+                    UtilityClass.setCustomAlert(title: "Missing".localized, message: (Localize.currentLanguage() == Languages.English.rawValue) ? msgNoCarsAvailable : msgNoCarsAvailable_Spanish, showStack: false) { (index, title) in   
                     }
                     
                     
@@ -3781,7 +3810,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
 
         self.ConstantViewCarListsHeight.constant = 0
         self.viewCarLists.isHidden = true
-    
+       
         self.viewActivity.stopAnimating()
         self.viewMainActivityIndicator.isHidden = true
         self.btnRequest.isHidden = false
@@ -4142,8 +4171,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(next, animated: true, completion: nil)
     }
     
-    func socketMethodForGettingBookingRejectNotification()
-    {
+    func socketMethodForGettingBookingRejectNotification() {
         // socket? Accepted
         self.socket?.on(SocketData.kRejectBookingRequestNotification, callback: { (data, ack) in
             print("socketMethodForGettingBookingRejectNotification() is \(data)")
@@ -4309,7 +4337,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     func socketMethodForGettingPickUpNotification() {
-
         self.socket?.on(SocketData.kPickupPassengerNotification, callback: { (data, ack) in
             print("socketMethodForGettingPickUpNotification() is \(data)")
             self.hideWaitingTime()
@@ -4341,13 +4368,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 
                 SingletonClass.sharedInstance.passengerTypeOther = false
                 self.completeTripInfo()
-            }
-            else {
+            } else {
                 self.completeTripInfo()
             }
-        
         })
     }
+    
     func delegateforGivingRate() {
         let ViewController = mainStoryboard.instantiateViewController(withIdentifier: "GiveRatingViewController") as? GiveRatingViewController
         ViewController?.delegateRating = self
@@ -4372,9 +4398,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.viewTripActions.isHidden = true
             self.vWAdvertisement.isHidden = true
             self.btnCloseAdv.isHidden = true
-            
             self.constraintVerticalSpacingLocation?.priority = UILayoutPriority(800)
-
             self.viewCarLists.isHidden = false
             self.ConstantViewCarListsHeight.constant = 150
             
@@ -4491,7 +4515,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 if SingletonClass.sharedInstance.bookingId != "" {
                     if SingletonClass.sharedInstance.bookingId == bookingId {
                         UtilityClass.setCustomAlert(title: "\(appName)", message: "Your request has been Accepted.".localized) { (index, title) in
-                        }
+                        } 
                         self.strBookingType = "BookLater"
                         self.DriverInfoAndSetToMap(driverData: NSArray(array: data))
                     }
@@ -4839,39 +4863,112 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     
     @IBAction func txtDestinationLocation(_ sender: UITextField) {
 
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
-        if(sender.tag == 0)
-        {
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        if(sender.tag == 0)
+//        {
+//            locationEnteredType = .dropOffFirst
+//        }
+//        else if (sender.tag == 1)
+//        {
+//            locationEnteredType = .dropOffSecond
+//        }
+//        present(acController, animated: true, completion: nil)
+        
+        if(sender.tag == 0) {
             locationEnteredType = .dropOffFirst
-        }
-        else if (sender.tag == 1)
-        {
+        } else if (sender.tag == 1) {
             locationEnteredType = .dropOffSecond
         }
-        present(acController, animated: true, completion: nil)
-        
+        self.openAddressPicker(type: locationEnteredType ?? .pickup)
     }
     
     @IBAction func txtCurrentLocation(_ sender: UITextField) {
-        let acController = GMSAutocompleteViewController()
-        acController.delegate = self
-      
-        let filter = GMSAutocompleteFilter()
-        filter.countries = ["GY"]
-        acController.autocompleteFilter = filter
+//        let acController = GMSAutocompleteViewController()
+//        acController.delegate = self
+//
+//        let filter = GMSAutocompleteFilter()
+//        filter.countries = ["GY"]
+//        acController.autocompleteFilter = filter
+//        locationEnteredType = .pickup
+//        present(acController, animated: true, completion: nil)
+        
+        
         locationEnteredType = .pickup
-        present(acController, animated: true, completion: nil)
+        self.openAddressPicker(type: locationEnteredType ?? .pickup)
+    }
+    
+    func openAddressPicker(type: locationTypeEntered) {
+        let addressPicker = AddressPickerVC { [weak self, type] location in
+            
+            self?.MarkerCurrntLocation.isHidden = false
+            self?.lblCurrentLocation.isHidden = false
+            self?.btnDoneForLocationSelected.isHidden = false
+            self?.viewBookNowLater.isHidden = true
+            self?.isFromAutoComplete = true
+            
+            if type == .pickup {
+                
+                self?.ConstantViewCarListsHeight.constant = 0
+                self?.viewCarLists.isHidden = true
+                self?.txtCurrentLocation.text = location.address
+                self?.strPickupLocation = location.address
+                self?.doublePickupLat = location.coordinate.latitude
+                self?.doublePickupLng = location.coordinate.longitude
+                self?.currentLocationMarker.map = nil
+                let camera = GMSCameraPosition.camera(withLatitude: self?.doublePickupLat ?? 0.0,longitude: self?.doublePickupLng ?? 0.0, zoom: 17)
+                self?.mapView.camera = camera
+                
+            } else if type == .dropOffFirst {
+                
+                self?.ConstantViewCarListsHeight.constant = 0
+                self?.viewCarLists.isHidden = true
+                self?.txtDestinationLocation.text = location.address
+                self?.strDropoffLocation = location.address
+                self?.doubleDropOffLat = location.coordinate.latitude
+                self?.doubleDropOffLng = location.coordinate.longitude
+                self?.destinationLocationMarker.map = nil
+                let camera = GMSCameraPosition.camera(withLatitude: self?.doubleDropOffLat ?? 0.0 ,longitude: self?.doubleDropOffLng ?? 0.0, zoom: 17)
+                self?.mapView.camera = camera
+                if(self?.isDropLocationChange ?? false){
+                    self?.btnDoneForLocationSelected.setTitle("Update Dropoff Location".localized, for: .normal)
+                }
+                
+            } else {
+                
+                self?.ConstantViewCarListsHeight.constant = 0
+                self?.viewCarLists.isHidden = true
+                self?.txtAdditionalDestinationLocation.text = location.address
+                self?.strAdditionalDropoffLocation = location.address
+                self?.doubleUpdateNewLat = location.coordinate.latitude
+                self?.doubleUpdateNewLng = location.coordinate.longitude
+                self?.destinationLocationMarker.map = nil
+                let camera = GMSCameraPosition.camera(withLatitude: self?.doubleUpdateNewLat ?? 0.0 ,longitude: self?.doubleUpdateNewLng ?? 0.0, zoom: 17)
+                self?.mapView.camera = camera
+                if(self?.isDropLocationChange ?? false){
+                    self?.btnDoneForLocationSelected.setTitle("Update Dropoff Location".localized, for: .normal)
+                }
+                
+            }
+            
+            if self?.txtCurrentLocation.text!.count != 0 && self?.txtDestinationLocation.text!.count != 0 {
+                self?.postPickupAndDropLocationForEstimateFare()
+                self?.btnDoneForLocationSelected.isHidden = false
+            }
+            self?.isDropLocationChange = false
+        }
+        
+        present(addressPicker.bindToSystemNavigation(), animated: true, completion: nil)
     }
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         self.MarkerCurrntLocation.isHidden = false
-        lblCurrentLocation.isHidden = false
+        self.lblCurrentLocation.isHidden = false
         self.btnDoneForLocationSelected.isHidden = false
         self.viewBookNowLater.isHidden = true
         self.isFromAutoComplete = true
@@ -4896,6 +4993,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
             self.viewCarLists.isHidden = true
             let SelectedDestinationLocation = place.formattedAddress ?? "-"
             txtDestinationLocation.text = SelectedDestinationLocation
+            
             strDropoffLocation = SelectedDestinationLocation
             doubleDropOffLat = place.coordinate.latitude
             doubleDropOffLng = place.coordinate.longitude
@@ -4936,7 +5034,6 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         if txtCurrentLocation.text!.count != 0 && txtDestinationLocation.text!.count != 0 {
             postPickupAndDropLocationForEstimateFare()
             self.btnDoneForLocationSelected.isHidden = false
-            //            setupBothCurrentAndDestinationMarkerAndPolylineOnMap()
         }
         
         self.isDropLocationChange = false

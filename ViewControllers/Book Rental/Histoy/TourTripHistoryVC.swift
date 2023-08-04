@@ -149,6 +149,9 @@ extension TourTripHistoryVC: UITableViewDelegate, UITableViewDataSource {
         cell.lblPickUpLoc.text = self.aryData[indexPath.row]["PickupLocation"] as? String ?? ""
         cell.lblDropOffLoc.text = self.aryData[indexPath.row]["DropoffLocation"] as? String ?? ""
         
+        cell.lblDropOffLoc2.isHidden = ((self.aryData[indexPath.row]["DropoffLocation2"] as? String ?? "") == "") ? true : false
+        cell.lblDropOffLoc2.text = self.aryData[indexPath.row]["DropoffLocation2"] as? String ?? ""
+        
         cell.lblBookingDate.text = "\(self.aryData[indexPath.row]["CreatedDate"] as? String ?? "")".components(separatedBy: " ")[0]
         cell.lblPickUpDate.text = self.aryData[indexPath.row]["PickupDateTime"] as? String ?? ""
         cell.lblDropOffDate.text = self.aryData[indexPath.row]["DropoffDateTime"] as? String ?? ""

@@ -65,7 +65,7 @@ class AddressPickerVC: UITableViewController {
             filter.locationBias = GMSPlaceRectangularLocationOption(northeast, southwest)
             filter.countries = ["GY"]
         }
-    
+        
         fetcher = GMSAutocompleteFetcher(filter: filter)
         fetcher?.delegate = self
     }
@@ -177,12 +177,10 @@ extension AddressPickerVC {
 }
 
 // MARK: - Autocomplete methods
-
 extension AddressPickerVC: GMSAutocompleteFetcherDelegate {
     func didAutocomplete(with predictions: [GMSAutocompletePrediction]) {
         autocompletePredictionArray = predictions
     }
-
     func didFailAutocompleteWithError(_: Error) {}
 }
 
@@ -208,14 +206,13 @@ extension AddressPickerVC: UISearchBarDelegate {
     }
 
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-            //cancel button becomes disabled when search bar isn't first responder, force it back enabled
-            DispatchQueue.main.async {
-                if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
-                    cancelButton.isEnabled = true
-                }
+        DispatchQueue.main.async {
+            if let cancelButton = searchBar.value(forKey: "cancelButton") as? UIButton {
+                cancelButton.isEnabled = true
             }
-            return true
         }
+        return true
+    }
 }
 
 class SubtitleTableViewCell: UITableViewCell {

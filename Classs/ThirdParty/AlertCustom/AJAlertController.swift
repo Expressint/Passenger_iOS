@@ -37,6 +37,9 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     @IBOutlet var btnOK: UIButton!
     @IBOutlet var viewAlertBtns: UIView!
     
+    @IBOutlet var btnYes: UIButton!
+    @IBOutlet var btnNo: UIButton!
+    
     @IBOutlet weak var stackBtns: UIStackView!
     @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnMsg: UIButton!
@@ -48,7 +51,7 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     
     /// AlertController Completion handler
     typealias alertCompletionBlock = ((Int, String) -> Void)?
-    private var block : alertCompletionBlock?
+    var block : alertCompletionBlock?
     
     // MARK:- AJAlertController Initialization
     // MARK:-
@@ -88,6 +91,9 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     /// Inital View Setup
     private func setupAJAlertController(){
         
+        btnYes.isHidden = true
+        btnNo.isHidden = true
+        
         let visualEffectView   = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         visualEffectView.alpha = 0.8
         visualEffectView.frame = self.view.bounds
@@ -109,7 +115,7 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
 //        btnOther.backgroundColor = themeButtonColor
 //        btnCancel.backgroundColor = themeButtonColor
 //        btnOK.backgroundColor = themeButtonColor
-       
+        
         btnOther.backgroundColor = themeAppMainColor
         btnCancel.backgroundColor = themeAppMainColor
         btnOK.backgroundColor = themeAppMainColor
@@ -124,6 +130,25 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
         lblTitle.text = strAlertTitle
         lblAlertText?.text = strAlertText
         lblAlertText?.textAlignment = (showContact) ? .center : .left
+        
+        let msg = (Localize.currentLanguage() == Languages.English.rawValue) ? msgNoCarsAvailable : msgNoCarsAvailable_Spanish
+        if(strAlertText == msg) {
+            
+            btnYes.isHidden = false
+            btnYes.titleLabel?.numberOfLines = 0
+            btnYes.titleLabel?.textAlignment = .center
+            btnYes.setTitle("Yes, I'll wait for the next available car".localized, for: .normal)
+            
+            btnNo.isHidden = false
+            btnNo.titleLabel?.numberOfLines = 0
+            btnNo.titleLabel?.textAlignment = .center
+            btnNo.setTitle("No problem, I'll find another means of transportation".localized, for: .normal)
+            
+            btnOther.isHidden = true
+            btnCancel.isHidden = true
+            btnOK.isHidden = true
+            return
+        }
         
         if let aCancelTitle = btnCancelTitle {
             btnCancel.setTitle(aCancelTitle, for: .normal)
@@ -239,8 +264,7 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
         if contactNumber == "" {
             UtilityClass.setCustomAlert(title: "\(appName)", message: "Contact number is not available") { (index, title) in
             }
-        }
-        else {
+        } else {
             callNumber(phoneNumber: contactNumber)
         }
     }
@@ -289,8 +313,6 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
         }
         controller.dismiss(animated: true, completion: nil)
     }
-    
-    
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         //... handle sms screen actions
@@ -358,12 +380,12 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     }
     
     @IBAction func btnCancelTapped(sender: UIButton) {
-        block!!(0,btnCancelTitle!)
+        block!!(1,btnCancelTitle ?? "")
         hide()
     }
     
     @IBAction func btnOtherTapped(sender: UIButton) {
-        block!!(1,btnOtherTitle!)
+        block!!(1, btnOtherTitle ?? "")
         hide()
     }
     
@@ -374,8 +396,18 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
     }
     
     @IBAction func btnClose(_ sender: UIButton) {
-        block!!(2,strAlertTitle)
+        block!!(2, btnCancelTitle ?? "")
         hide()
+    }
+    
+    @IBAction func btnYes(_ sender: UIButton) {
+        hide()
+        NotificationCenter.default.post(name: sendNoCarYesMsg, object: nil)
+    }
+    
+    @IBAction func btnNo(_ sender: UIButton) {
+        hide()
+        NotificationCenter.default.post(name: sendNoCarWillWaitMsg, object: nil)
     }
     
     

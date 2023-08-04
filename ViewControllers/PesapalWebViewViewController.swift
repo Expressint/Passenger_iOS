@@ -213,10 +213,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                             self.navigationController?.popViewController(animated: false)
                             self.delegate?.didOrderPesapalStatus(status: true)
                         }
-                        
                     }
-                    
-
                 }
             }
             alert.addAction(ok)

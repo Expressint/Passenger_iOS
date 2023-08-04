@@ -32,6 +32,7 @@ class IntroVC: BaseViewController {
         self.checkForNotification()
         NotificationCenter.default.addObserver(self, selector: #selector(changeLanguage), name: Notification.Name(rawValue: LCLLanguageChangeNotification), object: nil)
         self.socketMethods()
+        self.setNotificationcenter()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,7 +46,7 @@ class IntroVC: BaseViewController {
         
         self.setLocalization()
         self.setupRedirection()
-        self.setNotificationcenter()
+        
     }
     
     
@@ -176,7 +177,6 @@ class IntroVC: BaseViewController {
         NotificationCenter.default.removeObserver(self, name: openNAboutUs, object: nil)
         NotificationCenter.default.removeObserver(self, name: GoToChatScreen, object: nil)
         NotificationCenter.default.removeObserver(self, name: DeleteAccount, object: nil)
-        
     }
     
     func checkForNotification(){
