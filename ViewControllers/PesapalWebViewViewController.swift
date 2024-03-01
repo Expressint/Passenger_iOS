@@ -37,8 +37,8 @@ class PesapalWebViewViewController: BaseViewController {
         webView?.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
-    let successURL = WebserviceURLs.kBasePaymentURL + "payment/success" //"https://www.bookaridegy.com/payment/success"
-    let failURL = WebserviceURLs.kBasePaymentURL + "payment/failed" //"https://www.bookaridegy.com/payment/failed"
+    let successURL = NetworkEnvironment.current.paymentBaseURL + "payment/success" //"https://www.bookaridegy.com/payment/success"
+    let failURL = NetworkEnvironment.current.paymentBaseURL + "payment/failed" //"https://www.bookaridegy.com/payment/failed"
     
     // ----------------------------------------------------
     // MARK: - Base Methods
@@ -135,7 +135,7 @@ extension PesapalWebViewViewController: WKUIDelegate, WKNavigationDelegate {
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.present(alert, animated: true, completion: nil)
             }
         }
-        else if webView.url?.absoluteString == (WebserviceURLs.kBasePaymentURL + "payment/failed") { //"https://www.bookaridegy.com/payment/failed"
+        else if webView.url?.absoluteString == (NetworkEnvironment.current.paymentBaseURL + "payment/failed") { //"https://www.bookaridegy.com/payment/failed"
             
             let alert = UIAlertController(title: appName.localized, message: "Payment failed", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in

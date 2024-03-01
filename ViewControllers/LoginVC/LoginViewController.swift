@@ -326,6 +326,9 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
             {
                 DispatchQueue.main.async(execute: { () -> Void in
                     UtilityClass.hideACProgressHUD()
+                    SingletonClass.sharedInstance.passengerVerificationStatus = result["PassengerVerificationStatus"] as? String ?? "0"
+                    SingletonClass.sharedInstance.passengerVerificationMessage = result["PassengerVerificationMessage"] as? String ?? ""
+                    SingletonClass.sharedInstance.passengerVerificationMessageSpanish = result["PassengerVerificationMessageSpanish"] as? String ?? ""
                         SingletonClass.sharedInstance.dictProfile = NSMutableDictionary(dictionary: (result as! NSDictionary).object(forKey: "profile") as! NSDictionary)
 //                        SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)
                         SingletonClass.sharedInstance.strPassengerID = String(describing: SingletonClass.sharedInstance.dictProfile.object(forKey: "Id")!)//as! String
@@ -841,7 +844,11 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, alertVie
                 
                 print("result is : \(result)")
                 SingletonClass.sharedInstance.arrCarLists = NSMutableArray(array: (result as! NSDictionary).object(forKey: "car_class") as! NSArray)
-                 
+                SingletonClass.sharedInstance.passengerVerificationStatus = result["PassengerVerificationStatus"] as? String ?? "0"
+                SingletonClass.sharedInstance.passengerVerificationMessage = result["PassengerVerificationMessage"] as? String ?? ""
+                SingletonClass.sharedInstance.passengerVerificationMessageSpanish = result["PassengerVerificationMessageSpanish"] as? String ?? ""
+                SingletonClass.sharedInstance.complete_trip_message = result["complete_trip_message"] as? String ?? ""
+                SingletonClass.sharedInstance.is_show_message_after_trip = result["is_show_message_after_trip"] as? Bool ?? false
                 let PP = (result as! NSDictionary).object(forKey: "PrivacyPolicy") as? String ?? app_PrivacyPolicy
                 app_PrivacyPolicy = PP
                 let TC = (result as! NSDictionary).object(forKey: "TermsAndCondition") as? String ?? app_TermsAndCondition

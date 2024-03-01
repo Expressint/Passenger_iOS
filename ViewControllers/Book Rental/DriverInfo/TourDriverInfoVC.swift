@@ -86,7 +86,7 @@ class TourDriverInfoVC: BaseViewController {
         self.lblDriverName.text = self.dictCurrentPassengerInfoData.object(forKey: "Fullname") as? String ?? ""
         self.lblHours.text = "\(packageInfo?.object(forKey: "MinimumHours") as? String ?? "") hrs/\(packageInfo?.object(forKey: "MinimumKm") as? String ?? "") km $\(packageInfo?.object(forKey: "MinimumAmount") as? String ?? "")"
       
-        let urlLogo = "\(WebserviceURLs.kBaseImageURL)\(dictCurrentPassengerInfoData.object(forKey: "Image") as? String ?? "")"
+        let urlLogo = "\(NetworkEnvironment.current.imageBaseURL)\(dictCurrentPassengerInfoData.object(forKey: "Image") as? String ?? "")"
         self.imgDriver.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "icon_UserImage"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
                 self.imgDriver.image = image

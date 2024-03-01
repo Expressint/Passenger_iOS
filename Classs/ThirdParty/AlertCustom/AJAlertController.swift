@@ -188,6 +188,8 @@ class AJAlertController: UIViewController, MFMailComposeViewControllerDelegate, 
                 
         
         case .mac: break
+        case .vision:
+            break
         }
     }
     

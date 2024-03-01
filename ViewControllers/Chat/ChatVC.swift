@@ -127,7 +127,7 @@ class ChatVC: BaseViewController {
             
             socket?.on(clientEvent: .connect) { data, ack in
                 
-                print("socket? BaseURl : \(SocketData.kBaseURL)")
+                print("socket? BaseURl : \(NetworkEnvironment.current.socketURL)")
                 print("socket? connected")
                 
                 if self.socket?.status != .connected {
@@ -146,7 +146,8 @@ class ChatVC: BaseViewController {
     }
     
     func socketOnForStartTyping() {
-        self.socket?.on(SocketData.starTyping, callback: { (data, ack) in
+        self.socket?.on(SocketData.starTyping, callback: { [weak self] (data, ack) in
+            guard let self else { return }
             print ("response is : \(data)")
             
             let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
@@ -172,7 +173,8 @@ class ChatVC: BaseViewController {
     }
     
     func socketOnForStopTyping() {
-        self.socket?.on(SocketData.stopTyping, callback: { (data, ack) in
+        self.socket?.on(SocketData.stopTyping, callback: { [weak self] (data, ack) in
+            guard let self else { return }
             print ("response is : \(data)")
             
             let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
@@ -214,14 +216,19 @@ class ChatVC: BaseViewController {
     }
     
     func socketOnForReceiveMessage() {
-        self.socket?.on(SocketData.receiveMessage, callback: { (data, ack) in
+        self.socket?.on(SocketData.receiveMessage, callback: { [weak self] (data, ack) in
+            guard let self else { return }
             print ("Chat response is :  \(data)")
             let dictData = (data as NSArray).object(at: 0) as! [String : AnyObject]
             let senderId = dictData["sender_id"] as? String ?? ""
             if(senderId == self.receiverId || senderId == SingletonClass.sharedInstance.strPassengerID){
-                self.aryData.append(dictData)
-                self.tblData.reloadData()
-                self.scrollToBottom()
+                if !self.aryData.contains(where: {
+                    ($0["id"] as? String) == (dictData["id"] as? String)
+                }) {
+                    self.aryData.append(dictData)
+                    self.tblData.reloadData()
+                    self.scrollToBottom()
+                }
             }
         })
     }
@@ -371,15 +378,23 @@ extension ChatVC {
                 }
                 
                 if(self.sendDefaultmsg && self.isDispacherChat){
-                    let myJSON = ["sender_id" : SingletonClass.sharedInstance.strPassengerID,
-                                  "receiver_id": self.receiverId,
-                                  "message" : NoCarsAvailableDefaultMessage,
-                                  "msg_type" : "text",
-                                  "imageUrl" : "",
-                                  "sender_type" : "passenger",
-                                  "receiver_type" : (self.isDispacherChat) ? "dispatcher" : "driver",
-                                  "booking_id" : (self.isDispacherChat) ? "" : self.bookingId,
-                                  "booking_type": (self.isDispacherChat) ? "" : self.bookingType] as [String : Any]
+                    let myJSON = [
+                        "sender_id" : SingletonClass.sharedInstance.strPassengerID,
+                        "receiver_id": self.receiverId,
+                        "message" : NoCarsAvailableDefaultMessage,
+                        "msg_type" : "text",
+                        "imageUrl" : "",
+                        "sender_type" : "passenger",
+                        "receiver_type" : (
+                            self.isDispacherChat
+                        ) ? "dispatcher" : "driver",
+                        "booking_id" : (
+                            self.isDispacherChat
+                        ) ? "" : self.bookingId,
+                        "booking_type": (
+                            self.isDispacherChat
+                        ) ? "" : self.bookingType
+                    ] as [String : Any]
                     
                     self.socket?.emit(SocketData.sendMessage, with: [myJSON], completion: nil)
                     print ("\(SocketData.sendMessage) : \(myJSON)")

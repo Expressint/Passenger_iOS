@@ -102,9 +102,7 @@ let InitialStoryboard = UIStoryboard(name: "Initial", bundle: nil)
 //Live: https://www.bookaridegy.com/Passenger_Api/
 //Development: http://52.23.45.119/v2/
 struct WebserviceURLs {
-    static let kBaseImageURL                            = "https://www.bookaridegy.com/"
-    static let kBasePaymentURL                          = "https://www.bookaridegy.com/"
-    static let kBaseURL                                  = "https://www.bookaridegy.com/v3/Passenger_Api/"
+    
     static let kDriverRegister                           = "Register"
     static let kDriverLogin                              = "Login"
     static let kChangePassword                           = "ChangePassword"
@@ -185,7 +183,6 @@ struct WebserviceURLs {
 //Development: http://52.23.45.119:8080
 struct SocketData {
     
-    static let kBaseURL                                       = "https://www.bookaridegy.com:8080"
     static let kNearByDriverList                             = "NearByDriverListIOS"
     static let kUpdatePassengerLatLong                       = "UpdatePassengerLatLong"
     static let kAcceptBookingRequestNotification            = "AcceptBookingRequestNotification"

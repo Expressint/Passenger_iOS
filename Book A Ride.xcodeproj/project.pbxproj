@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18073BF32B209C1100DF0AA1 /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18073BF22B209C1100DF0AA1 /* NetworkEnvironment.swift */; };
 		18546BD2225DE9BE009DF334 /* PesapalWebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */; };
 		18B061AB256F739200BAA013 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18B061AA256F739100BAA013 /* GoogleService-Info.plist */; };
 		347A9FD92608C73900065C29 /* SelectDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347A9FD82608C73900065C29 /* SelectDriverViewController.swift */; };
@@ -465,6 +466,7 @@
 		0DD67F74FA4535C8BF89DF86 /* Pods-Flicha User.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicha User.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicha User/Pods-Flicha User.release.xcconfig"; sourceTree = "<group>"; };
 		10CF0D34AFC040FE32ACFFC8 /* Pods_LADA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LADA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B15DD6CDE343A0B29EC2A6 /* Pods_Book_A_Ride.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book_A_Ride.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18073BF22B209C1100DF0AA1 /* NetworkEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		1852C71B255A65B500CB0EE1 /* Book A Ride.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Book A Ride.entitlements"; sourceTree = "<group>"; };
 		18546BD1225DE9BE009DF334 /* PesapalWebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PesapalWebViewViewController.swift; sourceTree = "<group>"; };
 		18B061AA256F739100BAA013 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1421,6 +1423,7 @@
 				3A40737221B512280015C494 /* Extention+UIViewController.swift */,
 				3A40737321B512280015C494 /* SingletonClass.swift */,
 				3A40737421B512280015C494 /* UtilityClass.swift */,
+				18073BF22B209C1100DF0AA1 /* NetworkEnvironment.swift */,
 			);
 			path = UtilityClass;
 			sourceTree = "<group>";
@@ -2538,6 +2541,7 @@
 				3A4073E921B512280015C494 /* WalletTransferToBankVC.swift in Sources */,
 				3A84BC9B21C23CFC00EDA3A2 /* RadioButton.m in Sources */,
 				3A4073E321B512280015C494 /* WalletAddCardsViewController.swift in Sources */,
+				18073BF32B209C1100DF0AA1 /* NetworkEnvironment.swift in Sources */,
 				3A4073E221B512280015C494 /* UpdateProfileViewController.swift in Sources */,
 				3A4073E621B512280015C494 /* WalletCollectionViewCell.swift in Sources */,
 				3A40739D21B512280015C494 /* SideMenuCollectionViewCell.swift in Sources */,
@@ -2808,7 +2812,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.9.3;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -2822,7 +2826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";
@@ -2846,7 +2850,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: PICK AND GO PRIVATE LIMITED (HS8349WC4W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.9.3;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = AQ5BYLK3P7;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -2860,7 +2864,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eww.BookARidePassenger;
 				PRODUCT_NAME = "Book A Ride";
 				PROVISIONING_PROFILE = "";

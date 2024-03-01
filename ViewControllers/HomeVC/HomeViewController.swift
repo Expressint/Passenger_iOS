@@ -196,7 +196,20 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    
+    @objc func handlerChatNotification() {
+        if let strBookingID = AppDelegate.pushNotificationObj?.booking_id {
+            if let dictionary = aryRequestAcceptedData.firstObject as? NSDictionary  {
+                if let bookingInfo = (dictionary.object(forKey: "BookingInfo") as? NSArray)?.firstObject as? NSDictionary {
+                    if (bookingInfo.object(forKey: "Id") as? String) == strBookingID {
+                        btndeleagateGoToChat()
+                        AppDelegate.pushNotificationObj = nil
+                        AppDelegate.pushNotificationType = nil
+                    }
+                }
+            }
+        }
+    }
+
     func startwaitingTime() {
         if(isWaitingTimeStarted){
             self.timerWaiting = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updatePositiveTimer), userInfo: nil, repeats: true)
@@ -519,6 +532,8 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 self.present(alertController, animated: true, completion: nil)
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.handlerChatNotification), name: GoToChatScreen, object: nil)
+
     }
     
 
@@ -1395,7 +1410,12 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
     }
     
     @IBAction func btnRequestNow(_ sender: UIButton) {
-        self.webserviceCallForBookingCar()
+        if strModelId == "" {
+            UtilityClass.setCustomAlert(title: "Missing".localized, message: (Localize.currentLanguage() == Languages.English.rawValue) ? msgNoCarsAvailable : msgNoCarsAvailable_Spanish, showStack: false) { (index, title) in
+            }
+        } else {
+            self.webserviceCallForBookingCar()
+        }
     }
     
     //-------------------------------------------------------------
@@ -2003,7 +2023,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
                 txtNumberOfPassengers.text = ""
             }
             
-            if SingletonClass.sharedInstance.strPassengerID == "" || strModelId == "" || strPickupLocation == "" || strDropoffLocation == "" || doublePickupLat == 0 || doublePickupLng == 0 || doubleDropOffLat == 0 || doubleDropOffLng == 0 || strCarModelID == ""
+            if SingletonClass.sharedInstance.strPassengerID == "" || /*strModelId == "" ||*/ strPickupLocation == "" || strDropoffLocation == "" || doublePickupLat == 0 || doublePickupLng == 0 || doubleDropOffLat == 0 || doubleDropOffLng == 0 || strCarModelID == ""
             {
                 if txtCurrentLocation.text!.count == 0 {
                     
@@ -3439,7 +3459,7 @@ class HomeViewController: BaseViewController, UICollectionViewDelegate, UICollec
         }
         
         socket?.on(clientEvent: .connect) { data, ack in
-            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? BaseURl : \(NetworkEnvironment.current.socketURL)")
             print("socket? connected")
             self.socketOn()
         }
@@ -6787,7 +6807,7 @@ extension HomeViewController: FSPagerViewDataSource, FSPagerViewDelegate {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
    
-        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        let urlLogo = NetworkEnvironment.current.imageBaseURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
         cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
                 cell.imageView?.image = image

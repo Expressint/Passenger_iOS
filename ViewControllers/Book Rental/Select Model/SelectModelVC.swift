@@ -294,7 +294,7 @@ extension SelectModelVC: UITableViewDelegate, UITableViewDataSource {
         cell.imgModel.sd_setIndicatorStyle(UIActivityIndicatorViewStyle.medium)
         cell.imgModel.sd_setShowActivityIndicatorView(true)
         let imageURL = (arrData[indexPath.row])["Model_Image"] as? String ?? ""
-        cell.imgModel.sd_setImage(with: URL(string: WebserviceURLs.kBaseImageURL + imageURL), completed: { (image, error, cacheType, url) in
+        cell.imgModel.sd_setImage(with: URL(string: NetworkEnvironment.current.imageBaseURL + imageURL), completed: { (image, error, cacheType, url) in
             cell.imgModel.sd_setShowActivityIndicatorView(false)
         })
         
@@ -364,7 +364,7 @@ extension SelectModelVC {
         }
         
         socket?.on(clientEvent: .connect) { data, ack in
-            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? BaseURl : \(NetworkEnvironment.current.socketURL)")
             print("socket? connected")
             self.RentalOnMethods()
         }
@@ -816,7 +816,7 @@ extension SelectModelVC: FSPagerViewDataSource, FSPagerViewDelegate {
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
    
-        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        let urlLogo = NetworkEnvironment.current.imageBaseURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
         cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
                 cell.imageView?.image = image

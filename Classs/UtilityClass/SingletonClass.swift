@@ -117,5 +117,11 @@ class SingletonClass: NSObject {
     var strSocialImage = ""
     var strAppleId = ""
     
+    var passengerVerificationStatus = ""
+    var passengerVerificationMessage = ""
+    var passengerVerificationMessageSpanish = ""
     
+    var is_show_message_after_trip = false
+    var complete_trip_message = ""
+
 }

@@ -3,4 +3,54 @@
    uuid = "D9695CB1-BD59-43A0-AD5D-84302C2BE47C"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A230A78-8565-4A2D-A612-2D8F65EAE646"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Classs/ThirdParty/AlertCustom/AJAlertController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "openChatForDispatcher()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0A230A78-8565-4A2D-A612-2D8F65EAE646 - 61b40bce19ecda9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_A_Ride.AJAlertController.openChatForDispatcher() -&gt; ()"
+                  moduleName = "Book A Ride"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/GitHub/BookARide-Passenger_iOS/Classs/ThirdParty/AlertCustom/AJAlertController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "0A230A78-8565-4A2D-A612-2D8F65EAE646 - 61b40bce19ecda9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_A_Ride.AJAlertController.openChatForDispatcher() -&gt; ()"
+                  moduleName = "Book A Ride"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/GitHub/BookARide-Passenger_iOS/Classs/ThirdParty/AlertCustom/AJAlertController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "378"
+                  endingLineNumber = "378"
+                  offsetFromSymbolStart = "344">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -21,7 +21,7 @@ let header: [String:String] = ["key":"Book$951951"] //"Allout123*"
 
 func postData(_ dictParams: AnyObject, nsURL: String, completion: @escaping (_ result: AnyObject, _ sucess: Bool) -> Void)
 {
-    let url = WebserviceURLs.kBaseURL + nsURL
+    let url = NetworkEnvironment.current.apiBaseURL + nsURL
 
     UtilityClass.showACProgressHUD()
      print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
@@ -55,7 +55,7 @@ func postData(_ dictParams: AnyObject, nsURL: String, completion: @escaping (_ r
 
 func getData(_ dictParams: AnyObject, nsURL: String,  completion: @escaping (_ result: AnyObject, _ success: Bool) -> Void)
 {
-    let url = WebserviceURLs.kBaseURL + nsURL
+    let url = NetworkEnvironment.current.apiBaseURL + nsURL
     
     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
     UtilityClass.showACProgressHUD()
@@ -95,7 +95,7 @@ func getData(_ dictParams: AnyObject, nsURL: String,  completion: @escaping (_ r
 
 func sendImage(_ dictParams: [String:AnyObject], image1: UIImage, image2: UIImage = UIImage(), isRegister: Bool = false, nsURL: String, completion: @escaping (_ result: AnyObject, _ success: Bool) -> Void) {
     
-    let url = WebserviceURLs.kBaseURL + nsURL
+    let url = NetworkEnvironment.current.apiBaseURL + nsURL
     
     UtilityClass.showACProgressHUD()
     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
@@ -165,7 +165,7 @@ func sendImage(_ dictParams: [String:AnyObject], image1: UIImage, image2: UIImag
 
 func postTwoImageMethod(_ dictParams: [String:AnyObject], image1: UIImage, image2: UIImage, nsURL: String, completion: @escaping (_ result: AnyObject, _ success: Bool) -> Void) {
     
-    let url = WebserviceURLs.kBaseURL + nsURL
+    let url = NetworkEnvironment.current.apiBaseURL + nsURL
     
     UtilityClass.showACProgressHUD()
     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")
@@ -353,7 +353,7 @@ func ShoppingListOfGoogle(_ dictParams: AnyObject, Location: String, Type: Strin
 
 func estimateMethod(_ dictParams: AnyObject, nsURL: String, completion: @escaping (_ result: AnyObject, _ sucess: Bool) -> Void)
 {
-    let url = WebserviceURLs.kBaseURL + nsURL
+    let url = NetworkEnvironment.current.apiBaseURL + nsURL
     
 //    UtilityClass.showACProgressHUD()
     print("webservice is : \(url) and the params are \(dictParams) and the header key is \(header)")

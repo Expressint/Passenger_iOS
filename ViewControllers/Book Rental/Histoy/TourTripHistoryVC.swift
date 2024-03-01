@@ -282,7 +282,7 @@ extension TourTripHistoryVC {
         }
         
         socket?.on(clientEvent: .connect) { data, ack in
-            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? BaseURl : \(NetworkEnvironment.current.socketURL)")
             print("socket? connected")
             self.socketForRentalTripCancelled()
         }

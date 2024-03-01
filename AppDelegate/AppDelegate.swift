@@ -43,7 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     var isChatVisible: Bool = false
     var currentChatID: String = ""
     static var pushNotificationObj : NotificationObjectModel?
-    static var pushNotificationType : String?
+    static var pushNotificationType : NotificationTypes?
+
     
     static var current: AppDelegate? {
         UIApplication.shared.delegate as? AppDelegate
@@ -53,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
     {
         
     }
-    let manager = SocketManager(socketURL: URL(string: SocketData.kBaseURL)!, config: [.log(true), .compress,.version(.two)])
+    let manager = SocketManager(socketURL: URL(string: NetworkEnvironment.current.socketURL)!, config: [.log(true), .compress,.version(.two)])
     var socket : SocketIOClient!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -67,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font : UIFont.regular(ofSize: 14.0)]
 
         // Set Stored Language from Local Database
+        FirebaseApp.configure()
         socket = manager.defaultSocket
         
         UserDefaults.standard.set(false, forKey: kIsUpdateAvailable)
@@ -176,9 +178,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
          //            (window?.rootViewController as? UITabBarController)?.selectedIndex = 0
          }
          */
-  
-        
-        FirebaseApp.configure()
         LocationManager.shared.start()
         return true
     }
@@ -354,47 +353,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         print(#function, notification)
         let content = notification.request.content
         let userInfo = notification.request.content.userInfo
-  
+        
         if let mainDic = userInfo as? [String: Any]{
             
-            let pushObj = NotificationObjectModel()
-            if let bookingId = mainDic["gcm.notification.booking_id"]{
-                pushObj.booking_id = bookingId as? String ?? ""
-            }
-            if let sender = mainDic["gcm.notification.sender_id"]{
-                pushObj.sender_id = sender as? String ?? ""
-            }
-            if let type = mainDic["gcm.notification.type"]{
-                pushObj.type = type as? String ?? ""
-            }
-            if let title = mainDic["title"]{
-                pushObj.title = title as? String ?? ""
-            }
-            if let text = mainDic["text"]{
-                pushObj.text = text as? String ?? ""
-            }
-            
+            let pushObj = NotificationObjectModel(info: mainDic)
             AppDelegate.pushNotificationObj = pushObj
             AppDelegate.pushNotificationType = pushObj.type
-            
-            if pushObj.type == NotificationTypes.newMeassage.rawValue {
-                do {
-                    if(isChatVisible){
-                        let currentID = mainDic["gcm.notification.sender_id"] as? String ?? ""
-                        if(currentID == AppDelegate.current?.currentChatID){
-                            completionHandler([])
-                        }
+            if let type = pushObj.type {
+                switch type {
+                case .newMeassage:
+                    let currentID = pushObj.sender_id
+                    if(currentID == AppDelegate.current?.currentChatID){
+                        completionHandler([])
+                        return
                     }
-                } catch {
-                    print("Error : detected")
+                case .logout:
+                    break
+                case .accountVerified:
+                    if let status = pushObj.passengerVerificationStatus {
+                        SingletonClass.sharedInstance.passengerVerificationStatus = String(status)
+                    }
                 }
             }
-            
-            if pushObj.type == NotificationTypes.logout.rawValue {
-                
-            }
-            
-        completionHandler([.alert,.sound])
+            completionHandler([.alert,.sound])
         }
     }
     
@@ -405,27 +386,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
         
         if let mainDic = userInfo as? [String: Any]{
             
-            let pushObj = NotificationObjectModel()
-            if let bookingId = mainDic["gcm.notification.id"]{
-                pushObj.booking_id = bookingId as? String ?? ""
-            }
-            if let sender = mainDic["gcm.notification.sender_id"]{
-                pushObj.sender_id = sender as? String ?? ""
-            }
-            if let type = mainDic["gcm.notification.type"]{
-                pushObj.type = type as? String ?? ""
-            }
-            if let title = mainDic["title"]{
-                pushObj.title = title as? String ?? ""
-            }
-            if let text = mainDic["text"]{
-                pushObj.text = text as? String ?? ""
-            }
-            
+            let pushObj = NotificationObjectModel(info: mainDic)
+
             AppDelegate.pushNotificationObj = pushObj
             AppDelegate.pushNotificationType = pushObj.type
-          
-            if pushObj.type == NotificationTypes.newMeassage.rawValue {
+            
+            if pushObj.type == NotificationTypes.newMeassage {
                 if(!isChatVisible){
                     NotificationCenter.default.post(name: GoToChatScreen, object: nil)
                 }else{
@@ -759,15 +725,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, GIDSig
 //i18n_language = sw
 
 class NotificationObjectModel: Codable {
-    var booking_id: String?
-    var sender_id: String?
-    var type: String?
-    var title: String?
-    var text: String?
+    let booking_id: String
+    let sender_id: String
+    let type: NotificationTypes?
+    let title: String
+    let text: String
+    let passengerVerificationStatus: Int?
+    
+    init(info: [String: Any]) {
+        if let bookingId = info["gcm.notification.booking_id"] as? String {
+            booking_id = bookingId
+        } else {
+            booking_id = info["gcm.notification.id"] as? String ?? ""
+        }
+
+        sender_id = info["gcm.notification.sender_id"] as? String ?? ""
+        let typeKey = info["gcm.notification.type"] as? String ?? ""
+        type = NotificationTypes(rawValue: typeKey)
+        title = info["title"] as? String ?? ""
+        text = info["text"] as? String ?? ""
+        if let dataString = info["gcm.notification.data_push"] as? String {
+            do {
+                if let data = dataString.data(using: .utf8),
+                   let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                {
+                    passengerVerificationStatus = dictionary["PassengerVerificationStatus"] as? Int
+                } else {
+                    passengerVerificationStatus = nil
+                }
+            } catch {
+                passengerVerificationStatus = nil
+            }
+        } else {
+            passengerVerificationStatus = nil
+        }
+    }
+    
 }
 
-enum NotificationTypes : String {
+enum NotificationTypes : String, Codable {
     case newMeassage = "Chat"
     case logout = "logout"
-    
+    case accountVerified = "AccountVerified"
 }

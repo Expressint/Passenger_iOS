@@ -60,7 +60,7 @@ class IntroVC: BaseViewController {
         }
         
         socket?.on(clientEvent: .connect) { data, ack in
-            print("socket? BaseURl : \(SocketData.kBaseURL)")
+            print("socket? BaseURl : \(NetworkEnvironment.current)")
             print("socket? connected")
             self.RentalOnMethods()
         }
@@ -107,18 +107,36 @@ class IntroVC: BaseViewController {
     }
     
     @IBAction func btnRideAction(_ sender: Any) {
-        let next = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.navigationController?.pushViewController(next, animated: true)
+        if SingletonClass.sharedInstance.passengerVerificationStatus == "1" {
+            let next = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            self.navigationController?.pushViewController(next, animated: true)
+        } else {
+            let errorMessage = Localize.currentLanguage() == Languages.English.rawValue ? SingletonClass.sharedInstance.passengerVerificationMessage : SingletonClass.sharedInstance.passengerVerificationMessageSpanish
+            UtilityClass.setCustomAlert(title: "Error", message: errorMessage) { (index, title) in
+            }
+        }
     }
     
     @IBAction func btnRideHourlyAction(_ sender: Any) {
-        let profileViewController = bookingsStoryboard.instantiateViewController(withIdentifier: "SelectModelVC") as! SelectModelVC
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        if SingletonClass.sharedInstance.passengerVerificationStatus == "1" {
+            let profileViewController = bookingsStoryboard.instantiateViewController(withIdentifier: "SelectModelVC") as! SelectModelVC
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let errorMessage = Localize.currentLanguage() == Languages.English.rawValue ? SingletonClass.sharedInstance.passengerVerificationMessage : SingletonClass.sharedInstance.passengerVerificationMessageSpanish
+            UtilityClass.setCustomAlert(title: "Error", message: errorMessage) { (index, title) in
+            }
+        }
     }
     
     @IBAction func btnCorporateRideAction(_ sender: Any) {
-        //appDelegate.GoToHome()
-    }
+        //        if SingletonClass.sharedInstance.passengerVerificationStatus == "1" {
+        //            //appDelegate.GoToHome()
+        //        } else {
+        //        let errorMessage = Localize.currentLanguage() == Languages.English.rawValue ? SingletonClass.sharedInstance.passengerVerificationMessage : SingletonClass.sharedInstance.passengerVerificationMessageSpanish
+        //        UtilityClass.setCustomAlert(title: "Error", message: errorMessage) { (index, title) in
+        //        }
+        //       }
+            }
     
     func setupRedirection() {
         if currentTripType == "1" {
@@ -181,7 +199,7 @@ class IntroVC: BaseViewController {
     
     func checkForNotification(){
         if(AppDelegate.pushNotificationObj != nil){
-            if(AppDelegate.pushNotificationType == NotificationTypes.newMeassage.rawValue){
+            if(AppDelegate.pushNotificationType == NotificationTypes.newMeassage){
                 self.ChatScreen()
             }
         }
@@ -353,7 +371,7 @@ extension IntroVC: FSPagerViewDataSource, FSPagerViewDelegate {
 //
 //        } else {
 //            vWAdvertisement.automaticSlidingInterval = 3
-//            let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+//            let urlLogo = NetworkEnvironment.current.imageBaseURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
 //            cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
 //                if (error == nil) {
 //                    cell.imageView?.image = image
@@ -367,7 +385,7 @@ extension IntroVC: FSPagerViewDataSource, FSPagerViewDelegate {
 //            })
 //        }
 
-        let urlLogo = WebserviceURLs.kBaseImageURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
+        let urlLogo = NetworkEnvironment.current.imageBaseURL +  (arrAdvImages[index]["BannerImage"] as? String ?? "")
         cell.imageView?.sd_setImage(with: URL(string: urlLogo), placeholderImage: UIImage(named: "Banner_Placeholder"), options: [.continueInBackground], progress: nil, completed: { (image, error, cache, url) in
             if (error == nil) {
                 cell.imageView?.image = image

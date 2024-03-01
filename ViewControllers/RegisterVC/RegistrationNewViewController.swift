@@ -516,6 +516,10 @@ class RegistrationNewViewController: UIViewController,AKRadioButtonsControllerDe
                 SingletonClass.sharedInstance.isFromSocilaLogin = false
                 SingletonClass.sharedInstance.strAppleId = ""
                 
+                SingletonClass.sharedInstance.passengerVerificationStatus = result["PassengerVerificationStatus"] as? String ?? "0"
+                SingletonClass.sharedInstance.passengerVerificationMessage = result["PassengerVerificationMessage"] as? String ?? ""
+                SingletonClass.sharedInstance.passengerVerificationMessageSpanish = result["PassengerVerificationMessageSpanish"] as? String ?? ""
+
                 
                 DispatchQueue.main.async(execute: { () -> Void in
                 UtilityClass.hideACProgressHUD()
